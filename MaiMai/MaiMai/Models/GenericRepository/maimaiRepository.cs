@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using WhosHelp.Models.GenericRepository;
+using MaiMai.Models.GenericRepository;
 
 
 /// <summary>
 ///  介面實作  CRUD
 /// </summary>
-namespace WhosHelp.Models
+namespace MaiMai.Models
 {
     public class WhoHelpsRepository<Table> : IRepository<Table> where Table : class
     {

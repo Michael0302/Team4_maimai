@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 
-namespace WhosHelp.Models.GenericRepository
+namespace MaiMai.Models.GenericRepository
 {
     interface IRepository<Table>
     {
