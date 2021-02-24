@@ -1,0 +1,53 @@
+.row{
+width:  100%;
+
+}
+
+.requriedTab > li > a {
+    text-decoration: none;
+    margin: 20px 20px;
+    color: #D26900;
+ 
+
+}
+.requriedTab > li{
+
+    list-style: none;
+}
+.showPostArea{
+    width: 100%;
+    /* temp */
+    background-color: rgb(190, 175, 108);
+    margin: 5px auto;
+}
+
+
+
+/* ===================== */
+.requriedTab .nav-link.active, .requriedTab .show>.nav-link{
+
+    color: #D26900;
+    background-color: rgb(190, 175, 108);
+}
+.showPostArea .tab-content{
+
+    border: 3px dashed rgb(190, 136, 64);
+}
+.photo{
+    width: 150px;
+    height: 150px;
+    border: 2px solid rgba(212, 194, 148, 0.842);
+    margin:20px;
+}
+.post-button{
+    display: flex;
+    justify-content: space-between;
+
+}
+.post-text{
+    margin: 20px;
+    width: 700px;
+    height: 150px;
+    display: block;
+    
+}

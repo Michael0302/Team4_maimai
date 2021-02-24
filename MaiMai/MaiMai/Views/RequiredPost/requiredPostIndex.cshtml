@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "requiredPostIndex";
+}
+<head>
+    <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
+</head>
+
+<div class="container my-5">
+
+    <div class="container" style="background-color:burlywood; padding-bottom: 40px; border-radius: 20px;">
+
+
+
+        <ul class="nav nav-pills mb-3 requriedTab" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#allPost" role="tab"
+                   aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPost" role="tab"
+                   aria-controls="pills-profile" aria-selected="false">處理中的貼文</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pastPost" role="tab"
+                   aria-controls="pills-contact" aria-selected="false">已完成的貼文</a>
+            </li>
+        </ul>
+
+
+
+
+        <div class="showPostArea tab-content " id="pills-tabContent">
+
+
+            <div class="tab-pane fade show active" id="allPost" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row mx-auto" style="border-bottom: 3px dashed orange;">
+                    <div id="img" class="photo"></div>
+                    <div class="post-text">
+                        <h3 id="postName">訂單名子</h3>
+                        <h6 id="userName">買家名稱:</h6>
+                        <div>
+                            <h6 id="text">產品敘述:</h6>
+                        </div>
+                        <div class="post-button">
+                            <h6 id="price">大概徵求價位：</h6>
+                            <a data-toggle="collapse" href="#collapseComment"
+                               role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount">0</span>)</a>
+                            <div>
+                                <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample"
+                                   role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseComment">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                            richardson ad
+                            squid.
+                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea
+                            proident.
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                            richardson ad
+                            squid.
+                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea
+                            proident.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pocessPost" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div>
+                    2 Lorem
+                    ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem modi necessitatibus nam
+                    adipisci
+                    veritatis vel iure inventore assumenda, illum id repudiandae, nihil nemo! Eveniet obcaecati
+                    exercitationem distinctio, expedita ipsam culpa.
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="pastPost" role="tabpanel" aria-labelledby="pills-contact-tab">
+                3 Lorem
+                ipsum dolor sit amet consectetur adipisicing elit. Fuga quos ea assumenda ipsa, accusamus commodi
+                omnis dolorum nobis maiores deserunt vitae eaque nulla doloremque modi. Quod, odit. Quae, unde
+                ipsam!
+            </div>
+        </div>
+
+        <div id="demo"></div>
+
+    </div>
+
+
+</div>
+<script >
+    $(function () {
+        $.ajax({
+            url: "/RequiredPost/allrequiredPost",
+          type:"POST",
+            success: function (response) {
+                alert(response);
+                //var obj = strToJson(response);
+                //var str = "";
+                //for (var i = 0; i < obj.length; i++) {
+                //    str += "姓名:" +  + "  " + "年齡:" + obj[i].;
+                //}
+                //$("#div1").html(str);
+            }
+        })
+    })
+    function strToJson(str) {
+        var json = eval("(" + str + ") ");
+        return json;
+    }
+</script>
