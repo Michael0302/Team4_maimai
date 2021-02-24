@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "backstageIndex";
+}
+
+<h2>backstageIndex</h2>
+
+<div id="demo"></div>
+
+<script>
+    
+    $.ajax({
+        url: "/backstage/getMemberList_P",
+        type: "GET",
+        success: function (memberList) {
+            console.log(memberList);
+        }
+    })
+</script>
