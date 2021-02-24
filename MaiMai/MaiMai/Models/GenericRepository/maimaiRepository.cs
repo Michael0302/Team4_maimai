@@ -11,14 +11,14 @@ using MaiMai.Models.GenericRepository;
 /// </summary>
 namespace MaiMai.Models
 {
-    public class WhoHelpsRepository<Table> : IRepository<Table> where Table : class
+    public class maimaiRepository<Table> : IRepository<Table> where Table : class
     {
-        WhoHelpsEntities whdb = null;
+        maimaiEntities whdb = null;
         DbSet<Table> dbTable = null;
 
-        public WhoHelpsRepository()
+        public maimaiRepository()
         {
-            whdb = new WhoHelpsEntities();
+            whdb = new maimaiEntities();
             dbTable = whdb.Set<Table>();
         }
         public void Create(Table _entity)

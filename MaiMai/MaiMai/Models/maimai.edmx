@@ -1,0 +1,695 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductPostID" Type="int" />
+          <Property Name="QTY" Type="int" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="starRate" Type="int" />
+          <Property Name="commentDescription" Type="text" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userAccount" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="userPassWord" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nchar" MaxLength="10" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="phoneNumber" Type="nchar" MaxLength="10" />
+          <Property Name="firstName" Type="nchar" MaxLength="10" />
+          <Property Name="lastName" Type="nchar" MaxLength="10" />
+          <Property Name="birthday" Type="date" />
+          <Property Name="identityNumber" Type="nchar" MaxLength="10" />
+          <Property Name="profileImg" Type="nvarchar" MaxLength="50" />
+          <Property Name="userLevel" Type="int" />
+          <Property Name="totalStarRate" Type="float" />
+          <Property Name="selfDescription" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="buyerUserID" Type="int" />
+          <Property Name="orderStatus" Type="int" />
+          <Property Name="createdTime" Type="datetime" />
+          <Property Name="CartNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ProductPostID" Type="int" />
+          <Property Name="QTY" Type="int" />
+          <Property Name="oneProductTotalPrice" Type="int" />
+          <Property Name="SellerID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductPost">
+          <Key>
+            <PropertyRef Name="ProductPostID" />
+          </Key>
+          <Property Name="ProductPostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productName" Type="nvarchar" MaxLength="50" />
+          <Property Name="productDescription" Type="text" />
+          <Property Name="productImg" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="inStoreQTY" Type="int" />
+          <Property Name="price" Type="int" />
+          <Property Name="TagID" Type="int" />
+          <Property Name="createdTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="RequiredPost">
+          <Key>
+            <PropertyRef Name="RequiredPostID" />
+          </Key>
+          <Property Name="RequiredPostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="postTime" Type="datetime" />
+          <Property Name="postDescription" Type="text" />
+          <Property Name="postName" Type="nchar" MaxLength="20" />
+          <Property Name="postImg" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="requiredQTY" Type="int" />
+          <Property Name="estimatePrice" Type="int" />
+          <Property Name="TagID" Type="int" />
+          <Property Name="OrderID" Type="int" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tagName" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Cart_ProductPost">
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPost">
+              <PropertyRef Name="ProductPostID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="buyerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_ProductPost">
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPost">
+              <PropertyRef Name="ProductPostID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="ProductPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPost_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ProductPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPost_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="ProductPost">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequiredPost_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RequiredPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequiredPost_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="RequiredPost">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="maimaiModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductPost" EntityType="Self.ProductPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cart_ProductPost" Association="Self.FK_Cart_ProductPost">
+            <End Role="ProductPost" EntitySet="ProductPost" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Member" Association="Self.FK_Comment_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Order" Association="Self.FK_Comment_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Member" Association="Self.FK_Order_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_ProductPost" Association="Self.FK_OrderDetail_ProductPost">
+            <End Role="ProductPost" EntitySet="ProductPost" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPost_Member" Association="Self.FK_ProductPost_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ProductPost" EntitySet="ProductPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPost_Tag" Association="Self.FK_ProductPost_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ProductPost" EntitySet="ProductPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequiredPost_Member" Association="Self.FK_RequiredPost_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="RequiredPost" EntitySet="RequiredPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequiredPost_Tag" Association="Self.FK_RequiredPost_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="RequiredPost" EntitySet="RequiredPost" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductPostID" Type="Int32" />
+          <Property Name="QTY" Type="Int32" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_Cart_ProductPost" FromRole="Cart" ToRole="ProductPost" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="starRate" Type="Int32" />
+          <Property Name="commentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Comment_Order" FromRole="Comment" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userPassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="identityNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="profileImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userLevel" Type="Int32" />
+          <Property Name="totalStarRate" Type="Double" />
+          <Property Name="selfDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Member" FromRole="Member" ToRole="Order" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Member" FromRole="Member" ToRole="ProductPost" />
+          <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Member" FromRole="Member" ToRole="RequiredPost" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="buyerUserID" Type="Int32" />
+          <Property Name="orderStatus" Type="Int32" />
+          <Property Name="createdTime" Type="DateTime" Precision="3" />
+          <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Order" FromRole="Order" ToRole="Comment" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Order_Member" FromRole="Order" ToRole="Member" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailID" />
+          </Key>
+          <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductPostID" Type="Int32" />
+          <Property Name="QTY" Type="Int32" />
+          <Property Name="oneProductTotalPrice" Type="Int32" />
+          <Property Name="SellerID" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
+        </EntityType>
+        <EntityType Name="ProductPost">
+          <Key>
+            <PropertyRef Name="ProductPostID" />
+          </Key>
+          <Property Name="ProductPostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="productImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="inStoreQTY" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="TagID" Type="Int32" />
+          <Property Name="createdTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="RequiredPost">
+          <Key>
+            <PropertyRef Name="RequiredPostID" />
+          </Key>
+          <Property Name="RequiredPostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="postTime" Type="DateTime" Precision="3" />
+          <Property Name="postDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="postName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="postImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="requiredQTY" Type="Int32" />
+          <Property Name="estimatePrice" Type="Int32" />
+          <Property Name="TagID" Type="Int32" />
+          <Property Name="OrderID" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tagName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Tag" FromRole="Tag" ToRole="ProductPost" />
+          <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Tag" FromRole="Tag" ToRole="RequiredPost" />
+        </EntityType>
+        <Association Name="FK_Cart_ProductPost">
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPost">
+              <PropertyRef Name="ProductPostID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="buyerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPost_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ProductPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequiredPost_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RequiredPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_ProductPost">
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPost">
+              <PropertyRef Name="ProductPostID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="ProductPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPost_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="ProductPost">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequiredPost_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="TagID" />
+            </Principal>
+            <Dependent Role="RequiredPost">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cart" EntityType="Self.Cart" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" />
+          <EntitySet Name="Member" EntityType="Self.Member" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
+          <EntitySet Name="ProductPost" EntityType="Self.ProductPost" />
+          <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" />
+          <AssociationSet Name="FK_Cart_ProductPost" Association="Self.FK_Cart_ProductPost">
+            <End Role="ProductPost" EntitySet="ProductPost" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Member" Association="Self.FK_Comment_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Order" Association="Self.FK_Comment_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Member" Association="Self.FK_Order_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPost_Member" Association="Self.FK_ProductPost_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ProductPost" EntitySet="ProductPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequiredPost_Member" Association="Self.FK_RequiredPost_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="RequiredPost" EntitySet="RequiredPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_ProductPost" Association="Self.FK_OrderDetail_ProductPost">
+            <End Role="ProductPost" EntitySet="ProductPost" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPost_Tag" Association="Self.FK_ProductPost_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="ProductPost" EntitySet="ProductPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequiredPost_Tag" Association="Self.FK_RequiredPost_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="RequiredPost" EntitySet="RequiredPost" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="maimaiModelStoreContainer" CdmEntityContainer="maimaiEntities">
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="maimaiModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comment">
+            <EntityTypeMapping TypeName="maimaiModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="starRate" ColumnName="starRate" />
+                <ScalarProperty Name="commentDescription" ColumnName="commentDescription" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="maimaiModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="userAccount" ColumnName="userAccount" />
+                <ScalarProperty Name="userPassWord" ColumnName="userPassWord" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="identityNumber" ColumnName="identityNumber" />
+                <ScalarProperty Name="profileImg" ColumnName="profileImg" />
+                <ScalarProperty Name="userLevel" ColumnName="userLevel" />
+                <ScalarProperty Name="totalStarRate" ColumnName="totalStarRate" />
+                <ScalarProperty Name="selfDescription" ColumnName="selfDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="maimaiModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="buyerUserID" ColumnName="buyerUserID" />
+                <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetail">
+            <EntityTypeMapping TypeName="maimaiModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="oneProductTotalPrice" ColumnName="oneProductTotalPrice" />
+                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPost">
+            <EntityTypeMapping TypeName="maimaiModel.ProductPost">
+              <MappingFragment StoreEntitySet="ProductPost">
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productImg" ColumnName="productImg" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="inStoreQTY" ColumnName="inStoreQTY" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequiredPost">
+            <EntityTypeMapping TypeName="maimaiModel.RequiredPost">
+              <MappingFragment StoreEntitySet="RequiredPost">
+                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
+                <ScalarProperty Name="postTime" ColumnName="postTime" />
+                <ScalarProperty Name="postDescription" ColumnName="postDescription" />
+                <ScalarProperty Name="postName" ColumnName="postName" />
+                <ScalarProperty Name="postImg" ColumnName="postImg" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="requiredQTY" ColumnName="requiredQTY" />
+                <ScalarProperty Name="estimatePrice" ColumnName="estimatePrice" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tag">
+            <EntityTypeMapping TypeName="maimaiModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="tagName" ColumnName="tagName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
