@@ -147,6 +147,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comment.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GenericRepository\IRepository.cs" />
     <Compile Include="Models\GenericRepository\maimaiRepository.cs" />
     <Compile Include="Models\maimai.Context.cs">
@@ -154,10 +160,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>maimai.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\maimai.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\maimai.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>maimai.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Member.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Order.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderDetail.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductPost.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RequiredPost.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tag.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -215,6 +244,12 @@
     <Content Include="Models\maimai.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>maimai.Context.cs</LastGenOutput>
+      <DependentUpon>maimai.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\maimai.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>maimai.edmx</DependentUpon>
+      <LastGenOutput>maimai.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -243,9 +278,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>maimai.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\maimai.edmx.diagram">
+    <Content Include="Models\maimai.edmx.diagram">
       <DependentUpon>maimai.edmx</DependentUpon>
-    </None>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -357,6 +392,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\MetaDataModel\" />
+    <Folder Include="Models\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
