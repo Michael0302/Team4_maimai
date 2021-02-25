@@ -70,10 +70,38 @@ namespace MaiMai.Controllers
 
         }
 
+        public string uploadPhoto(HttpPostedFileBase upphoto) {
+            if (upphoto == null)
+            {
+                return "/Content/resource_nico/images/無圖示.jpg";
+            }
+            string filename = upphoto.FileName;
+            upphoto.SaveAs(Server.MapPath("~/Content/resource_nico/images/") + filename);
+            string filePath = $"/Content/resource_nico/images/{filename}";
 
-        public ActionResult commemtProductPost() { 
-        
-            
+            return filePath;
+        }
+
+        public ActionResult getAllTag() {
+
+            var table = db.Tag.Select(m => new TagViewModel() {
+
+                TagID = m.TagID,
+                tagName = m.tagName
+
+            }).ToList();
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+        }
+
+        maimaiRepository<ProductPost> productPostRepository = new maimaiRepository<ProductPost>();
+        public string commemtProductPost(ProductPost ps)
+        {
+
+            productPostRepository.Create(ps);
+
+            return "建立成功";
         }
 
 
