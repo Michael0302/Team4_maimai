@@ -52,6 +52,34 @@ namespace MaiMai.Controllers
 
         }
 
+        public ActionResult getAdminList_P(int userLevel)
+        {
+
+            var memList = db.Member.Where(m=>m.userLevel == userLevel).Select(m => new MemberViewModel()
+            {
+                UserID = m.UserID,
+                userAccount = m.userAccount,
+                userPassWord = m.userPassWord,
+                city = m.city,
+                address = m.address,
+                phoneNumber = m.phoneNumber,
+                firstName = m.firstName,
+                lastName = m.lastName,
+                Name = m.lastName + m.firstName,
+                birthday = m.birthday,
+                identityNumber = m.identityNumber,
+                profileImg = m.profileImg,
+                userLevel = m.userLevel,
+                totalStarRate = m.totalStarRate,
+                selfDescription = m.selfDescription,
+                email = m.email,
+                userLevelString = m.userLevel.ToString()
+            });
+
+            return Json(memList, JsonRequestBehavior.AllowGet);
+
+        }
+
         public ActionResult getMember_P(int? id)
         {
             if(id == null)
@@ -86,6 +114,18 @@ namespace MaiMai.Controllers
         {
             mb.Update(m);
             return Json(m, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getOrderList_P()
+        {
+            var orderlist = db.Order.Select(o=>new OrderViewModel() { 
+                OrderId = o.OrderId,
+                orderStatus = o.orderStatus,
+                createdTime = o.createdTime,
+                //UserID = o.OrderDetail
+            }).ToList();
+
+            return Json(orderlist, JsonRequestBehavior.AllowGet);
         }
     }
 

@@ -19,7 +19,7 @@
                    aria-expanded="false" aria-controls="member_P">會員管理</a>
                 <div class="collapse mb-3" id="member_P" data-parent="#backstage">
                     <a class="d-block btn" onclick="getMemberList()">所有會員</a>
-                    <a class="d-block btn" onclick="getMemberList()">管理員</a>
+                    <a class="d-block btn" onclick="getAdminLlist()">管理員</a>
                 </div>
 
                 <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#order_P" role="button"
@@ -131,7 +131,21 @@
                     })
                 }
             })
-        }
+    }
+
+    function getAdminLlist() {
+        $.ajax({
+            url: "@Url.Action("getAdminList_P", "backstage")",
+            type: "GET",
+            data: {userLevel:"1"},
+            success: function (memberList) {
+                $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>帳號</th><th>姓名</th><th>會員等級</th><th>信箱</th><th>城市</th><th></th></tr></thead> <tbody id='showList'></tbody></table>");
+                $(memberList).each(function (index, item) {
+                    $("#showList").append(`<tr><td>${item.userAccount}</td><td>${item.Name}</td><td>${item.userLevel}</td><td>${item.email}</td><td>${item.city}</td><td><button type='button' class='btn btn-primary' data-toggle='modal' onclick='getMember(${item.UserID})' data-target='#editMember'>查看</button></td></tr>`);
+                });
+            }
+        })
+    }
 
     function editMemberLevel() {
         var form = document.querySelector("form");
@@ -140,9 +154,9 @@
             url: "@Url.Action("editUserLevel_P", "backstage")",
             type: "POST",
             data: formdata,
-            processData: false, 
+            processData: false,
             contentType: false,
-            success: function (order) {                  
+            success: function (order) {
                 alert("儲存成功");
                 $('#editMemberbody').modal('hide')
                     getMemberList();
@@ -152,11 +166,11 @@
 
         function getOrderList() {
             $.ajax({
-                url: "backstage.html",
+                url: "@Url.Action("getOrderList_P", "backstage")",
                 type: "GET",
                 success: function (orderList) {
                     $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>訂單編號</th><th>賣方</th><th>買方</th><th>價錢</th><th>訂單狀態</th></tr></thead> <tbody id='showList'></tbody></table>")
-                    $("#showList").html("<tr><td><button type='button' class='btn btn-primary' onclick='getOrder()'>查看</button></td></tr>")
+                    $("#showList").html(`<tr><td>${orderList.OrderID}</td><td>${orderList}</td><td><button type='button' class='btn btn-primary' onclick='getOrder()'>查看</button></td></tr>`)
                 }
             })
         }
@@ -180,7 +194,9 @@
                     $("#editOrderbody").html("<div class='d-flex justify-content-center'><label>商品編號<input class='form-control' type='text'/><label>商品名稱<input class='form-control' type='text'/><label>商品描述<input class='form-control' type='text'/><label>商品照片<input class='form-control' type='text'/><label>建立者<input class='form-control' type='text'/><label>數量<input class='form-control' type='text'/><label>價錢<input class='form-control' type='text'/><label>標籤<input class='form-control' type='text'/><label>建立時間<input class='form-control' type='text'/></div>")
                 }
             })
-        }
+         }
+
+
 
 
 </script>
