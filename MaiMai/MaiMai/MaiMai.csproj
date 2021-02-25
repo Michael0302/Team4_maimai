@@ -391,6 +391,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\backstage\backstageIndex.cshtml" />
+    <Content Include="Views\backstage\getMemberList_P.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

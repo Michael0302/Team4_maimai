@@ -23,8 +23,12 @@ namespace MaiMai.Controllers
 
         public ActionResult getMemberList_P()
         {
-            var memList = mb.GetAll();
+
+            var memList = mb.GetAll().ToList();
+            //var memlist = new List<int>();
+            //memlist.Add(2);
             return Json(memList, JsonRequestBehavior.AllowGet);
+            //return Content("123");
         }
     }
 }

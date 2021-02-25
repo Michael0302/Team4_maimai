@@ -10,7 +10,7 @@
 <script>
 
     $.ajax({
-        url: "/backstage/getMemberList_P",
+        url: "@Url.Action("getMemberList_P", "backstage")",
         type: "GET",
         success: function (memberList) {
             console.log(memberList);
