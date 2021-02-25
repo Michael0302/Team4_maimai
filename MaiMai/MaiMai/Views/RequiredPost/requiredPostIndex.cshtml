@@ -18,7 +18,7 @@
                    aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPost" role="tab"
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPostStart" role="tab"
                    aria-controls="pills-profile" aria-selected="false">處理中的貼文</a>
             </li>
             <li class="nav-item">
@@ -34,10 +34,10 @@
 
 
             <div class="tab-pane fade show active" id="allPost" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="row mx-auto" style="border-bottom: 3px dashed orange;">
-                    <div id="img" class="photo"></div>
+                <div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">
+                    @*<div id="img" class="photo"></div>
                     <div class="post-text">
-                        <h3 id="postName">訂單名子</h3>
+                        <h3 id="postName">訂單名子:</h3>
                         <h6 id="userName">買家名稱:</h6>
                         <div>
                             <h6 id="text">產品敘述:</h6>
@@ -71,12 +71,13 @@
                             sapiente ea
                             proident.
                         </div>
-                    </div>
+                    </div>*@
                 </div>
             </div>
 
-            <div class="tab-pane fade" id="pocessPost" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="tab-pane fade" id="pocessPostStart" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div>
+
                     2 Lorem
                     ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem modi necessitatibus nam
                     adipisci
@@ -94,30 +95,117 @@
             </div>
         </div>
 
-        <div id="demo"></div>
+      
 
     </div>
 
 
 </div>
-<script >
+<script>
     $(function () {
+
         $.ajax({
             url: "/RequiredPost/allrequiredPost",
-          type:"POST",
+            type: "GET",
             success: function (response) {
-                alert(response);
-                //var obj = strToJson(response);
-                //var str = "";
-                //for (var i = 0; i < obj.length; i++) {
-                //    str += "姓名:" +  + "  " + "年齡:" + obj[i].;
-                //}
-                //$("#div1").html(str);
+                $(response).each(function (i, item) {
+                    $("#start").append(`  <div id="img" class="photo"></div>
+                    <div class="post-text">
+                        <h3 id="postName${i}">訂單名子:${item.postName}</h3>
+                        <h6 id="userName${i}">買家名稱:${item.userAccount}</h6>
+                        <div>
+                            <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                        </div>
+                        <div class="post-button">
+                            <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                            <a data-toggle="collapse" href="#collapseComment${i}"
+                               role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
+                            <div>
+                                <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample${i}"
+                                   role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
+                            </div>
+                        </div>
+                    </div>
+                       <div class="collapse" id="collapseComment${i}">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                            richardson ad
+                            squid.
+                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea
+                            proident.
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseExample${i}">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                            richardson ad
+                            squid.
+                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea
+                            proident.
+                        </div>
+                    </div>`)
+
+                })
             }
+        }) // ajax end
+
+
+        $("#pills-profile-tab").click(function () {
+                                                                  
+            $.ajax({
+                url: "/RequiredPost/allpoccessPost",
+                type: "GET",
+                success: function (response) {
+                    $(response).each(function (i, item) {
+                        $("#pocessPostStart").append(`  <div id="img" class="photo"></div>
+                    <div class="post-text">
+                        <h3 id="postName${i}">訂單名子:${item.postName}</h3>
+                        <h6 id="userName${i}">買家名稱:${item.userAccount}</h6>
+                        <div>
+                            <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                        </div>
+                        <div class="post-button">
+                            <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                            <a data-toggle="collapse" href="#collapseComment${i}"
+                               role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
+                            <div>
+                                <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample${i}"
+                                   role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
+                            </div>
+                        </div>
+                    </div>
+                       <div class="collapse" id="collapseComment${i}">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                            richardson ad
+                            squid.
+                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea
+                            proident.
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseExample${i}">
+                        <div class="card card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                            richardson ad
+                            squid.
+                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                            sapiente ea
+                            proident.
+                        </div>
+                    </div>`)
+
+                    })
+                }
+
+            }) // ajax end
+
+
+
+
         })
-    })
-    function strToJson(str) {
-        var json = eval("(" + str + ") ");
-        return json;
-    }
+    
+    })//documentReady
 </script>

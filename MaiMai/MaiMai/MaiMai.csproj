@@ -193,6 +193,7 @@
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\RequiredPostViewModel_C.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -403,7 +404,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\MetaDataModel\" />
-    <Folder Include="Models\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
