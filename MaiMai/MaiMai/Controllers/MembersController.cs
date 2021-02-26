@@ -47,7 +47,8 @@ namespace MaiMai.Controllers
             return View();
         }
 
-
+         
+       
 
         public ActionResult Login()
         {
@@ -63,7 +64,7 @@ namespace MaiMai.Controllers
             //}
 
             Member mb = db.Member.FirstOrDefault(m => m.userAccount == login.userAccount && m.userPassWord == login.userPassWord);
-
+            
             if (mb == null)
             {
                  

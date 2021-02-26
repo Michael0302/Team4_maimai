@@ -191,6 +191,7 @@
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModel\MemberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
