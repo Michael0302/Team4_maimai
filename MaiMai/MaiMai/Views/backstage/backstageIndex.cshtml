@@ -51,7 +51,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                <button type="button" class="btn btn-danger" onclick="editMemberLevel()">儲存</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="editMemberLevel()">儲存</button>
                             </div>
                         </div>
                     </div>
@@ -169,30 +169,61 @@
                 url: "@Url.Action("getOrderList_P", "backstage")",
                 type: "GET",
                 success: function (orderList) {
-                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>訂單編號</th><th>賣方</th><th>買方</th><th>價錢</th><th>訂單狀態</th></tr></thead> <tbody id='showList'></tbody></table>")
-                    $("#showList").html(`<tr><td>${orderList.OrderID}</td><td>${orderList}</td><td><button type='button' class='btn btn-primary' onclick='getOrder()'>查看</button></td></tr>`)
+                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr></thead> <tbody id='showList'></tbody></table>")
+                    $(orderList).each(function (index, orderList) {
+                        var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
+                        var year = new Date(Milliseconds).getFullYear();
+                        var month = new Date(Milliseconds).getMonth() + 1;
+                        var date = new Date(Milliseconds).getDate();
+                        $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId})'>查看</button></td></tr>`)
+                    })
                 }
             })
         }
 
-        function getOrder() {
+    function getOrderDetail(OrderId) {
             $.ajax({
-                url: "backstage.html",
+                url: "@Url.Action("getOrderDetail_P", "backstage")",
                 type: "GET",
+                data: { OrderId: OrderId},
                 success: function (order) {
-                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>商品名稱</th><th>價錢</th><th>數量</th><th>建立時間</th><th>建立者</th></tr></thead> <tbody id='showList'></tbody></table><div class='d-flex justify-content-center'><a class='btn btn-danger'>刪除此訂單</a></div>")
-                    $("#showList").html("<tr><td><button type='button' class='btn btn-primary' data-toggle='modal' onclick='getOrderDetail()' data-target='#editOrder'>查看</button></td></tr>")
+                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>商品名稱</th><th>總價</th><th>數量</th><th>建立時間</th><th>建立者</th><th></th></tr></thead> <tbody id='showList'></tbody></table><div class='d-flex justify-content-center'><a class='btn btn-danger'>刪除此訂單</a></div>")
+                    $(order).each(function (index, order) {
+                        var Milliseconds = parseInt(order.createdTime.replace(/\D/igm, ""));
+                        var year = new Date(Milliseconds).getFullYear();
+                        var month = new Date(Milliseconds).getMonth() + 1;
+                        var date = new Date(Milliseconds).getDate();
+                        var hour = new Date(Milliseconds).getHours();
+                        var min = new Date(Milliseconds).getMinutes();
+                        var sec = new Date(Milliseconds).getSeconds();
+                        $("#showList").append(`<tr><td>${order.productName}</td><td>${order.oneProductTotalPrice}</td><td>${order.QTY}</td><td>${year}-${month}-${date} ${hour}:${min}:${sec}</td><td>${order.SellerName}</td><td><button type='button' class='btn btn-primary' data-toggle='modal'  data-target='#editOrder' onclick="getProductPost(${order.ProductPostID},${order.QTY})">查看</button></td></tr>`)
+                    })
                 }
             })
-        }
+    }
 
-        function getOrderDetail() {
+    function delOrder() {
+
+    }
+
+
+    function getProductPost( ProductPostID, QTY) {
             $.ajax({
-                url: "backstage.html",
+                url: "@Url.Action("getProduct_P", "backstage")",
                 type: "GET",
-                success: function (order) {
-                    $("#editOrderbody").html("<div class='d-flex justify-content-center'><label>商品編號<input class='form-control' type='text'/><label>商品名稱<input class='form-control' type='text'/><label>商品描述<input class='form-control' type='text'/><label>商品照片<input class='form-control' type='text'/><label>建立者<input class='form-control' type='text'/><label>數量<input class='form-control' type='text'/><label>價錢<input class='form-control' type='text'/><label>標籤<input class='form-control' type='text'/><label>建立時間<input class='form-control' type='text'/></div>")
-                }
+                data: { ProductPostID: ProductPostID, QTY: QTY},
+                success: function (product) {                                        
+                    $(product).each(function (index, product) {
+                        var Milliseconds = parseInt(product.createdTime.replace(/\D/igm, ""));
+                        var year = new Date(Milliseconds).getFullYear();
+                        var month = new Date(Milliseconds).getMonth() + 1;
+                        var date = new Date(Milliseconds).getDate();
+                        var hour = new Date(Milliseconds).getHours();
+                        var min = new Date(Milliseconds).getMinutes();
+                        var sec = new Date(Milliseconds).getSeconds();
+                        $("#editOrderbody").html(`<div class='d-flex justify-content-center'><label>商品編號<input class='form-control' type='text' value="${product.ProductPostID}" readonly /><label>商品名稱<input class='form-control' type='text' value="${product.productName}" readonly/><label>商品描述<input class='form-control' type='text' value="${product.productDescription}" readonly/><label>商品照片<input class='form-control' type='text' value="${product.productImg}" readonly/><label>建立者<input class='form-control' type='text' value="${product.UserName}" readonly/><label>數量<input class='form-control' type='text' value="${product.QTY}" readonly/><label>價錢<input class='form-control' type='text' value="${product.price}" readonly/><label>標籤<input class='form-control' type='text' value="${product.Tag}" readonly/><label>建立時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/></div>`)
+                    })
+                    }
             })
          }
 

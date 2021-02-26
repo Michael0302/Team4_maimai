@@ -118,14 +118,67 @@ namespace MaiMai.Controllers
 
         public ActionResult getOrderList_P()
         {
-            var orderlist = db.Order.Select(o=>new OrderViewModel() { 
-                OrderId = o.OrderId,
-                orderStatus = o.orderStatus,
-                createdTime = o.createdTime,
-                //UserID = o.OrderDetail
-            }).ToList();
+            var orderlist = db.Order.Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+            {
+                x.OrderId,
+                x.orderStatus,
+                x.createdTime,
+                x.buyerUserID,
+                x.Member.firstName,
+                //y.SellerID,
+                y.oneProductTotalPrice,
+                
+            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID, g.firstName }).Select(s => new 
+            {
+                OrderId = s.Key.OrderId,
+                orderStatus = s.Key.orderStatus,
+                createdTime = s.Key.createdTime,
+                buyerUserID = s.Key.buyerUserID,
+                buyerName = s.Key.firstName,
+                //SellerID =s.Select(i => i.SellerID),
+                price =s.Select(i=>i.oneProductTotalPrice).Sum()
+            });
 
             return Json(orderlist, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getOrderDetail_P(int OrderId)
+        {
+            var orderDetail = db.OrderDetail.Where(o=>o.OrderID == OrderId).Select(s => new
+            {
+                ProductPostID = s.ProductPostID,
+                productName = s.ProductPost.productName,
+                oneProductTotalPrice = s.QTY * s.ProductPost.price,
+                QTY = s.QTY,
+                createdTime = s.Order.createdTime,
+                SellerName = s.ProductPost.Member.firstName
+            }).ToList();
+
+            return Json(orderDetail, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getProduct_P(int? ProductPostID, int? QTY) 
+        {
+            if(ProductPostID== null || QTY == null)
+            {
+                return Content("格式錯誤");
+            }
+            var product = db.ProductPost.Where(p => p.ProductPostID == ProductPostID).Select(s => new
+            {
+                ProductPostID = s.ProductPostID,
+                productName = s.productName,
+                productDescription = s.productDescription,
+                productImg = s.productImg,
+                UserName = s.Member.firstName,
+                QTY = QTY,
+                price = QTY*s.price,
+                TagID = s.TagID,
+                Tag = s.Tag.tagName,
+                createdTime = s.createdTime
+
+            }).ToList();
+
+            return Json(product, JsonRequestBehavior.AllowGet);
         }
     }
 

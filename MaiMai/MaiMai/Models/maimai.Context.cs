@@ -18,6 +18,7 @@ namespace MaiMai.Models
         public maimaiEntities()
             : base("name=maimaiEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

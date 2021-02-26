@@ -511,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Comment" EntityType="Self.Comment" />
           <EntitySet Name="Member" EntityType="Self.Member" />
