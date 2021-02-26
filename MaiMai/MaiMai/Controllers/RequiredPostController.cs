@@ -73,11 +73,11 @@ namespace MaiMai.Controllers
         public string uploadPhoto(HttpPostedFileBase upphoto) {
             if (upphoto == null)
             {
-                return "/Content/resource_nico/images/無圖示.jpg";
+                return "~/Content/resource_nico/images/無圖示.jpg";
             }
             string filename = upphoto.FileName;
             upphoto.SaveAs(Server.MapPath("~/Content/resource_nico/images/") + filename);
-            string filePath = $"/Content/resource_nico/images/{filename}";
+            string filePath = $"~/Content/resource_nico/images/{filename}";
 
             return filePath;
         }
@@ -96,16 +96,48 @@ namespace MaiMai.Controllers
         }
 
         maimaiRepository<ProductPost> productPostRepository = new maimaiRepository<ProductPost>();
-        public string commemtProductPost(ProductPost ps)
+        public string  commemtProductPost(ProductPost ps)
         {
+        
+            ps.createdTime =  DateTime.Now;
+
 
             productPostRepository.Create(ps);
 
-            return "建立成功";
+            return "留言成功";
         }
 
+        public ActionResult checkAllComment(string  data) {
+
+            var RequiredPostID = Convert.ToInt32(data);
+            var table = db.ProductPost.Where(m => m.RequiredPostID == RequiredPostID).Select(m => new ProductCommentListViewModel()
+            {
+                ProductPostID = m.ProductPostID,
+                productName = m.productName,
+                productDescription = m.productDescription,
+                productImg = m.productImg,
+                UserID = m.UserID,
+                inStoreQTY = m.inStoreQTY,
+                price = m.price,
+                TagID = m.TagID,
+                createdTime = m.createdTime,
+                RequiredPostID = m.RequiredPostID,
+                userAccount = m.Member.userAccount
+            }).ToList();
+            
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+        }
+        maimaiRepository<RequiredPost> requiredPostRepository = new maimaiRepository<RequiredPost>();
+        public string sendRequiredPost(RequiredPost rp)
+        {
+
+            rp.postTime = DateTime.Now;
 
 
+            requiredPostRepository.Create(rp);
 
+            return "發文成功";
+        }
     }//class end
 }//namespace end

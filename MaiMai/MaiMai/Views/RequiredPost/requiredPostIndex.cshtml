@@ -8,105 +8,154 @@
 </head>
 
 <div class="container my-5">
-
+   
     <div class="container" style="background-color:burlywood; padding-bottom: 40px; border-radius: 20px;">
+        <div class="row">
+            <ul class="nav nav-pills mb-3 requriedTab" id="pills-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#allPost" role="tab"
+                       aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
 
+                </li>
 
+                <!--============================--> @*個人帳號才出現*@
+                @*<li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPostStart" role="tab"
+                       aria-controls="pills-profile" aria-selected="false">處理中的貼文</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pastPost" role="tab"
+                       aria-controls="pills-contact" aria-selected="false">已完成的貼文</a>
+                </li>*@
+            </ul>
 
-        <ul class="nav nav-pills mb-3 requriedTab" id="pills-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#allPost" role="tab"
-                   aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPostStart" role="tab"
-                   aria-controls="pills-profile" aria-selected="false">處理中的貼文</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pastPost" role="tab"
-                   aria-controls="pills-contact" aria-selected="false">已完成的貼文</a>
-            </li>
-        </ul>
+            <div class="my-auto d-flex mb-1">
+                <a class="btn btn-warning" style="justify-content:flex-end" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+            </div>
 
+        </div>
+
+        <div class="modal fade" id="bulid" tabindex="-1" role="dialog" aria-labelledby="editMemberTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editMemberTitle"> 徵求貼文</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editMemberbody">
+                        <form class="formFrame mx-auto" enctype="multipart/form-data">
+                            <div class="displayImg">
+                                <img id="Productimg">
+                                <input type="file" onChange="doUpload()" name="postImg" id="postImg" style="display: block;">
+                            </div>
+                            <div class="displayInput">
+                                <h6>貼文名稱:<input type="text" name="postName" id="postName"></h6>
+                                <h6>
+                                    貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" rows="4"
+                                                   cols="50" onclick="tag()"></textarea>
+                                </h6>
+                                <h6>價格:<input type="text" name="estimatePrice" id="estimatePrice"></h6>
+                                <h6>數量:<input type="text" name="require0dQTY" id="requiredQTY"></h6>
+                                <h6>
+                                    標籤:
+                                    <select id="tagSelectioninPost" class="form-control" name="TagID" >
+                                        <option>Choose...</option>
+                                    </select>
+                                </h6>
+                                @*====userID======
+                                   ====posttime====*@
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequiredPost()">新增貼文</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
         <div class="showPostArea tab-content " id="pills-tabContent">
 
-
             <div class="tab-pane fade show active" id="allPost" role="tabpanel" aria-labelledby="pills-home-tab">
                 @*<div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">*@
-                    @*<div id="img" class="photo"></div>
-                        <div class="post-text">
-                            <h3 id="postName">訂單名子:</h3>
-                            <h6 id="userName">買家名稱:</h6>
-                            <div>
-                                <h6 id="text">產品敘述:</h6>
-                            </div>
-                            <div class="post-button">
-                                <h6 id="price">大概徵求價位：</h6>
-                                <a data-toggle="collapse" href="#collapseComment"
-                                   role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount">0</span>)</a>
-                                <div>
-                                    <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample"
-                                       role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
-                                </div>
-                            </div>
-                        </div>*@
-
-                    @*======================================comment ============================================================*@
-                    <!--<div class="collapse" id="collapseComment">
-                        <div class="card card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                            richardson ad
-                            squid.
-                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea
-                            proident.
+                @*<div id="img" class="photo"></div>
+                <div class="post-text">
+                    <h3 id="postName">訂單名子:</h3>
+                    <h6 id="userName">買家名稱:</h6>
+                    <div>
+                        <h6 id="text">產品敘述:</h6>
+                    </div>
+                    <div class="post-button">
+                        <h6 id="price">大概徵求價位：</h6>
+                        <a data-toggle="collapse" href="#collapseComment"
+                           role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount">0</span>)</a>
+                        <div>
+                            <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample"
+                               role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
                         </div>
-                    </div>-->
-                    @*end of comment*@
+                    </div>
+                </div>*@
 
+                @*======================================comment ============================================================*@
+                <!--<div class="collapse" id="collapseComment">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+                    richardson ad
+                    squid.
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
+                    sapiente ea
+                    proident.
+                </div>
+            </div>-->
+                @*@======================================*end of comment======================================================*@
 
-                    <!--<div class="collapse w-100" id="collapseExample">
-                    <div class="card card-body w-100">
-                        <form class="formFrame mx-auto" enctype="multipart/form-data">
-                            <div class="displayImg">
-                                <img id="Productimg">
-                                <input type="file" onChange="doUpload()" name="productImg" id="productImg" style="display: block;">
-                            </div>
-                            <div class="displayInput">
-                                <h6>產品名稱:<input type="text" name="productName" id="productName"></h6>
-                                <h6>
-                                    產品描述:<textarea id="productDescription" name="w3review" placeholder="使用程度、幾成新" rows="4"
-                                                   cols="50"></textarea>
-                                </h6>
+                @*===========================================start productComment===========================================================*@
+                <!--<div class="collapse w-100" id="collapseExample">
+            <div class="card card-body w-100">
+            <form class="formFrame mx-auto" enctype="multipart/form-data">
+                <div class="displayImg">
+                    <img id="Productimg">
+                    <input type="file" onChange="doUpload()" name="productImg" id="productImg" style="display: block;">
+                </div>
+                <div class="displayInput">
+                    <h6>產品名稱:<input type="text" name="productName" id="productName"></h6>
+                    <h6>
+                        產品描述:<textarea id="productDescription" name="w3review" placeholder="使用程度、幾成新" rows="4"
+                                       cols="50"></textarea>
+                    </h6>
 
-                                <h6>價格:<input type="text" name="price" id="price"></h6>
-                                <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY"></h6>
-                                <h6>
-                                    標籤:<selection id="tagselection" name="tag"></selection>
-                                </h6>
+                    <h6>價格:<input type="text" name="price" id="price"></h6>
+                    <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY"></h6>
+                    <h6>
+                        標籤:<selection id="tagselection" name="tag"></selection>
+                    </h6>
 
-                                <!-- createtime -->
-                    <!-- userID -->
-                    <!-- requiredPostID -->
-                    <!--<div style="display: flex; justify-content:flex-end; ">
-
-                                        <button type="submit" class="submitBtn">建立商品</button>
-                                    </div>
-                                </div>
-
-                            </form>
+                    <!-- createtime -->
+                <!-- userID -->
+                <!-- requiredPostID -->
+                <!--<div style="display: flex; justify-content:flex-end; ">
+                        <button type="submit" class="submitBtn">建立商品</button>
                         </div>
-                    </div>-->
-                    @*end of 訂單*@
-                @*</div>*@
             </div>
 
-            <div class="tab-pane fade" id="pocessPostStart" role="tabpanel" aria-labelledby="pills-profile-tab">
+                     </form>
+                 </div>
+                </div>-->
+                @*end of 訂單*@
+                @*</div>*@
+            </div>
+            @*=============================================tab 2=========================================================*@
+            @*<div class="tab-pane fade" id="pocessPostStart" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div>
-
                     2 Lorem
                     ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem modi necessitatibus nam
                     adipisci
@@ -114,21 +163,20 @@
                     exercitationem distinctio, expedita ipsam culpa.
                 </div>
 
-            </div>
-
-            <div class="tab-pane fade" id="pastPost" role="tabpanel" aria-labelledby="pills-contact-tab">
+            </div>*@
+            @*=============================================tab 3=========================================================*@
+            @*<div class="tab-pane fade" id="pastPost" role="tabpanel" aria-labelledby="pills-contact-tab">
                 3 Lorem
                 ipsum dolor sit amet consectetur adipisicing elit. Fuga quos ea assumenda ipsa, accusamus commodi
                 omnis dolorum nobis maiores deserunt vitae eaque nulla doloremque modi. Quod, odit. Quae, unde
                 ipsam!
-            </div>
+            </div>*@
         </div>
-
 
 
     </div>
 
-
+    
 </div>
 <script>
     $(function () {
@@ -138,59 +186,56 @@
             type: "GET",
             success: function (response) {
                 $(response).each(function (i, item) {
-                    $("#allPost").append(`  
+                    $("#allPost").append(`
                          <div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">
-                         <div id="img" class="photo"></div>
-                          <div class="post-text">
-                        <h3 id="postName${i}">訂單名子:${item.postName}</h3>
-                        <h6 id="userName${i}">買家名稱:${item.userAccount}</h6>
-                        <div>
-                            <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
-                        </div>
-                        <div class="post-button">
-                            <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
-                            <a data-toggle="collapse" href="#collapseComment${i}"
-                               role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
-                            <div>
-                                <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample${i}"
-                                   role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
+                            <div class="photo">
+                                    <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" /> 
                             </div>
-                        </div>
-                    </div>
-                       <div class="collapse" id="collapseComment${i}">
-                        <div class="card card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                            richardson ad
-                            squid.
-                            Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                            sapiente ea
-                            proident.
-                        </div>
-                    </div>
-                    <div class="collapse w-100" id="collapseExample${i}">
-                        <div class="card card-body w-100">
-                            <form class="formFrame mx-auto" enctype="multipart/form-data">
-                                <div class="displayImg">
-                                    <img id="Productimg">
-                                    <input type="file" onChange="doUpload()" name="productImg" id="productImg" style="display: block;">
-                                </div>
-                                <div class="displayInput">
-                                    <h6>產品名稱:<input type="text" name="productName" id="productName"></h6>
-                                    <h6>
-                                        產品描述:<textarea id="productDescription" name="productDescription" placeholder="使用程度、幾成新" rows="4"
-                                                       cols="50"></textarea>
-                                    </h6>
+                            <div class="post-text">
+                                    <h3 id="postName${i}">訂單名子:${item.postName}</h3>
+                                    <h6 id="userName${i}">買家名稱:${item.userAccount}</h6>
+                            <div>
+                                    <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                            </div>
+                            <div class="post-button">
+                                    <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                                    <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
+                                    <div>
+                                            <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample${i}"
+                                                role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
+                                    </div>
+                             </div>
+                          </div>
 
-                                    <h6>價格:<input type="text" name="price" id="price"></h6>
-                                    <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY"></h6>
-                                    <h6>
-                                        標籤:<select id="tagselection" class="form-control"  name="TagID" onclick="tag()">
-                                                   <option >Choose...</option>
-                                                   </select>
-                                    </h6>
+                         <div class="collapse w-100 comment" id="collapseComment${i}">
+                               <div class="card card-body w-100 comment">
+
+                                </div>
+                        </div>
+
+                         <div class="collapse w-100" id="collapseExample${i}">
+                              <div class="card card-body w-100">
+                                      <form class="formFrame mx-auto" enctype="multipart/form-data">
+                                                <div class="displayImg">
+                                                      <img id="Productimg">
+                                                      <input type="file" onChange="doUpload()" name="productImg" id="productImg" style="display: block;">
+                                                 </div>
+                                                <div class="displayInput">
+                                                        <h6>產品名稱:<input type="text" name="productName" id="productName"></h6>
+                                                        <h6>
+                                                              產品描述:<textarea id="productDescription" name="productDescription" placeholder="使用程度、幾成新" rows="4"
+                                                               cols="50" onclick="tag()"></textarea>
+                                                        </h6>
+                                                        <h6>價格:<input type="text" name="price" id="price"></h6>
+                                                        <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY"></h6>
+                                                        <h6>標籤:
+                                                                <select id="tagselection" class="form-control"  name="TagID" >
+                                                                              <option >Choose...</option>
+                                                                </select>
+                                                        </h6>
 
                                     <!-- createtime -->
-                                    <input type="hidden" name="createdTime" value="${new Date()}">
+                                    <input type="hidden" name="createdTime">
                                     <!-- userID -->
                                     <input type="hidden" name="RequiredPostID" value="${item.RequiredPostID}">
                                     <!-- requiredPostID -->
@@ -201,14 +246,18 @@
 
                             </form>
                                         <button type="submit" class="btn btn-info" onclick="submitProdouct()">建立商品留言</button>
-                        </div>
-                    </div>    @*end of 訂單*@
+                                </div>
+                          </div>    @*end of 訂單*@
                     </div)
                     `)
 
                 })
             }
-        }) // ajax end
+        })
+           
+
+
+        // ajax end
     })//documentReady
 
 
@@ -263,27 +312,26 @@
 
             }) // ajax end
 
-        })// proccess tab end 
+        })// proccess tab end
 
         function doUpload() {
             var photo = $(".displayImg>input").val();
             $.ajax({
                 url: "/RequiredPost/uploadPhoto",
                     type: "Post",
-                    data: { upphoto : photo},
-                success: function (response) {
-                    $(".displayImg>img").attr("src",`${response}`)
+                    data: { 'upphoto': photo},
+                    success: function (response) {
+                    $(".displayImg>img").attr("src", response)
                 }
             })
         } //  doUpload end
 
         function submitProdouct() {
-            //var productName = $('input[name="productName"]').val;
-            //var productName = $('input[name="productDescription"]').val;
-            //var productName = $('input[name="productName"]').val;
-            var date = new Date()
+           
+
             var form = document.querySelector("form");
             var data = new FormData(form);
+
             $.ajax({
                 url: "/RequiredPost/commemtProductPost",
                 type: "Post",
@@ -292,10 +340,12 @@
                 contentType:false,
                 success: function (response) {
                     window.alert(response)
+                    window.location.reload("/RequiredPost/requiredPostIndex")
+
                 }
             })
-        }
-       
+        }//end  of submit product
+
         function tag() {
             var txt = ""
             $.ajax({
@@ -303,18 +353,66 @@
                 type: "GET",
                 success: function (response) {
                     $(response).each(function (i, item) {
-                       
-                           txt += `<option value=${item.TagID}>${item.tagName}</option>`
+                       // txt += <a>itrm.tagid </a>
+                        txt += `<option value=${item.TagID}>${item.tagName}</option>`
                         $("h6>select").html(txt)
                     })
                 }
             })
 
-        }
+        }// end tag function
+    function checkCommentList(eler,index) {
 
+        var data = $(eler).attr("name");
+        var inner = "";
+        console.log(index);
+        console.log (data);
+        $.ajax({
+            url: "/RequiredPost/checkAllComment",
+            type: "Post",
+            data: { 'data': data },
+            success: function (response) {
+                $(response).each(function (i, item) {
+                    inner += `
+                         <div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">   
 
+                          <div class="photo">  <img src="../Content/resource_nico/images/${item.productImg}"/> </div>
+                          <div class="post-text">
+                                <h3 id="postName${i}">訂單名子: ${item.productName}</h3>
+                                <h6 id="userName${i}">賣家名稱:${item.userAccount}</h6>
+                                <div>
+                                <h6 id="text${i}">產品敘述:${item.productDescription}</h6>
+                            </div>
+                            <div class="post-button">
+                                <h6 id="price${i}">價位：${item.price}</h6>
+                         </div>
+                        </div>`
+                    })
+                $(`#collapseComment${index}>div`).html(inner);
+                $(`#cmCount${index}`).html(`${response.length}`)
+            }
+        })
+    } // end check comment function
 
+    function sendRequiredPost() {
 
-    
+        var form = document.querySelector("form");
+        var data = new FormData(form);
+
+        $.ajax({
+            url: "/RequiredPost/sendRequiredPost",
+            type: "Post",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                window.alert(response)
+                window.location.reload("/RequiredPost/requiredPostIndex")
+
+            }
+        })
+
+    }// end send required post 
+
 
 </script>

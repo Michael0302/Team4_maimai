@@ -193,6 +193,7 @@
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\ProductCommentListViewModel.cs" />
     <Compile Include="Models\ViewModel\RequiredPostViewModel_C.cs" />
     <Compile Include="Models\ViewModel\TagViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,6 +206,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\resource_nico\createProductPost.css" />
+    <Content Include="Content\resource_nico\images\nini.jpg" />
+    <Content Include="Content\resource_nico\images\徵求台POST\iphone12.jpg" />
+    <Content Include="Content\resource_nico\images\徵求台POST\一日女友.jpg" />
+    <Content Include="Content\resource_nico\images\徵求台POST\走私.jpg" />
     <Content Include="Content\resource_nico\images\無圖示.jpg" />
     <Content Include="Content\resource_nico\requriedIndex.css" />
     <Content Include="Content\themes\base\accordion.css" />
