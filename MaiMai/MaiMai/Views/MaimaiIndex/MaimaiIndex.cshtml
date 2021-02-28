@@ -12,22 +12,21 @@
             </div>
             <!-- 商品廣告 -->
             <div class="bodr5 d-flex">
-                    <div class="d-flex ">
-                        <div class="col-md-12">
-                            <div class="carousel slide multi-item-carousel " id="theCarousel">
-                                <div class="carousel-inner">
-                                    <div class="item active d-flex  " id="PopularProduct">
-
-                                        <div id="prevSlide" class="slide_btn">
-                                            <i class="fa fa-caret-left" style="background-color:#ffffff99"></i>
-                                        </div>
-                                        <div id="nextSlide" class="slide_btn">
-                                            <i class="fa fa-caret-right"></i>
-                                        </div>
-                                    </div>
+                <div class="d-flex theWidth">
+                    <div class="col-md-12">
+                        <div class="carousel slide multi-item-carousel " id="theCarousel">
+                            <div class="carousel-inner ">
+                                <div class="item active d-flex  " id="PopularProduct">
                                 </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div id="prevSlide" class="slide_btn">
+                    <i class="fa fa-caret-left" style="background-color:#ffffff99"></i>
+                </div>
+                <div id="nextSlide" class="slide_btn">
+                    <i class="fa fa-caret-right"></i>
                 </div>
             </div> <br>
             <div class="bodr5 overflow-hidden">商品廣告</div><br>
@@ -41,6 +40,7 @@
         </div>
     </div>
 </div>
+
 <script>
     function tagonclick(TagID) {
         window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
@@ -63,9 +63,10 @@
             url: "/MaimaiIndex/ProductPost",
             type: "GET",
             success: function (Productpost) {
+                $(".theWidth").css("width", Productpost.length * 700);
                 $(Productpost).each(function (i, item) {
                     $("#PopularProduct").append(`
-                            <div class="Carouseladvertising ml-3 mr-4  ">
+                            <div class="Carouseladvertising">
                                <div class="photho all123">
                                  <div>
                                      <h4>
@@ -79,33 +80,31 @@
                           </div>
                     `)
                 })
+                liftCar();
             }
         })        
     })
-    $(function () {
+
+    function liftCar() {
         let slideNum = 1;
-        let slideCount = $("#PopularProduct h4").length;
+        let slideCount = $(".Carouseladvertising").length;
         let lastIndex = slideCount - 1;
-
+        let slidemove ;
         function show() {
-            let slidemove = 0 +1500 * slideNum ;
-            $("div#PopularProduct").css("left", slidemove);
+             slidemove = 0 - 350 * slideNum;
+            $(".theWidth").css("left", slidemove);
         }
-
         $("#prevSlide").click(function () {
             slideNum--;
             if (slideNum < 0) slideNum = lastIndex;
             show();
-            console.log(123456);
-            console.log(lastIndex);
             console.log(slideCount);
             console.log(slidemove);
-
         })
         $("#nextSlide").click(function () {
             slideNum++;
             if (slideNum > lastIndex) slideNum = 0;
             show();
         })
-    })
+    }
 </script>

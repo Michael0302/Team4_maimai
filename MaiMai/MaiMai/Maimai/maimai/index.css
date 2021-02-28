@@ -73,6 +73,10 @@
     opacity: 0;
     max-height: 0;
 }
+.dropdown-menu {
+height:100%;
+width:50px;
+}
 /*鈴鐺 功能切換(使用未成功)*/
 .BellsMenuAc {
     border: 0.3px solid skyblue;
@@ -80,10 +84,10 @@
     max-height: 300px;
     transform: rotate(-45deg) translate(-9px,7px);
 }
-/*鈴鐺 功能切換(使用未成功)*/
+/*鈴鐺 功能切換*/
 .BellsMenuStyle {
-    width: 150px;
-    height: 250px
+    width: 100%;
+    height: 80px;
 }
 /*Layout_st 單入大頭貼人像(未使用)*/
 .mylogo {
@@ -125,13 +129,15 @@
     height: 250px;
     left: 0px;
     transition: all .5s;
+    margin-left:10px;
+    margin-right: 40px;
 }
 /*index body 框內 2*/
 .Carouseladvertising > .photho {
         border: 1px solid black;
         border-radius: 3px;
         width: 300px;
-        height: 170px;
+        height: 250px;
 }
     /*index body 框內 照片*/
     .Carouseladvertising > .photho img {
@@ -159,14 +165,15 @@
     right: 0;
 }
 .slide_btn i {
-    color: rgba(255,255,255,.6);
+    color: #6C6C6C;
     transition: .5s;
 }
 .slide_btn:hover i {
-    color: rgba(255,255,255,1);
+    color: #D9006C;
 }
-
-
+.theWidth {
+    position: relative;
+}
 /*=======================================================================*/
 /*foot_st*/
 .footerLogo {
@@ -184,9 +191,9 @@
 /*六角形狀(未使用)*/
 .sixsideline {
     position: relative;
-    width: 100px;
+    width: 70px;
     height: 0;
-    border-width: 0 71px 71px;
+    border-width: 0 101px 101px;
     border-style: solid;
     border-color: transparent transparent #f69;
 }
@@ -198,7 +205,7 @@
         left: -71px;
         width: 100px;
         height: 0;
-        border-width: 71px 71px 0;
+        border-width: 101px 101px 0;
         border-style: solid;
         border-color: #f69 transparent transparent;
     }
@@ -208,9 +215,9 @@
         content: "";
         top: 71px;
         left: -71px;
-        width: 242px;
+        width: 143px;
         height: 0;
-        border-width: 0 0 100px;
+        border-width: 0 0 101px;
         background: none;
         border-style: solid;
         border-color: transparent transparent #f69;
@@ -222,19 +229,19 @@
 /*=======================================================================*/
 
 /*TagSearchStyle TAG功能跳轉*/
-.TagSearchStyle {
+/*.TagSearchStyle {
     width: 100%;
     height: 100%;
     border-radius: 15px;
     border: 1px solid skyblue;
-}
+}*/
 /*TagSearchStyle TAG功能跳轉*/
-.TagSearchImgStyle {
-    width: 200px;
-    height: 312px;
+/*.TagSearchImgStyle {
+    width:226px;
+    height: 151px;
     border-radius: 15px;
     border: 1px solid #000000
-}
+}*/
 /*TagSearchStyle TAG功能跳轉*/
 TagSearchImgStyle > p {
     text-decoration: none;

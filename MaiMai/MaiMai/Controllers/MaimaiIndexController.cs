@@ -11,11 +11,7 @@ namespace MaiMai.Controllers
     public class MaimaiIndexController : Controller
     {
         maimaiEntities db = new maimaiEntities();
-
-
-        // GET: MaimaiIndex
-       
-
+        // GET: MaimaiIndex     
         public ActionResult TagResult()
         {
             var tagList = db.Tag.Select(m => new MaimaiIndexViewModel()
@@ -33,7 +29,6 @@ namespace MaiMai.Controllers
                productImg = m.productImg,
                price = m.price,
                productDescription = m.productDescription
-
             }).ToList();
             return Json(PostList,JsonRequestBehavior.AllowGet);
         }
@@ -50,17 +45,23 @@ namespace MaiMai.Controllers
             return Json(PostList, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Bells()
+
+        public ActionResult Bells(int? TagID =  5)
         {
-            var PostList = db.ProductPost.Select(m => new MaimaiIndexViewModel()            
+            var PostList = db.ProductPost.Where(m => m.UserID == TagID && m.inStoreQTY > 0).Select(m => new
             {
                 price = m.price,
                 productImg = m.productImg,
                 productName = m.productName,
             }).ToList();
-
             return Json(PostList, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
+
 
         public ActionResult MaimaiIndex()
         {
