@@ -47,6 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.12.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.12.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -123,6 +126,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -143,8 +147,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\backstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaimaiIndexController.cs" />
+    <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +196,11 @@
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\MemberViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderViewModel.cs" />
+    <Compile Include="Models\ViewModel\ProductCommentListViewModel.cs" />
+    <Compile Include="Models\ViewModel\RequiredPostViewModel_C.cs" />
+    <Compile Include="Models\ViewModel\TagViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +210,13 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\resource_nico\createProductPost.css" />
+    <Content Include="Content\resource_nico\images\nini.jpg" />
+    <Content Include="Content\resource_nico\images\徵求台POST\iphone12.jpg" />
+    <Content Include="Content\resource_nico\images\徵求台POST\一日女友.jpg" />
+    <Content Include="Content\resource_nico\images\徵求台POST\走私.jpg" />
+    <Content Include="Content\resource_nico\images\無圖示.jpg" />
+    <Content Include="Content\resource_nico\requriedIndex.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -284,6 +302,13 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="Models\maimai.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>maimai.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\maimai.edmx.diagram">
+      <DependentUpon>maimai.edmx</DependentUpon>
+    </Content>
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -294,18 +319,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\maimai.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>maimai.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\maimai.edmx.diagram">
-      <DependentUpon>maimai.edmx</DependentUpon>
-    </Content>
-    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.4.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.0.js" />
+    <Content Include="Scripts\jquery-3.4.0.min.js" />
+    <Content Include="Scripts\jquery-3.4.0.slim.js" />
+    <Content Include="Scripts\jquery-3.4.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.4.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
@@ -414,16 +434,16 @@
     <Content Include="Views\Shared\_Layoutmaimai.cshtml" />
     <Content Include="Views\MaimaiIndex\MaimaiIndex.cshtml" />
     <Content Include="Views\MaimaiIndex\tagsearch.cshtml" />
+    <Content Include="Views\backstage\backstageIndex.cshtml" />
+    <Content Include="Views\backstage\getMemberList_P.cshtml" />
+    <Content Include="Views\RequiredPost\requiredPostIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\MetaDataModel\" />
-    <Folder Include="Models\ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
