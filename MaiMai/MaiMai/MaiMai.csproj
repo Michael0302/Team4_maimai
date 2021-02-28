@@ -149,6 +149,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\backstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaimaiIndexController.cs" />
     <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -176,6 +177,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>maimai.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MaimaiIndexViewModel\MaimaiIndexViewModel.cs" />
     <Compile Include="Models\Member.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
@@ -259,6 +261,24 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Maimai\images\image jpeg\490db2640e04a996eea2652b0dc0b144.jpg" />
+    <Content Include="Maimai\images\image jpeg\55da87e84d72586b3cfb9249408c45f0.jpg" />
+    <Content Include="Maimai\images\image jpeg\82977e50d6548e1ea6e0972d11ea563e.jpg" />
+    <Content Include="Maimai\images\image jpeg\abf1b3dc2cab2c7d949228687c84013c.jpg" />
+    <Content Include="Maimai\images\image jpeg\maimaiTEXTLOGO.png" />
+    <Content Include="Maimai\images\image jpeg\maimaiTOPLOGO.png" />
+    <Content Include="Maimai\images\svg\070-envelop.svg" />
+    <Content Include="Maimai\images\svg\071-pushpin.svg" />
+    <Content Include="Maimai\images\svg\072-location.svg" />
+    <Content Include="Maimai\images\svg\073-location2.svg" />
+    <Content Include="Maimai\images\svg\074-compass.svg" />
+    <Content Include="Maimai\images\svg\076-map.svg" />
+    <Content Include="Maimai\images\svg\078-history.svg" />
+    <Content Include="Maimai\images\svg\082-bell.svg" />
+    <Content Include="Maimai\images\svg\135-search.svg" />
+    <Content Include="Maimai\images\svg\149-cog.svg" />
+    <Content Include="Maimai\images\svg\maimaiLOGO.svg" />
+    <Content Include="Maimai\images\svg\maimaiTOPLOGO.svg" />
     <Content Include="Models\maimai.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>maimai.Context.cs</LastGenOutput>
@@ -313,6 +333,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Maimai\maimai\Carousela-Index.js" />
+    <Content Include="Maimai\maimai\index.css" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -409,6 +431,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\_Layoutmaimai.cshtml" />
+    <Content Include="Views\MaimaiIndex\MaimaiIndex.cshtml" />
+    <Content Include="Views\MaimaiIndex\tagsearch.cshtml" />
     <Content Include="Views\backstage\backstageIndex.cshtml" />
     <Content Include="Views\backstage\getMemberList_P.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndex.cshtml" />
