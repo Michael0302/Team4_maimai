@@ -147,6 +147,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\backstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,6 +194,8 @@
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\MemberViewModel.cs" />
+    <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Models\ViewModel\ProductCommentListViewModel.cs" />
     <Compile Include="Models\ViewModel\RequiredPostViewModel_C.cs" />
     <Compile Include="Models\ViewModel\TagViewModel.cs" />
@@ -406,6 +409,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\backstage\backstageIndex.cshtml" />
+    <Content Include="Views\backstage\getMemberList_P.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
