@@ -1,0 +1,42 @@
+.formFrame {
+    width: 100%;
+    border-radius: 25px;
+    display: flex;
+    flex-wrap:wrap;
+}
+
+.displayImg > img {
+    margin: 20px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid darkkhaki;
+}
+
+.displayImg > input {
+    margin: 20px 20px;
+}
+
+.displayInput {
+    margin: 20px;
+}
+
+    .displayInput > h6 > input {
+        margin-left: 20px;
+    }
+
+    .displayInput > h6 > textarea {
+        margin-left: 20px;
+    }
+
+    .displayInput > h6 {
+        font-size: larger;
+        margin: 30px 20px;
+        color: darkslategray;
+        font-weight: 900;
+    }
+
+.submitBtn {
+    width: 80px;
+    height: 30px;
+    justify-content: flex-end;
+}
