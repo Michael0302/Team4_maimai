@@ -11,13 +11,15 @@
    
     <div class="container" style="background-color:burlywood; padding-bottom: 40px; border-radius: 20px;">
         <div class="row">
-            <ul class="nav nav-pills mb-3 requriedTab" id="pills-tab" role="tablist">
+            <ul class="nav nav-pills mb-3 requriedTab w-100" style="justify-content:space-between" id="pills-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#allPost" role="tab"
                        aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
 
                 </li>
-
+                <li >
+                    <a class="btn btn-warning" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                </li>
                 <!--============================--> @*個人帳號才出現*@
                 @*<li class="nav-item">
                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPostStart" role="tab"
@@ -29,9 +31,8 @@
                 </li>*@
             </ul>
 
-            <div class="my-auto d-flex mb-1">
-                <a class="btn btn-warning" style="justify-content:flex-end" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
-            </div>
+ 
+          
 
         </div>
 
@@ -49,19 +50,19 @@
                         <form class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
                                 <img id="Productimg">
-                                <input type="file" onChange="doUpload()" name="postImg" id="postImg" style="display: block;">
+                                <input  type="file" required  onChange="doUpload()" name="postImg" id="postImg" style="display: block;" >
                             </div>
                             <div class="displayInput">
-                                <h6>貼文名稱:<input type="text" name="postName" id="postName"></h6>
+                                <h6>貼文名稱:<input type="text"required  name="postName" id="postName" ></h6>
                                 <h6>
                                     貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" rows="4"
-                                                   cols="50" onclick="tag()"></textarea>
+                                                   cols="50" required onclick="tag()" ></textarea>
                                 </h6>
-                                <h6>價格:<input type="text" name="estimatePrice" id="estimatePrice"></h6>
-                                <h6>數量:<input type="text" name="require0dQTY" id="requiredQTY"></h6>
+                                <h6>價格:<input type="text" required name="estimatePrice" id="estimatePrice" ></h6>
+                                <h6>數量:<input type="text" required name="require0dQTY" id="requiredQTY" ></h6>
                                 <h6>
                                     標籤:
-                                    <select id="tagSelectioninPost" class="form-control" name="TagID" >
+                                    <select id="tagSelectioninPost" required class="form-control" name="TagID" >
                                         <option>Choose...</option>
                                     </select>
                                 </h6>
@@ -263,19 +264,21 @@
 
         $("#pills-profile-tab").click(function () {
 
-        $.ajax({
+            $.ajax({
                 url: "/RequiredPost/allpoccessPost",
                 type: "GET",
                 success: function (response) {
                     $(response).each(function (i, item) {
-                        $("#pocessPostStart").append(`  <div id="img" class="photo"></div>
-                    <div class="post-text">
-                        <h3 id="postName${i}">訂單名子:${item.postName}</h3>
-                        <h6 id="userName${i}">買家名稱:${item.userAccount}</h6>
-                        <div>
+                        $("#pocessPostStart").append(`  
+
+                            <div id="img" class="photo"></div>
+                            <div class="post-text">
+                            <h3 id="postName${i}">訂單名子:${item.postName}</h3>
+                            <h6 id="userName${i}">買家名稱:${item.userAccount}</h6>
+                            <div>
                             <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
-                        </div>
-                        <div class="post-button">
+                            </div>
+                            <div class="post-button">
                             <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
                             <a data-toggle="collapse" href="#collapseComment${i}"
                                role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
