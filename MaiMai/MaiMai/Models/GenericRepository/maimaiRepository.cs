@@ -13,7 +13,7 @@ namespace MaiMai.Models
 {
     public class maimaiRepository<Table> : IRepository<Table> where Table : class
     {
-        maimaiEntities whdb = null;
+        maimaiEntities  whdb = null;
         DbSet<Table> dbTable = null;
 
         public maimaiRepository()

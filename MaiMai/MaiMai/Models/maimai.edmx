@@ -4,6 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
+
     <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
@@ -78,6 +79,7 @@
           <Property Name="price" Type="int" />
           <Property Name="TagID" Type="int" />
           <Property Name="createdTime" Type="datetime" />
+          <Property Name="RequiredPostID" Type="int" />
         </EntityType>
         <EntityType Name="RequiredPost">
           <Key>
@@ -364,6 +366,7 @@
           <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
+          <Property Name="RequiredPostID" Type="Int32" />
         </EntityType>
         <EntityType Name="RequiredPost">
           <Key>
@@ -635,6 +638,7 @@
           <EntitySetMapping Name="ProductPost">
             <EntityTypeMapping TypeName="maimaiModel.ProductPost">
               <MappingFragment StoreEntitySet="ProductPost">
+                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
                 <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
                 <ScalarProperty Name="productDescription" ColumnName="productDescription" />
