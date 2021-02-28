@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "tagsearch";
+}
+
+<div style="height:50px"></div>
+<div>
+    <div><img /></div>
+    <div><h4></h4></div>
+    <div><p></p></div>
+</div>
+
+<div id="tag-search" class="d-flex"></div>
+
+<script>
+    var getUrlString = location.href;
+    var url = new URL(getUrlString);
+   getTagID= url.searchParams.get("TagID")
+
+    $.ajax({
+        url: "/MaimaiIndex/tagsearch123",
+        type: "GET",
+        data: {TagID:getTagID},
+        success: function (tagsearch) {
+            $(tagsearch).each(function (i, item) {
+                $("#tag-search").append(`
+                <div class="col-3">
+                     <div class"sixsideline"><a><img  src="${item.img}"/></a></div>
+                    <div><h4>${item.name}</h4></div>
+                     <div><p>${item.price}</p></div>
+                </div>
+                `)
+            })
+        }
+    })
+</script>

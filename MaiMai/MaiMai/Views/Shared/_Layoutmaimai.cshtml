@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhoHelps index</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="~/Maimai/maimai/index.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <style>
+    </style>
+    <title>@Page.Title</title>
+
+    @RenderSection("head", required: false)
+
+
+</head>
+<body>
+    <div class="navbarcontainer mb-5">
+        <div class="row navbar fixed-top" style="background-color: ghostwhite;">
+            <div class="d-flex ml-2 logo">
+
+                <a href="/">
+                    <p>
+                        <img class="logo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" />
+                    </p>
+                </a>@*logo 圖示end *@
+
+                <div class="mt-2 btnhome">
+                    <a href="/">
+                        <div class="mt-2">
+                            <span>Home</span>
+                        </div>
+                    </a>
+                </div>
+            </div>@*logo end *@
+            <input class="col-8 Searchmaimai" Placeholder="Search" src="~/Maimai/images/svg/135-search.svg" id="Ajax-search" />
+            @*搜尋列 end*@
+
+            <div>
+                @*登入*@
+                @*@if (Request.Cookies["LoginName"] != null)
+                    {
+                        <img  src="~/Maimai/images/svg/073-location2.svg" />
+                    }*@
+                <div class="d-flex">
+                    @*<p class="svg top3svg ml-2"><img class="logo" src="~/Maimai/images/svg/073-location2.svg"></p>*@
+
+                    @*地圖*@
+                    <p class="svg top3svg ml-2 mt-1"><img class="logo" src="~/Maimai/images/svg/076-map.svg"></p>
+
+                    @*鈴鐺*@
+                    <p class="svg ml-3 top3svg mt-1 BellsMenu"><img class="logo " src="~/Maimai/images/svg/082-bell.svg"></p>
+                    @*<div class=""><div class="BellsMenuAc"></div></div>*@
+
+
+                    <button class="btn d-flex mr-5" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
+                                <path id="Path_140" data-name="Path 140"
+                                      d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
+                                      fill="#7B7B7B"></path>
+                            </g>
+                        </svg>
+                    </button> @*會員圖示 end*@
+                </div>
+
+                @if (Request.Cookies["LoginName"] == null)
+                {
+                    <div class="collapse" id="collapseExample">
+                        <div>
+                            <span>@Html.ActionLink("註冊", "", "", null, new { @class = "free-text" })</span>
+                            <span>@Html.ActionLink("登入", "", "", null, new { @class = "free-text" })</span>
+                        </div>
+                    </div> @*左右收起1 end*@
+                }
+                else
+                {
+                    @*<span class=" mx-2">
+                            @Request.Cookies["LoginName"].Value
+                        </span>*@
+                    <div class="d-flex " style="display:none">
+                        <div class="d-flex  ml-1">
+                            @*<div class="btn-group dropdown">
+                                <div class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                     aria-expanded="false">
+                                    <img class="mylogo" src="~/Maimai/images/svg/076-map.svg">
+                                </div>*@
+                            @*<div class="dropdown-menu">
+                                    Dropdown menu links
+                                    <p class="svg "><img class="logo" src="">@Html.ActionLink("帳戶", "", "")</p>
+                                    <p class="svg"><img class="logo" src="">@Html.ActionLink("賣場", "", "")</p>
+                                    <p class="svg"><img class="logo" src="">@Html.ActionLink("我的後台", "", "")</p>
+                                </div>*@
+                            <!--</div>-->
+                        </div>
+                        <div class="collapse " id="collapseExample">
+                            <div class="dropdown free-text">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">帳戶</a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("帳戶", "", "", null, new { @class = "dropdown-item" })</li>
+                                    <li><a class="dropdown-item" href="#">@Html.ActionLink("登出", "Logout", "Members")</a></li>
+                                </ul>
+                            </div>
+                            <div class="free-text dropdown ">
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">訂單</a>
+                                <ul class="dropdown-menu">
+                                    <li>@Html.ActionLink("我的訂單", "", "", null, new { @class = "dropdown-item" })</li>
+                                    <li>@Html.ActionLink("建立訂單", "", "", null, new { @class = "dropdown-item" })</li>
+                                </ul>
+                            </div>
+                            @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
+                            {
+                                <span>@Html.ActionLink("後台", "", "", null, new { @class = "free-text" })</span>
+                            }
+                        </div>
+                        @*左右收起2end*@
+                    </div>
+                }
+            </div>@*登入end*@
+        </div>
+    </div>
+
+
+    @RenderBody()
+    <footer>
+        <hr>
+        <div class="container d-flex mt-1 mb-2" id="footer">
+            <div class=" mx-2">
+                <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
+            </div>
+            <div class="">
+                <div class="ml-5">
+                    <h5>關於我們</h5>
+                    <a href="#">Team 4</a><br>
+                    <a href="#">組長：黃士豪</a><br>
+                    <a href="#">技術長：蕭祥耀</a><br>
+                    <a href="#">組員：黃立恆、徐家雯、黃建寧</a><br>
+                </div>
+            </div>
+            <div class="">
+                <div class="ml-5">
+                    <h5>歡迎企業合作</h5>
+                    <a href="#">經銷商合作</a><br>
+                    <a href="#">全球保固</a><br>
+                    <a href="#">招募新夥伴</a><br>
+                </div>
+            </div>
+            <div class="">
+                <div class="ml-5">
+                    <h5>語言</h5>
+                    <select class="langSelect">
+                        <option selected>繁體中文</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                        <option value="cn">简体中文</option>
+                        <option value="jp">日本語</option>
+                        <option value="ru">Русский</option>
+                    </select><br>
+                    <a href="#">客戶服務中心</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+    <script>
+        $(".btnhome").hover(function () {
+            $(this).addClass("classhoverin")
+        }, function () {
+            $(this).removeClass("classhoverin")
+        })
+        $(".btnhome").click(function () {
+            $(this).removeClass("btnhome > a")
+            $(this).removeClass("btnhome")
+            $(this).addClass("classclick")
+            $(this).off("hover")
+        })
+    </script>
+    <script>
+        $(".BellsMenu").click(function () {
+            $(this).toggleClass('BellsMenuAc');
+        });
+
+    </script>
+    @*<script>
+            $("#Ajax-search").ready(function () {
+                var xhr = null;
+                $("#Ajax-search").keyup(function () {
+                    if (xhr) {
+                        xhr.abort();
+                    }
+                    var inputText = $.trim(this.value);
+                    if (inputText != "") {
+                        xhr = $.ajax({
+                            url: "/MaimaiIndex/TagResult",
+                            type: "GET",
+                            data: "keyword=" + inputText,
+                            dataType:"json",
+                            contentType: "application/x-www-form-urlencoded",
+                            success: function (json) {
+                                if (json.length != 0) {
+                                    var lists = "<ul>";
+                                    $.each(json, function () {
+                                        lists += "<li>" + this.tagName + "<li>";
+                                    }); lists += "</ul>";
+                                    $("#Ajax-search").html(lists).show(); $("li").click(function () {
+                                        $("#keyword").val($(this).text());
+                                        $("#Ajax-search").hide();
+                                    })
+                                } else {
+                                    $("#Ajax-search").hide();
+                                }
+                            }
+                        });
+                    } else {
+                        $("#Ajax-search").hide();//沒有查詢結果就隱藏搜索框
+                    }
+                }).blur(function () {
+                    $("#Ajax-search").hide();//輸入框失去焦點的時候就隱藏搜索框
+            });
+        </script>*@
+    <script src="~/Maimai/maimai/Carousela-Index.js"></script>
+</body>
+</html>

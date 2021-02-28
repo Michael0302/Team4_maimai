@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "MaimaiIndex";
+}
+
+<div style="height:50px" ></div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-8">
+            <div class="row mb-3 ml-1"  id="tag">
+                
+            </div>
+            <!-- 商品廣告 -->
+            <div class="bodr5 d-flex">
+                    <div class="d-flex overflow-hidden">
+                        <div class="col-md-12">
+                            <div class="carousel slide multi-item-carousel " id="theCarousel">
+                                <div class="carousel-inner">
+                                    <div class="item active d-flex " id="PopularProduct">
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <br>
+            <div class="bodr5">商品廣告</div><br>
+            <div class="bodr5">徵求布告欄</div><br>
+        </div>
+        <div class="bodr5 col-4">
+            直播
+            <div class="bodr5 mx-auto mb-4 mt-3"></div>
+            <div class="bodr5 mx-auto mb-4"></div>
+            <div class="bodr5 mx-auto mb-0"></div>
+        </div>
+    </div>
+</div>
+@*<script src="~/Maimai/maimai/Carousela-Index.js"></script>*@
+<script>
+    function tagonclick(TagID) {
+        window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
+    }
+    $(function () {       
+        $.ajax({
+            url: "/MaimaiIndex/TagResult",
+            type: "GET",
+            success: function (response) {                
+                $(response).each(function (i, item) {
+                    $("#tag").append(
+                        `<div class="tag">                        
+                    <p><a class="btn" onclick="tagonclick(${item.TagID})" ></a>${item.tagName}</p>`
+                    )
+                })
+            }
+        })
+      
+
+ 
+        //< img src = "${item.productImg}" >
+  
+        $.ajax({
+            url: "/MaimaiIndex/ProductPost",
+            type: "GET",
+            success: function (Productpost) {
+                $(Productpost).each(function (i, item) {
+                    $("#PopularProduct").append(`
+                            <div class="Carouseladvertising mx-4  ">
+                               <div class="photho">
+                                 <div>
+                                     <h4>
+                                         ${item.productDescription}
+                                      </h4>
+                                     <p>
+                                           金額 : $ ${item.price}
+                                     </p>
+                                    </div>
+                               </div>
+                          </div>
+                    `)
+                })
+            }
+        })
+    })
+
+</script>
