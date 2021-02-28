@@ -1,39 +1,9 @@
-﻿.navbarcontainer > .row > .logo  .logo {
+﻿/*Layout_st Logo*/
+.navbarcontainer > .row > .logo .logo {
     height: 48px;
     width: 48px;
 }
- .top3svg> .logo {
-    height: 24px;
-    width: 24px;
-}
-.btn-outline-dark{border-color:#f8f9fa00;border-radius: 35px;font-weight: bold;}
-.dropdown-menu >.svg > .logo {
-    height: 24px;
-    width: 24px;
-    margin-top: 1rem;
-}
-
-.navbarcontainer > .row > #Ajax-search {
-    height: 45px;
-    width: 1100px;
-    border-radius: 35px;
-}
-
-.mylogo{border-radius:50%;border:1px solid black; max-width:50px;height:auto;}
-.row>.col-8 .bodr5
-{border: 1px solid black;border-radius: 5px; margin: 0;width: 700px;height: 250px;}
-.row>.col-8>.row>.tag
-{border: 1px solid black;border-radius: 5px; margin: 0;width: 140px;height: 35px;text-align: center;background-color: skyblue;}
-.row>.bodr5
-{border: 1px solid black;border-radius: 5px; margin: 0;width: 300px;height: 900px;}
-.row>.bodr5>.bodr5
-{border: 1px solid black;border-radius: 5px; margin: 0;width: 300px;height: 250px;}
-
-.Carouseladvertising{width: 300px;height: 250px;}
-.Carouseladvertising>.photho{border: 1px solid black;border-radius: 3px;width: 300px;height: 170px;}
-.Carouseladvertising>.photho img{width: 100%;height: 100%;background-size: cover;}
-.footerLogo{width: 35%;height: 35%;}
-
+/*Layout_st Home*/
 .btnhome {
     height: 45px;
     border-radius: 35px;
@@ -42,14 +12,16 @@
     font-weight: bold;
     color: #000000;
 }
+/*Layout_st Home*/
 .classhoverin {
-    background-color: #F0F0F0;    
+    background-color: #F0F0F0;
 }
+/*Layout_st Home*/
 .btnhome > a {
-text-decoration: none;
-color: #000000;
+    text-decoration: none;
+    color: #000000;
 }
-
+/*Layout_st Home*/
 .classclick {
     background-color: #000000;
     color: white;
@@ -60,18 +32,156 @@ color: #000000;
     font-weight: bold;
 }
 
-.tagsearch123img {
-    width: 200px;
-    height: 312px;
-    border-radius: 15px;
-    border:1px solid #000000
+/*Layout_st 搜尋*/
+.navbarcontainer > .row #Ajax-search {
+    height: 45px;
+    width: 900px;
+    border-radius: 35px;
 }
-tagsearch123img > a {
-    text-decoration: none;
-    color: #000000;
+/*Layout_st 搜尋 下拉選單(未使用)*/
+.Searchmaimai {
+    padding: 0;
+    margin: 0;
+    width: 900px;
+    /*height: 50px;*/
+    max-height: 0;
+    position: relative;
+    left: 0;
+    top: 0;
+    background-color: white;
+    opacity: 1; /*表示完全透明 */
+    overflow: hidden;
+}
+/*Layout_st 搜尋 下拉選單(未使用)*/
+.Searchmaimai1 {
+    opacity: 1;
+    max-height: 750px;
+}
+/*Layout_st 地圖鈴鐺*/
+.top3svg > .logo {
+    height: 24px;
+    width: 24px;
+}
+/*鈴鐺 功能切換(使用未成功)*/
+.BellsMenu ul {
+    position: absolute;
+    left: 0;
+    top: 42px;
+    background: rgba(255,255,255,.8);
+    width: 120px;
+    overflow: hidden;
+    opacity: 0;
+    max-height: 0;
+}
+/*鈴鐺 功能切換(使用未成功)*/
+.BellsMenuAc {
+    border: 0.3px solid skyblue;
+    opacity: 1;
+    max-height: 300px;
+    transform: rotate(-45deg) translate(-9px,7px);
+}
+/*鈴鐺 功能切換(使用未成功)*/
+.BellsMenuStyle {
+    width: 150px;
+    height: 250px
+}
+/*Layout_st 單入大頭貼人像(未使用)*/
+.mylogo {
+    border-radius: 50%;
+    border: 1px solid black;
+    max-width: 50px;
+    height: auto;
+}
+/*Layout_st 下拉清單*/
+.dropdown-menu > .svg > .logo {
+    height: 24px;
+    width: 24px;
+    margin-top: 1rem;
+}
+/*=======================================================================*/
+/*index body 框1*/
+.row > .col-8 .bodr5 {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0;
+    width: 700px;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+/*index body 框內*/
+.row > .col-8 > .row > .tag {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 0;
+    width: auto;
+    height: 45px;
+    text-align: center;
+    background-color: skyblue;
+}
+/*index body 框內 1*/
+.Carouseladvertising {
+    width: 100%;
+    height: 250px;
+    left: 0px;
+    transition: all .5s;
+}
+/*index body 框內 2*/
+.Carouseladvertising > .photho {
+        border: 1px solid black;
+        border-radius: 3px;
+        width: 300px;
+        height: 170px;
+}
+    /*index body 框內 照片*/
+    .Carouseladvertising > .photho img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+    }
+/*=======================================================================*/
+/*輪播切換*/
+.slide_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    color: #fff;
+    position: absolute;
+    font-size: 24px;
+}
+#prevSlide {
+    left: 0;
+}
+#nextSlide {
+    right: 0;
+}
+.slide_btn i {
+    color: rgba(255,255,255,.6);
+    transition: .5s;
+}
+.slide_btn:hover i {
+    color: rgba(255,255,255,1);
 }
 
 
+/*=======================================================================*/
+/*foot_st*/
+.footerLogo {
+    width: 35%;
+    height: 35%;
+}
+
+/*=======================================================================*/
+.btn-outline-dark{border-color:#f8f9fa00;border-radius: 35px;font-weight: bold;}
+.row>.bodr5
+{border: 1px solid black;border-radius: 5px; margin: 0;width: 300px;height: 900px;}
+.row>.bodr5>.bodr5
+{border: 1px solid black;border-radius: 5px; margin: 0;width: 300px;height: 250px;}
+/*=======================================================================*/
+/*六角形狀(未使用)*/
 .sixsideline {
     position: relative;
     width: 100px;
@@ -80,7 +190,7 @@ tagsearch123img > a {
     border-style: solid;
     border-color: transparent transparent #f69;
 }
-
+    /*六角形狀(未使用)*/
     .sixsideline:before {
         position: absolute;
         content: "";
@@ -92,7 +202,7 @@ tagsearch123img > a {
         border-style: solid;
         border-color: #f69 transparent transparent;
     }
-
+    /*六角形狀(未使用)*/
     .sixsideline:after {
         position: absolute;
         content: "";
@@ -105,22 +215,30 @@ tagsearch123img > a {
         border-style: solid;
         border-color: transparent transparent #f69;
     }
+    /*選單改變速度(未使用)*/    
+.transition {
+    transition: 0.4s;
+}
+/*=======================================================================*/
 
-
-.BellsMenu {
-    position: absolute;
-    left: 0;
-    top: 42px;
-    background: rgba(255,255,255,.8);
-    width: 120px;
-    overflow: hidden;
-    opacity: 0;
-    max-height: 0;
+/*TagSearchStyle TAG功能跳轉*/
+.TagSearchStyle {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    border: 1px solid skyblue;
 }
-.BellsMenuAc > .BellsMenuAc {
-    opacity: 1;
-    max-height: 300px;
+/*TagSearchStyle TAG功能跳轉*/
+.TagSearchImgStyle {
+    width: 200px;
+    height: 312px;
+    border-radius: 15px;
+    border: 1px solid #000000
 }
-.BellsMenuAc {
-    transform: rotate(-45deg) translate(-9px,7px);
+/*TagSearchStyle TAG功能跳轉*/
+TagSearchImgStyle > p {
+    text-decoration: none;
+    text-size-adjust:150%;
+    color: #000000;
 }
+/*=======================================================================*/

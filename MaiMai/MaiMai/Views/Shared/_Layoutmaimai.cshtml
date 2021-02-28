@@ -40,15 +40,18 @@
                     </a>
                 </div>
             </div>@*logo end *@
-            <input class="col-8 Searchmaimai" Placeholder="Search" src="~/Maimai/images/svg/135-search.svg" id="Ajax-search" />
+
+            <input Placeholder="Search" id="Ajax-search" class="col-8  Ajax-search search" />
+
+
             @*搜尋列 end*@
 
             <div>
                 @*登入*@
                 @*@if (Request.Cookies["LoginName"] != null)
-                    {
-                        <img  src="~/Maimai/images/svg/073-location2.svg" />
-                    }*@
+                {
+                    <img  src="~/Maimai/images/svg/073-location2.svg" />
+                }*@
                 <div class="d-flex">
                     @*<p class="svg top3svg ml-2"><img class="logo" src="~/Maimai/images/svg/073-location2.svg"></p>*@
 
@@ -56,8 +59,8 @@
                     <p class="svg top3svg ml-2 mt-1"><img class="logo" src="~/Maimai/images/svg/076-map.svg"></p>
 
                     @*鈴鐺*@
-                    <p class="svg ml-3 top3svg mt-1 BellsMenu"><img class="logo " src="~/Maimai/images/svg/082-bell.svg"></p>
-                    @*<div class=""><div class="BellsMenuAc"></div></div>*@
+                    <p class="svg ml-3 top3svg mt-1"><img class="logo BellsMenu BellsMenu1" src="~/Maimai/images/svg/082-bell.svg" id="tBellsMenu"></p>
+
 
 
                     <button class="btn d-flex mr-5" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -83,21 +86,21 @@
                 else
                 {
                     @*<span class=" mx-2">
-                            @Request.Cookies["LoginName"].Value
-                        </span>*@
+                        @Request.Cookies["LoginName"].Value
+                    </span>*@
                     <div class="d-flex " style="display:none">
                         <div class="d-flex  ml-1">
                             @*<div class="btn-group dropdown">
-                                <div class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                     aria-expanded="false">
-                                    <img class="mylogo" src="~/Maimai/images/svg/076-map.svg">
-                                </div>*@
+                            <div class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                 aria-expanded="false">
+                                <img class="mylogo" src="~/Maimai/images/svg/076-map.svg">
+                            </div>*@
                             @*<div class="dropdown-menu">
-                                    Dropdown menu links
-                                    <p class="svg "><img class="logo" src="">@Html.ActionLink("帳戶", "", "")</p>
-                                    <p class="svg"><img class="logo" src="">@Html.ActionLink("賣場", "", "")</p>
-                                    <p class="svg"><img class="logo" src="">@Html.ActionLink("我的後台", "", "")</p>
-                                </div>*@
+                                Dropdown menu links
+                                <p class="svg "><img class="logo" src="">@Html.ActionLink("帳戶", "", "")</p>
+                                <p class="svg"><img class="logo" src="">@Html.ActionLink("賣場", "", "")</p>
+                                <p class="svg"><img class="logo" src="">@Html.ActionLink("我的後台", "", "")</p>
+                            </div>*@
                             <!--</div>-->
                         </div>
                         <div class="collapse " id="collapseExample">
@@ -126,6 +129,10 @@
             </div>@*登入end*@
         </div>
     </div>
+    
+
+
+
 
 
     @RenderBody()
@@ -197,50 +204,29 @@
             $(this).addClass("classclick")
             $(this).off("hover")
         })
-    </script>
-    <script>
+
         $(".BellsMenu").click(function () {
             $(this).toggleClass('BellsMenuAc');
-        });
+           
+        })
+        $(".BellsMenu1").click(function () {
+        $.ajax({
+            url: "/MaimaiIndex/Bells",
+            type: "GET",
+            success: function (tBellsMenu) {
+                $(tBellsMenu).each(function (i, item) {
+                    $("#tBellsMenu").append(`
+                <div class="BellsMenuStyle">                    
+                    <div><h4>${item.productName}</h4></div>
+                     <div><p>${item.price}</p></div>
+                </div>
+                `)
+                })
+            }
+        })
+        })
 
     </script>
-    @*<script>
-            $("#Ajax-search").ready(function () {
-                var xhr = null;
-                $("#Ajax-search").keyup(function () {
-                    if (xhr) {
-                        xhr.abort();
-                    }
-                    var inputText = $.trim(this.value);
-                    if (inputText != "") {
-                        xhr = $.ajax({
-                            url: "/MaimaiIndex/TagResult",
-                            type: "GET",
-                            data: "keyword=" + inputText,
-                            dataType:"json",
-                            contentType: "application/x-www-form-urlencoded",
-                            success: function (json) {
-                                if (json.length != 0) {
-                                    var lists = "<ul>";
-                                    $.each(json, function () {
-                                        lists += "<li>" + this.tagName + "<li>";
-                                    }); lists += "</ul>";
-                                    $("#Ajax-search").html(lists).show(); $("li").click(function () {
-                                        $("#keyword").val($(this).text());
-                                        $("#Ajax-search").hide();
-                                    })
-                                } else {
-                                    $("#Ajax-search").hide();
-                                }
-                            }
-                        });
-                    } else {
-                        $("#Ajax-search").hide();//沒有查詢結果就隱藏搜索框
-                    }
-                }).blur(function () {
-                    $("#Ajax-search").hide();//輸入框失去焦點的時候就隱藏搜索框
-            });
-        </script>*@
     <script src="~/Maimai/maimai/Carousela-Index.js"></script>
 </body>
 </html>

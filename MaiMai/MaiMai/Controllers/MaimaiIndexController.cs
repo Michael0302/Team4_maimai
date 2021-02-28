@@ -50,6 +50,18 @@ namespace MaiMai.Controllers
             return Json(PostList, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Bells()
+        {
+            var PostList = db.ProductPost.Select(m => new MaimaiIndexViewModel()            
+            {
+                price = m.price,
+                productImg = m.productImg,
+                productName = m.productName,
+            }).ToList();
+
+            return Json(PostList, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult MaimaiIndex()
         {
             return View();

@@ -4,11 +4,11 @@
 }
 
 <div style="height:50px"></div>
-<div>
-    <div><img /></div>
+@*<div>
+    <div><img src="${item.img}"/></div>
     <div><h4></h4></div>
     <div><p></p></div>
-</div>
+</div>*@
 
 <div id="tag-search" class="d-flex"></div>
 
@@ -24,8 +24,8 @@
         success: function (tagsearch) {
             $(tagsearch).each(function (i, item) {
                 $("#tag-search").append(`
-                <div class="col-3">
-                     <div class"sixsideline"><a><img  src="${item.img}"/></a></div>
+                <div class="col-3 TagSearchStyle" >
+                     <div class"TagSearchImgStyle"><a><img  src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"/></a></div>
                     <div><h4>${item.name}</h4></div>
                      <div><p>${item.price}</p></div>
                 </div>
