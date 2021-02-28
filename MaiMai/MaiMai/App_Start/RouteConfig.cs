@@ -16,7 +16,8 @@ namespace MaiMai
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "MaimaiIndex", action = "MaimaiIndex", id = UrlParameter.Optional }
+             //defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
