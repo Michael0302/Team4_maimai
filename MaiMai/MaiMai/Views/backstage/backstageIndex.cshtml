@@ -3,7 +3,7 @@
     ViewBag.Title = "backstageIndex";
 }
 
-<h2>backstageIndex</h2>
+@*<h2>backstageIndex</h2>*@
 
 
     <style>
@@ -26,8 +26,8 @@
                    aria-expanded="false" aria-controls="order_P">訂單管理</a>
                 <div class="collapse mb-3" id="order_P" data-parent="#backstage">
                     <a class="d-block btn" onclick="getOrderList()">所有訂單</a>
-                    <a class="d-block btn" onclick="getOrderList()">已完成訂單</a>
-                    <a class="d-block btn" onclick="getOrderList()">未完成訂單</a>
+                    <a class="d-block btn" onclick="getCompleteOrder()">已完成訂單</a>
+                    <a class="d-block btn" onclick="getUnCompleteOrder()">未完成訂單</a>
 
                 </div>
             </div>
@@ -175,19 +175,58 @@
                         var year = new Date(Milliseconds).getFullYear();
                         var month = new Date(Milliseconds).getMonth() + 1;
                         var date = new Date(Milliseconds).getDate();
-                        $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId})'>查看</button></td></tr>`)
+                        $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td></tr>`)
                     })
                 }
             })
-        }
+    }
 
-    function getOrderDetail(OrderId) {
+    function getCompleteOrder() {
+        $.ajax({
+            url: "@Url.Action("getOrderList_P", "backstage")",
+            type: "GET",
+            data: {status:"2"},
+            success: function (orderList) {
+                $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr></thead> <tbody id='showList'></tbody></table>")
+                $(orderList).each(function (index, orderList) {
+                    var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+                    $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td></tr>`)
+                })
+            }
+        })
+    }
+
+    function getUnCompleteOrder() {
+        $.ajax({
+            url: "@Url.Action("getOrderList_P", "backstage")",
+            type: "GET",
+            data: {status:"0"},
+            success: function (orderList) {
+                $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr></thead> <tbody id='showList'></tbody></table>")
+                $(orderList).each(function (index, orderList) {
+                    var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+                    $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td></tr>`)
+                })
+            }
+        })
+    }
+
+    function getOrderDetail(OrderId, orderStatus) {
             $.ajax({
                 url: "@Url.Action("getOrderDetail_P", "backstage")",
                 type: "GET",
                 data: { OrderId: OrderId},
                 success: function (order) {
-                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>商品名稱</th><th>總價</th><th>數量</th><th>建立時間</th><th>建立者</th><th></th></tr></thead> <tbody id='showList'></tbody></table><div class='d-flex justify-content-center'><a class='btn btn-danger'>刪除此訂單</a></div>")
+                    $("#show").html(`<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>商品名稱</th><th>總價</th><th>數量</th><th>建立時間</th><th>建立者</th><th></th></tr></thead> <tbody id='showList'></tbody></table><div class='d-flex justify-content-center'></div>`)
+                    if (orderStatus < 2) {
+                        $("#show").append(`<a class='btn btn-danger' onclick="delOrder(${OrderId})">刪除此訂單</a>`)
+                    }
                     $(order).each(function (index, order) {
                         var Milliseconds = parseInt(order.createdTime.replace(/\D/igm, ""));
                         var year = new Date(Milliseconds).getFullYear();
@@ -202,8 +241,20 @@
             })
     }
 
-    function delOrder() {
-
+    function delOrder(OrderId) {
+        if (window.confirm("確定刪除?"))
+        {        
+        $.ajax({
+            url: "@Url.Action("delOrder_P", "backstage")",
+            type: "GET",
+            data: { OrderId: OrderId },
+            success: function (order) {
+                window.alert("刪除成功")
+            }
+        })
+        }
+        else
+            return false;
     }
 
 
@@ -212,7 +263,7 @@
                 url: "@Url.Action("getProduct_P", "backstage")",
                 type: "GET",
                 data: { ProductPostID: ProductPostID, QTY: QTY},
-                success: function (product) {                                        
+                success: function (product) {
                     $(product).each(function (index, product) {
                         var Milliseconds = parseInt(product.createdTime.replace(/\D/igm, ""));
                         var year = new Date(Milliseconds).getFullYear();

@@ -19,6 +19,7 @@ namespace MaiMai.Controllers
         }
 
         maimaiRepository<Member> mb = new maimaiRepository<Member>();
+        maimaiRepository<Order> od = new maimaiRepository<Order>();
         maimaiEntities db = new maimaiEntities();
         public ActionResult backstageIndex()
         {
@@ -116,8 +117,61 @@ namespace MaiMai.Controllers
             return Json(m, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult getOrderList_P()
+        public ActionResult getOrderList_P(int? status)
         {
+            if(status != null )
+            {               
+                if(status >= 2) { 
+                var ordercmplist = db.Order.Where(m=>m.orderStatus >= 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+                {
+                    x.OrderId,
+                    x.orderStatus,
+                    x.createdTime,
+                    x.buyerUserID,
+                    x.Member.firstName,
+                    //y.SellerID,
+                    y.oneProductTotalPrice,
+
+                }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID, g.firstName }).Select(s => new
+                {
+                    OrderId = s.Key.OrderId,
+                    orderStatus = s.Key.orderStatus,
+                    createdTime = s.Key.createdTime,
+                    buyerUserID = s.Key.buyerUserID,
+                    buyerName = s.Key.firstName,
+                    //SellerID =s.Select(i => i.SellerID),
+                    price = s.Select(i => i.oneProductTotalPrice).Sum()
+                });
+
+                return Json(ordercmplist, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var ordercmplist = db.Order.Where(m => m.orderStatus < 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+                    {
+                        x.OrderId,
+                        x.orderStatus,
+                        x.createdTime,
+                        x.buyerUserID,
+                        x.Member.firstName,
+                        //y.SellerID,
+                        y.oneProductTotalPrice,
+
+                    }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID, g.firstName }).Select(s => new
+                    {
+                        OrderId = s.Key.OrderId,
+                        orderStatus = s.Key.orderStatus,
+                        createdTime = s.Key.createdTime,
+                        buyerUserID = s.Key.buyerUserID,
+                        buyerName = s.Key.firstName,
+                        //SellerID =s.Select(i => i.SellerID),
+                        price = s.Select(i => i.oneProductTotalPrice).Sum()
+                    });
+
+                    return Json(ordercmplist, JsonRequestBehavior.AllowGet);
+                }
+            }
+
             var orderlist = db.Order.Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
             {
                 x.OrderId,
@@ -140,6 +194,13 @@ namespace MaiMai.Controllers
             });
 
             return Json(orderlist, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult delOrder_P(int OrderId)
+        {
+            od.Delete(OrderId);
+
+            return Content("刪除成功");
         }
 
         public ActionResult getOrderDetail_P(int OrderId)
