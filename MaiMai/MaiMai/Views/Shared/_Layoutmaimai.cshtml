@@ -59,7 +59,18 @@
                     <p class="svg top3svg ml-2 mt-1"><img class="logo" src="~/Maimai/images/svg/076-map.svg"></p>
 
                     @*鈴鐺*@
-                    <p class="svg ml-3 top3svg mt-1"><img class="logo BellsMenu BellsMenu1" src="~/Maimai/images/svg/082-bell.svg" id="tBellsMenu"></p>
+                    @*<p class="svg ml-3 top3svg mt-1"><img class="logo BellsMenu BellsMenu1" src="~/Maimai/images/svg/082-bell.svg" id="tBellsMenu"></p>*@
+
+                <div class="dropdown">                    
+                    <p class="svg ml-3 top3svg mt-1 ropdown-toggle" data-toggle="dropdown" aria-haspopup="true" @*aria-expanded="false"*@>
+                    <img class="logo BellsMenu BellsMenu1" src="~/Maimai/images/svg/082-bell.svg" ></p>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="tBellsMenu">
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+
+
+
 
 
 
@@ -130,11 +141,6 @@
         </div>
     </div>
     
-
-
-
-
-
     @RenderBody()
     <footer>
         <hr>
@@ -207,25 +213,39 @@
 
         $(".BellsMenu").click(function () {
             $(this).toggleClass('BellsMenuAc');
-           
         })
         $(".BellsMenu1").click(function () {
-        $.ajax({
-            url: "/MaimaiIndex/Bells",
-            type: "GET",
-            success: function (tBellsMenu) {
-                $(tBellsMenu).each(function (i, item) {
-                    $("#tBellsMenu").append(`
-                <div class="BellsMenuStyle">                    
-                    <div><h4>${item.productName}</h4></div>
-                     <div><p>${item.price}</p></div>
-                </div>
-                `)
-                })
-            }
+            $.ajax({
+                url: "/MaimaiIndex/Bells",
+                type: "GET",
+                success: function (tBellsMenu) {
+                    $(tBellsMenu).each(function (i, item) {
+                        $("#tBellsMenu").append(`
+                                <a class="dropdown-item" href = "#" > ${item.price}${item.name}</a >                                
+                                `)
+                    })
+                }
+            })
         })
-        })
+        //<div class="BellsMenuStyle">
+                                //    <div><h4>${item.productName}${item.price}</h4></div>
 
+                                //</div>
+        //var BellsID = 5;
+        //$("#tBellsMenu").click(function () {
+        //    $.ajax({
+        //        url: "/MaimaiIndex/Bells",
+        //        type: "GET",
+        //        data: { TagID: BellsID },
+        //        success: function (tBellsMenu) {
+        //            $(tBellsMenu).each(function (i, item) {
+        //                $("#tBellsMenu").append(`
+        //                    <a class="dropdown-item" href = "#" > ${item.price}${item.name}</a >                           
+        //                `)
+        //            })
+        //        }
+        //    })
+        //})
     </script>
     <script src="~/Maimai/maimai/Carousela-Index.js"></script>
 </body>
