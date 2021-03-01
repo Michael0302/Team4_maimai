@@ -4,8 +4,6 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-
-
     <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
@@ -515,7 +513,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="false">
+        <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Comment" EntityType="Self.Comment" />
           <EntitySet Name="Member" EntityType="Self.Member" />

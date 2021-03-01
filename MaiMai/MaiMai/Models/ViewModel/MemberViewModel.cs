@@ -13,28 +13,12 @@ namespace MaiMai.Models.ViewModel
         public string city { get; set; }
         public string address { get; set; }
         public string phoneNumber { get; set; }
-
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string Name { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
         public string identityNumber { get; set; }
         public string profileImg { get; set; }
-
-        public Nullable<int> userLevel { get; set; } 
-        private string str;
-        public string userLevelString {
-        get
-            {
-                return str; 
-            }
-        set 
-            {
-                if (Convert.ToInt32(value) == 1) str = "管理員";
-                else if (Convert.ToInt32(value) == 2) str = "優質會員";
-                else  str = "一般會員";
-            }
-    }
+        public Nullable<int> userLevel { get; set; }
         public Nullable<double> totalStarRate { get; set; }
         public string selfDescription { get; set; }
         public string email { get; set; }
