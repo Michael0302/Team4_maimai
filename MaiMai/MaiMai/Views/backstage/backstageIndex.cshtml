@@ -30,6 +30,9 @@
                     <a class="d-block btn" onclick="getUnCompleteOrder()">未完成訂單</a>
 
                 </div>
+
+                <a class="btn btn-primary mb-3 btn-block text-white" onclick="information()">發送通知</a>
+                
             </div>
 
             <div class="col-10">
@@ -243,7 +246,7 @@
 
     function delOrder(OrderId) {
         if (window.confirm("確定刪除?"))
-        {        
+        {
         $.ajax({
             url: "@Url.Action("delOrder_P", "backstage")",
             type: "GET",
@@ -278,7 +281,20 @@
             })
          }
 
+    function information() {
+        $.ajax({
+            url: "@Url.Action("pushInfo_P", "backstage")",
+            type: "GET",
+            data: { },
+            success: function (mem) {
+                console.log(mem);
+                $(mem).each(function (index, mem) {
 
+                })
+            }
+        })
+    }
+    
 
 
 </script>

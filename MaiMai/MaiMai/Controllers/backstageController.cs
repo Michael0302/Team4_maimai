@@ -241,6 +241,21 @@ namespace MaiMai.Controllers
 
             return Json(product, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult pushInfo_P()
+        {
+            var memIDList = db.Member.Select(s => new
+                                            {
+                                                UserID = s.UserID
+                                            }).ToList();
+            List<string> memList = new List<string>();
+            foreach(var i in memIDList)
+            {
+                memList.Add(i.ToString());
+            }
+            //return string.Join(',', memList);
+            return Json(memList, JsonRequestBehavior.AllowGet);
+        }
     }
 
 }
