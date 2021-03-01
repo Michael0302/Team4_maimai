@@ -213,6 +213,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cssCHIEN\personalMarket.css" />
+    <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\resource_nico\createProductPost.css" />
     <Content Include="Content\resource_nico\images\nini.jpg" />
     <Content Include="Content\resource_nico\images\徵求台POST\iphone12.jpg" />
