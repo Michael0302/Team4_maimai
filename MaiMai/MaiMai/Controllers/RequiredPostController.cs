@@ -73,11 +73,12 @@ namespace MaiMai.Controllers
         public string uploadPhoto(HttpPostedFileBase upphoto) {
             if (upphoto == null)
             {
-                return "~/Content/resource_nico/images/無圖示.jpg";
+                return "../Content/resource_nico/images/無圖示.jpg";
             }
+            //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
             string filename = upphoto.FileName;
-            upphoto.SaveAs(Server.MapPath("~/Content/resource_nico/images/") + filename);
-            string filePath = $"~/Content/resource_nico/images/{filename}";
+            upphoto.SaveAs(Server.MapPath("../Content/resource_nico/images/") + filename);
+            string filePath = $"../Content/resource_nico/images/{filename}";
 
             return filePath;
         }

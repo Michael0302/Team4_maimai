@@ -218,19 +218,19 @@
                               <div class="card card-body w-100">
                                       <form class="formFrame mx-auto" enctype="multipart/form-data">
                                                 <div class="displayImg">
-                                                      <img id="Productimg">
-                                                      <input type="file" onChange="doUpload()" name="productImg" id="productImg" style="display: block;">
+                                                      <img id="Productimg${i}">
+                                                      <input type="file" onChange="doUpload(this,'${i}')" name="productImg" id="productImg${i}" style="display: block;">
                                                  </div>
                                                 <div class="displayInput">
-                                                        <h6>產品名稱:<input type="text" name="productName" id="productName"></h6>
+                                                        <h6>產品名稱:<input type="text" name="productName" id="productName${i}"></h6>
                                                         <h6>
-                                                              產品描述:<textarea id="productDescription" name="productDescription" placeholder="使用程度、幾成新" rows="4"
+                                                              產品描述:<textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新" rows="4"
                                                                cols="50" onclick="tag()"></textarea>
                                                         </h6>
-                                                        <h6>價格:<input type="text" name="price" id="price"></h6>
-                                                        <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY"></h6>
+                                                        <h6>價格:<input type="text" name="price" id="price${i}"></h6>
+                                                        <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY${i}"></h6>
                                                         <h6>標籤:
-                                                                <select id="tagselection" class="form-control"  name="TagID" >
+                                                                <select id="tagselection${i}" class="form-control"  name="TagID" >
                                                                               <option >Choose...</option>
                                                                 </select>
                                                         </h6>
@@ -317,12 +317,13 @@
 
         })// proccess tab end
 
-        function doUpload() {
-            var photo = $(".displayImg>input").val();
+        function doUpload(eler,index) {
+            var photo = $(eler).val();
+            console.log(photo);
             $.ajax({
                 url: "/RequiredPost/uploadPhoto",
                     type: "Post",
-                    data: { 'upphoto': photo},
+                data: { 'upphoto' : photo},
                     success: function (response) {
                     $(".displayImg>img").attr("src", response)
                 }
@@ -368,8 +369,7 @@
 
         var data = $(eler).attr("name");
         var inner = "";
-        console.log(index);
-        console.log (data);
+     
         $.ajax({
             url: "/RequiredPost/checkAllComment",
             type: "Post",
