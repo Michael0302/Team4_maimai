@@ -151,6 +151,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaimaiIndexController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
+    <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Controllers\PersonalMarketController.cs" />
     <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
@@ -448,6 +449,7 @@
     <Content Include="Views\Members\test.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
+    <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
