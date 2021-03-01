@@ -286,8 +286,8 @@
     <Content Include="Maimai\images\svg\maimaiTOPLOGO.svg" />
     <Content Include="Models\maimai.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>maimai.Context.cs</LastGenOutput>
       <DependentUpon>maimai.edmx</DependentUpon>
+      <LastGenOutput>maimai.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\maimai.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -307,13 +307,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <EntityDeploy Include="Models\maimai.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>maimai.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\maimai.edmx.diagram">
-      <DependentUpon>maimai.edmx</DependentUpon>
-    </Content>
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -324,6 +317,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\maimai.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>maimai.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\maimai.edmx.diagram">
+      <DependentUpon>maimai.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
