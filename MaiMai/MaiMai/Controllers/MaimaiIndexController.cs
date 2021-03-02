@@ -47,13 +47,11 @@ namespace MaiMai.Controllers
         //}
 
         //布告欄輪播
-
         public ActionResult RequiredPost()
         {
             var PostList = db.RequiredPost.Select(m => new RequiredPostViewModel_C()
             {
                 postImg = m.postImg,
-
                 postDescription = m.postDescription
             }).ToList();
             return Json(PostList, JsonRequestBehavior.AllowGet);
