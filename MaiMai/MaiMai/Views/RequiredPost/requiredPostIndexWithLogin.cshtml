@@ -346,7 +346,7 @@
 
         var test = getCookie('LoginAccount');
         if (test == null) {
-            alert("必須要登入才能留言喔");
+            alert("必須要登入才能查看留言喔");
             window.location.href = `/Members/Login`;
         }
         var form = $(`#Commentform${ i }`)
@@ -418,6 +418,7 @@
                             </div>
                             <div class="post-button">
                                 <h6 id="price${i}">價位：${item.price}</h6>
+                                <a class="btn btn-btn-warning" href="#">加入購物車 </a>
                          </div>
                         </div>`
                     })
