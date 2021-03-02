@@ -70,17 +70,34 @@ namespace MaiMai.Controllers
 
         }
 
-        public string uploadPhoto(HttpPostedFileBase upphoto) {
+        public string uploadPhoto(HttpPostedFileBase upphoto)
+        {
             if (upphoto == null)
             {
-                return "~/Content/resource_nico/images/無圖示.jpg";
+                return "../Content/resource_nico/images/無圖示.jpg";
             }
             string filename = upphoto.FileName;
-            upphoto.SaveAs(Server.MapPath("~/Content/resource_nico/images/") + filename);
-            string filePath = $"~/Content/resource_nico/images/{filename}";
+            upphoto.SaveAs(Server.MapPath("../Content/resource_nico/images/") + filename);
+            string filePath = $"../Content/resource_nico/images/{filename}";
 
             return filePath;
         }
+
+
+        //public string uploadPhoto(string upphoto)
+        //{
+        //    if (upphoto == null)
+        //    {
+        //        return "../Content/resource_nico/images/無圖示.jpg";
+        //    }
+
+
+        //    string filename = upphoto.FileName;
+        //    upphoto.SaveAs(Server.MapPath("../Content/resource_nico/images/") + filename);
+        //    string filePath = $"../Content/resource_nico/images/{filename}";
+
+        //    return filePath;
+        //}
 
         public ActionResult getAllTag() {
 

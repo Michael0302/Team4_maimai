@@ -218,8 +218,8 @@
                               <div class="card card-body w-100">
                                       <form class="formFrame mx-auto" enctype="multipart/form-data">
                                                 <div class="displayImg">
-                                                      <img id="Productimg">
-                                                      <input type="file" onChange="doUpload()" name="productImg" id="productImg" style="display: block;">
+                                                      <img id="Productimg${i}">
+                                                      <input type="file" onChange="doUpload(this,${i})" name="productImg" id="productImg" style="display: block;">
                                                  </div>
                                                 <div class="displayInput">
                                                         <h6>產品名稱:<input type="text" name="productName" id="productName"></h6>
@@ -317,14 +317,17 @@
 
         })// proccess tab end
 
-        function doUpload() {
-            var photo = $(".displayImg>input").val();
+        function doUpload(erel,index) {
+            var photo = $(erel).val();
+            console.log(photo)
+            console.log(typeof photo)
             $.ajax({
                 url: "/RequiredPost/uploadPhoto",
-                    type: "Post",
+                type: "Post",
+                forceSync: true,
                     data: { 'upphoto': photo},
                     success: function (response) {
-                    $(".displayImg>img").attr("src", response)
+                        $(`#Productimg${i}`).attr("src", response)
                 }
             })
         } //  doUpload end
