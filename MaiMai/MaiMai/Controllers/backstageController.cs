@@ -3,6 +3,7 @@ using MaiMai.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,6 +22,7 @@ namespace MaiMai.Controllers
         maimaiRepository<Member> mb = new maimaiRepository<Member>();
         maimaiRepository<Order> od = new maimaiRepository<Order>();
         maimaiEntities db = new maimaiEntities();
+        maimaiRepository<Tag> tagdb = new maimaiRepository<Tag>();
         public ActionResult backstageIndex()
         {
             return View();
@@ -241,6 +243,53 @@ namespace MaiMai.Controllers
 
             return Json(product, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult pushInfo_P()
+        {
+            var memIDList = db.Member.Select(s => new
+                                            {
+                                                UserID = s.UserID
+                                            }).ToList();
+            //List<string> names = new List<string>();
+            //foreach (var i in memIDList)
+            //{
+
+            //    names.Add(i.ToString());
+            //}
+
+            //return string.Join(',', names);
+            return Json(memIDList, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getTag()
+        {
+            var AllTag = db.Tag.Select(t => new
+            {
+                tagName = t.tagName
+            }).ToList();
+
+            return Json(AllTag, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult createTag(string TagName)
+        {
+            var isActive = db.Tag.FirstOrDefault(x=>x.tagName == TagName);
+            if(isActive != null)
+            {
+                Response.StatusCode = 500;
+                return Content("此標籤已存在");
+            }
+            Tag t = new Tag
+            {
+                tagName = TagName
+        };
+
+            tagdb.Create(t);
+
+            return Content("新增成功");
+        }
+
     }
 
 }

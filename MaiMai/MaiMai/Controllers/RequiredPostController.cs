@@ -25,7 +25,32 @@ namespace MaiMai.Controllers
             return View();
         }
 
-       
+        public ActionResult requiredPostIndexWithLogin()
+        {
+
+            return View();
+        }
+
+        public JsonResult allrequiredPostWithLogin(int loginID){
+
+            var table = db.RequiredPost.Where(m => m.UserID == loginID).Select(m => new RequiredPostViewModel_C()
+            {
+                RequiredPostID = m.RequiredPostID,
+                postTime = m.postTime,
+                postDescription = m.postDescription,
+                postName = m.postName,
+                postImg = m.postImg,
+                UserID = m.UserID,
+                requiredQTY = m.requiredQTY,
+                estimatePrice = m.estimatePrice,
+                TagID = m.TagID,
+                OrderID = m.OrderID,
+                userAccount = m.Member.userAccount
+            }).ToList();
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+    }
         public JsonResult allrequiredPost()
         {
 
@@ -70,18 +95,33 @@ namespace MaiMai.Controllers
 
         }
 
-        public string uploadPhoto(HttpPostedFileBase upphoto) {
-            if (upphoto == null)
+        public string uploadPhoto(upLoadPhotoViewModel data)
+        {
+            if (data.upphoto == null)
             {
-                return "~/Content/resource_nico/images/無圖示.jpg";
+                return "../Content/resource_nico/images/無圖示.jpg";
             }
-            string filename = upphoto.FileName;
-            upphoto.SaveAs(Server.MapPath("~/Content/resource_nico/images/") + filename);
-            string filePath = $"~/Content/resource_nico/images/{filename}";
+            //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
+            string filename = data.upphoto.FileName;
+            data.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
+            string filePath = $"../Content/ProductPostImg/{filename}";
 
             return filePath;
         }
 
+        //public string uploadPhoto(HttpPostedFileBase upphoto)
+        //{
+        //    if (upphoto == null)
+        //    {
+        //        return "../Content/resource_nico/images/無圖示.jpg";
+        //    }
+        //    //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
+        //    string filename = upphoto.FileName;
+        //   upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
+        //    string filePath = $"../Content/ProductPostImg/{filename}";
+
+        //    return filePath;
+        //}
         public ActionResult getAllTag() {
 
             var table = db.Tag.Select(m => new TagViewModel() {
@@ -96,13 +136,38 @@ namespace MaiMai.Controllers
         }
 
         maimaiRepository<ProductPost> productPostRepository = new maimaiRepository<ProductPost>();
-        public string  commemtProductPost(ProductPost ps)
+        public string  commemtProductPost(ProductCommentListViewModel ps)
         {
-        
-            ps.createdTime =  DateTime.Now;
+            ProductPost product = new ProductPost()
+            {
+                ProductPostID = ps.ProductPostID,
+                productName = ps.productName,
+                productDescription = ps.productDescription,
 
+                inStoreQTY = ps.inStoreQTY,
+                price = ps.price,
+                TagID = ps.TagID,
+                RequiredPostID = ps.RequiredPostID,
+                productImg = ps.upphoto.FileName,
+                createdTime = DateTime.Now,
+                UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value)
 
-            productPostRepository.Create(ps);
+            };
+            if (ps.upphoto == null)
+            {
+                product.productImg = "無圖示.jpg";
+            }
+            else { 
+            
+            product.productImg = ps.upphoto.FileName;
+            string filename = ps.upphoto.FileName;
+            ps.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
+            string filePath = $"../Content/ProductPostImg/{filename}";
+
+            }
+            //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
+
+            productPostRepository.Create(product);
 
             return "留言成功";
         }
@@ -133,7 +198,7 @@ namespace MaiMai.Controllers
         {
 
             rp.postTime = DateTime.Now;
-
+            rp.UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value);
 
             requiredPostRepository.Create(rp);
 

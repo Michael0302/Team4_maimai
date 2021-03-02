@@ -80,6 +80,9 @@
                 </div>
             </div><br>
             <!-- 布告欄 -->
+            </div> <br>
+            <div class="bodr5 overflow-hidden">商品廣告</div><br>
+            <div class="bodr5" onclick="toRequiredPostView()">徵求布告欄</div><br>
         </div>
 
         <div class="bodr5 col-4">
@@ -97,6 +100,34 @@
         window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
     }
     $(function () {
+
+    function getCookie(cookieName) {
+        var name = cookieName + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+
+    }
+
+    function tagonclick(TagID) {
+        window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
+    }
+    function toRequiredPostView() {
+
+        var test = getCookie('LoginAccount');
+        console.log(test)
+        if (test == "") {
+         
+            window.location.href = `/RequiredPost/requiredPostIndexWithLogin`;
+        }
+        window.location.href = `/RequiredPost/requiredPostIndex`;
+      
+    }
+    $(function () {       
         $.ajax({
             url: "/MaimaiIndex/TagResult",
             type: "GET",
