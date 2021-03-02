@@ -123,10 +123,19 @@
                                 </ul>
                             </div>
                             <div class="free-text dropdown ">
-                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">訂單</a>
+                                <a class="dropdown-toggle" href="#" data-toggle="dropdown">賣場</a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("我的訂單", "", "", null, new { @class = "dropdown-item" })</li>
-                                    <li>@Html.ActionLink("建立訂單", "", "", null, new { @class = "dropdown-item" })</li>
+
+                                    <li>@Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })</li>
+                                    <li>@Html.ActionLink("訂單管理", "", "", null, new { @class = "dropdown-item" })</li>
+                                    @if (Request.Cookies["LoginAccount"].Value == null)
+                                    {
+                                        <li>@Html.ActionLink("徵求台", "requiredPostIndex", "RequiredPost", null, new { @class = "dropdown-item" })</li>
+                                    }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "dropdown-item" })</li>
+                                    }
                                 </ul>
                             </div>
                             @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
