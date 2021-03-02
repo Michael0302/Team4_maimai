@@ -41,7 +41,33 @@
                 </div>
             </div>@*logo end *@
 
-            <input Placeholder="Search" id="Ajax-search" class="col-8  Ajax-search search" />
+            @*搜尋列 *@
+
+            <div class="col-8 dropdown">
+                <div class="Ajax-search ropdown-toggle"  data-toggle="dropdown" aria-haspopup="true">
+                <img class="ml-1" src="~/Maimai/images/svg/135-search.svg"/>
+                    <input Placeholder="Search " id="Ajax-search"  />
+                </div>
+                <div class="Ajax-search-dropdown Layout_st dropdown-menu ml-2" aria-labelledby="dropdownMenuButton">
+                    <div style="">
+                        熱門搜尋
+                        <div>關鍵字</div>
+                    </div>
+                    <div>
+                        <div>熱門主題</div>
+                        <div class="dropdown-item">
+                            <a class="" href="">
+                                <div style=" height:84px;width:192px;border-radius:15px;position:relative;  ">
+                                    <img src="~/Maimai/images/image jpeg/abf1b3dc2cab2c7d949228687c84013c.jpg" 
+                                                style="position: relative;height: 84px;width: 192px;border-radius: 15px;" />
+                                    <div style="position: absolute;z-index: 2;left: 50px;top: 30px;color: #FFFFFF;font-weight: bold;
+                                              ">添加文字...</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
             @*搜尋列 end*@
@@ -49,9 +75,9 @@
             <div>
                 @*登入*@
                 @*@if (Request.Cookies["LoginName"] != null)
-                {
-                    <img  src="~/Maimai/images/svg/073-location2.svg" />
-                }*@
+                    {
+                        <img  src="~/Maimai/images/svg/073-location2.svg" />
+                    }*@
                 <div class="d-flex">
                     @*<p class="svg top3svg ml-2"><img class="logo" src="~/Maimai/images/svg/073-location2.svg"></p>*@
 
@@ -61,13 +87,14 @@
                     @*鈴鐺*@
                     @*<p class="svg ml-3 top3svg mt-1"><img class="logo BellsMenu BellsMenu1" src="~/Maimai/images/svg/082-bell.svg" id="tBellsMenu"></p>*@
 
-                <div class="dropdown">                    
-                    <p class="svg ml-3 top3svg mt-1 ropdown-toggle" data-toggle="dropdown" aria-haspopup="true" @*aria-expanded="false"*@>
-                    <img class="logo BellsMenu BellsMenu1" src="~/Maimai/images/svg/082-bell.svg" ></p>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="tBellsMenu">
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown">
+                        <p class="svg ml-3 top3svg mt-1 ropdown-toggle" data-toggle="dropdown" aria-haspopup="true" @*aria-expanded="false"*@>
+                            <img class="logo BellsMenu BellsMenu1" src="~/Maimai/images/svg/082-bell.svg">
+                        </p>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="tBellsMenu">
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
                     </div>
-                </div>
 
 
 
@@ -97,21 +124,21 @@
                 else
                 {
                     @*<span class=" mx-2">
-                        @Request.Cookies["LoginName"].Value
-                    </span>*@
+                            @Request.Cookies["LoginName"].Value
+                        </span>*@
                     <div class="d-flex " style="display:none">
                         <div class="d-flex  ml-1">
                             @*<div class="btn-group dropdown">
-                            <div class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                 aria-expanded="false">
-                                <img class="mylogo" src="~/Maimai/images/svg/076-map.svg">
-                            </div>*@
+                                <div class="btn  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                     aria-expanded="false">
+                                    <img class="mylogo" src="~/Maimai/images/svg/076-map.svg">
+                                </div>*@
                             @*<div class="dropdown-menu">
-                                Dropdown menu links
-                                <p class="svg "><img class="logo" src="">@Html.ActionLink("帳戶", "", "")</p>
-                                <p class="svg"><img class="logo" src="">@Html.ActionLink("賣場", "", "")</p>
-                                <p class="svg"><img class="logo" src="">@Html.ActionLink("我的後台", "", "")</p>
-                            </div>*@
+                                    Dropdown menu links
+                                    <p class="svg "><img class="logo" src="">@Html.ActionLink("帳戶", "", "")</p>
+                                    <p class="svg"><img class="logo" src="">@Html.ActionLink("賣場", "", "")</p>
+                                    <p class="svg"><img class="logo" src="">@Html.ActionLink("我的後台", "", "")</p>
+                                </div>*@
                             <!--</div>-->
                         </div>
                         <div class="collapse " id="collapseExample">
@@ -140,7 +167,7 @@
             </div>@*登入end*@
         </div>
     </div>
-    
+
     @RenderBody()
     <footer>
         <hr>
@@ -205,10 +232,11 @@
             $(this).removeClass("classhoverin")
         })
         $(".btnhome").click(function () {
-            $(this).removeClass("btnhome > a")
-            $(this).removeClass("btnhome")
-            $(this).addClass("classclick")
-            $(this).off("hover")
+            //$(this).
+            //$(this).removeClass("btnhome > a")
+            //$(this).removeClass("btnhome")
+            //$(this).addClass("classclick")
+            //$(this).off("hover")
         })
 
         $(".BellsMenu").click(function () {
@@ -220,32 +248,13 @@
                 type: "GET",
                 success: function (tBellsMenu) {
                     $(tBellsMenu).each(function (i, item) {
-                        $("#tBellsMenu").append(`
-                                <a class="dropdown-item" href = "#" > ${item.price}${item.name}</a >                                
-                                `)
+                        $("#tBellsMenu").html(`
+                                            <a class="dropdown-item" href = "#" > ${item.price}${item.name}</a >
+                                            `)
                     })
                 }
             })
         })
-        //<div class="BellsMenuStyle">
-                                //    <div><h4>${item.productName}${item.price}</h4></div>
-
-                                //</div>
-        //var BellsID = 5;
-        //$("#tBellsMenu").click(function () {
-        //    $.ajax({
-        //        url: "/MaimaiIndex/Bells",
-        //        type: "GET",
-        //        data: { TagID: BellsID },
-        //        success: function (tBellsMenu) {
-        //            $(tBellsMenu).each(function (i, item) {
-        //                $("#tBellsMenu").append(`
-        //                    <a class="dropdown-item" href = "#" > ${item.price}${item.name}</a >                           
-        //                `)
-        //            })
-        //        }
-        //    })
-        //})
     </script>
     <script src="~/Maimai/maimai/Carousela-Index.js"></script>
 </body>

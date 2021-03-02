@@ -1,5 +1,6 @@
 ﻿using MaiMai.Models;
 using MaiMai.Models.MaimaiIndexViewModel;
+using MaiMai.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace MaiMai.Controllers
             }).ToList();
             return Json(tagList, JsonRequestBehavior.AllowGet);
         }
-
+        //廣告輪播
         public ActionResult ProductPost() 
         {
             var PostList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
@@ -31,6 +32,31 @@ namespace MaiMai.Controllers
                productDescription = m.productDescription
             }).ToList();
             return Json(PostList,JsonRequestBehavior.AllowGet);
+        }
+        //明星輪播
+
+        //public ActionResult ProductPost()
+        //{
+        //    var PostList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
+        //    {
+        //        productImg = m.productImg,
+        //        price = m.price,
+        //        productDescription = m.productDescription
+        //    }).ToList();
+        //    return Json(PostList, JsonRequestBehavior.AllowGet);
+        //}
+
+        //布告欄輪播
+
+        public ActionResult RequiredPost()
+        {
+            var PostList = db.RequiredPost.Select(m => new RequiredPostViewModel_C()
+            {
+                postImg = m.postImg,
+
+                postDescription = m.postDescription
+            }).ToList();
+            return Json(PostList, JsonRequestBehavior.AllowGet);
         }
 
         //匿名類別 左邊的是新的變數名稱 例如 : (新)inStoreQTY = m.inStoreQTY,        
