@@ -196,6 +196,9 @@
     <Compile Include="Models\RequiredPost.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
@@ -215,6 +218,15 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ProductPostImg\65K2.jfif" />
+    <Content Include="Content\ProductPostImg\土豆.jfif" />
+    <Content Include="Content\ProductPostImg\小藥丸藍色.jfif" />
+    <Content Include="Content\ProductPostImg\福袋.jfif" />
+    <Content Include="Content\ProductPostImg\籃球.jfif" />
+    <Content Include="Content\ProductPostImg\米.jfif" />
+    <Content Include="Content\ProductPostImg\豬.jfif" />
+    <Content Include="Content\ProductPostImg\鋼鐵人.jfif" />
+    <Content Include="Content\ProductPostImg\陪玩.jfif" />
     <Content Include="Content\cssCHIEN\personalMarket.css" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\resource_nico\createProductPost.css" />
