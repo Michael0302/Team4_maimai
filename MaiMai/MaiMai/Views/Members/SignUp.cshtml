@@ -290,10 +290,11 @@
             <div class="nt3 mt0-ns mb4"></div>
 
             <h3 class="b f4">註冊帳號</h3>
-            <a class="button b bg-fb white pa3 ba b--blue mb3 mr3" href="/users/auth/facebook">Facebook 註冊</a>
+            @*<a class="button b bg-fb white pa3 ba b--blue mb3 mr3" href="/users/auth/facebook">Facebook 註冊</a>*@
+            <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
             或
             @*<form class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
-                <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="MF0FgDTlkQn5iC3aS+8lHj2YptSaowZKgLayc3sHbCXv1pyTbIAWR4C3Lo0idR5krz2FHCU2cMNoBPW40xigVg==">*@
+        <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="MF0FgDTlkQn5iC3aS+8lHj2YptSaowZKgLayc3sHbCXv1pyTbIAWR4C3Lo0idR5krz2FHCU2cMNoBPW40xigVg==">*@
             <div class="js-details reset-details mb3 f6">
 
 
@@ -308,55 +309,55 @@
                             <div>
                                 @*@Html.HiddenFor(m => m.userLevel, new { Value = "5" })
 
-        @Html.LabelFor(m => m.lastName, "姓氏 ", new { @class = "b" })
-        @Html.TextBoxFor(m => m.lastName, new { @class = "w-100", placeholder = "請輸入姓氏" })
-        @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.lastName, "姓氏 ", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.lastName, new { @class = "w-100", placeholder = "請輸入姓氏" })
+                            @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.firstName, "姓名", new { @class = "b" })
-        @Html.TextBoxFor(m => m.firstName, new { @class = "w-100", placeholder = "請輸姓名" })
-        @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.firstName, "姓名", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.firstName, new { @class = "w-100", placeholder = "請輸姓名" })
+                            @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.birthday, "生日", new { @class = "b" })
-        @Html.TextBoxFor(m => m.birthday, new { @class = "w-100", placeholder = "請輸入生日:西元/月/日" })
-        @Html.ValidationMessageFor(m => m.birthday, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.birthday, "生日", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.birthday, new { @class = "w-100", placeholder = "請輸入生日:西元/月/日" })
+                            @Html.ValidationMessageFor(m => m.birthday, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.identyNumebr, "身分證字號", new { @class = "b" })
-        @Html.TextBoxFor(m => m.identyNumebr, new { @class = "w-100", placeholder = "請輸入身分證字號" })
-        @Html.ValidationMessageFor(m => m.identyNumebr, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.identyNumebr, "身分證字號", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.identyNumebr, new { @class = "w-100", placeholder = "請輸入身分證字號" })
+                            @Html.ValidationMessageFor(m => m.identyNumebr, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.userAccount, "用戶暱稱", new { @class = "b" })
-        @Html.TextBoxFor(m => m.userAccount, new { @class = "w-100", placeholder = "請輸入用戶暱稱" })
-        @Html.ValidationMessageFor(m => m.userAccount, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.userAccount, "用戶暱稱", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.userAccount, new { @class = "w-100", placeholder = "請輸入用戶暱稱" })
+                            @Html.ValidationMessageFor(m => m.userAccount, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
-        @Html.TextBoxFor(m => m.email, new { @class = "w-100", placeholder = "請輸入E-mail" })
-        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.email, new { @class = "w-100", placeholder = "請輸入E-mail" })
+                            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
-        @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100", placeholder = "請輸入會員密碼" })
-        @Html.ValidationMessageFor(m => m.userPassWord, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
+                            @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100", placeholder = "請輸入會員密碼" })
+                            @Html.ValidationMessageFor(m => m.userPassWord, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.ConfirmPassowrd, "確認密碼", new { @class = "b" })
-        @Html.PasswordFor(m => m.ConfirmPassowrd, new { @class = "w-100", placeholder = " 確認密碼" })
-        @Html.ValidationMessageFor(m => m.ConfirmPassowrd, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.ConfirmPassowrd, "確認密碼", new { @class = "b" })
+                            @Html.PasswordFor(m => m.ConfirmPassowrd, new { @class = "w-100", placeholder = " 確認密碼" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassowrd, "", new { @class = "text-danger" })
 
 
 
-        @Html.LabelFor(m => m.address, "住址", new { @class = "b" })
-        @Html.TextBoxFor(m => m.address, new { @class = "w-100", placeholder = "請輸入住址" })
-        @Html.ValidationMessageFor(m => m.address, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.address, "住址", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.address, new { @class = "w-100", placeholder = "請輸入住址" })
+                            @Html.ValidationMessageFor(m => m.address, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.city, "縣市", new { @class = "b" })
-        @Html.TextBoxFor(m => m.city, new { @class = "w-100", placeholder = "請輸入所在縣市" })
-        @Html.ValidationMessageFor(m => m.city, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.city, "縣市", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.city, new { @class = "w-100", placeholder = "請輸入所在縣市" })
+                            @Html.ValidationMessageFor(m => m.city, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.phoneNumber, "手機號碼", new { @class = "b" })
-        @Html.TextBoxFor(m => m.phoneNumber, new { @class = "w-100", placeholder = "請輸入手機號碼" })
-        @Html.ValidationMessageFor(m => m.phoneNumber, "", new { @class = "text-danger" })
+                            @Html.LabelFor(m => m.phoneNumber, "手機號碼", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.phoneNumber, new { @class = "w-100", placeholder = "請輸入手機號碼" })
+                            @Html.ValidationMessageFor(m => m.phoneNumber, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(m => m.proFileImg, "大頭照", new { @class = "b" })
-        @Html.TextBoxFor(m => m.proFileImg, new { @class = "w-100", type = "file" })
-        @Html.ValidationMessageFor(m => m.proFileImg, "", new { @class = "text-danger" })*@
+                            @Html.LabelFor(m => m.proFileImg, "大頭照", new { @class = "b" })
+                            @Html.TextBoxFor(m => m.proFileImg, new { @class = "w-100", type = "file" })
+                            @Html.ValidationMessageFor(m => m.proFileImg, "", new { @class = "text-danger" })*@
 
 
 
@@ -382,7 +383,7 @@
                                 <label class="b" for="address"> 地址</label>
                                 <input class="w-100" required="required" type="text" name="address" id="address">
                                 @*<label class="b" for="user_password_confirmation">確認密碼</label>
-        <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
+                            <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
                                 <label class="b" for="phoneNumber">手機號碼</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="text" name="phoneNumber" id="phoneNumber">
                                 <label class="b" for="firstName">名字</label>
@@ -408,7 +409,7 @@
                                 @*<h3 class="text-danger">@Html.ValidationSummary()</h3>*@
                             </div>
                         </form>
-                        
+
 
                     </div>
                     @*}*@
@@ -420,8 +421,8 @@
                         記得我的帳號，下次自動登入
                     </label>
                     @*<div class="mt3">
-                            <input type="submit" name="commit" value="註冊" class="button b green">
-                        </div>*@
+                    <input type="submit" name="commit" value="註冊" class="button b green">
+                </div>*@
                 </div>
                 <p class="f7 gray">繼續進行代表你同意<a href="/docs/terms_of_service">服務條款</a>。</p>
             </div>
@@ -430,7 +431,11 @@
             <a class="link b f6 hover-blue black mr3" href="/Members/Login">登入</a>
             @*@Html.ActionLink("登入", "Login", "Members")*@
             <a class="link b f6 hover-blue black mr3" href="/users/password/new">忘記密碼或重設密碼</a>
-
+            <div class="fb-like"
+                 data-share="true"
+                 data-width="450"
+                 data-show-faces="true">
+            </div>
 
         </div>
     </div>
@@ -440,10 +445,11 @@
 
 
     @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>*@
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-    
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=760951437892454&autoLogAppEvents=1" nonce="uw6hH87Q"></script>
     <script>
 
         //function checkinput() {
@@ -481,7 +487,6 @@
         //        return false;
         //    }
         //}
-     
 
 
 
@@ -494,16 +499,17 @@
 
 
 
-         function myFunction() {
-             $(document).ready(function () {
-                 
+
+        function myFunction() {
+            $(document).ready(function () {
+
 
                 var userAccount2 = $("#userAccount").val();
                 var userPassWord2 = $("#userPassWord").val();
                 var city2 = $("#city").val();
                 var address2 = $("#address").val();
                 var phoneNumber2 = $("#phoneNumber").val();
-                var firstName2= $("#firstName").val();
+                var firstName2 = $("#firstName").val();
                 var lastName2 = $("#lastName").val();
                 var birthday2 = $("#birthday").val();
                 var identityNumber2 = $("#identityNumber").val();
@@ -519,7 +525,7 @@
                     data: {
 
 
-                            userAccount: userAccount2 ,
+                        userAccount: userAccount2,
                         userPassWord: userPassWord2,
                         city: city2,
                         address: address2,
@@ -542,13 +548,71 @@
                     success: function (data) {
                         alert(data);
                         //window.location.reload();
-                        }
+                    }
 
-                    });
+                });
 
             });
 
         }
+
+    </script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '760951437892454',
+                cookie: true,
+                xfbml: true,
+                version: ' v10.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
+        });
+
+
+
+        {
+            status: 'connected',
+                authResponse: {
+                accessToken: '...',
+                    expiresIn: '...',
+                        signedRequest: '...',
+                            userID: '...'
+            }
+        }
+
+
+        <fb: login-button
+            scope="public_profile,email"
+            onlogin="checkLoginState();">
+        </fb: login - button >
+
+
+
+            function checkLoginState() {
+                FB.getLoginStatus(function (response) {
+                    statusChangeCallback(response);
+                });
+            }
+
+
+
+
 
     </script>
 </body>
