@@ -32,7 +32,6 @@ namespace MaiMai.Models
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<ProductPost> ProductPost { get; set; }
         public virtual DbSet<RequiredPost> RequiredPost { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
     }
 }

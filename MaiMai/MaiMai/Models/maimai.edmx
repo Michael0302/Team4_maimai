@@ -95,16 +95,6 @@
           <Property Name="TagID" Type="int" />
           <Property Name="OrderID" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Tag">
           <Key>
             <PropertyRef Name="TagID" />
@@ -240,7 +230,6 @@
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPost" EntityType="Self.ProductPost" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_ProductPost" Association="Self.FK_Cart_ProductPost">
             <End Role="ProductPost" EntitySet="ProductPost" />
@@ -287,57 +276,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="Cart" EntityType="maimaiModel.Cart" />
-          <EntitySet Name="Comment" EntityType="maimaiModel.Comment" />
-          <EntitySet Name="Member" EntityType="maimaiModel.Member" />
-          <EntitySet Name="Order" EntityType="maimaiModel.Order" />
-          <EntitySet Name="OrderDetail" EntityType="maimaiModel.OrderDetail" />
-          <EntitySet Name="ProductPost" EntityType="maimaiModel.ProductPost" />
-          <EntitySet Name="RequiredPost" EntityType="maimaiModel.RequiredPost" />
-          <EntitySet Name="sysdiagrams" EntityType="maimaiModel.sysdiagrams" />
-          <EntitySet Name="Tag" EntityType="maimaiModel.Tag" />
-          <AssociationSet Name="FK_Cart_ProductPost" Association="maimaiModel.FK_Cart_ProductPost">
-            <End Role="ProductPost" EntitySet="ProductPost" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_Member" Association="maimaiModel.FK_Comment_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_Order" Association="maimaiModel.FK_Comment_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Member" Association="maimaiModel.FK_Order_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductPost_Member" Association="maimaiModel.FK_ProductPost_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="ProductPost" EntitySet="ProductPost" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RequiredPost_Member" Association="maimaiModel.FK_RequiredPost_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="RequiredPost" EntitySet="RequiredPost" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Order" Association="maimaiModel.FK_OrderDetail_Order">
-            <End Role="Order" EntitySet="Order" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_ProductPost" Association="maimaiModel.FK_OrderDetail_ProductPost">
-            <End Role="ProductPost" EntitySet="ProductPost" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductPost_Tag" Association="maimaiModel.FK_ProductPost_Tag">
-            <End Role="Tag" EntitySet="Tag" />
-            <End Role="ProductPost" EntitySet="ProductPost" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RequiredPost_Tag" Association="maimaiModel.FK_RequiredPost_Tag">
-            <End Role="Tag" EntitySet="Tag" />
-            <End Role="RequiredPost" EntitySet="RequiredPost" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -346,7 +284,7 @@
           <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductPostID" Type="Int32" />
           <Property Name="QTY" Type="Int32" />
-          <NavigationProperty Name="ProductPost" Relationship="maimaiModel.FK_Cart_ProductPost" FromRole="Cart" ToRole="ProductPost" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_Cart_ProductPost" FromRole="Cart" ToRole="ProductPost" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -357,16 +295,16 @@
           <Property Name="starRate" Type="Int32" />
           <Property Name="commentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
-          <NavigationProperty Name="Order" Relationship="maimaiModel.FK_Comment_Order" FromRole="Comment" ToRole="Order" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Comment_Order" FromRole="Comment" ToRole="Order" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userAccount" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="userPassWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="userPassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -393,9 +331,9 @@
           <Property Name="orderStatus" Type="Int32" />
           <Property Name="createdTime" Type="DateTime" Precision="3" />
           <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Comment" Relationship="maimaiModel.FK_Comment_Order" FromRole="Order" ToRole="Comment" />
-          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Order_Member" FromRole="Order" ToRole="Member" />
-          <NavigationProperty Name="OrderDetail" Relationship="maimaiModel.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Order" FromRole="Order" ToRole="Comment" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Order_Member" FromRole="Order" ToRole="Member" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -407,8 +345,8 @@
           <Property Name="QTY" Type="Int32" />
           <Property Name="oneProductTotalPrice" Type="Int32" />
           <Property Name="SellerID" Type="Int32" />
-          <NavigationProperty Name="Order" Relationship="maimaiModel.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="ProductPost" Relationship="maimaiModel.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
         </EntityType>
         <EntityType Name="ProductPost">
           <Key>
@@ -423,11 +361,11 @@
           <Property Name="price" Type="Int32" />
           <Property Name="TagID" Type="Int32" />
           <Property Name="createdTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
           <Property Name="RequiredPostID" Type="Int32" />
-          <NavigationProperty Name="Cart" Relationship="maimaiModel.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
-          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
-          <NavigationProperty Name="OrderDetail" Relationship="maimaiModel.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
-          <NavigationProperty Name="Tag" Relationship="maimaiModel.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
         </EntityType>
         <EntityType Name="RequiredPost">
           <Key>
@@ -443,18 +381,8 @@
           <Property Name="estimatePrice" Type="Int32" />
           <Property Name="TagID" Type="Int32" />
           <Property Name="OrderID" Type="Int32" />
-          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
-          <NavigationProperty Name="Tag" Relationship="maimaiModel.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -462,12 +390,12 @@
           </Key>
           <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tagName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="ProductPost" Relationship="maimaiModel.FK_ProductPost_Tag" FromRole="Tag" ToRole="ProductPost" />
-          <NavigationProperty Name="RequiredPost" Relationship="maimaiModel.FK_RequiredPost_Tag" FromRole="Tag" ToRole="RequiredPost" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Tag" FromRole="Tag" ToRole="ProductPost" />
+          <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Tag" FromRole="Tag" ToRole="RequiredPost" />
         </EntityType>
         <Association Name="FK_Cart_ProductPost">
-          <End Type="maimaiModel.ProductPost" Role="ProductPost" Multiplicity="0..1" />
-          <End Type="maimaiModel.Cart" Role="Cart" Multiplicity="*" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductPost">
               <PropertyRef Name="ProductPostID" />
@@ -478,8 +406,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Member">
-          <End Type="maimaiModel.Member" Role="Member" Multiplicity="1" />
-          <End Type="maimaiModel.Comment" Role="Comment" Multiplicity="*" />
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
               <PropertyRef Name="UserID" />
@@ -490,8 +418,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Comment_Order">
-          <End Type="maimaiModel.Order" Role="Order" Multiplicity="0..1" />
-          <End Type="maimaiModel.Comment" Role="Comment" Multiplicity="*" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="OrderId" />
@@ -502,8 +430,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Member">
-          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="maimaiModel.Order" Role="Order" Multiplicity="*" />
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
               <PropertyRef Name="UserID" />
@@ -514,8 +442,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductPost_Member">
-          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="maimaiModel.ProductPost" Role="ProductPost" Multiplicity="*" />
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
               <PropertyRef Name="UserID" />
@@ -526,8 +454,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RequiredPost_Member">
-          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="maimaiModel.RequiredPost" Role="RequiredPost" Multiplicity="*" />
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
               <PropertyRef Name="UserID" />
@@ -538,8 +466,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_Order">
-          <End Type="maimaiModel.Order" Role="Order" Multiplicity="0..1" />
-          <End Type="maimaiModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
               <PropertyRef Name="OrderId" />
@@ -550,8 +478,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderDetail_ProductPost">
-          <End Type="maimaiModel.ProductPost" Role="ProductPost" Multiplicity="0..1" />
-          <End Type="maimaiModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductPost">
               <PropertyRef Name="ProductPostID" />
@@ -562,8 +490,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductPost_Tag">
-          <End Type="maimaiModel.Tag" Role="Tag" Multiplicity="0..1" />
-          <End Type="maimaiModel.ProductPost" Role="ProductPost" Multiplicity="*" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tag">
               <PropertyRef Name="TagID" />
@@ -574,8 +502,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_RequiredPost_Tag">
-          <End Type="maimaiModel.Tag" Role="Tag" Multiplicity="0..1" />
-          <End Type="maimaiModel.RequiredPost" Role="RequiredPost" Multiplicity="*" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tag">
               <PropertyRef Name="TagID" />
@@ -644,21 +572,21 @@
           <EntitySetMapping Name="Cart">
             <EntityTypeMapping TypeName="maimaiModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="QTY" ColumnName="QTY" />
-                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
-                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comment">
             <EntityTypeMapping TypeName="maimaiModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="commentDescription" ColumnName="commentDescription" />
-                <ScalarProperty Name="starRate" ColumnName="starRate" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="starRate" ColumnName="starRate" />
+                <ScalarProperty Name="commentDescription" ColumnName="commentDescription" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -686,23 +614,23 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="maimaiModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
-                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
-                <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
-                <ScalarProperty Name="buyerUserID" ColumnName="buyerUserID" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="buyerUserID" ColumnName="buyerUserID" />
+                <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetail">
             <EntityTypeMapping TypeName="maimaiModel.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
-                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
-                <ScalarProperty Name="oneProductTotalPrice" ColumnName="oneProductTotalPrice" />
-                <ScalarProperty Name="QTY" ColumnName="QTY" />
-                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="oneProductTotalPrice" ColumnName="oneProductTotalPrice" />
+                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -710,50 +638,39 @@
             <EntityTypeMapping TypeName="maimaiModel.ProductPost">
               <MappingFragment StoreEntitySet="ProductPost">
                 <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
-                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
-                <ScalarProperty Name="TagID" ColumnName="TagID" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="inStoreQTY" ColumnName="inStoreQTY" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="productImg" ColumnName="productImg" />
-                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
-                <ScalarProperty Name="productName" ColumnName="productName" />
                 <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productImg" ColumnName="productImg" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="inStoreQTY" ColumnName="inStoreQTY" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RequiredPost">
             <EntityTypeMapping TypeName="maimaiModel.RequiredPost">
               <MappingFragment StoreEntitySet="RequiredPost">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="TagID" ColumnName="TagID" />
-                <ScalarProperty Name="estimatePrice" ColumnName="estimatePrice" />
-                <ScalarProperty Name="requiredQTY" ColumnName="requiredQTY" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="postImg" ColumnName="postImg" />
-                <ScalarProperty Name="postName" ColumnName="postName" />
-                <ScalarProperty Name="postDescription" ColumnName="postDescription" />
-                <ScalarProperty Name="postTime" ColumnName="postTime" />
                 <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="maimaiModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="postTime" ColumnName="postTime" />
+                <ScalarProperty Name="postDescription" ColumnName="postDescription" />
+                <ScalarProperty Name="postName" ColumnName="postName" />
+                <ScalarProperty Name="postImg" ColumnName="postImg" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="requiredQTY" ColumnName="requiredQTY" />
+                <ScalarProperty Name="estimatePrice" ColumnName="estimatePrice" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tag">
             <EntityTypeMapping TypeName="maimaiModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
-                <ScalarProperty Name="tagName" ColumnName="tagName" />
                 <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="tagName" ColumnName="tagName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
