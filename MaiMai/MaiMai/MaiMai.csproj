@@ -205,6 +205,7 @@
     <Compile Include="Models\ViewModel\ProductCommentListViewModel.cs" />
     <Compile Include="Models\ViewModel\RequiredPostViewModel_C.cs" />
     <Compile Include="Models\ViewModel\TagViewModel.cs" />
+    <Compile Include="Models\ViewModel\upLoadPhotoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -450,9 +451,11 @@
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
+    <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ProductPostImg\" />
     <Folder Include="Models\MetaDataModel\" />
   </ItemGroup>
   <ItemGroup>

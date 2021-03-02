@@ -17,7 +17,8 @@ namespace MaiMai.Models.ViewModel
         public Nullable<int> TagID { get; set; }
         public Nullable<System.DateTime> createdTime { get; set; }
         public Nullable<int> RequiredPostID { get; set; }
-        
+
+        public HttpPostedFileBase upphoto { get; set; }
         public string userAccount { get; set; }
     }
 }
