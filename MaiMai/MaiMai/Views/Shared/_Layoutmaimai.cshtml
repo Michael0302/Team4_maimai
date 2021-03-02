@@ -89,8 +89,8 @@
                 {
                     <div class="collapse" id="collapseExample">
                         <div>
-                            <span>@Html.ActionLink("註冊", "", "", null, new { @class = "free-text" })</span>
-                            <span>@Html.ActionLink("登入", "", "", null, new { @class = "free-text" })</span>
+                            <span>@Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "free-text" })</span>
+                            <span>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "free-text" })</span>
                         </div>
                     </div> @*左右收起1 end*@
                 }
@@ -118,7 +118,7 @@
                             <div class="dropdown free-text">
                                 <a class="dropdown-toggle" href="#" data-toggle="dropdown">帳戶</a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("帳戶", "", "", null, new { @class = "dropdown-item" })</li>
+                                    <li>@Html.ActionLink("帳戶", "myAccountIndex", "MyAccount", null, new { @class = "dropdown-item" })</li>
                                     <li><a class="dropdown-item" href="#">@Html.ActionLink("登出", "Logout", "Members")</a></li>
                                 </ul>
                             </div>
@@ -131,7 +131,7 @@
                             </div>
                             @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
                             {
-                                <span>@Html.ActionLink("後台", "", "", null, new { @class = "free-text" })</span>
+                                <span>@Html.ActionLink("後台", "backstageIndex", "backstage", null, new { @class = "free-text" })</span>
                             }
                         </div>
                         @*左右收起2end*@
