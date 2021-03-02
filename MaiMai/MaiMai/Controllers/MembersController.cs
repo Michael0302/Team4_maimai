@@ -93,7 +93,14 @@ namespace MaiMai.Controllers
             return "登入成功";
         
         }
-
+        public ActionResult Logout()
+        {
+            Response.Cookies["LoginAccount"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["LoginName"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["MemberLevel"].Expires = DateTime.Now.AddDays(-1);
+            
+            return RedirectToAction("MaimaiIndex", "MaimaiIndex");
+        }
 
     }
 }
