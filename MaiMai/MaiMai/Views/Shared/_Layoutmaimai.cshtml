@@ -127,7 +127,7 @@
                                 <ul class="dropdown-menu">
 
                                     <li>@Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })</li>
-                                    <li>@Html.ActionLink("訂單管理", "", "", null, new { @class = "dropdown-item" })</li>
+                                    <li>@Html.ActionLink("訂單管理", "myOrder", "MyOrder", null, new { @class = "dropdown-item" })</li>
                                     @if (Request.Cookies["LoginAccount"].Value == null)
                                     {
                                         <li>@Html.ActionLink("徵求台", "requiredPostIndex", "RequiredPost", null, new { @class = "dropdown-item" })</li>
