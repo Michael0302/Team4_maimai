@@ -152,6 +152,7 @@
     <Compile Include="Controllers\MaimaiIndexController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\MyOrderController.cs" />
     <Compile Include="Controllers\PersonalMarketController.cs" />
     <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
@@ -451,6 +452,7 @@
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
+    <Content Include="Views\MyOrder\myOrder.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
