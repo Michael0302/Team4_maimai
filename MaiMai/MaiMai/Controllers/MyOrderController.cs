@@ -121,11 +121,13 @@ namespace MaiMai.Controllers
 
         public ActionResult getOrderList_P(int? status)
         {
+
+            var id = Convert.ToInt32(Request.Cookies["Login"].Value);
             if (status != null)
             {
                 if (status >= 2)
                 {
-                    var ordercmplist = db.Order.Where(m => m.orderStatus >= 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+                    var ordercmplist = db.Order.Where(m => (m.orderStatus >= 2)&&(m.buyerUserID==id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
                     {
                         x.OrderId,
                         x.orderStatus,
