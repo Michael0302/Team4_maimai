@@ -429,6 +429,8 @@
             目前狀態：<span id="FB_STATUS_1"></span>
         </div>
 
+            <button id="demo1" onclick="demo1()">DEMO1</button>
+
             <div class="mv4-ns mv3 bt b--light-gray"></div>
             <a class="link b f6 hover-blue black mr3" href="/Members/Login">登入</a>
             @*@Html.ActionLink("登入", "Login", "Members")*@
@@ -662,13 +664,29 @@
         //    onlogin="checkLoginState();">
         //</fb: login - button >
 
+        function demo1() {
 
-          
+            $("#userAccount").val("Kobe")
+             
+            $("#userPassWord").val("apple0108")
+            $("#userPassWordCheck").val("apple0108")
+            $("#city").val("台中市")
+            $("#address").val("台中市大雅區中港路一段88號")
+            $("#phoneNumber").val("0988554474")
+            $("#firstName").val("國瑜")
+            $("#lastName").val("韓")
+            $("#birthday").val("1945-01-08")
+            $("#identityNumber").val("F447878547")
+            //$("#profileImg").val("")
+            $("#selfDescription").val("台灣土豪,韓國瑜,販售各種國瑜寶寶")
+            $("#email").val("quees778w2s@gmail.com")
 
-         
+        }
 
 
     </script>
+
+ 
 </body>
 
 </html>
