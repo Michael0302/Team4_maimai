@@ -198,7 +198,7 @@ namespace MaiMai.Controllers
         {
             RequiredPost post = new RequiredPost()
             {
-                RequiredPostID = rp.RequiredPostID,
+             
             
                 postDescription = rp.postDescription,
                 postName = rp.postName,
