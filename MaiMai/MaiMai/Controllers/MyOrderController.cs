@@ -121,11 +121,13 @@ namespace MaiMai.Controllers
 
         public ActionResult getOrderList_P(int? status)
         {
+
+            var id = Convert.ToInt32(Request.Cookies["Login"].Value);
             if (status != null)
             {
                 if (status >= 2)
                 {
-                    var ordercmplist = db.Order.Where(m => m.orderStatus >= 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+                    var ordercmplist = db.Order.Where(m => (m.orderStatus >= 2)&&(m.buyerUserID==id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
                     {
                         x.OrderId,
                         x.orderStatus,
@@ -224,6 +226,7 @@ namespace MaiMai.Controllers
         public ActionResult getProduct_P(int? ProductPostID, int? QTY)
         {
             if (ProductPostID == null || QTY == null)
+                //為什麼會空值
             {
                 return Content("格式錯誤");
             }
@@ -235,7 +238,8 @@ namespace MaiMai.Controllers
                 productImg = s.productImg,
                 UserName = s.Member.firstName,
                 QTY = QTY,
-                price = QTY * s.price,
+                unitPrice=s.price,
+                totalPrice = QTY * s.price,
                 TagID = s.TagID,
                 Tag = s.Tag.tagName,
                 createdTime = s.createdTime
@@ -244,6 +248,20 @@ namespace MaiMai.Controllers
 
             return Json(product, JsonRequestBehavior.AllowGet);
         }
-    }
+        //public JsonResult cart_P(int productPostID)
+        //{
+        //    var list = db.ProductPost.Where(x => x.ProductPostID == productPostID).Select(s => new {
+        //    productName=s.ProductPostID,
+        //    productDescription=s.productDescription,
+        //    productImg=s.productImg,
+        //    productPrice=s.price,
+        //    productTag=s.Tag.tagName,
+        //    createdTime = s.createdTime
 
+        //    }).ToList();
+
+        //    return Json(list,JsonRequestBehavior.AllowGet);
+        //}
+
+    }
 }

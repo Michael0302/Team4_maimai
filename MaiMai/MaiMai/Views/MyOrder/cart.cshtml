@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "cart";
+}
+
+<h2>購物車</h2>
+
+@*orderID*@
+<div class="container" style="margin-top:100%">
+    <div class="row" >
+        <div class="col-10 justify-content-end">
+<table id="cartTable">
+    <thead><tr><td>商品名稱</td><td>圖片</td><td>價錢</td><td>數量</td><td>小計</td><td>標籤</td><td>編輯</td></tr></thead>
+</table>
+        </div>
+    </div>
+</div>
+
+@*總金額*@
+
+<script>
+    $.ajax({
+        url: "@Url.Action("getProduct_P", "MyOrder")",
+        data: {}, 從購物車刪除產品，cartNUM判斷同訂單產品累加
+        type:"GET",
+        success: function (result) {
+            $(result).each(function (index,item) {
+                $("cartTable").append(`<tr><td>${item.productName}</td><td>${item.productImg}</td><td>${item.unitPrice}</td><td>${item.QTY}</td><td>${item.totalPrice}</td><td>${item.Tag}</td><td><button type="button" class="btn btn-warning" onclick="delProduct(${item.ProductPostID})">刪除</button></td></tr>`);
+            });
+        }
+    })
+    function delProduct(ProductPostID) {
+
+    }
+
+</script>

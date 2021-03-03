@@ -452,6 +452,7 @@
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
     <Content Include="Views\MyOrder\myOrder.cshtml" />
+    <Content Include="Views\MyOrder\cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
