@@ -74,16 +74,17 @@ namespace MaiMai.Controllers
 
             Response.Cookies["LoginAccount"].Value = mb.UserID.ToString();
             Response.Cookies["LoginName"].Value = mb.userAccount.ToString();
-
+            Response.Cookies["LoginID"].Value = mb.UserID.ToString();
 
             Response.Cookies["MemberLevel"].Value = mb.userLevel.ToString();
-            Response.Cookies["MemberLevel"].Expires = DateTime.Now.AddDays(7);
 
 
             if (login.RememberMe == "on")
             {
+                Response.Cookies["MemberLevel"].Expires = DateTime.Now.AddDays(7);
                 Response.Cookies["LoginAccount"].Expires = DateTime.Now.AddDays(7);
                 Response.Cookies["LoginName"].Expires = DateTime.Now.AddDays(7);
+                Response.Cookies["LoginID"].Value = mb.UserID.ToString();
             }
 
 
@@ -93,7 +94,14 @@ namespace MaiMai.Controllers
             return "登入成功";
         
         }
-
+        public ActionResult Logout()
+        {
+            Response.Cookies["LoginAccount"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["LoginName"].Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies["MemberLevel"].Expires = DateTime.Now.AddDays(-1);
+            
+            return RedirectToAction("MaimaiIndex", "MaimaiIndex");
+        }
 
     }
 }

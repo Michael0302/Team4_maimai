@@ -30,6 +30,13 @@
                     <a class="d-block btn" onclick="getUnCompleteOrder()">未完成訂單</a>
 
                 </div>
+
+                <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
+                <div class="collapse" id="info_P" data-parent="#backstage"></div>
+
+                <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
+                <div class="collapse" id="tag_P" data-parent="#backstage"></div>
+
             </div>
 
             <div class="col-10">
@@ -121,7 +128,7 @@
                         var biryear = new Date(birthdayMilliseconds).getFullYear();
                         var birmonth = new Date(birthdayMilliseconds).getMonth()+1;
                         var birdate = new Date(birthdayMilliseconds).getDate();
-                        $("#editMemberbody").html(`<form><div class='d-flex justify-content-center'><label>會員編號<input name="UserID" class='form-control' type='text' value = "${member.UserID}" readonly/><label>會員帳號<input name="userAccount" class='form-control' type='text' value = "${member.userAccount}" readonly/><label>城市<input name="city" class='form-control' type='text' value = "${member.city}" readonly/><label>地址<input name="address" class='form-control' type='text' value = "${member.address}" readonly/><label>信箱<input name="email" class='form-control' type='text' value = "${member.email}" readonly/><label>電話<input name="phoneNumber" class='form-control' type='text' value = "${member.phoneNumber}" readonly/><label>姓名<input class='form-control' type='text' value = "${member.Name}" readonly/><label>生日<input class='form-control' name="birthday" type='text' value = "${biryear}-${birmonth}-${birdate}" readonly/><label>身分證字號<input class='form-control' type='text' name="identityNumber" value = "${member.identityNumber}" readonly/><label>大頭貼<input class='form-control' type='text' name="profileImg" value = "${member.profileImg}" readonly/><label>會員等級<select id="inputState" class="form-control" name="userLevel">
+                        $("#editMemberbody").html(`<form><div class='d-flex justify-content-center'><label>會員編號<input name="UserID" class='form-control' type='text' value = "${member.UserID}" readonly/><label>會員帳號<input name="userAccount" class='form-control' type='text' value = "${member.userAccount}" readonly/><label>城市<input name="city" class='form-control' type='text' value = "${member.city}" readonly/><label>地址<input name="address" class='form-control' type='text' value = "${member.address}" readonly/><label>信箱<input name="email" class='form-control' type='text' value = "${member.email}" readonly/><label>電話<input name="phoneNumber" class='form-control' type='text' value = "${member.phoneNumber}" readonly/><label>姓名<input class='form-control' type='text' value = "${member.Name}" readonly/><label>生日<input class='form-control' name="birthday" type='text' value = "${biryear}-${birmonth}-${birdate}" readonly/><label>身分證字號<input class='form-control' type='text' name="identityNuUrlber" value = "${member.identityNumber}" readonly/><label>大頭貼<input class='form-control' type='text' name="profileImg" value = "${member.profileImg}" readonly/><label>會員等級<select id="inputState" class="form-control" name="userLevel">
                             <option value="${member.userLevel}">${member.userLevelString}</option>
                             <option value="1">管理員</option>
                             <option value="2">優質會員</option>
@@ -243,7 +250,7 @@
 
     function delOrder(OrderId) {
         if (window.confirm("確定刪除?"))
-        {        
+        {
         $.ajax({
             url: "@Url.Action("delOrder_P", "backstage")",
             type: "GET",
@@ -278,7 +285,61 @@
             })
          }
 
+    function information() {
+        var list = "";
+        $.ajax({
+            url: "@Url.Action("pushInfo_P", "backstage")",
+            type: "GET",
+            data: { },
+            success: function (mem) {
+                $("#show").html(`<input type="text" id="searchID" placeholder="請輸入會員ID" class="form-control mb-3"/> <textarea style="resize:none" cols="50" rows="10" placeholder="請輸入通知內容"></textarea><div><input class="btn btn-primary" value="發送" onclick="pushInfo()"/></div`)
+                $(mem).each(function (index, mem) {
+                    list += mem.UserID+",";
+                })
+                AllmemIID = list.split(",");
+                $("#searchID").autocomplete({
+                    source: AllmemIID
+                })
+            }
+        })
+    }
 
+    function pushInfo() {
+        $.ajax({
+            url:"@Url.Action("", "backstage")"
 
+        })
+    }
+
+    function getTag() {
+        $.ajax({
+            url: "@Url.Action("getTag", "backstage")",
+            type: "GET",
+            data: {},
+            success: function (tag) {
+                $("#show").html(`<div><form><input type="text"  id="tagName" name="tagName" placeholder="請輸入要新增的標籤" /></form> <input class=" mt-2 col-1 btn btn-warning" value="新增" onclick="createTag()"/></div><div>現有標籤 : <select id="activeTag"></select></div>`)
+                $(tag).each(function (index, tag) {
+                    $("#activeTag").append(`<option>${tag.tagName}</option>`)
+                })
+            }
+        })
+    }
+
+    function createTag() {     
+        var tagName = $("#tagName").val();
+        $.ajax({
+            url: "@Url.Action("createTag", "backstage")",
+            type: "GET",
+            data: { tagName: tagName},
+            success: function (tag) {
+                alert("新增成功");
+                getTag();
+            },
+            error: function () {
+                alert("此標籤已存在");
+            }
+        })
+
+    }
 
 </script>
