@@ -143,11 +143,11 @@
                                                 <div class="D_lc">
                                                     <a class="D_ih" href="/p/特斯拉-1071117856/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
                                                         <div class="D_lm">
-                                                            <span class="D_bA D_ln D_bB"><img alt="" class="D_bE" src="https://media.karousell.com/media/photos/products/2021/2/23/_1614047114_979e5449_progressive_thumbnail" title=""></span>
+                                                            <span class="D_bA D_ln D_bB"><img alt="" class="D_bE"  id="productImg"src="https://media.karousell.com/media/photos/products/2021/2/23/_1614047114_979e5449_progressive_thumbnail" title=""></span>
                                                         </div>
                                                         <p  id="productName"class="D_bY D_ci D_cl D_co D_cq D_ct D_cw D_bV">特斯拉</p>
-                                                        <p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bU">NT$5,000,000</p>
-                                                        <p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">自動駕駛</p>
+                                                        <p id="price" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bU">NT$5,000,000</p>
+                                                        <p id="productDescription" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">自動駕駛</p>
                                                         <p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">新品</p>
                                                     </a>
                                                 </div>
@@ -350,7 +350,11 @@
 
                        
                         $("#productName").html(item.productName)
-                        console.log(item.productName)
+                        $("#productDescription").html(item.productDescription) 
+                        $("#price").html(item.price)
+                        //$("#productImg").html(item.productImg)
+                        //console.log(item.productImg)
+                        //console.log(item.productName)
 
                         //$("#image00").html(data.profileImg)
                         //$("#City").html(data.city)
