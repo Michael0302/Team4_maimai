@@ -289,78 +289,76 @@
         <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l">
             <div class="nt3 mt0-ns mb4"></div>
 
-            <h3 class="b f4">註冊帳號</h3>
+            <h3 class="b f4"> </h3>   
             @*<a class="button b bg-fb white pa3 ba b--blue mb3 mr3" href="/users/auth/facebook">Facebook 註冊</a>*@
-            <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+            @*<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>*@
+            <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" data-scope="public_profile,email" data-onlogin="checkLoginState();"></div>
             或
             @*<form class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
         <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="MF0FgDTlkQn5iC3aS+8lHj2YptSaowZKgLayc3sHbCXv1pyTbIAWR4C3Lo0idR5krz2FHCU2cMNoBPW40xigVg==">*@
-            <div class="js-details reset-details mb3 f6">
+        <div class="js-details reset-details mb3 f6">
 
 
-                <div class="mt3">
+            <div class="mt3">
 
 
-                    @*@using (Html.BeginForm("SignUp", "Members", FormMethod.Post, new { novalidate = "novalidate" }))*@
-                    <!--{-->
+                @*@using (Html.BeginForm("SignUp", "Members", FormMethod.Post, new { novalidate = "novalidate" }))*@
+                <!--{-->
 
-                    <div>
-                        <form @*onsubmit="return checkinput()"*@>
-                            <div>
-                                @*@Html.HiddenFor(m => m.userLevel, new { Value = "5" })
+                <div>
+                    <form @*onsubmit="return checkinput()"*@>
+                        <div>
+                            @*@Html.HiddenFor(m => m.userLevel, new { Value = "5" })
 
-                            @Html.LabelFor(m => m.lastName, "姓氏 ", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.lastName, new { @class = "w-100", placeholder = "請輸入姓氏" })
-                            @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.lastName, "姓氏 ", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.lastName, new { @class = "w-100", placeholder = "請輸入姓氏" })
+                        @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(m => m.firstName, "姓名", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.firstName, new { @class = "w-100", placeholder = "請輸姓名" })
-                            @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.firstName, "姓名", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.firstName, new { @class = "w-100", placeholder = "請輸姓名" })
+                        @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(m => m.birthday, "生日", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.birthday, new { @class = "w-100", placeholder = "請輸入生日:西元/月/日" })
-                            @Html.ValidationMessageFor(m => m.birthday, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.birthday, "生日", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.birthday, new { @class = "w-100", placeholder = "請輸入生日:西元/月/日" })
+                        @Html.ValidationMessageFor(m => m.birthday, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(m => m.identyNumebr, "身分證字號", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.identyNumebr, new { @class = "w-100", placeholder = "請輸入身分證字號" })
-                            @Html.ValidationMessageFor(m => m.identyNumebr, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.identyNumebr, "身分證字號", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.identyNumebr, new { @class = "w-100", placeholder = "請輸入身分證字號" })
+                        @Html.ValidationMessageFor(m => m.identyNumebr, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(m => m.userAccount, "用戶暱稱", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.userAccount, new { @class = "w-100", placeholder = "請輸入用戶暱稱" })
-                            @Html.ValidationMessageFor(m => m.userAccount, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.userAccount, "用戶暱稱", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.userAccount, new { @class = "w-100", placeholder = "請輸入用戶暱稱" })
+                        @Html.ValidationMessageFor(m => m.userAccount, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.email, new { @class = "w-100", placeholder = "請輸入E-mail" })
-                            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.email, new { @class = "w-100", placeholder = "請輸入E-mail" })
+                        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
-                            @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100", placeholder = "請輸入會員密碼" })
-                            @Html.ValidationMessageFor(m => m.userPassWord, "", new { @class = "text-danger" })
+                        @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
+                        @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100", placeholder = "請輸入會員密碼" })
+                        @Html.ValidationMessageFor(m => m.userPassWord, "", new { @class = "text-danger" })
 
-                            @Html.LabelFor(m => m.ConfirmPassowrd, "確認密碼", new { @class = "b" })
-                            @Html.PasswordFor(m => m.ConfirmPassowrd, new { @class = "w-100", placeholder = " 確認密碼" })
-                            @Html.ValidationMessageFor(m => m.ConfirmPassowrd, "", new { @class = "text-danger" })
-
-
-
-                            @Html.LabelFor(m => m.address, "住址", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.address, new { @class = "w-100", placeholder = "請輸入住址" })
-                            @Html.ValidationMessageFor(m => m.address, "", new { @class = "text-danger" })
-
-                            @Html.LabelFor(m => m.city, "縣市", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.city, new { @class = "w-100", placeholder = "請輸入所在縣市" })
-                            @Html.ValidationMessageFor(m => m.city, "", new { @class = "text-danger" })
-
-                            @Html.LabelFor(m => m.phoneNumber, "手機號碼", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.phoneNumber, new { @class = "w-100", placeholder = "請輸入手機號碼" })
-                            @Html.ValidationMessageFor(m => m.phoneNumber, "", new { @class = "text-danger" })
-
-                            @Html.LabelFor(m => m.proFileImg, "大頭照", new { @class = "b" })
-                            @Html.TextBoxFor(m => m.proFileImg, new { @class = "w-100", type = "file" })
-                            @Html.ValidationMessageFor(m => m.proFileImg, "", new { @class = "text-danger" })*@
+                        @Html.LabelFor(m => m.ConfirmPassowrd, "確認密碼", new { @class = "b" })
+                        @Html.PasswordFor(m => m.ConfirmPassowrd, new { @class = "w-100", placeholder = " 確認密碼" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassowrd, "", new { @class = "text-danger" })
 
 
 
+                        @Html.LabelFor(m => m.address, "住址", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.address, new { @class = "w-100", placeholder = "請輸入住址" })
+                        @Html.ValidationMessageFor(m => m.address, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(m => m.city, "縣市", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.city, new { @class = "w-100", placeholder = "請輸入所在縣市" })
+                        @Html.ValidationMessageFor(m => m.city, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(m => m.phoneNumber, "手機號碼", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.phoneNumber, new { @class = "w-100", placeholder = "請輸入手機號碼" })
+                        @Html.ValidationMessageFor(m => m.phoneNumber, "", new { @class = "text-danger" })
+
+                        @Html.LabelFor(m => m.proFileImg, "大頭照", new { @class = "b" })
+                        @Html.TextBoxFor(m => m.proFileImg, new { @class = "w-100", type = "file" })
+                        @Html.ValidationMessageFor(m => m.proFileImg, "", new { @class = "text-danger" })*@
 
 
 
@@ -372,60 +370,64 @@
 
 
 
-                                <label class="b" for="userAccount">用戶帳號</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount">
-                                <label class="b" for="userPassWord">密碼</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord">
-                                <label class="b" for="userPassWordCheck">確認密碼</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWordCheck" id="userPassWordCheck">
-                                <label class="b" for="city">城市</label>
-                                <input class="w-100" required="required" type="text" name="city" id="city">
-                                <label class="b" for="address"> 地址</label>
-                                <input class="w-100" required="required" type="text" name="address" id="address">
-                                @*<label class="b" for="user_password_confirmation">確認密碼</label>
-                            <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
-                                <label class="b" for="phoneNumber">手機號碼</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="phoneNumber" id="phoneNumber">
-                                <label class="b" for="firstName">名字</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="firstName" id="firstName">
-                                <label class="b" for="lastName">姓氏</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="lastName" id="lastName">
-                                <label class="b" for="birthday">生日</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="date" name="birthday" id="birthday">
-                                <label class="b" for="identityNumber">身分證字號</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="identityNumber" id="identityNumber">
-                                <label class="b" for="profileImg">個人頭像</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">
-                                <label class="b" for="selfDescription">個人簡介</label>
-                                <textarea class="w-100" required="required" autofocus="autofocus" type="text" name="selfDescription" id="selfDescription"> </textarea>
-                                <label class="b" for="email">信箱</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
-                            </div>
-
-                            <div>
-                                @*<input type="submit" value="註冊" class="btn btn-primary"  onclick="myFunction()"/>*@
-
-                                <button type="submit" id="p1" class="btn btn-primary" onclick="myFunction()">註冊</button>
-                                @*<h3 class="text-danger">@Html.ValidationSummary()</h3>*@
-                            </div>
-                        </form>
-
-
-                    </div>
-                    @*}*@
 
 
 
-                    <label class="f6">
-                        <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="user[remember_me]" id="user_remember_me">
-                        記得我的帳號，下次自動登入
-                    </label>
-                    @*<div class="mt3">
-                    <input type="submit" name="commit" value="註冊" class="button b green">
-                </div>*@
+                            <label class="b" for="userAccount">用戶帳號</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount">
+                            <label class="b" for="userPassWord">密碼</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord">
+                            <label class="b" for="userPassWordCheck">確認密碼</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWordCheck" id="userPassWordCheck">
+                            <label class="b" for="city">城市</label>
+                            <input class="w-100" required="required" type="text" name="city" id="city">
+                            <label class="b" for="address"> 地址</label>
+                            <input class="w-100" required="required" type="text" name="address" id="address">
+                            @*<label class="b" for="user_password_confirmation">確認密碼</label>
+                        <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
+                            <label class="b" for="phoneNumber">手機號碼</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="phoneNumber" id="phoneNumber">
+                            <label class="b" for="firstName">名字</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="firstName" id="firstName">
+                            <label class="b" for="lastName">姓氏</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="lastName" id="lastName">
+                            <label class="b" for="birthday">生日</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="date" name="birthday" id="birthday">
+                            <label class="b" for="identityNumber">身分證字號</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="identityNumber" id="identityNumber">
+                            <label class="b" for="profileImg">個人頭像</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">
+                            <label class="b" for="selfDescription">個人簡介</label>
+                            <textarea class="w-100" required="required" autofocus="autofocus" type="text" name="selfDescription" id="selfDescription"> </textarea>
+                            <label class="b" for="email">信箱</label>
+                            <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
+                        </div>
+
+                        <div>
+                            @*<input type="submit" value="註冊" class="btn btn-primary"  onclick="myFunction()"/>*@
+
+                            <button type="submit" id="p1" class="btn btn-primary" onclick="myFunction()">註冊</button>
+                            @*<h3 class="text-danger">@Html.ValidationSummary()</h3>*@
+                        </div>
+                    </form>
+
+
                 </div>
-                <p class="f7 gray">繼續進行代表你同意<a href="/docs/terms_of_service">服務條款</a>。</p>
+                @*}*@
+
+
+
+                <label class="f6">
+                    <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="user[remember_me]" id="user_remember_me">
+                    記得我的帳號，下次自動登入
+                </label>
+                @*<div class="mt3">
+                <input type="submit" name="commit" value="註冊" class="button b green">
+            </div>*@
             </div>
+            <p class="f7 gray">繼續進行代表你同意<a href="/docs/terms_of_service">服務條款</a>。</p>
+            目前狀態：<span id="FB_STATUS_1"></span>
+        </div>
 
             <button id="demo1" onclick="demo1()">DEMO1</button>
 
@@ -441,7 +443,7 @@
 
         </div>
     </div>
-
+   
 
 
 
@@ -453,7 +455,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=760951437892454&autoLogAppEvents=1" nonce="uw6hH87Q"></script>
-
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
 
         //function checkinput() {
@@ -556,9 +558,111 @@
 
                 });
 
+
+                
+
             });
 
         }
+
+
+        //function doUpload(eler) {
+        //    var photo = $(eler).val();
+        //    console.log(photo);
+        //    $.ajax({
+        //        url: "/RequiredPost/uploadPhoto",
+        //        type: "Post",
+        //        data: { upphoto: photo },
+        //        processData: false,
+        //        contentType: false,
+        //        success: function (response) {
+        //            $(".displayImg>img").attr("src", response)
+        //        }
+        //    })
+        //} //  doUpload end
+
+
+
+
+    </script>
+
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '760951437892454',
+                cookie: true,
+                xfbml: true,
+                version: ' v10.0'
+            });
+
+            FB.AppEvents.logPageView();
+
+        };
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
+        });
+
+        function statusChangeCallback(response) {
+            console.log(response);
+            var target = document.getElementById("FB_STATUS_1"),
+                html = "";
+
+            // 登入 FB 且已加入會員
+            if (response.status === 'connected') {
+                html = "已登入 FB，並加入 MaiMai  <br/>";
+
+                FB.api('/me?fields=id,name,email', function (response) {
+                    console.log(response);
+                    html += "會員暱稱：" + response.name + "<br/>";
+                    html += "會員 email：" + response.email;
+                    target.innerHTML = html;
+                });
+            }
+
+            // 登入 FB, 未偵測到加入會員
+            else if (response.status === "not_authorized") {
+                target.innerHTML = "已登入 FB，但未加入MaiMai  ";
+            }
+
+            // 未登入 FB
+            else {
+                target.innerHTML = "未登入 FB";
+            }
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+    
+
+
+        //{
+        //    status: 'connected',
+        //        authResponse: {
+        //        accessToken: '...',
+        //            expiresIn: '...',
+        //                signedRequest: '...',
+        //                    userID: '...'
+        //    }
+        //}
+
+
+        //<fb: login-button
+        //    scope="public_profile,email" autologoutlink="true"
+        //    onlogin="checkLoginState();">
+        //</fb: login - button >
 
         function demo1() {
 
@@ -578,7 +682,6 @@
             $("#email").val("quees778w2s@gmail.com")
 
         }
-
 
 
     </script>

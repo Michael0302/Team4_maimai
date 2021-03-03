@@ -460,16 +460,18 @@
     <Content Include="Views\RequiredPost\requiredPostIndex.cshtml" />
     <Content Include="Views\Members\fuck.cshtml" />
     <Content Include="Views\Members\Login.cshtml" />
-    <Content Include="Views\Members\SignUp.cshtml" />
     <Content Include="Views\Members\test.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
     <Content Include="Views\MyOrder\myOrder.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
+    <Content Include="Views\Members\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\MemberImg\" />
+    <Folder Include="Content\ProductPostImg\" />
     <Folder Include="Models\MetaDataModel\" />
   </ItemGroup>
   <ItemGroup>

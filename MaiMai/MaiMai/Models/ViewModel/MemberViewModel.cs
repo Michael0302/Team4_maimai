@@ -7,6 +7,7 @@ namespace MaiMai.Models.ViewModel
 {
     public class MemberViewModel
     {
+        public HttpPostedFileBase upphoto { get; set; }
         public int UserID { get; set; }
         public string userAccount { get; set; }
         public string userPassWord { get; set; }
