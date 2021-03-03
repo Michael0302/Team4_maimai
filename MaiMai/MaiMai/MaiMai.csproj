@@ -471,7 +471,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\MemberImg\" />
-    <Folder Include="Content\ProductPostImg\" />
     <Folder Include="Models\MetaDataModel\" />
   </ItemGroup>
   <ItemGroup>
