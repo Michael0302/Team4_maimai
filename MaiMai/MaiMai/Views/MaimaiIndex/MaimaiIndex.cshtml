@@ -80,7 +80,17 @@
     function tagonclick(TagID) {
         window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
     }
-    $(function () {
+
+    function toRequiredPostView() {
+        var test = getCookie('LoginAccount');
+        console.log(test)
+        if (test == "") {
+            window.location.href = `/RequiredPost/requiredPostIndexWithLogin`;
+        }
+        window.location.href = `/RequiredPost/requiredPostIndex`;
+    }
+
+    
         function getCookie(cookieName) {
             var name = cookieName + "=";
             var ca = document.cookie.split(';');
@@ -93,14 +103,7 @@
 
         }
 
-        function toRequiredPostView() {
-            var test = getCookie('LoginAccount');
-            console.log(test)
-            if (test == "") {
-                window.location.href = `/RequiredPost/requiredPostIndexWithLogin`;
-            }
-            window.location.href = `/RequiredPost/requiredPostIndex`;
-        }
+        
 
 
         $(function () {
@@ -244,7 +247,7 @@
             }
 
         })
-    })
+    
         //輪播左右
 
 </script>

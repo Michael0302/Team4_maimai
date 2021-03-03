@@ -1,5 +1,6 @@
 ﻿using MaiMai.Models;
 using MaiMai.Models.MaimaiIndexViewModel;
+using MaiMai.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

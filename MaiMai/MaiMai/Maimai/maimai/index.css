@@ -31,32 +31,77 @@
     justify-content: center;
     font-weight: bold;
 }
+/*=======================================================================*/
 
 /*Layout_st 搜尋*/
-.navbarcontainer > .row #Ajax-search {
+.Ajax-search {
     height: 45px;
     width: 900px;
-    border-radius: 35px;
+    background-color:#D0D0D0;
+    /*    border: 1px solid #000000;*/
+    border-radius:35px;
+    /*background-image:url(/Maimai/images/svg/135-search.svg);
+*/
 }
+    .Ajax-search > #Ajax-search {
+        border:0;
+        background-color: #D0D0D0;
+        border-bottom-right-radius:35px;
+        border-top-right-radius:35px;
+        /*    border-radius:35px;*/
+        width: 873px;
+        height: 100%;
+    }
+    .Ajax-search > input {
+        color: transparent;
+        outline: none;
+    }
+        .dropdown > .dropdown-menu {
+            border: 0;
+            left:2%;
+            width: 880px;
+            height: auto;
+        }
 /*Layout_st 搜尋 下拉選單(未使用)*/
-.Searchmaimai {
+/*.Searchmaimai {
     padding: 0;
     margin: 0;
-    width: 900px;
-    /*height: 50px;*/
-    max-height: 0;
+    width: 900px;*/
+/*height: 50px;*/
+/*max-height: 0;
     position: relative;
     left: 0;
     top: 0;
     background-color: white;
-    opacity: 1; /*表示完全透明 */
-    overflow: hidden;
-}
+    opacity: 1;*/ /*表示完全透明 */
+/*overflow: hidden;
+}*/
 /*Layout_st 搜尋 下拉選單(未使用)*/
-.Searchmaimai1 {
+/*.Searchmaimai1 {
     opacity: 1;
     max-height: 750px;
+}*/
+.Ajax-search-dropdown-img {
+    height: 84px;
+    width: 192px;
+    border-radius: 15px;
+    position: relative;
 }
+.Ajax-search-dropdown-img > img {
+    height: 84px;
+    width: 192px;
+    border-radius: 15px;
+    position: relative;
+}
+.Ajax-search-dropdown-font {
+    position: absolute;
+    z-index: 2;
+    left: 50px;
+    top: 30px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+/*=======================================================================*/
 /*Layout_st 地圖鈴鐺*/
 .top3svg > .logo {
     height: 24px;
@@ -140,11 +185,10 @@ width:50px;
         height: 250px;
 }
     /*index body 框內 照片*/
-    .Carouseladvertising > .photho img {
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-    }
+.all123 > .photho img {
+    width: 300px;
+    height: 180px;
+}
 /*=======================================================================*/
 /*輪播切換*/
 .slide_btn {
@@ -168,12 +212,65 @@ width:50px;
     color: #6C6C6C;
     transition: .5s;
 }
+
 .slide_btn:hover i {
     color: #D9006C;
 }
+
 .theWidth {
     position: relative;
 }
+@keyframes circle {
+     from {
+        stroke-dashoffset: 200;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+/*布告欄*/
+.circle {
+stroke-dasharray:1194;
+stroke-dashoffset:1194;
+animation-name:circle;
+animation-duration:1s;
+animation-timing-function:linear;
+animation-fill-mode:forwards;
+}
+
+.slide_btn3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    color: #fff;
+    position: absolute;
+    font-size: 24px;
+}
+#prevSlide3 {
+    left: 0;
+}
+
+#nextSlide3 {
+    right: 0;
+}
+.slide_btn3 i {
+    color: #6C6C6C;
+    transition: .5s;
+}
+
+.slide_btn3:hover i {
+    color: #D9006C;
+}
+
+.theWidth3 {
+    position: relative;
+}
+/*布告欄*/
+
 /*=======================================================================*/
 /*foot_st*/
 .footerLogo {
@@ -236,12 +333,12 @@ width:50px;
     border: 1px solid skyblue;
 }*/
 /*TagSearchStyle TAG功能跳轉*/
-/*.TagSearchImgStyle {
+.TagSearchImgStyle {
     width:226px;
-    height: 151px;
+    height: 210px;
     border-radius: 15px;
     border: 1px solid #000000
-}*/
+}
 /*TagSearchStyle TAG功能跳轉*/
 TagSearchImgStyle > p {
     text-decoration: none;
