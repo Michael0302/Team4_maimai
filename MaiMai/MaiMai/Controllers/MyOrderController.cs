@@ -152,8 +152,8 @@ namespace MaiMai.Controllers
                 }
                 else
                 {
-                    var ordercmplist = db.Order.Where(m => m.orderStatus < 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
-                    {
+                    var ordercmplist = db.Order.Where(m => (m.orderStatus < 2)&&(m.buyerUserID==id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, /*db.Order, x => x.OrderId -----db.OrderDetail,y=>y.OrderID兩張表單串聯*/
+                        (x, y) => new{
                         x.OrderId,
                         x.orderStatus,
                         x.createdTime,
