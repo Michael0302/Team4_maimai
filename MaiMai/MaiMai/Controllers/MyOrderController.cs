@@ -122,7 +122,7 @@ namespace MaiMai.Controllers
         public ActionResult getOrderList_P(int? status)
         {
 
-            var id = Convert.ToInt32(Request.Cookies["Login"].Value);
+            var id = Convert.ToInt32(Request.Cookies["LoginID"].Value);
             if (status != null)
             {
                 if (status >= 2)
@@ -152,8 +152,8 @@ namespace MaiMai.Controllers
                 }
                 else
                 {
-                    var ordercmplist = db.Order.Where(m => m.orderStatus < 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
-                    {
+                    var ordercmplist = db.Order.Where(m => (m.orderStatus < 2)&&(m.buyerUserID==id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, /*db.Order, x => x.OrderId -----db.OrderDetail,y=>y.OrderID兩張表單串聯*/
+                        (x, y) => new{
                         x.OrderId,
                         x.orderStatus,
                         x.createdTime,
