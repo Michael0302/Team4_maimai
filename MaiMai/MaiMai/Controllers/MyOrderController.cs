@@ -122,7 +122,7 @@ namespace MaiMai.Controllers
         public ActionResult getOrderList_P(int? status)
         {
 
-            var id = Convert.ToInt32(Request.Cookies["Login"].Value);
+            var id = Convert.ToInt32(Request.Cookies["LoginID"].Value);
             if (status != null)
             {
                 if (status >= 2)
