@@ -152,6 +152,7 @@
     <Compile Include="Controllers\MaimaiIndexController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\MyOrderController.cs" />
     <Compile Include="Controllers\PersonalMarketController.cs" />
     <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
@@ -215,15 +216,6 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\ProductPostImg\65K2.jfif" />
-    <Content Include="Content\ProductPostImg\土豆.jfif" />
-    <Content Include="Content\ProductPostImg\小藥丸藍色.jfif" />
-    <Content Include="Content\ProductPostImg\福袋.jfif" />
-    <Content Include="Content\ProductPostImg\籃球.jfif" />
-    <Content Include="Content\ProductPostImg\米.jfif" />
-    <Content Include="Content\ProductPostImg\豬.jfif" />
-    <Content Include="Content\ProductPostImg\鋼鐵人.jfif" />
-    <Content Include="Content\ProductPostImg\陪玩.jfif" />
     <Content Include="Content\cssCHIEN\personalMarket.css" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\resource_nico\createProductPost.css" />
@@ -460,6 +452,7 @@
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
+    <Content Include="Views\MyOrder\myOrder.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>

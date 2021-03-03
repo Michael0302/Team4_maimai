@@ -362,11 +362,12 @@
           <Property Name="price" Type="Int32" />
           <Property Name="TagID" Type="Int32" />
           <Property Name="createdTime" Type="DateTime" Precision="3" />
-          <Property Name="RequiredPostID" Type="Int32" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
           <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
+          <Property Name="RequiredPostID" Type="Int32" />
+
         </EntityType>
         <EntityType Name="RequiredPost">
           <Key>
@@ -638,6 +639,9 @@
           <EntitySetMapping Name="ProductPost">
             <EntityTypeMapping TypeName="maimaiModel.ProductPost">
               <MappingFragment StoreEntitySet="ProductPost">
+
+                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
+
                 <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
                 <ScalarProperty Name="productDescription" ColumnName="productDescription" />
@@ -647,7 +651,7 @@
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="TagID" ColumnName="TagID" />
                 <ScalarProperty Name="createdTime" ColumnName="createdTime" />
-                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

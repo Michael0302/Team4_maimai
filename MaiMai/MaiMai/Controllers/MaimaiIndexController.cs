@@ -1,6 +1,5 @@
 ﻿using MaiMai.Models;
 using MaiMai.Models.MaimaiIndexViewModel;
-using MaiMai.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +21,7 @@ namespace MaiMai.Controllers
             }).ToList();
             return Json(tagList, JsonRequestBehavior.AllowGet);
         }
-        //廣告輪播
+
         public ActionResult ProductPost() 
         {
             var PostList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
@@ -33,6 +32,7 @@ namespace MaiMai.Controllers
             }).ToList();
             return Json(PostList,JsonRequestBehavior.AllowGet);
         }
+
         //明星輪播
 
         //public ActionResult ProductPost()
