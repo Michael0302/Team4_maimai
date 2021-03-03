@@ -446,8 +446,17 @@
                     },
 
                     success: function (data) {
-                        alert('success: ' + data);
-                        window.location.href = "/MaimaiIndex/MaimaiIndex";
+                        
+                        var byebye = data.indexOf("密碼錯誤")
+                        if (byebye < 0) {
+                            alert(data);
+                            window.location.href = "/MaimaiIndex/MaimaiIndex";
+                        }
+                        else {
+                            alert("帳號不存在或密碼錯誤!")
+                        }
+                            
+                      
                     }
 
                 });

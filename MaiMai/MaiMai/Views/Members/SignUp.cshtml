@@ -556,9 +556,31 @@
 
                 });
 
+
+                
+
             });
 
         }
+
+
+        //function doUpload(eler) {
+        //    var photo = $(eler).val();
+        //    console.log(photo);
+        //    $.ajax({
+        //        url: "/RequiredPost/uploadPhoto",
+        //        type: "Post",
+        //        data: { upphoto: photo },
+        //        processData: false,
+        //        contentType: false,
+        //        success: function (response) {
+        //            $(".displayImg>img").attr("src", response)
+        //        }
+        //    })
+        //} //  doUpload end
+
+
+
 
     </script>
 
@@ -585,19 +607,19 @@
 
             // 登入 FB 且已加入會員
             if (response.status === 'connected') {
-                html = "已登入 FB，並加入 WFU BLOG DEMO 應用程式<br/>";
+                html = "已登入 FB，並加入 MaiMai  <br/>";
 
                 FB.api('/me?fields=id,name,email', function (response) {
                     console.log(response);
                     html += "會員暱稱：" + response.name + "<br/>";
-                    html += "會員 email：" + response.email + response.id;
+                    html += "會員 email：" + response.email;
                     target.innerHTML = html;
                 });
             }
 
             // 登入 FB, 未偵測到加入會員
             else if (response.status === "not_authorized") {
-                target.innerHTML = "已登入 FB，但未加入 WFU BLOG DEMO 應用程式";
+                target.innerHTML = "已登入 FB，但未加入MaiMai  ";
             }
 
             // 未登入 FB
