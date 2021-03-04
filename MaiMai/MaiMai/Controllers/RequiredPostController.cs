@@ -194,14 +194,39 @@ namespace MaiMai.Controllers
             return Json(table, JsonRequestBehavior.AllowGet);
         }
         maimaiRepository<RequiredPost> requiredPostRepository = new maimaiRepository<RequiredPost>();
-        public string sendRequiredPost(RequiredPost rp)
+        public string sendRequiredPost(RequiredPostViewModel_C rp)
         {
+            RequiredPost post = new RequiredPost()
+            {
+             
+            
+                postDescription = rp.postDescription,
+                postName = rp.postName,
+                postImg = rp.upphoto.FileName,
+                requiredQTY = rp.requiredQTY,
+                TagID = rp.TagID,
+                estimatePrice = rp.estimatePrice,
+                OrderID = rp.OrderID,
+        
+            };
+            post.postTime = DateTime.Now;
+            post.UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value);
 
-            rp.postTime = DateTime.Now;
-            rp.UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value);
+            requiredPostRepository.Create(post);
 
-            requiredPostRepository.Create(rp);
+            if (rp.upphoto == null)
+            {
+                rp.postImg = "無圖示.jpg";
+            }
+            else
+            {
 
+               
+                string filename = rp.upphoto.FileName;
+                rp.upphoto.SaveAs(Server.MapPath("../Content/resource_nico/images/徵求台POST/") + filename);
+                string filePath = $"../Content/resource_nico/images/徵求台POST/{filename}";
+
+            }
             return "發文成功";
         }
     }//class end

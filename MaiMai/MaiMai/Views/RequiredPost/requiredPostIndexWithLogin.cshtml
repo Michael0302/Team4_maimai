@@ -51,7 +51,7 @@
                         <form class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
                                 <img id="Productimg">
-                                <input type="file" required onChange="doUpload()" name="postImg" id="postImg" style="display: block;">
+                                <input type="file" required  name="upphoto" id="postImg" style="display: block;">
                             </div>
                             <div class="displayInput">
                                 <h6>貼文名稱:<input type="text" required name="postName" id="postName"></h6>
@@ -399,6 +399,7 @@
 
         var data = $(eler).attr("name");
         var inner = "";
+        console.log(data)
 
         $.ajax({
             url: "/RequiredPost/checkAllComment",
@@ -436,7 +437,7 @@
             window.location.href = `/Members/Login`;
         }
 
-        var form = document.querySelector("form");
+        var form = document.querySelector("#form1")
         var data = new FormData(form);
 
         $.ajax({
