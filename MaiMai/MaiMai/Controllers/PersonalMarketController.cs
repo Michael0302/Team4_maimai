@@ -41,9 +41,31 @@ namespace MaiMai.Controllers
              return Json(mb, JsonRequestBehavior.AllowGet);
             }
 
+        public ActionResult checkAllComment(int UserID)
+        {
+
+             
+            var table = db.ProductPost.Where(m => m.UserID == UserID).Select(m => new ProductCommentListViewModel()
+            {
+                ProductPostID = m.ProductPostID,
+                productName = m.productName,
+                productDescription = m.productDescription,
+                productImg = m.productImg,
+                UserID = m.UserID,
+                inStoreQTY = m.inStoreQTY,
+                price = m.price,
+                TagID = m.TagID,
+                createdTime = m.createdTime,
+                RequiredPostID = m.RequiredPostID,
+                userAccount = m.Member.userAccount
+            }).ToList();
 
 
-
-           
+            return Json(table, JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+    }
     }

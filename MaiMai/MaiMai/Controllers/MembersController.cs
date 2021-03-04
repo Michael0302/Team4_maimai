@@ -103,5 +103,19 @@ namespace MaiMai.Controllers
             return RedirectToAction("MaimaiIndex", "MaimaiIndex");
         }
 
+        //public string uploadPhoto(upLoadPhotoViewModel data)
+        //{
+        //    if (data.upphoto == null)
+        //    {
+        //        return "../Content/resource_nico/images/無圖示.jpg";
+        //    }
+        //    //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
+        //    string filename = data.upphoto.FileName;
+        //    data.upphoto.SaveAs(Server.MapPath("../Content/MemberImg/") + filename);
+        //    string filePath = $"../Content/MemberImg/{filename}";
+
+        //    return filePath;
+        //}
+
     }
 }
