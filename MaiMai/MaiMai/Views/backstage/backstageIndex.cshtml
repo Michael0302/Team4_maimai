@@ -13,77 +13,85 @@
     </style>
 
     <div class="container" style="margin-top:100px">
-        <div class="row">
-            <div class="col-2" id="backstage">
-                <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#member_P" role="button"
-                   aria-expanded="false" aria-controls="member_P">會員管理</a>
-                <div class="collapse mb-3" id="member_P" data-parent="#backstage">
-                    <a class="d-block btn" onclick="getMemberList()">所有會員</a>
-                    <a class="d-block btn" onclick="getAdminLlist()">管理員</a>
+        <div class="row ">
+            <div class="col-12 col-lg-2  d-sm-flex  navbar navbar-expand-lg navbar-light " id="backstage">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-wrap " id="navbarTogglerDemo02">
+
+
+                    <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#member_P" role="button"
+                       aria-expanded="false" aria-controls="member_P">會員管理</a>
+                    <div class="collapse mb-3" id="member_P" data-parent="#backstage">
+                        <a class="d-block btn" onclick="getMemberList()">所有會員</a>
+                        <a class="d-block btn" onclick="getAdminLlist()">管理員</a>
+                    </div>
+
+
+                    <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#order_P" role="button"
+                       aria-expanded="false" aria-controls="order_P">訂單管理</a>
+                    <div class="collapse mb-3" id="order_P" data-parent="#backstage">
+                        <a class="d-block btn" onclick="getOrderList()">所有訂單</a>
+                        <a class="d-block btn" onclick="getCompleteOrder()">已完成訂單</a>
+                        <a class="d-block btn" onclick="getUnCompleteOrder()">未完成訂單</a>
+
+                    </div>
+
+                    <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
+                    <div class="collapse" id="info_P" data-parent="#backstage"></div>
+
+                    <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
+                    <div class="collapse" id="tag_P" data-parent="#backstage"></div>
+                </div>
                 </div>
 
-                <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#order_P" role="button"
-                   aria-expanded="false" aria-controls="order_P">訂單管理</a>
-                <div class="collapse mb-3" id="order_P" data-parent="#backstage">
-                    <a class="d-block btn" onclick="getOrderList()">所有訂單</a>
-                    <a class="d-block btn" onclick="getCompleteOrder()">已完成訂單</a>
-                    <a class="d-block btn" onclick="getUnCompleteOrder()">未完成訂單</a>
+                <div class="col-12 col-lg-8">
+                    <div id="show">
+                    </div>
 
-                </div>
+                    <div class="modal fade" id="editMember" tabindex="-1" role="dialog" aria-labelledby="editMemberTitle"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editMemberTitle">會員資訊</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="editMemberbody">
 
-                <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
-                <div class="collapse" id="info_P" data-parent="#backstage"></div>
-
-                <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
-                <div class="collapse" id="tag_P" data-parent="#backstage"></div>
-
-            </div>
-
-            <div class="col-10">
-                <div id="show">
-                </div>
-
-                <div class="modal fade" id="editMember" tabindex="-1" role="dialog" aria-labelledby="editMemberTitle"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editMemberTitle">會員資訊</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="editMemberLevel()">儲存</button>
+                                </div>
                             </div>
-                            <div class="modal-body" id="editMemberbody">
+                        </div>
+                    </div>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="editMemberLevel()">儲存</button>
+                    <div class="modal fade" id="editOrder" tabindex="-1" role="dialog" aria-labelledby="editOrderTitle"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editOrderTitle">商品資訊</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="editOrderbody">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="modal fade" id="editOrder" tabindex="-1" role="dialog" aria-labelledby="editOrderTitle"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editOrderTitle">商品資訊</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" id="editOrderbody">
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
         </div>
 
