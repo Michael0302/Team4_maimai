@@ -231,6 +231,7 @@
     <Content Include="Content\ProductPostImg\運動.jpg" />
     <Content Include="Content\ProductPostImg\鋼鐵人.jfif" />
     <Content Include="Content\ProductPostImg\陪玩.jfif" />
+    <Content Include="Content\resource_nico\147-equalizer.svg" />
     <Content Include="Content\resource_nico\createProductPost.css" />
     <Content Include="Content\resource_nico\images\nini.jpg" />
     <Content Include="Content\resource_nico\images\徵求台POST\iphone12.jpg" />
@@ -471,7 +472,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\MemberImg\" />
-    <Folder Include="Content\ProductPostImg\" />
     <Folder Include="Models\MetaDataModel\" />
   </ItemGroup>
   <ItemGroup>
