@@ -12,15 +12,12 @@ namespace MaiMai.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class Receipt
     {
-        public int OrderDetailID { get; set; }
+        public int ReceiptID { get; set; }
+        public Nullable<int> ReceiptNumber { get; set; }
         public Nullable<int> OrderID { get; set; }
-        public Nullable<int> ProductPostID { get; set; }
-        public Nullable<int> QTY { get; set; }
-        public Nullable<int> oneProductTotalPrice { get; set; }
-    
-        public virtual Order Order { get; set; }
-        public virtual ProductPost ProductPost { get; set; }
+        public Nullable<int> OrderTotal { get; set; }
+        public Nullable<int> buyerUserID { get; set; }
     }
 }

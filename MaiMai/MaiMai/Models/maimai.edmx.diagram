@@ -4,17 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+<<<<<<< Updated upstream
       <Diagram DiagramId="74ff503645c04af085fc7ace08fbdded" Name="Diagram1">
+=======
+      <Diagram DiagramId="48e154f1cd1347cebffdf042fcb43e27" Name="Diagram1">
+>>>>>>> Stashed changes
         <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Comment" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Order" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+<<<<<<< Updated upstream
         <EntityTypeShape EntityType="maimaiModel.OrderDetail" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.ProductPost" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Report" Width="1.5" PointX="11" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.ReprotDetail" Width="1.5" PointX="8.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.RequiredPost" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Tag" Width="1.5" PointX="3.75" PointY="15.875" IsExpanded="true" />
+=======
+        <EntityTypeShape EntityType="maimaiModel.OrderDetail" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.ProductPost" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Receipt" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Report" Width="1.5" PointX="11" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.ReprotDetail" Width="1.5" PointX="8.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.RequiredPost" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Tag" Width="1.5" PointX="3.75" PointY="14.875" IsExpanded="true" />
+>>>>>>> Stashed changes
         <AssociationConnector Association="maimaiModel.FK_Cart_ProductPost" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Comment_Member" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Comment_Order" ManuallyRouted="false" />

@@ -194,6 +194,12 @@
     <Compile Include="Models\ProductPost.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+<<<<<<< Updated upstream
+=======
+    <Compile Include="Models\Receipt.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+>>>>>>> Stashed changes
     <Compile Include="Models\Report.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>

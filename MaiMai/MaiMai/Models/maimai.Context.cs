@@ -31,6 +31,10 @@ namespace MaiMai.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
         public virtual DbSet<ProductPost> ProductPost { get; set; }
+<<<<<<< Updated upstream
+=======
+        public virtual DbSet<Receipt> Receipt { get; set; }
+>>>>>>> Stashed changes
         public virtual DbSet<Report> Report { get; set; }
         public virtual DbSet<ReprotDetail> ReprotDetail { get; set; }
         public virtual DbSet<RequiredPost> RequiredPost { get; set; }

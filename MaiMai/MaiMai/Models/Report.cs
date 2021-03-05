@@ -19,6 +19,10 @@ namespace MaiMai.Models
         public Nullable<int> reportedUserID { get; set; }
         public Nullable<int> reportStatus { get; set; }
         public Nullable<int> ReprotDetailID { get; set; }
+<<<<<<< Updated upstream
+=======
+        public Nullable<System.DateTime> createdTime { get; set; }
+>>>>>>> Stashed changes
     
         public virtual ReprotDetail ReprotDetail { get; set; }
     }

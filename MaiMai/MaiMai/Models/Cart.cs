@@ -16,8 +16,8 @@ namespace MaiMai.Models
     {
         public int CartID { get; set; }
         public string CartNumber { get; set; }
-        public Nullable<int> ProductPostID { get; set; }
-        public Nullable<int> QTY { get; set; }
+        public Nullable<int> ReceiptNumber { get; set; }
+        public Nullable<int> checkOutTotal { get; set; }
     
         public virtual ProductPost ProductPost { get; set; }
     }

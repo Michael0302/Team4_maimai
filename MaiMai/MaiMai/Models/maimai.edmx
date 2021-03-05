@@ -11,8 +11,8 @@
           </Key>
           <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CartNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="ProductPostID" Type="int" />
-          <Property Name="QTY" Type="int" />
+          <Property Name="ReceiptNumber" Type="int" />
+          <Property Name="checkOutTotal" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -46,13 +46,13 @@
         </EntityType>
         <EntityType Name="Order">
           <Key>
-            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="buyerUserID" Type="int" />
-          <Property Name="orderStatus" Type="int" />
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sellerUserID" Type="int" />
           <Property Name="createdTime" Type="datetime" />
-          <Property Name="CartNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="sellerStatus" Type="int" />
+          <Property Name="buyerStatus" Type="int" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -63,7 +63,6 @@
           <Property Name="ProductPostID" Type="int" />
           <Property Name="QTY" Type="int" />
           <Property Name="oneProductTotalPrice" Type="int" />
-          <Property Name="SellerID" Type="int" />
         </EntityType>
         <EntityType Name="ProductPost">
           <Key>
@@ -80,6 +79,19 @@
           <Property Name="createdTime" Type="datetime" />
           <Property Name="RequiredPostID" Type="int" />
         </EntityType>
+<<<<<<< Updated upstream
+=======
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="ReceiptID" />
+          </Key>
+          <Property Name="ReceiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptNumber" Type="int" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="OrderTotal" Type="int" />
+          <Property Name="buyerUserID" Type="int" />
+        </EntityType>
+>>>>>>> Stashed changes
         <EntityType Name="Report">
           <Key>
             <PropertyRef Name="ReportID" />
@@ -89,6 +101,10 @@
           <Property Name="reportedUserID" Type="int" />
           <Property Name="reportStatus" Type="int" />
           <Property Name="ReprotDetailID" Type="int" />
+<<<<<<< Updated upstream
+=======
+          <Property Name="createdTime" Type="datetime" />
+>>>>>>> Stashed changes
         </EntityType>
         <EntityType Name="ReprotDetail">
           <Key>
@@ -127,7 +143,7 @@
               <PropertyRef Name="ProductPostID" />
             </Principal>
             <Dependent Role="Cart">
-              <PropertyRef Name="ProductPostID" />
+              <PropertyRef Name="ReceiptNumber" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -148,7 +164,7 @@
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
+              <PropertyRef Name="OrderID" />
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="OrderID" />
@@ -163,7 +179,7 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Order">
-              <PropertyRef Name="buyerUserID" />
+              <PropertyRef Name="sellerUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -172,7 +188,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
+              <PropertyRef Name="OrderID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="OrderID" />
@@ -258,6 +274,10 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPost" EntityType="Self.ProductPost" Schema="dbo" store:Type="Tables" />
+<<<<<<< Updated upstream
+=======
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+>>>>>>> Stashed changes
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReprotDetail" EntityType="Self.ReprotDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" Schema="dbo" store:Type="Tables" />
@@ -318,8 +338,13 @@
           </Key>
           <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+<<<<<<< Updated upstream
           <Property Name="ProductPostID" Type="Int32" />
           <Property Name="QTY" Type="Int32" />
+=======
+          <Property Name="ReceiptNumber" Type="Int32" />
+          <Property Name="checkOutTotal" Type="Int32" />
+>>>>>>> Stashed changes
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_Cart_ProductPost" FromRole="Cart" ToRole="ProductPost" />
         </EntityType>
         <EntityType Name="Comment">
@@ -360,13 +385,13 @@
         </EntityType>
         <EntityType Name="Order">
           <Key>
-            <PropertyRef Name="OrderId" />
+            <PropertyRef Name="OrderID" />
           </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="buyerUserID" Type="Int32" />
-          <Property Name="orderStatus" Type="Int32" />
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sellerUserID" Type="Int32" />
           <Property Name="createdTime" Type="DateTime" Precision="3" />
-          <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sellerStatus" Type="Int32" />
+          <Property Name="buyerStatus" Type="Int32" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Order" FromRole="Order" ToRole="Comment" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Order_Member" FromRole="Order" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
@@ -380,7 +405,6 @@
           <Property Name="ProductPostID" Type="Int32" />
           <Property Name="QTY" Type="Int32" />
           <Property Name="oneProductTotalPrice" Type="Int32" />
-          <Property Name="SellerID" Type="Int32" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
         </EntityType>
@@ -403,6 +427,19 @@
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
         </EntityType>
+<<<<<<< Updated upstream
+=======
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="ReceiptID" />
+          </Key>
+          <Property Name="ReceiptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptNumber" Type="Int32" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="OrderTotal" Type="Int32" />
+          <Property Name="buyerUserID" Type="Int32" />
+        </EntityType>
+>>>>>>> Stashed changes
         <EntityType Name="Report">
           <Key>
             <PropertyRef Name="ReportID" />
@@ -412,6 +449,10 @@
           <Property Name="reportedUserID" Type="Int32" />
           <Property Name="reportStatus" Type="Int32" />
           <Property Name="ReprotDetailID" Type="Int32" />
+<<<<<<< Updated upstream
+=======
+          <Property Name="createdTime" Type="DateTime" Precision="3" />
+>>>>>>> Stashed changes
           <NavigationProperty Name="ReprotDetail" Relationship="Self.FK_Report_ReprotDetail" FromRole="Report" ToRole="ReprotDetail" />
         </EntityType>
         <EntityType Name="ReprotDetail">
@@ -456,7 +497,11 @@
               <PropertyRef Name="ProductPostID" />
             </Principal>
             <Dependent Role="Cart">
+<<<<<<< Updated upstream
               <PropertyRef Name="ProductPostID" />
+=======
+              <PropertyRef Name="ReceiptNumber" />
+>>>>>>> Stashed changes
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -477,7 +522,7 @@
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
+              <PropertyRef Name="OrderID" />
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="OrderID" />
@@ -492,7 +537,19 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Order">
-              <PropertyRef Name="buyerUserID" />
+              <PropertyRef Name="sellerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPost_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ProductPost">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -525,7 +582,7 @@
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
+              <PropertyRef Name="OrderID" />
             </Principal>
             <Dependent Role="OrderDetail">
               <PropertyRef Name="OrderID" />
@@ -587,6 +644,10 @@
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
           <EntitySet Name="ProductPost" EntityType="Self.ProductPost" />
+<<<<<<< Updated upstream
+=======
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" />
+>>>>>>> Stashed changes
           <EntitySet Name="Report" EntityType="Self.Report" />
           <EntitySet Name="ReprotDetail" EntityType="Self.ReprotDetail" />
           <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" />
@@ -647,8 +708,8 @@
               <MappingFragment StoreEntitySet="Cart">
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
                 <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
-                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
-                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="checkOutTotal" ColumnName="checkOutTotal" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -687,11 +748,11 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="maimaiModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="buyerUserID" ColumnName="buyerUserID" />
-                <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="sellerUserID" ColumnName="sellerUserID" />
                 <ScalarProperty Name="createdTime" ColumnName="createdTime" />
-                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
+                <ScalarProperty Name="sellerStatus" ColumnName="sellerStatus" />
+                <ScalarProperty Name="buyerStatus" ColumnName="buyerStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -703,7 +764,53 @@
                 <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
                 <ScalarProperty Name="QTY" ColumnName="QTY" />
                 <ScalarProperty Name="oneProductTotalPrice" ColumnName="oneProductTotalPrice" />
-                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPost">
+            <EntityTypeMapping TypeName="maimaiModel.ProductPost">
+              <MappingFragment StoreEntitySet="ProductPost">
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productImg" ColumnName="productImg" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="inStoreQTY" ColumnName="inStoreQTY" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipt">
+            <EntityTypeMapping TypeName="maimaiModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderTotal" ColumnName="OrderTotal" />
+                <ScalarProperty Name="buyerUserID" ColumnName="buyerUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report">
+            <EntityTypeMapping TypeName="maimaiModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="reportorID" ColumnName="reportorID" />
+                <ScalarProperty Name="reportedUserID" ColumnName="reportedUserID" />
+                <ScalarProperty Name="reportStatus" ColumnName="reportStatus" />
+                <ScalarProperty Name="ReprotDetailID" ColumnName="ReprotDetailID" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReprotDetail">
+            <EntityTypeMapping TypeName="maimaiModel.ReprotDetail">
+              <MappingFragment StoreEntitySet="ReprotDetail">
+                <ScalarProperty Name="reportDetailID" ColumnName="reportDetailID" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

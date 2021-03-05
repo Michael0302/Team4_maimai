@@ -21,11 +21,11 @@ namespace MaiMai.Models
             this.OrderDetail = new HashSet<OrderDetail>();
         }
     
-        public int OrderId { get; set; }
-        public Nullable<int> buyerUserID { get; set; }
-        public Nullable<int> orderStatus { get; set; }
+        public int OrderID { get; set; }
+        public Nullable<int> sellerUserID { get; set; }
         public Nullable<System.DateTime> createdTime { get; set; }
-        public string CartNumber { get; set; }
+        public Nullable<int> sellerStatus { get; set; }
+        public Nullable<int> buyerStatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment { get; set; }
