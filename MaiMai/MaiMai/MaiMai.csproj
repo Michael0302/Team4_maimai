@@ -467,10 +467,12 @@
     <Content Include="Views\MyOrder\myOrder.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
     <Content Include="Views\Members\SignUp.cshtml" />
+    <Content Include="Views\backstage\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\MemberImg\" />
+    <Folder Include="Content\test_css\" />
     <Folder Include="Models\MetaDataModel\" />
   </ItemGroup>
   <ItemGroup>
