@@ -12,21 +12,18 @@ namespace MaiMai.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Tag
+    public partial class ReprotDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tag()
+        public ReprotDetail()
         {
-            this.ProductPost = new HashSet<ProductPost>();
-            this.RequiredPost = new HashSet<RequiredPost>();
+            this.Report = new HashSet<Report>();
         }
     
-        public int TagID { get; set; }
-        public string tagName { get; set; }
+        public int reportDetailID { get; set; }
+        public string reason { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductPost> ProductPost { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequiredPost> RequiredPost { get; set; }
+        public virtual ICollection<Report> Report { get; set; }
     }
 }
