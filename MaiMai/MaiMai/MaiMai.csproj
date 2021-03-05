@@ -238,6 +238,7 @@
     <Content Include="Content\resource_nico\images\徵求台POST\走私.jpg" />
     <Content Include="Content\resource_nico\images\無圖示.jpg" />
     <Content Include="Content\resource_nico\requriedIndex.css" />
+    <Content Include="Content\test_css\StyleSheet1.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -472,7 +473,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\MemberImg\" />
-    <Folder Include="Content\test_css\" />
     <Folder Include="Models\MetaDataModel\" />
   </ItemGroup>
   <ItemGroup>
