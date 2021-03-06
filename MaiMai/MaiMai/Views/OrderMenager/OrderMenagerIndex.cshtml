@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "OrderMenagerIndex";
+}
+
+
+<div class="container" style="margin-top:80px;">
+    <nav >
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-nonPay-tab" data-toggle="tab" href="#nav-nonPay" role="tab" aria-controls="nav-nonPay" aria-selected="true">待結帳訂單</a>
+
+            <a class="nav-item nav-link" id="nav-process-tab" data-toggle="tab" href="#nav-process" role="tab" aria-controls="nav-process" aria-selected="false">處理中訂單</a>
+            <a class="nav-item nav-link" id="nav-past-tab" data-toggle="tab" href="#nav-past" role="tab" aria-controls="nav-past" aria-selected="false">歷史訂單</a>
+        </div>
+    </nav>
+
+
+   @*================================以上導覽列============================================*@
+   @*================================以下待付款列表============================================*@
+
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-nonPay" role="tabpanel" aria-labelledby="nav-nonPay-tab">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">訂單編號</th>
+                    <th scope="col">商品項目</th>
+                    <th scope="col">建立時間</th>
+                    <th scope="col">總金額</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                   
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                 </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                   
+                </tr>
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+    S
+
+    @*========================================待付款訂單END=======================================*@
+    @*========================================處理中訂單START=======================================*@
+    <div class="tab-pane fade" id="nav-process" role="tabpanel" aria-labelledby="nav-process-tab">...</div>
+
+    @*========================================處理中訂單end=======================================*@
+    @*========================================歷史訂單START=======================================*@
+    <div class="tab-pane fade" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">...</div>
+
+    @*========================================處理中訂單START=======================================*@
+    </div> @*//END OF ORDER LIST*@
+
+</div> @*// END OF CONTAINER*@
+
+

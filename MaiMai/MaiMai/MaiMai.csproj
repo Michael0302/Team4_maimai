@@ -153,6 +153,7 @@
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Controllers\MyOrderController.cs" />
+    <Compile Include="Controllers\OrderMenagerController.cs" />
     <Compile Include="Controllers\PersonalMarketController.cs" />
     <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
@@ -474,6 +475,7 @@
     <Content Include="Views\MyOrder\myOrder.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
     <Content Include="Views\Members\SignUp.cshtml" />
+    <Content Include="Views\OrderMenager\OrderMenagerIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
