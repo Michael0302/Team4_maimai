@@ -197,7 +197,7 @@
     <Compile Include="Models\Report.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ReprotDetail.cs">
+    <Compile Include="Models\ReportDetail.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RequiredPost.cs">
