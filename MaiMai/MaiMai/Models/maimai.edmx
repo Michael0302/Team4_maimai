@@ -82,6 +82,27 @@
           <Property Name="createdTime" Type="datetime" />
           <Property Name="RequiredPostID" Type="int" />
           <Property Name="ReportID" Type="int" />
+<<<<<<< HEAD
+=======
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reportorID" Type="int" Nullable="false" />
+          <Property Name="repotedUserID" Type="int" Nullable="false" />
+          <Property Name="reportStatus" Type="int" />
+          <Property Name="createdTime" Type="int" />
+          <Property Name="ReportDetailID" Type="int" />
+        </EntityType>
+        <EntityType Name="ReportDetail">
+          <Key>
+            <PropertyRef Name="ReportDetailID" />
+          </Key>
+          <Property Name="ReportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reason" Type="text" />
+>>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -220,6 +241,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
+=======
+
+>>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
         <Association Name="FK_Report_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
           <End Role="Report" Type="Self.Report" Multiplicity="0..1" />
@@ -234,6 +259,7 @@
         </Association>
         <Association Name="FK_Report_Member1">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
+<<<<<<< HEAD
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
@@ -252,6 +278,26 @@
               <PropertyRef Name="ReportDetailID" />
             </Principal>
             <Dependent Role="Report">
+=======
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="repotedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_reportDetail">
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportDetail">
+              <PropertyRef Name="ReportDetailID" />
+            </Principal>
+            <Dependent Role="Report">
+>>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
               <PropertyRef Name="ReportDetailID" />
             </Dependent>
           </ReferentialConstraint>
@@ -450,6 +496,10 @@
             <PropertyRef Name="ReportID" />
           </Key>
           <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+<<<<<<< HEAD
+=======
+
+>>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
           <Property Name="reportorID" Type="Int32" Nullable="false" />
           <Property Name="repotedUserID" Type="Int32" Nullable="false" />
           <Property Name="reportStatus" Type="Int32" />
@@ -554,6 +604,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+<<<<<<< HEAD
+=======
+
+>>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
         <Association Name="FK_Report_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
           <End Role="Report" Type="Self.Report" Multiplicity="0..1" />
@@ -784,6 +838,46 @@
                 <ScalarProperty Name="SellerID" ColumnName="SellerID" />
                 <ScalarProperty Name="buyerStatus" ColumnName="buyerStatus" />
                 <ScalarProperty Name="sellerStatus" ColumnName="sellerStatus" />
+<<<<<<< HEAD
+=======
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPost">
+            <EntityTypeMapping TypeName="maimaiModel.ProductPost">
+              <MappingFragment StoreEntitySet="ProductPost">
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productImg" ColumnName="productImg" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="inStoreQTY" ColumnName="inStoreQTY" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report">
+            <EntityTypeMapping TypeName="maimaiModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="reportorID" ColumnName="reportorID" />
+                <ScalarProperty Name="repotedUserID" ColumnName="repotedUserID" />
+                <ScalarProperty Name="reportStatus" ColumnName="reportStatus" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+                <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportDetail">
+            <EntityTypeMapping TypeName="maimaiModel.ReportDetail">
+              <MappingFragment StoreEntitySet="ReportDetail">
+                <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+>>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
