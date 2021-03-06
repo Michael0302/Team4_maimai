@@ -100,7 +100,7 @@ namespace MaiMai.Controllers
             Response.Cookies["LoginName"].Expires = DateTime.Now.AddDays(-1);
             Response.Cookies["MemberLevel"].Expires = DateTime.Now.AddDays(-1);
             
-            return RedirectToAction("MaimaiIndex", "MaimaiIndex");
+            return RedirectToAction("MaimaiIndexNew", "NewMaimaiIndex");
         }
 
         //public string uploadPhoto(upLoadPhotoViewModel data)

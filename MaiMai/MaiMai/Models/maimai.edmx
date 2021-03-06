@@ -101,24 +101,6 @@
           <Property Name="ReportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reason" Type="text" />
         </EntityType>
-        <EntityType Name="Report">
-          <Key>
-            <PropertyRef Name="ReportID" />
-          </Key>
-          <Property Name="ReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="reportorID" Type="int" />
-          <Property Name="reportedUserID" Type="int" />
-          <Property Name="reportStatus" Type="int" />
-          <Property Name="ReprotDetailID" Type="int" />
-          <Property Name="createdTime" Type="datetime" />
-        </EntityType>
-        <EntityType Name="ReprotDetail">
-          <Key>
-            <PropertyRef Name="reportDetailID" />
-          </Key>
-          <Property Name="reportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="reason" Type="text" />
-        </EntityType>
         <EntityType Name="RequiredPost">
           <Key>
             <PropertyRef Name="RequiredPostID" />
@@ -238,7 +220,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-
         <Association Name="FK_Report_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
           <End Role="Report" Type="Self.Report" Multiplicity="0..1" />
@@ -469,7 +450,6 @@
             <PropertyRef Name="ReportID" />
           </Key>
           <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-
           <Property Name="reportorID" Type="Int32" Nullable="false" />
           <Property Name="repotedUserID" Type="Int32" Nullable="false" />
           <Property Name="reportStatus" Type="Int32" />
@@ -574,7 +554,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-
         <Association Name="FK_Report_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
           <End Role="Report" Type="Self.Report" Multiplicity="0..1" />
@@ -841,42 +820,6 @@
             <EntityTypeMapping TypeName="maimaiModel.ReportDetail">
               <MappingFragment StoreEntitySet="ReportDetail">
                 <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
-                <ScalarProperty Name="reason" ColumnName="reason" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductPost">
-            <EntityTypeMapping TypeName="maimaiModel.ProductPost">
-              <MappingFragment StoreEntitySet="ProductPost">
-                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
-                <ScalarProperty Name="productName" ColumnName="productName" />
-                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
-                <ScalarProperty Name="productImg" ColumnName="productImg" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="inStoreQTY" ColumnName="inStoreQTY" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="TagID" ColumnName="TagID" />
-                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
-                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Report">
-            <EntityTypeMapping TypeName="maimaiModel.Report">
-              <MappingFragment StoreEntitySet="Report">
-                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
-                <ScalarProperty Name="reportorID" ColumnName="reportorID" />
-                <ScalarProperty Name="reportedUserID" ColumnName="reportedUserID" />
-                <ScalarProperty Name="reportStatus" ColumnName="reportStatus" />
-                <ScalarProperty Name="ReprotDetailID" ColumnName="ReprotDetailID" />
-                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReprotDetail">
-            <EntityTypeMapping TypeName="maimaiModel.ReprotDetail">
-              <MappingFragment StoreEntitySet="ReprotDetail">
-                <ScalarProperty Name="reportDetailID" ColumnName="reportDetailID" />
                 <ScalarProperty Name="reason" ColumnName="reason" />
               </MappingFragment>
             </EntityTypeMapping>
