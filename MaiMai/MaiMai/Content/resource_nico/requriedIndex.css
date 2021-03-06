@@ -72,8 +72,8 @@ width:  100%;
 /* lg - Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .photo {
-        width: 30%;
-        height: 30%;
+        width: 150px;
+        height: 150px;
         border: 2px solid rgba(212, 194, 148, 0.842);
         margin: 20px;
         overflow: hidden;

@@ -8,26 +8,19 @@ using System.Web.Mvc;
 
 namespace MaiMai.Controllers
 {
-    public class OrderMenagerController : Controller
+    public class OrderManagerController : Controller
     {
         // GET: OrderMenager
         maimaiEntities db = new maimaiEntities();
-        public ActionResult OrderMenagerIndex()
-        {
+     
+        public ActionResult OrderIndex() {
             return View();
         }
 
-        public ActionResult getNonPayOrderList(string userid) {
+        public ActionResult getNonPayOrderList(string userid)
+        {
 
             var id = Convert.ToInt32(userid);
-
-            //var table = db.Order.Where(m => m.buyerUserID == id && m.orderStatus == 0).Select(m => new OrderViewModel() {
-
-            //    OrderId = m.OrderId,
-            //    orderStatus = m.orderStatus,
-            //    createdTime = m.createdTime,
-
-            //}).ToList();
 
             var table = db.Order.Where(m => m.buyerUserID == id && m.orderStatus == 0).Join(db.OrderDetail, o => o.OrderId, od => od.OrderID
             , (o, od) => new
@@ -42,6 +35,7 @@ namespace MaiMai.Controllers
             {
                 OrderId = s.Key.OrderId,
                 orderStatus = s.Key.orderStatus,
+                orderStatusString = s.Key.orderStatus.ToString(),
                 createdTime = s.Key.createdTime,
                 price = (int)s.Select(i => i.oneProductTotalPrice).Sum()
             }).ToList(); ;
@@ -50,5 +44,26 @@ namespace MaiMai.Controllers
             return Json(table, JsonRequestBehavior.AllowGet);
 
         }
-    }
-}
+
+
+        public ActionResult showOrderRecipt(string orderid, string userid)
+        {
+            var oid = Convert.ToInt32(orderid);
+            var mid = Convert.ToInt32(userid);
+
+            var table = db.Order.Where(m => m.buyerUserID == mid && m.OrderId == oid).Join(db.OrderDetail, o => o.OrderId, od => od.OrderID
+               , (o, od) => new
+               {
+                   createdTime = o.createdTime,
+                   productName =od.ProductPost.productName,
+                   productImg= od.ProductPost.productImg,
+                   QTY= od.QTY,
+                   OrderDetailID= od.OrderDetailID,
+                   oneProductTotalPrice= od.oneProductTotalPrice,
+                   userAccount=od.Member.userAccount
+               }).ToList();
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+        }
+    } //end of class
+}//end of namespace

@@ -101,7 +101,6 @@
           <Property Name="ReportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reason" Type="text" />
         </EntityType>
-
         <EntityType Name="RequiredPost">
           <Key>
             <PropertyRef Name="RequiredPostID" />
@@ -170,6 +169,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="buyerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="SellerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -308,6 +319,10 @@
             <End Role="Member" EntitySet="Member" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Member" Association="Self.FK_OrderDetail_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
@@ -393,6 +408,7 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Member" FromRole="Member" ToRole="Order" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Member" FromRole="Member" ToRole="OrderDetail" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Member" FromRole="Member" ToRole="ProductPost" />
           <NavigationProperty Name="Report" Relationship="Self.FK_Report_Member" FromRole="Member" ToRole="Report" />
           <NavigationProperty Name="Report1" Relationship="Self.FK_Report_Member1" FromRole="Member" ToRole="Report" />
@@ -423,6 +439,7 @@
           <Property Name="SellerID" Type="Int32" />
           <Property Name="buyerStatus" Type="Int32" />
           <Property Name="sellerStatus" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_OrderDetail_Member" FromRole="OrderDetail" ToRole="Member" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
         </EntityType>
@@ -540,6 +557,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="buyerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="SellerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -677,6 +706,10 @@
           <AssociationSet Name="FK_Order_Member" Association="Self.FK_Order_Member">
             <End Role="Member" EntitySet="Member" />
             <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Member" Association="Self.FK_OrderDetail_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductPost_Member" Association="Self.FK_ProductPost_Member">
             <End Role="Member" EntitySet="Member" />

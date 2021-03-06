@@ -154,6 +154,7 @@
     <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Controllers\MyOrderController.cs" />
     <Compile Include="Controllers\NewMaimaiIndexController.cs" />
+    <Compile Include="Controllers\OrderManagerController.cs" />
     <Compile Include="Controllers\PersonalMarketController.cs" />
     <Compile Include="Controllers\RequiredPostController.cs" />
     <Compile Include="Global.asax.cs">
@@ -244,6 +245,7 @@
     <Content Include="Content\resource_nico\images\徵求台POST\一日女友.jpg" />
     <Content Include="Content\resource_nico\images\徵求台POST\走私.jpg" />
     <Content Include="Content\resource_nico\images\無圖示.jpg" />
+    <Content Include="Content\resource_nico\OrderManager.css" />
     <Content Include="Content\resource_nico\requriedIndex.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -502,6 +504,7 @@
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
     <Content Include="Views\Members\SignUp.cshtml" />
     <Content Include="Views\NewMaimaiIndex\MaimaiIndexNew.cshtml" />
+    <Content Include="Views\OrderManager\OrderIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
