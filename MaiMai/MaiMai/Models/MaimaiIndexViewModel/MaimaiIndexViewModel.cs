@@ -9,7 +9,6 @@ namespace MaiMai.Models.MaimaiIndexViewModel
     {
         //public int TagID { get; set; }
         public string tagName { get; set; }
-
         public int ProductPostID { get; set; }
         public string productName { get; set; }
         public string productDescription { get; set; }
@@ -19,5 +18,11 @@ namespace MaiMai.Models.MaimaiIndexViewModel
         public Nullable<int> price { get; set; }
         public Nullable<int> TagID { get; set; }
         public Nullable<System.DateTime> createdTime { get; set; }
+
+        //新的資料庫Member Star
+        public string userAccount { get; set; }
+        public string profileImg { get; set; }
+        public Nullable<double> totalStarRate { get; set; }
+        public Nullable<int> userLevel { get; set; }
     }
 }

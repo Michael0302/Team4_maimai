@@ -12,15 +12,15 @@ namespace MaiMai.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ReprotDetail
+    public partial class ReportDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ReprotDetail()
+        public ReportDetail()
         {
             this.Report = new HashSet<Report>();
         }
     
-        public int reportDetailID { get; set; }
+        public int ReportDetailID { get; set; }
         public string reason { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

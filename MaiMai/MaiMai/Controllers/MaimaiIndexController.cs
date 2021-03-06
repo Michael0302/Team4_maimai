@@ -57,7 +57,6 @@ namespace MaiMai.Controllers
             return Json(PostList, JsonRequestBehavior.AllowGet);
         }
 
-
         public ActionResult Bells(int? TagID =  5)
         {
             var PostList = db.ProductPost.Where(m => m.UserID == TagID && m.inStoreQTY > 0).Select(m => new
@@ -69,12 +68,6 @@ namespace MaiMai.Controllers
             return Json(PostList, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
-
-
         public ActionResult MaimaiIndex()
         {
             return View();
@@ -84,7 +77,5 @@ namespace MaiMai.Controllers
         {
             return View();
         }
-
-
     }
 }

@@ -75,7 +75,6 @@ namespace MaiMai.Controllers
             Response.Cookies["LoginAccount"].Value = mb.UserID.ToString();
             Response.Cookies["LoginName"].Value = mb.userAccount.ToString();
             Response.Cookies["LoginID"].Value = mb.UserID.ToString();
-
             Response.Cookies["MemberLevel"].Value = mb.userLevel.ToString();
 
 
@@ -100,7 +99,7 @@ namespace MaiMai.Controllers
             Response.Cookies["LoginName"].Expires = DateTime.Now.AddDays(-1);
             Response.Cookies["MemberLevel"].Expires = DateTime.Now.AddDays(-1);
             
-            return RedirectToAction("MaimaiIndex", "MaimaiIndex");
+            return RedirectToAction("MaimaiIndexNew", "NewMaimaiIndex");
         }
 
         //public string uploadPhoto(upLoadPhotoViewModel data)
