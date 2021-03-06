@@ -225,7 +225,7 @@
         var test = getCookie('LoginAccount');
         if (test == "") {
             window.alert("必須要登入才能留言喔");
-            window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
       
         var form = document.querySelector(`.Commentform${index}`)
@@ -270,7 +270,7 @@
 
         if (test == "") {
             window.alert("必須要登入才能留言喔");
-            window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
 
         var data = $(eler).attr("name");
@@ -311,7 +311,7 @@
 
         if (test == null) {
             alert("必須要登入才能發文喔");
-            window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
 
         var form = document.querySelector("#form1")

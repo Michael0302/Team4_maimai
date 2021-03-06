@@ -14,5 +14,7 @@ namespace MaiMai.Models.ViewModel
         
         public Nullable<int> SellerID { get; set; }
         public int price { get; set; }
+
+  
     }
 }
