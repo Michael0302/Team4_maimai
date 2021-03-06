@@ -4,12 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-<<<<<<< HEAD
-      <Diagram DiagramId="d9bd3c18135d44bd8ea2bcbfecff9e11" Name="Diagram1">
-=======
 
-      <Diagram DiagramId="9032cd0ac55d46eabd669b86f40369fd" Name="Diagram1">
->>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
+      <Diagram DiagramId="cafc477f73284a5f80cb45a4f1d75f1e" Name="Diagram1">
         <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Comment" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
@@ -25,10 +21,7 @@
         <AssociationConnector Association="maimaiModel.FK_Comment_Order" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Order_Member" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_ProductPost_Member" ManuallyRouted="false" />
-<<<<<<< HEAD
-=======
 
->>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
         <AssociationConnector Association="maimaiModel.FK_Report_Member" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Report_Member1" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_RequiredPost_Member" ManuallyRouted="false" />
