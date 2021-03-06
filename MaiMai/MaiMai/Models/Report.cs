@@ -15,10 +15,6 @@ namespace MaiMai.Models
     public partial class Report
     {
         public int ReportID { get; set; }
-<<<<<<< HEAD
-=======
-
->>>>>>> e5269a236bc61367af41102a5001b6ee54f39cfa
         public int reportorID { get; set; }
         public int repotedUserID { get; set; }
         public Nullable<int> reportStatus { get; set; }
