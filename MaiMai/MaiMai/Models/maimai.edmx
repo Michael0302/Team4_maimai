@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="maimai2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -82,7 +82,6 @@
           <Property Name="createdTime" Type="datetime" />
           <Property Name="RequiredPostID" Type="int" />
           <Property Name="ReportID" Type="int" />
-
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -102,7 +101,6 @@
           <Property Name="ReportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reason" Type="text" />
         </EntityType>
-
         <EntityType Name="RequiredPost">
           <Key>
             <PropertyRef Name="RequiredPostID" />
@@ -236,7 +234,6 @@
         </Association>
         <Association Name="FK_Report_Member1">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
-
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
@@ -283,7 +280,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="maimaiModelStoreContainer">
+        <EntityContainer Name="maimai2ModelStoreContainer">
           <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
@@ -351,7 +348,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="maimai2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -722,9 +719,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="maimaiModelStoreContainer" CdmEntityContainer="maimaiEntities">
+        <EntityContainerMapping StorageEntityContainer="maimai2ModelStoreContainer" CdmEntityContainer="maimaiEntities">
           <EntitySetMapping Name="Cart">
-            <EntityTypeMapping TypeName="maimaiModel.Cart">
+            <EntityTypeMapping TypeName="maimai2Model.Cart">
               <MappingFragment StoreEntitySet="Cart">
                 <ScalarProperty Name="CartID" ColumnName="CartID" />
                 <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
@@ -734,7 +731,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Comment">
-            <EntityTypeMapping TypeName="maimaiModel.Comment">
+            <EntityTypeMapping TypeName="maimai2Model.Comment">
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -745,7 +742,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Member">
-            <EntityTypeMapping TypeName="maimaiModel.Member">
+            <EntityTypeMapping TypeName="maimai2Model.Member">
               <MappingFragment StoreEntitySet="Member">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="userAccount" ColumnName="userAccount" />
@@ -766,7 +763,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order">
-            <EntityTypeMapping TypeName="maimaiModel.Order">
+            <EntityTypeMapping TypeName="maimai2Model.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="buyerUserID" ColumnName="buyerUserID" />
@@ -777,7 +774,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderDetail">
-            <EntityTypeMapping TypeName="maimaiModel.OrderDetail">
+            <EntityTypeMapping TypeName="maimai2Model.OrderDetail">
               <MappingFragment StoreEntitySet="OrderDetail">
                 <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -787,12 +784,11 @@
                 <ScalarProperty Name="SellerID" ColumnName="SellerID" />
                 <ScalarProperty Name="buyerStatus" ColumnName="buyerStatus" />
                 <ScalarProperty Name="sellerStatus" ColumnName="sellerStatus" />
-
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductPost">
-            <EntityTypeMapping TypeName="maimaiModel.ProductPost">
+            <EntityTypeMapping TypeName="maimai2Model.ProductPost">
               <MappingFragment StoreEntitySet="ProductPost">
                 <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
@@ -809,7 +805,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Report">
-            <EntityTypeMapping TypeName="maimaiModel.Report">
+            <EntityTypeMapping TypeName="maimai2Model.Report">
               <MappingFragment StoreEntitySet="Report">
                 <ScalarProperty Name="ReportID" ColumnName="ReportID" />
                 <ScalarProperty Name="reportorID" ColumnName="reportorID" />
@@ -821,7 +817,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReportDetail">
-            <EntityTypeMapping TypeName="maimaiModel.ReportDetail">
+            <EntityTypeMapping TypeName="maimai2Model.ReportDetail">
               <MappingFragment StoreEntitySet="ReportDetail">
                 <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
                 <ScalarProperty Name="reason" ColumnName="reason" />
@@ -829,7 +825,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RequiredPost">
-            <EntityTypeMapping TypeName="maimaiModel.RequiredPost">
+            <EntityTypeMapping TypeName="maimai2Model.RequiredPost">
               <MappingFragment StoreEntitySet="RequiredPost">
                 <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
                 <ScalarProperty Name="postTime" ColumnName="postTime" />
@@ -846,7 +842,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tag">
-            <EntityTypeMapping TypeName="maimaiModel.Tag">
+            <EntityTypeMapping TypeName="maimai2Model.Tag">
               <MappingFragment StoreEntitySet="Tag">
                 <ScalarProperty Name="TagID" ColumnName="TagID" />
                 <ScalarProperty Name="tagName" ColumnName="tagName" />
