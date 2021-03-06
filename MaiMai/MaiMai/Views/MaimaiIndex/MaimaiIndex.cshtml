@@ -211,9 +211,7 @@
             let slideCount = $(".Carouseladvertising").length;
             let lastIndex = slideCount - 1;
             let slidemove;
-            let slideNum3 = 1;
-            let slideCount3 = $(".Carouseladvertising3").length;
-            let lastIndex3 = slideCount3 - 1;
+      
             function show() {
                 slidemove = 0 - 350 * slideNum;
                 $(".theWidth").css("left", slidemove);
@@ -230,6 +228,10 @@
                 if (slideNum > lastIndex) slideNum = 0;
                 show();
             })
+
+            let slideNum3 = 1;
+            let slideCount3 = $(".Carouseladvertising3").length;
+            let lastIndex3 = slideCount3 - 1;
             //布告欄
             function show3() {
                 slidemove = 0 - 350 * slideNum3;
