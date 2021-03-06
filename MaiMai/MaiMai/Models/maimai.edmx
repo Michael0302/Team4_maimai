@@ -101,6 +101,7 @@
           <Property Name="ReportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reason" Type="text" />
         </EntityType>
+
         <EntityType Name="RequiredPost">
           <Key>
             <PropertyRef Name="RequiredPostID" />
