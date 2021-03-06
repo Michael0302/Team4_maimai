@@ -552,8 +552,19 @@
                     },
 
                     success: function (data) {
-                        alert(data);
-                        //window.location.reload();
+                        var good = data.indexOf("註冊成功")
+                        console.log(good)
+                        if (good==0) {
+                            alert("成功註冊")
+                            window.location.href = "/MaimaiIndex/MaimaiIndex";
+                        }
+                        else {
+                            alert("註冊失敗,請檢查輸入欄位")
+                            
+                        }
+
+
+                      
                     }
 
                 });
