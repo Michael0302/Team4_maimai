@@ -75,7 +75,6 @@ namespace MaiMai.Controllers
             Response.Cookies["LoginAccount"].Value = mb.UserID.ToString();
             Response.Cookies["LoginName"].Value = mb.userAccount.ToString();
             Response.Cookies["LoginID"].Value = mb.UserID.ToString();
-
             Response.Cookies["MemberLevel"].Value = mb.userLevel.ToString();
 
 

@@ -5,15 +5,17 @@
 
 
 <body>
-    
+    @*首頁圖片 css內*@
     <section class="home">
     </section>
+    @*首頁圖片*@
     <div class="container-fluid paddding mb-5">
         <div class="d-flex mx-0">
             <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
                 <div class="fh5co_suceefh5co_height">
                     <img src="images/nick-karvounis-78711.jpg" alt="img" />
                     <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                    @*文字*@
                     <div class="fh5co_suceefh5co_height_position_absolute_font">
                         <div class="">
                             <a href="#" class="color_fff">
@@ -28,6 +30,7 @@
                             </a>
                         </div>
                     </div>
+                    @*文字*@
                 </div>
             </div>
             <div class="col-md-6">
@@ -116,15 +119,12 @@
         </div>
     </div>
 
-    <div class="container ">
 
-    </div>
     <div class="row ">
         <div class="col-md-12 ">
-
             <div class="carousel slide multi-item-carousel active " id="theCarousel" style="background: #333; color: #ddd;">
-
                 <div class="carousel-inner  d-md-flex theWidth">
+                    <!--  Example item start -->
                     <div class="item mx-md-2 Carouseladvertising">
                         <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth,australia" class="img-responsive"></a></div>
                     </div>
@@ -147,6 +147,7 @@
                         <div class="col-xs-4"><a href="#1"><img src="https://source.unsplash.com/300x300/?perth,australia&r=7" class="img-responsive"></a></div>
                     </div>
                     <!--  Example item end -->
+
                 </div>
                 <div id="prevSlide" class="slide_btn">
                     <i class="fa fa-caret-left"></i>
@@ -154,20 +155,33 @@
                 <div id="nextSlide" class="slide_btn">
                     <i class="fa fa-caret-right"></i>
                 </div>
-
             </div>
-
-
         </div>
     </div>
 
     <script>
-        //function liftCar() {
+        $(function () {
+            $.ajax({
+                url: "/NewMaimaiIndex/StarFive",
+                type: "GET",
+                success: function (StarFive) {
+                    $(StarFive).each(function (i, item) {
+                        $("#tag").append(
+                            `<div class="tag ml-2">
+                    <p><a class="btn" onclick="tagonclick(${item.TagID})" >${item.tagName}</a></p></div>`
+                        )
+                    })
+                }
+            })
+        })
+    </script>
+
+    @*輪播*@
+    <script>
         let slideNum = 0;
         let slideCount = $(".Carouseladvertising").length;
         let lastIndex = slideCount - 1;
         let slidemove;
-
         function show() {
             slidemove = 0 - 500 * slideNum;
             $(".theWidth").css("left", slidemove);
@@ -180,15 +194,13 @@
             console.log(slideCount);
             console.log(lastIndex);
             console.log(slidemove);
-
-
         })
         $("#nextSlide").click(function () {
             slideNum++;
             if (slideNum > lastIndex) slideNum = 0;
             show();
         })
-                    //}
     </script>
+    @*輪播*@
 </body>
 

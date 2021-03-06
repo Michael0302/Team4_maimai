@@ -11,9 +11,9 @@ body {
 /*-- Inspiration taken from abdo steif -->
 /* --> https://codepen.io/abdosteif/pen/bRoyMb?editors=1100*/
 
-/* Navbar section */
+/* nav1bar section */
 
-.nav {
+.nav1 {
     width: 100%;
     height: 65px;
     position: fixed;
@@ -22,29 +22,29 @@ body {
     z-index:1;
 }
 
-.nav div.logo {
+.nav1 div.logo {
     float: left;
     width: auto;
     height: auto;
     padding-left: 3rem;
 }
 
-.nav div.logo a {
+.nav1 div.logo a {
     text-decoration: none;
     color: #fff;
     font-size: 2.5rem;
 }
 
-.nav div.logo a:hover {
+.nav1 div.logo a:hover {
     color: #00E676;
 }
 
-.nav div.main_list {
+.nav1 div.main_list {
     height: 65px;
     float: right;
 }
 
-.nav div.main_list ul {
+.nav1 div.main_list ul {
     width: 100%;
     height: 65px;
     display: flex;
@@ -53,30 +53,30 @@ body {
     padding: 0;
 }
 
-.nav div.main_list ul li {
+.nav1 div.main_list ul li {
     width: auto;
     height: 65px;
     padding: 0;
     padding-right: 3rem;
 }
 
-.nav div.main_list ul li a {
+.nav1 div.main_list ul li a {
     text-decoration: none;
     color: #fff;
     line-height: 65px;
     font-size: 2.4rem;
 }
 
-.nav div.main_list ul li a:hover {
+.nav1 div.main_list ul li a:hover {
     color: #00E676;
 }
 /*=====================================================*/
-    .nav div.main_list {
+    .nav1 div.main_list {
         height: 65px;
         float: right;
     }
 
-        .nav div.main_list div.navlinks {
+        .nav1 div.main_list div.navlinks {
             width: 100%;
             height: 65px;
             display: flex;
@@ -85,21 +85,21 @@ body {
             padding: 0;
         }
 
-            .nav div.main_list div.navlinks div.svglink {
+            .nav1 div.main_list div.navlinks div.svglink {
             width: auto;
             height: 65px;
             padding: 0;
             padding-right: 3rem;
             }
 
-                .nav div.main_list div.navlinks div.svglink a {
+                .nav1 div.main_list div.navlinks div.svglink a {
                     text-decoration: none;
                     color: #fff;
                     line-height: 65px;
                     font-size: 2.4rem;
                 }
 
-                    .nav div.main_list div.navlinks div.svglink a:hover {
+                    .nav1 div.main_list div.navlinks div.svglink a:hover {
                         color: #00E676;
                     }
 
@@ -120,7 +120,7 @@ body {
     display: none;
 }
 
-.nav {
+.nav1 {
     padding-top: 20px;
     padding-bottom: 20px;
     -webkit-transition: all 0.4s ease;
@@ -140,19 +140,19 @@ body {
     .navTrigger {
         display: block;
     }
-    .nav div.logo {
+    .nav1 div.logo {
         margin-left: 15px;
     }
-    .nav div.main_list {
+    .nav1 div.main_list {
         width: 100%;
         height: 0;
         overflow: hidden;
     }
-    .nav div.show_list {
+    .nav1 div.show_list {
         height: auto;
         display: none;
     }
-    .nav div.main_list ul {
+    .nav1 div.main_list ul {
         flex-direction: column;
         width: 100%;
         height: 100vh;
@@ -160,20 +160,20 @@ body {
         left: 0;
         bottom: 0;
         background-color: #111;
-        /*same background color of navbar*/
+        /*same background color of nav1bar*/
         background-position: center top;
     }
-    .nav div.main_list ul li {
+    .nav1 div.main_list ul li {
         width: 100%;
         text-align: right;
     }
-    .nav div.main_list ul li a {
+    .nav1 div.main_list ul li a {
         text-align: center;
         width: 100%;
         font-size: 3rem;
         padding: 20px;
     }
-    .nav div.media_button {
+    .nav1 div.media_button {
         display: block;
     }
 }
@@ -445,6 +445,7 @@ body {
         padding: 0;
         margin: 0;
     }
+  
     /*==================================================================*/
     .dropdown-search {
         width: 650px;

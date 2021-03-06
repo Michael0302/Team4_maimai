@@ -13,20 +13,17 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <link href="~/Maimai/layout/css/layout.css" rel="stylesheet" />
     <link href="~/Maimai/layout/css/style_1.css" rel="stylesheet" />
-
-
     <title>@Page.Title</title>
+    @RenderSection("head", required: false)
 </head>
-@RenderSection("head", required: false)
 
 
 <body>
-    <nav class="nav">
+    <nav class="nav1">
         <div class="container d-flex">
             <div class="logo col-md-1">
                 <a href="#"><img class="footerLogo1" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
             </div>
-
             <div class=" col-md-8 dropdown ml-3">
                 <div class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
@@ -74,7 +71,7 @@
                         @if (Request.Cookies["LoginName"] == null)
                         {
                             <div class="collapse" id="collapseExample">
-                                <div>
+                                <div style="width:120px">
                                     <span>@Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "free-text" })</span>
                                     <span>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "free-text" })</span>
                                 </div>
@@ -189,11 +186,9 @@
     <script>
         $(window).scroll(function () {
             if ($(document).scrollTop() > 20) {
-                $('.nav').addClass('affix');
-
-                console.log("OK");
+                $('.nav1').addClass('affix');
             } else {
-                $('.nav').removeClass('affix');
+                $('.nav1').removeClass('affix');
             }
         });
     </script>

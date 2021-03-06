@@ -82,6 +82,7 @@
           <Property Name="createdTime" Type="datetime" />
           <Property Name="RequiredPostID" Type="int" />
           <Property Name="ReportID" Type="int" />
+
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -101,6 +102,7 @@
           <Property Name="ReportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reason" Type="text" />
         </EntityType>
+
         <EntityType Name="RequiredPost">
           <Key>
             <PropertyRef Name="RequiredPostID" />
@@ -234,6 +236,7 @@
         </Association>
         <Association Name="FK_Report_Member1">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
+
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
@@ -784,6 +787,7 @@
                 <ScalarProperty Name="SellerID" ColumnName="SellerID" />
                 <ScalarProperty Name="buyerStatus" ColumnName="buyerStatus" />
                 <ScalarProperty Name="sellerStatus" ColumnName="sellerStatus" />
+
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
