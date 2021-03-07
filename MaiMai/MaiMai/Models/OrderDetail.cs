@@ -23,6 +23,7 @@ namespace MaiMai.Models
         public Nullable<int> buyerStatus { get; set; }
         public Nullable<int> sellerStatus { get; set; }
     
+        public virtual Member Member { get; set; }
         public virtual Order Order { get; set; }
         public virtual ProductPost ProductPost { get; set; }
     }

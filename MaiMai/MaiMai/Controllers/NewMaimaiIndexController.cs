@@ -32,13 +32,13 @@ namespace MaiMai.Controllers
 
         public ActionResult addCarousel()
         {
-            var PostList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
+            var addCarouselList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
             {
                 productImg = m.productImg,
                 price = m.price,
                 productDescription = m.productDescription
             }).ToList();
-            return Json(PostList, JsonRequestBehavior.AllowGet);
+            return Json(addCarouselList, JsonRequestBehavior.AllowGet);
         }
     }
 }
