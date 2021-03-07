@@ -49,17 +49,73 @@
 
 
         @*========================================待付款訂單END=======================================*@
+
         @*========================================處理中訂單START=======================================*@
-        <div class="tab-pane fade" id="nav-process" role="tabpanel" aria-labelledby="nav-process-tab">...</div>
+        <div class="tab-pane fade" id="nav-process" role="tabpanel" aria-labelledby="nav-process-tab">
+
+            <table class="table table-striped table-hover">
+
+                <thead>
+                    <tr>
+                        <th scope="col">訂單編號</th>
+                        <th scope="col">建立時間</th>
+                        <th scope="col">商品細項</th>
+                        <th scope="col"></th>
+                        <th scope="col">賣家商城</th>
+                        <th scope="col">訂單狀態</th>
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+                <tbody id="tProcessbody">
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+
+
+
+
 
         @*========================================處理中訂單end=======================================*@
+
         @*========================================歷史訂單START=======================================*@
-        <div class="tab-pane fade" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">...</div>
+        <div class="tab-pane fade" id="nav-past" role="tabpanel" aria-labelledby="nav-past-tab">
 
-        @*========================================處理中訂單START=======================================*@
-    </div> @*//END OF ORDER LIST*@
 
-</div> @*// END OF CONTAINER*@
+
+            <table class="table table-striped table-hover">
+
+                <thead>
+                    <tr>
+                        <th scope="col">訂單編號</th>
+                        <th scope="col">建立時間</th>
+                        <th scope="col">訂單總金額</th>
+                        <th scope="col">訂單狀態</th>
+                        <th scope="col"></th>
+
+                    </tr>
+                </thead>
+                <tbody id="tPastbody">
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    @*=======================================訂單end=======================================*@
+</div> @*//END OF ORDER LIST*@
+
+
 
 @*=====================================詳細訂單彈跳視窗start==========================================*@
 <div class="modal fade" id="showOrder" tabindex="-1" role="dialog" aria-labelledby="showOrderTitle" aria-hidden="true">
@@ -82,15 +138,15 @@
                 </table>
 
             </div>
-            
-                <div class="w-100 d-flex justify-content-end">
-                    <h5 class="mr-5">總金額:</h5><h4 class="mx-5" id="momey"></h4>
-                </div>
-           
+
+            <div class="w-100 d-flex justify-content-end">
+                <h5 class="mr-5">總金額:</h5><h4 class="mx-5" id="momey"></h4>
+            </div>
+
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-info" data-dismiss="modal" onclick="checkout()">結帳</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">取消訂單</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">取消訂單</button>
             </div>
         </div>
     </div>
@@ -115,7 +171,7 @@
 
     $(function () {
 
-       
+
         console.log(test);
         console.log(typeof test);
 
@@ -128,23 +184,135 @@
             type: "GET",
             data: { 'userid': test },
             success: function (response) {
-
+                var text = "";
                 $(response).each(function (i, item) {
                     var Milliseconds = parseInt(item.createdTime.replace(/\D/igm, ""));
                     var year = new Date(Milliseconds).getFullYear();
                     var month = new Date(Milliseconds).getMonth() + 1;
                     var date = new Date(Milliseconds).getDate();
 
-                    $('#tbody').append(`
-                        <tr onclick="showDetail(this,${item.OrderId})" data-toggle='modal' data-target='#showOrder')>
-                        <td>${item.OrderId}</td>
-                        <td>${year} - ${month} - ${date}</td>
-                        <td>${item.price}</td>
-                        <td>${item.orderStatusString}</td>
-                        <td><a class= "btn btn-info" href="#"> 結帳</td>
-                        </tr>`)
+                    text += `
+                    <tr onclick="showDetail(this,${item.OrderId})" data-toggle='modal' data-target='#showOrder')>
+                    <td>${item.OrderId}</td>
+                    <td>${year} - ${month} - ${date}</td>
+                    <td id="total" name="${item.price}">${item.price}</td>
+                    <td>${item.orderStatusString}</td>
+                    <td><a class= "btn btn-info" href="#"> 結帳</td>
+                    </tr>`
 
                 })
+                $('#tbody').html(text)
+
+            }
+        })
+
+        // ==================Process order ajax==================
+
+        $.ajax({
+            url: "/OrderManager/getProcessOrderList",
+            type: "GET",
+            data: { 'userid': test },
+            success: function (response) {
+                var text = "";
+                $(response).each(function (i, item) {
+                    var Milliseconds = parseInt(item.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+
+
+                    var sellerStatus = item.sellerStatus;
+                    var buyerStatus = item.buyerStatus;
+
+                    if (buyerStatus == 2) {
+
+                        text += `
+                        <tr >
+                        <td id="oderdeail" name="${item.oderdeail}"> ${item.OrderId}</td>
+                        <td>${year} - ${month} - ${date}</td>
+                        <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
+                        <td>${item.ProductPostName}</td>
+                        <td>${item.buyerName}</td>
+                        <td> 已到貨</td>
+                        <td><a class= "btn btn-info" href="#"> 評論</td>
+                        </tr>`
+
+                    }
+                    else if (sellerStatus == 0) {
+
+                        text += `
+                        <tr >
+                        <td  id="oderdeail" name="${item.oderdeail}"> ${item.OrderId}</td>
+                        <td>${year} - ${month} - ${date}</td>
+                         <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
+                        <td>${item.ProductPostName}</td>
+                        <td>${item.buyerName}</td>
+                        <td> 等待賣家確認中</td>
+                        <td><a class= "btn btn-info" onclick="endOrder()"> 結單</td>
+                        </tr>`
+
+                    }
+                    else if (sellerStatus == 1 || sellerStaus==2)  {
+
+                        text += `
+                        <tr >
+                        <td  id="oderdeail" name="${item.oderdeail}"> ${item.OrderId}</td>
+                        <td>${year} - ${month} - ${date}</td>
+                          <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
+                        <td>${item.ProductPostName}</td>
+                        <td>${item.buyerName}</td>
+                        <td> 賣家出貨中</td>
+                        <td><a class= "btn btn-info" onclick="endOrder()"> 結單</td>
+                        </tr>`
+
+                    }// 這邊要秀prodcut detail
+
+                    else if (sellerStatus == 2) {
+
+                        text += `
+                        <tr >
+                        <td  id="oderdeail" name="${item.oderdeail}"> ${item.OrderId}</td>
+                        <td>${year} - ${month} - ${date}</td>
+                          <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
+                        <td>${item.ProductPostName}</td>
+                        <td>${item.buyerName}</td>
+                        <td> 賣家已出貨</td>
+                        <td><a class= "btn btn-info" onclick="endOrder()"> 結單</td>
+                        </tr>`
+
+                    }// 這邊要秀prodcut detail
+
+
+                    $('#tProcessbody').html(text)
+
+                })
+            }
+        })
+
+        //==================Process order ajax==============================
+        $.ajax({
+            url: "/OrderManager/getPastOrderList",
+            type: "GET",
+            data: { 'userid': test },
+            success: function (response) {
+                var text = "";
+                $(response).each(function (i, item) {
+                    var Milliseconds = parseInt(item.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+
+                    text += `
+                    <tr onclick="showDetail(this,${item.OrderId})" data-toggle='modal' data-target='#showOrder')>
+                    <td>${item.OrderId}</td>
+                    <td>${year} - ${month} - ${date}</td>
+                    <td >${item.price}</td>
+                    <td>${item.orderStatusString}</td>
+
+                    </tr>`
+
+                })
+                $('#tPastbody').html(text)
             }
         })
 
@@ -161,27 +329,28 @@
             data: { 'orderid': id, 'userid': test },
             success: function (response) {
 
-                    var Milliseconds = parseInt(response[0].createdTime.replace(/\D/igm, ""));
-                    var year = new Date(Milliseconds).getFullYear();
-                    var month = new Date(Milliseconds).getMonth() + 1;
-                    var date = new Date(Milliseconds).getDate();
+                var Milliseconds = parseInt(response[0].createdTime.replace(/\D/igm, ""));
+                var year = new Date(Milliseconds).getFullYear();
+                var month = new Date(Milliseconds).getMonth() + 1;
+                var date = new Date(Milliseconds).getDate();
 
                 var total = 0;
-                var text =""
+                var text = ""
+                $('#showOrderTitle').attr('name', `${id}`);
                 $('#showOrderTitle').html(`訂單編號 # ${id}`);
                 $('#showOrderTime').html(`${year} - ${month} - ${date}`);
 
                 $(response).each(function (i, item) {
 
                     total += item.oneProductTotalPrice;
-                    
+
                     text += `<tr scope="row">
-                        <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
-                        <td><a href="#">${item.productName}</a></td>
-                        <td><a href="#">${item.userAccount}</a></td>
-                        <td>x ${item.QTY}</td>
-                        <td>${item.oneProductTotalPrice} 元</td>
-                        </tr>`;
+                    <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
+                    <td><a href="#">${item.productName}</a></td>
+                    <td><a href="#">${item.userAccount}</a></td>
+                    <td>x ${item.QTY}</td>
+                    <td>${item.oneProductTotalPrice} 元</td>
+                    </tr>`;
 
                     $('#receiptbody').html(text);
                     $('#momey').html(`${total} 元`)
@@ -194,21 +363,44 @@
     }//end of showproductList
 
     function checkout() {
-       let id =  $('#showOrderTitle').val();
+
+        let id = $('#showOrderTitle').attr("name");
 
         $.ajax({
             url: "/OrderManager/checkout",
             type: "GET",
-            data: { 'orderid': id},
+            data: { 'orderid': id },
             success: function (response) {
+                window.alert(response);
+                window.location.reload("/OrderManager/OrderIndex");
 
-                
+            },
+            error: function (response) {
 
-                })
+                window.alert(response);
+                window.location.reload("/OrderManager/OrderIndex");
             }
-        })
-       
+        });
+    };
 
+    function endOrder() {
+
+        let id = $('#oderdeail').attr("name");
+        $.ajax({
+            url: "/OrderManager/endOrder",
+            type: "GET",
+            data: { 'oderdeail': id },
+            success: function (response) {
+                window.alert(response);
+                window.location.reload();
+
+            },
+            error: function (response) {
+
+                window.alert(response);
+                window.location.reload();
+            }
+        });
 
     }
 
