@@ -22,10 +22,10 @@
     <nav class="nav1">
         <div class="container d-flex">
             <div class="logo col-md-1">
-                <a href="#"><img class="footerLogo1" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
+                <a href="/"><img class="footerLogo1" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
             </div>
             <div class=" col-md-8 dropdown ml-3">
-                <div class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" >
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
                     <input Placeholder="Search " class="dropdown-search" />
                 </div>
@@ -62,7 +62,7 @@
                                 <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
                                     <path id="Path_140" data-name="Path 140"
                                           d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
-                                          fill="#f5efef"></path>
+                                          fill="#7B7B7B"></path>
                                 </g>
                             </svg>
                         </button> @*會員圖示 end*@
@@ -72,7 +72,9 @@
                         {
                             <div class="collapse" id="collapseExample">
                                 <div style="width:120px">
-                                    <span>@Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "free-text" })</span>
+                                    <span style="        font: 100;        color: #977C00;">
+                                        @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "free-text" })
+                                    </span>
                                     <span>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "free-text" })</span>
                                 </div>
                             </div> @*左右收起1 end*@
@@ -82,21 +84,18 @@
                             @*<span class=" mx-2">
                                     @Request.Cookies["LoginName"].Value
                                 </span>*@
-                            <div class="d-flex " style="display:none">
-                                <div class="d-flex  ml-1">
-                                </div>
-                                <div class="collapse " id="collapseExample">
-                                    <div class="dropdown free-text">
-                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">帳戶</a>
+                            <div>                                
+                                <div class="collapse" id="collapseExample">
+                                    <div class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">帳戶</a>
                                         <ul class="dropdown-menu">
                                             <li>@Html.ActionLink("帳戶", "myAccountIndex", "MyAccount", null, new { @class = "dropdown-item" })</li>
-                                            <li><a class="dropdown-item" href="#">@Html.ActionLink("登出", "Logout", "Members")</a></li>
+                                            <li>@Html.ActionLink("登出", "Logout", "Members", null, new { @class = "dropdown-item" })</li>
                                         </ul>
                                     </div>
-                                    <div class="free-text dropdown ">
+                                    <div class="free-text dropdown- ">
                                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">賣場</a>
-                                        <ul class="dropdown-menu">
-
+                                        <ul class="dropdown-menu" >
                                             <li>@Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })</li>
                                             <li>@Html.ActionLink("訂單管理", "", "", null, new { @class = "dropdown-item" })</li>
                                             @if (Request.Cookies["LoginAccount"].Value == null)
@@ -182,7 +181,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    @*<script src="~/Scripts/bootstrap.js"></script>*@
     <script>
         $(window).scroll(function () {
             if ($(document).scrollTop() > 20) {

@@ -1,5 +1,6 @@
 ﻿using MaiMai.Models;
 using MaiMai.Models.MaimaiIndexViewModel;
+using MaiMai.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,20 @@ namespace MaiMai.Controllers
         //五星廣告
         public ActionResult StarFive()
         {
-            var StarFiveList = db.Member.Where(m => m.totalStarRate == 5.0).ToList();                          
+            var StarFiveList = db.Member.Where(m => m.totalStarRate == 5.0).ToList();
             return Json(StarFiveList, JsonRequestBehavior.AllowGet);
         }
         //五星廣告
 
+        public ActionResult addCarousel()
+        {
+            var addCarouselList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
+            {
+                productImg = m.productImg,
+                price = m.price,
+                productDescription = m.productDescription
+            }).ToList();
+            return Json(addCarouselList, JsonRequestBehavior.AllowGet);
+        }
     }
 }
