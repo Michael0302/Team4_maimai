@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -64,6 +64,8 @@
           <Property Name="QTY" Type="int" />
           <Property Name="oneProductTotalPrice" Type="int" />
           <Property Name="SellerID" Type="int" />
+          <Property Name="buyerStatus" Type="int" />
+          <Property Name="sellerStatus" Type="int" />
         </EntityType>
         <EntityType Name="ProductPost">
           <Key>
@@ -79,6 +81,25 @@
           <Property Name="TagID" Type="int" />
           <Property Name="createdTime" Type="datetime" />
           <Property Name="RequiredPostID" Type="int" />
+          <Property Name="ReportID" Type="int" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reportorID" Type="int" Nullable="false" />
+          <Property Name="repotedUserID" Type="int" Nullable="false" />
+          <Property Name="reportStatus" Type="int" />
+          <Property Name="createdTime" Type="int" />
+          <Property Name="ReportDetailID" Type="int" />
+        </EntityType>
+        <EntityType Name="ReportDetail">
+          <Key>
+            <PropertyRef Name="ReportDetailID" />
+          </Key>
+          <Property Name="ReportDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reason" Type="text" />
         </EntityType>
         <EntityType Name="RequiredPost">
           <Key>
@@ -94,6 +115,7 @@
           <Property Name="estimatePrice" Type="int" />
           <Property Name="TagID" Type="int" />
           <Property Name="OrderID" Type="int" />
+          <Property Name="ReportID" Type="int" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -150,6 +172,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderDetail_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="SellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderDetail_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
@@ -198,6 +232,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Report_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Member1">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="repotedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_reportDetail">
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportDetail">
+              <PropertyRef Name="ReportDetailID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReportDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RequiredPost_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
           <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
@@ -229,6 +299,8 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPost" EntityType="Self.ProductPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportDetail" EntityType="Self.ReportDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cart_ProductPost" Association="Self.FK_Cart_ProductPost">
@@ -247,6 +319,10 @@
             <End Role="Member" EntitySet="Member" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Member" Association="Self.FK_OrderDetail_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderDetail" EntitySet="OrderDetail" />
@@ -263,6 +339,18 @@
             <End Role="Tag" EntitySet="Tag" />
             <End Role="ProductPost" EntitySet="ProductPost" />
           </AssociationSet>
+          <AssociationSet Name="FK_Report_Member" Association="Self.FK_Report_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Member1" Association="Self.FK_Report_Member1">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_reportDetail" Association="Self.FK_Report_reportDetail">
+            <End Role="ReportDetail" EntitySet="ReportDetail" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
           <AssociationSet Name="FK_RequiredPost_Member" Association="Self.FK_RequiredPost_Member">
             <End Role="Member" EntitySet="Member" />
             <End Role="RequiredPost" EntitySet="RequiredPost" />
@@ -272,7 +360,8 @@
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -319,7 +408,10 @@
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Member" FromRole="Member" ToRole="Order" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Member" FromRole="Member" ToRole="OrderDetail" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Member" FromRole="Member" ToRole="ProductPost" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_Report_Member" FromRole="Member" ToRole="Report" />
+          <NavigationProperty Name="Report1" Relationship="Self.FK_Report_Member1" FromRole="Member" ToRole="Report" />
           <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Member" FromRole="Member" ToRole="RequiredPost" />
         </EntityType>
         <EntityType Name="Order">
@@ -345,6 +437,9 @@
           <Property Name="QTY" Type="Int32" />
           <Property Name="oneProductTotalPrice" Type="Int32" />
           <Property Name="SellerID" Type="Int32" />
+          <Property Name="buyerStatus" Type="Int32" />
+          <Property Name="sellerStatus" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_OrderDetail_Member" FromRole="OrderDetail" ToRole="Member" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
         </EntityType>
@@ -361,11 +456,34 @@
           <Property Name="price" Type="Int32" />
           <Property Name="TagID" Type="Int32" />
           <Property Name="createdTime" Type="DateTime" Precision="3" />
+          <Property Name="RequiredPostID" Type="Int32" />
+          <Property Name="ReportID" Type="Int32" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
           <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
-          <Property Name="RequiredPostID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportID" />
+          </Key>
+          <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reportorID" Type="Int32" Nullable="false" />
+          <Property Name="repotedUserID" Type="Int32" Nullable="false" />
+          <Property Name="reportStatus" Type="Int32" />
+          <Property Name="createdTime" Type="Int32" />
+          <Property Name="ReportDetailID" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Report_Member" FromRole="Report" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="Self.FK_Report_Member1" FromRole="Report" ToRole="Member" />
+          <NavigationProperty Name="ReportDetail" Relationship="Self.FK_Report_reportDetail" FromRole="Report" ToRole="ReportDetail" />
+        </EntityType>
+        <EntityType Name="ReportDetail">
+          <Key>
+            <PropertyRef Name="ReportDetailID" />
+          </Key>
+          <Property Name="ReportDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_Report_reportDetail" FromRole="ReportDetail" ToRole="Report" />
         </EntityType>
         <EntityType Name="RequiredPost">
           <Key>
@@ -381,6 +499,7 @@
           <Property Name="estimatePrice" Type="Int32" />
           <Property Name="TagID" Type="Int32" />
           <Property Name="OrderID" Type="Int32" />
+          <Property Name="ReportID" Type="Int32" />
           <NavigationProperty Name="Member" Relationship="Self.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
         </EntityType>
@@ -441,6 +560,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderDetail_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="SellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductPost_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
           <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
@@ -450,6 +581,30 @@
             </Principal>
             <Dependent Role="ProductPost">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Member1">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="repotedUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -501,6 +656,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Report_reportDetail">
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportDetail">
+              <PropertyRef Name="ReportDetailID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReportDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RequiredPost_Tag">
           <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
           <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
@@ -520,6 +687,8 @@
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
           <EntitySet Name="ProductPost" EntityType="Self.ProductPost" />
+          <EntitySet Name="Report" EntityType="Self.Report" />
+          <EntitySet Name="ReportDetail" EntityType="Self.ReportDetail" />
           <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
           <AssociationSet Name="FK_Cart_ProductPost" Association="Self.FK_Cart_ProductPost">
@@ -538,9 +707,21 @@
             <End Role="Member" EntitySet="Member" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Member" Association="Self.FK_OrderDetail_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductPost_Member" Association="Self.FK_ProductPost_Member">
             <End Role="Member" EntitySet="Member" />
             <End Role="ProductPost" EntitySet="ProductPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Member" Association="Self.FK_Report_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Member1" Association="Self.FK_Report_Member1">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Report" EntitySet="Report" />
           </AssociationSet>
           <AssociationSet Name="FK_RequiredPost_Member" Association="Self.FK_RequiredPost_Member">
             <End Role="Member" EntitySet="Member" />
@@ -557,6 +738,14 @@
           <AssociationSet Name="FK_ProductPost_Tag" Association="Self.FK_ProductPost_Tag">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="ProductPost" EntitySet="ProductPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_reportDetail" Association="Self.FK_Report_reportDetail">
+            <End Role="ReportDetail" EntitySet="ReportDetail" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequiredPost_Tag" Association="Self.FK_RequiredPost_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
           <AssociationSet Name="FK_RequiredPost_Tag" Association="Self.FK_RequiredPost_Tag">
             <End Role="Tag" EntitySet="Tag" />
@@ -631,6 +820,45 @@
                 <ScalarProperty Name="QTY" ColumnName="QTY" />
                 <ScalarProperty Name="oneProductTotalPrice" ColumnName="oneProductTotalPrice" />
                 <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+                <ScalarProperty Name="buyerStatus" ColumnName="buyerStatus" />
+                <ScalarProperty Name="sellerStatus" ColumnName="sellerStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPost">
+            <EntityTypeMapping TypeName="maimaiModel.ProductPost">
+              <MappingFragment StoreEntitySet="ProductPost">
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productImg" ColumnName="productImg" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="inStoreQTY" ColumnName="inStoreQTY" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="TagID" ColumnName="TagID" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+                <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Report">
+            <EntityTypeMapping TypeName="maimaiModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
+                <ScalarProperty Name="reportorID" ColumnName="reportorID" />
+                <ScalarProperty Name="repotedUserID" ColumnName="repotedUserID" />
+                <ScalarProperty Name="reportStatus" ColumnName="reportStatus" />
+                <ScalarProperty Name="createdTime" ColumnName="createdTime" />
+                <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportDetail">
+            <EntityTypeMapping TypeName="maimaiModel.ReportDetail">
+              <MappingFragment StoreEntitySet="ReportDetail">
+                <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -663,6 +891,7 @@
                 <ScalarProperty Name="estimatePrice" ColumnName="estimatePrice" />
                 <ScalarProperty Name="TagID" ColumnName="TagID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ReportID" ColumnName="ReportID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
