@@ -65,5 +65,20 @@ namespace MaiMai.Controllers
 
             return Json(table, JsonRequestBehavior.AllowGet);
         }
+
+        maimaiRepository<Order> order = new maimaiRepository<Order>();
+
+
+
+        public ActionResult checkout( string orderid) {
+
+            var oid = Convert.ToInt32(orderid);
+            var  orderReciept= order.GetbyID(oid);
+
+            orderReciept.orderStatus = 1;
+
+            
+
+        }
     } //end of class
 }//end of namespace

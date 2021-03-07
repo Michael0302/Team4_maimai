@@ -76,7 +76,7 @@
             </div>
 
             <div class="modal-body" id="showOrderbody">
-                <table class="table">
+                <table class="table table1">
                     <tbody id="receiptbody">
                     </tbody>
                 </table>
@@ -89,7 +89,7 @@
            
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-info" data-dismiss="modal">結帳</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="checkout()">結帳</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">取消訂單</button>
             </div>
         </div>
@@ -137,7 +137,7 @@
 
                     $('#tbody').append(`
                         <tr onclick="showDetail(this,${item.OrderId})" data-toggle='modal' data-target='#showOrder')>
-                        <td${item.OrderId}</td>
+                        <td>${item.OrderId}</td>
                         <td>${year} - ${month} - ${date}</td>
                         <td>${item.price}</td>
                         <td>${item.orderStatusString}</td>
@@ -168,8 +168,8 @@
 
                 var total = 0;
                 var text =""
-                $('#showOrderTitle').append(`訂單編號 # ${id}`);
-                $('#showOrderTime').append(`${year} - ${month} - ${date}`);
+                $('#showOrderTitle').html(`訂單編號 # ${id}`);
+                $('#showOrderTime').html(`${year} - ${month} - ${date}`);
 
                 $(response).each(function (i, item) {
 
@@ -177,8 +177,8 @@
                     
                     text += `<tr scope="row">
                         <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
-                        <td><a href="#">${item.productName}"</a></td>
-                        <td><a href="#">${item.userAccount}"</a></td>
+                        <td><a href="#">${item.productName}</a></td>
+                        <td><a href="#">${item.userAccount}</a></td>
                         <td>x ${item.QTY}</td>
                         <td>${item.oneProductTotalPrice} 元</td>
                         </tr>`;
@@ -190,6 +190,25 @@
                 })
             }
         })
+
+    }//end of showproductList
+
+    function checkout() {
+       let id =  $('#showOrderTitle').val();
+
+        $.ajax({
+            url: "/OrderManager/checkout",
+            type: "GET",
+            data: { 'orderid': id},
+            success: function (response) {
+
+                
+
+                })
+            }
+        })
+       
+
 
     }
 
