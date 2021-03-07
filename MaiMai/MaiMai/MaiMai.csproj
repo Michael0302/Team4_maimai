@@ -238,7 +238,6 @@
     <Content Include="Content\resource_nico\images\徵求台POST\走私.jpg" />
     <Content Include="Content\resource_nico\images\無圖示.jpg" />
     <Content Include="Content\resource_nico\requriedIndex.css" />
-    <Content Include="Content\test_css\StyleSheet1.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -468,7 +467,6 @@
     <Content Include="Views\MyOrder\myOrder.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
     <Content Include="Views\Members\SignUp.cshtml" />
-    <Content Include="Views\backstage\test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
