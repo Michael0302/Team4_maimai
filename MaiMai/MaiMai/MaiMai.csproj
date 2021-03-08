@@ -148,6 +148,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\backstageController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaimaiIndexController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
@@ -223,6 +224,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cart_css\Cart.css" />
     <Content Include="Content\cssCHIEN\personalMarket.css" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\65K2.jfif" />
@@ -502,6 +504,7 @@
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
     <Content Include="Views\Members\SignUp.cshtml" />
     <Content Include="Views\NewMaimaiIndex\MaimaiIndexNew.cshtml" />
+    <Content Include="Views\Cart\cartIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

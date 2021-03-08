@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "cartIndex";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="d-flex align-content-center titleH w-100" style="margin-top:100px;">
+            <h2 class="titleColor pt-3">購物車</h2>
+        </div>
+        <div class="col-12">
+            <table class="table tableCenter table-hover">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" class="mr-2 checkedAll" onclick="checkedAll()">商品</th>
+                        <th>圖片</th>
+                        <th>單價</th>
+                        <th>數量</th>
+                        <th>總計</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr id="cartList">
+                        @*<td><input type="checkbox" class="mr-2 sel">AA</td>
+                        <td>11</td>
+                        <td>BB</td>
+                        <td>CC</td>
+                        <td class="proTotal">300</td>
+                        <td>
+                            <a class="btn">
+                                <svg baseProfile="tiny" height="24px" id="Layer_1" version="1.2"
+                                     class="delColor" viewBox="0 0 24 24" width="24px" xml:space="preserve"
+                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path d="M12,3c-4.963,0-9,4.038-9,9s4.037,9,9,9s9-4.038,9-9S16.963,3,12,3z M12,19c-3.859,0-7-3.14-7-7s3.141-7,7-7s7,3.14,7,7  S15.859,19,12,19z" />
+
+                                <path d="M12.707,12l2.646-2.646c0.194-0.194,0.194-0.512,0-0.707c-0.195-0.194-0.513-0.194-0.707,0L12,11.293L9.354,8.646  c-0.195-0.194-0.513-0.194-0.707,0c-0.195,0.195-0.195,0.513,0,0.707L11.293,12l-2.646,2.646c-0.195,0.195-0.195,0.513,0,0.707  C8.744,15.451,8.872,15.5,9,15.5s0.256-0.049,0.354-0.146L12,12.707l2.646,2.646C14.744,15.451,14.872,15.5,15,15.5  s0.256-0.049,0.354-0.146c0.194-0.194,0.194-0.512,0-0.707L12.707,12z" />
+
+                                    </svg>
+                            </a>
+                        </td>*@
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-end align-content-center">
+                <label class="mt-1">小計(<span class="totalCount">0</span>個商品):</label>
+                <h4 class="totalPrice">$0</h4>
+                <a class="btn order col-2 ml-2">下單</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".sel").on("change", changeValue);
+
+
+    function changeValue() {
+        var total = 0;
+        var checkedCount = $(".sel:checked").length
+        console.log(checkedCount);
+        var checkedAllSelectCount = $("table tr").length - 1;
+        if (checkedCount <= checkedAllSelectCount) {
+            $(".checkedAll").prop("checked", false);
+        }
+        if (checkedCount == 0) {
+            $(".totalPrice").text("$0");
+            $(".totalCount").text("0");
+            $(".checkedAll").prop("checked", false);
+        }
+        else if (checkedCount == checkedAllSelectCount) {
+            $(".checkedAll").prop("checked", true);
+        }
+        $(".sel:checked").each(function () {
+            $(".totalPrice").text("");
+            total += parseInt($(this).parent().parent().find(`td[class]`).text())
+
+            $(".totalPrice").text(`$${total}`);
+            $(".totalCount").text(checkedCount);
+        })
+    }
+
+     function checkedAll() {
+        if ($(".checkedAll").prop("checked") == false) {
+            $(".sel").prop("checked", false);
+            changeValue();
+            return false;
+        }
+        $(".sel").prop("checked", true);
+        changeValue();
+    }
+
+    //function loadCart() {
+    $(function () {
+
+        $.ajax({
+            url: "@Url.Action("getCart_P", "Cart")",
+            type: "GET",
+            success: function (cart) {
+                if (cart == "fail") {
+                    window.location.href = "/Members/Login";
+                }
+                $(cart).each(function (index, cart) {
+                    $("#cartList").append(`
+                        <td><input type="checkbox" class="mr-2 sel" onclick="changeValue()">${cart.productName}</td>
+                        <td "><img src="../Content/ProductPostImg/${cart.productImg}"/></td>
+                        <td>${cart.price}</td>
+                        <td>${cart.QTY}</td>
+                        <td class="proTotal">${cart.price*cart.QTY}</td>
+                        <td>
+                            <a class="btn">
+                                <svg baseProfile="tiny" height="24px" id="Layer_1" version="1.2"
+                                     class="delColor" viewBox="0 0 24 24" width="24px" xml:space="preserve"
+                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <path d="M12,3c-4.963,0-9,4.038-9,9s4.037,9,9,9s9-4.038,9-9S16.963,3,12,3z M12,19c-3.859,0-7-3.14-7-7s3.141-7,7-7s7,3.14,7,7  S15.859,19,12,19z" />
+
+                                <path d="M12.707,12l2.646-2.646c0.194-0.194,0.194-0.512,0-0.707c-0.195-0.194-0.513-0.194-0.707,0L12,11.293L9.354,8.646  c-0.195-0.194-0.513-0.194-0.707,0c-0.195,0.195-0.195,0.513,0,0.707L11.293,12l-2.646,2.646c-0.195,0.195-0.195,0.513,0,0.707  C8.744,15.451,8.872,15.5,9,15.5s0.256-0.049,0.354-0.146L12,12.707l2.646,2.646C14.744,15.451,14.872,15.5,15,15.5  s0.256-0.049,0.354-0.146c0.194-0.194,0.194-0.512,0-0.707L12.707,12z" />
+
+                                    </svg>
+                            </a>
+                        </td>
+                    `)
+                })
+            }
+
+        })
+    })
+    //}
+</script>
