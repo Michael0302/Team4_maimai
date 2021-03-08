@@ -145,7 +145,7 @@
 
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-info" data-dismiss="modal" onclick="checkout()">結帳</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="checkout()">結帳</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">取消訂單</button>
             </div>
         </div>
@@ -197,7 +197,7 @@
                     <td>${year} - ${month} - ${date}</td>
                     <td id="total" name="${item.price}">${item.price}</td>
                     <td>${item.orderStatusString}</td>
-                    <td><a class= "btn btn-info" href="#"> 結帳</td>
+                    <td><a class= "btn btn-secondary" href="#"> 結帳</td>
                     </tr>`
 
                 })
@@ -234,7 +234,7 @@
                         <td>${item.ProductPostName}</td>
                         <td>${item.buyerName}</td>
                         <td> 已到貨</td>
-                        <td><a class= "btn btn-info" href="#"> 評論</td>
+                        <td><a class= "btn btn-secondary" href="#"> 評論</td>
                         </tr>`
 
                     }
@@ -248,7 +248,7 @@
                         <td>${item.ProductPostName}</td>
                         <td>${item.buyerName}</td>
                         <td> 等待賣家確認中</td>
-                        <td><a class= "btn btn-info" onclick="endOrder()"> 結單</td>
+                        <td><a class= "btn btn-secondary" onclick="endOrder()"> 結單</td>
                         </tr>`
 
                     }
@@ -262,7 +262,7 @@
                         <td>${item.ProductPostName}</td>
                         <td>${item.buyerName}</td>
                         <td> 賣家出貨中</td>
-                        <td><a class= "btn btn-info" onclick="endOrder()"> 結單</td>
+                        <td><a class= "btn btn-secondary" onclick="endOrder()"> 結單</td>
                         </tr>`
 
                     }// 這邊要秀prodcut detail
@@ -277,7 +277,7 @@
                         <td>${item.ProductPostName}</td>
                         <td>${item.buyerName}</td>
                         <td> 賣家已出貨</td>
-                        <td><a class= "btn btn-info" onclick="endOrder()"> 結單</td>
+                        <td><a class= "btn btn-secondary" onclick="endOrder()"> 結單</td>
                         </tr>`
 
                     }// 這邊要秀prodcut detail

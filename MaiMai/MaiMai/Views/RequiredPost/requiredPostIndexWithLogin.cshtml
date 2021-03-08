@@ -10,7 +10,7 @@
 
 <div class="container" style=" padding-top: 100px">
 
-    <div class="container" style="background-color:burlywood; padding-bottom: 40px; border-radius: 20px; ">
+    <div class="container" style=" padding-bottom: 40px; border-radius: 20px; ">
         <div class="row">
             <ul class="nav nav-pills mb-3 requriedTab w-100" style="justify-content:space-between" id="pills-tab" role="tablist">
                 <li class="nav-item">
@@ -29,21 +29,9 @@
                 </li>
 
                 <li>
-                    <a class="btn btn-warning" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                    <a class="btn  btn-secondary" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPostStart" role="tab"
-                       aria-controls="pills-profile" aria-selected="false">處理中的貼文</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pastPost" role="tab"
-                       aria-controls="pills-contact" aria-selected="false">已完成的貼文</a>
-                </li>
-            </ul>
-
-
-
+                </ul>
 
         </div>
 
@@ -131,7 +119,7 @@
             success: function (response) {
                 $(response).each(function (i, item) {
                     $("#allPost").append(`
-                         <div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">
+                         <div class="row mx-auto" style="border-bottom: 3px dashed gray;" id="start">
                             <div class="photo">
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -185,12 +173,12 @@
                                 </div>
 
                             </form>
-                                        <button type="submit" class="btn btn-info" onclick="submitProdouct(this,${i})">建立商品留言</button>
+                                        <button type="submit" class="btn btn-secondary" onclick="submitProdouct(this,${i})">建立商品留言</button>
                                 </div>
                           </div>    @*end of 訂單*@
                     </div)
                     `)
-
+                    checkSpan(item.RequiredPostID, i);
                 })
             }
         })
@@ -200,6 +188,17 @@
         // ajax end
     })//documentReady
 
+    function checkSpan(id, i) {
+
+        $.ajax({
+            url: "/RequiredPost/checkCommentSPan",
+            type: "GET",
+            data: { 'i': id },
+            success: function (response) {
+                $(`#cmCount${i}`).html(`${response}`)
+            }
+        })
+    }
 
     $("#pills-profile-tab").click(function () {
 
@@ -338,8 +337,6 @@
     function checkCommentList(eler,index) {
 
         var test = getCookie('LoginAccount');
-
-
         var data = $(eler).attr("name");
         var inner = "";
         console.log(data)
@@ -351,19 +348,19 @@
             success: function (response) {
                 $(response).each(function (i, item) {
                     inner += `
-                         <div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">
+                         <div class="row mx-auto" style="border-bottom: 3px dashed gray;" id="start">
 
                           <div class="photo">  <img src="../Content/resource_nico/images/${item.productImg}"/> </div>
                           <div class="post-text">
-                                <h3 id="postName${i}">訂單名子: ${item.productName}</h3>
-                                <h6 id="userName${i}">賣家名稱:${item.userAccount}</h6>
+                                <h3 id="postName${i}"> ${item.productName}</h3>
+                                <h6 id="userName${i}">賣家:${item.userAccount}</h6>
                                 <div>
                                 <h6 id="text${i}">產品敘述:${item.productDescription}</h6>
                             </div>
                             <div class="post-button">
                                 <h6 id="price${i}">價位：${item.price}</h6>
 
-                                <a class="btn btn-warning" href="#">加入購物車</a>
+                                <a class="btn btn-secondary" href="#">加入購物車</a>
 
                          </div>
                         </div>`
