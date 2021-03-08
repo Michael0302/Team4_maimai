@@ -502,6 +502,9 @@
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
     <Content Include="Views\Members\SignUp.cshtml" />
     <Content Include="Views\NewMaimaiIndex\MaimaiIndexNew.cshtml" />
+    <Content Include="Views\MyOrder\creditCard.cshtml" />
+    <Content Include="Views\MyOrder\report.cshtml" />
+    <Content Include="Views\MyOrder\shoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

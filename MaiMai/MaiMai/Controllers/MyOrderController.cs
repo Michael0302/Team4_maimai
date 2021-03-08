@@ -1,4 +1,5 @@
-﻿using MaiMai.Models;
+﻿
+using MaiMai.Models;
 using MaiMai.Models.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -119,15 +120,17 @@ namespace MaiMai.Controllers
             return Json(m, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult getOrderList_P(int? status)
+        public ActionResult getOrderList_P(int? status)  //key group by
         {
 
-            var id = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var id = Convert.ToInt32(Request.Cookies["LoginID"].Value); 
+            //Response.Cookies["LoginID"]設定者給的初始值  rememberme=="on" checkbox attr
+            //<a href="SignUp"> controller action
             if (status != null)
             {
                 if (status >= 2)
                 {
-                    var ordercmplist = db.Order.Where(m => (m.orderStatus >= 2)&&(m.buyerUserID==id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+                    var ordercmplist = db.Order.Where(m => (m.orderStatus >= 2) && (m.buyerUserID == id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
                     {
                         x.OrderId,
                         x.orderStatus,
@@ -145,14 +148,14 @@ namespace MaiMai.Controllers
                         buyerUserID = s.Key.buyerUserID,
                         buyerName = s.Key.firstName,
                         //SellerID =s.Select(i => i.SellerID),
-                        price = s.Select(i => i.oneProductTotalPrice).Sum()
-                    });
-
+                        price = s.Select(i => i.oneProductTotalPrice).Sum(),
+                    }) ;
                     return Json(ordercmplist, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    var ordercmplist = db.Order.Where(m => (m.orderStatus < 2)&&(m.buyerUserID==id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, /*db.Order, x => x.OrderId -----db.OrderDetail,y=>y.OrderID兩張表單串聯*/
+                    var ordercmplist = db.Order.Where(m => (m.orderStatus < 2)&&(m.buyerUserID==id)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, 
+                        /*db.Order, x => x.OrderId -----db.OrderDetail,y=>y.OrderID兩張表單串聯*/
                         (x, y) => new{
                         x.OrderId,
                         x.orderStatus,
@@ -204,7 +207,6 @@ namespace MaiMai.Controllers
         public ActionResult delOrder_P(int OrderId)
         {
             od.Delete(OrderId);
-
             return Content("刪除成功");
         }
 
@@ -246,6 +248,61 @@ namespace MaiMai.Controllers
 
             return Json(product, JsonRequestBehavior.AllowGet);
         }
-    }
 
+        //public JsonResult shoppingCart()
+        //{
+
+        //    var id = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+        //    var list = db.OrderDetail.Where(x => x.OrderID == id && (x.ProductPost.Cart.cartID == id)).Select({ 
+        //            cartID=x.ProductPost.Cart.cartID,
+        //            cartNumber= x.ProductPost.Cart.cartNumber,
+        //            cartQTY=x.ProductPost.Cart.QTY,
+        //    }).ToList();
+        //    return Json(list, JsonRequestBehavior.AllowGet));
+        //}
+
+        public ActionResult report()
+        {
+            return View();
+        }
+
+        public ActionResult getReport(int ?postID)
+        {
+            var reportDetail = db.ReportDetail.Select(t => new
+            {
+                //reportorID = t.reportorID,
+                //reportedUserID = t.repotedUserID,
+                //reportStatus = t.reportStatus,
+                //reportDetailID = t.ReportDetailID,
+                //createdTime = t.createdTime,
+                reason = t.reason
+            }).ToList();
+
+            return Json(reportDetail, JsonRequestBehavior.AllowGet);
+        }
+
+
+        maimaiRepository<Report> rtdb = new maimaiRepository<Report>();
+
+        public ActionResult saveReport(string reportTXT, Array reportTAG)
+        {
+            Report r = new Report
+            {
+                //reportorID = formadata.reportorID,
+                //reportedUserID = formdata.reportedUserID,
+                //reportStatus = formdata.reportStatus,
+                //ReportDetailID=form.reportDetailID,
+                //createdTime=form.createdTime,
+                //ReportDetail.reason = reportTXT
+            };
+
+            rtdb.Create(r);
+
+            return Content("新增成功");
+        }
+
+
+
+
+    }
 }
