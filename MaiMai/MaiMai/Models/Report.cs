@@ -12,19 +12,17 @@ namespace MaiMai.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class Report
     {
-        public int OrderDetailID { get; set; }
-        public Nullable<int> OrderID { get; set; }
-        public Nullable<int> ProductPostID { get; set; }
-        public Nullable<int> QTY { get; set; }
-        public Nullable<int> oneProductTotalPrice { get; set; }
-        public Nullable<int> SellerID { get; set; }
-        public Nullable<int> buyerStatus { get; set; }
-        public Nullable<int> sellerStatus { get; set; }
+        public int ReportID { get; set; }
+        public int reportorID { get; set; }
+        public int repotedUserID { get; set; }
+        public Nullable<int> reportStatus { get; set; }
+        public Nullable<int> createdTime { get; set; }
+        public Nullable<int> ReportDetailID { get; set; }
     
         public virtual Member Member { get; set; }
-        public virtual Order Order { get; set; }
-        public virtual ProductPost ProductPost { get; set; }
+        public virtual Member Member1 { get; set; }
+        public virtual ReportDetail ReportDetail { get; set; }
     }
 }

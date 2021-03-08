@@ -149,6 +149,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\backstageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\maimaiEntities.cs" />
     <Compile Include="Controllers\MaimaiIndexController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
@@ -192,6 +193,12 @@
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductPost.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Report.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ReportDetail.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RequiredPost.cs">
@@ -467,6 +474,9 @@
     <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
     <Content Include="Views\MyOrder\myOrder.cshtml" />
     <Content Include="Views\RequiredPost\requiredPostIndexWithLogin.cshtml" />
+    <Content Include="Views\MyOrder\creditCard.cshtml" />
+    <Content Include="Views\MyOrder\shoppingCart.cshtml" />
+    <Content Include="Views\MyOrder\report.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

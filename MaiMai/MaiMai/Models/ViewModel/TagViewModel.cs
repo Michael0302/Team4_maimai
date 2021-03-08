@@ -9,5 +9,8 @@ namespace MaiMai.Models.ViewModel
     {
         public int TagID { get; set; }
         public string tagName { get; set; }
+
     }
+
+
 }
