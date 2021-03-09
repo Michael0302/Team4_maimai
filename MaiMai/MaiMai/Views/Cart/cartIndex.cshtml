@@ -55,6 +55,11 @@
 </div>
 
 <script>
+    $(function () {
+        getCartList();
+    })
+
+
     $(".sel").on("change", changeValue);
 
 
@@ -94,7 +99,8 @@
     }
 
     //function loadCart() {
-    $(function () {
+    //$(function () {
+    function getCartList() {
 
         $.ajax({
             url: "@Url.Action("getCart_P", "Cart")",
@@ -129,13 +135,11 @@
             }
 
         })
-    })
+    }
+    //})
 
     function delProduct() {
-        console.log($(event.target).parent());
-        console.log(typeof $(event.target).parent());
         var proID = $(event.target).parent().data("productid");
-        console.log(proID);
         $.ajax({
             url: "@Url.Action("delProduct", "Cart")",
             type: "GET",
@@ -143,7 +147,8 @@
             //processData: false,
             //contentType: false,
             success: function (status) {
-                window.location.reload;
+                console.log("123");
+                location.reload();
             }
         })
     }
