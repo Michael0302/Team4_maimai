@@ -199,7 +199,6 @@ namespace MaiMai.Controllers
             RequiredPost post = new RequiredPost()
             {
              
-            
                 postDescription = rp.postDescription,
                 postName = rp.postName,
                 postImg = rp.upphoto.FileName,
@@ -221,7 +220,6 @@ namespace MaiMai.Controllers
             else
             {
 
-               
                 string filename = rp.upphoto.FileName;
                 rp.upphoto.SaveAs(Server.MapPath("../Content/resource_nico/images/徵求台POST/") + filename);
                 string filePath = $"../Content/resource_nico/images/徵求台POST/{filename}";
@@ -229,5 +227,16 @@ namespace MaiMai.Controllers
             }
             return "發文成功";
         }
+
+        public string checkCommentSPan(int i)
+        {
+
+            var table = db.ProductPost.Where(m => m.RequiredPostID == i);
+            int count = table.Count();
+            
+
+            return count.ToString();
+        }
+
     }//class end
 }//namespace end
