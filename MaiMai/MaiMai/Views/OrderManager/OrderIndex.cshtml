@@ -140,13 +140,14 @@
             </div>
 
             <div class="w-100 d-flex justify-content-end">
-                <h5 class="mr-5">總金額:</h5><h4 class="mx-5" id="momey"></h4>
+                <h5 class="mr-5">總金額:</h5>
+                <h4 class="mx-5" id="momey"></h4>
             </div>
 
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="checkout()">結帳</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">取消訂單</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="checkout()">結帳</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消訂單</button>
             </div>
         </div>
     </div>
@@ -192,7 +193,7 @@
                     var date = new Date(Milliseconds).getDate();
 
                     text += `
-                    <tr onclick="showDetail(this,${item.OrderId})" data-toggle='modal' data-target='#showOrder')>
+                    <tr onclick="showDetail(this,${item.OrderId},0)" data-toggle='modal' data-target='#showOrder')>
                     <td>${item.OrderId}</td>
                     <td>${year} - ${month} - ${date}</td>
                     <td id="total" name="${item.price}">${item.price}</td>
@@ -238,7 +239,7 @@
                         </tr>`
 
                     }
-                    else if (sellerStatus == 0) {
+                    else if (buyerStatus == 1 && sellerStatus == 0) {
 
                         text += `
                         <tr >
@@ -252,7 +253,7 @@
                         </tr>`
 
                     }
-                    else if (sellerStatus == 1 || sellerStaus==2)  {
+                    else if (buyerStatus == 1 && sellerStatus == 1) {
 
                         text += `
                         <tr >
@@ -267,7 +268,7 @@
 
                     }// 這邊要秀prodcut detail
 
-                    else if (sellerStatus == 2) {
+                    else if (buyerStatus == 1 && sellerStatus == 2) {
 
                         text += `
                         <tr >
@@ -303,7 +304,7 @@
                     var date = new Date(Milliseconds).getDate();
 
                     text += `
-                    <tr onclick="showDetail(this,${item.OrderId})" data-toggle='modal' data-target='#showOrder')>
+                    <tr onclick="showDetail(this,${item.OrderId},1)" data-toggle='modal' data-target='#showOrder')>
                     <td>${item.OrderId}</td>
                     <td>${year} - ${month} - ${date}</td>
                     <td >${item.price}</td>
@@ -318,7 +319,7 @@
 
     }) // end of doucument ready
 
-    function showDetail(elem, id) {
+    function showDetail(elem, id, index) {
 
         console.log(elem)
         console.log(id)
@@ -357,6 +358,13 @@
 
 
                 })
+                var text = ""
+                if (index == 1) {
+                    text += `<button type="button" class="btn btn-info" data-dismiss="modal" >評論</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>`
+                    document.querySelector('.modal-footer').innerHTML = text;
+
+                }
             }
         })
 

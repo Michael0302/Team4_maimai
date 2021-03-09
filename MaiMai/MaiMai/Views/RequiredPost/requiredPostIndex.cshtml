@@ -40,9 +40,9 @@
                     <div class="modal-body" id="editMemberbody">
                         <form id="form1"class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
-                                <img id="Productimg">
-                                <input  type="file" required  name="upphoto" id="productImg" style="display: block;" >
-                            </div>
+                                <div class="photo"><img id="Productimg"></div>
+                                    <input type="file" required name="upphoto" id="productImg" style="display: block" ; onchange="previewFile()">
+                                </div>
                             <div class="displayInput">
                                 <h6>貼文名稱:<input type="text"required  name="postName" id="postName" ></h6>
                                 <h6>
@@ -130,8 +130,8 @@
                               <div class="card card-body w-100"}>
                                     <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
                                                 <div class="displayImg Productimg${i}">
-                                                      <img  id="Productimg${i}">
-                                                      <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}" style="display: block;">
+                                                      <div class="photo"><img  id="Productimg${i}"></div>
+                                                      <input type="file"  onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}" style="display: block;">
                                                  </div>
                                                 <div class="displayInput">
                                                         <h6>產品名稱:<input type="text" name="productName" id="productName${i}"></h6>
@@ -197,26 +197,40 @@
 
         }
    
-
-        function doUpload(eler,index) {
+     function previewFile() {
             //var photo = $(eler).val();
-            var files = document.getElementById(`productImg${index}`).files;
-            console.log(files);
+         const preview = document.querySelector('#Productimg');
+         const file = document.querySelector('input[type=file]').files[0];
+         const reader = new FileReader();
 
-            var fileData = new FormData();
-            fileData.append(upphoto,files[0]);
-            console.log(fileData);
-            $.ajax({
-                url: "/RequiredPost/uploadPhoto",
-                type: "Post",
-                processData: false,
-                contentType: false,
-                data: { data: fileData},
-                    success: function (response) {
-                        $(`#Productimg${index}`).attr("src", response)
-                }
-            })
+         reader.addEventListener("load", function () {
+             // convert image file to base64 string
+             preview.src = reader.result;
+         }, false);
+
+         if (file) {
+             reader.readAsDataURL(file);
+         }
         } //  doUpload end
+
+    function doUpload(elem, index) {
+
+        const preview = document.querySelector(`#Productimg${index}`);
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+
+
+
+    }
 
     function submitProdouct(eler, index) {
         console.log(index)

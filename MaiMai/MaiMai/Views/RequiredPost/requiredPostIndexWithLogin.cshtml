@@ -48,8 +48,8 @@
                     <div class="modal-body" id="editMemberbody">
                         <form class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
-                                <img id="Productimg">
-                                <input type="file" required name="upphoto" id="postImg" style="display: block;">
+                                <div class="photo"><img id="Productimg"></div>
+                                <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
                             </div>
                             <div class="displayInput">
                                 <h6>貼文名稱:<input type="text" required name="postName" id="postName"></h6>
@@ -187,6 +187,41 @@
 
         // ajax end
     })//documentReady
+
+    function previewFile() {
+        //var photo = $(eler).val();
+        const preview = document.querySelector('#Productimg');
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    } //  doUpload end
+
+    function doUpload(elem, index) {
+
+        const preview = document.querySelector(`#Productimg${index}`);
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+
+
+
+    }
 
     function checkSpan(id, i) {
 

@@ -120,8 +120,9 @@ namespace MaiMai.Controllers
             return Json(table, JsonRequestBehavior.AllowGet);
         }
 
+        maimaiRepository<OrderDetail> OrderDetailRepository = new maimaiRepository<OrderDetail>();
         maimaiRepository<Order> order = new maimaiRepository<Order>();
-        maimaiRepository<OrderDetail> OrderDetail = new maimaiRepository<OrderDetail>();
+       
 
 
         public string checkout(string orderid)
@@ -130,26 +131,44 @@ namespace MaiMai.Controllers
             var oid = Convert.ToInt32(orderid);
             var orderReciept = order.GetbyID(oid);
 
+          
+
             if (orderReciept == null)
             {
                 Response.StatusCode = 404;
 
                 return "錯誤";
             }
-
+                
                 orderReciept.orderStatus = 1;
-
+                 changeStatus(oid);
                 order.Update(orderReciept);
 
                 return "繳費成功";
         }
 
 
+        public void changeStatus( int orderid) {
+
+            var tableD = db.OrderDetail.Where(m => m.OrderID == orderid).ToList();
+
+
+            foreach (OrderDetail item in tableD)
+            {
+               
+                item.buyerStatus = 1;
+
+                db.SaveChanges();
+                //OrderDetailRepository.Update(item);
+            }
+
+        }
+
         public string endOrder(string oderdeail)
         {
-
+           
             var oid = Convert.ToInt32(oderdeail);
-            var orderDetail = OrderDetail.GetbyID(oid);
+            var orderDetail = OrderDetailRepository.GetbyID(oid);
 
             if (orderDetail == null)
             {
@@ -160,7 +179,7 @@ namespace MaiMai.Controllers
 
             orderDetail.buyerStatus = 2;
 
-            OrderDetail.Update(orderDetail);
+            OrderDetailRepository.Update(orderDetail);
 
             return "結單成功 ! 別忘了下評論喔";
         }
