@@ -19,6 +19,7 @@ namespace MaiMai.Models
         {
             this.Comment = new HashSet<Comment>();
             this.Order = new HashSet<Order>();
+            this.OrderDetail = new HashSet<OrderDetail>();
             this.ProductPost = new HashSet<ProductPost>();
             this.Report1 = new HashSet<Report>();
             this.RequiredPost = new HashSet<RequiredPost>();
@@ -44,6 +45,8 @@ namespace MaiMai.Models
         public virtual ICollection<Comment> Comment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPost> ProductPost { get; set; }
         public virtual Report Report { get; set; }

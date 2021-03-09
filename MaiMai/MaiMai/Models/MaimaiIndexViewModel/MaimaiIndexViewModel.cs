@@ -18,7 +18,6 @@ namespace MaiMai.Models.MaimaiIndexViewModel
         public Nullable<int> price { get; set; }
         public Nullable<int> TagID { get; set; }
         public Nullable<System.DateTime> createdTime { get; set; }
-
         //新的資料庫Member Star
         public string userAccount { get; set; }
         public string profileImg { get; set; }
