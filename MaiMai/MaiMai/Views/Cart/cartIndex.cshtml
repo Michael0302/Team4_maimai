@@ -21,8 +21,8 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr id="cartList">
+                <tbody id="cartList">
+                   @* <tr>*@
                         @*<td><input type="checkbox" class="mr-2 sel">AA</td>
                         <td>11</td>
                         <td>BB</td>
@@ -40,7 +40,7 @@
                                     </svg>
                             </a>
                         </td>*@
-                    </tr>
+                    @*</tr>*@
 
                 </tbody>
             </table>
@@ -105,13 +105,14 @@
                 }
                 $(cart).each(function (index, cart) {
                     $("#cartList").append(`
+                        <tr>
                         <td><input type="checkbox" class="mr-2 sel" onclick="changeValue()">${cart.productName}</td>
                         <td "><img src="../Content/ProductPostImg/${cart.productImg}"/></td>
                         <td>${cart.price}</td>
                         <td>${cart.QTY}</td>
                         <td class="proTotal">${cart.price*cart.QTY}</td>
                         <td>
-                            <a class="btn">
+                            <a class="btn" data-productID="${cart.CartID}" onclick="delProduct()">
                                 <svg baseProfile="tiny" height="24px" id="Layer_1" version="1.2"
                                      class="delColor" viewBox="0 0 24 24" width="24px" xml:space="preserve"
                                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -122,11 +123,29 @@
                                     </svg>
                             </a>
                         </td>
+                        </tr>
                     `)
                 })
             }
 
         })
     })
+
+    function delProduct() {
+        console.log($(event.target).parent());
+        console.log(typeof $(event.target).parent());
+        var proID = $(event.target).parent().data("productid");
+        console.log(proID);
+        $.ajax({
+            url: "@Url.Action("delProduct", "Cart")",
+            type: "GET",
+            data: {productID: proID},
+            //processData: false,
+            //contentType: false,
+            success: function (status) {
+                window.location.reload;
+            }
+        })
+    }
     //}
 </script>

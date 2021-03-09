@@ -51,12 +51,22 @@ namespace MaiMai.Controllers
                 productName = s.Select(i => i.productName),
                 productImg = s.Select(i => i.productImg),
                 price = s.Select(i => i.price),
-            }).ToList();
-           
-                
-            
+            }).ToList();          
 
             return Json(products, JsonRequestBehavior.AllowGet);
+        }
+
+        maimaiRepository<Cart> dbCart = new maimaiRepository<Cart>();
+       
+        public ActionResult delProduct(int? productID)
+        {
+            if (productID ==null)
+            {
+                return Content("false");
+            }
+            dbCart.Delete((int)productID);
+
+            return Content("true");
         }
     }
 }
