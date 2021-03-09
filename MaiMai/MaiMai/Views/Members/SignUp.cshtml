@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_LayoutPage1.cshtml";
 }
 
- 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,263 +14,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <style>
-        @@media screen and (min-width: 60em), print {
-            .flex-l {
-                display: flex;
-            }
-        }
+    <link href="~/Content/cssCHIEN/SignUP.css" rel="stylesheet" />
 
-        .bg-near-white {
-            background-color: #f4f4f4;
-        }
-
-        @@media screen and (min-width: 60em), print {
-            .w-50-l {
-                width: 50%;
-            }
-        }
-
-
-        .self-center {
-            align-self: center;
-        }
-
-        @@media screen and (min-width: 60em), print {
-            .tr-l {
-                text-align: right;
-            }
-        }
-
-        /*    @@media screen and (min-width: 60em), print {
-                    .tl-l {
-                        text-align: left;
-                    }
-                }*/
-
-
-        @@media screen and (min-width: 60em), print {
-            .pv6-l {
-                padding-top: 8rem;
-                padding-bottom: 8rem;
-            }
-        }
-
-        @@media screen and (min-width: 30em), print {
-            .ph5-ns {
-                padding-left: 4rem;
-                padding-right: 4rem;
-            }
-        }
-
-        @@media screen and (min-width: 30em), print {
-            .pv5-ns {
-                padding-top: 4rem;
-                padding-bottom: 4rem;
-            }
-        }
-
-        @@media screen and (min-width: 30em), print {
-            .pt3-ns {
-                padding-top: 1rem;
-            }
-        }
-
-        .ph4 {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        .pv4 {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-
-
-        html, body, div, article, section, main, footer, header, form, fieldset, legend, pre, code, a, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, textarea, table, td, th, tr, input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="text"], input[type="url"], .border-box {
-            box-sizing: border-box;
-        }
-
-        div {
-            display: block;
-        }
-
-        body, input, textarea, button {
-            font-size: 15px;
-            font-family: karla, -apple-system, BlinkMacSystemFont, "Segoe UI", "微軟正黑體", "Microsoft JhengHei", sans-serif;
-            line-height: 1.6em;
-            color: #3f3f3f;
-        }
-
-        @@media screen and (min-width: 60em), print {
-            .bg-white-l {
-                background-color: #fdfdfd;
-            }
-        }
-
-        .mt0-ns {
-            margin-top: 0;
-        }
-
-        .mb4 {
-            margin-bottom: 2rem;
-        }
-
-        .b {
-            font-weight: bold;
-        }
-
-        .f4 {
-            font-size: 1.25rem;
-        }
-
-        .mb3 {
-            margin-bottom: 1rem;
-        }
-
-        .mr3 {
-            margin-right: 1rem;
-        }
-
-        .pa3 {
-            padding: 1rem;
-        }
-
-        .bg-fb {
-            background-color: #3b5998 !important;
-        }
-
-        .white {
-            color: #fdfdfd !important;
-        }
-
-        .button {
-            display: inline-block;
-            background-color: transparent;
-            border-width: 1px;
-            border-style: solid;
-            border-color: initial;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 0.75rem 1.5rem;
-            line-height: 1em;
-            opacity: 0.9;
-            white-space: nowrap;
-            transform: translateZ(0);
-        }
-
-        a {
-            color: #0050a2;
-            text-decoration: none;
-        }
-
-        .f5 {
-            font-size: 1rem;
-        }
-
-        .dib {
-            display: inline-block;
-        }
-
-        .mv0 {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        .mr4 {
-            margin-right: 2rem;
-        }
-
-        .br {
-            border-right-style: solid;
-            border-right-width: 1px;
-        }
-
-        .b--light-silver {
-            border-color: #aaa;
-        }
-
-        form {
-            display: block;
-            margin-top: 0em;
-        }
-
-        .f6, .progress text {
-            font-size: 0.875rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        label {
-            cursor: default;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .w-50 {
-            width: 50%;
-        }
-
-        input, textarea {
-            padding: 0.25rem 0.5rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid #e0e0e0;
-            font-size: .875rem;
-            border-radius: .125rem;
-            color: #767676;
-        }
-
-        .mt3 {
-            margin-top: 1rem;
-        }
-
-        .green {
-            color: #229f2a;
-        }
-
-        .f7 {
-            font-size: 0.75rem;
-        }
-
-        .gray {
-            color: #767676;
-        }
-
-        p {
-            display: block;
-            /*margin-block-start: 1em;
-                    margin-block-end: 1em;
-                    margin-inline-start: 0px;
-                    margin-inline-end: 0px;*/
-        }
-
-        .mv4-ns {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .bt {
-            border-top-style: solid;
-            border-top-width: 1px;
-        }
-
-        .b--light-gray {
-            border-color: #e0e0e0;
-        }
-
-        .black {
-            color: #101010;
-        }
-
-        .mr3 {
-            margin-right: 1rem;
-        }
-    </style>
 </head>
 
 <body class="w-100">
@@ -288,149 +32,67 @@
         </div>
         <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l">
             <div class="nt3 mt0-ns mb4"></div>
-
-            <h3 class="b f4"> </h3>   
-            @*<a class="button b bg-fb white pa3 ba b--blue mb3 mr3" href="/users/auth/facebook">Facebook 註冊</a>*@
-            @*<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>*@
+            <h3 class="b f4"> </h3>
             <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" data-scope="public_profile,email" data-onlogin="checkLoginState();"></div>
-            或
-            @*<form class="new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post">
-        <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="MF0FgDTlkQn5iC3aS+8lHj2YptSaowZKgLayc3sHbCXv1pyTbIAWR4C3Lo0idR5krz2FHCU2cMNoBPW40xigVg==">*@
-        <div class="js-details reset-details mb3 f6">
+            或註冊
+            <div class="js-details reset-details mb3 f6">
+                <div class="mt3">
+                    <div>
+                        <form>
+                            <div>
+                                <label class="b" for="userAccount">用戶帳號</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount">
+                                <label class="b" for="userPassWord">密碼</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord">
+                                <label class="b" for="userPassWordCheck">確認密碼</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWordCheck" id="userPassWordCheck">
+                                <label class="b" for="city">城市</label>
+                                <input class="w-100" required="required" type="text" name="city" id="city">
+                                <label class="b" for="address"> 地址</label>
+                                <input class="w-100" required="required" type="text" name="address" id="address">
+                                @*<label class="b" for="user_password_confirmation">確認密碼</label>
+                                    <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
+                                <label class="b" for="phoneNumber">手機號碼</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="phoneNumber" id="phoneNumber">
+                                <label class="b" for="firstName">名字</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="firstName" id="firstName">
+                                <label class="b" for="lastName">姓氏</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="lastName" id="lastName">
+                                <label class="b" for="birthday">生日</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="date" name="birthday" id="birthday">
+                                <label class="b" for="identityNumber">身分證字號</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="identityNumber" id="identityNumber">
+                                <label class="b" for="profileImg">個人頭像</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">
+                                <label class="b" for="selfDescription">個人簡介</label>
+                                <textarea class="w-100" required="required" autofocus="autofocus" type="text" name="selfDescription" id="selfDescription"> </textarea>
+                                <label class="b" for="email">信箱</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
+                            </div>
+                            <div class="mt3">
+                                <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button>
+
+                                
 
 
-            <div class="mt3">
-
-
-                @*@using (Html.BeginForm("SignUp", "Members", FormMethod.Post, new { novalidate = "novalidate" }))*@
-                <!--{-->
-
-                <div>
-                    <form @*onsubmit="return checkinput()"*@>
-                        <div>
-                            @*@Html.HiddenFor(m => m.userLevel, new { Value = "5" })
-
-                        @Html.LabelFor(m => m.lastName, "姓氏 ", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.lastName, new { @class = "w-100", placeholder = "請輸入姓氏" })
-                        @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.firstName, "姓名", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.firstName, new { @class = "w-100", placeholder = "請輸姓名" })
-                        @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.birthday, "生日", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.birthday, new { @class = "w-100", placeholder = "請輸入生日:西元/月/日" })
-                        @Html.ValidationMessageFor(m => m.birthday, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.identyNumebr, "身分證字號", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.identyNumebr, new { @class = "w-100", placeholder = "請輸入身分證字號" })
-                        @Html.ValidationMessageFor(m => m.identyNumebr, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.userAccount, "用戶暱稱", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.userAccount, new { @class = "w-100", placeholder = "請輸入用戶暱稱" })
-                        @Html.ValidationMessageFor(m => m.userAccount, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.email, new { @class = "w-100", placeholder = "請輸入E-mail" })
-                        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
-                        @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100", placeholder = "請輸入會員密碼" })
-                        @Html.ValidationMessageFor(m => m.userPassWord, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.ConfirmPassowrd, "確認密碼", new { @class = "b" })
-                        @Html.PasswordFor(m => m.ConfirmPassowrd, new { @class = "w-100", placeholder = " 確認密碼" })
-                        @Html.ValidationMessageFor(m => m.ConfirmPassowrd, "", new { @class = "text-danger" })
-
-
-
-                        @Html.LabelFor(m => m.address, "住址", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.address, new { @class = "w-100", placeholder = "請輸入住址" })
-                        @Html.ValidationMessageFor(m => m.address, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.city, "縣市", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.city, new { @class = "w-100", placeholder = "請輸入所在縣市" })
-                        @Html.ValidationMessageFor(m => m.city, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.phoneNumber, "手機號碼", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.phoneNumber, new { @class = "w-100", placeholder = "請輸入手機號碼" })
-                        @Html.ValidationMessageFor(m => m.phoneNumber, "", new { @class = "text-danger" })
-
-                        @Html.LabelFor(m => m.proFileImg, "大頭照", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.proFileImg, new { @class = "w-100", type = "file" })
-                        @Html.ValidationMessageFor(m => m.proFileImg, "", new { @class = "text-danger" })*@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            <label class="b" for="userAccount">用戶帳號</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount">
-                            <label class="b" for="userPassWord">密碼</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord">
-                            <label class="b" for="userPassWordCheck">確認密碼</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWordCheck" id="userPassWordCheck">
-                            <label class="b" for="city">城市</label>
-                            <input class="w-100" required="required" type="text" name="city" id="city">
-                            <label class="b" for="address"> 地址</label>
-                            <input class="w-100" required="required" type="text" name="address" id="address">
-                            @*<label class="b" for="user_password_confirmation">確認密碼</label>
-                        <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
-                            <label class="b" for="phoneNumber">手機號碼</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="phoneNumber" id="phoneNumber">
-                            <label class="b" for="firstName">名字</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="firstName" id="firstName">
-                            <label class="b" for="lastName">姓氏</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="lastName" id="lastName">
-                            <label class="b" for="birthday">生日</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="date" name="birthday" id="birthday">
-                            <label class="b" for="identityNumber">身分證字號</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="text" name="identityNumber" id="identityNumber">
-                            <label class="b" for="profileImg">個人頭像</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">
-                            <label class="b" for="selfDescription">個人簡介</label>
-                            <textarea class="w-100" required="required" autofocus="autofocus" type="text" name="selfDescription" id="selfDescription"> </textarea>
-                            <label class="b" for="email">信箱</label>
-                            <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
-                        </div>
-
-                        <div>
-                            @*<input type="submit" value="註冊" class="btn btn-primary"  onclick="myFunction()"/>*@
-
-                            <button type="submit" id="p1" class="btn btn-primary" onclick="myFunction()">註冊</button>
-                            @*<h3 class="text-danger">@Html.ValidationSummary()</h3>*@
-                        </div>
-                    </form>
-
-
+                                @*<button type="button" class="register-submit"onclick="myFunction()" >送出</button>
+        <button type="submit" class="register-submit2 hide">.323</button>*@
+                            </div>
+                        </form>
+                    </div>
+                    <label class="f6">
+                        <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="user[remember_me]" id="user_remember_me">
+                        記得我的帳號，下次自動登入
+                    </label>
                 </div>
-                @*}*@
-
-
-
-                <label class="f6">
-                    <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="user[remember_me]" id="user_remember_me">
-                    記得我的帳號，下次自動登入
-                </label>
-                @*<div class="mt3">
-                <input type="submit" name="commit" value="註冊" class="button b green">
-            </div>*@
+                <p class="f7 gray">
+                    繼續進行代表你同意
+                    <a href="/docs/terms_of_service">服務條款</a>。
+                </p>
+                目前狀態：
+                <span id="FB_STATUS_1"></span>
             </div>
-            <p class="f7 gray">繼續進行代表你同意<a href="/docs/terms_of_service">服務條款</a>。</p>
-            目前狀態：<span id="FB_STATUS_1"></span>
-        </div>
-
             <button id="demo1" onclick="demo1()">DEMO1</button>
-
             <div class="mv4-ns mv3 bt b--light-gray"></div>
             <a class="link b f6 hover-blue black mr3" href="/Members/Login">登入</a>
             @*@Html.ActionLink("登入", "Login", "Members")*@
@@ -440,15 +102,8 @@
                  data-width="450"
                  data-show-faces="true">
             </div>
-
         </div>
     </div>
-   
-
-
-
-
-    @*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>*@
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
@@ -456,7 +111,39 @@
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=760951437892454&autoLogAppEvents=1" nonce="uw6hH87Q"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- 若需相容 IE11，要加載 Promise Polyfill-->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+
+
+
     <script>
+
+        function alertTest() {
+            Swal.fire(
+                "註冊失敗", //標題 
+                " 請檢查您所輸入的欄位是否有誤!", //訊息內容(可省略)
+                "error" //圖示(可省略) success/info/warning/error/question
+               
+            );
+        }
+
+
+        function alertTest1() {
+            Swal.fire(
+                "註冊成功", //標題 
+                " 歡迎光臨MaiMai</br>2秒後自動跳轉回首頁", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
+
+            );
+        }
+
+        function home() {
+            window.location.href = "/NewMaimaiIndex/MaimaiIndexNew";
+        }
+
+
 
         //function checkinput() {
         //    // 檢查登入帳號是否有特殊字元
@@ -494,21 +181,8 @@
         //    }
         //}
 
-
-
-
-
-
-
-
-
-
-
-
-
         function myFunction() {
             $(document).ready(function () {
-
 
                 var userAccount2 = $("#userAccount").val();
                 var userPassWord2 = $("#userPassWord").val();
@@ -525,12 +199,9 @@
 
 
                 $.ajax({
-
                     type: "POST",
                     url: " /Members/SignUpMethod",
                     data: {
-
-
                         userAccount: userAccount2,
                         userPassWord: userPassWord2,
                         city: city2,
@@ -543,37 +214,22 @@
                         profileImg: profileImg2,
                         selfDescription: selfDescription2,
                         email: email2
-
-
-
-
-
-
                     },
-
                     success: function (data) {
                         var good = data.indexOf("註冊成功")
                         console.log(good)
-                        if (good==0) {
-                            alert("成功註冊")
-                            window.location.href = "/MaimaiIndex/MaimaiIndex";
-                        }
-                        else {
-                            alert("註冊失敗,請檢查輸入欄位")
+                        if (good == 0) {
+                            alertTest1()
+                            setTimeout("home()",2000)
                             
                         }
-
-
-                      
+                        else {
+                            //alert("註冊失敗,請檢查輸入欄位")
+                            alertTest()
+                        }
                     }
-
                 });
-
-
-                
-
             });
-
         }
 
 
@@ -656,7 +312,7 @@
         }(document, 'script', 'facebook-jssdk'));
 
 
-    
+
 
 
         //{
@@ -676,9 +332,7 @@
         //</fb: login - button >
 
         function demo1() {
-
             $("#userAccount").val("Kobe")
-             
             $("#userPassWord").val("apple0108")
             $("#userPassWordCheck").val("apple0108")
             $("#city").val("台中市")
@@ -691,13 +345,47 @@
             //$("#profileImg").val("")
             $("#selfDescription").val("台灣土豪,韓國瑜,販售各種國瑜寶寶")
             $("#email").val("quees778w2s@gmail.com")
-
         }
+
+        $(function () {
+            $('.register-submit').on('click', function () {
+                $.ajax({
+                    url: " ",
+                    type: 'POST',
+                    dataType: 'HTML',
+                    data: {
+                        account: $('#inputAccount').val()
+                    },
+                    success: function (res) {
+                        if (res == '1') {
+                            alert('申請帳號重複，請輸入其他帳號');
+                        } else {
+                            $('.register-submit2').click();
+                        }
+                    }
+                });
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     </script>
 
- 
+
 </body>
 
 </html>
