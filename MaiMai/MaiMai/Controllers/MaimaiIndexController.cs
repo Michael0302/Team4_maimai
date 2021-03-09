@@ -34,19 +34,6 @@ namespace MaiMai.Controllers
             return Json(PostList,JsonRequestBehavior.AllowGet);
         }
 
-        //明星輪播
-
-        //public ActionResult ProductPost()
-        //{
-        //    var PostList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
-        //    {
-        //        productImg = m.productImg,
-        //        price = m.price,
-        //        productDescription = m.productDescription
-        //    }).ToList();
-        //    return Json(PostList, JsonRequestBehavior.AllowGet);
-        //}
-
         //布告欄輪播
         public ActionResult RequiredPost()
         {
@@ -70,7 +57,6 @@ namespace MaiMai.Controllers
             return Json(PostList, JsonRequestBehavior.AllowGet);
         }
 
-
         public ActionResult Bells(int? TagID =  5)
         {
             var PostList = db.ProductPost.Where(m => m.UserID == TagID && m.inStoreQTY > 0).Select(m => new
@@ -82,12 +68,6 @@ namespace MaiMai.Controllers
             return Json(PostList, JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
-
-
         public ActionResult MaimaiIndex()
         {
             return View();
@@ -97,7 +77,5 @@ namespace MaiMai.Controllers
         {
             return View();
         }
-
-
     }
 }

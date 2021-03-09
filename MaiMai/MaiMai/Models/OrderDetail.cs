@@ -20,6 +20,8 @@ namespace MaiMai.Models
         public Nullable<int> QTY { get; set; }
         public Nullable<int> oneProductTotalPrice { get; set; }
         public Nullable<int> SellerID { get; set; }
+        public Nullable<int> buyerStatus { get; set; }
+        public Nullable<int> sellerStatus { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual ProductPost ProductPost { get; set; }

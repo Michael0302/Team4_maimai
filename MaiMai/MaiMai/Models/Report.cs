@@ -15,11 +15,14 @@ namespace MaiMai.Models
     public partial class Report
     {
         public int ReportID { get; set; }
-        public Nullable<int> reportorID { get; set; }
-        public Nullable<int> reportedUserID { get; set; }
+        public int reportorID { get; set; }
+        public int repotedUserID { get; set; }
         public Nullable<int> reportStatus { get; set; }
-        public Nullable<int> ReprotDetailID { get; set; }
+        public Nullable<int> createdTime { get; set; }
+        public Nullable<int> ReportDetailID { get; set; }
     
-        public virtual ReprotDetail ReprotDetail { get; set; }
+        public virtual Member Member { get; set; }
+        public virtual Member Member1 { get; set; }
+        public virtual ReportDetail ReportDetail { get; set; }
     }
 }
