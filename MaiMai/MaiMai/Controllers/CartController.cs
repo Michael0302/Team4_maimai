@@ -26,7 +26,6 @@ namespace MaiMai.Controllers
         {
             if (Request.Cookies["LoginID"] == null)
             {
-                
                 return Content("fail");
             }
 
@@ -41,7 +40,7 @@ namespace MaiMai.Controllers
                 y.productName,
                 y.productImg,
                 y.price
-            }).GroupBy(g => new { g.CartID, g.QTY, g.CartNumber, g.UserID }).Select(s => new
+            }).GroupBy(g => new { g.CartID,g.QTY, g.CartNumber, g.UserID }).Select(s => new
             {
                 CartID = s.Key.CartID,
                 CartNumber = s.Key.CartNumber,
@@ -67,6 +66,45 @@ namespace MaiMai.Controllers
             dbCart.Delete((int)productID);
 
             return Content("true");
+        }
+
+        public ActionResult cartToOrder(string[] CartID)
+        {
+            if (Request.Cookies["LoginID"] == null)
+            {
+                return Content("fail");
+            }
+
+            var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            List<Cart> cart = new List<Cart>();
+            
+            foreach (string i in CartID)
+            {
+                //i = Convert.ToInt32(i);
+                var oneProduct = db.Cart.Find(Convert.ToInt32(i));
+                ///取出CartID存入Order
+                Order ord = new Order();
+                ord.buyerUserID = UserID;
+                ord.CartNumber = oneProduct.CartNumber;
+                ord.orderStatus = 0;
+                ord.createdTime = new DateTime();
+                db.Order.Add(ord);
+                db.SaveChanges();
+                ///抓取存入的OrderID存入OrderDetail
+                var orded = db.Order.FirstOrDefault(o => o.CartNumber == oneProduct.CartNumber);
+                OrderDetail ordt = new OrderDetail();
+                ordt.OrderID = orded.OrderId;
+                ordt.ProductPostID = oneProduct.ProductPostID;
+                ordt.QTY = oneProduct.QTY;
+                ordt.oneProductTotalPrice = oneProduct.QTY * oneProduct.ProductPost.price;
+                ordt.SellerID = oneProduct.ProductPost.UserID;
+                ordt.buyerStatus = 0;
+                ordt.sellerStatus = 0;
+                db.OrderDetail.Add(ordt);
+                db.SaveChanges();
+            }
+
+            return Content("success");
         }
     }
 }

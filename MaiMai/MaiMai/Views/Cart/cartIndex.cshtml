@@ -48,7 +48,7 @@
             <div class="d-flex justify-content-end align-content-center">
                 <label class="mt-1">小計(<span class="totalCount">0</span>個商品):</label>
                 <h4 class="totalPrice">$0</h4>
-                <a class="btn order col-2 ml-2">下單</a>
+                <a class="btn order col-2 ml-2" onclick="CartToOrder()">下單</a>
             </div>
         </div>
     </div>
@@ -66,7 +66,6 @@
     function changeValue() {
         var total = 0;
         var checkedCount = $(".sel:checked").length
-        console.log(checkedCount);
         var checkedAllSelectCount = $("table tr").length - 1;
         if (checkedCount <= checkedAllSelectCount) {
             $(".checkedAll").prop("checked", false);
@@ -112,7 +111,7 @@
                 $(cart).each(function (index, cart) {
                     $("#cartList").append(`
                         <tr>
-                        <td><input type="checkbox" class="mr-2 sel" onclick="changeValue()">${cart.productName}</td>
+                        <td><input data-productID="${cart.CartID}" type="checkbox" class="mr-2 sel" onclick="changeValue()">${cart.productName}</td>
                         <td "><img src="../Content/ProductPostImg/${cart.productImg}"/></td>
                         <td>${cart.price}</td>
                         <td>${cart.QTY}</td>
@@ -148,6 +147,25 @@
             //contentType: false,
             success: function (status) {
                 console.log("123");
+                location.reload();
+            }
+        })
+    }
+
+    function CartToOrder() {
+        var checkedToOrder = [];
+        $("td input:checked").each(function () {
+            checkedToOrder.push($(this).data("productid"));
+        })
+        console.log(checkedToOrder);
+        $.ajax({
+            url: "@Url.Action("cartToOrder", "Cart")",
+            type: "GET",
+            data: JSON.stringify(checkedToOrder),
+            //processData: false,
+            //traditional: true,
+            contentType: "text/html",
+            success: function (status) {
                 location.reload();
             }
         })
