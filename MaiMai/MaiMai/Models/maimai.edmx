@@ -13,6 +13,7 @@
           <Property Name="CartNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="ProductPostID" Type="int" />
           <Property Name="QTY" Type="int" />
+          <Property Name="UserID" Type="int" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -43,6 +44,7 @@
           <Property Name="totalStarRate" Type="float" />
           <Property Name="selfDescription" Type="text" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="totalStarRate2" Type="int" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -93,6 +95,7 @@
           <Property Name="reportStatus" Type="int" />
           <Property Name="createdTime" Type="int" />
           <Property Name="ReportDetailID" Type="int" />
+          <Property Name="reportDescription" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ReportDetail">
           <Key>
@@ -373,6 +376,7 @@
           <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductPostID" Type="Int32" />
           <Property Name="QTY" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_Cart_ProductPost" FromRole="Cart" ToRole="ProductPost" />
         </EntityType>
         <EntityType Name="Comment">
@@ -406,6 +410,7 @@
           <Property Name="totalStarRate" Type="Double" />
           <Property Name="selfDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="totalStarRate2" Type="Int32" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Member" FromRole="Member" ToRole="Order" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Member" FromRole="Member" ToRole="OrderDetail" />
@@ -473,6 +478,7 @@
           <Property Name="reportStatus" Type="Int32" />
           <Property Name="createdTime" Type="Int32" />
           <Property Name="ReportDetailID" Type="Int32" />
+          <Property Name="reportDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Report_Member" FromRole="Report" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="Self.FK_Report_Member1" FromRole="Report" ToRole="Member" />
           <NavigationProperty Name="ReportDetail" Relationship="Self.FK_Report_reportDetail" FromRole="Report" ToRole="ReportDetail" />
@@ -761,6 +767,7 @@
                 <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
                 <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
                 <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -793,6 +800,7 @@
                 <ScalarProperty Name="totalStarRate" ColumnName="totalStarRate" />
                 <ScalarProperty Name="selfDescription" ColumnName="selfDescription" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="totalStarRate2" ColumnName="totalStarRate2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -847,6 +855,7 @@
                 <ScalarProperty Name="reportStatus" ColumnName="reportStatus" />
                 <ScalarProperty Name="createdTime" ColumnName="createdTime" />
                 <ScalarProperty Name="ReportDetailID" ColumnName="ReportDetailID" />
+                <ScalarProperty Name="reportDescription" ColumnName="reportDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
