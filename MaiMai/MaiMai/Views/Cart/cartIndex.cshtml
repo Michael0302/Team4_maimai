@@ -161,7 +161,9 @@
         $.ajax({
             url: "@Url.Action("cartToOrder", "Cart")",
             type: "GET",
-            data: JSON.stringify(checkedToOrder),
+            data: {
+                CartID: JSON.stringify(checkedToOrder)
+            } ,
             //processData: false,
             //traditional: true,
             contentType: "text/html",
