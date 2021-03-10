@@ -505,6 +505,7 @@
     <Content Include="Views\Members\SignUp.cshtml" />
     <Content Include="Views\NewMaimaiIndex\MaimaiIndexNew.cshtml" />
     <Content Include="Views\OrderManager\OrderIndex.cshtml" />
+    <Content Include="Views\NewMaimaiIndex\ProdutPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
