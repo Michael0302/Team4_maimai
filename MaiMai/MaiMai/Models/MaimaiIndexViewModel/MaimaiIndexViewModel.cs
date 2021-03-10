@@ -23,7 +23,5 @@ namespace MaiMai.Models.MaimaiIndexViewModel
         public string profileImg { get; set; }
         public Nullable<double> totalStarRate { get; set; }
         public Nullable<int> userLevel { get; set; }
-        public Nullable<int> totalStarRate2 { get; set; }
-
     }
 }
