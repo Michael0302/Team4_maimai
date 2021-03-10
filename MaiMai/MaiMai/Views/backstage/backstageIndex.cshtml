@@ -143,12 +143,12 @@
                             </select><label>總評分<input class='form-control' type='text' name="totalStarRate" value = "${member.totalStarRate}" readonly/><label>自我介紹<textarea class='form-control' rows="5" cols="30"  style="resize:none" name="selfDescription" readonly>${member.selfDescription}</textarea><input type="hidden" name="userPassWord" value="${member.userPassWord}"/><input type="hidden" name="firstName" value="${member.firstName}"/><input type="hidden" name="lastName" value="${member.lastName}"/></div</form>`)
 
                         if (member.userLevel == 1) {
-                            //$("#inputState option[value=1]").attr("selected", "selected");
-                            document.querySelector("#inputState option").style = "selected:selected";
+                            $("#inputState option[value=1]").attr("selected", "selected");                            
                         }
                         else if (member.userLevel == 2) {
                             $("#inputState option[value=2]").attr("selected", "selected");
-                        } else if (member.userLevel == 3) {
+                        }
+                        else if (member.userLevel == 3) {
                             $("#inputState option[value=3]").attr("selected", "selected");
                         }
 
