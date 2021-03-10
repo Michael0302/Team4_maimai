@@ -160,13 +160,11 @@
         console.log(checkedToOrder);
         $.ajax({
             url: "@Url.Action("cartToOrder", "Cart")",
-            type: "GET",
-            data: {
-                CartID: JSON.stringify(checkedToOrder)
-            } ,
-            //processData: false,
+            type: "POST",
+            data: JSON.stringify(checkedToOrder),
+            processData: false,
             //traditional: true,
-            contentType: "text/html",
+            contentType: "application/json",
             success: function (status) {
                 location.reload();
             }
