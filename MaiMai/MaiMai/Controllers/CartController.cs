@@ -40,7 +40,7 @@ namespace MaiMai.Controllers
                 y.productName,
                 y.productImg,
                 y.price
-            }).GroupBy(g => new { g.CartID,g.QTY, g.CartNumber, g.UserID }).Select(s => new
+            }).GroupBy(g => new { g.CartID,g.QTY, g.CartNumber, g.UserID }).Select(s => new  ///所有從Cart取得的資料須groupby否則會當作同一筆
             {
                 CartID = s.Key.CartID,
                 CartNumber = s.Key.CartNumber,
@@ -78,26 +78,30 @@ namespace MaiMai.Controllers
             var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
             List<Cart> cart = new List<Cart>();
 
+            IQueryable<Cart> oneProduct = db.Cart;
+            IQueryable<Order>orded = db.Order;
+            IQueryable<ProductPost> product = db.ProductPost;
+
             foreach (string i in CartID.ToArray())
             {
-                //i = Convert.ToInt32(i);
-                var oneProduct = db.Cart.Find(Convert.ToInt32(i));
-                ///取出CartID存入Order
+                var oneProduct1 = oneProduct.ToList().FirstOrDefault(m=>m.CartID==Convert.ToInt32(i));   
+                /////取出CartID存入Order
                 Order ord = new Order();
                 ord.buyerUserID = UserID;
-                ord.CartNumber = oneProduct.CartNumber;
+                ord.CartNumber = oneProduct1.CartNumber;
                 ord.orderStatus = 0;
-                ord.createdTime = new DateTime();
+                ord.createdTime = DateTime.Now;
                 db.Order.Add(ord);
                 db.SaveChanges();
                 ///抓取存入的OrderID存入OrderDetail
-                var orded = db.Order.FirstOrDefault(o => o.CartNumber == oneProduct.CartNumber);
+                var orded1 = orded.FirstOrDefault(o => o.CartNumber == oneProduct1.CartNumber);
+                //var product1 = product.FirstOrDefault(p=>p.ProductPostID == oneProduct1.ProductPostID);
                 OrderDetail ordt = new OrderDetail();
-                ordt.OrderID = orded.OrderId;
-                ordt.ProductPostID = oneProduct.ProductPostID;
-                ordt.QTY = oneProduct.QTY;
-                ordt.oneProductTotalPrice = oneProduct.QTY * oneProduct.ProductPost.price;
-                ordt.SellerID = oneProduct.ProductPost.UserID;
+                ordt.OrderID = orded1.OrderId;
+                ordt.ProductPostID = oneProduct1.ProductPostID;
+                ordt.QTY = oneProduct1.QTY;
+                ordt.oneProductTotalPrice = oneProduct1.QTY * oneProduct1.ProductPost.price;
+                ordt.SellerID = oneProduct1.ProductPost.UserID;
                 ordt.buyerStatus = 0;
                 ordt.sellerStatus = 0;
                 db.OrderDetail.Add(ordt);
