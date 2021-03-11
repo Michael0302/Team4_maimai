@@ -4,18 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="47f9c784bdfa4556bcee5ba64cb105a9" Name="Diagram1">
-        <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+      <Diagram DiagramId="ccc889fa55744331999b63564635d505" Name="Diagram1">
         <EntityTypeShape EntityType="maimaiModel.Comment" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Order" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.OrderDetail" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.ProductPost" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Report" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.ProductPost" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Report" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.ReportDetail" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.RequiredPost" Width="1.5" PointX="6" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Tag" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
-        <AssociationConnector Association="maimaiModel.FK_Cart_ProductPost" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Comment_Member" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Comment_Order" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Order_Member" ManuallyRouted="false" />
@@ -29,6 +27,8 @@
         <AssociationConnector Association="maimaiModel.FK_ProductPost_Tag" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Report_reportDetail" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_RequiredPost_Tag" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="maimaiModel.FK_Cart_ProductPost" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,6 +18,8 @@ namespace MaiMai.Models
         public string CartNumber { get; set; }
         public Nullable<int> ProductPostID { get; set; }
         public Nullable<int> QTY { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public Nullable<bool> Status { get; set; }
     
         public virtual ProductPost ProductPost { get; set; }
     }
