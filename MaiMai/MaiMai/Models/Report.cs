@@ -18,8 +18,11 @@ namespace MaiMai.Models
         public int reportorID { get; set; }
         public int repotedUserID { get; set; }
         public Nullable<int> reportStatus { get; set; }
-        public Nullable<int> createdTime { get; set; }
+        public Nullable<System.DateTime> createdTime { get; set; }
         public Nullable<int> ReportDetailID { get; set; }
+        public string reportDescription { get; set; }
+        public int ProductOrRequire { get; set; }
+        public int ProductOrRequireID { get; set; }
     
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }

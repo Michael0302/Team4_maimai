@@ -24,7 +24,6 @@ namespace MaiMai.Models
         public Nullable<int> estimatePrice { get; set; }
         public Nullable<int> TagID { get; set; }
         public Nullable<int> OrderID { get; set; }
-        public Nullable<int> ReportID { get; set; }
     
         public virtual Member Member { get; set; }
         public virtual Tag Tag { get; set; }

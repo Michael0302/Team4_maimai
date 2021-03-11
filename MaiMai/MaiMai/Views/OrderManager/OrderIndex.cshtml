@@ -249,9 +249,9 @@
                         <td>${item.ProductPostName}</td>
                         <td>${item.buyerName}</td>
                         <td> 等待賣家確認中</td>
-                        <td><a class= "btn btn-secondary" onclick="endOrder()"> 結單</td>
+                        <td></td>
                         </tr>`
-
+                            //< td > <a class="btn btn-secondary" onclick="endOrder()" > 結單</td>
                     }
                     else if (buyerStatus == 1 && sellerStatus == 1) {
 
@@ -263,9 +263,9 @@
                         <td>${item.ProductPostName}</td>
                         <td>${item.buyerName}</td>
                         <td> 賣家出貨中</td>
-                        <td><a class= "btn btn-secondary" onclick="endOrder()"> 結單</td>
+                       <td></td>
                         </tr>`
-
+                            //< td > <a class="btn btn-secondary" onclick="endOrder()"> 結單</td>
                     }// 這邊要秀prodcut detail
 
                     else if (buyerStatus == 1 && sellerStatus == 2) {

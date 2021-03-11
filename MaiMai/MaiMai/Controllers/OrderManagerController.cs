@@ -183,5 +183,146 @@ namespace MaiMai.Controllers
 
             return "結單成功 ! 別忘了下評論喔";
         }
+
+
+        // ========================= 以下為賣價訂單管理=============================
+
+
+
+        public ActionResult salesOrderIndex()
+        {
+            return View();
+        }
+
+        public ActionResult getComfirmOrderList( string userid) {
+            
+            var id = Convert.ToInt32(userid);
+
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.buyerStatus == 1 && m.sellerStatus ==0 ).Select(od => new {
+                orderDetailId= od.OrderDetailID,
+                orderID= od.OrderID,
+                createdTime = od.Order.createdTime,
+                productName = od.ProductPost.productName,
+                productImg = od.ProductPost.productImg,
+                QTY = od.QTY,
+                OrderDetailID = od.OrderDetailID,
+                oneProductTotalPrice = od.oneProductTotalPrice,
+                buyerUserAccount = od.Order.buyerUserID
+
+            }); 
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+        }
+
+        public string  confirmOrder(string oderdeail) {
+
+            var oid = Convert.ToInt32(oderdeail);
+            var orderDetail = OrderDetailRepository.GetbyID(oid);
+
+            orderDetail.sellerStatus = 1;
+            try
+            {
+                OrderDetailRepository.Update(orderDetail);
+                return "確認訂單成功";
+            }
+            catch( Exception e) {
+                Response.StatusCode = 404;
+                return "確認失敗";
+
+            }
+            
+         
+        }
+
+        public string sentOrder(string oderdeail)
+        {
+
+            var oid = Convert.ToInt32(oderdeail);
+            var orderDetail = OrderDetailRepository.GetbyID(oid);
+
+            orderDetail.sellerStatus = 2;
+            try
+            {
+                OrderDetailRepository.Update(orderDetail);
+                return "出貨成功";
+            }
+            catch (Exception e)
+            {
+                Response.StatusCode = 404;
+                return "出貨失敗";
+
+            }
+
+
+        }
+
+        public ActionResult getSalesProcessOrderList(string userid) {
+            var id = Convert.ToInt32(userid);
+
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 1).Select(od => new {
+                orderDetailId = od.OrderDetailID,
+                orderID = od.OrderID,
+                createdTime = od.Order.createdTime,
+                productName = od.ProductPost.productName,
+                productImg = od.ProductPost.productImg,
+                QTY = od.QTY,
+                OrderDetailID = od.OrderDetailID,
+                oneProductTotalPrice = od.oneProductTotalPrice,
+                buyerUserAccount = od.Order.buyerUserID
+
+            });
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+
+
+        }
+        public ActionResult getSalesProcessedOrderList(string userid)
+        {
+            var id = Convert.ToInt32(userid);
+
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2 && m.buyerStatus==2).Select(od => new {
+                orderDetailId = od.OrderDetailID,
+                orderID = od.OrderID,
+                createdTime = od.Order.createdTime,
+                productName = od.ProductPost.productName,
+                productImg = od.ProductPost.productImg,
+                QTY = od.QTY,
+                OrderDetailID = od.OrderDetailID,
+                oneProductTotalPrice = od.oneProductTotalPrice,
+                buyerUserAccount = od.Order.buyerUserID
+
+            });
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+        public ActionResult getSalesPastOrderList(string userid)
+        {
+            var id = Convert.ToInt32(userid);
+
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2).Select(od => new {
+                orderDetailId = od.OrderDetailID,
+                orderID = od.OrderID,
+                createdTime = od.Order.createdTime,
+                productName = od.ProductPost.productName,
+                productImg = od.ProductPost.productImg,
+                QTY = od.QTY,
+                OrderDetailID = od.OrderDetailID,
+                oneProductTotalPrice = od.oneProductTotalPrice,
+                buyerUserAccount = od.Order.buyerUserID
+
+            });
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+
+
+        }
+
     } //end of class
 }//end of namespace
