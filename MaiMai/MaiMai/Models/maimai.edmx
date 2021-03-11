@@ -364,8 +364,7 @@
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="maimai2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -468,6 +467,7 @@
           <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
+          <NavigationProperty Name="Cart" Relationship="maimaiModel.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -520,18 +520,6 @@
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Tag" FromRole="Tag" ToRole="ProductPost" />
           <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Tag" FromRole="Tag" ToRole="RequiredPost" />
         </EntityType>
-        <Association Name="FK_Cart_ProductPost">
-          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
-          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductPost">
-              <PropertyRef Name="ProductPostID" />
-            </Principal>
-            <Dependent Role="Cart">
-              <PropertyRef Name="ProductPostID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Comment_Member">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
@@ -689,7 +677,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Comment" EntityType="Self.Comment" />
           <EntitySet Name="Member" EntityType="Self.Member" />
           <EntitySet Name="Order" EntityType="Self.Order" />
@@ -699,10 +686,6 @@
           <EntitySet Name="ReportDetail" EntityType="Self.ReportDetail" />
           <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" />
           <EntitySet Name="Tag" EntityType="Self.Tag" />
-          <AssociationSet Name="FK_Cart_ProductPost" Association="Self.FK_Cart_ProductPost">
-            <End Role="ProductPost" EntitySet="ProductPost" />
-            <End Role="Cart" EntitySet="Cart" />
-          </AssociationSet>
           <AssociationSet Name="FK_Comment_Member" Association="Self.FK_Comment_Member">
             <End Role="Member" EntitySet="Member" />
             <End Role="Comment" EntitySet="Comment" />
@@ -755,7 +738,36 @@
             <End Role="Tag" EntitySet="Tag" />
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
+          <EntitySet Name="Cart" EntityType="maimaiModel.Cart" />
+          <AssociationSet Name="FK_Cart_ProductPost" Association="maimaiModel.FK_Cart_ProductPost">
+            <End Role="ProductPost" EntitySet="ProductPost" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductPostID" Type="Int32" />
+          <Property Name="QTY" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="ProductPost" Relationship="maimaiModel.FK_Cart_ProductPost" FromRole="Cart" ToRole="ProductPost" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Cart_ProductPost">
+          <End Type="maimaiModel.ProductPost" Role="ProductPost" Multiplicity="0..1" />
+          <End Type="maimaiModel.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPost">
+              <PropertyRef Name="ProductPostID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -892,6 +904,18 @@
               <MappingFragment StoreEntitySet="Tag">
                 <ScalarProperty Name="TagID" ColumnName="TagID" />
                 <ScalarProperty Name="tagName" ColumnName="tagName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="maimaiModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
+                <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

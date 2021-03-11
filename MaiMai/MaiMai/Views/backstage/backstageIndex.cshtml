@@ -14,76 +14,84 @@
 
     <div class="container" style="padding-top:100px">
         <div class="row">
-            <div class="col-2" id="backstage">
-                <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#member_P" role="button"
-                   aria-expanded="false" aria-controls="member_P">會員管理</a>
-                <div class="collapse mb-3" id="member_P" data-parent="#backstage">
-                    <a class="d-block btn" onclick="getMemberList()">所有會員</a>
-                    <a class="d-block btn" onclick="getAdminLlist()">管理員</a>
+            <div class="col-12 col-lg-2  d-sm-flex  navbar navbar-expand-lg navbar-light align-items-start" id="backstage">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-wrap" id="navbarTogglerDemo02">
+
+
+                    <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#member_P" role="button"
+                       aria-expanded="false" aria-controls="member_P">會員管理</a>
+                    <div class="collapse mb-3" id="member_P" data-parent="#backstage">
+                        <a class="d-block btn"  onclick="getMemberList()">所有會員</a>
+                        <a class="d-block btn" onclick="getAdminLlist()">管理員</a>
+                    </div>
+
+
+                    <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#order_P" role="button"
+                       aria-expanded="false" aria-controls="order_P">訂單管理</a>
+                    <div class="collapse mb-3" id="order_P" data-parent="#backstage">
+                        <a class="d-block btn" onclick="getOrderList()">所有訂單</a>
+                        <a class="d-block btn" onclick="getCompleteOrder()">已完成訂單</a>
+                        <a class="d-block btn" onclick="getUnCompleteOrder()">未完成訂單</a>
+
+                    </div>
+
+                    <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
+                    <div class="collapse" id="info_P" data-parent="#backstage"></div>
+
+                    <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
+                    <div class="collapse" id="tag_P" data-parent="#backstage"></div>
+                </div>
                 </div>
 
-                <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#order_P" role="button"
-                   aria-expanded="false" aria-controls="order_P">訂單管理</a>
-                <div class="collapse mb-3" id="order_P" data-parent="#backstage">
-                    <a class="d-block btn" onclick="getOrderList()">所有訂單</a>
-                    <a class="d-block btn" onclick="getCompleteOrder()">已完成訂單</a>
-                    <a class="d-block btn" onclick="getUnCompleteOrder()">未完成訂單</a>
+                <div class="col-12 col-lg-8">
+                    <div id="show">
+                    </div>
 
-                </div>
+                    <div class="modal fade" id="editMember" tabindex="-1" role="dialog" aria-labelledby="editMemberTitle"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editMemberTitle">會員資訊</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="editMemberbody">
 
-                <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
-                <div class="collapse" id="info_P" data-parent="#backstage"></div>
-
-                <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
-                <div class="collapse" id="tag_P" data-parent="#backstage"></div>
-
-            </div>
-
-            <div class="col-10">
-                <div id="show">
-                </div>
-
-                <div class="modal fade" id="editMember" tabindex="-1" role="dialog" aria-labelledby="editMemberTitle"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editMemberTitle">會員資訊</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="editMemberLevel()">儲存</button>
+                                </div>
                             </div>
-                            <div class="modal-body" id="editMemberbody">
+                        </div>
+                    </div>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="editMemberLevel()">儲存</button>
+                    <div class="modal fade" id="editOrder" tabindex="-1" role="dialog" aria-labelledby="editOrderTitle"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editOrderTitle">商品資訊</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="editOrderbody">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="modal fade" id="editOrder" tabindex="-1" role="dialog" aria-labelledby="editOrderTitle"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editOrderTitle">商品資訊</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" id="editOrderbody">
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
         </div>
 
@@ -129,11 +137,20 @@
                         var birmonth = new Date(birthdayMilliseconds).getMonth()+1;
                         var birdate = new Date(birthdayMilliseconds).getDate();
                         $("#editMemberbody").html(`<form><div class='d-flex justify-content-center'><label>會員編號<input name="UserID" class='form-control' type='text' value = "${member.UserID}" readonly/><label>會員帳號<input name="userAccount" class='form-control' type='text' value = "${member.userAccount}" readonly/><label>城市<input name="city" class='form-control' type='text' value = "${member.city}" readonly/><label>地址<input name="address" class='form-control' type='text' value = "${member.address}" readonly/><label>信箱<input name="email" class='form-control' type='text' value = "${member.email}" readonly/><label>電話<input name="phoneNumber" class='form-control' type='text' value = "${member.phoneNumber}" readonly/><label>姓名<input class='form-control' type='text' value = "${member.Name}" readonly/><label>生日<input class='form-control' name="birthday" type='text' value = "${biryear}-${birmonth}-${birdate}" readonly/><label>身分證字號<input class='form-control' type='text' name="identityNuUrlber" value = "${member.identityNumber}" readonly/><label>大頭貼<input class='form-control' type='text' name="profileImg" value = "${member.profileImg}" readonly/><label>會員等級<select id="inputState" class="form-control" name="userLevel">
-                            <option value="${member.userLevel}">${member.userLevelString}</option>
                             <option value="1">管理員</option>
                             <option value="2">優質會員</option>
                             <option value="3">一般會員</option>
                             </select><label>總評分<input class='form-control' type='text' name="totalStarRate" value = "${member.totalStarRate}" readonly/><label>自我介紹<textarea class='form-control' rows="5" cols="30"  style="resize:none" name="selfDescription" readonly>${member.selfDescription}</textarea><input type="hidden" name="userPassWord" value="${member.userPassWord}"/><input type="hidden" name="firstName" value="${member.firstName}"/><input type="hidden" name="lastName" value="${member.lastName}"/></div</form>`)
+
+                        if (member.userLevel == 1) {
+                            $("#inputState option[value=1]").attr("selected", "selected");                            
+                        }
+                        else if (member.userLevel == 2) {
+                            $("#inputState option[value=2]").attr("selected", "selected");
+                        }
+                        else if (member.userLevel == 3) {
+                            $("#inputState option[value=3]").attr("selected", "selected");
+                        }
 
                     })
                 }
