@@ -363,6 +363,6 @@ FodyWeavers.xsd
 *.dll
 
 #Michael_add SQL file
-maimai.Designer.cs
-maimai.edmx
-maimai.edmx.diagram
+*.Designer.cs
+*.edmx
+*.edmx.diagram
