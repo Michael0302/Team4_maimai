@@ -23,6 +23,7 @@ namespace MaiMai.Models
             this.ProductPost = new HashSet<ProductPost>();
             this.Report1 = new HashSet<Report>();
             this.RequiredPost = new HashSet<RequiredPost>();
+            this.Report2 = new HashSet<Report>();
         }
     
         public int UserID { get; set; }
@@ -55,5 +56,7 @@ namespace MaiMai.Models
         public virtual ICollection<Report> Report1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequiredPost> RequiredPost { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Report> Report2 { get; set; }
     }
 }

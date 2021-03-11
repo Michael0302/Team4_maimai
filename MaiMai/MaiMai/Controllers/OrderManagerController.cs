@@ -122,15 +122,19 @@ namespace MaiMai.Controllers
 
         maimaiRepository<OrderDetail> OrderDetailRepository = new maimaiRepository<OrderDetail>();
         maimaiRepository<Order> order = new maimaiRepository<Order>();
-       
 
+        maimaiRepository<RequiredPost> requiredPostRepository = new maimaiRepository<RequiredPost>();
 
         public string checkout(string orderid)
         {
 
             var oid = Convert.ToInt32(orderid);
             var orderReciept = order.GetbyID(oid);
-
+            var requirePost = db.RequiredPost.FirstOrDefault(m => m.OrderID == oid);
+            if (requirePost != null) {
+                requirePost.isPast = true;
+                requiredPostRepository.Update(requirePost);
+            }
           
 
             if (orderReciept == null)
@@ -235,6 +239,27 @@ namespace MaiMai.Controllers
          
         }
 
+        public ActionResult getSalesProcessOrderList(string userid) {
+            var id = Convert.ToInt32(userid);
+
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 1 && m.buyerStatus == 1).Select(od => new {
+                orderDetailId = od.OrderDetailID,
+                orderID = od.OrderID,
+                createdTime = od.Order.createdTime,
+                productName = od.ProductPost.productName,
+                productImg = od.ProductPost.productImg,
+                QTY = od.QTY,
+                OrderDetailID = od.OrderDetailID,
+                oneProductTotalPrice = od.oneProductTotalPrice,
+                buyerUserAccount = od.Order.buyerUserID
+
+            });
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+
+
+        }
         public string sentOrder(string oderdeail)
         {
 
@@ -257,32 +282,11 @@ namespace MaiMai.Controllers
 
         }
 
-        public ActionResult getSalesProcessOrderList(string userid) {
-            var id = Convert.ToInt32(userid);
-
-            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 1).Select(od => new {
-                orderDetailId = od.OrderDetailID,
-                orderID = od.OrderID,
-                createdTime = od.Order.createdTime,
-                productName = od.ProductPost.productName,
-                productImg = od.ProductPost.productImg,
-                QTY = od.QTY,
-                OrderDetailID = od.OrderDetailID,
-                oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = od.Order.buyerUserID
-
-            });
-
-
-            return Json(table, JsonRequestBehavior.AllowGet);
-
-
-        }
         public ActionResult getSalesProcessedOrderList(string userid)
         {
             var id = Convert.ToInt32(userid);
 
-            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2 && m.buyerStatus==2).Select(od => new {
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2 && m.buyerStatus==1).Select(od => new {
                 orderDetailId = od.OrderDetailID,
                 orderID = od.OrderID,
                 createdTime = od.Order.createdTime,
@@ -305,7 +309,7 @@ namespace MaiMai.Controllers
         {
             var id = Convert.ToInt32(userid);
 
-            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2).Select(od => new {
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2 && m.buyerStatus == 2).Select(od => new {
                 orderDetailId = od.OrderDetailID,
                 orderID = od.OrderID,
                 createdTime = od.Order.createdTime,
