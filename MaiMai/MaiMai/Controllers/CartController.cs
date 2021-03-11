@@ -30,7 +30,7 @@ namespace MaiMai.Controllers
             }
 
             var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var products = db.Cart.Where(c => c.UserID == UserID).Join(db.ProductPost, x => x.ProductPostID, y => y.ProductPostID, (x, y) => new
+            var products = db.Cart.Where(c => c.UserID == UserID && c.Status == false).Join(db.ProductPost, x => x.ProductPostID, y => y.ProductPostID, (x, y) => new
             {
                 x.CartID,
                 x.CartNumber,
@@ -84,7 +84,7 @@ namespace MaiMai.Controllers
 
             foreach (string i in CartID.ToArray())
             {
-                var oneProduct1 = oneProduct.ToList().FirstOrDefault(m=>m.CartID==Convert.ToInt32(i));   
+                var oneProduct1 = oneProduct.ToList().FirstOrDefault(m=>m.CartID==Convert.ToInt32(i) && m.Status == false);   
                 /////取出CartID存入Order
                 Order ord = new Order();
                 ord.buyerUserID = UserID;
@@ -105,6 +105,9 @@ namespace MaiMai.Controllers
                 ordt.buyerStatus = 0;
                 ordt.sellerStatus = 0;
                 db.OrderDetail.Add(ordt);
+                db.SaveChanges();
+
+                oneProduct1.Status = true;
                 db.SaveChanges();
             }
 
