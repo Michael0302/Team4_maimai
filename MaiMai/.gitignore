@@ -361,3 +361,8 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 *.dll
+
+#Michael_add SQL file
+maimai.Designer.cs
+maimai.edmx
+maimai.edmx.diagram
