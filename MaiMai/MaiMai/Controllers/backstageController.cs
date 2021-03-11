@@ -21,6 +21,7 @@ namespace MaiMai.Controllers
 
         maimaiRepository<Member> mb = new maimaiRepository<Member>();
         maimaiRepository<Order> od = new maimaiRepository<Order>();
+        maimaiRepository<ProductPost> prod = new maimaiRepository<ProductPost>();
         maimaiEntities db = new maimaiEntities();
         maimaiRepository<Tag> tagdb = new maimaiRepository<Tag>();
         public ActionResult backstageIndex()
@@ -288,6 +289,14 @@ namespace MaiMai.Controllers
             tagdb.Create(t);
 
             return Content("新增成功");
+        }
+
+        //商品列表
+        public ActionResult getAllPorducts()
+        {
+            var prodlist = prod.GetAll();
+
+            return Json(prodlist, JsonRequestBehavior.AllowGet);
         }
 
     }
