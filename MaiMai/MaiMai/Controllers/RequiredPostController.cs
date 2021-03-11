@@ -95,6 +95,29 @@ namespace MaiMai.Controllers
 
         }
 
+        public ActionResult allPastPost()
+        {
+
+            var table = db.RequiredPost.Where(m => m.isPast == true).Select(m => new RequiredPostViewModel_C()
+            {
+                RequiredPostID = m.RequiredPostID,
+                postTime = m.postTime,
+                postDescription = m.postDescription,
+                postName = m.postName,
+                postImg = m.postImg,
+                UserID = m.UserID,
+                requiredQTY = m.requiredQTY,
+                estimatePrice = m.estimatePrice,
+                TagID = m.TagID,
+                OrderID = m.OrderID,
+                userAccount = m.Member.userAccount
+            }).ToList();
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+
+        }
+
         public string uploadPhoto(upLoadPhotoViewModel data)
         {
             if (data.upphoto == null)

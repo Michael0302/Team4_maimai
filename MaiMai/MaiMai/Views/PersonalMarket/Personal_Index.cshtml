@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="~/Content/cssCHIEN/personalMarket.css" rel="stylesheet" />
-     
+
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
+    <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <style>
     </style>
 </head>
@@ -41,7 +42,12 @@
                             </div>
                             <div class="D_agK w-25">
                                 <a class="D_ih" data-toggle='modal' data-target='#bulid'>
-                                    <div class="D_aG D_ay D_aS D_aO D_aB "  type="button">上架商品</div>
+                                    <div class="D_aG D_ay D_aS D_aO D_aB " type="button">上架商品</div>
+                                </a>
+                            </div>
+                            <div class="D_agK w-25">
+                                <a class="D_ih" href="/OrderManager/salesOrderIndex">
+                                    <div class="D_aG D_ay D_aS D_aO D_aB " type="button">賣家訂單管理</div>
                                 </a>
                             </div>
                             <div class="D_agK">
@@ -225,8 +231,8 @@
                 <div class="modal-body" id="editMemberbody">
                     <form class="formFrame mx-auto " enctype="multipart/form-data">
                         <div class="displayImg">
-                            <img id="Productimg">
-                            <input type="file" onChange="doUpload(this)" name="upphoto" id="productImg" style="display: block;">
+                            <div class="photo"><img id="Productimg"></div>
+                            <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;">
                         </div>
                         <div class="displayInput">
                             <h6>
@@ -384,10 +390,6 @@
 
 
 
-
-
-
-
         });
 
         function submitProdouct() {
@@ -427,19 +429,20 @@
 
         }// end tag function
 
-        function doUpload(eler) {
-            var photo = $(eler).val();
-            console.log(photo);
-            $.ajax({
-                url: "/RequiredPost/uploadPhoto",
-                type: "Post",
-                data: { upphoto: photo },
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    $(".displayImg>img").attr("src", response)
-                }
-            })
+        function previewFile() {
+            //var photo = $(eler).val();
+            const preview = document.querySelector('#Productimg');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                // convert image file to base64 string
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
         } //  doUpload end
 
     </script>
