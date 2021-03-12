@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c4ba92c3eb954f6f8dfaa0bb8743a6a3" Name="Diagram1">
+      <Diagram DiagramId="a19b83f61af14378aaf29d2c1c664673" Name="Diagram1">
         <EntityTypeShape EntityType="maimai2Model.Cart" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="maimai2Model.Comment" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="maimai2Model.Member" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
