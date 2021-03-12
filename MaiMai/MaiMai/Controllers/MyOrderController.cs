@@ -270,11 +270,6 @@ namespace MaiMai.Controllers
         {
             var reportDetail = db.ReportDetail.Select(t => new
             {
-                //reportorID = t.reportorID,
-                //reportedUserID = t.repotedUserID,
-                //reportStatus = t.reportStatus,
-                //reportDetailID = t.ReportDetailID,
-                //createdTime = t.createdTime,
                 reason = t.reason
             }).ToList();
 
@@ -284,19 +279,24 @@ namespace MaiMai.Controllers
 
         maimaiRepository<Report> rtdb = new maimaiRepository<Report>();
 
-        public ActionResult saveReport(string reportTXT, Array reportTAG)
+        public ActionResult saveReport(string reportTXT, int reportTAG)
         {
-            Report r = new Report
+            
+            Report r = new Report  //存值不成功??
             {
-                //reportorID = formadata.reportorID,
-                //reportedUserID = formdata.reportedUserID,
-                //reportStatus = formdata.reportStatus,
-                //ReportDetailID=form.reportDetailID,
-                //createdTime=form.createdTime,
-                //ReportDetail.reason = reportTXT
+                reportorID = 13,//Convert.ToInt32(Request.Cookies["LoginID"].Value),
+                repotedUserID = 5,
+                reportStatus = 0,
+                createdTime = DateTime.Now,
+                ReportDetailID = reportTAG,  
+                reportDescription = reportTXT, //[Product(0)OrRequire(1)] 
+                ProductOrRequire = 1,
+                ProductOrRequireID=4
             };
 
-            rtdb.Create(r);
+            db.Report.Add(r);
+            db.SaveChanges();
+            //rtdb.Create(r);
 
             return Content("新增成功");
         }
