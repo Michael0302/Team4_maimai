@@ -17,8 +17,8 @@ namespace MaiMai.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductPost()
         {
-            this.OrderDetail = new HashSet<OrderDetail>();
             this.Cart = new HashSet<Cart>();
+            this.OrderDetail = new HashSet<OrderDetail>();
         }
     
         public int ProductPostID { get; set; }
@@ -31,12 +31,15 @@ namespace MaiMai.Models
         public Nullable<int> TagID { get; set; }
         public Nullable<System.DateTime> createdTime { get; set; }
         public Nullable<int> RequiredPostID { get; set; }
+        public string county { get; set; }
+        public string district { get; set; }
+        public Nullable<bool> status { get; set; }
     
-        public virtual Member Member { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Cart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         public virtual Tag Tag { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cart> Cart { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

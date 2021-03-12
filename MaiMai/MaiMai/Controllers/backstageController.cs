@@ -124,7 +124,7 @@ namespace MaiMai.Controllers
         {
             if(status != null )
             {               
-                if(status >= 2) { 
+                if(status == 2 || status==3) { 
                 var ordercmplist = db.Order.Where(m=>m.orderStatus >= 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
                 {
                     x.OrderId,
@@ -201,7 +201,9 @@ namespace MaiMai.Controllers
 
         public ActionResult delOrder_P(int OrderId)
         {
-            od.Delete(OrderId);
+            db.Order.Find(OrderId).orderStatus = 4;
+            db.SaveChanges();
+            //od.Delete(OrderId);
 
             return Content("刪除成功");
         }
@@ -294,11 +296,98 @@ namespace MaiMai.Controllers
         //商品列表
         public ActionResult getAllPorducts()
         {
-            var prodlist = prod.GetAll();
+            var prodlist = db.ProductPost.Where(p=>p.status ==true).Select(s=>new {
+                ProductPostID = s.ProductPostID,
+                productName = s.productName,
+                productDescription = s.productDescription,
+                productImg = s.productImg,
+                UserName = s.Member.firstName,
+                UserID = s.UserID,
+                price = s.price,
+                TagID = s.TagID,
+                Tag = s.Tag.tagName,
+                createdTime = s.createdTime,
+                inStoreQTY = s.inStoreQTY,
+                RequiredPostID = s.RequiredPostID
+            });
 
             return Json(prodlist, JsonRequestBehavior.AllowGet);
         }
 
+        //單一商品貼文
+        public ActionResult getProductPostFromAll(int ProductPostID)
+        {
+            var prodlist = db.ProductPost.Where(p=>p.ProductPostID == ProductPostID).Select(s => new {
+                ProductPostID = s.ProductPostID,
+                productName = s.productName,
+                productDescription = s.productDescription,
+                productImg = s.productImg,
+                UserName = s.Member.firstName,
+                UserID = s.UserID,
+                price = s.price,
+                TagID = s.TagID,
+                Tag = s.Tag.tagName,
+                createdTime = s.createdTime,
+                inStoreQTY = s.inStoreQTY,
+                RequiredPostID = s.RequiredPostID
+            });
+
+            return Json(prodlist, JsonRequestBehavior.AllowGet);
+        }
+
+    //下架商品
+    public ActionResult cancelProduct(int ProductPostID)
+        {
+            var cancel = db.ProductPost.Find(ProductPostID);
+
+            cancel.status = false;
+            db.SaveChanges();
+
+            return Content("成功下架");
+        }
+
+      //取得刪除列表
+     public ActionResult getDelPorducts()
+        {
+            var prodlist = db.ProductPost.Where(p => p.status == false).Select(s => new {
+                ProductPostID = s.ProductPostID,
+                productName = s.productName,
+                productDescription = s.productDescription,
+                productImg = s.productImg,
+                UserName = s.Member.firstName,
+                UserID = s.UserID,
+                price = s.price,
+                TagID = s.TagID,
+                Tag = s.Tag.tagName,
+                createdTime = s.createdTime,
+                inStoreQTY = s.inStoreQTY,
+                RequiredPostID = s.RequiredPostID
+            });
+
+            return Json(prodlist, JsonRequestBehavior.AllowGet);
+        }
+
+      //取得檢舉列表
+      public ActionResult getReport_P()
+        {
+            var allreports = db.Report.Select(s => new
+            {
+                ReportID = s.ReportID,
+                reportorID = s.reportorID,
+                repotedUserID = s.repotedUserID,
+                reportStatus = s.reportStatus,
+                createdTime = s.createdTime,
+                ReportDetailID = s.ReportDetailID,
+                reportDescription = s.reportDescription,
+                ProductOrRequire = s.ProductOrRequire,
+                ProductOrRequireID = s.ProductOrRequireID,
+            });
+
+            return Json(allreports, JsonRequestBehavior.AllowGet);
+        }
+
     }
+
+    
 
 }

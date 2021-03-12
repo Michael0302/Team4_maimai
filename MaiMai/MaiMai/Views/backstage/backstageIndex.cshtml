@@ -40,8 +40,8 @@
                     <a class="btn btn-primary mb-3 btn-block" data-toggle="collapse" href="#product_P" role="button"
                        aria-expanded="false" aria-controls="product_P">商品管理</a>
                     <div class="collapse mb-3" id="product_P" data-parent="#backstage">
-                        <a class="d-block btn" onclick="getMemberList()">所有商品</a>
-                        <a class="d-block btn" onclick="getAdminLlist()">下架商品</a>
+                        <a class="d-block btn" onclick="getAllPorducts()">上架商品</a>
+                        <a class="d-block btn" onclick="getDelProducts()">下架商品</a>
                     </div>
 
                     <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
@@ -50,7 +50,7 @@
                     <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
                     <div class="collapse" id="tag_P" data-parent="#backstage"></div>
 
-                    <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#report_P" role="button" onclick="getTag()">檢舉列表</a>
+                    <a class="btn btn-primary mb-3 btn-block text-white" data-toggle="collapse" href="#report_P" role="button" onclick="reportList()">檢舉列表</a>
                     <div class="collapse" id="report_P" data-parent="#backstage"></div>
 
 
@@ -58,8 +58,11 @@
             </div>
 
             <div class="col-12 col-lg-8">
+
+                @*更新部分頁面*@
                 <div id="show">
                 </div>
+
 
                 <div class="modal fade" id="editMember" tabindex="-1" role="dialog" aria-labelledby="editMemberTitle"
                      aria-hidden="true">
@@ -101,34 +104,52 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProductTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editProductTitle">商品資訊</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="editProductbody">
 
-            <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProductTitle"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editProductTitle">商品資訊</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="editProductbody">
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProductTitle"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="reportTitle">檢舉明細</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="reportTitle">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
+
+
         </div>
-           
-
-        </div>
-
-
     </div>
 
 
@@ -145,7 +166,7 @@
             crossorigin="anonymous"></script>*@
 <script>
 
-        function getMemberList() {
+    function getMemberList() {
             $.ajax({
                 url: "@Url.Action("getMemberList_P", "backstage")",
                 type: "GET",
@@ -158,7 +179,7 @@
             })
         }
 
-        function getMember(id) {
+    function getMember(id) {
             $.ajax({
                 url: "@Url.Action("getMember_P", "backstage")",
                 data: {id:id },
@@ -172,7 +193,7 @@
                         $("#editMemberbody").html(`
                                            <form>
                                                 <div class='d-flex justify-content-center'>
-                                                        <label>大頭貼<div><img src="../Content/ProductPostImg/member/${member.profileImg}"/></div>
+                                                        <label>大頭貼<div style="width:200px; height:200px; background-image:url(../Content/ProductPostImg/member/${member.profileImg}); background-size:cover"></div>
                                                         <label>會員編號<input name="UserID" class='form-control' type='text' value = "${member.UserID}" readonly/>
                                                         <label>會員帳號<input name="userAccount" class='form-control' type='text' value = "${member.userAccount}" readonly/>
                                                         <label>城市<input name="city" class='form-control' type='text' value = "${member.city}" readonly/>
@@ -240,7 +261,7 @@
             })
         }
 
-        function getOrderList() {
+    function getOrderList() {
             $.ajax({
                 url: "@Url.Action("getOrderList_P", "backstage")",
                 type: "GET",
@@ -310,7 +331,7 @@
                                                 <div class='d-flex justify-content-center' id='search'></div>
                                                     <table class='table table-hover'>
                                                         <thead class='table-dark'>
-                                                            <tr id='showTh'><th>商品名稱</th><th>總價</th><th>數量</th><th>建立時間</th><th>建立者</th><th></th></tr>
+                                                            <tr id='showTh'><th>商品名稱</th><th>總價</th><th>數量</th><th>建立時間</th><th>賣家</th><th></th></tr>
                                                         </thead>
                                                         <tbody id='showList'>
                                                         </tbody>
@@ -327,7 +348,18 @@
                         var hour = new Date(Milliseconds).getHours();
                         var min = new Date(Milliseconds).getMinutes();
                         var sec = new Date(Milliseconds).getSeconds();
-                        $("#showList").append(`<tr><td>${order.productName}</td><td>${order.oneProductTotalPrice}</td><td>${order.QTY}</td><td>${year}-${month}-${date} ${hour}:${min}:${sec}</td><td>${order.SellerName}</td><td><button type='button' class='btn btn-primary' data-toggle='modal'  data-target='#editOrder' onclick="getProductPost(${order.ProductPostID},${order.QTY})">查看</button></td></tr>`)
+                        $("#showList").append(`
+                                                    <tr>
+                                                    <td>${order.productName}</td>
+                                                    <td>${order.oneProductTotalPrice}</td>
+                                                    <td>${order.QTY}</td>
+                                                    <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>
+                                                    <td>${order.SellerName}</td>
+                                                    <td>
+                                                    <button type='button' class='btn btn-primary' data-toggle='modal'  data-target='#editOrder' onclick="getProductPost (${order.ProductPostID},${order.QTY})">查看</button>
+                                                    </td>
+                                                    </tr>
+                                            `)
                     })
                 }
             })
@@ -342,6 +374,7 @@
             data: { OrderId: OrderId },
             success: function (order) {
                 window.alert("刪除成功")
+                getOrderList();
             }
         })
         }
@@ -366,11 +399,11 @@
                         var sec = new Date(Milliseconds).getSeconds();
                         $("#editOrderbody").html(`
                                                 <div class='d-flex justify-content-center'>
-                                                    <label>商品照片<div><img src="../Content/ProductPostImg/${product.productImg}"/></div>
+                                                    <label>商品照片<div style="width:200px; height:200px; background-image:url(../Content/ProductPostImg/${product.productImg}); background-size:cover"></div>
                                                     <label>商品編號<input class='form-control' type='text' value="${product.ProductPostID}" readonly />
                                                     <label>商品名稱<input class='form-control' type='text' value="${product.productName}" readonly/>
                                                     <label>商品描述<input class='form-control' type='text' value="${product.productDescription}" readonly/>
-                                                    <label>建立者<input class='form-control' type='text' value="${product.UserName}" readonly/>
+                                                    <label>賣家<input class='form-control' type='text' value="${product.UserName}" readonly/>
                                                     <label>數量<input class='form-control' type='text' value="${product.QTY}" readonly/>
                                                     <label>價錢<input class='form-control' type='text' value="${product.price}" readonly/>
                                                     <label>標籤<input class='form-control' type='text' value="${product.Tag}" readonly/>
@@ -400,6 +433,7 @@
         })
     }
 
+    //發通知
     function pushInfo() {
         $.ajax({
             url:"@Url.Action("", "backstage")"
@@ -446,16 +480,170 @@
     function getAllPorducts() {
 
         $.ajax({
-            url: "@Url.Action("createTag", "backstage")",
-            type: "GET",            
+            url: "@Url.Action("getAllPorducts", "backstage")",
+            type: "GET",
             success: function (allProduct) {
-                alert("新增成功");
-                getTag();
-            },
-            error: function () {
-                alert("此標籤已存在");
+                $("#show").html(`
+                                            <div class='d-flex justify-content-center' id='search'></div>
+                                                    <table class='table table-hover'>
+                                                        <thead class='table-dark'>
+                                                            <tr id='showTh'><th>商品編號</th><th>商品名稱</th><th>價錢</th><th>庫存</th><th>建立時間</th><th></th></tr>
+                                                        </thead>
+                                                        <tbody id='showList'>
+                                                        </tbody>
+                                                    </table>
+                                                <div class='d-flex justify-content-center'></div>
+                                    `)
+
+                $(allProduct).each(function (index, allproduct) {
+                    var Milliseconds = parseInt(allproduct.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+                    var hour = new Date(Milliseconds).getHours();
+                    var min = new Date(Milliseconds).getMinutes();
+                    var sec = new Date(Milliseconds).getSeconds();
+
+                    $("#showList").append(`
+                                            <tr data-toggle='modal'  data-target='#editProduct' onclick="getProductPostFromAll(${allproduct.ProductPostID})">
+                                                    <td>${allproduct.ProductPostID}</td>
+                                                    <td>${allproduct.productName}</td>
+                                                    <td>${allproduct.price}</td>
+                                                    <td>${allproduct.inStoreQTY}</td>
+                                                    <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>
+                                                    <td>
+                                                    <button type='button' class='btn btn-danger' onclick="cancelProduct(${allproduct.ProductPostID})">下架此商品</button>
+                                                    </td>
+                                                    </tr>
+                                                `)
+                })
             }
         })
+    }
+
+    function getProductPostFromAll(ProductPostID) {
+        $.ajax({
+            url: "@Url.Action("getProductPostFromAll", "backstage")",
+            data: { ProductPostID: ProductPostID},
+            type: "GET",
+            success: function (oneProduct) {
+                $(oneProduct).each(function (index, oneProduct) {
+                    var Milliseconds = parseInt(oneProduct.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+                    var hour = new Date(Milliseconds).getHours();
+                    var min = new Date(Milliseconds).getMinutes();
+                    var sec = new Date(Milliseconds).getSeconds();
+
+                    $("#editProductbody").html(`
+                                        <div class='d-flex justify-content-center'>
+                                                    <label>商品照片<div style="width:200px; height:200px; background-image: url(../Content/ProductPostImg/${oneProduct.productImg}); background-size: cover"></div>
+                                                    <label>商品編號<input class='form-control' type='text' value="${oneProduct.ProductPostID}" readonly />
+                                                    <label>商品名稱<input class='form-control' type='text' value="${oneProduct.productName}" readonly/>
+                                                    <label>商品描述<input class='form-control' type='text' value="${oneProduct.productDescription}" readonly/>
+                                                    <label>賣家<input class='form-control' type='text' value="${oneProduct.UserName}" readonly/>
+                                                    <label>庫存<input class='form-control' type='text' value="${oneProduct.inStoreQTY}" readonly/>
+                                                    <label>價錢<input class='form-control' type='text' value="${oneProduct.price}" readonly/>
+                                                    <label>標籤<input class='form-control' type='text' value="${oneProduct.Tag}" readonly/>
+                                                    <label>徵求台編號<input class='form-control' type='text' value="${oneProduct.RequiredPostID}" readonly/>
+                                                    <label>建立時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/></div>
+                                                `)
+                })
+            }
+        })
+    }
+    
+    function cancelProduct(ProductPostID) {
+        $.ajax({
+            url: "@Url.Action("cancelProduct", "backstage")",
+            data: { ProductPostID: ProductPostID },
+            type: "GET",
+            success: function (oneProduct) {
+                alert("此訂單已下架!");
+                getAllPorducts();
+            }
+        })
+        event.stopPropagation();
+    }
+
+    //取得刪除列表
+    function getDelProducts() {
+        $.ajax({
+            url: "@Url.Action("getDelPorducts", "backstage")",
+            type: "GET",
+            success: function (allProduct) {
+                $("#show").html(`
+                                            <div class='d-flex justify-content-center' id='search'></div>
+                                                    <table class='table table-hover'>
+                                                        <thead class='table-dark'>
+                                                            <tr id='showTh'><th>商品編號</th><th>商品名稱</th><th>價錢</th><th>庫存</th><th>建立時間</th><th></th></tr>
+                                                        </thead>
+                                                        <tbody id='showList'>
+                                                        </tbody>
+                                                    </table>
+                                                <div class='d-flex justify-content-center'></div>
+                                    `)
+
+                $(allProduct).each(function (index, allproduct) {
+                    var Milliseconds = parseInt(allproduct.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+                    var hour = new Date(Milliseconds).getHours();
+                    var min = new Date(Milliseconds).getMinutes();
+                    var sec = new Date(Milliseconds).getSeconds();
+
+                    $("#showList").append(`
+                                            <tr data-toggle='modal'  data-target='#editProduct' onclick="getProductPostFromAll (${allproduct.ProductPostID})">
+                                                    <td>${allproduct.ProductPostID}</td>
+                                                    <td>${allproduct.productName}</td>
+                                                    <td>${allproduct.price}</td>
+                                                    <td>${allproduct.inStoreQTY}</td>
+                                                    <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>
+                                                    <td>
+                                                    <button type='button' class='btn btn-primary' onclick="getProductPostFromAll(${allproduct.ProductPostID})">查看</button>
+                                                    </td>
+                                                    </tr>
+                                                `)
+                })
+            }
+        })
+    }
+
+    function reportList() {
+        $.ajax({
+                url: "@Url.Action("getReport_P", "backstage")",
+                type: "GET",
+                success: function (report) {
+                    $("#show").html(`
+                                    < div class= 'd-flex justify-content-center' id = 'search' ></div >
+                                        <table class='table table-hover'>
+                                            <thead class='table-dark'>
+                                                <tr id='showTh'>
+                                                    <th>檢舉單號</th>
+                                                    <th>檢舉人</th>
+                                                    <th>被檢舉人</th>
+                                                    <th>檢舉時間</th>
+                                                    <th>處理狀態</th>
+                                                    <th>檢舉類別</th>
+                                                </tr>
+                                            </thead>
+                                        <tbody id='showList'></tbody>
+                                    </table>`);
+                    $(report).each(function(index, item){
+                        $("#showList").append(`
+                                                                <tr data-toggle='modal'  data-target='#editProduct' onclick="getProductPostFromAll(${item.ReportID})">
+                                                                    <td>${item.ReportID}</td>
+                                                                    <td>${item.reportorID}</td>
+                                                                    <td>${item.repotedUserID}</td>
+                                                                    <td>${item.createdTime}</td>
+                                                                    <td>${item.reportStatus}</td>
+                                                                    <td>${item.ReportDetailID}</td>
+                                                                </tr>`);
+                    });
+                }
+            })
     }
 
 </script>
