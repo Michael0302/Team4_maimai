@@ -6,6 +6,7 @@
 <head>
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
+    <script src="~/Content/resource_nico/tw-city-selector.min.js"></script>
 </head>
 
 <div class="container" style=" padding-top: 100px">
@@ -51,7 +52,7 @@
                         </button>
                     </div>
                     <div class="modal-body" id="editMemberbody">
-                        <form class="formFrame mx-auto" enctype="multipart/form-data">
+                        <form  id="form1" class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
                                 <div class="photo"><img id="Productimg"></div>
                                 <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
@@ -61,6 +62,26 @@
                                 <h6>
                                     貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
                                 </h6>
+
+
+                                <div>
+                                    <h6>交貨方式</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="express" id="flexRadioDefault1" value="express"checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            物流交貨
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pTop" id="flexRadioDefault2"   value="pTop" >
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          當面交貨/地點
+                                        </label>
+                                    </div>
+                                    <div  class="my-selector-b" disabled></div>
+                                </div>
+
+
                                 <h6>價格:<input type="text" required name="estimatePrice" id="estimatePrice"></h6>
                                 <h6>數量:<input type="text" required name="require0dQTY" id="requiredQTY"></h6>
                                 <h6>
@@ -70,7 +91,7 @@
                                     </select>
                                 </h6>
                                 @*====userID======
-                                    ====posttime====*@
+        ====posttime====*@
 
                             </div>
 
@@ -112,9 +133,16 @@
 </div>
 <script>
     $(function () {
+
+        new TwCitySelector({
+            el: ".my-selector-b",
+            elCounty: ".county", // 在 el 裡查找 dom
+            elDistrict: ".district"
+        });
+
+     
+
         var test = getCookie('LoginID');
-        console.log(test)
-        console.log(typeof test)
 
 
         $.ajax({
@@ -134,6 +162,9 @@
                             <div>
                                     <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
                             </div>
+
+                             
+
                             <div class="post-button">
                                     <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
@@ -156,9 +187,29 @@
                                                  </div>
                                                 <div class="displayInput">
                                                         <h6>產品名稱:<input type="text" name="productName" id="productName${i}"></h6>
+
                                                         <h6>
                                                               產品描述:<textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新" class="w-75" onclick="tag()"></textarea>
                                                         </h6>
+
+                                    <div>
+                                    <h6>交貨方式</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="express" id="flexRadioDefault1" value="express"checked>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            物流交貨
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="pTop" id="flexRadioDefault2"   value="pTop" >
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                          當面交貨/地點
+                                        </label>
+                                    </div>
+                                    <div class="my-selector-b" disabled ></div>
+                                </div>
+
+
                                                         <h6>價格:<input type="text" name="price" id="price${i}"></h6>
                                                         <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY${i}"></h6>
                                                         <h6>標籤:
@@ -188,10 +239,19 @@
             }
         })
 
-
-
         // ajax end
     })//documentReady
+
+        $('input[type=radio]').change(function () {
+            if (this.value == 'pTop') {
+                $(".county").attr('disabled', false);
+                $(".district").attr('disabled', false);
+            }
+            else {
+                $(".county").attr('disabled', true)
+                $(".district").attr('disabled', true)
+            }
+        });
 
     function previewFile() {
         //var photo = $(eler).val();
@@ -247,32 +307,38 @@
                 type: "GET",
                 success: function (response) {
                     $(response).each(function (i, item) {
+                        
+
                         $("#pocessPostStart").append(`
 
-                            <div id="img" class="photo"></div>
-                            <div class="post-text">
-                            <h3 id="postName${i}">${item.postName}</h3>
-                            <h6 id="userName${i}">名稱:${item.userAccount}</h6>
-                            <div>
-                            <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
-                            </div>
-                            <div class="post-button">
-                            <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
-                            <a data-toggle="collapse" href="#collapseComment${i}"
-                               role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
+                                        <div id="img" class="photo"></div>
+                                        <div class="post-text">
+                                    <div class="d-flex justify-content-between">
+                                                <h3 id="postName${i}">${item.postName}</h3>
+                                                <h6>${item.county}  <span>${item.district}</span></h6>
+                                                 </div>
+                                        <h6 id="userName${i}">名稱:${item.userAccount}</h6>
+                                        <div>
+                                        <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                                        </div>
+                                        <div class="post-button">
+                                        <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                                        <a data-toggle="collapse" href="#collapseComment${i}"
+                                           role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
 
-                        </div>
-                    </div>
-                       <div class="collapse" id="collapseComment${i}">
-                        <div class="card card-body">
+                                    </div>
+                                </div>
+                                   <div class="collapse" id="collapseComment${i}">
+                                    <div class="card card-body">
 
-                        </div>
-                    </div>
-                    <div class="collapse" id="collapseExample${i}">
-                        <div class="card card-body">
+                                    </div>
+                                </div>
+                                <div class="collapse" id="collapseExample${i}">
+                                    <div class="card card-body">
 
-                        </div>
-                    </div>`)
+                                    </div>
+                                </div>
+                          `)
 
 
                     })
@@ -362,7 +428,9 @@
                 }
             })
 
-        }// end tag function
+    }// end tag function
+
+
         function getCookie(cookieName) {
             var name = cookieName + "=";
             var ca = document.cookie.split(';');
@@ -373,7 +441,8 @@
             }
             return "";
 
-        }
+    }
+
     function checkCommentList(eler,index) {
 
         var test = getCookie('LoginAccount');
@@ -392,7 +461,10 @@
 
                           <div class="photo">  <img src="../Content/resource_nico/images/${item.productImg}"/> </div>
                           <div class="post-text">
-                                <h3 id="postName${i}"> ${item.productName}</h3>
+                                <div class="d-flex justify-content-between">
+                                    <h3 id="postName${i}">${item.productName}</h3>
+                                    <h6>${item.county}  <span>${item.district}</span></h6>
+                                     </div>
                                 <h6 id="userName${i}">賣家:${item.userAccount}</h6>
                                 <div>
                                 <h6 id="text${i}">產品敘述:${item.productDescription}</h6>
@@ -403,8 +475,9 @@
                                 <a class="btn btn-secondary" href="#">加入購物車</a>
 
                          </div>
-                        </div>`
-                    })
+                        </div>
+
+                    `})
                 $(`#collapseComment${index}>div`).html(inner);
                 $(`#cmCount${index}`).html(`${response.length}`)
             }
@@ -413,6 +486,10 @@
 
     function sendRequiredPost() {
 
+        console.log($(".county").val());
+        console.log($(".district").val());
+  
+        
         var test = getCookie('LoginAccount');
         if (test == null) {
             alert("必須要登入才能留言喔");
@@ -421,6 +498,9 @@
 
         var form = document.querySelector("#form1")
         var data = new FormData(form);
+        data.append("county", $(".county").val());
+        data.append("district", $(".district").val());
+
 
         $.ajax({
             url: "/RequiredPost/sendRequiredPost",

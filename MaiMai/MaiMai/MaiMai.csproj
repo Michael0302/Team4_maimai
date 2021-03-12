@@ -252,6 +252,7 @@
     <Content Include="Content\resource_nico\images\無圖示.jpg" />
     <Content Include="Content\resource_nico\OrderManager.css" />
     <Content Include="Content\resource_nico\requriedIndex.css" />
+    <Content Include="Content\resource_nico\tw-city-selector.min.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />

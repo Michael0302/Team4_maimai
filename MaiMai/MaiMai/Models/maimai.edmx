@@ -84,6 +84,8 @@
           <Property Name="TagID" Type="int" />
           <Property Name="createdTime" Type="datetime" />
           <Property Name="RequiredPostID" Type="int" />
+          <Property Name="county" Type="nchar" MaxLength="10" />
+          <Property Name="district" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -121,6 +123,8 @@
           <Property Name="TagID" Type="int" />
           <Property Name="OrderID" Type="int" />
           <Property Name="isPast" Type="bit" />
+          <Property Name="county" Type="nchar" MaxLength="10" />
+          <Property Name="district" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -480,6 +484,8 @@
           <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
+          <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -524,6 +530,8 @@
           <NavigationProperty Name="Member" Relationship="Self.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
           <Property Name="isPast" Type="Boolean" />
+          <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -876,6 +884,8 @@
           <EntitySetMapping Name="ProductPost">
             <EntityTypeMapping TypeName="maimaiModel.ProductPost">
               <MappingFragment StoreEntitySet="ProductPost">
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="county" ColumnName="county" />
                 <ScalarProperty Name="ProductPostID" ColumnName="ProductPostID" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
                 <ScalarProperty Name="productDescription" ColumnName="productDescription" />
@@ -915,6 +925,8 @@
           <EntitySetMapping Name="RequiredPost">
             <EntityTypeMapping TypeName="maimaiModel.RequiredPost">
               <MappingFragment StoreEntitySet="RequiredPost">
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="county" ColumnName="county" />
                 <ScalarProperty Name="isPast" ColumnName="isPast" />
                 <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
                 <ScalarProperty Name="postTime" ColumnName="postTime" />

@@ -13,7 +13,7 @@ namespace MaiMai.Controllers
     {
         // GET: RequiredPost
 
-        maimaiRepository<RequiredPost> requiredPostTable = new maimaiRepository<RequiredPost>();
+
         maimaiEntities db = new maimaiEntities();
         public ActionResult Index()
         {
@@ -31,7 +31,8 @@ namespace MaiMai.Controllers
             return View();
         }
 
-        public JsonResult allrequiredPostWithLogin(int loginID){
+        public JsonResult allrequiredPostWithLogin(int loginID)
+        {
 
             var table = db.RequiredPost.Where(m => m.UserID == loginID).Select(m => new RequiredPostViewModel_C()
             {
@@ -45,12 +46,15 @@ namespace MaiMai.Controllers
                 estimatePrice = m.estimatePrice,
                 TagID = m.TagID,
                 OrderID = m.OrderID,
-                userAccount = m.Member.userAccount
+                userAccount = m.Member.userAccount,
+                county = m.county,
+                district = m.county
+
             }).ToList();
 
 
             return Json(table, JsonRequestBehavior.AllowGet);
-    }
+        }
         public JsonResult allrequiredPost()
         {
 
@@ -66,16 +70,19 @@ namespace MaiMai.Controllers
                 estimatePrice = m.estimatePrice,
                 TagID = m.TagID,
                 OrderID = m.OrderID,
-                userAccount = m.Member.userAccount
+                userAccount = m.Member.userAccount,
+                county = m.county,
+                district = m.district
             }).ToList();
-         
+
 
             return Json(table, JsonRequestBehavior.AllowGet);
         }// allpostend
 
-        public ActionResult allpoccessPost() {
+        public ActionResult allpoccessPost()
+        {
 
-            var table = db.RequiredPost.Where( m => m.OrderID != null).Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.OrderID != null).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,
@@ -87,7 +94,9 @@ namespace MaiMai.Controllers
                 estimatePrice = m.estimatePrice,
                 TagID = m.TagID,
                 OrderID = m.OrderID,
-                userAccount = m.Member.userAccount
+                userAccount = m.Member.userAccount,
+                county = m.county,
+                district = m.district
             }).ToList();
 
 
@@ -110,7 +119,9 @@ namespace MaiMai.Controllers
                 estimatePrice = m.estimatePrice,
                 TagID = m.TagID,
                 OrderID = m.OrderID,
-                userAccount = m.Member.userAccount
+                userAccount = m.Member.userAccount,
+                county = m.county,
+                district = m.district
             }).ToList();
 
 
@@ -132,22 +143,12 @@ namespace MaiMai.Controllers
             return filePath;
         }
 
-        //public string uploadPhoto(HttpPostedFileBase upphoto)
-        //{
-        //    if (upphoto == null)
-        //    {
-        //        return "../Content/resource_nico/images/無圖示.jpg";
-        //    }
-        //    //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
-        //    string filename = upphoto.FileName;
-        //   upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
-        //    string filePath = $"../Content/ProductPostImg/{filename}";
 
-        //    return filePath;
-        //}
-        public ActionResult getAllTag() {
+        public ActionResult getAllTag()
+        {
 
-            var table = db.Tag.Select(m => new TagViewModel() {
+            var table = db.Tag.Select(m => new TagViewModel()
+            {
 
                 TagID = m.TagID,
                 tagName = m.tagName
@@ -159,7 +160,7 @@ namespace MaiMai.Controllers
         }
 
         maimaiRepository<ProductPost> productPostRepository = new maimaiRepository<ProductPost>();
-        public string  commemtProductPost(ProductCommentListViewModel ps)
+        public string commemtProductPost(ProductCommentListViewModel ps)
         {
             ProductPost product = new ProductPost()
             {
@@ -180,12 +181,13 @@ namespace MaiMai.Controllers
             {
                 product.productImg = "無圖示.jpg";
             }
-            else { 
-            
-            product.productImg = ps.upphoto.FileName;
-            string filename = ps.upphoto.FileName;
-            ps.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
-            string filePath = $"../Content/ProductPostImg/{filename}";
+            else
+            {
+
+                product.productImg = ps.upphoto.FileName;
+                string filename = ps.upphoto.FileName;
+                ps.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
+                string filePath = $"../Content/ProductPostImg/{filename}";
 
             }
             //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
@@ -195,7 +197,8 @@ namespace MaiMai.Controllers
             return "留言成功";
         }
 
-        public ActionResult checkAllComment(string  data) {
+        public ActionResult checkAllComment(string data)
+        {
 
             var RequiredPostID = Convert.ToInt32(data);
             var table = db.ProductPost.Where(m => m.RequiredPostID == RequiredPostID).Select(m => new ProductCommentListViewModel()
@@ -210,9 +213,12 @@ namespace MaiMai.Controllers
                 TagID = m.TagID,
                 createdTime = m.createdTime,
                 RequiredPostID = m.RequiredPostID,
-                userAccount = m.Member.userAccount
+                userAccount = m.Member.userAccount,
+                county = m.county,
+                district = m.district
+
             }).ToList();
-            
+
 
             return Json(table, JsonRequestBehavior.AllowGet);
         }
@@ -221,7 +227,7 @@ namespace MaiMai.Controllers
         {
             RequiredPost post = new RequiredPost()
             {
-             
+
                 postDescription = rp.postDescription,
                 postName = rp.postName,
                 postImg = rp.upphoto.FileName,
@@ -229,7 +235,9 @@ namespace MaiMai.Controllers
                 TagID = rp.TagID,
                 estimatePrice = rp.estimatePrice,
                 OrderID = rp.OrderID,
-        
+                county = rp.county,
+                district = rp.district
+
             };
             post.postTime = DateTime.Now;
             post.UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value);
@@ -256,7 +264,7 @@ namespace MaiMai.Controllers
 
             var table = db.ProductPost.Where(m => m.RequiredPostID == i);
             int count = table.Count();
-            
+
 
             return count.ToString();
         }
