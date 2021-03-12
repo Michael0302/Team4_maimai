@@ -18,5 +18,7 @@ namespace MaiMai.Models.GenericRepository
         Table GetbyID(int id);
 
         void Delete(int id);
+
+         
     }
 }

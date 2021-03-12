@@ -41,23 +41,39 @@
                         <form>
                             <div>
                                 <label class="b" for="userAccount">用戶帳號</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount">
+                                <input onkeyup="value=value.replace(/[\W]/g,'') "
+                                       onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount" onblur="checkName()">
+
+                                <span id="idsp"> </span>
+                                <span id="ccc"></span>
                                 <label class="b" for="userPassWord">密碼</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord">
+                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord" @*onblur="chkPassword()"*@ onblur="checkpas1()">
+
+                                <span id="idsp2"> </span>
                                 <label class="b" for="userPassWordCheck">確認密碼</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWordCheck" id="userPassWordCheck">
+                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWordCheck" id="userPassWordCheck" onblur="checkpas()">
+                                <span class="tip" style="color: red;">兩次輸入的密碼不一致</span><br>
+
                                 <label class="b" for="city">城市</label>
                                 <input class="w-100" required="required" type="text" name="city" id="city">
                                 <label class="b" for="address"> 地址</label>
                                 <input class="w-100" required="required" type="text" name="address" id="address">
                                 @*<label class="b" for="user_password_confirmation">確認密碼</label>
-                                    <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
+        <input class="w-100" required="required" minlength="6" type="password" name="user[password_confirmation]" id="user_password_confirmation">*@
                                 <label class="b" for="phoneNumber">手機號碼</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="phoneNumber" id="phoneNumber">
+                                <input class="w-100" required="required" autofocus="autofocus" type="tel" name="phoneNumber" id="phoneNumber">
+
+
+
                                 <label class="b" for="firstName">名字</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="text" name="firstName" id="firstName">
+                                <span id="idspname"> </span>
+
                                 <label class="b" for="lastName">姓氏</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="text" name="lastName" id="lastName">
+                                <span id="idsplastName"> </span>
+
+
                                 <label class="b" for="birthday">生日</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="date" name="birthday" id="birthday">
                                 <label class="b" for="identityNumber">身分證字號</label>
@@ -70,9 +86,10 @@
                                 <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
                             </div>
                             <div class="mt3">
-                                <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button>
+                                <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button> 
+                                 
+                                <button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>
 
-                                
 
 
                                 @*<button type="button" class="register-submit"onclick="myFunction()" >送出</button>
@@ -118,24 +135,221 @@
 
 
 
+
+
     <script>
+
+
+        document.getElementById("firstName").onblur = checkName1;
+        function checkName1() {
+
+            let theName = document.getElementById("firstName").value;
+            let theNameLen = theName.length;
+            let sp = document.getElementById("idspname");
+
+            if (theName == "")
+                sp.innerHTML = "<span style='color:red'>不可空白</span>";
+
+            else if (theNameLen > 1) {
+
+                for (let i = 0; i < theNameLen; i++) {
+                    let NameChr = theName.charAt(i);
+                    if (NameChr < "\u4E00" || NameChr > "\u9FFF") {
+                        sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
+
+                    }
+                    else sp.innerHTML = " 正確</span>";
+                }
+            }
+            else sp.innerHTML = "<span style='color:red'>至少輸入兩個字</span>";
+        }
+
+
+
+
+
+
+        document.getElementById("lastName").onblur = checkName2;
+        function checkName2() {
+
+            let theName = document.getElementById("lastName").value;
+            let theNameLen = theName.length;
+            let sp = document.getElementById("idsplastName");
+
+            if (theName == "")
+                sp.innerHTML = "<span style='color:red'>不可空白</span>";
+
+            else if (theNameLen > 0) {
+
+                for (let i = 0; i < theNameLen; i++) {
+                    let NameChr = theName.charAt(i);
+                    if (NameChr < "\u4E00" || NameChr > "\u9FFF") {
+                        sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
+
+                    }
+                    else sp.innerHTML = " 正確</span>";
+                }
+            }
+            else sp.innerHTML = "<span style='color:red'>至少輸入一個字</span>";
+        }
+
+
+
+
+
+
+
+
+        $(".tip").hide();
+        function checkpas1() {//當第一個密碼框失去焦點時，觸發checkpas1事件
+            var pas1 = document.getElementById("userPassWord").value;
+            var pas2 = document.getElementById("userPassWordCheck").value;//獲取兩個密碼框的值
+            if (pas1 != pas2 && pas2 != "")//此事件當兩個密碼不相等且第二個密碼是空的時候會顯示錯誤資訊
+                $(".tip").show();
+            else
+                $(".tip").hide();//若兩次輸入的密碼相等且都不為空時，不顯示錯誤資訊
+
+            chkPassword()
+
+        }
+
+
+        function checkpas() {//當第一個密碼框失去焦點時，觸發checkpas2件
+            var pas1 = document.getElementById("userPassWord").value;
+            var pas2 = document.getElementById("userPassWordCheck").value;//獲取兩個密碼框的值
+            if (pas1 != pas2) {
+                $(".tip").show();//當兩個密碼不相等時則顯示錯誤資訊
+            } else {
+                $(".tip").hide();
+            }
+        }
+
+
+        function checkpas2() {//點選提交按鈕時，觸發checkpas2事件，會進行彈框提醒以防無視錯誤資訊提交
+            var pas3 = document.getElementById("userPassWord").value;
+            var pas4 = document.getElementById("userPassWordCheck").value;
+            if (pas3 != pas4) {
+                alert("兩次輸入的密碼不一致！");
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+        function checkName() {
+            checkAccount()
+
+
+
+
+            let theName = document.getElementById("userAccount").value;
+            let theNameLen = theName.length;
+            let sp = document.getElementById("idsp");
+            let flag1 = false, flag2 = false;  
+            if (theName == "")
+                sp.innerHTML = " <span style='color:red'>不可空白</span>";
+
+            else if (theNameLen > 6) {
+
+                for (let i = 0; i < theNameLen; i++) {
+                    let NameChr = theName.charAt(i).toUpperCase();
+
+                    if (NameChr >= "A" && NameChr <= "Z")
+                        flag1 = true;
+
+                    else if (NameChr >= "0" && NameChr <= "9")
+                        flag2 = true;
+                    //else if (pattern.test(PwdChr))
+                    //    flag3 = true;
+
+                    if (flag1 && flag2) break;
+
+                }
+                if (flag1 && flag2) sp.innerHTML = "正確</span>";
+                else sp.innerHTML = " <span style='color:red'>要包含字母數字 </span>";
+            }
+            else
+                sp.innerHTML = " <span style='color:red'>至少輸入6個字</span>";
+
+
+        }
+
+
+                    //if (NameChr < "\u4E00" || NameChr > "\u9FFF") {
+                    //    sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
+
+        //            }
+        //            else sp.innerHTML = "正確</span>";
+        //        }
+        //    }
+        //    else sp.innerHTML ="<span style='color:red'>至少輸入兩個字</span>";
+        //}
+
+
+
+
+
+        function chkPassword() {
+            //取得元素值
+            let thePwd = document.getElementById("userPassWord").value;
+            let thePwdLen = thePwd.length;
+            let flag1 = false, flag2 = false; flag3 = false;
+            let sp = document.getElementById("idsp2");
+
+            //判斷元素值是否為空白，密碼長度是否大於6
+            if (thePwd == "")
+                //alert("you must enter");
+                sp.innerHTML =
+                    "<span style='color:red'>不可空白</span>";
+            //document.getElementById("idPwd").insertAdjacentHTML("afterend", "you must enter");
+            //如果長度是否大於6，判斷是否包含字母、數字、特殊符號a1 
+            else if (thePwdLen >= 6) {
+                //alert(">=6");
+                for (let i = 0; i < thePwdLen; i++) {
+                    let PwdChr = thePwd.charAt(i).toUpperCase();//轉換為大寫
+                    var pattern = new RegExp("[`~!@@#$^&*()=|{}':;',\\[\\].<>《》/?~！@@#￥……&*（）——|{}【】‘；：”“'。，、？ ]");
+                    if (PwdChr >= "A" && PwdChr <= "Z")
+                        flag1 = true;
+
+                    else if (PwdChr >= "0" && PwdChr <= "9")
+                        flag2 = true;
+                    else if (pattern.test(PwdChr))
+                        flag3 = true;
+
+                    if (flag1 && flag2 && flag3) break;
+
+                }
+                if (flag1 && flag2 && flag3) sp.innerHTML = "正確</span>";
+                else sp.innerHTML = " <span style='color:red'>要包含字母數字特殊符號</span>";
+            }
+            else
+                sp.innerHTML = " <span style='color:red'>至少輸入6個字</span>";
+  }
+
+
 
         function alertTest() {
             Swal.fire(
-                "註冊失敗", //標題 
+                "註冊失敗", //標題
                 " 請檢查您所輸入的欄位是否有誤!", //訊息內容(可省略)
                 "error" //圖示(可省略) success/info/warning/error/question
-               
             );
         }
 
 
         function alertTest1() {
             Swal.fire(
-                "註冊成功", //標題 
-                " 歡迎光臨MaiMai</br>2秒後自動跳轉回首頁", //訊息內容(可省略)
-                "success" //圖示(可省略) success/info/warning/error/question
-
+                "註冊成功", //標題
+                " 歡迎光臨MaiMai</br>2秒後自動跳轉回首頁...", //訊息內容(可省略)
+               "success" //圖示(可省略) success/info/warning/error/question
             );
         }
 
@@ -182,6 +396,7 @@
         //}
 
         function myFunction() {
+
             $(document).ready(function () {
 
                 var userAccount2 = $("#userAccount").val();
@@ -221,7 +436,7 @@
                         if (good == 0) {
                             alertTest1()
                             setTimeout("home()",2000)
-                            
+
                         }
                         else {
                             //alert("註冊失敗,請檢查輸入欄位")
@@ -347,25 +562,44 @@
             $("#email").val("quees778w2s@gmail.com")
         }
 
-        $(function () {
-            $('.register-submit').on('click', function () {
+        function checkAccount () {
+           
                 $.ajax({
-                    url: " ",
+                    url: "/Members/CheckAccount",
                     type: 'POST',
-                    dataType: 'HTML',
+                    
                     data: {
-                        account: $('#inputAccount').val()
+                        account: $('#userAccount').val()
                     },
-                    success: function (res) {
-                        if (res == '1') {
-                            alert('申請帳號重複，請輸入其他帳號');
-                        } else {
-                            $('.register-submit2').click();
+                    success: function (data) {
+                        if (data == "2") {
+                            $("#ccc").css("color", "red")
+                            $("#ccc").html("請輸入帳號!")
+               
+                
                         }
+
+                        else if (data == '1') {
+                            //alert('申請帳號重複，請輸入其他帳號');
+                            $("#ccc").css("color","red")
+
+                            $("#ccc").html("帳號重複!")
+                        
+                        }
+                        else {
+                            //alert('帳號可以使用');  
+                            $("#ccc").css("color", "green")
+                            $("#ccc").html("帳號可以使用!")
+ 
+                            //$('#p1 ').click();
+                        }
+                          
+
+                    
                     }
                 });
-            });
-        });
+            };
+ 
 
 
 
