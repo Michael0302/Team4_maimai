@@ -60,7 +60,10 @@
                     <div class="D_agN">
                         <div class="D_agO">
                             <div class="D_jU">
-                                <span class="D_bA D_agP D_jV D_kf D_bB"><img alt="" class="D_bE" id="image00" @*src="https://media.karousell.com/media/photos/profiles/2021/02/23/hcn0108_1614047046.jpg"*@ title=""></span>
+                                <span class="D_bA D_agP D_jV D_kf D_bB" id="ImgGood">
+                                </span>
+
+                                    @*<span class="D_bA D_agP D_jV D_kf D_bB"><img alt="" class="D_bE" id="image00"  src="../Content/ProductPostImg/member/  title=""></span>*@
                             </div>
                             <h2 id="lastName" class="D_bi D_bq D_bw D_by D_bg">建寧 黃</h2>
                              
@@ -327,15 +330,28 @@
                 },
 
                 success: function (data) {
-                    //console.log(data.userAccount)
+
                     $("#lastName").html(data.lastName + data.firstName)
-                    
-                    $("#image00").html(data.profileImg)
+                    //$("#image00").html(data.profileImg)
                     $("#City").html(data.city)
                     $("#selfDescription").html(data.selfDescription)
-                }
 
-            });
+                    $(data).each(function (i, item) {
+                        $("#ImgGood").append(` <img alt="" class="D_bE" id="image00"  img src=../Content/ProductPostImg/member/${item.profileImg}  title=""> `)
+                    });
+
+
+
+                    
+                }
+            
+        });
+                
+                        
+
+                
+        
+         
 
 
 
@@ -354,6 +370,9 @@
 
                 success: function (data) {
                     $(data).each(function (i, item) {
+                        //$("#ImgGood").append(` <img alt="" class="D_bE" id="image00"  img src=../Content/ProductPostImg/member/${item.profileImg}  title=""> `)
+                    
+
                         $("#allPost").append(`
                         <div class="D_kZ D_kW D_il">
                             <div class="D_lc">
