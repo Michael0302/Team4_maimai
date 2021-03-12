@@ -125,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProductTitle"
+                <div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="editProductTitle"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -135,11 +135,12 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body" id="reportTitle">
+                            <div class="modal-body" id="reportbody">
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                                <a id="report-footer"></a>
                             </div>
                         </div>
                     </div>
@@ -238,7 +239,7 @@
             success: function (memberList) {
                 $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>帳號</th><th>姓名</th><th>會員等級</th><th>信箱</th><th>城市</th><th></th></tr></thead> <tbody id='showList'></tbody></table>");
                 $(memberList).each(function (index, item) {
-                    $("#showList").append(`<tr><td>${item.userAccount}</td><td>${item.Name}</td><td>${item.userLevel}</td><td>${item.email}</td><td>${item.city}</td><td><button type='button' class='btn btn-primary' data-toggle='modal' onclick='getMember(${item.UserID})' data-target='#editMember'>查看</button></td></tr>`);
+                    $("#showList").append(`<tr><td>${item.userAccount}</td><td>${item.Name}</td><td>${item.userLevelString}</td><td>${item.email}</td><td>${item.city}</td><td><button type='button' class='btn btn-primary' data-toggle='modal' onclick='getMember(${item.UserID})' data-target='#editMember'>查看</button></td></tr>`);
                 });
             }
         })
@@ -266,13 +267,45 @@
                 url: "@Url.Action("getOrderList_P", "backstage")",
                 type: "GET",
                 success: function (orderList) {
-                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr></thead> <tbody id='showList'></tbody></table>")
+                    $("#show").html(`
+                                        <div class= 'd-flex justify-content-center' id = 'search' ></div >
+                                        <table class='table table-hover'>
+                                            <thead class='table-dark'>
+                                                <tr id='showTh'>
+                                                    <th>訂單編號</th>
+                                                    <th>建立時間</th>
+                                                    <th>買方</th>
+                                                    <th>買方姓名</th>
+                                                    <th>價錢</th>
+                                                    <th>訂單狀態</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id='showList'></tbody>
+                                        </table>`)
                     $(orderList).each(function (index, orderList) {
+                        var orderStatus = "";
+                        switch (orderList.orderStatus) {
+                            case 0: orderStatus = "已下單"; break;
+                            case 1: orderStatus = "已結帳"; break;
+                            case 2: orderStatus = "已評論"; break;
+                            case 3: orderStatus = "已完成"; break;
+                            case 4: orderStatus = "已取消"; break;
+                        }
                         var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
                         var year = new Date(Milliseconds).getFullYear();
                         var month = new Date(Milliseconds).getMonth() + 1;
                         var date = new Date(Milliseconds).getDate();
-                        $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td></tr>`)
+                        $("#showList").append(`
+                                                                <tr>
+                                                                <td>${orderList.OrderId}</td>
+                                                                <td>${year}-${month}-${date}</td>
+                                                                <td>${orderList.buyerUserID}</td>
+                                                                <td>${orderList.buyerName}</td>
+                                                                <td>$${orderList.price}</td>
+                                                                <td>${orderStatus}</td>
+                                                                <td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td>
+                                                                </tr>`)
                     })
                 }
             })
@@ -284,13 +317,37 @@
             type: "GET",
             data: {status:"2"},
             success: function (orderList) {
-                $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr></thead> <tbody id='showList'></tbody></table>")
+                $("#show").html(`
+                                    <div class='d-flex justify-content-center' id='search'></div>
+                                    <table class='table table-hover'>
+                                    <thead class='table-dark'>
+                                    <tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr>
+                                    </thead>
+                                    <tbody id='showList'></tbody>
+                                    </table>`)
                 $(orderList).each(function (index, orderList) {
+                        var orderStatus = "";
+                        switch (orderList.orderStatus) {
+                            case 0: orderStatus = "已下單"; break;
+                            case 1: orderStatus = "已結帳"; break;
+                            case 2: orderStatus = "已評論"; break;
+                            case 3: orderStatus = "已完成"; break;
+                            case 4: orderStatus = "已取消"; break;
+                        }
                     var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
                     var year = new Date(Milliseconds).getFullYear();
                     var month = new Date(Milliseconds).getMonth() + 1;
                     var date = new Date(Milliseconds).getDate();
-                    $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td></tr>`)
+                    $("#showList").append(`
+                                                    <tr>
+                                                    <td>${orderList.OrderId}</td>
+                                                    <td>${year}-${month}-${date}</td>
+                                                    <td>${orderList.buyerUserID}</td>
+                                                    <td>${orderList.buyerName}</td>
+                                                    <td>$${orderList.price}</td>
+                                                    <td>${orderStatus}</td>
+                                                    <td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td>
+                                                    </tr>`)
                 })
             }
         })
@@ -311,11 +368,28 @@
                                                     <tbody id='showList'></tbody>
                                                 </table>`)
                 $(orderList).each(function (index, orderList) {
+                    var orderStatus = "";
+                    switch (orderList.orderStatus) {
+                        case 0: orderStatus = "已下單"; break;
+                        case 1: orderStatus = "已結帳"; break;
+                        case 2: orderStatus = "已評論"; break;
+                        case 3: orderStatus = "已完成"; break;
+                        case 4: orderStatus = "已取消"; break;
+                    }
                     var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
                     var year = new Date(Milliseconds).getFullYear();
                     var month = new Date(Milliseconds).getMonth() + 1;
                     var date = new Date(Milliseconds).getDate();
-                    $("#showList").append(`<tr><td>${orderList.OrderId}</td><td>${year}-${month}-${date}</td><td>${orderList.buyerUserID}</td><td>${orderList.buyerName}</td><td>$${orderList.price}</td><td>${orderList.orderStatus}</td><td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td></tr>`)
+                    $("#showList").append(`
+                                                        <tr>
+                                                        <td>${orderList.OrderId}</td>
+                                                        <td>${year}-${month}-${date}</td>
+                                                        <td>${orderList.buyerUserID}</td>
+                                                        <td>${orderList.buyerName}</td>
+                                                        <td>$${orderList.price}</td>
+                                                        <td>${orderStatus}</td>
+                                                        <td><button type='button' class='btn btn-primary' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td>
+                                                        </tr>`)
                 })
             }
         })
@@ -441,6 +515,7 @@
         })
     }
 
+    //取得標籤
     function getTag() {
         $.ajax({
             url: "@Url.Action("getTag", "backstage")",
@@ -455,6 +530,7 @@
         })
     }
 
+    //新增標籤
     function createTag() {
         var tagName = $("#tagName").val();
         if (tagName == "") {
@@ -553,7 +629,8 @@
             }
         })
     }
-    
+
+    //下架商品
     function cancelProduct(ProductPostID) {
         $.ajax({
             url: "@Url.Action("cancelProduct", "backstage")",
@@ -611,13 +688,14 @@
         })
     }
 
+    //檢舉頁面
     function reportList() {
         $.ajax({
                 url: "@Url.Action("getReport_P", "backstage")",
                 type: "GET",
                 success: function (report) {
                     $("#show").html(`
-                                    < div class= 'd-flex justify-content-center' id = 'search' ></div >
+                                    <div class= 'd-flex justify-content-center' id = 'search' ></div >
                                         <table class='table table-hover'>
                                             <thead class='table-dark'>
                                                 <tr id='showTh'>
@@ -631,19 +709,103 @@
                                             </thead>
                                         <tbody id='showList'></tbody>
                                     </table>`);
-                    $(report).each(function(index, item){
+                    $(report).each(function (index, item) {
+                        var reportStatus = "";
+                        if (item.reportStatus == 0)
+                            reportStatus = "未處理";
+                        else
+                            reportStatus = "已處理";
+                        var Milliseconds = parseInt(item.createdTime.replace(/\D/igm, ""));
+                        var year = new Date(Milliseconds).getFullYear();
+                        var month = new Date(Milliseconds).getMonth() + 1;
+                        var date = new Date(Milliseconds).getDate();
+                        var hour = new Date(Milliseconds).getHours();
+                        var min = new Date(Milliseconds).getMinutes();
+                        var sec = new Date(Milliseconds).getSeconds();
+
                         $("#showList").append(`
-                                                                <tr data-toggle='modal'  data-target='#editProduct' onclick="getProductPostFromAll(${item.ReportID})">
+                                                                <tr data-toggle='modal'  data-target='#report' onclick="getReportDetail(${item.ReportID})">
                                                                     <td>${item.ReportID}</td>
-                                                                    <td>${item.reportorID}</td>
-                                                                    <td>${item.repotedUserID}</td>
-                                                                    <td>${item.createdTime}</td>
-                                                                    <td>${item.reportStatus}</td>
-                                                                    <td>${item.ReportDetailID}</td>
+                                                                    <td>[${item.reportorID}]${item.reportorName}</td>
+                                                                    <td>[${item.repotedUserID}]${item.repotedUserName}</td>
+                                                                    <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>
+                                                                    <td><a  id="reportStauts${item.ReportID}">${reportStatus}</a></td>
+                                                                    <td>${item.ReportDetailTag}</td>
                                                                 </tr>`);
+                        $("a").each(function () {
+                            if ($(this).text() == "未處理") {
+                                $(this).attr("style", "color:red;");
+                            }
+                        })
                     });
                 }
             })
+    }
+
+    //檢舉modal
+    function getReportDetail(ReportID) {
+        $.ajax({
+            url: "@Url.Action("getReportDetail_P", "backstage")",
+            data: { ReportID: ReportID },
+            type: "GET",
+            success: function (reportdetail) {
+                $(reportdetail).each(function (index, reportdetail) {
+                    var source = "";
+                    if (reportdetail.ProductOrRequire == 0)
+                        source = "商品貼文";
+                    else
+                        source = "徵求台貼文";
+                    var reportStatus = "";
+                    if (reportdetail.reportStatus == 0)
+                        reportStatus = "未處理";
+                    else
+                        reportStatus = "已處理";
+                    var Milliseconds = parseInt(reportdetail.createdTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+                    var hour = new Date(Milliseconds).getHours();
+                    var min = new Date(Milliseconds).getMinutes();
+                    var sec = new Date(Milliseconds).getSeconds();
+
+                    $("#reportbody").html(`
+                                        <div class='d-flex justify-content-center'>
+                                                    <label>檢舉編號<input class='form-control' type='text' value="${reportdetail.ReportID}" readonly/>
+                                                    <label>檢舉人<input class='form-control' type='text' value="[${reportdetail.reportorID}]${reportdetail.reportorName}" readonly />
+                                                    <label>被檢舉人<input class='form-control' type='text' value="[${reportdetail.repotedUserID}]${reportdetail.repotedUserName}" readonly/>
+                                                    <label>檢舉類別<input class='form-control' type='text' value="${reportdetail.ReportDetailTag}" readonly/>
+                                                    <label>檢舉內容<input class='form-control' type='text' value="${reportdetail.reportDescription}" readonly/>
+                                                    <label>來源<input class='form-control' type='text' value="${source}" readonly/>
+                                                    <label>來源編號<input class='form-control' type='text' value="${reportdetail.ProductOrRequireID}" readonly/>
+                                                    <label>檢舉時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/>
+                                                    <label>處理狀態<input class='form-control reportStatus' type='text' value="${reportStatus}" readonly/>
+                                                </div>
+                                                `)
+                    $(".reportStatus").each(function () {
+                        if ($(this).val() == "未處理") {
+                            $("#report-footer").html(`<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="processReport(${reportdetail.ReportID})">已處理</button>`)
+                        }
+                        else {
+                            $("#report-footer").html("");
+                        }
+                    })
+
+                });
+            }
+        })
+    }
+
+    //修改檢舉狀態
+    function processReport(ReportID) {
+        $.ajax({
+            url: "@Url.Action("editReportStatus_P", "backstage")",
+            data: { ReportID: ReportID},
+            type: "POST",
+            success: function (data) {
+                alert("此檢舉已處理!");
+                reportList();
+            }
+        })
     }
 
 </script>

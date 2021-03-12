@@ -336,7 +336,7 @@ namespace MaiMai.Controllers
         }
 
     //下架商品
-    public ActionResult cancelProduct(int ProductPostID)
+        public ActionResult cancelProduct(int ProductPostID)
         {
             var cancel = db.ProductPost.Find(ProductPostID);
 
@@ -347,7 +347,7 @@ namespace MaiMai.Controllers
         }
 
       //取得刪除列表
-     public ActionResult getDelPorducts()
+        public ActionResult getDelPorducts()
         {
             var prodlist = db.ProductPost.Where(p => p.status == false).Select(s => new {
                 ProductPostID = s.ProductPostID,
@@ -368,24 +368,55 @@ namespace MaiMai.Controllers
         }
 
       //取得檢舉列表
-      public ActionResult getReport_P()
+        public ActionResult getReport_P()
         {
             var allreports = db.Report.Select(s => new
             {
                 ReportID = s.ReportID,
                 reportorID = s.reportorID,
+                reportorName = s.Member.firstName,
                 repotedUserID = s.repotedUserID,
+                repotedUserName = s.Member1.firstName,
                 reportStatus = s.reportStatus,
                 createdTime = s.createdTime,
                 ReportDetailID = s.ReportDetailID,
+                ReportDetailTag = s.ReportDetail.reason,
+                reportDescription = s.reportDescription,
+                ProductOrRequire = s.ProductOrRequire,
+                ProductOrRequireID = s.ProductOrRequireID,
+            }).OrderByDescending(o=>o.ReportID);
+
+            return Json(allreports, JsonRequestBehavior.AllowGet);
+        }
+
+        //檢舉modal
+        public ActionResult getReportDetail_P(int ReportID)
+        {
+            var reportdetail = db.Report.Where(m => m.ReportID == ReportID).Select(s => new
+            {
+                ReportID = s.ReportID,
+                reportorID = s.reportorID,
+                reportorName = s.Member.firstName,
+                repotedUserID = s.repotedUserID,
+                repotedUserName = s.Member1.firstName,
+                reportStatus = s.reportStatus,
+                createdTime = s.createdTime,
+                ReportDetailID = s.ReportDetailID,
+                ReportDetailTag = s.ReportDetail.reason,
                 reportDescription = s.reportDescription,
                 ProductOrRequire = s.ProductOrRequire,
                 ProductOrRequireID = s.ProductOrRequireID,
             });
 
-            return Json(allreports, JsonRequestBehavior.AllowGet);
+            return Json(reportdetail, JsonRequestBehavior.AllowGet);
         }
 
+        //修改檢舉狀態
+        public void editReportStatus_P(int ReportID)
+        {
+            db.Report.Find(ReportID).reportStatus = 1;
+            db.SaveChanges();
+        }
     }
 
     
