@@ -67,13 +67,13 @@
                                 <div>
                                     <h6>交貨方式</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="express" id="flexRadioDefault1" value="express"checked>
+                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express"checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             物流交貨
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="pTop" id="flexRadioDefault2"   value="pTop" >
+                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2"   value="pTop" >
                                         <label class="form-check-label" for="flexRadioDefault2">
                                           當面交貨/地點
                                         </label>
@@ -158,6 +158,10 @@
                             </div>
                             <div class="post-text">
                                     <h3 id="postName${i}">${item.postName}</h3>
+  <div class="d-flex justify-content-between">
+                                    <h3 id="postName${i}">${item.postName}</h3>
+                                    <h6>${item.county} <span>${item.district}</span></h6>
+                                </div>
                                     <h6 id="userName${i}">買家:${item.userAccount}</h6>
                             <div>
                                     <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
@@ -195,13 +199,13 @@
                                     <div>
                                     <h6>交貨方式</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="express" id="flexRadioDefault1" value="express"checked>
+                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express"checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             物流交貨
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="pTop" id="flexRadioDefault2"   value="pTop" >
+                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2"   value="pTop" >
                                         <label class="form-check-label" for="flexRadioDefault2">
                                           當面交貨/地點
                                         </label>
@@ -302,6 +306,7 @@
 
     $("#pills-profile-tab").click(function () {
 
+        var text = "";
             $.ajax({
                 url: "/RequiredPost/allpoccessPost",
                 type: "GET",
@@ -309,9 +314,11 @@
                     $(response).each(function (i, item) {
                         
 
-                        $("#pocessPostStart").append(`
-
-                                        <div id="img" class="photo"></div>
+                      text+=`
+ 
+                                      <div class="photo">
+                                    <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
+                            </div>
                                         <div class="post-text">
                                     <div class="d-flex justify-content-between">
                                                 <h3 id="postName${i}">${item.postName}</h3>
@@ -338,9 +345,9 @@
 
                                     </div>
                                 </div>
-                          `)
+                          `
 
-
+                        $("#pocessPostStart").html(text);
                     })
                 }
 
@@ -349,17 +356,25 @@
         })// proccess tab end
 
     $("#pills-contact-tab").click(function () {
-
+        var test = getCookie('LoginID');
+        var text = "";
         $.ajax({
-            url: "/RequiredPost/allpoccessPost",
+            url: "/RequiredPost/allpastPost",
             type: "GET",
+            data: { loginID: test },
             success: function (response) {
                 $(response).each(function (i, item) {
-                    $("#pocessPostStart").append(`
+                     text +=`
 
-                            <div id="img" class="photo"></div>
+                         <div class="photo">
+                                    <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
+                            </div>
                             <div class="post-text">
-                            <h3 id="postName${i}">${item.postName}</h3>
+                            
+                                <div class="d-flex justify-content-between">
+                                    <h3 id="postName${i}">${item.postName}</h3>
+                                    <h6>${item.county} <span>${item.district}</span></h6>
+                                </div>
                             <h6 id="userName${i}">買家:${item.userAccount}</h6>
                             <div>
                             <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
@@ -380,9 +395,9 @@
                         <div class="card card-body">
 
                         </div>
-                    </div>`)
+                    </div>`
 
-
+                    $("#pastPost").html(text);
                 })
             }
 

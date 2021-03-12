@@ -34,7 +34,7 @@ namespace MaiMai.Controllers
         public JsonResult allrequiredPostWithLogin(int loginID)
         {
 
-            var table = db.RequiredPost.Where(m => m.UserID == loginID).Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.UserID == loginID && m.isPast == false).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,
@@ -58,7 +58,7 @@ namespace MaiMai.Controllers
         public JsonResult allrequiredPost()
         {
 
-            var table = db.RequiredPost.Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.isPast == false).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,
@@ -82,7 +82,7 @@ namespace MaiMai.Controllers
         public ActionResult allpoccessPost()
         {
 
-            var table = db.RequiredPost.Where(m => m.OrderID != null).Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.OrderID != null && m.isPast == false).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,
@@ -104,10 +104,10 @@ namespace MaiMai.Controllers
 
         }
 
-        public ActionResult allPastPost()
+        public ActionResult allPastPost(int loginID)
         {
 
-            var table = db.RequiredPost.Where(m => m.isPast == true).Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.UserID == loginID &&  m.isPast == true).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,
@@ -236,7 +236,8 @@ namespace MaiMai.Controllers
                 estimatePrice = rp.estimatePrice,
                 OrderID = rp.OrderID,
                 county = rp.county,
-                district = rp.district
+                district = rp.district,
+                isPast = false
 
             };
             post.postTime = DateTime.Now;
