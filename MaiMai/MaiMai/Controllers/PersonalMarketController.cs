@@ -45,7 +45,7 @@ namespace MaiMai.Controllers
         {
 
              
-            var table = db.ProductPost.Where(m => m.UserID == UserID).Select(m => new ProductCommentListViewModel()
+            var table = db.ProductPost.Where(m => m.UserID == UserID&&m.status==true).Select(m => new ProductCommentListViewModel()
             {
                 ProductPostID = m.ProductPostID,
                 productName = m.productName,
@@ -64,6 +64,20 @@ namespace MaiMai.Controllers
             return Json(table, JsonRequestBehavior.AllowGet);
         }
 
+        maimaiRepository<ProductPost> ProductPostRepository = new maimaiRepository<ProductPost>();
+
+
+        public string deletepost(int UserID)
+        {
+            
+           ProductPost abc=ProductPostRepository.GetbyID(UserID);
+
+            abc.status = false;
+
+            ProductPostRepository.Update(abc);
+            return "成功";
+
+        }
 
 
 
