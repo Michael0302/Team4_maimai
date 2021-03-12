@@ -27,6 +27,5 @@ namespace MaiMai.Models
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }
         public virtual ReportDetail ReportDetail { get; set; }
-        public virtual Member Member2 { get; set; }
     }
 }
