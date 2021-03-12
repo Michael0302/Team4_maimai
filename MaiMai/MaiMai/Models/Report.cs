@@ -24,8 +24,8 @@ namespace MaiMai.Models
         public int ProductOrRequire { get; set; }
         public int ProductOrRequireID { get; set; }
     
-        public virtual ReportDetail ReportDetail { get; set; }
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }
+        public virtual ReportDetail ReportDetail { get; set; }
     }
 }

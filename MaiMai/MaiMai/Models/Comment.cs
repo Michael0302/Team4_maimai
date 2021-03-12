@@ -20,7 +20,7 @@ namespace MaiMai.Models
         public string commentDescription { get; set; }
         public int UserID { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Member Member { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

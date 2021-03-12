@@ -27,14 +27,13 @@ namespace MaiMai.Models
     
         public virtual DbSet<Cart> Cart { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<ProductPost> ProductPost { get; set; }
         public virtual DbSet<Report> Report { get; set; }
         public virtual DbSet<ReportDetail> ReportDetail { get; set; }
         public virtual DbSet<RequiredPost> RequiredPost { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
-        public virtual DbSet<Cart> Cart { get; set; }
-        //public virtual DbSet<ProductPost> ProductPost { get; set; }
-        public virtual DbSet<Member> Member { get; set; }
     }
 }
