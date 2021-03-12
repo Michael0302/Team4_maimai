@@ -11,7 +11,7 @@ namespace MaiMai.Controllers
 {
     public class NewMaimaiIndexController : Controller
     {
-
+        maimaiRepository<Cart> CartRepository = new maimaiRepository<Cart>();
         maimaiEntities db = new maimaiEntities();
         // GET: NewMaimaiIndex
         
@@ -40,6 +40,7 @@ namespace MaiMai.Controllers
         {
             var addCarouselList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
             {
+                ProductPostID = m.ProductPostID,
                 productImg = m.productImg,
                 price = m.price,
                 productDescription = m.productDescription
@@ -67,18 +68,47 @@ namespace MaiMai.Controllers
         }
         public ActionResult ProdutPostDetail(int PostID)
         {
+
             var ProdutPostDetailList = db.ProductPost.Where(m => m.ProductPostID == PostID).Select(m=>new{
                 img=m.productImg,
                 ProductName=m.productName,
                 price=m.price,
                 Description=m.productDescription,
                 QTY=m.inStoreQTY,
+                UserID=m.UserID,
+                
             }).ToList();
             return Json(ProdutPostDetailList, JsonRequestBehavior.AllowGet);
         }
         //商品頁面
+        //送去購物車
+        public ActionResult goCar() 
+        {
+            return View();
+        }
 
+        public string goCar1(Cart ProductPostIDlll)
+        {
+            
+            var carnumver = db.Cart.FirstOrDefault(m => m.CartNumber != null && m.UserID == ProductPostIDlll.UserID && m.Status == false);
+            if (carnumver != null)
+            {
+                ProductPostIDlll.CartNumber = carnumver.CartNumber;
+                ProductPostIDlll.Status = false;
+                CartRepository.Create(ProductPostIDlll);
+                return "新增成功";
+            }
+            else
+            {
+                ProductPostIDlll.CartNumber = (new Random().Next(0, int.MaxValue)+(db.Cart.FirstOrDefault().UserID.ToString()));
+                ProductPostIDlll.Status = false;
+                CartRepository.Create(ProductPostIDlll);
+                return "新增成功";
+            }
 
+            //return "123";
+        }
+        //送去購物車
 
     }
 }

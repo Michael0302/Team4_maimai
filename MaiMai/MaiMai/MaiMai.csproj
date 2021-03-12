@@ -205,6 +205,9 @@
     <Compile Include="Models\RequiredPost.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
@@ -228,6 +231,19 @@
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\65K2.jfif" />
     <Content Include="Content\ProductPostImg\iphone11.png" />
+    <Content Include="Content\ProductPostImg\member\嘉慶.jfif" />
+    <Content Include="Content\ProductPostImg\member\嘉文.jfif" />
+    <Content Include="Content\ProductPostImg\member\大衛.jfif" />
+    <Content Include="Content\ProductPostImg\member\建寧.jfif" />
+    <Content Include="Content\ProductPostImg\member\惠妹.jfif" />
+    <Content Include="Content\ProductPostImg\member\捷克.jfif" />
+    <Content Include="Content\ProductPostImg\member\新春.jfif" />
+    <Content Include="Content\ProductPostImg\member\旗山.jfif" />
+    <Content Include="Content\ProductPostImg\member\月眉.jfif" />
+    <Content Include="Content\ProductPostImg\member\杰倫.jfif" />
+    <Content Include="Content\ProductPostImg\member\翔耀.jfif" />
+    <Content Include="Content\ProductPostImg\member\茲達.jfif" />
+    <Content Include="Content\ProductPostImg\member\阿娥.jfif" />
     <Content Include="Content\ProductPostImg\nini.jpg" />
     <Content Include="Content\ProductPostImg\土豆.jfif" />
     <Content Include="Content\ProductPostImg\小藥丸藍色.jfif" />
@@ -505,6 +521,7 @@
     <Content Include="Views\Members\SignUp.cshtml" />
     <Content Include="Views\NewMaimaiIndex\MaimaiIndexNew.cshtml" />
     <Content Include="Views\OrderManager\OrderIndex.cshtml" />
+    <Content Include="Views\NewMaimaiIndex\ProdutPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

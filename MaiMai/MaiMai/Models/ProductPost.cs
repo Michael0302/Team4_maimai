@@ -31,7 +31,8 @@ namespace MaiMai.Models
         public Nullable<int> TagID { get; set; }
         public Nullable<System.DateTime> createdTime { get; set; }
         public Nullable<int> RequiredPostID { get; set; }
-        public Nullable<int> ReportID { get; set; }
+        public string county { get; set; }
+        public string district { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }

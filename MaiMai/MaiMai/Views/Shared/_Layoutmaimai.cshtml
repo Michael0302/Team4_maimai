@@ -25,7 +25,7 @@
                 <a href="/"><img class="footerLogo1" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
             </div>
             <div class=" col-md-8 dropdown ml-3">
-                <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" >
+                <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
                     <input Placeholder="Search " class="dropdown-search" />
                 </div>
@@ -84,7 +84,7 @@
                             @*<span class=" mx-2">
                                     @Request.Cookies["LoginName"].Value
                                 </span>*@
-                            <div>                                
+                            <div>
                                 <div class="collapse" id="collapseExample">
                                     <div class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">帳戶</a>
@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="free-text dropdown- ">
                                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">賣場</a>
-                                        <ul class="dropdown-menu" >
+                                        <ul class="dropdown-menu">
                                             <li>@Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })</li>
                                             <li>@Html.ActionLink("訂單管理", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })</li>
                                             @if (Request.Cookies["LoginAccount"].Value == null)
@@ -190,5 +190,6 @@
             }
         });
     </script>
+    @RenderSection("scrpts", required: false)
 </body>
 </html>
