@@ -35,9 +35,9 @@
 
 
                 <li>
-                    <a class="btn  btn-secondary" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                    <a class="btn  btn-secondary" style="color:white;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                 </li>
-                </ul>
+            </ul>
 
         </div>
 
@@ -52,7 +52,7 @@
                         </button>
                     </div>
                     <div class="modal-body" id="editMemberbody">
-                        <form  id="form1" class="formFrame mx-auto" enctype="multipart/form-data">
+                        <form id="form1" class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
                                 <div class="photo"><img id="Productimg"></div>
                                 <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
@@ -67,18 +67,18 @@
                                 <div>
                                     <h6>交貨方式</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express"checked>
+                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express" checked>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             物流交貨
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2"   value="pTop" >
+                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2" value="pTop">
                                         <label class="form-check-label" for="flexRadioDefault2">
-                                          當面交貨/地點
+                                            當面交貨/地點
                                         </label>
                                     </div>
-                                    <div  class="my-selector-b" disabled></div>
+                                    <div class="my-selector-b" disabled></div>
                                 </div>
 
 
@@ -90,8 +90,8 @@
                                         <option>Choose...</option>
                                     </select>
                                 </h6>
-                                @*====userID======
-        ====posttime====*@
+                                ====userID======
+                                ====posttime====
 
                             </div>
 
@@ -106,7 +106,33 @@
             </div>
         </div>
 
+        @*===============================EDIT POST START==========================================*@
 
+
+        <div class="modal fade" id="model-editPost" tabindex="-1" role="dialog" aria-labelledby="model-editPost"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="model-editPost"> 徵求貼文</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="editPOST">
+                     
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequiredPost()">新增貼文</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*===============================EDIT POST END==========================================*@
 
         <div class="showPostArea tab-content " id="pills-tabContent">
 
@@ -140,7 +166,7 @@
             elDistrict: ".district"
         });
 
-     
+
 
         var test = getCookie('LoginID');
 
@@ -157,8 +183,8 @@
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
                             <div class="post-text">
-                                    <h3 id="postName${i}">${item.postName}</h3>
-  <div class="d-flex justify-content-between">
+
+                            <div class="d-flex justify-content-between">
                                     <h3 id="postName${i}">${item.postName}</h3>
                                     <h6>${item.county} <span>${item.district}</span></h6>
                                 </div>
@@ -167,12 +193,12 @@
                                     <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
                             </div>
 
-                             
+
 
                             <div class="post-button">
                                     <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
-
+                                     <a  role="button" href="#" onclick="editRequiredPost(this,'${item.RequiredPostID}')">編輯</a>
                              </div>
                           </div>
 
@@ -222,11 +248,11 @@
                                                                 </select>
                                                         </h6>
 
-                                    <!-- createtime -->
+                                    <!-- createtime 
                                     <input type="hidden" name="createdTime">
-                                    <!-- userID -->
+                                     userID 
                                     <input type="hidden" name="RequiredPostID" value="${item.RequiredPostID}">
-                                    <!-- requiredPostID -->
+                                     requiredPostID 
                                     <div style="display: flex; justify-content:flex-end;">
 
                                     </div>
@@ -235,7 +261,7 @@
                             </form>
                                         <button type="submit" class="btn btn-secondary" onclick="submitProdouct(this,${i})">建立商品留言</button>
                                 </div>
-                          </div>    @*end of 訂單*@
+                          </div>-->    end of 訂單
                     </div)
                     `)
                     checkSpan(item.RequiredPostID, i);
@@ -312,10 +338,9 @@
                 type: "GET",
                 success: function (response) {
                     $(response).each(function (i, item) {
-                        
 
-                      text+=`
- 
+                        text += `
+
                                       <div class="photo">
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -345,7 +370,7 @@
 
                                     </div>
                                 </div>
-                          `
+                          `;
 
                         $("#pocessPostStart").html(text);
                     })
@@ -370,7 +395,7 @@
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
                             <div class="post-text">
-                            
+
                                 <div class="d-flex justify-content-between">
                                     <h3 id="postName${i}">${item.postName}</h3>
                                     <h6>${item.county} <span>${item.district}</span></h6>
@@ -413,7 +438,7 @@
             window.location.href = `/Members/Login`;
         }
         var form = $(`#Commentform${ i }`)
-            var data = new FormData(form);
+        var data = new FormData(form);
 
             $.ajax({
                 url: "/RequiredPost/commemtProductPost",
@@ -427,9 +452,9 @@
 
                 }
             })
-        }//end  of submit product
+     }//end  of submit product
 
-        function tag() {
+    function tag() {
             var txt = ""
             $.ajax({
                 url: "/RequiredPost/getAllTag",
@@ -446,7 +471,7 @@
     }// end tag function
 
 
-        function getCookie(cookieName) {
+    function getCookie(cookieName) {
             var name = cookieName + "=";
             var ca = document.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
@@ -460,10 +485,10 @@
 
     function checkCommentList(eler,index) {
 
-        var test = getCookie('LoginAccount');
+      
         var data = $(eler).attr("name");
         var inner = "";
-        console.log(data)
+       
 
         $.ajax({
             url: "/RequiredPost/checkAllComment",
@@ -501,10 +526,6 @@
 
     function sendRequiredPost() {
 
-        console.log($(".county").val());
-        console.log($(".district").val());
-  
-        
         var test = getCookie('LoginAccount');
         if (test == null) {
             alert("必須要登入才能留言喔");
@@ -532,5 +553,67 @@
 
     }// end send required post
 
+    //function editRequiredPost(eler, id) {
+    //    let text = "";
+    //    $.ajax({
+    //        url: "/RequiredPost/getRequireDetail",
+    //        type: "GET",
+    //        odID: id,
+    //        success: function (response) {
+    //            text = `
+    //                <form id="${id}" class="formFrame mx-auto" enctype="multipart/form-data">
+    //                        <div class="displayImg">
+    //                            <div class="photo"><img id="Productimg" src="../Content/resource_nico/images/徵求台POST/${response.postImg}"></div>
+    //                            <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
+    //                        </div>
+    //                        <div class="displayInput">
+    //                            <h6>貼文名稱:<input type="text" required name="postName" id="postName" value="${response.postName}"></h6>
+    //                            <h6>
+    //                                貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()" value="${response.postDescription}"></textarea>
+    //                            </h6>
 
+
+    //                            <div>
+    //                                <h6>交貨方式</h6>
+    //                                <div class="form-check">
+    //                                    <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express" checked>
+    //                                    <label class="form-check-label" for="flexRadioDefault1">
+    //                                        物流交貨
+    //                                    </label>
+    //                                </div>
+    //                                <div class="form-check">
+    //                                    <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2" value="pTop">
+    //                                    <label class="form-check-label" for="flexRadioDefault2">
+    //                                        當面交貨/地點
+    //                                    </label>
+    //                                </div>
+    //                                <div class="my-selector-b" disabled></div>
+    //                            </div>
+
+
+    //                            <h6>價格:<input type="text" required name="estimatePrice" id="estimatePrice" value="${response.estimatePrice}"></h6>
+    //                            <h6>數量:<input type="text" required name="require0dQTY" id="requiredQTY" value="${response.requiredQTY}"></h6>
+    //                            <h6>
+    //                                標籤:
+    //                                <select id="tagSelectioninPost" required class="form-control" name="TagID">
+    //                                    <option>Choose...</option>
+    //                                </select>
+    //                            </h6>
+    //                            ====userID======
+    //                            ====posttime====
+
+    //                        </div>
+
+    //                    </form>
+
+    //                </div>
+                    
+
+
+    //              `;
+    //        }
+    //    })
+
+
+    //}
 </script>

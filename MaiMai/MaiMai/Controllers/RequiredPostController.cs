@@ -48,7 +48,7 @@ namespace MaiMai.Controllers
                 OrderID = m.OrderID,
                 userAccount = m.Member.userAccount,
                 county = m.county,
-                district = m.county
+                district = m.district
 
             }).ToList();
 
@@ -269,6 +269,27 @@ namespace MaiMai.Controllers
 
             return count.ToString();
         }
+        
+        public ActionResult getRequireDetail(int odID) {
+
+            var rPost = db.RequiredPost.Where(m => m.RequiredPostID == odID).Select(m => new
+            {
+
+                postDescription = m.postDescription,
+                postName = m.postName,
+                postImg = m.postImg,
+                requiredQTY = m.requiredQTY,
+                TagID = m.TagID,
+                estimatePrice = m.estimatePrice,
+                OrderID = m.OrderID,
+                county = m.county,
+                district = m.district,
+                isPast = false
+
+            });
+            return Json(rPost, JsonRequestBehavior.AllowGet);
+        }
+        
 
     }//class end
 }//namespace end
