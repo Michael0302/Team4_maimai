@@ -51,7 +51,7 @@
                             </div>
                      </div>
                     <div class="col-12 col-md-6 prdMT">
-                                <h3 id="itemuserid" name="${item.UserID}">商品名稱:</h3>
+                                <h3 >商品名稱:</h3>
                                 <h4 >${item.ProductName}</h4>
                             <div class="priceH d-flex justify-content-between">
                                 <h2 class="priceColor">價錢:${item.price}</h2>
@@ -124,27 +124,24 @@
     //=========================================================
     function addcar() {
      
-
-        if (test == "") {
-            var test = getCookie('LoginAccount');
-            console.log(test)
-            console.log(typeof test)
-            window.alert("請先登入會員");
-            return window.location.href = `/Members/Login`;
-        }
-
         $.ajax({
             url: "/NewMaimaiIndex/goCar1",
             type: "post",
             data: {
                 ProductPostID: getProductPostID,               
-                QTY :$("#count").val(),
+                QTY: $("#count").val(),
+                //inStoreQTY: $("#inStoreQTY").val(),
                 //CartNumber: "123",
-                UserID: $("#itemuserid").attr("name"),
+                //UserID: $("#itemuserid").attr("name"),
             },
             success: function (data) {
+                if (data == "請先登入") {
+                    window.location.href = "/Members/Login";
+                }
                 alert(data)
+                window.location.href = "/Cart/cartIndex";
             }
+
         });
     }
     //=========================================================

@@ -76,7 +76,6 @@ namespace MaiMai.Controllers
                 Description=m.productDescription,
                 QTY=m.inStoreQTY,
                 UserID=m.UserID,
-                
             }).ToList();
             return Json(ProdutPostDetailList, JsonRequestBehavior.AllowGet);
         }
@@ -89,19 +88,29 @@ namespace MaiMai.Controllers
 
         public string goCar1(Cart ProductPostIDlll)
         {
-            
-            var carnumver = db.Cart.FirstOrDefault(m => m.CartNumber != null && m.UserID == ProductPostIDlll.UserID && m.Status == false);
+            if (Request.Cookies["LoginID"] == null)
+            {       
+                return ("請先登入");
+            }
+            var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var pdpost = db.ProductPost.FirstOrDefault(m => m.ProductPostID == ProductPostIDlll.ProductPostID);
+            var carnumver = db.Cart.FirstOrDefault(m => m.CartNumber != null && m.UserID == UserID && m.Status == false);
             if (carnumver != null)
             {
-                ProductPostIDlll.CartNumber = carnumver.CartNumber;
-                ProductPostIDlll.Status = false;
-                CartRepository.Create(ProductPostIDlll);
+                
+                carnumver.QTY += ProductPostIDlll.QTY;
+                //carnumver.CartNumber = ProductPostIDlll.CartNumber;
+                carnumver.Status = false;
+                carnumver.UserID = UserID;
+                pdpost.inStoreQTY = pdpost.inStoreQTY - carnumver.QTY;
+                db.SaveChanges();
                 return "新增成功";
             }
             else
             {
                 ProductPostIDlll.CartNumber = (new Random().Next(0, int.MaxValue)+(db.Cart.FirstOrDefault().UserID.ToString()));
                 ProductPostIDlll.Status = false;
+                ProductPostIDlll.UserID = UserID;
                 CartRepository.Create(ProductPostIDlll);
                 return "新增成功";
             }
