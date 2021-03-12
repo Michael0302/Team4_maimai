@@ -95,6 +95,29 @@ namespace MaiMai.Controllers
 
         }
 
+        public ActionResult allPastPost()
+        {
+
+            var table = db.RequiredPost.Where(m => m.isPast == true).Select(m => new RequiredPostViewModel_C()
+            {
+                RequiredPostID = m.RequiredPostID,
+                postTime = m.postTime,
+                postDescription = m.postDescription,
+                postName = m.postName,
+                postImg = m.postImg,
+                UserID = m.UserID,
+                requiredQTY = m.requiredQTY,
+                estimatePrice = m.estimatePrice,
+                TagID = m.TagID,
+                OrderID = m.OrderID,
+                userAccount = m.Member.userAccount
+            }).ToList();
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+
+        }
+
         public string uploadPhoto(upLoadPhotoViewModel data)
         {
             if (data.upphoto == null)
@@ -199,7 +222,6 @@ namespace MaiMai.Controllers
             RequiredPost post = new RequiredPost()
             {
              
-            
                 postDescription = rp.postDescription,
                 postName = rp.postName,
                 postImg = rp.upphoto.FileName,
@@ -221,7 +243,6 @@ namespace MaiMai.Controllers
             else
             {
 
-               
                 string filename = rp.upphoto.FileName;
                 rp.upphoto.SaveAs(Server.MapPath("../Content/resource_nico/images/徵求台POST/") + filename);
                 string filePath = $"../Content/resource_nico/images/徵求台POST/{filename}";
@@ -229,5 +250,16 @@ namespace MaiMai.Controllers
             }
             return "發文成功";
         }
+
+        public string checkCommentSPan(int i)
+        {
+
+            var table = db.ProductPost.Where(m => m.RequiredPostID == i);
+            int count = table.Count();
+            
+
+            return count.ToString();
+        }
+
     }//class end
 }//namespace end

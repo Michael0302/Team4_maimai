@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <link href="~/Maimai/layout/css/layout.css" rel="stylesheet" />
     <link href="~/Maimai/layout/css/style_1.css" rel="stylesheet" />
+    <link href="~/Content/Cart_css/Cart.css" rel="stylesheet" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
 </head>
@@ -97,7 +98,7 @@
                                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">賣場</a>
                                         <ul class="dropdown-menu">
                                             <li>@Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })</li>
-                                            <li>@Html.ActionLink("訂單管理", "", "", null, new { @class = "dropdown-item" })</li>
+                                            <li>@Html.ActionLink("訂單管理", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })</li>
                                             @if (Request.Cookies["LoginAccount"].Value == null)
                                             {
                                                 <li>@Html.ActionLink("徵求台", "requiredPostIndex", "RequiredPost", null, new { @class = "dropdown-item" })</li>

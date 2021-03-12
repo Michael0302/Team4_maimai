@@ -8,7 +8,7 @@
 </head>
 
 <div class="container" style="padding-top:100px">
-    <div class="container" style="background-color:burlywood; padding-bottom: 40px; border-radius: 20px; ">
+    <div class="container" style=" padding-bottom: 40px; border-radius: 20px; ">
         <div class="row">
             <ul class="nav nav-pills mb-3 requriedTab w-100" style="justify-content:space-between" id="pills-tab" role="tablist">
                 <li class="nav-item">
@@ -17,17 +17,9 @@
 
                 </li>
                 <li >
-                    <a class="btn btn-warning" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                    <a class="btn  btn-secondary" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                 </li>
-                <!--============================--> @*個人帳號才出現*@
-                @*<li class="nav-item">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pocessPostStart" role="tab"
-                       aria-controls="pills-profile" aria-selected="false">處理中的貼文</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pastPost" role="tab"
-                       aria-controls="pills-contact" aria-selected="false">已完成的貼文</a>
-                </li>*@
+             
             </ul>
 
  
@@ -48,14 +40,13 @@
                     <div class="modal-body" id="editMemberbody">
                         <form id="form1"class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
-                                <img id="Productimg">
-                                <input  type="file" required  name="upphoto" id="productImg" style="display: block;" >
-                            </div>
+                                <div class="photo"><img id="Productimg"></div>
+                                    <input type="file" required name="upphoto" id="productImg" style="display: block" ; onchange="previewFile()">
+                                </div>
                             <div class="displayInput">
                                 <h6>貼文名稱:<input type="text"required  name="postName" id="postName" ></h6>
                                 <h6>
-                                    貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" rows="4"
-                                                   cols="50" required onclick="tag()" ></textarea>
+                                    貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()" ></textarea>
                                 </h6>
                                 <h6>價格:<input type="text" required name="estimatePrice" id="estimatePrice" ></h6>
                                 <h6>數量:<input type="text" required name="require0dQTY" id="requiredQTY" ></h6>
@@ -86,94 +77,12 @@
         <div class="showPostArea tab-content " id="pills-tabContent">
 
             <div class="tab-pane fade show active" id="allPost" role="tabpanel" aria-labelledby="pills-home-tab">
-                @*<div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">*@
-                @*<div id="img" class="photo"></div>
-                <div class="post-text">
-                    <h3 id="postName">訂單名子:</h3>
-                    <h6 id="userName">買家名稱:</h6>
-                    <div>
-                        <h6 id="text">產品敘述:</h6>
-                    </div>
-                    <div class="post-button">
-                        <h6 id="price">大概徵求價位：</h6>
-                        <a data-toggle="collapse" href="#collapseComment"
-                           role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount">0</span>)</a>
-                        <div>
-                            <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample"
-                               role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
-                        </div>
-                    </div>
-                </div>*@
-
-                @*======================================comment ============================================================*@
-                <!--<div class="collapse" id="collapseComment">
-                <div class="card card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
-                    richardson ad
-                    squid.
-                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea
-                    proident.
-                </div>
-            </div>-->
-                @*@======================================*end of comment======================================================*@
-
-                @*===========================================start productComment===========================================================*@
-                <!--<div class="collapse w-100" id="collapseExample">
-            <div class="card card-body w-100">
-            <form class="formFrame mx-auto" enctype="multipart/form-data">
-                <div class="displayImg">
-                    <img id="Productimg">
-                    <input type="file" onChange="doUpload()" name="productImg" id="productImg" style="display: block;">
-                </div>
-                <div class="displayInput">
-                    <h6>產品名稱:<input type="text" name="productName" id="productName"></h6>
-                    <h6>
-                        產品描述:<textarea id="productDescription" name="w3review" placeholder="使用程度、幾成新" rows="4"
-                                       cols="50"></textarea>
-                    </h6>
-
-                    <h6>價格:<input type="text" name="price" id="price"></h6>
-                    <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY"></h6>
-                    <h6>
-                        標籤:<selection id="tagselection" name="tag"></selection>
-                    </h6>
-
-                    <!-- createtime -->
-                <!-- userID -->
-                <!-- requiredPostID -->
-                <!--<div style="display: flex; justify-content:flex-end; ">
-                        <button type="submit" class="submitBtn">建立商品</button>
-                        </div>
+              
             </div>
-
-                     </form>
-                 </div>
-                </div>-->
-                @*end of 訂單*@
-                @*</div>*@
-            </div>
-            @*=============================================tab 2=========================================================*@
-            @*<div class="tab-pane fade" id="pocessPostStart" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div>
-                    2 Lorem
-                    ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem modi necessitatibus nam
-                    adipisci
-                    veritatis vel iure inventore assumenda, illum id repudiandae, nihil nemo! Eveniet obcaecati
-                    exercitationem distinctio, expedita ipsam culpa.
-                </div>
-
-            </div>*@
-            @*=============================================tab 3=========================================================*@
-            @*<div class="tab-pane fade" id="pastPost" role="tabpanel" aria-labelledby="pills-contact-tab">
-                3 Lorem
-                ipsum dolor sit amet consectetur adipisicing elit. Fuga quos ea assumenda ipsa, accusamus commodi
-                omnis dolorum nobis maiores deserunt vitae eaque nulla doloremque modi. Quod, odit. Quae, unde
-                ipsam!
-            </div>*@
+         
         </div>
 
-
+        
     </div>
 
     
@@ -188,24 +97,27 @@
             success: function (response) {
                 $(response).each(function (i, item) {
                     $("#allPost").append(`
-                         <div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">
+                         <div class="row mx-auto" style="border-bottom: 3px dashed gray;" id="start">
                             <div class="photo">
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" /> 
                             </div>
                             <div class="post-text">
-                                    <h3 id="postName${i}">訂單名子:${item.postName}</h3>
-                                    <h6 id="userName${i}">買家名稱:${item.userAccount}</h6>
-                            <div>
-                                    <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
-                            </div>
-                            <div class="post-button">
-                                    <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
-                                    <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
+                                    <h3 id="postName${i}">${item.postName}</h3>
+                                    <h6 id="userName${i}">買家:${item.userAccount}</h6>
+                                        <div>
+                                                <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                                        </div>
+                                    <div class="post-button">
+                                            <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                                            <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
+                                                <div>
+                                                        <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample${i}"
+                                                            role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
+                                                </div>
+                                     </div>
                                     <div>
-                                            <a class="btn btn-outline-warning" data-toggle="collapse" href="#collapseExample${i}"
-                                                role="button" aria-expanded="false" aria-controls="collapseExample">我要留言</a>
+                                   
                                     </div>
-                             </div>
                           </div>
 
                          <div class="collapse w-100 comment" id="collapseComment${i}">
@@ -218,14 +130,13 @@
                               <div class="card card-body w-100"}>
                                     <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
                                                 <div class="displayImg Productimg${i}">
-                                                      <img  id="Productimg${i}">
-                                                      <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}" style="display: block;">
+                                                      <div class="photo"><img  id="Productimg${i}"></div>
+                                                      <input type="file"  onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}" style="display: block;">
                                                  </div>
                                                 <div class="displayInput">
                                                         <h6>產品名稱:<input type="text" name="productName" id="productName${i}"></h6>
                                                         <h6>
-                                                              產品描述:<textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新" rows="4"
-                                                               cols="50" onclick="tag()"></textarea>
+                                                              產品描述:<textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新" class="w-75" onclick="tag()"></textarea>
                                                         </h6>
                                                         <h6>價格:<input type="text" name="price" id="price${i}"></h6>
                                                         <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY${i}"></h6>
@@ -246,21 +157,33 @@
                                 </div>
 
                             </form>
-                                        <button type="submit" class="btn btn-info" onclick="submitProdouct(this,${i})">建立商品留言</button>
+                                        <button type="submit" class="btn btn-secondary" onclick="submitProdouct(this,${i})">建立商品留言</button>
                                 </div>
                           </div>    @*end of 訂單*@
                     </div)
                     `)
 
+                    checkSpan(item.RequiredPostID,i);
+                    
                 })
             }
         })
            
-
+       
 
         // ajax end
     })//documentReady
-
+    function checkSpan(id ,i ) {
+     
+        $.ajax({
+            url: "/RequiredPost/checkCommentSPan",
+            type: "GET",
+            data: { 'i': id },
+            success: function (response) {
+                $(`#cmCount${i}`).html(`${response}`)
+            }
+        })
+    }
 
         function getCookie(cookieName) {
             var name = cookieName + "=";
@@ -274,26 +197,40 @@
 
         }
    
-
-        function doUpload(eler,index) {
+     function previewFile() {
             //var photo = $(eler).val();
-            var files = document.getElementById(`productImg${index}`).files;
-            console.log(files);
+         const preview = document.querySelector('#Productimg');
+         const file = document.querySelector('input[type=file]').files[0];
+         const reader = new FileReader();
 
-            var fileData = new FormData();
-            fileData.append(upphoto,files[0]);
-            console.log(fileData);
-            $.ajax({
-                url: "/RequiredPost/uploadPhoto",
-                type: "Post",
-                processData: false,
-                contentType: false,
-                data: { data: fileData},
-                    success: function (response) {
-                        $(`#Productimg${index}`).attr("src", response)
-                }
-            })
+         reader.addEventListener("load", function () {
+             // convert image file to base64 string
+             preview.src = reader.result;
+         }, false);
+
+         if (file) {
+             reader.readAsDataURL(file);
+         }
         } //  doUpload end
+
+    function doUpload(elem, index) {
+
+        const preview = document.querySelector(`#Productimg${index}`);
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            // convert image file to base64 string
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+
+
+
+    }
 
     function submitProdouct(eler, index) {
         console.log(index)
@@ -301,7 +238,7 @@
         var test = getCookie('LoginAccount');
         if (test == "") {
             window.alert("必須要登入才能留言喔");
-            window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
       
         var form = document.querySelector(`.Commentform${index}`)
@@ -346,7 +283,7 @@
 
         if (test == "") {
             window.alert("必須要登入才能留言喔");
-            window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
 
         var data = $(eler).attr("name");
@@ -359,18 +296,18 @@
             success: function (response) {
                 $(response).each(function (i, item) {
                     inner += `
-                         <div class="row mx-auto" style="border-bottom: 3px dashed orange;" id="start">   
+                         <div class="row mx-auto" style="border-bottom: 3px dashed gray;" id="start">   
 
                           <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
                           <div class="post-text">
-                                <h3 id="postName${i}">訂單名子: ${item.productName}</h3>
-                                <h6 id="userName${i}">賣家名稱:${item.userAccount}</h6>
+                                <h3 id="postName${i}">${item.productName}</h3>
+                                <h6 id="userName${i}">賣家:${item.userAccount}</h6>
                                 <div>
                                 <h6 id="text${i}">產品敘述:${item.productDescription}</h6>
                             </div>
                             <div class="post-button">
                                 <h6 id="price${i}">價位：${item.price}</h6>
-                                <a class="btn btn-warning" href="#">加入購物車</a>
+                                <a class="btn btn-secondary" href="#">加入購物車</a>
                          </div>
                         </div>`
                     })
@@ -387,7 +324,7 @@
 
         if (test == null) {
             alert("必須要登入才能發文喔");
-            window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
 
         var form = document.querySelector("#form1")

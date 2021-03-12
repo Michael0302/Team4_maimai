@@ -14,329 +14,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <style>
-        @@media screen and (min-width: 60em), print {
-            .flex-l {
-                display: flex;
-            }
-        }
 
-        .bg-near-white {
-            background-color: #f4f4f4;
-        }
-
-        .cf {
-            *zoom: 1;
-        }
-
-        html, body, div, article, section, main, footer, header, form, fieldset, legend, pre, code, a, h1, h2, h3, h4, h5, h6, p, ul, ol, li, dl, dt, dd, textarea, table, td, th, tr, input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="text"], input[type="url"], .border-box {
-            box-sizing: border-box;
-        }
-
-        div {
-            display: block;
-        }
-
-        body, input, textarea, button {
-            font-size: 15px;
-            font-family: karla, -apple-system, BlinkMacSystemFont, "Segoe UI", "微軟正黑體", "Microsoft JhengHei", sans-serif;
-            line-height: 1.6em;
-            color: #3f3f3f;
-        }
-
-        body {
-            margin: 0;
-            word-wrap: break-word;
-            -webkit-font-smoothing: antialiased;
-            text-rendering: optimizeLegibility;
-        }
-
-        html {
-            line-height: 1.15;
-            -ms-text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        .cf:before, .cf:after {
-            content: " ";
-            display: table;
-        }
-
-        .cf:after {
-            clear: both;
-        }
-
-        .cf:before, .cf:after {
-            content: " ";
-            display: table;
-        }
-
-        ::selection {
-            background: rgba(0,0,0,0.8);
-            color: #fff;
-        }
-
-        @@media screen and (min-width: 60em), print {
-            .w-50-l {
-                width: 50%;
-            }
-        }
-
-        .self-center {
-            align-self: center;
-        }
-
-        @@media screen and (min-width: 60em), print {
-            .tr-l {
-                text-align: right;
-            }
-        }
-
-
-        @@media screen and (min-width: 60em), print {
-            .tl-l {
-                text-align: left;
-            }
-        }
-
-        .tc {
-            text-align: center;
-        }
-
-        @@media screen and (min-width: 60em), print {
-            .pv6-l {
-                padding-top: 8rem;
-                padding-bottom: 8rem;
-            }
-        }
-
-        @@media screen and (min-width: 30em), print {
-            .ph5-ns {
-                padding-left: 4rem;
-                padding-right: 4rem;
-            }
-        }
-
-        @@media screen and (min-width: 30em), print {
-            .pv5-ns {
-                padding-top: 4rem;
-                padding-bottom: 4rem;
-            }
-        }
-
-        .ph4 {
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        .pv4 {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-
-        .nowrap {
-            white-space: nowrap;
-        }
-
-        .f5 {
-            font-size: 1rem;
-        }
-
-        .dib {
-            display: inline-block;
-        }
-
-        .mv0 {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        .mr4 {
-            margin-right: 2rem;
-        }
-
-        .br {
-            border-right-style: solid;
-            border-right-width: 1px;
-        }
-
-        .b--light-silver {
-            border-color: #aaa;
-        }
-
-        .mb4 {
-            margin-bottom: 2rem;
-        }
-
-        .nt3 {
-            margin-top: -1rem;
-        }
-
-        .b {
-            font-weight: bold;
-        }
-
-        .db {
-            display: block;
-        }
-
-        .white {
-            color: #fdfdfd;
-        }
-
-        .mb3 {
-            margin-bottom: 1rem;
-        }
-
-        @@media screen and (min-width: 30em), print {
-            .pt3-ns {
-                padding-top: 1rem;
-            }
-        }
-
-        @@media screen and (min-width: 60em), print {
-            .bg-white-l {
-                background-color: #fdfdfd;
-            }
-        }
-
-        @@media screen and (min-width: 30em), print {
-            .mt0-ns {
-                margin-top: 0;
-            }
-        }
-
-        .pa3 {
-            padding: 1rem;
-        }
-
-        .ba {
-            border-style: solid;
-            border-width: 1px;
-        }
-
-        .b--blue {
-            border-color: #3366a9;
-        }
-
-        .bg-fb {
-            background-color: #3b5998 !important;
-        }
-
-        .white {
-            color: #fdfdfd !important;
-        }
-
-        .button {
-            display: inline-block;
-            background-color: transparent;
-            border-width: 1px;
-            border-style: solid;
-            border-color: initial;
-            border-radius: 4px;
-            cursor: pointer;
-            padding: 0.75rem 1.5rem;
-            line-height: 1em;
-            opacity: 0.9;
-            white-space: nowrap;
-            transform: translateZ(0);
-        }
-
-        .f6, .progress text {
-            font-size: 0.875rem;
-        }
-
-        .br2 {
-            border-radius: 0.25rem;
-        }
-
-        .b--light-gray {
-            border-color: #e0e0e0;
-        }
-
-        button, html [type="button"], [type="reset"], [type="submit"] {
-            -webkit-appearance: button;
-        }
-
-        .w-100 {
-            width: 100%;
-        }
-
-        .tl {
-            text-align: left;
-        }
-
-        .black {
-            color: #101010;
-        }
-
-        .pa3 {
-            padding: 1rem;
-        }
-
-        .js-summary {
-            cursor: pointer;
-        }
-
-        .button-text {
-            background: none;
-            border: 0;
-            box-shadow: none;
-            padding: 0;
-            margin: 0;
-            color: inherit;
-            display: inline;
-        }
-
-        body, input, textarea, button {
-            font-size: 15px;
-            font-family: karla, -apple-system, BlinkMacSystemFont, "Segoe UI", "微軟正黑體", "Microsoft JhengHei", sans-serif;
-            line-height: 1.6em;
-            color: #3f3f3f;
-        }
-
-        button, select {
-            text-transform: none;
-        }
-
-        button, input {
-            overflow: visible;
-        }
-
-        .mt3 {
-            margin-top: 1rem;
-        }
-
-        .ph3 {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        .pb3 {
-            padding-bottom: 1rem;
-        }
-
-        form {
-            display: block;
-            margin-top: 0em;
-        }
-
-        .green {
-            color: #229f2a;
-        }
-
-        .mr3 {
-            margin-right: 1rem;
-        }
-
-        .f7 {
-            font-size: 0.75rem;
-        }
-
-        .gray {
-            color: #767676;
-        }
-    </style>
+    <link href="~/Content/cssCHIEN/Login.css" rel="stylesheet" />
 </head>
 
 <body class="w-100">
@@ -374,9 +53,9 @@
                                 <input class="w-100" required="required" type="password" name="userPassWord" id="userPassWord">
                             </div>
                         </form>
-                        
-                       
-                            @*<div>
+
+
+                        @*<div>
                                 @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
                                 @Html.TextBoxFor(m => m.email, new { @class = "w-100" })
                             </div>
@@ -384,13 +63,13 @@
                                 @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
                                 @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100" })
                             </div>*@
-                            <div>
-                                <label><input type="checkbox" name="RememberMe" />保持登入 </label>
-                            </div>
-                            <input type="submit" value="登入" class="button b green mr3"   onclick="myFunction()" />
+                        <div>
+                            <label><input type="checkbox" name="RememberMe" />保持登入 </label>
+                        </div>
+                        <input type="submit" value="登入" class="button b green mr3" onclick="myFunction()" />
 
-                          
-                     
+
+
                         @*<label class="b" for="user_email">電子信箱</label>
                             <input class="w-100" required="required" autofocus="autofocus" type="email" name="user[email]" id="user_email">
                             <label class="b" for="user_password">密碼</label>
@@ -417,67 +96,94 @@
     </div>
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- 若需相容 IE11，要加載 Promise Polyfill-->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script>
-        
-       
-            function myFunction() {
-
-                var userAccount2 = $("#userAccount").val();
-
-                var userPassWord2 = $("#userPassWord").val();
 
 
-                $.ajax({
+        function myFunction() {
 
-                    type: "POST",
-                    url: " /Members/LoginMethod",
-                    data: {
+            var userAccount2 = $("#userAccount").val();
+
+            var userPassWord2 = $("#userPassWord").val();
 
 
-                        userAccount: userAccount2,
+            $.ajax({
 
-                        userPassWord: userPassWord2
+                type: "POST",
+                url: " /Members/LoginMethod",
+                data: {
 
-                    },
 
-                    success: function (data) {
-                        
-                        var byebye = data.indexOf("密碼錯誤")
-                        if (byebye < 0) {
-                            alert(data);
-                            window.location.href = "/NewMaimaiIndex/MaimaiIndexNew";
-                        }
-                        else {
-                            alert("帳號不存在或密碼錯誤!")
-                        }
-                            
-                      
+                    userAccount: userAccount2,
+
+                    userPassWord: userPassWord2
+
+                },
+
+                success: function (data) {
+
+                    var byebye = data.indexOf("密碼錯誤")
+                    if (byebye < 0) {
+                        //alert(data);
+                        alertTest1()
+                        //window.location.href = "/NewMaimaiIndex/MaimaiIndexNew";
+                        setTimeout("home()", 2000)
+                    }
+                    else {
+                        alertTest()
                     }
 
-                });
 
-                var test = getCookie('LoginAccount'); 
-
-                function getCookie(cookieName) {
-                    var name = cookieName + "=";
-                    var ca = document.cookie.split(';');
-                    for (var i = 0; i < ca.length; i++) {
-                        var c = ca[i];
-                        while (c.charAt(0) == ' ') c = c.substring(1);
-                        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-                    }
-                    return "";
                 }
-                console.log(test);
-                
 
+            });
+
+            var test = getCookie('LoginAccount');
+
+            function getCookie(cookieName) {
+                var name = cookieName + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
             }
- 
+            console.log(test);
+
+
+        }
+
+        function alertTest() {
+            Swal.fire(
+                "登入失敗", //標題
+                " 請確認您的帳號或密碼", //訊息內容(可省略)
+                "error" //圖示(可省略) success/info/warning/error/question
+
+            );
+        }
+
+        function alertTest1() {
+            Swal.fire(
+                "登入成功", //標題
+                " 歡迎光臨MaiMai</br>2秒後自動跳轉回首頁...", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
+
+            );
+        }
+        function home() {
+            window.location.href = "/NewMaimaiIndex/MaimaiIndexNew";
+        }
+
+
+
     </script>
 </body>
 

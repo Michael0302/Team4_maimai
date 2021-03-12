@@ -13,6 +13,7 @@
         <EntityTypeShape EntityType="maimaiModel.ProductPost" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.ReportDetail" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.RequiredPost" Width="1.5" PointX="6" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Tag" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="maimaiModel.FK_Cart_ProductPost" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Comment_Member" ManuallyRouted="false" />
