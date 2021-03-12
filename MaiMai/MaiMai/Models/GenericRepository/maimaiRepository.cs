@@ -48,5 +48,6 @@ namespace MaiMai.Models
             whdb.Entry<Table>(_entity).State = EntityState.Modified;
             whdb.SaveChanges();
         }
+    
     }
 }

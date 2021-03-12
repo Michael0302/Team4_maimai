@@ -2,6 +2,7 @@
 using MaiMai.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -46,6 +47,29 @@ namespace MaiMai.Controllers
         {
             return View();
         }
+      
+        public string CheckAccount(string account)
+        {
+            if (account == "")
+            {
+                return"2";
+            }
+
+
+
+            SqlConnection conn = new SqlConnection("data source=maimai.database.windows.net;initial catalog=maimai2;persist security info=True;user id=team4;password=MaiMai123;");
+            conn.Open();
+
+            SqlCommand bb = new SqlCommand("Select * From Member Where userAccount='" + account + "'", conn);
+            SqlDataReader ha = bb.ExecuteReader();
+            if (ha.Read())
+                 
+            {
+                return "1";
+            }
+            return "0";
+        }
+
 
          
        
