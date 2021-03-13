@@ -73,7 +73,7 @@
                                 </svg>
                         </a>
 
-                        <input id="count" class="Nborder" value="1" size="1">
+                        <input id="count" class="Nborder" value="0" size="1">
 
                         <a id="countup" class="btn"  onclick="countUpClick()">
                             <svg width="24px" height="24px" class="svgHover" fill="#0072E3"
@@ -156,18 +156,13 @@
     //數量計算
     function countDownClick() {
         var count = $("#count").val();
-        var instoreQty = $("#inStoreQTY").html();
-        console.log(instoreQty);
-        console.log(count);
-
-
-        if (count <= 1) {
-            $("#count").val("1");
+        var instoreQty = $("#inStoreQTY").html();        
+        if (count <= 0) {
+            $("#count").val("0");
         }
         else {
-            $("#count").val(`${count * 1 - 1}`);
-       
-            $("#inStoreQTY").html(`${instoreQty * 1 + 1}`)
+            $("#count").val(`${(count * 1)-1}`);       
+            $("#inStoreQTY").html(`${(instoreQty * 1) + 1}`)
             $("#overcount").html("")
         }
     }
@@ -182,7 +177,7 @@
         }
         else {
             $("#count").val(`${count * 1 + 1}`);
-            $("#inStoreQTY").html(`${instoreQty - 1}`)
+            $("#inStoreQTY").html(`${(instoreQty - 1)}`)
         }
     }
     //$("#countdown").on("click", function () {

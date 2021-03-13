@@ -68,7 +68,6 @@ namespace MaiMai.Controllers
         }
         public ActionResult ProdutPostDetail(int PostID)
         {
-
             var ProdutPostDetailList = db.ProductPost.Where(m => m.ProductPostID == PostID).Select(m=>new{
                 img=m.productImg,
                 ProductName=m.productName,
@@ -93,35 +92,52 @@ namespace MaiMai.Controllers
             {       
                 return ("請先登入");
             }
+            //使用者
             var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            //商品( 確認商品的ID)
             var pdpost = db.ProductPost.FirstOrDefault(m => m.ProductPostID == ProductPostIDlll.ProductPostID);
+            //購物車            
+            //Cart cart = new Cart();
+            //( 1.有購物車號碼 2.使用者ID符合 3.未結單)
             var carnumver = db.Cart.FirstOrDefault(m => m.CartNumber != null && m.UserID == UserID && m.Status == false);
+            var cardb = db.Cart.FirstOrDefault(m => m.ProductPostID == ProductPostIDlll.ProductPostID  && m.UserID == UserID && m.Status == false);
+            
             if (carnumver != null)
-            {
-                
-                carnumver.QTY += ProductPostIDlll.QTY;
-                carnumver.CartNumber = ProductPostIDlll.CartNumber;
-                carnumver.ProductPostID = pdpost.ProductPostID;
-                carnumver.Status = false;
-
-                carnumver.UserID = UserID;
-
-                pdpost.inStoreQTY = pdpost.inStoreQTY - carnumver.QTY;
-                db.SaveChanges();
-                return "新增成功";
+            {                
+                if (cardb != null)
+                {
+                    pdpost.inStoreQTY = pdpost.inStoreQTY - ProductPostIDlll.QTY;
+                    db.SaveChanges();
+                    ProductPostIDlll.CartNumber = cardb.CartNumber;
+                    ProductPostIDlll.ProductPostID = cardb.ProductPostID;
+                    cardb.QTY = ProductPostIDlll.QTY + cardb.QTY;
+                    ProductPostIDlll.UserID = UserID;
+                    ProductPostIDlll.Status = cardb.Status;
+                    db.SaveChanges();                    
+                    return "商品更新成功";
+                }               
+                else
+                {
+                    ProductPostIDlll.CartNumber = carnumver.CartNumber;
+                    ProductPostIDlll.UserID = UserID;
+                    ProductPostIDlll.Status = false;
+                    CartRepository.Create(ProductPostIDlll);
+                    pdpost.inStoreQTY = pdpost.inStoreQTY - ProductPostIDlll.QTY;
+                    db.SaveChanges();
+                    return "增加一筆新商品";
+                }                     
             }
             else
             {
                 ProductPostIDlll.CartNumber = (new Random().Next(0, int.MaxValue)+(db.Cart.FirstOrDefault().UserID.ToString()));
                 ProductPostIDlll.Status = false;
                 ProductPostIDlll.UserID = UserID;
-                CartRepository.Create(ProductPostIDlll);
+                CartRepository.Create(ProductPostIDlll); 
+                pdpost.inStoreQTY = pdpost.inStoreQTY - ProductPostIDlll.QTY;
+                db.SaveChanges();        
                 return "新增成功";
             }
-
-            //return "123";
         }
         //送去購物車
-
     }
 }
