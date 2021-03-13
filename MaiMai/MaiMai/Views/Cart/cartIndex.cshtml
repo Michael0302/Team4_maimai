@@ -97,8 +97,6 @@
         changeValue();
     }
 
-    //function loadCart() {
-    //$(function () {
     function getCartList() {
 
         $.ajax({
@@ -152,6 +150,7 @@
         })
     }
 
+    //下單
     function CartToOrder() {
         var checkedToOrder = [];
         $("td input:checked").each(function () {
@@ -166,7 +165,9 @@
             //traditional: true,
             contentType: "application/json",
             success: function (status) {
-                location.reload();
+                alert("下單成功!");
+                window.location.href = "/OrderManager/OrderIndex"
+                //location.reload();
             }
         })
     }

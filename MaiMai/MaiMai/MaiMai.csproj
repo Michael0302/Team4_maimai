@@ -522,6 +522,7 @@
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\OrderManager\OrderIndex.cshtml" />
     <Content Include="Views\OrderManager\salesOrderIndex.cshtml" />
+    <Content Include="Views\Cart\cartIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
