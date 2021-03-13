@@ -44,6 +44,7 @@
             //data內的直要跟conterl內的action值一樣
             success: function (postdetail) {
                 $(postdetail).each(function (i, item) {
+                    console.log(item.ProductPostID);
                     $("#postdetail").prepend(`
                      <div class="col-12 col-md-6 prdMT ">
                             <div class="prdImg">
@@ -98,7 +99,7 @@
                         <label>剩餘</label><span id="inStoreQTY" >${item.QTY}</span>
                     </div>
                 </div>
-                <div class="col-6 d-flex justify-content-center" onclick="addcar()">
+                <div class="col-6 d-flex justify-content-center" onclick="addcar(${item.ProductPostID})">
                     <a class="btn addcart" >
                         <svg id="Capa_1" width="30px" height="20px"
                              style="enable-background:new 0 0 60.013 60.013;" version="1.1"
@@ -122,13 +123,13 @@
     })
     //選轉輪播
     //=========================================================
-    function addcar() {
-     
+    function addcar(getProductPostIDNew) {
+        console.log(getProductPostIDNew);
         $.ajax({
             url: "/NewMaimaiIndex/goCar1",
             type: "post",
             data: {
-                ProductPostID: getProductPostID,               
+                ProductPostID: getProductPostIDNew,               
                 QTY: $("#count").val(),
                 //inStoreQTY: $("#inStoreQTY").val(),
                 //CartNumber: "123",

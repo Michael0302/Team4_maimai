@@ -76,6 +76,7 @@ namespace MaiMai.Controllers
                 Description=m.productDescription,
                 QTY=m.inStoreQTY,
                 UserID=m.UserID,
+                ProductPostID=m.ProductPostID,
             }).ToList();
             return Json(ProdutPostDetailList, JsonRequestBehavior.AllowGet);
         }
@@ -99,9 +100,12 @@ namespace MaiMai.Controllers
             {
                 
                 carnumver.QTY += ProductPostIDlll.QTY;
-                //carnumver.CartNumber = ProductPostIDlll.CartNumber;
+                carnumver.CartNumber = ProductPostIDlll.CartNumber;
+                carnumver.ProductPostID = pdpost.ProductPostID;
                 carnumver.Status = false;
+
                 carnumver.UserID = UserID;
+
                 pdpost.inStoreQTY = pdpost.inStoreQTY - carnumver.QTY;
                 db.SaveChanges();
                 return "新增成功";
