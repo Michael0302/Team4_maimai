@@ -21,7 +21,9 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using MaiMai.Models;
 using Microsoft.AspNet.SignalR;
+using System.Web.Mvc;
 
 namespace SignalRMvc.chatHubs
 {
@@ -40,13 +42,38 @@ namespace SignalRMvc.chatHubs
         /// 供客戶端呼叫的伺服器端程式碼
         /// </summary>
         /// <param name="message"></param>
+        maimaiEntities db = new maimaiEntities();
+
+        public void Group(string GroupId, int UserID)
+        {
+            var userLevel = db.Member.Find(UserID).userLevel;
+            if( userLevel == 1 || userLevel==2)
+            {
+                Groups.Add(Context.ConnectionId, "All");
+                Groups.Add(Context.ConnectionId, "VIP");
+            }
+            else if(userLevel == 3)
+            {
+                Groups.Add(Context.ConnectionId, "All");
+            }
+        }
+
         public void Send(string message)
         {
+            //var name = GenerateRandomName(4);
+
+            // 呼叫所有客戶端的sendMessage方法
+            //Clients.All.sendMessage(name, message);
+            Clients.Group("All").addMessage(message); //addMessage 是前端function
+
+        }
+
+        public void SendToOne(string message)
+        {
             var name = GenerateRandomName(4);
-            
+
             // 呼叫所有客戶端的sendMessage方法
             Clients.All.sendMessage(name, message);
-           
         }
 
 

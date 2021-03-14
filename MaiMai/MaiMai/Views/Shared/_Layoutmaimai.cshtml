@@ -131,6 +131,8 @@
 
 
     @RenderBody()
+
+    <div id="page"></div>
     <footer>
         <hr>
         <div class="container d-flex mt-1 mb-2" id="footer">
@@ -198,6 +200,20 @@
                 $('.nav1').removeClass('affix');
             }
         });
+
+        //Michael singalR add start>>>>>
+
+        $(function () {
+            var chat = $.connection.chatHub;
+
+            chat.client.sendMessage = function (ReciverLevel, message) {
+                // 向頁面新增訊息
+                $('#page').append(`<li><strong>   [系統通知]</strong>:   ${htmlEncode(message)}   </li>`);
+            };
+        })
+
+        //Michael singalR add end<<<<<
+
     </script>
     @RenderSection("scripts", required: false)
 </body>
