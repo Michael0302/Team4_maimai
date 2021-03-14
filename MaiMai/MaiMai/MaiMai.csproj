@@ -165,6 +165,9 @@
     <Compile Include="Models\Cart.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Chat.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Comment.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
@@ -187,6 +190,9 @@
     </Compile>
     <Compile Include="Models\MaimaiIndexViewModel\MaimaiIndexViewModel.cs" />
     <Compile Include="Models\Member.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotificationID.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
