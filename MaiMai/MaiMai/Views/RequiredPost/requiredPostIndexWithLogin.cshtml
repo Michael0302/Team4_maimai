@@ -125,7 +125,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">刪除</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequiredPost()">儲存貼文</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="getRequireDetail()">儲存貼文</button>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,10 @@
                             <div class="post-button">
                                     <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
-                                     <a class="btn" onclick="getEditPost(this,${item.RequiredPostID})">編輯</a>
+
+                                    
+
+                                     <a class="btn" onclick="getEditPost(this,${item.RequiredPostID})" data-toggle='modal' data-target='#model-editPost'>編輯</a>
                              </div>
                           </div>
 
@@ -552,24 +555,26 @@
         })
 
     }// end send required post
-
+     
     function getEditPost(eler, id) {
+        console.log(id);
         var text = "";
         $.ajax({
             url: "/RequiredPost/getRequireDetail",
             type: "GET",
-            odID: id,
+            data:{ 'odID': id },
             success: function (response) {
-                text = `
+                $(response).each(function (i, item) {
+                    text = `
                     <form id="${id}" class="formframe mx-auto" enctype="multipart/form-data">
                             <div class="displayimg">
-                                <div class="photo"><img id="productimg" src="../content/resource_nico/images/徵求台post/${response.postimg}"></div>
+                                <div class="photo"><img id="productimg" src="../content/resource_nico/images/徵求台post/${item.postImg}"></div>
                                 <input type="file" required name="upphoto" id="postimg" style="display: block;" onchange="previewfile()">
                             </div>
                             <div class="displayinput">
-                                <h6>貼文名稱:<input type="text" required name="postname" id="postname" value="${response.postname}"></h6>
+                                <h6>貼文名稱:<input type="text" required name="postname" id="postname" value="${item.postName}"></h6>
                                 <h6>
-                                    貼文描述:<textarea id="postdescription" name="postdescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()" value="${response.postdescription}"></textarea>
+                                    貼文描述:<textarea id="postdescription" name="postdescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()" value="${item.postDescription}"></textarea>
                                 </h6>
 
 
@@ -589,19 +594,17 @@
                                     </div>
                                     <div class="my-selector-b" disabled></div>
                                 </div>
+ 
 
-
-                                <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${response.estimateprice}"></h6>
-                                <h6>數量:<input type="text" required name="require0dqty" id="requiredqty" value="${response.requiredqty}"></h6>
+                                <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${item.estimatePrice}"></h6>
+                                <h6>數量:<input type="text" required name="require0dqty" id="requiredqty" value="${item.requiredQTY}"></h6>
                                 <h6>
                                     標籤:
-                                    <select id="tagselectioninpost" required class="form-control" name="tagid">
-                                        <option>choose...</option>
+                                    <select id="tagselectioninpost" required class="form-control" name="tagid" onclick="tag()">
+                                        <option>${item.TagID}</option>
                                     </select>
                                 </h6>
-                                ====userid======
-                                ====posttime====
-
+                              
                             </div>
 
                         </form>
@@ -611,6 +614,7 @@
 
 
                   `;
+                })
                 $('#editPOST').html(text);
             }
         })

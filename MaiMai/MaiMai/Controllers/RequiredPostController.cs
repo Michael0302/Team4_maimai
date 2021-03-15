@@ -107,7 +107,7 @@ namespace MaiMai.Controllers
         public ActionResult allPastPost(int loginID)
         {
 
-            var table = db.RequiredPost.Where(m => m.UserID == loginID &&  m.isPast == true).Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.UserID == loginID && m.isPast == true).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,
@@ -269,7 +269,7 @@ namespace MaiMai.Controllers
 
             return count.ToString();
         }
-        
+        [HttpGet]
         public ActionResult getRequireDetail(string odID) {
 
             var id = Convert.ToInt32(odID);
@@ -286,10 +286,26 @@ namespace MaiMai.Controllers
                 district = m.district,
                 isPast = false
 
-            });
+            }).ToList();
             return Json(rPost, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+
+        public ActionResult getRequireDetail( RequiredPost rp) {
+
+            try
+            {
+
+
+                requiredPostRepository.Update(rp);
+                return Json(rp, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e) {
+
+                return Json(e, JsonRequestBehavior.AllowGet);
+            }
         
+        }
 
     }//class end
 }//namespace end
