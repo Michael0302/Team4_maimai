@@ -44,7 +44,7 @@ namespace SignalRMvc.chatHubs
         /// <param name="message"></param>
         maimaiEntities db = new maimaiEntities();
 
-        public void Group(string GroupId, int UserID)
+        public void Group( int UserID)
         {
             var userLevel = db.Member.Find(UserID).userLevel;
             if( userLevel == 1 || userLevel==2)
@@ -74,6 +74,11 @@ namespace SignalRMvc.chatHubs
 
             // 呼叫所有客戶端的sendMessage方法
             Clients.All.sendMessage(name, message);
+        }
+
+        public void SendToVIP(string message)
+        {
+            Clients.Group("VIP").addMessage(message);
         }
 
 
