@@ -270,10 +270,10 @@ namespace MaiMai.Controllers
             return count.ToString();
         }
         
-        public ActionResult getRequireDetail(int odID) {
+        public ActionResult getRequireDetail(string odID) {
 
-            var rPost = db.RequiredPost.Where(m => m.RequiredPostID == odID).Select(m => new
-            {
+            var id = Convert.ToInt32(odID);
+            var rPost = db.RequiredPost.Where(m => m.RequiredPostID == id).Select(m => new {
 
                 postDescription = m.postDescription,
                 postName = m.postName,

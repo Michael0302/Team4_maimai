@@ -90,8 +90,8 @@
                                         <option>Choose...</option>
                                     </select>
                                 </h6>
-                                ====userID======
-                                ====posttime====
+                                @*====userID======
+                                ====posttime====*@
 
                             </div>
 
@@ -114,7 +114,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="model-editPost"> 徵求貼文</h5>
+                        <h5 class="modal-title" id="model-editPost"> 編輯貼文</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -124,8 +124,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequiredPost()">新增貼文</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">刪除</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequiredPost()">儲存貼文</button>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                             <div class="post-button">
                                     <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
-                                     <a  role="button" href="#" onclick="editRequiredPost(this,'${item.RequiredPostID}')">編輯</a>
+                                     <a class="btn" onclick="getEditPost(this,${item.RequiredPostID})">編輯</a>
                              </div>
                           </div>
 
@@ -553,67 +553,68 @@
 
     }// end send required post
 
-    //function editRequiredPost(eler, id) {
-    //    let text = "";
-    //    $.ajax({
-    //        url: "/RequiredPost/getRequireDetail",
-    //        type: "GET",
-    //        odID: id,
-    //        success: function (response) {
-    //            text = `
-    //                <form id="${id}" class="formFrame mx-auto" enctype="multipart/form-data">
-    //                        <div class="displayImg">
-    //                            <div class="photo"><img id="Productimg" src="../Content/resource_nico/images/徵求台POST/${response.postImg}"></div>
-    //                            <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
-    //                        </div>
-    //                        <div class="displayInput">
-    //                            <h6>貼文名稱:<input type="text" required name="postName" id="postName" value="${response.postName}"></h6>
-    //                            <h6>
-    //                                貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()" value="${response.postDescription}"></textarea>
-    //                            </h6>
+    function getEditPost(eler, id) {
+        var text = "";
+        $.ajax({
+            url: "/RequiredPost/getRequireDetail",
+            type: "GET",
+            odID: id,
+            success: function (response) {
+                text = `
+                    <form id="${id}" class="formframe mx-auto" enctype="multipart/form-data">
+                            <div class="displayimg">
+                                <div class="photo"><img id="productimg" src="../content/resource_nico/images/徵求台post/${response.postimg}"></div>
+                                <input type="file" required name="upphoto" id="postimg" style="display: block;" onchange="previewfile()">
+                            </div>
+                            <div class="displayinput">
+                                <h6>貼文名稱:<input type="text" required name="postname" id="postname" value="${response.postname}"></h6>
+                                <h6>
+                                    貼文描述:<textarea id="postdescription" name="postdescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()" value="${response.postdescription}"></textarea>
+                                </h6>
 
 
-    //                            <div>
-    //                                <h6>交貨方式</h6>
-    //                                <div class="form-check">
-    //                                    <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express" checked>
-    //                                    <label class="form-check-label" for="flexRadioDefault1">
-    //                                        物流交貨
-    //                                    </label>
-    //                                </div>
-    //                                <div class="form-check">
-    //                                    <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2" value="pTop">
-    //                                    <label class="form-check-label" for="flexRadioDefault2">
-    //                                        當面交貨/地點
-    //                                    </label>
-    //                                </div>
-    //                                <div class="my-selector-b" disabled></div>
-    //                            </div>
+                                <div>
+                                    <h6>交貨方式</h6>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="transationtype" id="flexradiodefault1" value="express" checked>
+                                        <label class="form-check-label" for="flexradiodefault1">
+                                            物流交貨
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="transationtype" id="flexradiodefault2" value="ptop">
+                                        <label class="form-check-label" for="flexradiodefault2">
+                                            當面交貨/地點
+                                        </label>
+                                    </div>
+                                    <div class="my-selector-b" disabled></div>
+                                </div>
 
 
-    //                            <h6>價格:<input type="text" required name="estimatePrice" id="estimatePrice" value="${response.estimatePrice}"></h6>
-    //                            <h6>數量:<input type="text" required name="require0dQTY" id="requiredQTY" value="${response.requiredQTY}"></h6>
-    //                            <h6>
-    //                                標籤:
-    //                                <select id="tagSelectioninPost" required class="form-control" name="TagID">
-    //                                    <option>Choose...</option>
-    //                                </select>
-    //                            </h6>
-    //                            ====userID======
-    //                            ====posttime====
+                                <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${response.estimateprice}"></h6>
+                                <h6>數量:<input type="text" required name="require0dqty" id="requiredqty" value="${response.requiredqty}"></h6>
+                                <h6>
+                                    標籤:
+                                    <select id="tagselectioninpost" required class="form-control" name="tagid">
+                                        <option>choose...</option>
+                                    </select>
+                                </h6>
+                                ====userid======
+                                ====posttime====
 
-    //                        </div>
+                            </div>
 
-    //                    </form>
+                        </form>
 
-    //                </div>
+                    </div>
                     
 
 
-    //              `;
-    //        }
-    //    })
+                  `;
+                $('#editPOST').html(text);
+            }
+        })
 
 
-    //}
+    }
 </script>
