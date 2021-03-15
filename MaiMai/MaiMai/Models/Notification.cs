@@ -12,11 +12,12 @@ namespace MaiMai.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class NotificationID
+    public partial class Notification
     {
-        public int NotificationID1 { get; set; }
+        public int NotificationID { get; set; }
         public Nullable<int> SenderID { get; set; }
         public string ReciverLevel { get; set; }
         public string NotifyText { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
     }
 }

@@ -191,7 +191,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
     
     <script src="~/signalr/hubs"></script>
 
@@ -209,18 +209,26 @@
         $(function () {
             var chat = $.connection.chatHub;
 
-            chat.client.sendMessage = function (ReciverLevel, message) {
-                // 向頁面新增訊息
-                $('#page').append(`<li><strong>   [系統通知]</strong>:   ${htmlEncode(message)}   </li>`);
-            };
+            //chat.client.sendMessage = function (ReciverLevel, message) {
+            //    // 向頁面新增訊息
+            //    $('#page').append(`<li><strong>   [系統通知]</strong>:   ${(message)}   </li>`);
+            //};
 
             chat.client.addMessage = function (ReciverLevel, message) {
                 // 向頁面新增訊息
-                $('#page').append(`<li><strong>   [系統通知]</strong>:   ${htmlEncode(message)}   </li>`);
+                $('#page').append(`<li><strong>   [系統通知]</strong>:   ${(message)}   </li>`);
             };
 
             $.connection.hub.start().done(function () {
-                chat.server.group(1);
+                $.ajax({
+                    url: "@Url.Action("getUserID_P", "backstage")",
+                    type: "GET",
+                    success: function (userID) {
+                        if(userID != "null")
+                            chat.server.group(userID);
+                    }
+                })
+                
             })
         })
 

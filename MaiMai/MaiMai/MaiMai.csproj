@@ -212,7 +212,7 @@
     <Compile Include="Models\Member.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NotificationID.cs">
+    <Compile Include="Models\Notification.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">

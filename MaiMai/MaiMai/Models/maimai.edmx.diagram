@@ -8,8 +8,6 @@
         <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Chat" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Comment" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.NotificationID" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Order" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.OrderDetail" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.ProductPost" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
@@ -18,19 +16,21 @@
         <EntityTypeShape EntityType="maimaiModel.RequiredPost" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Tag" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="maimaiModel.FK_Cart_ProductPost" ManuallyRouted="false" />
-        <AssociationConnector Association="maimaiModel.FK_Comment_Member" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Comment_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="maimaiModel.FK_Order_Member" ManuallyRouted="false" />
-        <AssociationConnector Association="maimaiModel.FK_OrderDetail_Member" ManuallyRouted="false" />
-        <AssociationConnector Association="maimaiModel.FK_ProductPost_Member" ManuallyRouted="false" />
-        <AssociationConnector Association="maimaiModel.FK_Report_Member" ManuallyRouted="false" />
-        <AssociationConnector Association="maimaiModel.FK_Report_Member1" ManuallyRouted="false" />
-        <AssociationConnector Association="maimaiModel.FK_RequiredPost_Member" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_OrderDetail_Order" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_OrderDetail_ProductPost" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_ProductPost_Tag" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Report_reportDetail" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_RequiredPost_Tag" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="10.125" />
+        <AssociationConnector Association="maimaiModel.FK_Comment_Member" />
+        <AssociationConnector Association="maimaiModel.FK_Order_Member" />
+        <AssociationConnector Association="maimaiModel.FK_OrderDetail_Member" />
+        <AssociationConnector Association="maimaiModel.FK_ProductPost_Member" />
+        <AssociationConnector Association="maimaiModel.FK_Report_Member" />
+        <AssociationConnector Association="maimaiModel.FK_Report_Member1" />
+        <AssociationConnector Association="maimaiModel.FK_RequiredPost_Member" />
+        <EntityTypeShape EntityType="maimaiModel.Notification" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

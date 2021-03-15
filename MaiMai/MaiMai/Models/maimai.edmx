@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -55,8 +55,9 @@
           <Property Name="totalStarRate" Type="float" />
           <Property Name="selfDescription" Type="text" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="connectionID" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="NotificationID">
+        <EntityType Name="Notification">
           <Key>
             <PropertyRef Name="NotificationID" />
           </Key>
@@ -64,6 +65,7 @@
           <Property Name="SenderID" Type="int" />
           <Property Name="ReciverLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="NotifyText" Type="nchar" MaxLength="10" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -325,7 +327,7 @@
           <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NotificationID" EntityType="Self.NotificationID" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPost" EntityType="Self.ProductPost" Schema="dbo" store:Type="Tables" />
@@ -390,8 +392,7 @@
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -426,44 +427,8 @@
           <Property Name="starRate" Type="Int32" />
           <Property Name="commentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Comment_Order" FromRole="Comment" ToRole="Order" />
-        </EntityType>
-        <EntityType Name="Member">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="userPassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="birthday" Type="DateTime" Precision="0" />
-          <Property Name="identityNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="profileImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="userLevel" Type="Int32" />
-          <Property Name="totalStarRate" Type="Double" />
-          <Property Name="selfDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Member" FromRole="Member" ToRole="Order" />
-          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Member" FromRole="Member" ToRole="OrderDetail" />
-          <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Member" FromRole="Member" ToRole="ProductPost" />
-          <NavigationProperty Name="Report" Relationship="Self.FK_Report_Member" FromRole="Member" ToRole="Report" />
-          <NavigationProperty Name="Report1" Relationship="Self.FK_Report_Member1" FromRole="Member" ToRole="Report" />
-          <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Member" FromRole="Member" ToRole="RequiredPost" />
-        </EntityType>
-        <EntityType Name="NotificationID">
-          <Key>
-            <PropertyRef Name="NotificationID1" />
-          </Key>
-          <Property Name="NotificationID1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SenderID" Type="Int32" />
-          <Property Name="ReciverLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NotifyText" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -475,8 +440,8 @@
           <Property Name="createdTime" Type="DateTime" Precision="3" />
           <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Order" FromRole="Order" ToRole="Comment" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_Order_Member" FromRole="Order" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Order_Member" FromRole="Order" ToRole="Member" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -490,9 +455,9 @@
           <Property Name="SellerID" Type="Int32" />
           <Property Name="buyerStatus" Type="Int32" />
           <Property Name="sellerStatus" Type="Int32" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_OrderDetail_Member" FromRole="OrderDetail" ToRole="Member" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
+          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_OrderDetail_Member" FromRole="OrderDetail" ToRole="Member" />
         </EntityType>
         <EntityType Name="ProductPost">
           <Key>
@@ -512,9 +477,9 @@
           <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="status" Type="Boolean" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
+          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -529,9 +494,9 @@
           <Property Name="reportDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProductOrRequire" Type="Int32" Nullable="false" />
           <Property Name="ProductOrRequireID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_Report_Member" FromRole="Report" ToRole="Member" />
-          <NavigationProperty Name="Member1" Relationship="Self.FK_Report_Member1" FromRole="Report" ToRole="Member" />
           <NavigationProperty Name="ReportDetail" Relationship="Self.FK_Report_reportDetail" FromRole="Report" ToRole="ReportDetail" />
+          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Report_Member" FromRole="Report" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="maimaiModel.FK_Report_Member1" FromRole="Report" ToRole="Member" />
         </EntityType>
         <EntityType Name="ReportDetail">
           <Key>
@@ -558,8 +523,8 @@
           <Property Name="isPast" Type="Boolean" />
           <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Member" Relationship="Self.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
+          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -582,18 +547,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_Member">
-          <End Role="Member" Type="Self.Member" Multiplicity="1" />
-          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Comment">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Comment_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
@@ -603,78 +556,6 @@
             </Principal>
             <Dependent Role="Comment">
               <PropertyRef Name="OrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_Member">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="buyerUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderDetail_Member">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="OrderDetail">
-              <PropertyRef Name="SellerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductPost_Member">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="ProductPost">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_Member">
-          <End Role="Member" Type="Self.Member" Multiplicity="1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="reportorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_Member1">
-          <End Role="Member" Type="Self.Member" Multiplicity="1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="repotedUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RequiredPost_Member">
-          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
-          <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="RequiredPost">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -742,8 +623,6 @@
           <EntitySet Name="Cart" EntityType="Self.Cart" />
           <EntitySet Name="Chat" EntityType="Self.Chat" />
           <EntitySet Name="Comment" EntityType="Self.Comment" />
-          <EntitySet Name="Member" EntityType="Self.Member" />
-          <EntitySet Name="NotificationID" EntityType="Self.NotificationID" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
           <EntitySet Name="ProductPost" EntityType="Self.ProductPost" />
@@ -755,37 +634,9 @@
             <End Role="ProductPost" EntitySet="ProductPost" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_Member" Association="Self.FK_Comment_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
           <AssociationSet Name="FK_Comment_Order" Association="Self.FK_Comment_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="Comment" EntitySet="Comment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Member" Association="Self.FK_Order_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderDetail_Member" Association="Self.FK_OrderDetail_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="OrderDetail" EntitySet="OrderDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductPost_Member" Association="Self.FK_ProductPost_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="ProductPost" EntitySet="ProductPost" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_Member" Association="Self.FK_Report_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Report" EntitySet="Report" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_Member1" Association="Self.FK_Report_Member1">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Report" EntitySet="Report" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RequiredPost_Member" Association="Self.FK_RequiredPost_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
             <End Role="Order" EntitySet="Order" />
@@ -807,7 +658,159 @@
             <End Role="Tag" EntitySet="Tag" />
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
+          <EntitySet Name="Member" EntityType="maimaiModel.Member" />
+          <AssociationSet Name="FK_Comment_Member" Association="maimaiModel.FK_Comment_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Member" Association="maimaiModel.FK_Order_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Member" Association="maimaiModel.FK_OrderDetail_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductPost_Member" Association="maimaiModel.FK_ProductPost_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="ProductPost" EntitySet="ProductPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Member" Association="maimaiModel.FK_Report_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_Member1" Association="maimaiModel.FK_Report_Member1">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RequiredPost_Member" Association="maimaiModel.FK_RequiredPost_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="RequiredPost" EntitySet="RequiredPost" />
+          </AssociationSet>
+          <EntitySet Name="Notification" EntityType="maimaiModel.Notification" />
         </EntityContainer>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userAccount" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userPassWord" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="identityNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="profileImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="userLevel" Type="Int32" />
+          <Property Name="totalStarRate" Type="Double" />
+          <Property Name="selfDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Comment" Relationship="maimaiModel.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
+          <NavigationProperty Name="Order" Relationship="maimaiModel.FK_Order_Member" FromRole="Member" ToRole="Order" />
+          <NavigationProperty Name="OrderDetail" Relationship="maimaiModel.FK_OrderDetail_Member" FromRole="Member" ToRole="OrderDetail" />
+          <NavigationProperty Name="ProductPost" Relationship="maimaiModel.FK_ProductPost_Member" FromRole="Member" ToRole="ProductPost" />
+          <NavigationProperty Name="Report" Relationship="maimaiModel.FK_Report_Member" FromRole="Member" ToRole="Report" />
+          <NavigationProperty Name="Report1" Relationship="maimaiModel.FK_Report_Member1" FromRole="Member" ToRole="Report" />
+          <NavigationProperty Name="RequiredPost" Relationship="maimaiModel.FK_RequiredPost_Member" FromRole="Member" ToRole="RequiredPost" />
+          <Property Name="connectionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Comment_Member">
+          <End Type="maimaiModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="maimaiModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Member">
+          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="maimaiModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="buyerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Member">
+          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="maimaiModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="SellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductPost_Member">
+          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="maimaiModel.ProductPost" Role="ProductPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ProductPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Member">
+          <End Type="maimaiModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="maimaiModel.Report" Role="Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="reportorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_Member1">
+          <End Type="maimaiModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="maimaiModel.Report" Role="Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="repotedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RequiredPost_Member">
+          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="maimaiModel.RequiredPost" Role="RequiredPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RequiredPost">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderID" Type="Int32" />
+          <Property Name="ReciverLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NotifyText" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -845,37 +848,6 @@
                 <ScalarProperty Name="starRate" ColumnName="starRate" />
                 <ScalarProperty Name="commentDescription" ColumnName="commentDescription" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Member">
-            <EntityTypeMapping TypeName="maimaiModel.Member">
-              <MappingFragment StoreEntitySet="Member">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="userAccount" ColumnName="userAccount" />
-                <ScalarProperty Name="userPassWord" ColumnName="userPassWord" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="identityNumber" ColumnName="identityNumber" />
-                <ScalarProperty Name="profileImg" ColumnName="profileImg" />
-                <ScalarProperty Name="userLevel" ColumnName="userLevel" />
-                <ScalarProperty Name="totalStarRate" ColumnName="totalStarRate" />
-                <ScalarProperty Name="selfDescription" ColumnName="selfDescription" />
-                <ScalarProperty Name="email" ColumnName="email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NotificationID">
-            <EntityTypeMapping TypeName="maimaiModel.NotificationID">
-              <MappingFragment StoreEntitySet="NotificationID">
-                <ScalarProperty Name="NotificationID1" ColumnName="NotificationID" />
-                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
-                <ScalarProperty Name="ReciverLevel" ColumnName="ReciverLevel" />
-                <ScalarProperty Name="NotifyText" ColumnName="NotifyText" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -970,6 +942,39 @@
               <MappingFragment StoreEntitySet="Tag">
                 <ScalarProperty Name="TagID" ColumnName="TagID" />
                 <ScalarProperty Name="tagName" ColumnName="tagName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="maimaiModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="connectionID" ColumnName="connectionID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="selfDescription" ColumnName="selfDescription" />
+                <ScalarProperty Name="totalStarRate" ColumnName="totalStarRate" />
+                <ScalarProperty Name="userLevel" ColumnName="userLevel" />
+                <ScalarProperty Name="profileImg" ColumnName="profileImg" />
+                <ScalarProperty Name="identityNumber" ColumnName="identityNumber" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="userPassWord" ColumnName="userPassWord" />
+                <ScalarProperty Name="userAccount" ColumnName="userAccount" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notification">
+            <EntityTypeMapping TypeName="maimaiModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="NotifyText" ColumnName="NotifyText" />
+                <ScalarProperty Name="ReciverLevel" ColumnName="ReciverLevel" />
+                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+                <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

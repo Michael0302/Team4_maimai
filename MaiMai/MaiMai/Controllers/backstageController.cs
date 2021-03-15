@@ -417,6 +417,18 @@ namespace MaiMai.Controllers
             db.Report.Find(ReportID).reportStatus = 1;
             db.SaveChanges();
         }
+
+        //抓cookie userID
+        public ActionResult getUserID_P()
+        {
+            if(Request.Cookies["LoginID"] == null)
+            {
+                return Content("null");
+            }
+            var userID = Request.Cookies["LoginID"].Value.ToString();
+
+            return Content(userID);
+        }
     }
 
     
