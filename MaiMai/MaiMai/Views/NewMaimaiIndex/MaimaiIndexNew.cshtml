@@ -129,8 +129,9 @@
         <div class="row mb-lg-3">
             <div class="col-md-12 " >
                 <div>
-                    <p class="mb-2">最新商品</p>
-                    <p class="mb-2">更多</p>
+                    <p class="mb-2 col-3">最新商品</p>
+                    <p class="col-6"></p>
+                    <p class="mb-2 col-3">更多</p>
                 </div>
                 <div class="carousel slide multi-item-carousel active " id="theCarousel2" style="background: #333; color: #ddd;">
                     <div class="carousel-inner  d-md-flex theWidth2 mt-3" id="NewAddCarousel">
@@ -148,9 +149,10 @@
         @*商品輪播*@
         <div class="row mt-lg-3">
             <div class="col-md-12 ">
-                <div>
-                    <p class="mb-2">商品</p>
-                    <p class="mb-2">更多</p>
+                <div class="d-flex">
+                    <p class="mb-2 col-3">商品</p>
+                    <p class="col-6"></p>
+                    <p class="mb-2 col-3">更多</p>
                 </div>
                 <div class="carousel slide multi-item-carousel active " id="theCarousel" style="background: #333; color: #ddd;">
                     <div class="carousel-inner  d-md-flex theWidth " id="addCarousel">
@@ -218,10 +220,8 @@
                         if (i == 0) {
                             $("#StarFive").prepend(`
                             <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
-                                <div class="fh5co_suceefh5co_height">
-                               
+                                <div class="fh5co_suceefh5co_height">                               
                                     <img src="../Content/ProductPostImg/member/${item.img}" alt="img" />
-                              
                                         <div class="fh5co_suceefh5co_height_position_absolute"></div>
                     @*文字*@
                                         <div class="fh5co_suceefh5co_height_position_absolute_font">
@@ -329,7 +329,7 @@
                 success: function (addCarousel) {
                     $(addCarousel).each(function (i, item) {
                         $("#addCarousel").append(`
-                        <div class="item mx-md-2 Carouseladvertising ">
+                        <div class="item mx-md-2 Carouseladvertising"onclick="CarouselClick(${item.ProductPostID})">
                                 <div class="col-xs-4">
                                     <a href="#1">
                                              <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})

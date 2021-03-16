@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "creditCard";
+}
+
+<h2>creditCard</h2>
+
+@*@Url.Content(~/img.jpg)*@
+@*aio_check_out_credit_onetime信用卡一次付清*@
+開啟專案時require('opay_payment_nodejs')
+
+const opay_payment = require('../lib/opay_payment.js');
+//參數值為[PLEASE MODIFY]者，請在每次測試時給予獨特值
+//若要測試非必帶參數請將base_param內註解的參數依需求取消註解 //
+let base_param = {
+    MerchantTradeNo: 'PLEASEMODIFY', //請帶20碼uid, ex: f0a0d7e9fae1bb72bc93
+    MerchantTradeDate: '2017/02/13 15:45:30', //ex: 2017/02/13 15:45:30
+    TotalAmount: '100',
+    TradeDesc: '測試交易描述',
+    ItemName: '測試商品等',
+    ReturnURL: 'http://192.168.0.1',
+    // ChooseSubPayment: '',
+    // OrderResultURL: 'http://192.168.0.1/payment_result',
+    // NeedExtraPaidInfo: '1',
+    // ClientBackURL: 'https://www.google.com',
+    // ItemURL: 'http://item.test.tw',
+    // Remark: '交易備註',
+    // HoldTradeAMT: '1',
+    // StoreID: '',
+    // UseRedeem: ''
+};
+
+let create = new opay_payment();
+let htm = create.payment_client.aio_check_out_credit_onetime(parameters = base_param);
+console.log(htm);
+
+@*自訂賣家傳送參數*@
+
+<form id="formCreditCard" method="post" accept-charset="UTF-8"
+      action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5">
+
+    MerchantID 商店代號:
+    <input type="text" name="MerchantID" value="2000132" /><br />
+    MerchantTradeNo 商店交易編號:
+    <input type="text" name="MerchantTradeNo" value="DX2021031210503944f4" /><br />
+    MerchantTradeDate 商店交易時間:
+    <input type="text" name="MerchantTradeDate" value="2021/03/12 10:50:39" /><br />
+    PaymentType 交易類型:
+    <input type="text" name="PaymentType" value="aio" /><br />
+    TotalAmount 交易金額:
+    <input type="text" name="TotalAmount" value="5" /><br />
+    TradeDesc 交易描述:
+    <input type="text" name="TradeDesc" value="建立信用卡測試訂單" /><br />
+    ItemName 商品名稱:
+    <input type="text" name="ItemName" value="MacBook 30元X2#iPhone6s 40元X1" /><br />
+    ReturnURL 付款完成通知回傳網址:
+    <input type="text" name="ReturnURL" value="https://developers.opay.tw/AioMock/MerchantReturnUrl" /><br />
+    ChoosePayment 預設付款方式:
+    <input type="text" name="ChoosePayment" value="Credit" /><br />
+    會員商店代碼:
+    <input type="text" name="StoreID" value="" /><br />
+    ClientBackURL Client端返回廠商網址:
+    <input type="text" name="ClientBackURL" value="https://developers.opay.tw/AioMock/MerchantClientBackUrl" /><br />
+    CreditInstallment 刷卡分期期數:
+    <input type="text" name="CreditInstallment" value="" /><br />
+    InstallmentAmount 使用刷卡分期的付款金額:
+    <input type="text" name="InstallmentAmount" value="" /><br />
+    Redeem 信用卡是否使用紅利折抵:
+    <input type="text" name="Redeem" value="" /><br />
+    CheckMacValue 簽章類型:
+    <input type="text" name="EncryptType" value="1" /><br />
+    CheckMacValue 檢查碼:
+    <input type="text" name="CheckMacValue" value="887D0749DAA42E2611051856C96B0AA9F6C66AE9BBE9D3BD80359FE34E14C13B" /><br />
+    <input type="submit" value="送出訂單" />
+
+</form>
+
+
+@*checkMacVal SDK工具包自動產生*@
+
+
