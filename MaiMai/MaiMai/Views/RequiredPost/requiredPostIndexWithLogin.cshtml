@@ -124,8 +124,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">刪除</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="getRequireDetail()">儲存貼文</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteRequireDetail()">過期貼文</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequireDetail()">儲存貼文</button>
                     </div>
                 </div>
             </div>
@@ -274,17 +274,6 @@
 
         // ajax end
     })//documentReady
-
-        $('input[type=radio]').change(function () {
-            if (this.value == 'pTop') {
-                $(".county").attr('disabled', false);
-                $(".district").attr('disabled', false);
-            }
-            else {
-                $(".county").attr('disabled', true)
-                $(".district").attr('disabled', true)
-            }
-        });
 
     function previewFile() {
         //var photo = $(eler).val();
@@ -527,6 +516,7 @@
         })
     } // end check comment function
 
+
     function sendRequiredPost() {
 
         var test = getCookie('LoginAccount');
@@ -555,18 +545,21 @@
         })
 
     }// end send required post
+    
+
      
     function getEditPost(eler, id) {
-        console.log(id);
+
         var text = "";
         $.ajax({
             url: "/RequiredPost/getRequireDetail",
             type: "GET",
             data:{ 'odID': id },
-            success: function (response) {
-                $(response).each(function (i, item) {
+            success: function (item) {
+          
+               
                     text = `
-                    <form id="${id}" class="formframe mx-auto" enctype="multipart/form-data">
+                    <form id="editform" class="formframe mx-auto" enctype="multipart/form-data">
                             <div class="displayimg">
                                 <div class="photo"><img id="productimg" src="../content/resource_nico/images/徵求台post/${item.postImg}"></div>
                                 <input type="file" required name="upphoto" id="postimg" style="display: block;" onchange="previewfile()">
@@ -574,7 +567,7 @@
                             <div class="displayinput">
                                 <h6>貼文名稱:<input type="text" required name="postname" id="postname" value="${item.postName}"></h6>
                                 <h6>
-                                    貼文描述:<textarea id="postdescription" name="postdescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()" value="${item.postDescription}"></textarea>
+                                    貼文描述:<textarea id="postdescription" name="postdescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()">${item.postDescription}</textarea>
                                 </h6>
 
 
@@ -586,25 +579,32 @@
                                             物流交貨
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationtype" id="flexradiodefault2" value="ptop">
+                                    <div class="form-check" >
+                                        <input class="form-check-input" type="radio"  onclick="changeDis()" name="transationtype" id="flexradiodefault2" value="ptop"  >
                                         <label class="form-check-label" for="flexradiodefault2">
                                             當面交貨/地點
                                         </label>
                                     </div>
-                                    <div class="my-selector-b" disabled></div>
+                                      <div id="city"> 
+                                        <div>
+                                            <select><option name="county"  value="${item.county}">${item.county}</option></select>
+                                        </div>
+                                        <div>
+                                            <select><option  name="district" value="${item.district}">${item.district}</option></select>
+                                        </div>
+                                        </div>
                                 </div>
  
 
                                 <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${item.estimatePrice}"></h6>
-                                <h6>數量:<input type="text" required name="require0dqty" id="requiredqty" value="${item.requiredQTY}"></h6>
+                                <h6>數量:<input type="text" required name="requiredQTY" id="requiredqty" value="${item.requiredQTY}"></h6>
                                 <h6>
                                     標籤:
                                     <select id="tagselectioninpost" required class="form-control" name="tagid" onclick="tag()">
-                                        <option>${item.TagID}</option>
+                                        <option value="${item.TagID}">${item.TagName}</option>
                                     </select>
                                 </h6>
-                              
+                                <input id="RequiredPostID" name="RequiredPostID" value="${item.RequiredPostID}"  type="hidden">
                             </div>
 
                         </form>
@@ -614,11 +614,68 @@
 
 
                   `;
-                })
+             
                 $('#editPOST').html(text);
             }
         })
 
+     }
+
+    function changeDis() {
+
+        new TwCitySelector({
+            el: ".my-selector-c",
+            elCounty: ".county", // 在 el 裡查找 dom
+            elDistrict: ".district", // 在 el 裡查找 dom
+          
+        });
+
+        $(`#city`).addClass("my-selector-c");
+
+        $(`#city`).html(`
+            <div>
+                <select class="county"></select>
+            </div>
+            <div>
+                <select class="district"></select>
+            </div>`);
 
     }
+
+    function sendRequireDetail() {
+
+
+        var form = document.querySelector("#editform");
+        var data = new FormData(form);
+
+        console.log(data);
+        $.ajax({
+            url: "/RequiredPost/sendRequireDetail",
+            type: "Post",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                window.alert(response)
+                window.location.reload("/RequiredPost/requiredPostIndex")
+
+            }
+        })
+          
+    }
+
+    function deleteRequireDetail() {
+        var rpID = $("#RequiredPostID").val();
+        $.ajax({
+            url: "/RequiredPost/deleteRequireDetail",
+            type: "GET",
+            data: { 'data': rpID },
+            success: function (response) {
+                window.alert(response)
+                window.location.reload("/RequiredPost/requiredPostIndex")
+
+            }
+        })
+    }
+    
 </script>

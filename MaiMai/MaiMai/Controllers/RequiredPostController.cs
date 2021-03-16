@@ -273,39 +273,84 @@ namespace MaiMai.Controllers
         public ActionResult getRequireDetail(string odID) {
 
             var id = Convert.ToInt32(odID);
-            var rPost = db.RequiredPost.Where(m => m.RequiredPostID == id).Select(m => new {
-
+            var rPost = db.RequiredPost.
+            Select(m => new
+            {
+                RequiredPostID=m.RequiredPostID,
                 postDescription = m.postDescription,
                 postName = m.postName,
                 postImg = m.postImg,
                 requiredQTY = m.requiredQTY,
-                TagID = m.TagID,
+                TagName = m.Tag.tagName,
+                TagID= m.TagID,
                 estimatePrice = m.estimatePrice,
                 OrderID = m.OrderID,
                 county = m.county,
                 district = m.district,
                 isPast = false
 
-            }).ToList();
+            }).FirstOrDefault(m => m.RequiredPostID == id);
             return Json(rPost, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
 
-        public ActionResult getRequireDetail( RequiredPost rp) {
+        public string sendRequireDetail( RequiredPostViewModel_C rp) {
 
             try
             {
+                RequiredPost post = requiredPostRepository.GetbyID(rp.RequiredPostID);
 
 
-                requiredPostRepository.Update(rp);
-                return Json(rp, JsonRequestBehavior.AllowGet);
+                    post.postDescription = rp.postDescription;
+                    post.postName = rp.postName;
+                
+                    post.requiredQTY = rp.requiredQTY;
+                    post.TagID = rp.TagID;
+                    post.estimatePrice = rp.estimatePrice;
+                    post.OrderID = rp.OrderID;
+                    post.county = rp.county;
+                    post.district = rp.district;
+                    post.isPast = false;
+                   
+
+         
+                post.postTime = DateTime.Now;
+                post.UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value);
+
+                requiredPostRepository.Update(post);
+
+                if (rp.upphoto != null) { 
+               
+                    string filename = rp.upphoto.FileName;
+                    rp.upphoto.SaveAs(Server.MapPath("../Content/resource_nico/images/徵求台POST/") + filename);
+                    string filePath = $"../Content/resource_nico/images/徵求台POST/{filename}";
+
+                }
+
+                return "修改成功";
             }
             catch (Exception e) {
 
-                return Json(e, JsonRequestBehavior.AllowGet);
+                return "修改失敗";
             }
         
         }
 
+        public string deleteRequireDetail(string data) {
+
+            try
+            {
+                var id = Convert.ToInt32(data);
+                var reqiredPost = requiredPostRepository.GetbyID(id);
+                reqiredPost.isPast = true;
+                requiredPostRepository.Update(reqiredPost);
+                return "已變成過去貼文";
+            }
+            catch (Exception e) {
+
+                return e.Message;
+            }
+        
+        }
     }//class end
 }//namespace end
