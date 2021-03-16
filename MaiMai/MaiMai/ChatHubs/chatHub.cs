@@ -25,36 +25,46 @@ using MaiMai.Models;
 using Microsoft.AspNet.SignalR;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace SignalRMvc.chatHubs
 {
+
+    //public class User
+    //{
+    //    /// <summary>
+    //    /// 連線ID
+    //    /// </summary>
+    //    [Key]
+    //    public string ConnectionID { get; set; }
+
+    //    /// <summary>
+    //    /// 使用者名稱稱
+    //    /// </summary>
+    //    public string Name { get; set; }
+
+    //    public User(string name, string connectionId)
+    //    {
+    //        this.Name = name;
+    //        this.ConnectionID = connectionId;
+    //    }
+    //}
+
+
     public class chatHub : Hub
     {
-        private static readonly char[] Constant =
-        {
- '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
- 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
- 'w', 'x', 'y', 'z',
- 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
- 'W', 'X', 'Y', 'Z'
- };
+        //public static List<User> users = new List<User>();
 
-        /// <summary>
-        /// 供客戶端呼叫的伺服器端程式碼
-        /// </summary>
-        /// <param name="message"></param>
+        
         maimaiEntities db = new maimaiEntities();
 
         public void Group(int UserID)
         {
             var user = db.Member.Find(UserID);
-            
-            //判斷是否有connectionID，如沒有，塞一個進去
-            if(user.connectionID == null)
-            {
                 user.connectionID = Context.ConnectionId;
                 db.SaveChanges();
-            }
+            
 
             //判斷會員等級 一般會員>加入All群組，管理員&優質會員>加入All & VIP群組
             if (user.userLevel != 3)
@@ -62,6 +72,17 @@ namespace SignalRMvc.chatHubs
                 var reload_user = db.Member.Find(UserID);
                 Groups.Add(reload_user.connectionID, "VIP");
             }
+        }
+        public override Task OnConnected()
+        {
+            //var user = users.Where(u => u.ConnectionID == Context.ConnectionId).SingleOrDefault();
+            //判断用户是否存在，否则添加集合
+            //if (user == null)
+            //{
+            //    user = new User("",  Context.ConnectionId);
+            //    users.Add(user);
+            //}
+            return base.OnConnected();
         }
 
         public void Send(int sender,  string message)
@@ -103,7 +124,7 @@ namespace SignalRMvc.chatHubs
         public void SendToVIP(int sender,  string message)
         {
             Clients.Group("VIP").addMessage(message);
-
+           
             Notification noti = new Notification()
             {
                 SenderID = sender,
@@ -117,26 +138,6 @@ namespace SignalRMvc.chatHubs
         }
 
 
-        public override Task OnConnected()
-        {
-            Trace.WriteLine("客戶端連線成功");
-            return base.OnConnected();
-        }
 
-        /// <summary>
-        /// 產生隨機使用者名稱函式
-        /// </summary>
-        /// <param name="length">使用者名稱長度</param>
-        /// <returns></returns>
-        public static string GenerateRandomName(int length)
-        {
-            var newRandom = new System.Text.StringBuilder(62);
-            var rd = new Random();
-            for (var i = 0; i < length; i++)
-            {
-                newRandom.Append(Constant[rd.Next(62)]);
-            }
-            return newRandom.ToString();
-        }
     }
 }

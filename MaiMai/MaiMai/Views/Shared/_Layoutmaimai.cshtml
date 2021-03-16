@@ -214,7 +214,7 @@
             //    $('#page').append(`<li><strong>   [系統通知]</strong>:   ${(message)}   </li>`);
             //};
 
-            chat.client.addMessage = function (ReciverLevel, message) {
+            chat.client.addMessage = function (message) {
                 // 向頁面新增訊息
                 $('#page').append(`<li><strong>   [系統通知]</strong>:   ${(message)}   </li>`);
             };
@@ -233,7 +233,10 @@
         })
 
             //Michael singalR add end<<<<<
-
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
     </script>
     @RenderSection("scripts", required: false)
 </body>

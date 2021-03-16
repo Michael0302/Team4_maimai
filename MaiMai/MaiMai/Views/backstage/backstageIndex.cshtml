@@ -530,22 +530,17 @@
     }
 
     //發通知
-        function pushInfo() {
-            console.log(chat.server);            
-            $.connection.hub.start().done(function () {
-                console.log(chat.server);
-            var message = $("#infotext").text();
+         function pushInfo() {
+             $.connection.hub.start().done(function () {
+            var message = $("#infotext").val();
             var reciver = $("#searchID").val().toUpperCase();
-            var sender = "";
-            $.ajax({
-                    url: "@Url.Action("getUserID_P", "backstage")",
-                    type: "GET",
-                    success: function (userID) {
-                        if(userID != "null")
-                            sender = userID;
-                    }
-                })
-
+                 var sender = getCookie("LoginID");
+                 if (sender == "") {
+                     alert("請先登入")
+                     return false;
+                 }
+             
+                 console.log(message);
                 if (reciver == "ALL") {
                     chat.server.send(sender, message);
                 }
@@ -878,5 +873,18 @@
         })
     }
 
+    //抓cookies
+        function getCookie(cookieName) {
+            var name = cookieName + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+
+        }
+    
     </script>
  }

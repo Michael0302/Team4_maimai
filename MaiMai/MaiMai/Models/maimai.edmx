@@ -35,6 +35,7 @@
           <Property Name="starRate" Type="int" />
           <Property Name="commentDescription" Type="text" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CommentorUserID" Type="int" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -64,7 +65,7 @@
           <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SenderID" Type="int" />
           <Property Name="ReciverLevel" Type="nvarchar" MaxLength="50" />
-          <Property Name="NotifyText" Type="nchar" MaxLength="10" />
+          <Property Name="NotifyText" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Order">
@@ -429,6 +430,7 @@
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Comment_Order" FromRole="Comment" ToRole="Order" />
           <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
+          <Property Name="CommentorUserID" Type="Int32" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -808,7 +810,7 @@
           <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SenderID" Type="Int32" />
           <Property Name="ReciverLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NotifyText" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
@@ -843,6 +845,7 @@
           <EntitySetMapping Name="Comment">
             <EntityTypeMapping TypeName="maimaiModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="CommentorUserID" ColumnName="CommentorUserID" />
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="starRate" ColumnName="starRate" />
