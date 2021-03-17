@@ -203,13 +203,14 @@ div.col-md-8 {
 }
 .Ajax-search-dropdown-img {
 }
+
 .Ajax-search-dropdown-img > img {
-        height: 84px;
-        width: 192px;
-        border-radius: 15px;
-        position: relative;
-        top: 0;
-    }
+    height: 84px;
+    width: 192px;
+    border-radius: 15px;
+    position: relative;
+    top: 0;
+}
 ul.dropdown-menu {
     border: 0;
     background-color: transparent;
