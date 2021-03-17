@@ -66,7 +66,7 @@ namespace SignalRMvc.chatHubs
                 db.SaveChanges();
             
 
-            //判斷會員等級 一般會員>加入All群組，管理員&優質會員>加入All & VIP群組
+            //判斷會員等級 管理員&優質會員>加入 VIP群組
             if (user.userLevel != 3)
             {
                 var reload_user = db.Member.Find(UserID);

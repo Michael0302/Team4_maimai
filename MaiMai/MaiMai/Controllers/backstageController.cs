@@ -429,6 +429,39 @@ namespace MaiMai.Controllers
 
             return Content(userID);
         }
+
+        public ActionResult getNotification_P()
+        {
+            var login = Request.Cookies["LoginID"];
+            if (login == null) {
+                return Content("尚未登入");
+            }
+
+            var loginID = login.Value;
+            var userLevel = db.Member.Find(Convert.ToInt32(loginID)).userLevel;
+            if(userLevel == 3)
+            {
+                 var noti = db.Notification.Where(m => m.ReciverLevel.ToUpper() == "ALL" || m.ReciverLevel == loginID).Select(s=>new {
+                     SenderID = s.SenderID,
+                     ReciverLevel = s.ReciverLevel,
+                     NotifyText = s.NotifyText,
+                     CreateTime = s.CreateTime,
+                 });
+
+                return Json(noti, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var noti = db.Notification.Where(m => m.ReciverLevel.ToUpper() == "ALL" || m.ReciverLevel.ToUpper() == "VIP" || m.ReciverLevel == loginID).Select(s => new {
+                    SenderID = s.SenderID,
+                    ReciverLevel = s.ReciverLevel,
+                    NotifyText = s.NotifyText,
+                    CreateTime = s.CreateTime,
+                });
+
+                return Json(noti, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 
     
