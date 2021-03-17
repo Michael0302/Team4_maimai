@@ -41,6 +41,7 @@ namespace MaiMai.Models
         public Nullable<double> totalStarRate { get; set; }
         public string selfDescription { get; set; }
         public string email { get; set; }
+        public string connectionID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comment { get; set; }
