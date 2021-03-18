@@ -21,7 +21,7 @@ namespace MaiMai.Models
         public int UserID { get; set; }
         public Nullable<int> CommentorUserID { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Member Member { get; set; }
+        public virtual Order Order { get; set; }
     }
 }
