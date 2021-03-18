@@ -25,48 +25,39 @@
 
 <body>
     <nav class="nav1">
-        <div class="container d-flex">
-            <div class="logo col-md-1">
-                <a href="/"><img class="HeardLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
+        <div class=" d-flex">
+            @*layout左邊*@
+            <div class=" d-flex mt-3 ml-2 mr-5">
+                <div class="logo">
+                    <a class="d-flex" href="/">
+                        <img class="HeardLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" />
+                    </a>
+                </div>
+                <div class="MaiMai mt-2 ">
+                    <a>
+                        <p> MaiMai </p>
+                    </a>
+                </div>
             </div>
-            <div class=" col-md-8 dropdown ml-3">
-                <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
+            @*layout左邊*@
+            @*Search*@
+            <div class=" dropdown col-8 my-3">
+                <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
 
-                <div class="Ajax-search-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton" style="left:30%">
+                <div class="Ajax-search-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton" @*style="left:30%"*@>
                     <div class="dropdown-item  ">
-                        <div class=" row" style="width:720px;height:100%;" id="tag-search-dropdown">
-
-                            @*<a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
-                                        添加文字...
-                                    </div>
-                                </a>
-                                <a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
-                                        添加文字...
-                                    </div>
-                                </a>
-                                <a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
-                                        添加文字...
-                                    </div>
-                                </a>
-                                <a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
-                                        添加文字...
-                                    </div>
-                                </a>*@
-
+                        <div class=" row" style="width:100%;height:100%;" id="tag-search-dropdown">
                         </div>
                     </div>
                 </div>
             </div>
+            @*Search*@
 
-
-            <div id="mainListDiv" class="main_list">
+            @*layout右邊*@
+            <div id="mainListDiv" class="main_list" style="position: absolute; right: 0px;">
                 <div class="navlinks d-flex">
                     <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
                     <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@  
@@ -144,37 +135,33 @@
         </div>
     </nav>
 
-
-
-
     @RenderBody()
 
     <div id="page"></div>
     <footer>
         <hr>
-        <div class="container d-flex mt-1 mb-2" id="footer">
-            <div class=" mx-2">
+        <div class=" d-flex mt-1 mb-2" id="footer">
+            <div class="col-1">
                 <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
             </div>
-            <div class="">
-                <div class="ml-5">
-                    <h5>關於我們</h5>
-                    <a href="#">Team 4</a><br>
-                    <a href="#">組長：黃士豪</a><br>
-                    <a href="#">技術長：蕭祥耀</a><br>
-                    <a href="#">組員：黃立恆、徐家雯、黃建寧</a><br>
-                </div>
+            <div class="col-3" style="position: absolute; left: 20%;">
+                <h5>關於我們</h5>
+                <select class="langSelect">
+                    <option selected>Team 4</option>
+                    <option value="組長">黃士豪</option>
+                    <option value="技術長">蕭祥耀</option>
+                    <option value="組員">徐家雯</option>
+                    <option value="組員">黃建寧</option>
+                    <option value="組員">黃立恆</option>
+                </select><br>
             </div>
-            <div class="">
-                <div class="ml-5">
+                <div class="col-6"style="position: absolute; left: 40%;">
                     <h5>歡迎企業合作</h5>
                     <a href="#">經銷商合作</a><br>
                     <a href="#">全球保固</a><br>
                     <a href="#">招募新夥伴</a><br>
-                </div>
             </div>
-            <div class="">
-                <div class="ml-5">
+                <div class="col-2" style="position: absolute; left: 80%;">
                     <h5>語言</h5>
                     <select class="langSelect">
                         <option selected>繁體中文</option>
@@ -187,7 +174,6 @@
                         <option value="ru">Русский</option>
                     </select><br>
                     <a href="#">客戶服務中心</a>
-                </div>
             </div>
         </div>
     </footer>
@@ -202,7 +188,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -211,7 +197,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
-    
+
     <script src="~/signalr/hubs"></script>
 
     <script>
@@ -289,7 +275,7 @@
         //    }
         //});
         //==============================
-      
+
 
         //Michael singalR add start>>>>>
 
@@ -332,7 +318,7 @@
                             chat.server.group(userID);
                     }
                 })
-                
+
             })
 
         })
@@ -358,7 +344,7 @@
                     })
                 }
             })
-           
+
         });
 
     </script>
