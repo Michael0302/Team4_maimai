@@ -27,7 +27,7 @@
     <nav class="nav1">
         <div class="container d-flex">
             <div class="logo col-md-1">
-                <a href="/"><img class="footerLogo1" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
+                <a href="/"><img class="HeardLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
             </div>
             <div class=" col-md-8 dropdown ml-3">
                 <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
@@ -286,13 +286,17 @@
         function tagonclick(TagID) {
             window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
         }
-        $(window).scroll(function () {
-            if ($(document).scrollTop() > 20) {
-                $('.nav1').addClass('affix');
-            } else {
-                $('.nav1').removeClass('affix');
-            }
-        });
+        //==============================
+        //捲動更換CSS
+        //$(window).scroll(function () {
+        //    if ($(document).scrollTop() > 20) {
+        //        $('.nav1').addClass('affix');
+        //    } else {
+        //        $('.nav1').removeClass('affix');
+        //    }
+        //});
+        //==============================
+      
 
         //Michael singalR add start>>>>>
 
@@ -361,13 +365,10 @@
                     })
                 }
             })
-
-
-
-
+           
         });
 
     </script>
-    @RenderSection("scripts", required: false)
+    @RenderSection("scrpts", required: false)
 </body>
 </html>
