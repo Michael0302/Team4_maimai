@@ -19,6 +19,7 @@ namespace MaiMai.Models
         public Nullable<int> starRate { get; set; }
         public string commentDescription { get; set; }
         public int UserID { get; set; }
+        public Nullable<int> CommentorUserID { get; set; }
     
         public virtual Member Member { get; set; }
         public virtual Order Order { get; set; }

@@ -11,9 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <link href="~/Maimai/layout/css/layout.css" rel="stylesheet" />
     <link href="~/Maimai/layout/css/style_1.css" rel="stylesheet" />
     <link href="~/Content/Cart_css/Cart.css" rel="stylesheet" />
+    <link href="~/Content/Backstage_css/backstage.css" rel="stylesheet" />
+    @*Pagination*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
 </head>
@@ -28,18 +32,35 @@
             <div class=" col-md-8 dropdown ml-3">
                 <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
-                    <input Placeholder="Search " class="dropdown-search" />
+                    <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
-                <div class="Ajax-search-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div class="dropdown-item">
-                        <a class="Ajax-search-dropdown-img" href="">
-                            <img src="~/Maimai/images/image jpeg/abf1b3dc2cab2c7d949228687c84013c.jpg"
-                                 style="position: relative;" />
-                            <div style="position: absolute;z-index: 2;left: 50px;top: 30px;color: #FFFFFF;font-weight: bold;
-                                                  ">
-                                添加文字...
-                            </div>
-                        </a>
+
+                <div class="Ajax-search-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton" style="left:30%">
+                    <div class="dropdown-item  ">
+                        <div class=" row" style="width:720px;height:100%;" id="tag-search-dropdown">
+
+                            @*<a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
+                                        添加文字...
+                                    </div>
+                                </a>
+                                <a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
+                                        添加文字...
+                                    </div>
+                                </a>
+                                <a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
+                                        添加文字...
+                                    </div>
+                                </a>
+                                <a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
+                                        添加文字...
+                                    </div>
+                                </a>*@
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,8 +69,15 @@
             <div id="mainListDiv" class="main_list">
                 <div class="navlinks d-flex">
                     <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
-                    <div class="svglink"><a href="#">@*Portfolio*@<img src="~/Maimai/images/svg/076-map.svg"></a></div>
-                    <div class="svglink"><a href="#">@*Services*@<img src="~/Maimai/images/svg/082-bell.svg"></a></div>
+                    <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@<img src="~/Maimai/images/svg/076-map.svg"></a></div>
+                    <div class="svglink dropdown" >
+                    <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >@*Services*@
+                        <img src="~/Maimai/images/svg/082-bell.svg"></a>
+                                                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" >
+                                                      @*<a class="dropdown-item" href="#">Action</a>
+                                                      <a class="dropdown-item" href="#">Another action</a>
+                                                      <a class="dropdown-item" href="#">Something else here</a>*@
+                                                  </div></div>
                     @*<li><a href="#">Contact</a></li>*@
                     <div class="svglink">
                         @*登入*@
@@ -127,6 +155,8 @@
 
 
     @RenderBody()
+
+    <div id="page"></div>
     <footer>
         <hr>
         <div class="container d-flex mt-1 mb-2" id="footer">
@@ -179,11 +209,83 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    
+    <script src="~/signalr/hubs"></script>
+
     <script>
+
+        //$("#inputsearch").change(function () {
+        //    //var availabletags="";
+        //    $.ajax({
+        //            url: "/NewMaimaiIndex/searchall",
+        //        type: "GET",
+        //        data: { "text": `${$("#inputsearch").val()}`},
+        //        success: function (text) {
+        //            var test = []
+        //                 $(text).each(function (index, text) {
+        //                     test.push(text.name);
+
+        //                 })
+        //            //console.log(text)
+        //            ////availabletags = list.split(",");
+        //            //console.log(availabletags)s
+        //            console.log(test)
+        //                $("#inputsearch").autocomplete({
+        //                    source: test
+        //            });
+        //        }
+        //    })
+        //});
+
+        $.ajax({
+            url: "/NewMaimaiIndex/searchall",
+            type: "GET",
+            data: { "text": `${$("#inputsearch").val()}` },
+            success: function (text) {
+                var test = []
+                $("#inputsearch").autocomplete({
+                    source: test
+                });
+                $(text).each(function (index, text) {
+                    test.push(text.name);
+                })
+                //console.log(text)
+                ////availabletags = list.split(",");
+                //console.log(availabletags)s
+                console.log(test)
+
+            }
+        })
+
+
+        //function inputsearch() {
+        //        ajax({
+        //            url: "/NewMaimaiIndex/searchall",
+        //            type: "GET",
+        //            data: { "text":`${$("#inputsearch").val()}` },
+        //        success: function (inputsearch) {
+        //            $(inputsearch).each(function (i, item) {
+        //                $("#inputsearch").append(`
+        //                            ${item.name}
+        //                            ${item.prd}
+        //                                                                  ` )
+        //            })
+        //        }
+        //        })
+        //}
+
+        function tagonclick(TagID) {
+            window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
+        }
         $(window).scroll(function () {
             if ($(document).scrollTop() > 20) {
                 $('.nav1').addClass('affix');
@@ -191,7 +293,81 @@
                 $('.nav1').removeClass('affix');
             }
         });
+
+        //Michael singalR add start>>>>>
+
+        $(function () {
+
+            //比對資料表Notification有無符合自己id or 群組的通知
+            $.ajax({
+                url: "@Url.Action("getNotification_P", "backstage")",
+                type: "GET",
+                success: function (noti) {
+                    $(noti).each(function (index, noti) {
+                        $("#notify").append(`<a class="btn-sm"><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a><br>`);
+                    })
+                }
+
+            })
+
+            $("body").on('click', '[data-stopPropagation]', function (e) {
+                e.stopPropagation();
+            });
+
+            var chat = $.connection.chatHub;
+
+            //chat.client.sendMessage = function (ReciverLevel, message) {
+            //    // 向頁面新增訊息
+            //    $('#page').append(`<li><strong>   [系統通知]</strong>:   ${(message)}   </li>`);
+            //};
+
+            chat.client.addMessage = function (message) {
+                // 向頁面新增訊息
+                $('#notify').append(`<strong>   [系統通知]</strong>:   ${(message)} <br>`);
+            };
+
+            $.connection.hub.start().done(function () {
+                $.ajax({
+                    url: "@Url.Action("getUserID_P", "backstage")",
+                    type: "GET",
+                    success: function (userID) {
+                        if(userID != "null")
+                            chat.server.group(userID);
+                    }
+                })
+                
+            })
+
+        })
+
+            //Michael singalR add end<<<<<
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+        $(function () {
+            $.ajax({
+                url: "/MaimaiIndex/TagResult",
+                type: "GET",
+                success: function (tagsearch) {
+                    $(tagsearch).each(function (i, item) {
+                        $("#tag-search-dropdown").append(`
+                                                    <a class="Ajax-search-dropdown-img mx-3 mb-3" onclick="tagonclick(${item.TagID})" >
+                                                            <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
+                                                                ${item.tagName}
+                                                    </div>
+                                                </a >
+                                                                                             ` )
+                    })
+                }
+            })
+
+
+
+
+        });
+
     </script>
-    @RenderSection("scrpts", required: false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>

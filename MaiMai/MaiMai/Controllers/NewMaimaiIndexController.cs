@@ -14,7 +14,17 @@ namespace MaiMai.Controllers
         maimaiRepository<Cart> CartRepository = new maimaiRepository<Cart>();
         maimaiEntities db = new maimaiEntities();
         // GET: NewMaimaiIndex
-        
+
+        public ActionResult searchall(string text) {
+            var SearchAll =
+                db.ProductPost.Where(m => m.productName.Contains(text) || m.productDescription.Contains(text)).Select(m => new
+                {
+                    name = m.productName,
+                    prd = m.productDescription
+                }).ToList();
+            return Json(SearchAll, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Index()
         {
             return View();
