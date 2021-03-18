@@ -21,7 +21,6 @@ namespace MaiMai.Controllers
 
         maimaiRepository<Member> mb = new maimaiRepository<Member>();
         maimaiRepository<Order> od = new maimaiRepository<Order>();
-        maimaiRepository<ProductPost> prod = new maimaiRepository<ProductPost>();
         maimaiEntities db = new maimaiEntities();
         maimaiRepository<Tag> tagdb = new maimaiRepository<Tag>();
         public ActionResult backstageIndex()
@@ -124,7 +123,7 @@ namespace MaiMai.Controllers
         {
             if(status != null )
             {               
-                if(status == 2 || status==3) { 
+                if(status >= 2) { 
                 var ordercmplist = db.Order.Where(m=>m.orderStatus >= 2).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
                 {
                     x.OrderId,
@@ -201,9 +200,7 @@ namespace MaiMai.Controllers
 
         public ActionResult delOrder_P(int OrderId)
         {
-            db.Order.Find(OrderId).orderStatus = 4;
-            db.SaveChanges();
-            //od.Delete(OrderId);
+            od.Delete(OrderId);
 
             return Content("刪除成功");
         }
@@ -293,177 +290,6 @@ namespace MaiMai.Controllers
             return Content("新增成功");
         }
 
-        //商品列表
-        public ActionResult getAllPorducts()
-        {
-            var prodlist = db.ProductPost.Where(p=>p.status ==true).Select(s=>new {
-                ProductPostID = s.ProductPostID,
-                productName = s.productName,
-                productDescription = s.productDescription,
-                productImg = s.productImg,
-                UserName = s.Member.firstName,
-                UserID = s.UserID,
-                price = s.price,
-                TagID = s.TagID,
-                Tag = s.Tag.tagName,
-                createdTime = s.createdTime,
-                inStoreQTY = s.inStoreQTY,
-                RequiredPostID = s.RequiredPostID
-            });
-
-            return Json(prodlist, JsonRequestBehavior.AllowGet);
-        }
-
-        //單一商品貼文
-        public ActionResult getProductPostFromAll(int ProductPostID)
-        {
-            var prodlist = db.ProductPost.Where(p=>p.ProductPostID == ProductPostID).Select(s => new {
-                ProductPostID = s.ProductPostID,
-                productName = s.productName,
-                productDescription = s.productDescription,
-                productImg = s.productImg,
-                UserName = s.Member.firstName,
-                UserID = s.UserID,
-                price = s.price,
-                TagID = s.TagID,
-                Tag = s.Tag.tagName,
-                createdTime = s.createdTime,
-                inStoreQTY = s.inStoreQTY,
-                RequiredPostID = s.RequiredPostID
-            });
-
-            return Json(prodlist, JsonRequestBehavior.AllowGet);
-        }
-
-    //下架商品
-        public ActionResult cancelProduct(int ProductPostID)
-        {
-            var cancel = db.ProductPost.Find(ProductPostID);
-
-            cancel.status = false;
-            db.SaveChanges();
-
-            return Content("成功下架");
-        }
-
-      //取得刪除列表
-        public ActionResult getDelPorducts()
-        {
-            var prodlist = db.ProductPost.Where(p => p.status == false).Select(s => new {
-                ProductPostID = s.ProductPostID,
-                productName = s.productName,
-                productDescription = s.productDescription,
-                productImg = s.productImg,
-                UserName = s.Member.firstName,
-                UserID = s.UserID,
-                price = s.price,
-                TagID = s.TagID,
-                Tag = s.Tag.tagName,
-                createdTime = s.createdTime,
-                inStoreQTY = s.inStoreQTY,
-                RequiredPostID = s.RequiredPostID
-            });
-
-            return Json(prodlist, JsonRequestBehavior.AllowGet);
-        }
-
-      //取得檢舉列表
-        public ActionResult getReport_P()
-        {
-            var allreports = db.Report.Select(s => new
-            {
-                ReportID = s.ReportID,
-                reportorID = s.reportorID,
-                reportorName = s.Member.firstName,
-                repotedUserID = s.repotedUserID,
-                repotedUserName = s.Member1.firstName,
-                reportStatus = s.reportStatus,
-                createdTime = s.createdTime,
-                ReportDetailID = s.ReportDetailID,
-                ReportDetailTag = s.ReportDetail.reason,
-                reportDescription = s.reportDescription,
-                ProductOrRequire = s.ProductOrRequire,
-                ProductOrRequireID = s.ProductOrRequireID,
-            }).OrderByDescending(o=>o.ReportID);
-
-            return Json(allreports, JsonRequestBehavior.AllowGet);
-        }
-
-        //檢舉modal
-        public ActionResult getReportDetail_P(int ReportID)
-        {
-            var reportdetail = db.Report.Where(m => m.ReportID == ReportID).Select(s => new
-            {
-                ReportID = s.ReportID,
-                reportorID = s.reportorID,
-                reportorName = s.Member.firstName,
-                repotedUserID = s.repotedUserID,
-                repotedUserName = s.Member1.firstName,
-                reportStatus = s.reportStatus,
-                createdTime = s.createdTime,
-                ReportDetailID = s.ReportDetailID,
-                ReportDetailTag = s.ReportDetail.reason,
-                reportDescription = s.reportDescription,
-                ProductOrRequire = s.ProductOrRequire,
-                ProductOrRequireID = s.ProductOrRequireID,
-            });
-
-            return Json(reportdetail, JsonRequestBehavior.AllowGet);
-        }
-
-        //修改檢舉狀態
-        public void editReportStatus_P(int ReportID)
-        {
-            db.Report.Find(ReportID).reportStatus = 1;
-            db.SaveChanges();
-        }
-
-        //抓cookie userID
-        public ActionResult getUserID_P()
-        {
-            if(Request.Cookies["LoginID"] == null)
-            {
-                return Content("null");
-            }
-            var userID = Request.Cookies["LoginID"].Value.ToString();
-
-            return Content(userID);
-        }
-
-        public ActionResult getNotification_P()
-        {
-            var login = Request.Cookies["LoginID"];
-            if (login == null) {
-                return Content("尚未登入");
-            }
-
-            var loginID = login.Value;
-            var userLevel = db.Member.Find(Convert.ToInt32(loginID)).userLevel;
-            if(userLevel == 3)
-            {
-                 var noti = db.Notification.Where(m => m.ReciverLevel.ToUpper() == "ALL" || m.ReciverLevel == loginID).Select(s=>new {
-                     SenderID = s.SenderID,
-                     ReciverLevel = s.ReciverLevel,
-                     NotifyText = s.NotifyText,
-                     CreateTime = s.CreateTime,
-                 });
-
-                return Json(noti, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                var noti = db.Notification.Where(m => m.ReciverLevel.ToUpper() == "ALL" || m.ReciverLevel.ToUpper() == "VIP" || m.ReciverLevel == loginID).Select(s => new {
-                    SenderID = s.SenderID,
-                    ReciverLevel = s.ReciverLevel,
-                    NotifyText = s.NotifyText,
-                    CreateTime = s.CreateTime,
-                });
-
-                return Json(noti, JsonRequestBehavior.AllowGet);
-            }
-        }
     }
-
-    
 
 }

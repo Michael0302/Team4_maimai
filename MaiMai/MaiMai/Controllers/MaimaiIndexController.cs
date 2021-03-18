@@ -16,7 +16,6 @@ namespace MaiMai.Controllers
             {
                 TagID = m.TagID,
                 tagName = m.tagName
-
             }).ToList();
             return Json(tagList, JsonRequestBehavior.AllowGet);
         }

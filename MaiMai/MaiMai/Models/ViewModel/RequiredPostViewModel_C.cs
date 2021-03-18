@@ -17,9 +17,6 @@ namespace MaiMai.Models.ViewModel
         public Nullable<int> estimatePrice { get; set; }
         public Nullable<int> TagID { get; set; }
         public Nullable<int> OrderID { get; set; }
-
-        public string county { get; set; }
-        public string district { get; set; }
         public HttpPostedFileBase upphoto { get; set; }
         public string userAccount { get; set; }
 

@@ -6,7 +6,6 @@
 <head>
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
-    <script src="~/Content/resource_nico/tw-city-selector.min.js"></script>
 </head>
 
 <div class="container" style=" padding-top: 100px">
@@ -35,9 +34,9 @@
 
 
                 <li>
-                    <a class="btn  btn-secondary" style="color:white;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                    <a class="btn  btn-secondary" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                 </li>
-            </ul>
+                </ul>
 
         </div>
 
@@ -52,7 +51,7 @@
                         </button>
                     </div>
                     <div class="modal-body" id="editMemberbody">
-                        <form id="form1" class="formFrame mx-auto" enctype="multipart/form-data">
+                        <form class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
                                 <div class="photo"><img id="Productimg"></div>
                                 <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
@@ -62,26 +61,6 @@
                                 <h6>
                                     貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
                                 </h6>
-
-
-                                <div>
-                                    <h6>交貨方式</h6>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            物流交貨
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2" value="pTop">
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            當面交貨/地點
-                                        </label>
-                                    </div>
-                                    <div class="my-selector-b" disabled></div>
-                                </div>
-
-
                                 <h6>價格:<input type="text" required name="estimatePrice" id="estimatePrice"></h6>
                                 <h6>數量:<input type="text" required name="require0dQTY" id="requiredQTY"></h6>
                                 <h6>
@@ -91,7 +70,7 @@
                                     </select>
                                 </h6>
                                 @*====userID======
-                                ====posttime====*@
+                                    ====posttime====*@
 
                             </div>
 
@@ -106,33 +85,7 @@
             </div>
         </div>
 
-        @*===============================EDIT POST START==========================================*@
 
-
-        <div class="modal fade" id="model-editPost" tabindex="-1" role="dialog" aria-labelledby="model-editPost"
-             aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="model-editPost"> 編輯貼文</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body" id="editPOST">
-                     
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteRequireDetail()">過期貼文</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequireDetail()">儲存貼文</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        @*===============================EDIT POST END==========================================*@
 
         <div class="showPostArea tab-content " id="pills-tabContent">
 
@@ -159,16 +112,9 @@
 </div>
 <script>
     $(function () {
-
-        new TwCitySelector({
-            el: ".my-selector-b",
-            elCounty: ".county", // 在 el 裡查找 dom
-            elDistrict: ".district"
-        });
-
-
-
         var test = getCookie('LoginID');
+        console.log(test)
+        console.log(typeof test)
 
 
         $.ajax({
@@ -183,25 +129,15 @@
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
                             <div class="post-text">
-
-                            <div class="d-flex justify-content-between">
                                     <h3 id="postName${i}">${item.postName}</h3>
-                                    <h6>${item.county} <span>${item.district}</span></h6>
-                                </div>
                                     <h6 id="userName${i}">買家:${item.userAccount}</h6>
                             <div>
                                     <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
                             </div>
-
-
-
                             <div class="post-button">
                                     <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
 
-                                    
-
-                                     <a class="btn" onclick="getEditPost(this,${item.RequiredPostID})" data-toggle='modal' data-target='#model-editPost'>編輯</a>
                              </div>
                           </div>
 
@@ -220,29 +156,9 @@
                                                  </div>
                                                 <div class="displayInput">
                                                         <h6>產品名稱:<input type="text" name="productName" id="productName${i}"></h6>
-
                                                         <h6>
                                                               產品描述:<textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新" class="w-75" onclick="tag()"></textarea>
                                                         </h6>
-
-                                    <div>
-                                    <h6>交貨方式</h6>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express"checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            物流交貨
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2"   value="pTop" >
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                          當面交貨/地點
-                                        </label>
-                                    </div>
-                                    <div class="my-selector-b" disabled ></div>
-                                </div>
-
-
                                                         <h6>價格:<input type="text" name="price" id="price${i}"></h6>
                                                         <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY${i}"></h6>
                                                         <h6>標籤:
@@ -251,11 +167,11 @@
                                                                 </select>
                                                         </h6>
 
-                                    <!-- createtime 
+                                    <!-- createtime -->
                                     <input type="hidden" name="createdTime">
-                                     userID 
+                                    <!-- userID -->
                                     <input type="hidden" name="RequiredPostID" value="${item.RequiredPostID}">
-                                     requiredPostID 
+                                    <!-- requiredPostID -->
                                     <div style="display: flex; justify-content:flex-end;">
 
                                     </div>
@@ -264,13 +180,15 @@
                             </form>
                                         <button type="submit" class="btn btn-secondary" onclick="submitProdouct(this,${i})">建立商品留言</button>
                                 </div>
-                          </div>-->    end of 訂單
+                          </div>    @*end of 訂單*@
                     </div)
                     `)
                     checkSpan(item.RequiredPostID, i);
                 })
             }
         })
+
+
 
         // ajax end
     })//documentReady
@@ -324,47 +242,39 @@
 
     $("#pills-profile-tab").click(function () {
 
-        var text = "";
             $.ajax({
                 url: "/RequiredPost/allpoccessPost",
                 type: "GET",
                 success: function (response) {
                     $(response).each(function (i, item) {
+                        $("#pocessPostStart").append(`
 
-                        text += `
-
-                                      <div class="photo">
-                                    <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
+                            <div id="img" class="photo"></div>
+                            <div class="post-text">
+                            <h3 id="postName${i}">${item.postName}</h3>
+                            <h6 id="userName${i}">名稱:${item.userAccount}</h6>
+                            <div>
+                            <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
                             </div>
-                                        <div class="post-text">
-                                    <div class="d-flex justify-content-between">
-                                                <h3 id="postName${i}">${item.postName}</h3>
-                                                <h6>${item.county}  <span>${item.district}</span></h6>
-                                                 </div>
-                                        <h6 id="userName${i}">名稱:${item.userAccount}</h6>
-                                        <div>
-                                        <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
-                                        </div>
-                                        <div class="post-button">
-                                        <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
-                                        <a data-toggle="collapse" href="#collapseComment${i}"
-                                           role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
+                            <div class="post-button">
+                            <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                            <a data-toggle="collapse" href="#collapseComment${i}"
+                               role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
 
-                                    </div>
-                                </div>
-                                   <div class="collapse" id="collapseComment${i}">
-                                    <div class="card card-body">
+                        </div>
+                    </div>
+                       <div class="collapse" id="collapseComment${i}">
+                        <div class="card card-body">
 
-                                    </div>
-                                </div>
-                                <div class="collapse" id="collapseExample${i}">
-                                    <div class="card card-body">
+                        </div>
+                    </div>
+                    <div class="collapse" id="collapseExample${i}">
+                        <div class="card card-body">
 
-                                    </div>
-                                </div>
-                          `;
+                        </div>
+                    </div>`)
 
-                        $("#pocessPostStart").html(text);
+
                     })
                 }
 
@@ -373,25 +283,17 @@
         })// proccess tab end
 
     $("#pills-contact-tab").click(function () {
-        var test = getCookie('LoginID');
-        var text = "";
+
         $.ajax({
-            url: "/RequiredPost/allpastPost",
+            url: "/RequiredPost/allpoccessPost",
             type: "GET",
-            data: { loginID: test },
             success: function (response) {
                 $(response).each(function (i, item) {
-                     text +=`
+                    $("#pocessPostStart").append(`
 
-                         <div class="photo">
-                                    <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
-                            </div>
+                            <div id="img" class="photo"></div>
                             <div class="post-text">
-
-                                <div class="d-flex justify-content-between">
-                                    <h3 id="postName${i}">${item.postName}</h3>
-                                    <h6>${item.county} <span>${item.district}</span></h6>
-                                </div>
+                            <h3 id="postName${i}">${item.postName}</h3>
                             <h6 id="userName${i}">買家:${item.userAccount}</h6>
                             <div>
                             <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
@@ -412,9 +314,9 @@
                         <div class="card card-body">
 
                         </div>
-                    </div>`
+                    </div>`)
 
-                    $("#pastPost").html(text);
+
                 })
             }
 
@@ -430,7 +332,7 @@
             window.location.href = `/Members/Login`;
         }
         var form = $(`#Commentform${ i }`)
-        var data = new FormData(form);
+            var data = new FormData(form);
 
             $.ajax({
                 url: "/RequiredPost/commemtProductPost",
@@ -444,9 +346,9 @@
 
                 }
             })
-     }//end  of submit product
+        }//end  of submit product
 
-    function tag() {
+        function tag() {
             var txt = ""
             $.ajax({
                 url: "/RequiredPost/getAllTag",
@@ -460,10 +362,8 @@
                 }
             })
 
-    }// end tag function
-
-
-    function getCookie(cookieName) {
+        }// end tag function
+        function getCookie(cookieName) {
             var name = cookieName + "=";
             var ca = document.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
@@ -473,14 +373,13 @@
             }
             return "";
 
-    }
-
+        }
     function checkCommentList(eler,index) {
 
-      
+        var test = getCookie('LoginAccount');
         var data = $(eler).attr("name");
         var inner = "";
-       
+        console.log(data)
 
         $.ajax({
             url: "/RequiredPost/checkAllComment",
@@ -493,10 +392,7 @@
 
                           <div class="photo">  <img src="../Content/resource_nico/images/${item.productImg}"/> </div>
                           <div class="post-text">
-                                <div class="d-flex justify-content-between">
-                                    <h3 id="postName${i}">${item.productName}</h3>
-                                    <h6>${item.county}  <span>${item.district}</span></h6>
-                                     </div>
+                                <h3 id="postName${i}"> ${item.productName}</h3>
                                 <h6 id="userName${i}">賣家:${item.userAccount}</h6>
                                 <div>
                                 <h6 id="text${i}">產品敘述:${item.productDescription}</h6>
@@ -507,15 +403,13 @@
                                 <a class="btn btn-secondary" href="#">加入購物車</a>
 
                          </div>
-                        </div>
-
-                    `})
+                        </div>`
+                    })
                 $(`#collapseComment${index}>div`).html(inner);
                 $(`#cmCount${index}`).html(`${response.length}`)
             }
         })
     } // end check comment function
-
 
     function sendRequiredPost() {
 
@@ -527,9 +421,6 @@
 
         var form = document.querySelector("#form1")
         var data = new FormData(form);
-        data.append("county", $(".county").val());
-        data.append("district", $(".district").val());
-
 
         $.ajax({
             url: "/RequiredPost/sendRequiredPost",
@@ -545,137 +436,6 @@
         })
 
     }// end send required post
-    
-
-     
-    function getEditPost(eler, id) {
-
-        var text = "";
-        $.ajax({
-            url: "/RequiredPost/getRequireDetail",
-            type: "GET",
-            data:{ 'odID': id },
-            success: function (item) {
-          
-               
-                    text = `
-                    <form id="editform" class="formframe mx-auto" enctype="multipart/form-data">
-                            <div class="displayimg">
-                                <div class="photo"><img id="productimg" src="../content/resource_nico/images/徵求台post/${item.postImg}"></div>
-                                <input type="file" required name="upphoto" id="postimg" style="display: block;" onchange="previewfile()">
-                            </div>
-                            <div class="displayinput">
-                                <h6>貼文名稱:<input type="text" required name="postname" id="postname" value="${item.postName}"></h6>
-                                <h6>
-                                    貼文描述:<textarea id="postdescription" name="postdescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()">${item.postDescription}</textarea>
-                                </h6>
 
 
-                                <div>
-                                    <h6>交貨方式</h6>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationtype" id="flexradiodefault1" value="express" checked>
-                                        <label class="form-check-label" for="flexradiodefault1">
-                                            物流交貨
-                                        </label>
-                                    </div>
-                                    <div class="form-check" >
-                                        <input class="form-check-input" type="radio"  onclick="changeDis()" name="transationtype" id="flexradiodefault2" value="ptop"  >
-                                        <label class="form-check-label" for="flexradiodefault2">
-                                            當面交貨/地點
-                                        </label>
-                                    </div>
-                                      <div id="city"> 
-                                        <div>
-                                            <select><option name="county"  value="${item.county}">${item.county}</option></select>
-                                        </div>
-                                        <div>
-                                            <select><option  name="district" value="${item.district}">${item.district}</option></select>
-                                        </div>
-                                        </div>
-                                </div>
- 
-
-                                <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${item.estimatePrice}"></h6>
-                                <h6>數量:<input type="text" required name="requiredQTY" id="requiredqty" value="${item.requiredQTY}"></h6>
-                                <h6>
-                                    標籤:
-                                    <select id="tagselectioninpost" required class="form-control" name="tagid" onclick="tag()">
-                                        <option value="${item.TagID}">${item.TagName}</option>
-                                    </select>
-                                </h6>
-                                <input id="RequiredPostID" name="RequiredPostID" value="${item.RequiredPostID}"  type="hidden">
-                            </div>
-
-                        </form>
-
-                    </div>
-                    
-
-
-                  `;
-             
-                $('#editPOST').html(text);
-            }
-        })
-
-     }
-
-    function changeDis() {
-
-        new TwCitySelector({
-            el: ".my-selector-c",
-            elCounty: ".county", // 在 el 裡查找 dom
-            elDistrict: ".district", // 在 el 裡查找 dom
-          
-        });
-
-        $(`#city`).addClass("my-selector-c");
-
-        $(`#city`).html(`
-            <div>
-                <select class="county"></select>
-            </div>
-            <div>
-                <select class="district"></select>
-            </div>`);
-
-    }
-
-    function sendRequireDetail() {
-
-
-        var form = document.querySelector("#editform");
-        var data = new FormData(form);
-
-        console.log(data);
-        $.ajax({
-            url: "/RequiredPost/sendRequireDetail",
-            type: "Post",
-            data: data,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                window.alert(response)
-                window.location.reload("/RequiredPost/requiredPostIndex")
-
-            }
-        })
-          
-    }
-
-    function deleteRequireDetail() {
-        var rpID = $("#RequiredPostID").val();
-        $.ajax({
-            url: "/RequiredPost/deleteRequireDetail",
-            type: "GET",
-            data: { 'data': rpID },
-            success: function (response) {
-                window.alert(response)
-                window.location.reload("/RequiredPost/requiredPostIndex")
-
-            }
-        })
-    }
-    
 </script>

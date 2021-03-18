@@ -1,49 +1,76 @@
-﻿
-.HeardLogo {
-width:48px;height:48px;
-margin:0;
-padding:0;
-}
-    .HeardLogo:hover {
-        background-color: #D0D0D0;
-        border-radius:50%;
-    }
-.MaiMai {
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: 500;
-    color: #EA0000;
+﻿@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
+
+html,
+body {
     margin: 0;
     padding: 0;
-    
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+    font-size: 62.5%;
+    font-size: 15px;
 }
-    .MaiMai > a > p {
-        margin: 0;
-        padding: 0;
-    }
-.dropdown-toggle::after {
-    display: none;
-}
-/*} NICO*/
+/*-- Inspiration taken from abdo steif -->
+/* --> https://codepen.io/abdosteif/pen/bRoyMb?editors=1100*/
+/* nav1bar section */
 .nav1 {
     width: 100%;
     position: fixed;
-    z-index: 50;
-    background-color: #FCFCFC;
+    text-align: center;
+    z-index: 3;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
-
-
+.nav1 div.logo {
+        float: left;
+        width: auto;
+        height: auto;
+        padding-left: 3rem;
+    }
+.nav1 div.logo a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 2.5rem;
+        }
+.nav1 div.logo a:hover {
+                color: #00E676;
+            }
 .nav1 div.main_list {
         height: 65px;
         float: right;
     }
-
+.nav1 div.main_list ul {
+            width: 15px;
+            height: 65px;
+            /*display: flex;*/
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+.nav1 div.main_list ul li {
+                width: 50px;
+                margin: 0;
+                /*height: 65px;*/
+                padding: 0;
+                padding-right: 3rem;
+            }
+.nav1 div.main_list ul li a {
+                    /*text-decoration: none;*/
+                    /*color: #fff;*/
+                    line-height: 30px;
+                    font-size: 1.5rem;
+                    padding-left: 5rem;
+                    background-color: transparent;
+                    color: #f5bc04;
+                }
 .nav1 div.main_list ul li a:hover {
                         color: #5B5B5B;
                     }
 .nav1 div.main_list div.navlinks {
             width: 100%;
             height: 65px;
+            /*display: flex;*/
             list-style: none;
             margin-top: 8%;
             padding: 0;
@@ -56,6 +83,7 @@ padding:0;
             }
 .nav1 div.main_list div.navlinks div.svglink a {
                     text-decoration: none;
+                    /*color: #fff;*/
                     line-height: 30px;
                     font-size: 1.5rem;
                 }
@@ -64,16 +92,10 @@ padding:0;
                     }
 .home {
     width: 100%;
-    height: 40vh;
+    height: 100vh;
     background-image: url(https://images.unsplash.com/photo-1498550744921-75f79806b8a7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b0f6908fa5e81286213c7211276e6b3d&auto=format&fit=crop&w=1500&q=80);
     background-position: center top;
     background-size: cover;
-}
-input {
-    outline: none;
-    border: none;
-    font-size: 20px;
-    left:15px;
 }
 /*Carsousel*/
 .slide_btn {
@@ -96,6 +118,7 @@ input {
 #NewprevSlide {
     left: 0;
 }
+
 #NewnextSlide {
     right: 0;
 }
@@ -127,7 +150,7 @@ input {
         width: fit-content; /*不準刪*/
         
     }
-.row > div.col-md-12 > div#theCarousel2 > div#NewaddCarousel {
+    .row > div.col-md-12 > div#theCarousel2 > div#NewaddCarousel {
         max-height: 300px;
         max-width:2560px;
         /*width: fit-content;*/ /*不準刪*/
@@ -142,62 +165,73 @@ input {
             max-width: 200px;
             
         }
-.row > div.col-md-12 > div#theCarousel2 > #NewaddCarousel > .NewCarouseladvertising {
+    .row > div.col-md-12 > div#theCarousel2 > #NewaddCarousel > .NewCarouseladvertising {
         margin-top: 1rem;
         margin-bottom: 15rem;
     }
-.row > div.col-md-12 > div#theCarousel2 > #NewaddCarousel > .NewCarouseladvertising .img-responsive {
+
+        .row > div.col-md-12 > div#theCarousel2 > #NewaddCarousel > .NewCarouseladvertising .img-responsive {
             background-size: 100%;
             max-height: 200px;
             max-width: 200px;
         }
         /*foot_st*/
 .footerLogo {
-            width: 50px;
-            height: 100%;
+            width: 35%;
+            height: 35%;
         }
-
+.footerLogo1 {
+    width: 100%;
+    height: 100%;
+    fill: #EE7621;
+}
 /*Serach*/
 #dropdownMenuButton {
     padding: 0;
     margin: 0;
 }
-
+div.col-md-8 {
+    padding: 0;
+    margin: 0;
+}
 .dropdown-search {
-    width:100%;
+    width: 650px;
     height: 50px;
     border-radius: 35px;
-    /*margin-top: 1%;*/
+    margin-top: 1%;
     background-color: #7b7b7b7b;
 }
 .Ajax-search-dropdown-img {
 }
-
 .Ajax-search-dropdown-img > img {
-    height: 84px;
-    width: 192px;
-    border-radius: 15px;
-    position: relative;
-    top: 0;
+        height: 84px;
+        width: 192px;
+        border-radius: 15px;
+        position: relative;
+        top: 0;
+    }
+ul.dropdown-menu {
+    border: 0;
+    background-color: transparent;
+}
+.affix {
+    padding: 0;
+    background-color: #111;
 }
 
 /*tag*/
 .tag {
     margin: 0;
     padding: 0;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    width: 80px;
-    height: 30px;
+    border-radius: 50%;
+    max-width: 80px;
+    max-height: 50px;
     background-color: #BEBEBE;
     color: #272727;
     font-weight: bold;
-    font:600;
     font-size: 25px;
     font-family: fantasy;
-    
+    text-align: center;
 }
     .tag:hover {
         transform: scale(1.25,1.25);
@@ -205,3 +239,257 @@ input {
         background-color: #000000;
         color: #FFFFFF;
     }
+
+
+/* Media qurey section */
+@media screen and (min-width: 767px) and (max-width: 1200px) {      
+    .footerLogo1 {
+        width: 50px;
+        height: 50px;
+        fill: #EE7621;        
+    }
+    .nav1 > div.container > div.logo {
+    margin-top:4%;
+    margin-right:1%;
+    }
+    .container > div.dropdown > div#dropdownMenuButton {
+        margin-top: 2%;
+        max-width: 100%;
+    }
+    .container > div.dropdown > div#dropdownMenuButton > img {
+            visibility: hidden;
+        }
+    .container > div.dropdown > div#dropdownMenuButton > .dropdown-search {
+            height: 50px;
+            border-radius: 35px;
+            background-color: #7b7b7b7b;
+        }
+    .nav1 div.main_list {
+    margin-top:10%;
+    margin-left:-70%
+    }
+}
+@media screen and (max-width:766px) {
+    .nav1 div.logo {
+        margin-left: 15px;
+    }
+
+    .nav1 div.main_list {
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .nav1 div.show_list {
+        height: auto;
+        display: none;
+    }
+
+    .nav1 div.main_list ul {
+        flex-direction: column;
+        width: 100%;
+        height: 50vh;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        /*        background-color: #111;*/
+        /*same background color of nav1bar*/
+        background-position: center top;
+    }
+
+        .nav1 div.main_list ul li {
+            width: 100%;
+            text-align: right;
+        }
+
+            .nav1 div.main_list ul li a {
+                text-align: center;
+                width: 100%;
+                font-size: 3rem;
+                padding: 20px;
+            }
+
+    .nav1 div.media_button {
+        display: block;
+    }
+
+    .container > div.dropdown > div#dropdownMenuButton {
+        margin-top: 2%;
+        width: 100%;
+    }
+
+        .container > div.dropdown > div#dropdownMenuButton > img {
+            visibility: hidden;
+        }
+        .container > div.dropdown > div#dropdownMenuButton > .dropdown-search {
+            height: 50px;
+            width: 100%;
+            border-radius: 35px;
+            background-color: #7b7b7b7b;
+        }
+        .container > div.dropdown > div#dropdownMenuButton > div.Ajax-search-dropdown {
+            width: 100px;
+            height: 100%;
+            left: -15%;
+            background-color: transparent;
+        }
+
+            .container > div.dropdown  >.dropdown-menu {
+                width: 100px;
+                height: 100%;
+                left: -15%;
+                background-color: transparent;
+                border:0;                
+            }
+                .container > div.dropdown > .dropdown-menu a.Ajax-search-dropdown-img > div {
+                    visibility: hidden;
+                } 
+                .Ajax-search-dropdown-img > img {
+                    height: 50px;
+                    width: 50px;
+                    background-color: transparent;
+                }
+}
+/*====================================================================*/
+/* Animation */
+/* Inspiration taken from Dicson https://codemyui.com/simple-hamburger-menu-x-mark-animation/ */
+@-webkit-keyframes inM {
+    50% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(45deg);
+    }
+}
+@keyframes inM {
+    50% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+@-webkit-keyframes outM {
+    50% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(45deg);
+    }
+}
+@keyframes outM {
+    50% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+@-webkit-keyframes inT {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        -webkit-transform: translateY(9px) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translateY(9px) rotate(135deg);
+    }
+}
+@keyframes inT {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(9px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(9px) rotate(135deg);
+    }
+}
+@-webkit-keyframes outT {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        -webkit-transform: translateY(9px) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translateY(9px) rotate(135deg);
+    }
+}
+@keyframes outT {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(9px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(9px) rotate(135deg);
+    }
+}
+@-webkit-keyframes inBtm {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        -webkit-transform: translateY(-9px) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translateY(-9px) rotate(135deg);
+    }
+}
+@keyframes inBtm {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-9px) rotate(135deg);
+    }
+}
+@-webkit-keyframes outBtm {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        -webkit-transform: translateY(-9px) rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: translateY(-9px) rotate(135deg);
+    }
+}
+@keyframes outBtm {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-9px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-9px) rotate(135deg);
+    }
+}
+/*====================================================================*/

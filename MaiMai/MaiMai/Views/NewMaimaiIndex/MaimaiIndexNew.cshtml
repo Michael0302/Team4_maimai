@@ -128,12 +128,12 @@
         @*最新商品輪播*@
         <div class="row mb-lg-3">
             <div class="col-md-12 " >
-                <div class="d-flex">
+                <div>
                     <p class="mb-2 col-3">最新商品</p>
                     <p class="col-6"></p>
                     <p class="mb-2 col-3">更多</p>
                 </div>
-                <div class="carousel slide multi-item-carousel active " id="theCarousel2">
+                <div class="carousel slide multi-item-carousel active " id="theCarousel2" style="background: #333; color: #ddd;">
                     <div class="carousel-inner  d-md-flex theWidth2 mt-3" id="NewAddCarousel">
                     </div>
                     <div id="NewprevSlide" class="slide_btn">
@@ -154,7 +154,7 @@
                     <p class="col-6"></p>
                     <p class="mb-2 col-3">更多</p>
                 </div>
-                <div class="carousel slide multi-item-carousel active " id="theCarousel">
+                <div class="carousel slide multi-item-carousel active " id="theCarousel" style="background: #333; color: #ddd;">
                     <div class="carousel-inner  d-md-flex theWidth " id="addCarousel">
                         <!--  Example item start -->
                         @*<div class="item mx-md-2 Carouseladvertising">
@@ -292,8 +292,8 @@
                                     <a href="#1" >
                                              <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})
                                                             ;height: 200px; width: 200px;background-size:cover;"></div>
-                                            <div>名稱 : ${item.productDescription}</div>
-                                            <div>金額 : ${item.price}</div>
+                                            <div>${item.productDescription}</div>
+                                            <div>${item.price}</div>
                                        </a>
                                 </div>
                         </div>
@@ -366,8 +366,8 @@
                     success: function (response) {
                         $(response).each(function (i, item) {
                             $("#tag").append(
-                                `<div class="tag ml-3 my-2 "onclick="tagonclick(${item.TagID})">
-                    <a class="btn "  >${item.tagName}</a></div>`
+                                `<div class="tag ml-3 mt-2 mb-2">
+                    <p><a class="btn " onclick="tagonclick(${item.TagID})" >${item.tagName}</a></p></div>`
                             )
                         })
                     }
