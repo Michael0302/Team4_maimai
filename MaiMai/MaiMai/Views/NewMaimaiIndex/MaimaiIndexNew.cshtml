@@ -366,8 +366,8 @@
                     success: function (response) {
                         $(response).each(function (i, item) {
                             $("#tag").append(
-                                `<div class="tag ml-3 mt-2 mb-2">
-                    <p><a class="btn " onclick="tagonclick(${item.TagID})" >${item.tagName}</a></p></div>`
+                                `<div class="tag ml-3 my-2 "onclick="tagonclick(${item.TagID})">
+                    <a class="btn "  >${item.tagName}</a></div>`
                             )
                         })
                     }
