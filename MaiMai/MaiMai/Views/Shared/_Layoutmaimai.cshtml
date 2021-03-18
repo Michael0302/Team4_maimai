@@ -32,18 +32,35 @@
             <div class=" col-md-8 dropdown ml-3">
                 <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
-                    <input Placeholder="Search " class="dropdown-search" />
+                    <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
-                <div class="Ajax-search-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div class="dropdown-item">
-                        <a class="Ajax-search-dropdown-img" href="">
-                            <img src="~/Maimai/images/image jpeg/abf1b3dc2cab2c7d949228687c84013c.jpg"
-                                 style="position: relative;" />
-                            <div style="position: absolute;z-index: 2;left: 50px;top: 30px;color: #FFFFFF;font-weight: bold;
-                                                  ">
-                                添加文字...
-                            </div>
-                        </a>
+
+                <div class="Ajax-search-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton" style="left:30%">
+                    <div class="dropdown-item  ">
+                        <div class=" row" style="width:720px;height:100%;" id="tag-search-dropdown">
+
+                            @*<a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
+                                        添加文字...
+                                    </div>
+                                </a>
+                                <a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
+                                        添加文字...
+                                    </div>
+                                </a>
+                                <a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
+                                        添加文字...
+                                    </div>
+                                </a>
+                                <a class="Ajax-search-dropdown-img mx-3" href="">
+                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
+                                        添加文字...
+                                    </div>
+                                </a>*@
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -192,9 +209,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
@@ -203,6 +222,70 @@
     <script src="~/signalr/hubs"></script>
 
     <script>
+
+        //$("#inputsearch").change(function () {
+        //    //var availabletags="";
+        //    $.ajax({
+        //            url: "/NewMaimaiIndex/searchall",
+        //        type: "GET",
+        //        data: { "text": `${$("#inputsearch").val()}`},
+        //        success: function (text) {
+        //            var test = []
+        //                 $(text).each(function (index, text) {
+        //                     test.push(text.name);
+
+        //                 })
+        //            //console.log(text)
+        //            ////availabletags = list.split(",");
+        //            //console.log(availabletags)s
+        //            console.log(test)
+        //                $("#inputsearch").autocomplete({
+        //                    source: test
+        //            });
+        //        }
+        //    })
+        //});
+
+        $.ajax({
+            url: "/NewMaimaiIndex/searchall",
+            type: "GET",
+            data: { "text": `${$("#inputsearch").val()}` },
+            success: function (text) {
+                var test = []
+                $("#inputsearch").autocomplete({
+                    source: test
+                });
+                $(text).each(function (index, text) {
+                    test.push(text.name);
+                })
+                //console.log(text)
+                ////availabletags = list.split(",");
+                //console.log(availabletags)s
+                console.log(test)
+
+            }
+        })
+
+
+        //function inputsearch() {
+        //        ajax({
+        //            url: "/NewMaimaiIndex/searchall",
+        //            type: "GET",
+        //            data: { "text":`${$("#inputsearch").val()}` },
+        //        success: function (inputsearch) {
+        //            $(inputsearch).each(function (i, item) {
+        //                $("#inputsearch").append(`
+        //                            ${item.name}
+        //                            ${item.prd}
+        //                                                                  ` )
+        //            })
+        //        }
+        //        })
+        //}
+
+        function tagonclick(TagID) {
+            window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
+        }
         $(window).scroll(function () {
             if ($(document).scrollTop() > 20) {
                 $('.nav1').addClass('affix');
@@ -262,6 +345,28 @@
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+        $(function () {
+            $.ajax({
+                url: "/MaimaiIndex/TagResult",
+                type: "GET",
+                success: function (tagsearch) {
+                    $(tagsearch).each(function (i, item) {
+                        $("#tag-search-dropdown").append(`
+                                                    <a class="Ajax-search-dropdown-img mx-3 mb-3" onclick="tagonclick(${item.TagID})" >
+                                                            <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
+                                                                ${item.tagName}
+                                                    </div>
+                                                </a >
+                                                                                             ` )
+                    })
+                }
+            })
+
+
+
+
+        });
+
     </script>
     @RenderSection("scripts", required: false)
 </body>

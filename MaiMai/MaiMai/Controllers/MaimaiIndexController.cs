@@ -1,10 +1,7 @@
 ﻿using MaiMai.Models;
 using MaiMai.Models.MaimaiIndexViewModel;
 using MaiMai.Models.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MaiMai.Controllers
@@ -19,6 +16,7 @@ namespace MaiMai.Controllers
             {
                 TagID = m.TagID,
                 tagName = m.tagName
+
             }).ToList();
             return Json(tagList, JsonRequestBehavior.AllowGet);
         }
@@ -50,6 +48,7 @@ namespace MaiMai.Controllers
         {
             var PostList = db.ProductPost.Where(m => m.TagID == TagID && m.inStoreQTY > 0).Select(m => new
             {
+                PostID = m.ProductPostID,
                 price = m.price,
                 img = m.productImg,
                 name = m.productName,

@@ -277,11 +277,12 @@
     function checkCommentList(eler,index) {
 
      
-        var test = getCookie('LoginAccount');
-        console.log(test)
-        console.log(typeof test)
+   
 
         if (test == "") {
+            var test = getCookie('LoginAccount');
+            console.log(test)
+            console.log(typeof test)
             window.alert("必須要登入才能留言喔");
             return window.location.href = `/Members/Login`;
         }
