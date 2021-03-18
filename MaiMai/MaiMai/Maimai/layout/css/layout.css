@@ -205,3 +205,9 @@ input {
         background-color: #000000;
         color: #FFFFFF;
     }
+@media (min-width: 576px) and (max-width: 1000px) {
+    #inputsearch {
+    display:none;
+    }
+}
+
