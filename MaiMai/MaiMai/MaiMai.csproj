@@ -361,6 +361,7 @@
     <Content Include="Maimai\images\svg\maimaiTOPLOGO.svg" />
     <Content Include="Maimai\layout\css\layout.css" />
     <Content Include="Maimai\layout\css\style_1.css" />
+    <Content Include="Maimai\layout\images\059-cart.svg" />
     <Content Include="Maimai\layout\images\10-1-1-875x500.jpg" />
     <Content Include="Maimai\layout\images\32-450x260.jpg" />
     <Content Include="Maimai\layout\images\39-324x235.jpg" />
