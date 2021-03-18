@@ -571,6 +571,7 @@
     <Content Include="Views\Cart\cartIndex.cshtml" />
     <Content Include="Views\googleMap\Index.cshtml" />
     <Content Include="Views\Comment\Comment.cshtml" />
+    <Content Include="Views\NewMaimaiIndex\ProdutPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
