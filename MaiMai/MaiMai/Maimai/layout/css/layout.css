@@ -494,3 +494,35 @@ ul.dropdown-menu {
     }
 }
 /*====================================================================*/
+
+/*Michael add*/
+.noti {
+    background-color: #7B7B7B;
+}
+.noti_border{
+    border-bottom: 0.5px solid black;
+}
+
+.chatbox {
+    width: 380px;
+    height: 50px;
+    background-color: #ccc;
+    position: fixed;
+    right: 10px;
+    bottom: 0px;
+    font-size: 20px;
+}
+
+.chatmsg {
+    width: 380px;
+    height: 400px;
+    background-color: #ccc;
+    position: fixed;
+    right: 10px;
+    bottom: 0px;
+    transform: translateY(500px);
+    transition: .5s;
+}
+
+
+/*====================================================================*/

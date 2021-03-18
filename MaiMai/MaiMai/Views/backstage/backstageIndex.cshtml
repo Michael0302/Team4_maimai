@@ -540,7 +540,6 @@
                      return false;
                  }
              
-                 console.log(message);
                 if (reciver == "ALL") {
                     chat.server.send(sender, message);
                 }
@@ -550,7 +549,10 @@
                 }
                 else {
                     chat.server.sendToOne(sender, reciver, message);
-                }
+                 }
+                 swal("訊息已發送", "", "success");
+                 $("#infotext").val("");
+                 $("#searchID").val("");
 
             })
 

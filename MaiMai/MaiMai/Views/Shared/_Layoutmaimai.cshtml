@@ -73,7 +73,7 @@
                     <div class="svglink dropdown" >
                     <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >@*Services*@
                         <img src="~/Maimai/images/svg/082-bell.svg"></a>
-                                                  <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" >
+                                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto"  >
                                                       @*<a class="dropdown-item" href="#">Action</a>
                                                       <a class="dropdown-item" href="#">Another action</a>
                                                       <a class="dropdown-item" href="#">Something else here</a>*@
@@ -155,8 +155,28 @@
 
 
     @RenderBody()
-
-    <div id="page"></div>
+    <div class="chatbox d-flex justify-content-center align-content-center btn" >聊天室</div>
+    <div class="chatmsg"><div id="chatmsgClose" class="btn d-flex justify-content-end mb-2" style="height:10px">X</div>
+                                                    <div class="row">
+                                                        <div class="col-4" style="width:100%;height:375px; overflow-y:scroll;">
+                                                            <a class="btn-block" style="border: 1px solid black">1</a>
+                                                       
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <div>
+                                                                會員編號
+                                                            </div>
+                                                            <div class="d-flex justify-content-start">
+                                                                123
+                                                            </div>
+                                                            <div class="d-flex justify-content-end">
+                                                                456
+                                                            </div>
+                                                        <input type="text" style="position:fixed; bottom:5px"/>
+                                                        <a class="btn" style="position:fixed; bottom:0px;right:10px">送出</a>
+                                                        </div>
+                                                    </div>
+    </div>
     <footer>
         <hr>
         <div class="container d-flex mt-1 mb-2" id="footer">
@@ -304,7 +324,7 @@
                 type: "GET",
                 success: function (noti) {
                     $(noti).each(function (index, noti) {
-                        $("#notify").append(`<a class="btn-sm"><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a><br>`);
+                        $("#notify").append(`<div class="noti py-2 noti_border" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
                     })
                 }
 
@@ -316,14 +336,9 @@
 
             var chat = $.connection.chatHub;
 
-            //chat.client.sendMessage = function (ReciverLevel, message) {
-            //    // 向頁面新增訊息
-            //    $('#page').append(`<li><strong>   [系統通知]</strong>:   ${(message)}   </li>`);
-            //};
-
             chat.client.addMessage = function (message) {
                 // 向頁面新增訊息
-                $('#notify').append(`<strong>   [系統通知]</strong>:   ${(message)} <br>`);
+                $('#notify').append(`<div class="noti py-2 noti_border" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
             };
 
             $.connection.hub.start().done(function () {
@@ -362,8 +377,13 @@
                 }
             })
 
+            $('.chatbox').on('click', function () {
+                $('.chatmsg').css('transform', 'translateY(0)')
+            })
 
-
+            $('#chatmsgClose').on('click', function () {
+                $('.chatmsg').css('transform', 'translateY(500px)');
+            })
 
         });
 
