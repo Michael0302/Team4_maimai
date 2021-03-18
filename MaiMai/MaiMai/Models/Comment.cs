@@ -16,7 +16,7 @@ namespace MaiMai.Models
     {
         public int CommentID { get; set; }
         public Nullable<int> OrderID { get; set; }
-        public Nullable<double> starRate { get; set; }
+        public Nullable<int> starRate { get; set; }
         public string commentDescription { get; set; }
         public int UserID { get; set; }
         public Nullable<int> CommentorUserID { get; set; }
