@@ -169,6 +169,7 @@
     <Compile Include="ChatHubs\Startup.cs" />
     <Compile Include="Controllers\backstageController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\googleMapController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaimaiIndexController.cs" />
@@ -234,6 +235,9 @@
     <Compile Include="Models\RequiredPost.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
@@ -258,11 +262,21 @@
     <Content Include="Content\cssCHIEN\Comment.css" />
     <Content Include="Content\cssCHIEN\personalMarket.css" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
-    <Content Include="Content\ProductPostImg\65K2.jfif" />
     <Content Include="Content\ProductPostImg\iphone11.png" />
-    <Content Include="Content\ProductPostImg\nini.jpg" />
-    <Content Include="Content\ProductPostImg\土豆.jfif" />
-    <Content Include="Content\ProductPostImg\小藥丸藍色.jfif" />
+    <Content Include="Content\ProductPostImg\member\嘉慶.jfif" />
+    <Content Include="Content\ProductPostImg\member\嘉文.jfif" />
+    <Content Include="Content\ProductPostImg\member\大衛.jfif" />
+    <Content Include="Content\ProductPostImg\member\建寧.jfif" />
+    <Content Include="Content\ProductPostImg\member\惠妹.jfif" />
+    <Content Include="Content\ProductPostImg\member\捷克.jfif" />
+    <Content Include="Content\ProductPostImg\member\新春.jfif" />
+    <Content Include="Content\ProductPostImg\member\旗山.jfif" />
+    <Content Include="Content\ProductPostImg\member\月眉.jfif" />
+    <Content Include="Content\ProductPostImg\member\杰倫.jfif" />
+    <Content Include="Content\ProductPostImg\member\翔耀.jfif" />
+    <Content Include="Content\ProductPostImg\member\茲達.jfif" />
+    <Content Include="Content\ProductPostImg\member\阿娥.jfif" />
+    <Content Include="Content\ProductPostImg\射擊遊戲.jpg" />
     <Content Include="Content\ProductPostImg\福袋.jfif" />
     <Content Include="Content\ProductPostImg\籃球.jfif" />
     <Content Include="Content\ProductPostImg\米.jfif" />
@@ -272,13 +286,13 @@
     <Content Include="Content\ProductPostImg\鋼鐵人.jfif" />
     <Content Include="Content\ProductPostImg\陪玩.jfif" />
     <Content Include="Content\resource_nico\createProductPost.css" />
-    <Content Include="Content\resource_nico\images\nini.jpg" />
     <Content Include="Content\resource_nico\images\徵求台POST\iphone12.jpg" />
     <Content Include="Content\resource_nico\images\徵求台POST\一日女友.jpg" />
-    <Content Include="Content\resource_nico\images\徵求台POST\走私.jpg" />
     <Content Include="Content\resource_nico\images\無圖示.jpg" />
+    <Content Include="Content\resource_nico\logoTOPwithoutBG.png" />
     <Content Include="Content\resource_nico\OrderManager.css" />
     <Content Include="Content\resource_nico\requriedIndex.css" />
+    <Content Include="Content\resource_nico\tw-city-selector.min.js" />
     <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
     <Content Include="Content\sweetalert\docs.css" />
     <Content Include="Content\sweetalert\sweet-alert.css" />
@@ -347,6 +361,7 @@
     <Content Include="Maimai\images\svg\maimaiTOPLOGO.svg" />
     <Content Include="Maimai\layout\css\layout.css" />
     <Content Include="Maimai\layout\css\style_1.css" />
+    <Content Include="Maimai\layout\images\059-cart.svg" />
     <Content Include="Maimai\layout\images\10-1-1-875x500.jpg" />
     <Content Include="Maimai\layout\images\32-450x260.jpg" />
     <Content Include="Maimai\layout\images\39-324x235.jpg" />
@@ -554,6 +569,7 @@
     <Content Include="Views\OrderManager\OrderIndex.cshtml" />
     <Content Include="Views\OrderManager\salesOrderIndex.cshtml" />
     <Content Include="Views\Cart\cartIndex.cshtml" />
+    <Content Include="Views\googleMap\Index.cshtml" />
     <Content Include="Views\Comment\Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
