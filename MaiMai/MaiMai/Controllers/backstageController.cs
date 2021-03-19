@@ -462,6 +462,13 @@ namespace MaiMai.Controllers
                 return Json(noti, JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult getChat_P(int ProductPostID)
+        {
+            var sellerID = db.ProductPost.Find(ProductPostID).UserID;
+
+            return Json('');
+        }
     }
 
     

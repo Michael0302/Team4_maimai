@@ -360,15 +360,28 @@
                 }
             })
 
-            $('.chatbox').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(0)')
-            })
+            $('.chatbox').on('click', displayChat)
 
             $('#chatmsgClose').on('click', function () {
                 $('.chatmsg').css('transform', 'translateY(500px)');
             })
 
         });
+
+        function displayChat(ProductPostID) {
+            $('.chatmsg').css('transform', 'translateY(0)')
+            if (ProductPostID != null || ProductPostID != "") {
+                $.ajax({
+                    url: '',
+                    type: "GET",
+                    data: { ProductPostID: ProductPostID},
+                    success: function () {
+
+                    }
+                })
+            }
+        };
+
 
     </script>
     @RenderSection("scripts", required: false)
