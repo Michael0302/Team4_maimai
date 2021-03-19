@@ -23,53 +23,45 @@
 </head>
 
 
-<body>
-    <nav class="nav1">
-        <div class="container d-flex">
-            <div class="logo col-md-1">
-                <a href="/"><img class="footerLogo1" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" /></a>
+<body class="container">
+    <nav class="nav1 ">
+        <div class=" d-flex">
+            @*layout左邊*@
+            <div class=" d-flex mt-3 ml-2">
+                <div class="logo">
+                    <a class="d-flex" href="/">
+                        <img class="HeardLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg" />
+                    </a>
+                </div>
+                <div class="MaiMai mt-2 ">
+                    <a>
+                        <p> MaiMai </p>
+                    </a>
+                </div>
             </div>
-            <div class=" col-md-8 dropdown ml-3">
-                <div class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
+            @*layout左邊*@
+            @*Search*@
+            <div class=" dropdown col-6 my-3">
+                <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
 
-                <div class="Ajax-search-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton" style="left:30%">
+                <div class="Ajax-search-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton" @*style="left:30%"*@>
                     <div class="dropdown-item  ">
-                        <div class=" row" style="width:720px;height:100%;" id="tag-search-dropdown">
-
-                            @*<a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
-                                        添加文字...
-                                    </div>
-                                </a>
-                                <a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
-                                        添加文字...
-                                    </div>
-                                </a>
-                                <a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
-                                        添加文字...
-                                    </div>
-                                </a>
-                                <a class="Ajax-search-dropdown-img mx-3" href="">
-                                    <div style="width: 150px;height: 100px;background-size: cover;background-image: url(../../Content/ProductPostImg/運動.jpg);text-align:center;">
-                                        添加文字...
-                                    </div>
-                                </a>*@
-
+                        <div class=" row" style="width:100%;height:100%;" id="tag-search-dropdown">
                         </div>
                     </div>
                 </div>
             </div>
+            @*Search*@
 
-
-            <div id="mainListDiv" class="main_list">
+            @*layout右邊*@
+            <div id="mainListDiv" class="main_list" style="position: absolute; right:20% ;">
                 <div class="navlinks d-flex">
                     <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
-                    <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@<img src="~/Maimai/images/svg/076-map.svg"></a></div>
+                    <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@  
+                    <img src="~/Maimai/layout/images/059-cart.svg" />  </a></div>
                     <div class="svglink dropdown" >
                     <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >@*Services*@
                         <img src="~/Maimai/images/svg/082-bell.svg"></a>
@@ -79,80 +71,69 @@
                                                       <a class="dropdown-item" href="#">Something else here</a>*@
                                                   </div></div>
                     @*<li><a href="#">Contact</a></li>*@
-                    <div class="svglink">
-                        @*登入*@
-                        @*@if (Request.Cookies["LoginName"] != null)
-                            {
-                                <img  src="~/Maimai/images/svg/073-location2.svg" />
-                            }*@
-                        <button class="btn" type="button" data-toggle="collapse" data-target="#collapseExample"
-                                aria-expanded="false" aria-controls="collapseExample">
-                            <svg width="24" height="24" viewBox="0 0 24 24">
-                                <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
-                                    <path id="Path_140" data-name="Path 140"
-                                          d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
-                                          fill="#7B7B7B"></path>
-                                </g>
-                            </svg>
-                        </button> @*會員圖示 end*@
+                <div class="dropdown">
+                    @*登入*@
+                    @*@if (Request.Cookies["LoginName"] != null)
+        {
+            <img  src="~/Maimai/images/svg/073-location2.svg" />
+        }*@
+                    <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
+                                <path id="Path_140" data-name="Path 140"
+                                      d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
+                                      fill="#7B7B7B"></path>
+                            </g>
+                        </svg>
+                    </button> @*會員圖示 end*@
 
-                        @*登入end*@
-                        @if (Request.Cookies["LoginName"] == null)
-                        {
-                            <div class="collapse" id="collapseExample">
-                                <div style="width:120px">
-                                    <span style="        font: 100;        color: #977C00;">
-                                        @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "free-text" })
-                                    </span>
-                                    <span>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "free-text" })</span>
-                                </div>
-                            </div> @*左右收起1 end*@
-                        }
-                        else
-                        {
-                            @*<span class=" mx-2">
-                                    @Request.Cookies["LoginName"].Value
-                                </span>*@
-                            <div>
-                                <div class="collapse" id="collapseExample">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">帳戶</a>
-                                        <ul class="dropdown-menu">
-                                            <li>@Html.ActionLink("帳戶", "myAccountIndex", "MyAccount", null, new { @class = "dropdown-item" })</li>
-                                            <li>@Html.ActionLink("登出", "Logout", "Members", null, new { @class = "dropdown-item" })</li>
-                                        </ul>
-                                    </div>
-                                    <div class="free-text dropdown- ">
-                                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">賣場</a>
-                                        <ul class="dropdown-menu">
-                                            <li>@Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })</li>
-                                            <li>@Html.ActionLink("訂單管理", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })</li>
-                                            @if (Request.Cookies["LoginAccount"].Value == null)
-                                            {
-                                                <li>@Html.ActionLink("徵求台", "requiredPostIndex", "RequiredPost", null, new { @class = "dropdown-item" })</li>
-                                            }
-                                            else
-                                            {
-                                                <li>@Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "dropdown-item" })</li>
-                                            }
-                                        </ul>
-                                    </div>
-                                    @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
-                                    {
-                                        <span>@Html.ActionLink("後台", "backstageIndex", "backstage", null, new { @class = "free-text" })</span>
-                                    }
-                                </div>
-                                @*左右收起2end*@
-                            </div>
-                        }
-                    </div>
+                    @*登入end*@
+                    @if (Request.Cookies["LoginName"] == null)
+                    {
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLogin">
+                            <li> @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "dropdown-item" })</li>
+
+                        </ul>
+
+                    }
+                    else
+                    {
+                        @*<span class=" mx-2">
+            @Request.Cookies["LoginName"].Value
+            </span>*@
+
+                <div class="dropdown-menu" style="padding-top:unset;">
+                    <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人帳戶管理</h5></div>
+                    @Html.ActionLink("個人資料", "myAccountIndex", "MyAccount", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("我的訂單", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
+                   
+
+
+                    <div class="dropdown-divider"style="margin-bottom:unset;"></div>
+                    <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人賣場管理</h5></div>
+                    @Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("賣場交易訂單", "salesOrderIndex", "OrderManage", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "dropdown-item" })
+
+
+                    <div class="dropdown-divider"></div>
+                    @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
+                    {
+                        @Html.ActionLink("後台管理員", "backstageIndex", "backstage", null, new { @class = "dropdown-item" })
+                         }
+                    @Html.ActionLink("登出", "Logout", "Members", null, new { @class = "dropdown-item" , style = "font-weight:bolder;color:#FFB5B5" })
+                </div>
+
+
+                    
+                    }
+                </div>
                 </div>
             </div>
         </div>
     </nav>
-
-
-
 
     @RenderBody()
     <div class="chatbox d-flex justify-content-center align-content-center btn" >聊天室</div>
@@ -179,29 +160,28 @@
     </div>
     <footer>
         <hr>
-        <div class="container d-flex mt-1 mb-2" id="footer">
-            <div class=" mx-2">
+        <div class=" d-flex mt-1 mb-2" id="footer">
+            <div class="col-1">
                 <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
             </div>
-            <div class="">
-                <div class="ml-5">
-                    <h5>關於我們</h5>
-                    <a href="#">Team 4</a><br>
-                    <a href="#">組長：黃士豪</a><br>
-                    <a href="#">技術長：蕭祥耀</a><br>
-                    <a href="#">組員：黃立恆、徐家雯、黃建寧</a><br>
-                </div>
+            <div class="col-3" style="position: absolute; left: 20%;">
+                <h5>關於我們</h5>
+                <select class="langSelect">
+                    <option selected>Team 4</option>
+                    <option value="組長">黃士豪</option>
+                    <option value="技術長">蕭祥耀</option>
+                    <option value="組員">徐家雯</option>
+                    <option value="組員">黃建寧</option>
+                    <option value="組員">黃立恆</option>
+                </select><br>
             </div>
-            <div class="">
-                <div class="ml-5">
+                <div class="col-6"style="position: absolute; left: 40%;">
                     <h5>歡迎企業合作</h5>
                     <a href="#">經銷商合作</a><br>
                     <a href="#">全球保固</a><br>
                     <a href="#">招募新夥伴</a><br>
-                </div>
             </div>
-            <div class="">
-                <div class="ml-5">
+                <div class="col-2" style="position: absolute; left: 80%;">
                     <h5>語言</h5>
                     <select class="langSelect">
                         <option selected>繁體中文</option>
@@ -214,7 +194,6 @@
                         <option value="ru">Русский</option>
                     </select><br>
                     <a href="#">客戶服務中心</a>
-                </div>
             </div>
         </div>
     </footer>
@@ -229,7 +208,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -238,7 +217,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
-    
+
     <script src="~/signalr/hubs"></script>
 
     <script>
@@ -306,13 +285,17 @@
         function tagonclick(TagID) {
             window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
         }
-        $(window).scroll(function () {
-            if ($(document).scrollTop() > 20) {
-                $('.nav1').addClass('affix');
-            } else {
-                $('.nav1').removeClass('affix');
-            }
-        });
+        //==============================
+        //捲動更換CSS
+        //$(window).scroll(function () {
+        //    if ($(document).scrollTop() > 20) {
+        //        $('.nav1').addClass('affix');
+        //    } else {
+        //        $('.nav1').removeClass('affix');
+        //    }
+        //});
+        //==============================
+
 
         //Michael singalR add start>>>>>
 
@@ -350,7 +333,7 @@
                             chat.server.group(userID);
                     }
                 })
-                
+
             })
 
         })
