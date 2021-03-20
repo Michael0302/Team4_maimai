@@ -572,6 +572,7 @@
     <Content Include="Views\googleMap\Index.cshtml" />
     <Content Include="Views\Comment\Comment.cshtml" />
     <Content Include="Views\NewMaimaiIndex\ProdutPost.cshtml" />
+    <Content Include="Views\PersonalMarket\fuckyou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
