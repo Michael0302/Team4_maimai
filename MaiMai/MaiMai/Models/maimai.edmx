@@ -32,7 +32,7 @@
           </Key>
           <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderID" Type="int" />
-          <Property Name="starRate" Type="int" />
+          <Property Name="starRate" Type="float" />
           <Property Name="commentDescription" Type="text" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="CommentorUserID" Type="int" />
@@ -437,7 +437,7 @@
           </Key>
           <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="OrderID" Type="Int32" />
-          <Property Name="starRate" Type="Int32" />
+          <Property Name="starRate" Type="Double" />
           <Property Name="commentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CommentorUserID" Type="Int32" />

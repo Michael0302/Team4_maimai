@@ -79,10 +79,7 @@ namespace MaiMai.Controllers
 
         }
 
-        public ActionResult fuckyou()
-        {
-            return View();
-        }
+       
 
     }
     }
