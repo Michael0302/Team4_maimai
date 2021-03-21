@@ -267,6 +267,19 @@ namespace MaiMai.Controllers
             return Json(memIDList, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult getinfoRecord_P()
+        {
+            var infoRecord = db.Notification.Select(s => new
+                                            {
+                                                SenderID = s.SenderID,
+                                                ReciverLevel = s.ReciverLevel,
+                                                NotifyText = s.NotifyText,
+                                                CreateTime = s.CreateTime,
+                                            }).OrderByDescending(o=>o.CreateTime);
+
+            return Json(infoRecord, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult getTag()
         {
             var AllTag = db.Tag.Select(t => new

@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-10">
 
             @*更新部分頁面*@
             <div id="show">
@@ -174,7 +174,7 @@
                 // 向頁面新增訊息
                 $('#page').append(`<li><strong>   [系統通知]</strong>:   ${message}   </li>`);
 
-            };            
+            };
         })
 
     function getMemberList() {
@@ -516,8 +516,26 @@
             success: function (mem) {
                 $("#show").html(`
                                             <input type="text" id="searchID" placeholder="請輸入會員ID" class="form-control mb-3"/>
-                                            <textarea id="infotext" style="resize:none" cols="50" rows="10" placeholder="請輸入通知內容"></textarea>
-                                            <div><input class="btn btn-primary" value="發送" onclick="pushInfo()"/></div`)
+                                            <div class="d-flex">
+                                                <div class="col-6">
+                                                <textarea id="infotext" style="resize:none" cols="50" rows="10" placeholder="請輸入通知內容"></textarea>
+                                                <input class="btn btn-primary" value="發送" onclick="pushInfo()"/>
+                                                </div>
+                                                    <span style="color:#6C6C6C">發送紀錄</span>
+                                                <div id="pushrecord" class="col-6" style="height:280px; overflow-y:auto">
+                                                    <div>
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr><th>發送人</th><th>對象</th><th>時間</th><th>內容</th></tr>
+                                                            </thead>
+                                                            <tbody id="infoRecord">
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div
+                                            `)
                 $(mem).each(function (index, mem) {
                     list += mem.UserID+",";
                 })
@@ -527,19 +545,51 @@
                 })
             }
         })
+
+        $.ajax({
+            url: "@Url.Action("getinfoRecord_P", "backstage")",
+            success: function (data) {
+                $(data).each(function (index, data) {
+                    var Milliseconds = parseInt(data.CreateTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+                    var hour = new Date(Milliseconds).getHours();
+                    var min = new Date(Milliseconds).getMinutes();
+                    var sec = new Date(Milliseconds).getSeconds();
+                    $("#infoRecord").append(`
+                                                    <tr>
+                                                    <td>${data.SenderID}</td><td>${data.ReciverLevel}</td>
+                                                    <td>${year}/${month}/${date} ${hour}:${min}:${sec}</td><td>${data.NotifyText}</td>
+                                                    </tr>
+                                                        `)
+                })
+            }
+        })
     }
 
     //發通知
          function pushInfo() {
-             $.connection.hub.start().done(function () {
             var message = $("#infotext").val();
-            var reciver = $("#searchID").val().toUpperCase();
+             var reciver = $("#searchID").val().toUpperCase();
+             var loginID = getCookie("LoginID");
+             var date = new Date();
+             console.log(date);
+             var year = date.getFullYear();
+             var mon = date.getMonth();
+             var dat = date.getDate();
+             var hour = date.getHours();
+             var min = date.getMinutes();
+             var sec = date.getSeconds();
+
+             $("#infoRecord").prepend(`<tr><td>${loginID}</td><td>${reciver}</td><td>${year}/${mon}/${dat} ${hour}:${min}:${sec}</td><td>${message}</td></tr>`)
+             $.connection.hub.start().done(function () {
                  var sender = getCookie("LoginID");
                  if (sender == "") {
                      alert("請先登入")
                      return false;
                  }
-             
+
                 if (reciver == "ALL") {
                     chat.server.send(sender, message);
                 }
@@ -669,7 +719,12 @@
                     var hour = new Date(Milliseconds).getHours();
                     var min = new Date(Milliseconds).getMinutes();
                     var sec = new Date(Milliseconds).getSeconds();
-
+                    var prodPost = "";
+                    if (oneProduct.RequiredPostID == null) {
+                        prodPost = "無";
+                    } else {
+                        prodPost = oneProduct.RequiredPostID
+                    }
                     $("#editProductbody").html(`
                                         <div class='d-flex justify-content-center'>
                                                     <label>商品照片<div style="width:200px; height:200px; background-image: url(../Content/ProductPostImg/${oneProduct.productImg}); background-size: cover"></div>
@@ -680,7 +735,7 @@
                                                     <label>庫存<input class='form-control' type='text' value="${oneProduct.inStoreQTY}" readonly/>
                                                     <label>價錢<input class='form-control' type='text' value="${oneProduct.price}" readonly/>
                                                     <label>標籤<input class='form-control' type='text' value="${oneProduct.Tag}" readonly/>
-                                                    <label>徵求台編號<input class='form-control' type='text' value="${oneProduct.RequiredPostID}" readonly/>
+                                                    <label>徵求台編號<input class='form-control' type='text' value="${prodPost}" readonly/>
                                                     <label>建立時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/></div>
                                                 `)
                 })
@@ -887,6 +942,6 @@
             return "";
 
         }
-    
+
     </script>
  }
