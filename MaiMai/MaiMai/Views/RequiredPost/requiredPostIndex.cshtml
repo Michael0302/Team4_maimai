@@ -1,13 +1,11 @@
 ﻿
-@{
-    ViewBag.Title = "requiredPostIndex";
-}
+@{ ViewBag.Title = "requiredPostIndex"; }
 <head>
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
     <script src="~/Content/resource_nico/tw-city-selector.min.js"></script>
 
-    
+
 </head>
 
 
@@ -20,10 +18,10 @@
                        aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
 
                 </li>
-                <li >
+                <li>
                     <a class="btn  btn-secondary" style="color:white;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                 </li>
-             
+
             </ul>
         </div>
 
@@ -38,11 +36,11 @@
                         </button>
                     </div>
                     <div class="modal-body" id="editMemberbody">
-                        <form id="form1"class="formFrame mx-auto" enctype="multipart/form-data">
+                        <form id="form1" class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
                                 <div class="photo"><img id="Productimg"></div>
-                                    <input type="file" required name="upphoto" id="productImg" style="display: block" ; onchange="previewFile()">
-                                </div>
+                                <input type="file" required name="upphoto" id="productImg" style="display: block" ; onchange="previewFile()">
+                            </div>
                             <div class="displayInput">
                                 <h6>貼文名稱:<input type="text" required name="postName" id="postName"></h6>
                                 <h6>
@@ -51,13 +49,13 @@
                                 <div>
                                     <h6>交貨方式</h6>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType"  value="express" id="express">
+                                        <input class="form-check-input" type="radio" name="transationType" value="express" id="express">
                                         <label class="form-check-label" for="express">
                                             物流交貨
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType"  value="pTop" id="pTop" checked>
+                                        <input class="form-check-input" type="radio" name="transationType" value="pTop" id="pTop" checked>
                                         <label class="form-check-label" for="pTop">
                                             當面交貨/地點
                                         </label>
@@ -96,17 +94,41 @@
         <div class="showPostArea tab-content " id="pills-tabContent">
 
             <div class="tab-pane fade show active" id="allPost" role="tabpanel" aria-labelledby="pills-home-tab">
-              
+
             </div>
-         
+
         </div>
 
-        
+
     </div>
 
-    
+
 </div>
 
+@*=================report 立恆=====================*@
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalCenterTitle">檢舉內容</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span id="modalSpan" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                <button id="submit" onclick="saveReport()" type="button" class="btn btn-primary">送出</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*=================report =====================*@
 
 
 <script>
@@ -115,7 +137,7 @@
 
         new TwCitySelector({
             el: ".my-selector-b",
-            elCounty: ".county", 
+            elCounty: ".county",
             elDistrict: ".district"
         });
 
@@ -163,6 +185,7 @@
 
                             <div class="collapse w-100" id="collapseExample${i}">
                                 <div class="card card-body w-100" }>
+                                    <span role="button"  class="btn" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter">檢舉</span>
                                     <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
                                         <div class="displayImg Productimg${i}">
                                             <div class="photo"><img id="Productimg${i}"></div>
@@ -258,7 +281,7 @@
             <div>
                 <select class="district"></select>
             </div>`);
-            
+
     }
 
 
@@ -325,7 +348,9 @@
 
         var test = getCookie('LoginAccount');
         if (test == "") {
-            window.alert("必須要登入才能留言喔");
+            Swal.fire("必須要登入才能留言喔")
+
+           
             return window.location.href = `/Members/Login`;
         }
 
@@ -373,7 +398,7 @@
             var test = getCookie('LoginAccount');
             console.log(test)
             console.log(typeof test)
-            window.alert("必須要登入才能留言喔");
+            Swal.fire("必須要登入才能留言喔")
             return window.location.href = `/Members/Login`;
         }
 
@@ -392,7 +417,7 @@
                           <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
                           <div class="post-text">
                                 <div class="d-flex justify-content-between">
-                                    <h3 id="postName${i}">${item.productName}</h3>
+                                 <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">   <h3 id="postName${i}">${item.productName}</h3></a>
                                     <h6>${item.county}  <span>${item.district}</span></h6>
                                      </div>
                                 <h6 id="userName${i}">賣家:${item.userAccount}</h6>
@@ -404,7 +429,7 @@
                                 <a class="btn btn-secondary" href="#">加入購物車</a>
                          </div>
                         </div>
-                    
+
                     `})
                 $(`#collapseComment${index}>div`).html(inner);
                 $(`#cmCount${index}`).html(`${response.length}`)
@@ -436,13 +461,89 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                window.alert(response)
+                Swal.fire(response);
+             
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }
         })
 
     }// end send required post
+
+     //========== report script=====================
+
+    function report() {
+        $.ajax({
+            url: "@Url.Action("getReport","MyOrder")",
+            data: {},
+            type: "GET",
+            success: function (result) {
+                $(".modal-body").html(`
+                <!-- Default dropright button -->
+<p>
+  <a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    檢舉標籤
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+                <div  id="reportTags"class="btn-group">
+
+</div>
+                </div>
+                    </div>
+                    </div>
+                 </div>
+
+                <div id="warning" class="align-content-center">
+                <label ><h3>內容描述</h3></label>
+                </div>
+                <div>
+                <textarea id="reportTXT" rows="15" cols="60"></textarea>
+                </div>
+`);
+
+                $(result).each(function (index, item) {
+                    $("#reportTags").append(`
+<input type="radio"class="btn btn-info " value="${index}"style="border-radius:50px"id="btnradio${index}" required>
+  <label  for="btnradio${index}" class="btn btn-info " value="${index}"style="border-radius:50px" onclick="changeColor()" >
+
+${item.reason}</label>
+                `)
+                })
+
+            }
+        })
+    }
+    //
+    function changeColor() {
+        $(event.target).removeClass("btn-info").addClass("btn-success").siblings().removeClass("btn-success").addClass("btn-info");
+    };
+
+    function saveReport() {
+        //var reportTAG = new Array();
+        //$('input:checked').each(function (i) { reportTAG[i] = $(this).val(); });
+        console.log(`reportTAG=$('input:checked').val()`);
+        var reportTAG = $('input:checked').val() * 1 + 1;
+        if (reportTAG == "NaN") {
+            return false;
+        }
+        $.ajax({
+            url: "@Url.Action("saveReport","MyOrder")",
+            data: { reportTXT: $("#reportTXT").val(), reportTAG: reportTAG  },
+            type: "POST",
+            success: function (result) {
+//                alert("送出成功!!");
+                swal('成功', '送出成功', 'success');
+                setTimeout(function () { $(".close").click() }, 700);
+            },
+            error: function(){
+                swal("失敗","檢舉標籤為必要勾選!!",'error');
+            }
+        })
+    }
+
+
+    //========== report script=====================
 
 
 </script>
