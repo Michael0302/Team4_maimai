@@ -58,7 +58,7 @@
 
             @*layout右邊*@
             <div id="mainListDiv" class="main_list" style="position: absolute; right:20% ;">
-                <div class="navlinks d-flex">
+                <div class="navlinks d-flex mt-3">
                     <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
                     <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@  
                     <img src="~/Maimai/layout/images/059-cart.svg" />  </a></div>
@@ -71,14 +71,14 @@
                                                       <a class="dropdown-item" href="#">Something else here</a>*@
                                                   </div></div>
                     @*<li><a href="#">Contact</a></li>*@
-                <div class="dropdown">
+                <div class="dropdown mt-1">
                     @*登入*@
                     @*@if (Request.Cookies["LoginName"] != null)
         {
             <img  src="~/Maimai/images/svg/073-location2.svg" />
         }*@
                     <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
-                        <svg width="24" height="24" viewBox="0 0 24 24">
+                        <svg width="28" height="28" viewBox="0 0 24 24" >
                             <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
                                 <path id="Path_140" data-name="Path 140"
                                       d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
@@ -90,13 +90,10 @@
                     @*登入end*@
                     @if (Request.Cookies["LoginName"] == null)
                     {
-
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLogin">
                             <li> @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "dropdown-item" })</li>
                             <li>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "dropdown-item" })</li>
-
                         </ul>
-
                     }
                     else
                     {
@@ -104,7 +101,7 @@
             @Request.Cookies["LoginName"].Value
             </span>*@
 
-                <div class="dropdown-menu" style="padding-top:unset;">
+                    <div class="dropdown-menu" style="padding-top:unset;">
                     <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人帳戶管理</h5></div>
                     @Html.ActionLink("個人資料", "myAccountIndex", "MyAccount", null, new { @class = "dropdown-item" })
                     @Html.ActionLink("我的訂單", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })

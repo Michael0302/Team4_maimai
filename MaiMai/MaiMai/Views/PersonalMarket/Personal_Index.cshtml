@@ -1,8 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Personal_Index";
+    ViewBag.Title = "fuckyou";
     Layout = "~/Views/Shared/_Layoutmaimai.cshtml";
 }
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,10 +12,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link href="~/Content/cssCHIEN/personalMarket.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">*@
 
+    <link href="~/Content/cssCHIEN/personalMarket.css" rel="stylesheet" />
+     
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <style>
@@ -24,10 +27,8 @@
             background-image: url(../../Content/ImageCHIEN/maimai.png);
             background-repeat: repeat;
             background-size: 100%;
-            border-radius:10px;
+            border-radius: 10px;
         }
-
-
     </style>
 </head>
 
@@ -47,7 +48,7 @@
                                 <a class="D_sa D_rW D_sc D_sf D_ih">
                                     <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU">商品</p>
                                 </a>
-                                <a class="D_sa D_rW D_ih">
+                                <a class="D_sa D_rW D_ih" href="../Comment/Comment">
                                     <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU">評價</p>
                                 </a>
                             </div>
@@ -74,10 +75,10 @@
                                 <span class="D_bA D_agP D_jV D_kf D_bB" id="ImgGood">
                                 </span>
 
-                                    @*<span class="D_bA D_agP D_jV D_kf D_bB"><img alt="" class="D_bE" id="image00"  src="../Content/ProductPostImg/member/  title=""></span>*@
+                                @*<span class="D_bA D_agP D_jV D_kf D_bB"><img alt="" class="D_bE" id="image00"  src="../Content/ProductPostImg/member/  title=""></span>*@
                             </div>
-                            <h2 id="lastName" class="D_bi D_bq D_bw D_by D_bg">建寧 黃</h2>
-                             
+                            <h2 id="lastName" class="D_bi D_bq D_bw D_by D_bg">@*建寧 黃*@</h2>
+
                             <p class="D_bY D_cj D_cl D_co D_cr D_ct D_cv D_bU"> </p>
                             <div class="D_aha" style="">
                                 <img alt="" class="D_bE D_bA D_ahb" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/star-empty-66230871b8b309452e1913302057b3b5.svg" title="">
@@ -159,25 +160,25 @@
                                     </div>
                                     <div class="D_is">
                                         <div class="D_io D_ahw" id="allPost">
-                        @*頭*@
+                                            @*頭*@
                                             @*<div class="D_kZ D_kW D_il">
-                                                <div class="D_lc">
-                                                    <a class="D_ih" href="/p/特斯拉-1071117856/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
-                                                        <div class="D_lm">
-                                                            <span class="D_bA D_ln D_bB"><img alt="" class="D_bE"  id="productImg"src="https://media.karousell.com/media/photos/products/2021/2/23/_1614047114_979e5449_progressive_thumbnail" title=""></span>
-                                                        </div>
-                                                        <p  id="productName"class="D_bY D_ci D_cl D_co D_cq D_ct D_cw D_bV">特斯拉</p>
-                                                        <p id="price" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bU">NT$5,000,000</p>
-                                                        <p id="productDescription" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">自動駕駛</p>
-                                                        <p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">新品</p>
-                                                    </a>
-                                                </div>
-                                                <div class="D_l_  M_gx D_kX">
-                                                    <button class="D_aG D_ay D_aT D_aY D_lA  D_kY" type="button"><svg class="D_lB " height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1c3.852 0 7 3.148 7 7 0 3.858-2.067 7.513-5.44 10.724C16.158 21.01 13.04 23 12 23s-4.158-1.99-6.56-4.276C2.067 15.514 0 11.858 0 8c0-3.852 3.148-7 7-7 1.917 0 3.688.79 5 2.13C13.312 1.79 15.083 1 17 1zm0 2c-1.677 0-3.205.854-4.176 2.267a1 1 0 0 1-1.648 0C10.205 3.854 8.676 3 7 3 4.252 3 2 5.252 2 8c0 3.215 1.804 6.406 4.82 9.276C8.86 19.218 11.652 21 12 21c.347 0 3.14-1.782 5.18-3.724C20.197 14.406 22 11.215 22 8c0-2.748-2.252-5-5-5z" fill="#57585a"></path></svg><span class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_bV">&nbsp;</span></button>
-                                                    <button class="D_aG D_ay D_aS D_aY D_lA D_kY" type="button"><img alt="" class="D_bE D_bA D_lB" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/listing-insight-f5374f8a0bd79934d0aa3cbe73d07584.svg" title=""></button>
-                                                </div>
-                                                <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button">宣傳</button>
-                                            </div>*@
+                                                    <div class="D_lc">
+                                                        <a class="D_ih" href="/p/特斯拉-1071117856/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
+                                                            <div class="D_lm">
+                                                                <span class="D_bA D_ln D_bB"><img alt="" class="D_bE"  id="productImg"src="https://media.karousell.com/media/photos/products/2021/2/23/_1614047114_979e5449_progressive_thumbnail" title=""></span>
+                                                            </div>
+                                                            <p  id="productName"class="D_bY D_ci D_cl D_co D_cq D_ct D_cw D_bV">特斯拉</p>
+                                                            <p id="price" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bU">NT$5,000,000</p>
+                                                            <p id="productDescription" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">自動駕駛</p>
+                                                            <p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">新品</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="D_l_  M_gx D_kX">
+                                                        <button class="D_aG D_ay D_aT D_aY D_lA  D_kY" type="button"><svg class="D_lB " height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1c3.852 0 7 3.148 7 7 0 3.858-2.067 7.513-5.44 10.724C16.158 21.01 13.04 23 12 23s-4.158-1.99-6.56-4.276C2.067 15.514 0 11.858 0 8c0-3.852 3.148-7 7-7 1.917 0 3.688.79 5 2.13C13.312 1.79 15.083 1 17 1zm0 2c-1.677 0-3.205.854-4.176 2.267a1 1 0 0 1-1.648 0C10.205 3.854 8.676 3 7 3 4.252 3 2 5.252 2 8c0 3.215 1.804 6.406 4.82 9.276C8.86 19.218 11.652 21 12 21c.347 0 3.14-1.782 5.18-3.724C20.197 14.406 22 11.215 22 8c0-2.748-2.252-5-5-5z" fill="#57585a"></path></svg><span class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_bV">&nbsp;</span></button>
+                                                        <button class="D_aG D_ay D_aS D_aY D_lA D_kY" type="button"><img alt="" class="D_bE D_bA D_lB" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/listing-insight-f5374f8a0bd79934d0aa3cbe73d07584.svg" title=""></button>
+                                                    </div>
+                                                    <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button">宣傳</button>
+                                                </div>*@
                                             @*委*@
                                             <div class="D_kZ D_kW D_il">
                                                 <div class="D_lc">
@@ -225,7 +226,7 @@
 
         </div>
     </div>
-     
+
 
 
 
@@ -309,7 +310,8 @@
     @*================================================end 建立訂單藏======================================================*@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>*@
+     
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script>
 
@@ -360,15 +362,15 @@
 
 
 
-                    
+
                 }
-            
-        });
-                
-                        
- 
-        
-         
+
+            });
+
+
+
+
+
 
 
 
@@ -388,31 +390,31 @@
                 success: function (data) {
                     $(data).each(function (i, item) {
                         //$("#ImgGood").append(` <img alt="" class="D_bE" id="image00"  img src=../Content/ProductPostImg/member/${item.profileImg}  title=""> `)
-                    
+
 
                         $("#allPost").append(`
-                        <div class="D_kZ D_kW D_il">
-                            <div class="D_lc">
-                                <a class="D_ih" href="/p/特斯拉-1071117856/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
-                                    <div class="D_lm">
-                                        <span class="D_bA D_ln D_bB"><img alt="" class="D_bE" id="productImg" img src=../Content/ProductPostImg/${item.productImg} title=""></span>
-                                                        </div>
-                                        <p id="productName" class="D_bY D_ci D_cl D_co D_cq D_ct D_cw D_bV">${item.productName}</p>
-                                        <p id="price" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bU">NT$${item.price}</p>
-                                        <p id="productDescription" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV"> ${item.productDescription}</p>
-                                        <p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">總量 : ${item.inStoreQTY}</p>  
-                                                    </a>
-                                                </div>
-                                <div class="D_l_  M_gx D_kX">
-                                    <button class="D_aG D_ay D_aT D_aY D_lA  D_kY" type="button"><svg class="D_lB " height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1c3.852 0 7 3.148 7 7 0 3.858-2.067 7.513-5.44 10.724C16.158 21.01 13.04 23 12 23s-4.158-1.99-6.56-4.276C2.067 15.514 0 11.858 0 8c0-3.852 3.148-7 7-7 1.917 0 3.688.79 5 2.13C13.312 1.79 15.083 1 17 1zm0 2c-1.677 0-3.205.854-4.176 2.267a1 1 0 0 1-1.648 0C10.205 3.854 8.676 3 7 3 4.252 3 2 5.252 2 8c0 3.215 1.804 6.406 4.82 9.276C8.86 19.218 11.652 21 12 21c.347 0 3.14-1.782 5.18-3.724C20.197 14.406 22 11.215 22 8c0-2.748-2.252-5-5-5z" fill="#57585a"></path></svg><span class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_bV">&nbsp;</span></button>
-                                    <button class="D_aG D_ay D_aS D_aY D_lA D_kY" type="button"><img alt="" class="D_bE D_bA D_lB" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/listing-insight-f5374f8a0bd79934d0aa3cbe73d07584.svg" title=""></button>
-                                                </div>
-                                    <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button" onclick="deletepost (${item.ProductPostID})">下架</button>
-                                </div>`)
-                        console.log(item.ProductPostID)
-                       
+                            <div class="D_kZ D_kW D_il">
+                                <div class="D_lc">
+                                    <a class="D_ih" href="/p/特斯拉-1071117856/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
+                                        <div class="D_lm">
+                                            <span class="D_bA D_ln D_bB"><img alt="" class="D_bE" id="productImg" img src=../Content/ProductPostImg/${item.productImg} title=""></span>
+                                                            </div>
+                                            <p id="productName" class="D_bY D_ci D_cl D_co D_cq D_ct D_cw D_bV">${item.productName}</p>
+                                            <p id="price" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bU">NT$${item.price}</p>
+                                            <p id="productDescription" class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV"> ${item.productDescription}</p>
+                                            <p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bV">總量 : ${item.inStoreQTY}</p>
+                                                        </a>
+                                                    </div>
+                                    <div class="D_l_  M_gx D_kX">
+                                        <button class="D_aG D_ay D_aT D_aY D_lA  D_kY" type="button"><svg class="D_lB " height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1c3.852 0 7 3.148 7 7 0 3.858-2.067 7.513-5.44 10.724C16.158 21.01 13.04 23 12 23s-4.158-1.99-6.56-4.276C2.067 15.514 0 11.858 0 8c0-3.852 3.148-7 7-7 1.917 0 3.688.79 5 2.13C13.312 1.79 15.083 1 17 1zm0 2c-1.677 0-3.205.854-4.176 2.267a1 1 0 0 1-1.648 0C10.205 3.854 8.676 3 7 3 4.252 3 2 5.252 2 8c0 3.215 1.804 6.406 4.82 9.276C8.86 19.218 11.652 21 12 21c.347 0 3.14-1.782 5.18-3.724C20.197 14.406 22 11.215 22 8c0-2.748-2.252-5-5-5z" fill="#57585a"></path></svg><span class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_bV">&nbsp;</span></button>
+                                        <button class="D_aG D_ay D_aS D_aY D_lA D_kY" type="button"><img alt="" class="D_bE D_bA D_lB" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/listing-insight-f5374f8a0bd79934d0aa3cbe73d07584.svg" title=""></button>
+                                                    </div>
+                                        <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button" onclick="deletepost (${item.ProductPostID})">下架</button>
+                                    </div>`)
+                        console.log(test)
+
                         //$("#productName").html(item.productName)
-                        //$("#productDescription").html(item.productDescription) 
+                        //$("#productDescription").html(item.productDescription)
                         //$("#price").html(item.price)
                         ////$("#productImg").html(item.productImg)
                         ////console.log(item.productImg)
@@ -422,7 +424,8 @@
                         ////$("#City").html(data.city)
                         ////$("#selfDescription").html(data.selfDescription)
                     }
-                        )}
+                    )
+                }
             });
 
 
@@ -456,7 +459,7 @@
 
 
         function submitProdouct() {
-       
+
 
             var form = document.querySelector(".formFrame")
             console.log(form)
@@ -514,5 +517,4 @@
 </body>
 
 </html>
-
 
