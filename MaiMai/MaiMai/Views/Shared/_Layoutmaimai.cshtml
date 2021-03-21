@@ -307,7 +307,7 @@
         //Michael singalR add start>>>>>
         var chat = $.connection.chatHub;
         $(function () {
-
+            getConent();
             //比對資料表Notification有無符合自己id or 群組的通知
             $.ajax({
                 url: "@Url.Action("getNotification_P", "backstage")",
@@ -331,7 +331,7 @@
                 $('#notify').append(`<div class="noti py-2 noti_border" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
             };
 
-            $.connection.hub.start().done(function () {
+            $.connection.hub.start() .done(function () {
                 $.ajax({
                     url: "@Url.Action("getUserID_P", "backstage")",
                     type: "GET",
@@ -354,8 +354,14 @@
 
         })
 
-        chat.client.reciverMessage = function (message) {
-            $("#chatroom").append(`
+        chat.client.reciverMessage = function (message, user) {
+            debugger;
+            var ChatName = $("#NameList" + user.userAccount);
+            if (ChatName.length == 0) {
+                $("#chatNameList").html("");
+                getConent();
+            }
+            $("#chatbody").append(`
                 <div class="d-flex justify-content-start">
                     ${message}
                 </div>
@@ -365,7 +371,7 @@
         }
 
         chat.client.senderMessage = function (message) {
-            $("#chatroom").append(`
+            $("#chatbody").append(`
                 <div class="d-flex justify-content-end">
                     ${message}
                 </div>
@@ -379,7 +385,14 @@
             var text = $("#chattext").val();
             var sender = getCookie("LoginID");
             $.connection.hub.start().done(function () {
-                chat.server.oneToOneChat(sender, reciverID, text);
+                chat.server.oneToOneChat(sender, reciverID, text).done(function () {
+                    var ChatName = $("#NameList" + reciverID);
+                    console.log(ChatName.length);
+                    if (ChatName.length == 0) {
+                        $("#chatNameList").html("");
+                        getConent();
+                    }
+                });
             });
         }
 
@@ -397,26 +410,20 @@
 
         //一開始載入 先去資料庫抓歷史紀錄塞到左邊列表
         var loginID = getCookie("LoginID");
-                $.ajax({
+        function getConent() {
+            $.ajax({
                     url: "@Url.Action("getAllChat_P", "backstage")",
                     type: "GET",
                     success: function (record) {
                         $(record).each(function (index, record) {
-                            //console.log(record[0].ReciverName);
-                            var UserName = `${record[0].ReciverName}`;
-                            if (record[0].SenderID == loginID) {
-                                $("#chatNameList").append(`
-                                        <div class="btn" onclick="getRecord(${record[0].ReciverID}, '${record[0].ReciverName}')">${record[0].ReciverName}</div>
+                            $("#chatNameList").append(`
+                                        <div id="NameList${record.TargetID}" class="btn" onclick="getRecord(${record.TargetID}, '${record.TargetName}')">${record.TargetName}</div>
                                     `)
-                            }
-                            else {
-                                $("#chatNameList").append(`
-                                        <div class="btn" onclick="getRecord(${record[0].SenderID},'${record[0].SenderName}')">${record[0].SenderName}</div>
-                                    `)
-                            }
                         })
                     }
                 })
+        }
+
 
         //抓資料庫 塞到右邊內容
         function getRecord(UserID, UserName) {
@@ -427,11 +434,14 @@
                 url: "@Url.Action("getAllChatRecord_P", "backstage")",
                 data: { UserID: UserID },
                 success: function (record) {
+                    console.log(record);
                     $("#chatroom").html(`
                             <div>${UserName}</div>
-                            <div id="chatbody"></div>
+                            <div id="chatbody" style="height:320px;overflow-y:auto"></div>
+                            <div>
                             <input id="chattext" type="text" style="position:fixed; bottom:5px" />
                             <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${UserID})">送出</a>
+                            </div>
                             `)
                     $(record).each(function (index, record) {
                         if (record.SenderID == LoginID) {

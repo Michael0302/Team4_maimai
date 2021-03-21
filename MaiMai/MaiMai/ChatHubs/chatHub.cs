@@ -31,26 +31,6 @@ using System.ComponentModel.DataAnnotations;
 namespace SignalRMvc.chatHubs
 {
 
-    //public class User
-    //{
-    //    /// <summary>
-    //    /// 連線ID
-    //    /// </summary>
-    //    [Key]
-    //    public string ConnectionID { get; set; }
-
-    //    /// <summary>
-    //    /// 使用者名稱稱
-    //    /// </summary>
-    //    public string Name { get; set; }
-
-    //    public User(string name, string connectionId)
-    //    {
-    //        this.Name = name;
-    //        this.ConnectionID = connectionId;
-    //    }
-    //}
-
 
     public class chatHub : Hub
     {
@@ -126,7 +106,10 @@ namespace SignalRMvc.chatHubs
             var user = db.Member.Find(reciver);
             if (user != null)
             {
-                Clients.Client(user.connectionID).reciverMessage(message);
+                Clients.Client(user.connectionID).reciverMessage(message, new {
+                    user.UserID,
+                    user.userAccount
+                    });
                 Clients.Caller.senderMessage(message);
 
                 Chat chat = new Chat()
