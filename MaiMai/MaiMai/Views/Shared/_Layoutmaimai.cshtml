@@ -16,6 +16,7 @@
     <link href="~/Maimai/layout/css/style_1.css" rel="stylesheet" />
     <link href="~/Content/Cart_css/Cart.css" rel="stylesheet" />
     <link href="~/Content/Backstage_css/backstage.css" rel="stylesheet" />
+
     @*Pagination*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
@@ -403,16 +404,14 @@
                         $(record).each(function (index, record) {
                             //console.log(record[0].ReciverName);
                             var UserName = `${record[0].ReciverName}`;
-                            console.log(UserName);
                             if (record[0].SenderID == loginID) {
-                                console.log(UserName);
                                 $("#chatNameList").append(`
-                                        <div class="btn" onclick="getRecord(${record[0].ReciverID}, '${UserName}')">${record[0].ReciverName}</div>
+                                        <div class="btn" onclick="getRecord(${record[0].ReciverID}, '${record[0].ReciverName}')">${record[0].ReciverName}</div>
                                     `)
                             }
                             else {
                                 $("#chatNameList").append(`
-                                        <div class="btn" onclick="getRecord(${record[0].SenderID},${record[0].SenderName})">${record[0].SenderName}</div>
+                                        <div class="btn" onclick="getRecord(${record[0].SenderID},'${record[0].SenderName}')">${record[0].SenderName}</div>
                                     `)
                             }
                         })

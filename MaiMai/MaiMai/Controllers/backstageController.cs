@@ -484,6 +484,7 @@ namespace MaiMai.Controllers
         //點擊聊天室 抓取聊天紀錄
         public ActionResult getAllChat_P()
         {
+            if (Request.Cookies["LoginID"] == null) return Content("尚未登入");
             var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
             var record = db.Chat.Where(m => m.ReciverID == loginID || m.SenderID == loginID).OrderByDescending(o => o.ChatTime).Select(s=>new {
                 SenderID = s.SenderID,
