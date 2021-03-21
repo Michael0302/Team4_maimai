@@ -307,6 +307,7 @@ svg:not(:root) {
 }
 .D_cw {
     font-weight: 600;
+    color: #008f79;
 }
 .D_alV {
     margin-bottom: 12px;
@@ -798,3 +799,173 @@ input {
     outline: none;
 }
 
+.D_agE {
+    width: 100%;
+    height: 128px;
+    background-color: black;
+    background-image: url(../../Content/ImageCHIEN/maimai.png);
+    background-repeat: repeat;
+    background-size: 100%;
+    border-radius: 10px;
+}
+
+.D_ahz:hover {
+    cursor: pointer;
+    background-color: #f0f1f1;
+    box-shadow: 0 0 0 4px #fff;
+}
+
+.D_ahz {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 8px 12px;
+    margin-left: -12px;
+    border-radius: 2px;
+}
+
+.D_aW {
+    text-decoration: none;
+}
+
+.D_aT {
+    color: #57585a;
+}
+
+.D_aK {
+    overflow: hidden;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    text-overflow: ellipsis;
+}
+
+.D_ahA:nth-child(2), .D_ahB {
+    margin-left: 4px;
+}
+
+.D_ahA {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.D_lQ {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.D_lV {
+    margin-right: 2px;
+}
+
+.D_lT {
+    width: 20px;
+    height: 20px;
+}
+
+.D_ahB {
+    margin-right: 8px;
+}
+
+.D_ahA:nth-child(2), .D_ahB {
+    margin-left: 4px;
+}
+
+.D_ahA {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.D_aG {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.D_bh {
+    font-weight: 400;
+}
+
+.D_bf {
+    text-align: left;
+}
+
+.D_bc {
+    white-space: normal;
+}
+
+.D_aZ {
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+.D_aW {
+    text-decoration: none;
+}
+
+.D_aT {
+    color: #57585a;
+    padding: 5px;
+    background-color: mintcream;
+}
+
+.D_aK {
+    overflow: hidden;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    text-overflow: ellipsis;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.D_aG {
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.D_bh {
+    font-weight: 400;
+}
+
+.D_bf {
+    text-align: left;
+}
+
+.D_bc {
+    white-space: normal;
+}
+
+.D_aZ {
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+.D_aW {
+    text-decoration: none;
+}
+
+.D_aT {
+    color: #57585a;
+}
+
+.D_aK {
+    overflow: hidden;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    text-overflow: ellipsis;
+}
