@@ -121,6 +121,27 @@ namespace SignalRMvc.chatHubs
             }
         }
 
+        public void OneToOneChat(int sender, int reciver, string message)
+        {
+            var user = db.Member.Find(reciver);
+            if (user != null)
+            {
+                Clients.Client(user.connectionID).reciverMessage(message);
+                Clients.Caller.senderMessage(message);
+
+                Chat chat = new Chat()
+                {
+                    SenderID = sender,
+                    ReciverID = reciver,
+                    ChatText = message,
+                    ChatTime = DateTime.Now
+                };
+
+                db.Chat.Add(chat);
+                db.SaveChanges();
+            }
+        }
+
         public void SendToVIP(int sender,  string message)
         {
             Clients.Group("VIP").addMessage(message);

@@ -465,9 +465,52 @@ namespace MaiMai.Controllers
 
         public ActionResult getChat_P(int ProductPostID)
         {
-            var sellerID = db.ProductPost.Find(ProductPostID).UserID;
+            
+            var seller = db.ProductPost.Where(x => x.ProductPostID == ProductPostID).Select(x=>new {
+                ProductPostID = x.ProductPostID,
+                UserID = x.UserID,
+                UserName = x.Member.userAccount
+            });
+            
 
-            return Json('');
+            return Json(seller,JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getChatText(int ProductPostID)
+        {
+            return Json(123, JsonRequestBehavior.AllowGet); 
+        }
+
+        //點擊聊天室 抓取聊天紀錄
+        public ActionResult getAllChat_P()
+        {
+            var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var record = db.Chat.Where(m => m.ReciverID == loginID || m.SenderID == loginID).OrderByDescending(o => o.ChatTime).Select(s=>new {
+                SenderID = s.SenderID,
+                SenderName = s.Member.userAccount,
+                ReciverID = s.ReciverID,
+                ReciverName = s.Member1.userAccount,
+                ChatText = s.ChatText,
+                ChatTime = s.ChatTime,
+            }).GroupBy(g=>new { g.ReciverID, g.ReciverName, g.SenderID, g.SenderName});
+
+            return Json(record, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getAllChatRecord_P(int UserID)
+        {
+            var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var record = db.Chat.Where(m => (m.ReciverID == loginID && m.SenderID == UserID) || (m.ReciverID == UserID && m.SenderID == loginID))
+                                        .Select(s=>new {
+                                            SenderID = s.SenderID,
+                                            SenderName = s.Member.userAccount,
+                                            ReciverID = s.ReciverID,
+                                            ReciverName = s.Member1.userAccount,
+                                            ChatText = s.ChatText,
+                                            ChatTime = s.ChatTime,
+                                        });
+
+            return Json(record, JsonRequestBehavior.AllowGet);
         }
     }
 

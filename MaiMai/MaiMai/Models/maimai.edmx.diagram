@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="163d953ec33c4c5bb831c18fa71dd986" Name="Diagram1">
         <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Chat" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Chat" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Comment" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Notification" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
@@ -32,6 +32,8 @@
         <AssociationConnector Association="maimaiModel.FK_ProductPost_Tag" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Report_reportDetail" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_RequiredPost_Tag" ManuallyRouted="false" />
+        <AssociationConnector Association="maimaiModel.FK_Chat_Member" />
+        <AssociationConnector Association="maimaiModel.FK_Chat_Member1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

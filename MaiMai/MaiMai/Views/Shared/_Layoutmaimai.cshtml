@@ -137,26 +137,35 @@
 
     @RenderBody()
     <div class="chatbox d-flex justify-content-center align-content-center btn" >聊天室</div>
-    <div class="chatmsg"><div id="chatmsgClose" class="btn d-flex justify-content-end mb-2" style="height:10px">X</div>
-                                                    <div class="row">
-                                                        <div class="col-4" style="width:100%;height:375px; overflow-y:scroll;">
-                                                            <a class="btn-block" style="border: 1px solid black">1</a>
-                                                       
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <div>
-                                                                會員編號
-                                                            </div>
-                                                            <div class="d-flex justify-content-start">
-                                                                123
-                                                            </div>
-                                                            <div class="d-flex justify-content-end">
-                                                                456
-                                                            </div>
-                                                        <input type="text" style="position:fixed; bottom:5px"/>
-                                                        <a class="btn" style="position:fixed; bottom:0px;right:10px">送出</a>
-                                                        </div>
-                                                    </div>
+
+    <div class="chatmsg" style="border-radius:0 0 10% 10%">
+        <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
+        background-color: #5CADAD;
+        border-radius:10% 10% 0 0 ;
+">X</div>
+        <div class="row">
+            <div class="col-4 chatContent" id="chatNameList">
+                @*<a class="btn-block" style="border: 1px solid black">1</a>*@
+
+            </div>
+            <div id="chatroom" class="col-8">
+                @*<div>
+            會員編號
+        </div>
+        <div id="chatbody">
+            <div class="d-flex justify-content-start">
+                <span style="background-color:white; border-radius:10px;">
+                    123
+                </span>
+            </div>
+            <div class="d-flex justify-content-end">
+                456
+            </div>
+        </div>
+        <input id="chattext" type="text" style="position:fixed; bottom:5px" />
+        <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText()">送出</a>*@
+            </div>
+        </div>
     </div>
     <footer>
         <hr>
@@ -298,7 +307,7 @@
 
 
         //Michael singalR add start>>>>>
-
+        var chat = $.connection.chatHub;
         $(function () {
 
             //比對資料表Notification有無符合自己id or 群組的通知
@@ -317,7 +326,7 @@
                 e.stopPropagation();
             });
 
-            var chat = $.connection.chatHub;
+            //var chat = $.connection.chatHub;
 
             chat.client.addMessage = function (message) {
                 // 向頁面新增訊息
@@ -336,13 +345,155 @@
 
             })
 
+            //聊天室
+            $('.chatbox').on('click', function () {
+                $('.chatmsg').css('transform', 'translateY(0)')
+            })
+
+            $('#chatmsgClose').on('click', function () {
+                $('.chatmsg').css('transform', 'translateY(500px)');
+            })
+
         })
+
+        chat.client.reciverMessage = function (message) {
+            $("#chatroom").append(`
+                <div class="d-flex justify-content-start">
+                    ${message}
+                </div>
+            `)
+            $("#chattext").val("");
+            $("#chattext").focus();
+        }
+
+        chat.client.senderMessage = function (message) {
+            $("#chatroom").append(`
+                <div class="d-flex justify-content-end">
+                    ${message}
+                </div>
+            `)
+            $("#chattext").val("");
+            $("#chattext").focus();
+        }
+
+        //觸發server function
+        function submitText(reciverID) {
+            var text = $("#chattext").val();
+            var sender = getCookie("LoginID");
+            $.connection.hub.start().done(function () {
+                chat.server.oneToOneChat(sender, reciverID, text);
+            });
+        }
+
+        function getCookie(cookieName) {
+            var name = cookieName + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+
+        }
+
+        //一開始載入 先去資料庫抓歷史紀錄塞到左邊列表
+        var loginID = getCookie("LoginID");
+                $.ajax({
+                    url: "@Url.Action("getAllChat_P", "backstage")",
+                    type: "GET",
+                    success: function (record) {
+                        $(record).each(function (index, record) {
+                            //console.log(record[0].ReciverName);
+                            var UserName = `${record[0].ReciverName}`;
+                            console.log(UserName);
+                            if (record[0].SenderID == loginID) {
+                                console.log(UserName);
+                                $("#chatNameList").append(`
+                                        <div class="btn" onclick="getRecord(${record[0].ReciverID}, '${UserName}')">${record[0].ReciverName}</div>
+                                    `)
+                            }
+                            else {
+                                $("#chatNameList").append(`
+                                        <div class="btn" onclick="getRecord(${record[0].SenderID},${record[0].SenderName})">${record[0].SenderName}</div>
+                                    `)
+                            }
+                        })
+                    }
+                })
+
+        //抓資料庫 塞到右邊內容
+        function getRecord(UserID, UserName) {
+            //console.log(UserName);
+            var LoginName = getCookie("LoginName")
+            var LoginID = getCookie("LoginID")
+            $.ajax({
+                url: "@Url.Action("getAllChatRecord_P", "backstage")",
+                data: { UserID: UserID },
+                success: function (record) {
+                    $("#chatroom").html(`
+                            <div>${UserName}</div>
+                            <div id="chatbody"></div>
+                            <input id="chattext" type="text" style="position:fixed; bottom:5px" />
+                            <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${UserID})">送出</a>
+                            `)
+                    $(record).each(function (index, record) {
+                        if (record.SenderID == LoginID) {
+                            $("#chatbody").append(`
+                                <div class="d-flex justify-content-end">
+                                    ${record.ChatText}
+                                </div>
+                            `);
+                        } else {
+                            $("#chatbody").append(`
+                            <div class="d-flex justify-content-start">
+                                ${record.ChatText}
+                            </div>
+                        `);
+                        }
+                    })
+                }
+            })
+        }
+
+        //聯絡賣家
+        function displayChat(ProductPostID) {
+            $('.chatmsg').css('transform', 'translateY(0)')
+            if (ProductPostID != null || ProductPostID != "") {
+                $.ajax({
+                    url: "@Url.Action("getChat_P", "backstage")",
+                    data: { ProductPostID: ProductPostID},
+                    success: function (data) {
+                        $(data).each(function (index, data) {
+                        $("#chatroom").html(`
+                            <div>
+                                ${data.UserName}
+                            </div>
+                            <div id="chatbody">
+                                <div class="d-flex justify-content-start">
+                                    <span style="background-color:white; border-radius:10px;">
+
+                                    </span>
+                                </div>
+                            <div class="d-flex justify-content-end">
+
+                            </div>
+                        </div>
+                        <input id="chattext" type="text" style="position:fixed; bottom:5px" />
+                        <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${data.UserID})">送出</a>
+                        `);
+                        })
+                    }
+                })
 
             //Michael singalR add end<<<<<
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+
+
+
         $(function () {
             $.ajax({
                 url: "/MaimaiIndex/TagResult",
@@ -355,28 +506,23 @@
                                                                 ${item.tagName}
                                                     </div>
                                                 </a >
-                                                                                             ` )
+                                             ` )
                     })
                 }
             })
-
-            $('.chatbox').on('click', displayChat)
-
-            $('#chatmsgClose').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(500px)');
-            })
-
         });
 
-        function displayChat(ProductPostID) {
-            $('.chatmsg').css('transform', 'translateY(0)')
-            if (ProductPostID != null || ProductPostID != "") {
-                $.ajax({
-                    url: '',
-                    type: "GET",
-                    data: { ProductPostID: ProductPostID},
-                    success: function () {
 
+
+                $.ajax({
+                     url: "@Url.Action("getChatText", "backstage")",
+                    data: { ProductPostID: ProductPostID},
+                    success: function (data) {
+                        console.log(data);
+                        $("#chatbody").append(`123`);
+                        //$(data).each(function (index, data) {
+
+                        //})
                     }
                 })
             }
