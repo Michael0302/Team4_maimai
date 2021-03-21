@@ -562,7 +562,7 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                window.alert(response)
+                swal('成功', response, 'success');
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }
@@ -680,7 +680,8 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                window.alert(response)
+                swal('成功', response, 'success');
+
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }
@@ -695,7 +696,8 @@
             type: "GET",
             data: { 'data': rpID },
             success: function (response) {
-                window.alert(response)
+                swal('成功', response, 'success');
+
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }
