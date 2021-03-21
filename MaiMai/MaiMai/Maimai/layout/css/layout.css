@@ -261,6 +261,7 @@ div.tag > a.btn {
     right: 10px;
     bottom: 0px;
     font-size: 20px;
+    z-index:999;
 }
 
 .chatmsg {
@@ -272,6 +273,7 @@ div.tag > a.btn {
     bottom: 0px;
     transform: translateY(500px);
     transition: .5s;
+    z-index: 999;
 }
 
 /*聊天室窗內容*/
