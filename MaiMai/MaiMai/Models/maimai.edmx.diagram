@@ -32,6 +32,8 @@
         <AssociationConnector Association="maimaiModel.FK_ProductPost_Tag" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Report_reportDetail" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_RequiredPost_Tag" ManuallyRouted="false" />
+        <AssociationConnector Association="maimaiModel.FK_Chat_Member" />
+        <AssociationConnector Association="maimaiModel.FK_Chat_Member1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
