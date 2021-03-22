@@ -8,7 +8,7 @@
         <div class="d-flex align-content-center titleH w-100" style="margin-top:100px;">
             <h2 class="titleColor pt-3">購物車</h2>
         </div>
-        <div class="col-12">
+        <div class="col-12" id="noProduct">
             <table class="table tableCenter table-hover">
                 <thead>
                     <tr>
@@ -97,8 +97,6 @@
         changeValue();
     }
 
-    //function loadCart() {
-    //$(function () {
     function getCartList() {
 
         $.ajax({
@@ -108,6 +106,11 @@
                 if (cart == "fail") {
                     window.location.href = "/Members/Login";
                 }
+
+                if (cart.length == 0) {
+                    $("#noProduct").html(`<h2 class="mb-5" style="text-align:center">目前無任何商品</h2>`);
+                }
+                else {
                 $(cart).each(function (index, cart) {
                     $("#cartList").append(`
                         <tr>
@@ -131,6 +134,7 @@
                         </tr>
                     `)
                 })
+                }
             }
 
         })
@@ -146,18 +150,21 @@
             //processData: false,
             //contentType: false,
             success: function (status) {
-                console.log("123");
                 location.reload();
             }
         })
     }
 
+    //下單
     function CartToOrder() {
         var checkedToOrder = [];
+        if ($("td input:checked").length == 0) {
+            alert("請選擇商品");
+            return false;
+        }
         $("td input:checked").each(function () {
             checkedToOrder.push($(this).data("productid"));
         })
-        console.log(checkedToOrder);
         $.ajax({
             url: "@Url.Action("cartToOrder", "Cart")",
             type: "POST",
@@ -166,7 +173,9 @@
             //traditional: true,
             contentType: "application/json",
             success: function (status) {
-                location.reload();
+                alert("下單成功!");
+                window.location.href = "/OrderManager/OrderIndex"
+                //location.reload();
             }
         })
     }
