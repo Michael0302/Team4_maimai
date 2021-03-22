@@ -65,7 +65,7 @@
                     <img src="~/Maimai/layout/images/059-cart.svg" />  </a></div>
                     <div class="svglink dropdown" >
                     <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >@*Services*@
-                        <img src="~/Maimai/images/svg/082-bell.svg"></a>
+                        <img src="~/Maimai/images/svg/082-bell.svg"><span id="redPoint" class=""></span></a>
                                                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto"  >
                                                       @*<a class="dropdown-item" href="#">Action</a>
                                                       <a class="dropdown-item" href="#">Another action</a>
@@ -324,6 +324,7 @@
                 }else {
                     $('#notify').prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
                 }
+                $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
             };
 
 
@@ -348,20 +349,21 @@
                 $('.chatmsg').css('transform', 'translateY(500px)');
             })
 
-            //判斷通知欄裡是否有未讀訊息          
-            
+
         })
-        //$(window).on("load",function () {
-        //    console.log($("#notify div").length)
-        //    });
 
 
 
 
         //判斷通知欄是否有未讀訊息
         function isReadActive() {
-            //debugger;
-            console.log($("#notify div").length);
+            console.log($("#notify div.noti").length);
+            if ($("#notify div.noti").length > 0) {
+                $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
+            }
+            if ($("#notify div.noti").length == 0) {
+                $("#redPoint").removeClass("redPoint").html("");
+            }
         }
 
         //抓通知歷史訊息
@@ -380,6 +382,7 @@
 
                         }
                     })
+                    //判斷通知欄裡是否有未讀訊息          
                     isReadActive();
                 }                
             })
@@ -390,7 +393,10 @@
             $(event.target).removeClass("noti");
             $.ajax({
                 url: "@Url.Action("changeNotiStatus", "backstage")",
-                data: { NotificationID: NotificationID},
+                data: { NotificationID: NotificationID },
+                success: function (data) {
+                    isReadActive();
+                }
             })
         }
 

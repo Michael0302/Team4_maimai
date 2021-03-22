@@ -288,5 +288,19 @@ div.tag > a.btn {
     background-color: #BEBEBE;
 }
 
+/*通知欄紅點*/
+.redPoint{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background-color:red;
+    position:absolute;
+    right:8px;
+    top:10px;
+    color:white;
+    font-size:10px;
+    text-align:center;
+}
+
 
 /*====================================================================*/
