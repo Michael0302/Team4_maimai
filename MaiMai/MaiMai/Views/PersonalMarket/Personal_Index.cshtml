@@ -209,6 +209,13 @@
         .D_bh {
             font-weight: 600;
         }
+        .wei-grid-special0 {
+            overflow: hidden;
+            transition: box-shadow 500ms;
+        }
+        .wei-grid-special0:hover {
+            box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
+        }
     </style>
 </head>
 
@@ -339,7 +346,7 @@
                                         </div>
                                     </div>
                                     <div class="D_is">
-                                        <div class="D_io D_ahw" id="allPost">
+                                        <div class="D_io D_ahw " id="allPost">
                                             @*頭*@
                                             @*<div class="D_kZ D_kW D_il">
                                                     <div class="D_lc">
@@ -360,8 +367,8 @@
                                                     <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button">宣傳</button>
                                                 </div>*@
                                             @*委*@
-                                            <div class="D_kZ D_kW D_il">
-                                                <div class="D_lc">
+                                            <div class="D_kZ D_kW D_il wei-grid-special0">
+                                                <div class="D_lc ">
                                                     <a class="D_ih" href="/p/歡迎加入旋轉拍賣！-1071117678/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
                                                         <div class="D_lm">
                                                             <span class="D_bA D_ln D_bB"><img alt="" class="D_bE" src="~/Content/ImageCHIEN/maimaiLOGO.svg" title=""></span>
@@ -494,7 +501,10 @@
      
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script>
-
+        function CarouselClick(PostID) {
+            window.location.href = `/NewMaimaiIndex/ProdutPost?PostID=${PostID}`;
+            console.log(ProductPostID);
+        }
         //.D_sf {
         //    border - bottom: 2px solid #008f79;
         //}
@@ -505,6 +515,14 @@
             } ,function () {
              $(".greenline").css("color", "black");
             });
+           
+
+            //$(".Shadow").hover(function () {
+            //    $(".Shadow").css("box-shadow", "10px 5px 5px black")
+            //}, function () {
+            //        $(".Shadow").css("box-shadow", "10px 5px 5px green");
+            //});
+
 
         });
 
@@ -813,9 +831,9 @@
 
 
                         $("#allPost").append(`
-                            <div class="D_kZ D_kW D_il">
-                                <div class="D_lc">
-                                    <a class="D_ih" href="/p/特斯拉-1071117856/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
+                            <div class="D_kZ D_kW D_il wei-grid-special0 ">
+                                <div class="D_lc " onclick="CarouselClick(${item.ProductPostID})">
+                                    <a class="D_ih"  >
                                         <div class="D_lm">
                                             <span class="D_bA D_ln D_bB"><img alt="" class="D_bE" id="productImg" img src=../Content/ProductPostImg/${item.productImg} title=""></span>
                                                             </div>
@@ -831,7 +849,7 @@
                                                     </div>
                                         <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button" onclick="deletepost (${item.ProductPostID})">下架</button>
                                     </div>`)
-                        console.log(test)
+                        console.log(item.ProductPostID)
 
                         //$("#productName").html(item.productName)
                         //$("#productDescription").html(item.productDescription)
