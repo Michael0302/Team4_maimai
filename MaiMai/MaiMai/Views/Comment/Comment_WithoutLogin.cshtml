@@ -227,14 +227,14 @@
                         <div class="D_agM"></div>
                         <div class="D_agH">
                             <div class="D_rY  D_ix">
-                                <a class="D_sa D_rW D_sc  D_ih" href="../PersonalMarket/Personal_Index">
-                                    <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU greenline">商品</p>
+                                <a class="D_sa D_rW D_sc  D_ih"  onclick="goback()">
+                                    <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU greenline" >商品</p>
                                 </a>
                                 <a class="D_sa D_rW D_ih D_sf">
                                     <p class="  D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU g123">評價</p>
                                 </a>
                             </div>
-                            <div class="D_agK w-25">
+                            @*<div class="D_agK w-25">
                                 <a class="D_ih" data-toggle='modal' data-target='#bulid'>
                                     <div class="D_aG D_ay D_aS D_aO D_aB " type="button">上架商品</div>
                                 </a>
@@ -248,7 +248,7 @@
                                 <a class="D_ih" href="/settings/profile/">
                                     <div class="D_aG D_ay D_aS D_aO D_aB" type="button">編輯檔案</div>
                                 </a>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="D_agN">
@@ -325,7 +325,7 @@
                                     *@
                                 </a>
                             </div>
-                            <div class="D_alQ D_ba D_bc D_alQ1">
+                            @*<div class="D_alQ D_ba D_bc D_alQ1">
                                 <div class="D_alR">
                                     <div class="D_alU">
                                         <img alt="" class="D_bE D_bA D_alW" crossorigin="anonymous"
@@ -339,7 +339,7 @@
                                     </div>
                                 </div>
                                 <button class="D_aG D_ay D_aS D_aI D_az D_alT" type="button">查看點閱率</button>
-                            </div>
+                            </div>*@
                             <div class="D_vO D_ahj">
                                 <div id="AdWideMPUDesktop-container" class="D_hi D_vP">
                                     <div class="D_hj" id="AdWideMPUDesktop-label">
@@ -535,7 +535,9 @@
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
     <script>
-
+        function goback() {
+            window.location.href = `/PersonalMarket/Personal_Index_WithoutLogin?UserID=${getProductPostID}`;
+        }
 
         $(function () {
             $(".greenline").hover(function () {
@@ -550,6 +552,12 @@
 
 
         $(function () {
+
+            var getUrlString = location.href;
+            var url = new URL(getUrlString);
+            getProductPostID = url.searchParams.get("UserID");
+
+
             var test = getCookie('LoginAccount');
 
             function getCookie(cookieName) {
@@ -570,7 +578,7 @@
                 url: "/PersonalMarket/GetMember",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 
@@ -608,7 +616,7 @@
                 url: "/PersonalMarket/checkAllComment",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 
@@ -661,7 +669,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -686,7 +694,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -708,7 +716,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -730,7 +738,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -965,7 +973,7 @@
                 url: "/Comment/ViewRate",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 

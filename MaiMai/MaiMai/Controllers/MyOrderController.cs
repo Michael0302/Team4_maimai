@@ -314,7 +314,7 @@ namespace MaiMai.Controllers
             var CommentorUserID=db.Order.Find(OrderID).buyerUserID;
 
             Comment cmt = new Comment() {
-                OrderID= OrderID,
+                //OrderID= OrderID,
                 starRate= starRate,
                 commentDescription=description,
                 UserID=UserID,

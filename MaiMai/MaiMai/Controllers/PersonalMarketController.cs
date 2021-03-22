@@ -80,6 +80,9 @@ namespace MaiMai.Controllers
         }
 
        
-
+        public ActionResult Personal_Index_WithoutLogin()
+        {
+            return View();
+        }
     }
     }
