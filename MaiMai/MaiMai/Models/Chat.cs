@@ -18,6 +18,8 @@ namespace MaiMai.Models
         public Nullable<int> SenderID { get; set; }
         public Nullable<int> ReciverID { get; set; }
         public string ChatText { get; set; }
-        public Nullable<System.DateTime> ChatTime { get; set; }
+        public Nullable<System.DateTime> ChatTime { get; set; }    
+        public virtual Member Member { get; set; }
+        public virtual Member Member1 { get; set; }
     }
 }
