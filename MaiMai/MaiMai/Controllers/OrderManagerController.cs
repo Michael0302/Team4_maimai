@@ -318,9 +318,9 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = od.Order.buyerUserID
+                buyerUserAccount = od.Order.Member.userAccount
 
-            });
+            }).ToList();
 
 
             return Json(table, JsonRequestBehavior.AllowGet);
