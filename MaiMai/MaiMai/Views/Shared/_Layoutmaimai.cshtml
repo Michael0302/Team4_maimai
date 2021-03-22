@@ -491,7 +491,8 @@
                         })
                     }
                 })
-
+            }
+        };
             //Michael singalR add end<<<<<
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
@@ -517,22 +518,7 @@
                 }
             })
         });
-
-
-
-                $.ajax({
-                     url: "@Url.Action("getChatText", "backstage")",
-                    data: { ProductPostID: ProductPostID},
-                    success: function (data) {
-                        console.log(data);
-                        $("#chatbody").append(`123`);
-                        //$(data).each(function (index, data) {
-
-                        //})
-                    }
-                })
-            }
-        };
+            
 
 
     </script>
