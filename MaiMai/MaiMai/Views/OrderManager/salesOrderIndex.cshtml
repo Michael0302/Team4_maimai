@@ -362,7 +362,8 @@
             type: "GET",
             data: { 'oderdeail': orderid },
             success: function (response) {
-                window.alert(response);
+                swal('成功', response, 'success');
+
                 window.location.reload();
 
             },
@@ -382,13 +383,15 @@
             type: "GET",
             data: { 'oderdeail': orderid },
             success: function (response) {
-                window.alert(response);
+                swal('成功', response, 'success');
+
                 window.location.reload();
 
             },
             error: function (response) {
 
-                window.alert(response);
+                swal('GG', response, 'error');
+
                 window.location.reload();
             }
         });

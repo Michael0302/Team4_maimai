@@ -518,6 +518,16 @@
           <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderID" Type="Int32" />
+          <Property Name="ReciverLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderId" />
