@@ -136,11 +136,9 @@
     @RenderBody()
     <div class="chatbox d-flex justify-content-center align-content-center btn" >聊天室</div>
 
-    <div class="chatmsg" style="border-radius:0 0 10% 10%">
+    <div class="chatmsg" style="">
         <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
-        background-color: #5CADAD;
-        border-radius:10% 10% 0 0 ;
-">X</div>
+        background-color: #5CADAD;">X</div>
         <div class="row">
             <div class="col-4 chatContent" id="chatNameList">
                 @*<a class="btn-block" style="border: 1px solid black">1</a>*@
@@ -357,7 +355,6 @@
 
         //判斷通知欄是否有未讀訊息
         function isReadActive() {
-            console.log($("#notify div.noti").length);
             if ($("#notify div.noti").length > 0) {
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
             }
@@ -480,12 +477,11 @@
                 url: "@Url.Action("getAllChatRecord_P", "backstage")",
                 data: { UserID: UserID },
                 success: function (record) {
-                    console.log(record);
                     $("#chatroom").html(`
                             <div>${UserName}</div>
                             <div id="chatbody" style="height:320px;overflow-y:auto"></div>
                             <div>
-                            <input id="chattext" type="text" style="position:fixed; bottom:5px" />
+                            <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
                             <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${UserID})">送出</a>
                             </div>
                             `)
@@ -517,6 +513,12 @@
                     data: { ProductPostID: ProductPostID},
                     success: function (data) {
                         $(data).each(function (index, data) {
+                            $("#chatNameList div").each(function (index, name) {
+                                if (data.UserName == name.textContent) {
+                                    getRecord(data.UserID, data.UserName);
+                                    return false;
+                                }
+                            });
                         $("#chatroom").html(`
                             <div>
                                 ${data.UserName}
@@ -531,7 +533,7 @@
 
                             </div>
                         </div>
-                        <input id="chattext" type="text" style="position:fixed; bottom:5px" />
+                        <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
                         <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${data.UserID})">送出</a>
                         `);
                         })

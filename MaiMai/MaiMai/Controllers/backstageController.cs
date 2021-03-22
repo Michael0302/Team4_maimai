@@ -514,10 +514,10 @@ namespace MaiMai.Controllers
         {
             if (Request.Cookies["LoginID"] == null) return Content("尚未登入");
             var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var record = db.Chat.Where(m => m.ReciverID == loginID || m.SenderID == loginID).OrderByDescending(o => o.ChatTime).Select(s => new
+            var record = db.Chat.Where(m => m.ReciverID == loginID || m.SenderID == loginID).OrderByDescending(o=>o.ChatID).Select(s => new
             {
                 TargetID = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.ReciverID : s.SenderID,
-                TargetName = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.Member1.userAccount : s.Member.userAccount,
+                TargetName = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.Member1.userAccount : s.Member.userAccount,                
             }).Distinct();
 
             return Json(record, JsonRequestBehavior.AllowGet);
