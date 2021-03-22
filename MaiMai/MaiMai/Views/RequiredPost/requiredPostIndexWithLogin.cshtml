@@ -1,7 +1,5 @@
 ﻿
-@{
-    ViewBag.Title = "requiredPostIndexWithLogin";
-}
+@{ ViewBag.Title = "requiredPostIndexWithLogin"; }
 
 <head>
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
@@ -58,10 +56,10 @@
                                 <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
                             </div>
                             <div class="displayInput">
-                                <h6>貼文名稱:<input type="text" required name="postName" id="postName"></h6>
+                                <h6>貼文名稱:</h6><input type="text" required name="postName" id="postName">
                                 <h6>
-                                    貼文描述:<textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
-                                </h6>
+                                    貼文描述:
+                                </h6><textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
 
 
                                 <div>
@@ -82,8 +80,8 @@
                                 </div>
 
 
-                                <h6>價格:<input type="text" required name="estimatePrice" id="estimatePrice"></h6>
-                                <h6>數量:<input type="text" required name="require0dQTY" id="requiredQTY"></h6>
+                                <h6>價格:</h6><input type="text" required name="estimatePrice" id="estimatePrice">
+                                <h6>數量:</h6><input type="text" required name="require0dQTY" id="requiredQTY">
                                 <h6>
                                     標籤:
                                     <select id="tagSelectioninPost" required class="form-control" name="TagID">
@@ -91,7 +89,7 @@
                                     </select>
                                 </h6>
                                 @*====userID======
-                                ====posttime====*@
+                                    ====posttime====*@
 
                             </div>
 
@@ -120,7 +118,7 @@
                         </button>
                     </div>
                     <div class="modal-body" id="editPOST">
-                     
+
 
                     </div>
                     <div class="modal-footer">
@@ -157,6 +155,32 @@
 
 
 </div>
+
+
+@*=================report 立恆=====================*@
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalCenterTitle">檢舉內容</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span id="modalSpan" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                <button id="submit" onclick="saveReport()" type="button" class="btn btn-primary">送出</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*=================report =====================*@
 <script>
     $(function () {
 
@@ -174,7 +198,7 @@
         $.ajax({
             url: "/RequiredPost/allrequiredPostWithLogin",
             type: "GET",
-            data: {loginID:test},
+            data: { loginID: test },
             success: function (response) {
                 $(response).each(function (i, item) {
                     $("#allPost").append(`
@@ -199,7 +223,7 @@
                                     <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
 
-                                    
+
 
                                      <a class="btn" onclick="getEditPost(this,${item.RequiredPostID})" data-toggle='modal' data-target='#model-editPost'>編輯</a>
                              </div>
@@ -251,11 +275,11 @@
                                                                 </select>
                                                         </h6>
 
-                                    <!-- createtime 
+                                    <!-- createtime
                                     <input type="hidden" name="createdTime">
-                                     userID 
+                                     userID
                                     <input type="hidden" name="RequiredPostID" value="${item.RequiredPostID}">
-                                     requiredPostID 
+                                     requiredPostID
                                     <div style="display: flex; justify-content:flex-end;">
 
                                     </div>
@@ -325,13 +349,13 @@
     $("#pills-profile-tab").click(function () {
 
         var text = "";
-            $.ajax({
-                url: "/RequiredPost/allpoccessPost",
-                type: "GET",
-                success: function (response) {
-                    $(response).each(function (i, item) {
+        $.ajax({
+            url: "/RequiredPost/allpoccessPost",
+            type: "GET",
+            success: function (response) {
+                $(response).each(function (i, item) {
 
-                        text += `
+                    text += `
 
                                       <div class="photo">
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
@@ -364,13 +388,13 @@
                                 </div>
                           `;
 
-                        $("#pocessPostStart").html(text);
-                    })
-                }
+                    $("#pocessPostStart").html(text);
+                })
+            }
 
-            }) // ajax end
+        }) // ajax end
 
-        })// proccess tab end
+    })// proccess tab end
 
     $("#pills-contact-tab").click(function () {
         var test = getCookie('LoginID');
@@ -381,7 +405,7 @@
             data: { loginID: test },
             success: function (response) {
                 $(response).each(function (i, item) {
-                     text +=`
+                    text += `
 
                          <div class="photo">
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
@@ -422,65 +446,65 @@
 
     })// finish tab end
 
-    function submitProdouct(eler,index) {
+    function submitProdouct(eler, index) {
 
         var test = getCookie('LoginAccount');
         if (test == null) {
             alert("必須要登入才能查看留言喔");
             window.location.href = `/Members/Login`;
         }
-        var form = $(`#Commentform${ i }`)
+        var form = $(`#Commentform${i}`)
         var data = new FormData(form);
 
-            $.ajax({
-                url: "/RequiredPost/commemtProductPost",
-                type: "Post",
-                data: data,
-                processData: false,
-                contentType:false,
-                success: function (response) {
-                    window.alert(response)
-                    window.location.reload("/RequiredPost/requiredPostIndex")
+        $.ajax({
+            url: "/RequiredPost/commemtProductPost",
+            type: "Post",
+            data: data,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                window.alert(response)
+                window.location.reload("/RequiredPost/requiredPostIndex")
 
-                }
-            })
-     }//end  of submit product
+            }
+        })
+    }//end  of submit product
 
     function tag() {
-            var txt = ""
-            $.ajax({
-                url: "/RequiredPost/getAllTag",
-                type: "GET",
-                success: function (response) {
-                    $(response).each(function (i, item) {
-                       // txt += <a>itrm.tagid </a>
-                        txt += `<option value=${item.TagID}>${item.tagName}</option>`
-                        $("h6>select").html(txt)
-                    })
-                }
-            })
+        var txt = ""
+        $.ajax({
+            url: "/RequiredPost/getAllTag",
+            type: "GET",
+            success: function (response) {
+                $(response).each(function (i, item) {
+                    // txt += <a>itrm.tagid </a>
+                    txt += `<option value=${item.TagID}>${item.tagName}</option>`
+                    $("h6>select").html(txt)
+                })
+            }
+        })
 
     }// end tag function
 
 
     function getCookie(cookieName) {
-            var name = cookieName + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1);
-                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-            }
-            return "";
+        var name = cookieName + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1);
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
 
     }
 
-    function checkCommentList(eler,index) {
+    function checkCommentList(eler, index) {
 
-      
+
         var data = $(eler).attr("name");
         var inner = "";
-       
+
 
         $.ajax({
             url: "/RequiredPost/checkAllComment",
@@ -494,7 +518,7 @@
                           <div class="photo">  <img src="../Content/resource_nico/images/${item.productImg}"/> </div>
                           <div class="post-text">
                                 <div class="d-flex justify-content-between">
-                                    <h3 id="postName${i}">${item.productName}</h3>
+                                   <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"> <h3 id="postName${i}">${item.productName}</h3></a>
                                     <h6>${item.county}  <span>${item.district}</span></h6>
                                      </div>
                                 <h6 id="userName${i}">賣家:${item.userAccount}</h6>
@@ -538,27 +562,27 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                window.alert(response)
+                swal('成功', response, 'success');
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }
         })
 
     }// end send required post
-    
 
-     
+
+
     function getEditPost(eler, id) {
 
         var text = "";
         $.ajax({
             url: "/RequiredPost/getRequireDetail",
             type: "GET",
-            data:{ 'odID': id },
+            data: { 'odID': id },
             success: function (item) {
-          
-               
-                    text = `
+
+
+                text = `
                     <form id="editform" class="formframe mx-auto" enctype="multipart/form-data">
                             <div class="displayimg">
                                 <div class="photo"><img id="productimg" src="../content/resource_nico/images/徵求台post/${item.postImg}"></div>
@@ -585,7 +609,7 @@
                                             當面交貨/地點
                                         </label>
                                     </div>
-                                      <div id="city"> 
+                                      <div id="city">
                                         <div>
                                             <select><option name="county"  value="${item.county}">${item.county}</option></select>
                                         </div>
@@ -594,7 +618,7 @@
                                         </div>
                                         </div>
                                 </div>
- 
+
 
                                 <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${item.estimatePrice}"></h6>
                                 <h6>數量:<input type="text" required name="requiredQTY" id="requiredqty" value="${item.requiredQTY}"></h6>
@@ -610,16 +634,16 @@
                         </form>
 
                     </div>
-                    
+
 
 
                   `;
-             
+
                 $('#editPOST').html(text);
             }
         })
 
-     }
+    }
 
     function changeDis() {
 
@@ -627,7 +651,7 @@
             el: ".my-selector-c",
             elCounty: ".county", // 在 el 裡查找 dom
             elDistrict: ".district", // 在 el 裡查找 dom
-          
+
         });
 
         $(`#city`).addClass("my-selector-c");
@@ -656,12 +680,13 @@
             processData: false,
             contentType: false,
             success: function (response) {
-                window.alert(response)
+                swal('成功', response, 'success');
+
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }
         })
-          
+
     }
 
     function deleteRequireDetail() {
@@ -671,11 +696,85 @@
             type: "GET",
             data: { 'data': rpID },
             success: function (response) {
-                window.alert(response)
+                swal('成功', response, 'success');
+
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }
         })
     }
-    
+    //========== report script=====================
+
+    function report() {
+        $.ajax({
+            url: "@Url.Action("getReport","MyOrder")",
+            data: {},
+            type: "GET",
+            success: function (result) {
+                $(".modal-body").html(`
+                <!-- Default dropright button -->
+<p>
+  <a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    檢舉標籤
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+                <div  id="reportTags"class="btn-group">
+
+</div>
+                </div>
+                    </div>
+                    </div>
+                 </div>
+
+                <div id="warning" class="align-content-center">
+                <label ><h3>內容描述</h3></label>
+                </div>
+                <div>
+                <textarea id="reportTXT" rows="15" cols="60"></textarea>
+                </div>
+`);
+
+                $(result).each(function (index, item) {
+                    $("#reportTags").append(`
+<input type="radio"class="btn btn-info " value="${index}"style="border-radius:50px"id="btnradio${index}" required>
+  <label  for="btnradio${index}" class="btn btn-info " value="${index}"style="border-radius:50px" onclick="changeColor()" >
+
+${item.reason}</label>
+                `)
+                })
+
+            }
+        })
+    }
+    //
+    function changeColor() {
+        $(event.target).removeClass("btn-info").addClass("btn-success").siblings().removeClass("btn-success").addClass("btn-info");
+    };
+
+    function saveReport() {
+        //var reportTAG = new Array();
+        //$('input:checked').each(function (i) { reportTAG[i] = $(this).val(); });
+        console.log(`reportTAG=$('input:checked').val()`);
+        var reportTAG = $('input:checked').val() * 1 + 1;
+        if (reportTAG == "NaN") {
+            return false;
+        }
+        $.ajax({
+            url: "@Url.Action("saveReport","MyOrder")",
+            data: { reportTXT: $("#reportTXT").val(), reportTAG: reportTAG  },
+            type: "POST",
+            success: function (result) {
+//                alert("送出成功!!");
+                swal('成功', '送出成功', 'success');
+                setTimeout(function () { $(".close").click() }, 700);
+            },
+            error: function(){
+                swal("失敗","檢舉標籤為必要勾選!!",'error');
+            }
+        })
+    }
+
+
+    //========== report script=====================
 </script>
