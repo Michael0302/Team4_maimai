@@ -241,6 +241,7 @@
     <Compile Include="Models\Tag.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\CommentViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
     <Compile Include="Models\ViewModel\MemberViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderViewModel.cs" />
@@ -360,6 +361,7 @@
     <Content Include="Maimai\images\svg\maimaiLOGO.svg" />
     <Content Include="Maimai\images\svg\maimaiTOPLOGO.svg" />
     <Content Include="Maimai\layout\css\layout.css" />
+    <Content Include="Maimai\layout\css\Productpost.css" />
     <Content Include="Maimai\layout\css\style_1.css" />
     <Content Include="Maimai\layout\images\059-cart.svg" />
     <Content Include="Maimai\layout\images\10-1-1-875x500.jpg" />
@@ -555,7 +557,6 @@
     <Content Include="Views\Members\fuck.cshtml" />
     <Content Include="Views\Members\Login.cshtml" />
     <Content Include="Views\Members\test.cshtml" />
-    <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\Shared\_LayoutPage1.cshtml" />
     <Content Include="Views\MyAccount\myAccountIndex.cshtml" />
     <Content Include="Views\MyOrder\myOrder.cshtml" />
@@ -570,8 +571,9 @@
     <Content Include="Views\OrderManager\salesOrderIndex.cshtml" />
     <Content Include="Views\Cart\cartIndex.cshtml" />
     <Content Include="Views\googleMap\Index.cshtml" />
-    <Content Include="Views\Comment\Comment.cshtml" />
     <Content Include="Views\NewMaimaiIndex\ProdutPost.cshtml" />
+    <Content Include="Views\Comment\Comment.cshtml" />
+    <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

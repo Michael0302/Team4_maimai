@@ -27,6 +27,16 @@ namespace MaiMai.Controllers
 
             return  "註冊成功" ; /* RedirectToAction("Homepage", "HomePage_C");*/
         }
+
+
+
+
+
+
+
+
+
+
         //public ActionResult test(Member mb)
         //{
         //    //if (ModelState.IsValid == false)
