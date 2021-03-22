@@ -47,6 +47,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AllPay.Payment.Integration, Version=1.0.0.11, Culture=neutral, PublicKeyToken=afb33c1e6a3b1bbd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Payment_Net-master\AioSDK\AllPay.Payment.Integration.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.12.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.12.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
@@ -165,6 +169,9 @@
     <Compile Include="Models\Cart.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Chat.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Comment.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
@@ -187,6 +194,9 @@
     </Compile>
     <Compile Include="Models\MaimaiIndexViewModel\MaimaiIndexViewModel.cs" />
     <Compile Include="Models\Member.cs">
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Notification.cs">
       <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
@@ -234,6 +244,19 @@
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\65K2.jfif" />
     <Content Include="Content\ProductPostImg\iphone11.png" />
+    <Content Include="Content\ProductPostImg\member\嘉慶.jfif" />
+    <Content Include="Content\ProductPostImg\member\嘉文.jfif" />
+    <Content Include="Content\ProductPostImg\member\大衛.jfif" />
+    <Content Include="Content\ProductPostImg\member\建寧.jfif" />
+    <Content Include="Content\ProductPostImg\member\惠妹.jfif" />
+    <Content Include="Content\ProductPostImg\member\捷克.jfif" />
+    <Content Include="Content\ProductPostImg\member\新春.jfif" />
+    <Content Include="Content\ProductPostImg\member\旗山.jfif" />
+    <Content Include="Content\ProductPostImg\member\月眉.jfif" />
+    <Content Include="Content\ProductPostImg\member\杰倫.jfif" />
+    <Content Include="Content\ProductPostImg\member\翔耀.jfif" />
+    <Content Include="Content\ProductPostImg\member\茲達.jfif" />
+    <Content Include="Content\ProductPostImg\member\阿娥.jfif" />
     <Content Include="Content\ProductPostImg\nini.jpg" />
     <Content Include="Content\ProductPostImg\土豆.jfif" />
     <Content Include="Content\ProductPostImg\小藥丸藍色.jfif" />
@@ -301,6 +324,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\chngstar.gif" />
+    <Content Include="images\nike shoes.jpg" />
+    <Content Include="images\star.gif" />
     <Content Include="Maimai\images\image jpeg\490db2640e04a996eea2652b0dc0b144.jpg" />
     <Content Include="Maimai\images\image jpeg\55da87e84d72586b3cfb9249408c45f0.jpg" />
     <Content Include="Maimai\images\image jpeg\82977e50d6548e1ea6e0972d11ea563e.jpg" />
@@ -523,6 +549,7 @@
     <Content Include="Views\MyOrder\report.cshtml" />
     <Content Include="Views\MyOrder\shoppingCart.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\MyOrder\commentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
