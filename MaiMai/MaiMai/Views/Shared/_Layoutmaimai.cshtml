@@ -112,7 +112,7 @@
                     <div class="dropdown-divider"style="margin-bottom:unset;"></div>
                     <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人賣場管理</h5></div>
                     @Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })
-                    @Html.ActionLink("賣場交易訂單", "salesOrderIndex", "OrderManage", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("賣場交易訂單", "salesOrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
                     @Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "dropdown-item" })
 
 
@@ -491,7 +491,8 @@
                         })
                     }
                 })
-
+            }
+        };
             //Michael singalR add end<<<<<
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
@@ -508,8 +509,8 @@
                     $(tagsearch).each(function (i, item) {
                         $("#tag-search-dropdown").append(`
                                                     <a class="Ajax-search-dropdown-img mx-3 mb-3" onclick="tagonclick(${item.TagID})" >
-                                                            <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
-                                                                ${item.tagName}
+                                                            <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/${item.TagImg})">
+                                                                <div style="color:#FCFCFC;font-weight:bold;">${item.tagName}</div>
                                                     </div>
                                                 </a >
                                              ` )
@@ -517,22 +518,7 @@
                 }
             })
         });
-
-
-
-                $.ajax({
-                     url: "@Url.Action("getChatText", "backstage")",
-                    data: { ProductPostID: ProductPostID},
-                    success: function (data) {
-                        console.log(data);
-                        $("#chatbody").append(`123`);
-                        //$(data).each(function (index, data) {
-
-                        //})
-                    }
-                })
-            }
-        };
+            
 
 
     </script>
