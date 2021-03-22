@@ -204,6 +204,13 @@
             padding: 16px;
             margin-top: 36px;
         }
+        .D_hi {
+            padding: 12px 0;
+            margin: 20px;
+        }
+        .D_bh {
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -220,8 +227,8 @@
                         <div class="D_agM"></div>
                         <div class="D_agH">
                             <div class="D_rY  D_ix">
-                                <a class="D_sa D_rW D_sc  D_ih" href="../PersonalMarket/Personal_Index">
-                                    <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU greenline">商品</p>
+                                <a class="D_sa D_rW D_sc  D_ih"  onclick="goback()">
+                                    <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU greenline" >商品</p>
                                 </a>
                                 <a class="D_sa D_rW D_ih D_sf">
                                     <p class="  D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU g123">評價</p>
@@ -359,7 +366,7 @@
                             <div class="D_alF D_bE D_bG">
                                 <div class="D_alG">
                                     <h3 class="D_hx D_hF D_hL D_hO D_hw">評價</h3>
-                                    <div class="D_nM D_alP" role="dropdown">
+                                    @*<div class="D_nM D_alP" role="dropdown">
                                         <button class="D_gZ D_eB D_hn D_hi D_eG D_nN" type="button">
                                             <span class="D_bR D_cb D_ce D_ch D_cj D_cm D_co D_ob D_bL">Sort by</span>
                                             <div class="D_nP">
@@ -371,10 +378,10 @@
                                                       fill="#2c2c2d"></path>
                                             </svg>
                                         </button>
-                                    </div>
+                                    </div>*@
                                 </div>
                                 <div class="D_alI">
-                                    <div class="D_alJ">
+                                    @*<div class="D_alJ">
                                         <label class="D_oH D_oG D_oI">
                                             <input class="D_oK"
                                                    type="radio" value="0" checked="">
@@ -382,7 +389,7 @@
                                                 <span class="D_bR D_cb D_ce D_ch D_ck D_cm D_co D_bK">All</span>
                                             </div>
                                         </label>
-                                    </div>
+                                    </div>*@
                                     <div class="D_alK">
                                         <div class="D_alQ">
                                             <h1 class="D_hx D_hF D_hL D_hO D_hP D_hu" id="TotalRate"> </h1>&nbsp;&nbsp;
@@ -528,7 +535,9 @@
             integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
             crossorigin="anonymous"></script>
     <script>
-
+        function goback() {
+            window.location.href = `/PersonalMarket/Personal_Index_WithoutLogin?UserID=${getProductPostID}`;
+        }
 
         $(function () {
             $(".greenline").hover(function () {
@@ -543,6 +552,12 @@
 
 
         $(function () {
+
+            var getUrlString = location.href;
+            var url = new URL(getUrlString);
+            getProductPostID = url.searchParams.get("UserID");
+
+
             var test = getCookie('LoginAccount');
 
             function getCookie(cookieName) {
@@ -563,7 +578,7 @@
                 url: "/PersonalMarket/GetMember",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 
@@ -601,7 +616,7 @@
                 url: "/PersonalMarket/checkAllComment",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 
@@ -654,7 +669,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -679,7 +694,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -701,7 +716,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -723,7 +738,7 @@
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -958,7 +973,7 @@
                 url: "/Comment/ViewRate",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 

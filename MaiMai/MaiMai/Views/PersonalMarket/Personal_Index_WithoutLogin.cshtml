@@ -206,6 +206,9 @@
         .g123 {
             color: #008f79;
         }
+        .D_bh {
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -225,7 +228,7 @@
                                 <a class="D_sa D_rW D_sc D_sf D_ih" >
                                     <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU g123" >商品</p>
                                 </a>
-                                <a class="D_sa D_rW D_ih" href="../Comment/Comment">
+                                <a class="D_sa D_rW D_ih" onclick="goback()">
                                     <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline">評價</p>
                                 </a>
                             </div>
@@ -323,7 +326,7 @@
                                     <div class="D_aht">
                                         <h3 class="D_bi D_bq D_bw D_bz D_bh">商品</h3>
                                         <div class="D_ahy">
-                                            <form>
+                                            @*<form>
                                                 <div class="D_hA">
                                                     <div class="D_hB D_hm D_ahu">
                                                         <div class="D_hE">
@@ -332,7 +335,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </form>*@
                                         </div>
                                     </div>
                                     <div class="D_is">
@@ -491,7 +494,9 @@
      
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script>
-
+        function goback() {
+            window.location.href = `/Comment/Comment_WithoutLogin?UserID=${getProductPostID}`;
+        }
         //.D_sf {
         //    border - bottom: 2px solid #008f79;
         //}
@@ -519,13 +524,16 @@
                 return "";
 
             }
-
+            var getUrlString = location.href;
+            var url = new URL(getUrlString);
+            getProductPostID = url.searchParams.get("UserID");
+          
             $.ajax({
 
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -756,11 +764,11 @@
             //console.log(test)
             $.ajax({
 
-                type: "POST",
+                type: "GET",
                 url: "/PersonalMarket/GetMember",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 
@@ -798,7 +806,7 @@
                 url: "/PersonalMarket/checkAllComment",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 
@@ -827,7 +835,7 @@
                                         <button class="D_aG D_ay D_aT D_aY D_lA  D_kY" type="button"><svg class="D_lB " height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1c3.852 0 7 3.148 7 7 0 3.858-2.067 7.513-5.44 10.724C16.158 21.01 13.04 23 12 23s-4.158-1.99-6.56-4.276C2.067 15.514 0 11.858 0 8c0-3.852 3.148-7 7-7 1.917 0 3.688.79 5 2.13C13.312 1.79 15.083 1 17 1zm0 2c-1.677 0-3.205.854-4.176 2.267a1 1 0 0 1-1.648 0C10.205 3.854 8.676 3 7 3 4.252 3 2 5.252 2 8c0 3.215 1.804 6.406 4.82 9.276C8.86 19.218 11.652 21 12 21c.347 0 3.14-1.782 5.18-3.724C20.197 14.406 22 11.215 22 8c0-2.748-2.252-5-5-5z" fill="#57585a"></path></svg><span class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_bV">&nbsp;</span></button>
                                         <button class="D_aG D_ay D_aS D_aY D_lA D_kY" type="button"><img alt="" class="D_bE D_bA D_lB" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/listing-insight-f5374f8a0bd79934d0aa3cbe73d07584.svg" title=""></button>
                                                     </div>
-                                        <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button" onclick="deletepost (${item.ProductPostID})">下架</button>
+                                        <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button"   >加入購物車</button>
                                     </div>`)
                         console.log(test)
 
