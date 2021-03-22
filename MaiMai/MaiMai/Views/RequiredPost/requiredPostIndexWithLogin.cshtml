@@ -202,7 +202,7 @@
             success: function (response) {
                 $(response).each(function (i, item) {
                     $("#allPost").append(`
-                         <div class="row mx-auto" style="border-bottom: 3px dashed gray;" id="start">
+                         <div class="row mx-auto shadow-sm" style="border-bottom: 3px dashed gray;" id="start">
                             <div class="photo">
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -513,7 +513,7 @@
             success: function (response) {
                 $(response).each(function (i, item) {
                     inner += `
-                         <div class="row mx-auto" style="border-bottom: 3px dashed gray;" id="start">
+                         <div class="row mx-auto shadow-sm" style="border-bottom: 3px dashed gray;" id="start">
 
                           <div class="photo">  <img src="../Content/resource_nico/images/${item.productImg}"/> </div>
                           <div class="post-text">
