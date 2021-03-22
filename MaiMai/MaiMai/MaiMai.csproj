@@ -241,6 +241,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Cart_css\Cart.css" />
     <Content Include="Content\cssCHIEN\personalMarket.css" />
+    <Content Include="Content\ImageCHIEN\maimai.png" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\65K2.jfif" />
     <Content Include="Content\ProductPostImg\iphone11.png" />
