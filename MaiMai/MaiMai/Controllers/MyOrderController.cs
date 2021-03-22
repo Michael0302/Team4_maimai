@@ -293,31 +293,30 @@ namespace MaiMai.Controllers
         public ActionResult getComment(int OrderDetailID)
             //userID買家-評論者  commentorUserID賣家-被評論者
         {
-            var UserID = db.OrderDetail.Find(OrderDetailID).SellerID; //PK才可以用find
-            var img = db.Member.Find(UserID).profileImg;
+            var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID; //PK才可以用find,SellerID=14
+            var img = db.Member.Find(SellerID).profileImg;
 
-            var commentDetail = db.Comment.Where(t => t.UserID == UserID).Select(s => new
+            var commentDetail = db.Comment.Where(t => t.CommentorUserID == SellerID).Select(s => new
             {
                 starRate = s.starRate,  
-                img=img, //nvarchar
+                img=img, 
             }).ToList();
-
-            
             return Json(commentDetail, JsonRequestBehavior.AllowGet);
         }
 
         maimaiRepository<Comment> cmdb = new maimaiRepository<Comment>();
-        public ActionResult saveComment(int starRate,string description)
+        public ActionResult saveComment(int OrderDetailID, int starRate,string description)
         {
-            var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var OrderID = db.OrderDetail.Where(x=>x.SellerID==UserID).Select(x=>new { OrderID=x.OrderID});
-            var CommentorUserID=db.Order.Find(OrderID).buyerUserID;
+            
+            var UserID = 1;// Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var OrderID = db.OrderDetail.Find(OrderDetailID).OrderID;
+            var CommentorUserID=db.Comment.Find(UserID).CommentorUserID;
 
             Comment cmt = new Comment() {
-                OrderID= OrderID,
                 starRate= starRate,
                 commentDescription=description,
                 UserID=UserID,
+                OrderID= OrderID,
                 CommentorUserID= CommentorUserID,
             };
             cmdb.Create(cmt);

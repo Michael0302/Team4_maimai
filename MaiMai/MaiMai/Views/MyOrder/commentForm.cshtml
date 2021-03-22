@@ -27,7 +27,7 @@
                 </div>
                 <div id="modal-body" class="modal-body" style="margin-bottom:30px">
                     <div style="text-align:center" class="mb-5">
-                        <img src="旗山.jfif" />
+                        <img src="" />
                     
                     </div>
                     <h4>請問您對這次交易的滿意度為 :</h4>
@@ -97,7 +97,7 @@
         function getComment() {
         $.ajax({
             url: "@Url.Action("getComment","MyOrder")",
-            data: { OrderDetailID:23},
+            data: { OrderDetailID:35},
             type: "GET",
             success: function (result) {
                 var CNT = result.length;
@@ -124,7 +124,7 @@
             type: "POST",
             success: function (result) {
             swal('成功', '感謝您寶貴的意見', 'success');
-            setTimeout(function () { $(".close").click() }, 700);
+                setTimeout(function () { $(".close").click() }, 700);
             },
             error: function(){
             swal("失敗","星星滿意度為必要勾選!!",'error');

@@ -245,6 +245,9 @@
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\65K2.jfif" />
     <Content Include="Content\ProductPostImg\iphone11.png" />
+    <Content Include="Content\ProductPostImg\member\chngstar.jfif" />
+    <Content Include="Content\ProductPostImg\member\nike shoes.jfif" />
+    <Content Include="Content\ProductPostImg\member\star.jfif" />
     <Content Include="Content\ProductPostImg\member\嘉慶.jfif" />
     <Content Include="Content\ProductPostImg\member\嘉文.jfif" />
     <Content Include="Content\ProductPostImg\member\大衛.jfif" />
