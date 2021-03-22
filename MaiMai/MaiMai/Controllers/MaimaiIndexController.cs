@@ -15,7 +15,8 @@ namespace MaiMai.Controllers
             var tagList = db.Tag.Select(m => new MaimaiIndexViewModel()
             {
                 TagID = m.TagID,
-                tagName = m.tagName
+                tagName = m.tagName,
+                TagImg = m.TagImg,
 
             }).ToList();
             return Json(tagList, JsonRequestBehavior.AllowGet);

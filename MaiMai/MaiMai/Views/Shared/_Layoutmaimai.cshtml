@@ -491,7 +491,8 @@
                         })
                     }
                 })
-
+            }
+        };
             //Michael singalR add end<<<<<
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
@@ -508,8 +509,8 @@
                     $(tagsearch).each(function (i, item) {
                         $("#tag-search-dropdown").append(`
                                                     <a class="Ajax-search-dropdown-img mx-3 mb-3" onclick="tagonclick(${item.TagID})" >
-                                                            <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/運動.jpg)">
-                                                                ${item.tagName}
+                                                            <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/${item.TagImg})">
+                                                                <div style="color:#FCFCFC;font-weight:bold;">${item.tagName}</div>
                                                     </div>
                                                 </a >
                                              ` )
@@ -517,22 +518,7 @@
                 }
             })
         });
-
-
-
-                $.ajax({
-                     url: "@Url.Action("getChatText", "backstage")",
-                    data: { ProductPostID: ProductPostID},
-                    success: function (data) {
-                        console.log(data);
-                        $("#chatbody").append(`123`);
-                        //$(data).each(function (index, data) {
-
-                        //})
-                    }
-                })
-            }
-        };
+            
 
 
     </script>
