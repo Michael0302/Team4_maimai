@@ -61,171 +61,183 @@
             <div id="mainListDiv" class="main_list" style="position: absolute; right:20% ;">
                 <div class="navlinks d-flex mt-3">
                     <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
-                    <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@  
-                    <img src="~/Maimai/layout/images/059-cart.svg" />  </a></div>
-                    <div class="svglink dropdown" >
-                    <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >@*Services*@
-                        <img src="~/Maimai/images/svg/082-bell.svg"><span id="redPoint" class=""></span></a>
-                                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto"  >
-                                                      @*<a class="dropdown-item" href="#">Action</a>
-                                                      <a class="dropdown-item" href="#">Another action</a>
-                                                      <a class="dropdown-item" href="#">Something else here</a>*@
-                                                  </div></div>
-                    @*<li><a href="#">Contact</a></li>*@
-                <div class="dropdown mt-1">
-                    @*登入*@
-                    @*@if (Request.Cookies["LoginName"] != null)
-        {
-            <img  src="~/Maimai/images/svg/073-location2.svg" />
-        }*@
-                    <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
-                        <svg width="28" height="28" viewBox="0 0 24 24" >
-                            <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
-                                <path id="Path_140" data-name="Path 140"
-                                      d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
-                                      fill="#7B7B7B"></path>
-                            </g>
-                        </svg>
-                    </button> @*會員圖示 end*@
+                    <div class="svglink">
+                        <a href="../../Cart/cartIndex">
+                            @*Portfolio*@
+                        <img src="~/Maimai/layout/images/059-cart.svg" />
+                    </a>
+                </div>
+                <div class="svglink dropdown">
+                    <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @*Services*@
+                    <img src="~/Maimai/images/svg/082-bell.svg"><span id="redPoint" class=""></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto">
+                    @*<a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>*@
+                </div>
+            </div>
+            @*<li><a href="#">Contact</a></li>*@
+            <div class="dropdown mt-1">
+                @*登入*@
+                @*@if (Request.Cookies["LoginName"] != null)
+                    {
+                        <img  src="~/Maimai/images/svg/073-location2.svg" />
+                    }*@
+                <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
+                    <svg width="28" height="28" viewBox="0 0 24 24">
+                        <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
+                            <path id="Path_140" data-name="Path 140"
+                                  d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
+                                  fill="#7B7B7B"></path>
+                        </g>
+                    </svg>
+                </button> @*會員圖示 end*@
 
-                    @*登入end*@
-                    @if (Request.Cookies["LoginName"] == null)
-                    {
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLogin">
-                            <li> @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "dropdown-item" })</li>
-                            <li>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "dropdown-item" })</li>
-                        </ul>
-                    }
-                    else
-                    {
-                        @*<span class=" mx-2">
-            @Request.Cookies["LoginName"].Value
-            </span>*@
+                @*登入end*@
+                @if (Request.Cookies["LoginName"] == null)
+                {
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLogin">
+                        <li> @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "dropdown-item" })</li>
+                    </ul>
+                }
+                else
+                {
+                    @*<span class=" mx-2">
+                        @Request.Cookies["LoginName"].Value
+                        </span>*@
 
                     <div class="dropdown-menu" style="padding-top:unset;">
-                    <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人帳戶管理</h5></div>
-                    @Html.ActionLink("個人資料", "myAccountIndex", "MyAccount", null, new { @class = "dropdown-item" })
-                    @Html.ActionLink("我的訂單", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
-                   
+                        <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人帳戶管理</h5></div>
+                        @Html.ActionLink("個人資料", "myAccountIndex", "MyAccount", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("我的訂單", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
 
 
-                    <div class="dropdown-divider"style="margin-bottom:unset;"></div>
-                    <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人賣場管理</h5></div>
-                    @Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })
-                    @Html.ActionLink("賣場交易訂單", "salesOrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
-                    @Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "dropdown-item" })
+
+                        <div class="dropdown-divider" style="margin-bottom:unset;"></div>
+                        <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人賣場管理</h5></div>
+                        @Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("賣場交易訂單", "salesOrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "dropdown-item" })
 
 
-                    <div class="dropdown-divider"></div>
-                    @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
-                    {
-                        @Html.ActionLink("後台管理員", "backstageIndex", "backstage", null, new { @class = "dropdown-item" })
-                         }
-                    @Html.ActionLink("登出", "Logout", "Members", null, new { @class = "dropdown-item" , style = "font-weight:bolder;color:#FFB5B5" })
-                </div>
+                        <div class="dropdown-divider"></div>
+                        @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
+                        {
+                            @Html.ActionLink("後台管理員", "backstageIndex", "backstage", null, new { @class = "dropdown-item" })
+                        }
+                        @Html.ActionLink("登出", "Logout", "Members", null, new { @class = "dropdown-item", style = "font-weight:bolder;color:#FFB5B5" })
+                    </div>
 
 
-                    
-                    }
-                </div>
-                </div>
-            </div>
-        </div>
-    </nav>
 
-    @RenderBody()
-    <div class="chatbox d-flex justify-content-center align-content-center btn" >聊天室</div>
-
-    <div class="chatmsg" style="">
-        <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
-        background-color: #5CADAD;">X</div>
-        <div class="row">
-            <div class="col-4 chatContent" id="chatNameList">
-                @*<a class="btn-block" style="border: 1px solid black">1</a>*@
-
-            </div>
-            <div id="chatroom" class="col-8">
-                @*<div>
-            會員編號
-        </div>
-        <div id="chatbody">
-            <div class="d-flex justify-content-start">
-                <span style="background-color:white; border-radius:10px;">
-                    123
-                </span>
-            </div>
-            <div class="d-flex justify-content-end">
-                456
-            </div>
-        </div>
-        <input id="chattext" type="text" style="position:fixed; bottom:5px" />
-        <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText()">送出</a>*@
+                }
             </div>
         </div>
     </div>
-    <footer>
-        <hr>
-        <div class=" d-flex mt-1 mb-2" id="footer">
-            <div class="col-1">
-                <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
-            </div>
-            <div class="col-3" style="position: absolute; left: 20%;">
-                <h5>關於我們</h5>
-                <select class="langSelect">
-                    <option selected>Team 4</option>
-                    <option value="組長">黃士豪</option>
-                    <option value="技術長">蕭祥耀</option>
-                    <option value="組員">徐家雯</option>
-                    <option value="組員">黃建寧</option>
-                    <option value="組員">黃立恆</option>
-                </select><br>
-            </div>
-                <div class="col-6"style="position: absolute; left: 40%;">
-                    <h5>歡迎企業合作</h5>
-                    <a href="#">經銷商合作</a><br>
-                    <a href="#">全球保固</a><br>
-                    <a href="#">招募新夥伴</a><br>
-            </div>
-                <div class="col-2" style="position: absolute; left: 80%;">
-                    <h5>語言</h5>
-                    <select class="langSelect">
-                        <option selected>繁體中文</option>
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="fr">Français</option>
-                        <option value="de">Deutsch</option>
-                        <option value="cn">简体中文</option>
-                        <option value="jp">日本語</option>
-                        <option value="ru">Русский</option>
-                    </select><br>
-                    <a href="#">客戶服務中心</a>
-            </div>
+</div>
+</nav>
+
+@RenderBody()
+<div class="chatbox d-flex justify-content-center align-content-center btn">聊天室</div>
+
+<div class="chatmsg" style="">
+    <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
+        background-color: #5CADAD;">X</div>
+    <div class="row">
+        <div class="col-4 chatContent" id="chatNameList">
+            @*<a class="btn-block" style="border: 1px solid black">1</a>*@
+
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-            crossorigin="anonymous"></script>
+        <div id="chatroom" class="col-8">
+        </div>
+    </div>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+@*系統通知modal>>>>>>>>>>>>>*@
+<div class="modal fade" id="sysInfo" tabindex="-1" role="dialog" aria-labelledby="sysInfoTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sysInfoTitle">系統通知</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="sysInfobody">
 
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            </div>
+            
+        </div>
+    </div>
+</div>
+    @*<<<<<<<<<<<<<<<<系統通知modal*@
+<footer>
+    <hr>
+    <div class=" d-flex mt-1 mb-2" id="footer">
+        <div class="col-1">
+            <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
+        </div>
+        <div class="col-3" style="position: absolute; left: 20%;">
+            <h5>關於我們</h5>
+            <select class="langSelect">
+                <option selected>Team 4</option>
+                <option value="組長">黃士豪</option>
+                <option value="技術長">蕭祥耀</option>
+                <option value="組員">徐家雯</option>
+                <option value="組員">黃建寧</option>
+                <option value="組員">黃立恆</option>
+            </select><br>
+        </div>
+        <div class="col-6" style="position: absolute; left: 40%;">
+            <h5>歡迎企業合作</h5>
+            <a href="#">經銷商合作</a><br>
+            <a href="#">全球保固</a><br>
+            <a href="#">招募新夥伴</a><br>
+        </div>
+        <div class="col-2" style="position: absolute; left: 80%;">
+            <h5>語言</h5>
+            <select class="langSelect">
+                <option selected>繁體中文</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="cn">简体中文</option>
+                <option value="jp">日本語</option>
+                <option value="ru">Русский</option>
+            </select><br>
+            <a href="#">客戶服務中心</a>
+        </div>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    <script src="~/signalr/hubs"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+
+<script src="~/signalr/hubs"></script>
+
+<script>
 
         //$("#inputsearch").change(function () {
         //    //var availabletags="";
@@ -309,9 +321,11 @@
             //比對資料表Notification有無符合自己id or 群組的通知
             getNotiRecord()
 
-            $("body").on('click', '[data-stopPropagation]', function (e) {
-                e.stopPropagation();
-            });
+
+            //取消bubble事件(點通知 通知欄不會縮小)
+            //$("body").on('click', '[data-stopPropagation]', function (e) {
+            //    e.stopPropagation();
+            //});
 
             //var chat = $.connection.chatHub;
 
@@ -372,16 +386,16 @@
                 success: function (noti) {
                     $(noti).each(function (index, noti) {
                         if (noti.Status == false) {
-                            $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID})"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
+                            $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID})"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
                         }
                         else {
-                            $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
+                            $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
 
                         }
                     })
-                    //判斷通知欄裡是否有未讀訊息          
+                    //判斷通知欄裡是否有未讀訊息
                     isReadActive();
-                }                
+                }
             })
         }
 
@@ -392,6 +406,7 @@
                 url: "@Url.Action("changeNotiStatus", "backstage")",
                 data: { NotificationID: NotificationID },
                 success: function (data) {
+
                     isReadActive();
                 }
             })
@@ -569,7 +584,7 @@
 
 
 
-    </script>
-    @RenderSection("scripts", required: false)
+</script>
+@RenderSection("scripts", required: false)
 </body>
 </html>
