@@ -67,7 +67,7 @@
     </div>
 
     <script>
-
+        var starRate;
     $(function () {
         // 星星評等
         $("#div0").find("img").on({
@@ -75,6 +75,7 @@
                 $(this).prop("src", "../Content/ProductPostImg/member/chngstar.jfif");
                 $(this).prevAll().attr("src", "../Content/ProductPostImg/member/chngstar.jfif");
                 $("#div0 p").text("評分為......." + ($(this).index() + 1) + "分，雙擊滑鼠送出");
+               
             },
             mouseout: function () {
                 $(this).prop("src", "../Content/ProductPostImg/member/star.jfif");
@@ -86,6 +87,7 @@
                 $("#div0").find("img").off("mouseout");
                 $("#div0").off("mouseout");
                 $("#div0 p").text("評分完成......" + ($(this).index() + 1) + "分");
+                starRate = $(this).index() + 1;
             },
         });
         $("#div0").mouseout(function () {
@@ -93,11 +95,12 @@
             $("#div0 p").text("評分中.......");
         })
     });
+
     //OrderID:3 獲得目前評價
         function getComment() {
         $.ajax({
             url: "@Url.Action("getComment","MyOrder")",
-            data: { OrderDetailID:35},
+            data: { OrderDetailID:23},
             type: "GET",
             success: function (result) {
                 var CNT = result.length;
@@ -115,13 +118,14 @@
             },
         })
     }
-
-    function saveComment() {
-        var starRate = float.Parse($(this).index() + 1);
+     
+        function saveComment() {
+            console.log(starRate);
+           
         $.ajax({
             url: "@Url.Action("saveComment", "MyOrder")",
-            data: { starRate: $(this).index() + 1, description: $(`#commentTXT`).val() },
-            type: "POST",
+            data: {  OrderID:"40", starRate: starRate, description: $(`#commentTXT`).val()},
+            type: "GET",
             success: function (result) {
             swal('成功', '感謝您寶貴的意見', 'success');
                 setTimeout(function () { $(".close").click() }, 700);

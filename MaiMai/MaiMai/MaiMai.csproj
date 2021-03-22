@@ -349,9 +349,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\chngstar.gif" />
-    <Content Include="images\nike shoes.jpg" />
-    <Content Include="images\star.gif" />
     <Content Include="Maimai\images\image jpeg\490db2640e04a996eea2652b0dc0b144.jpg" />
     <Content Include="Maimai\images\image jpeg\55da87e84d72586b3cfb9249408c45f0.jpg" />
     <Content Include="Maimai\images\image jpeg\82977e50d6548e1ea6e0972d11ea563e.jpg" />
@@ -585,6 +582,7 @@
     <Content Include="Views\NewMaimaiIndex\ProdutPost.cshtml" />
     <Content Include="Views\Comment\Comment.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
+    <Content Include="Views\MyOrder\checkOut.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
