@@ -23,6 +23,7 @@ namespace MaiMai.Models
     
         public int TagID { get; set; }
         public string tagName { get; set; }
+        public string TagImg { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPost> ProductPost { get; set; }
