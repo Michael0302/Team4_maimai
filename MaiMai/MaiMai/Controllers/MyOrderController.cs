@@ -124,8 +124,6 @@ namespace MaiMai.Controllers
         {
 
             var id = Convert.ToInt32(Request.Cookies["LoginID"].Value); 
-            //Response.Cookies["LoginID"]設定者給的初始值  rememberme=="on" checkbox attr
-            //<a href="SignUp"> controller action
             if (status != null)
             {
                 if (status >= 2)
@@ -187,7 +185,6 @@ namespace MaiMai.Controllers
                 x.createdTime,
                 x.buyerUserID,
                 x.Member.firstName,
-                //y.SellerID,
                 y.oneProductTotalPrice,
 
             }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID, g.firstName }).Select(s => new
@@ -249,17 +246,6 @@ namespace MaiMai.Controllers
             return Json(product, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult shoppingCart()
-        //{
-
-        //    var id = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-        //    var list = db.OrderDetail.Where(x => x.OrderID == id && (x.ProductPost.Cart.cartID == id)).Select({ 
-        //            cartID=x.ProductPost.Cart.cartID,
-        //            cartNumber= x.ProductPost.Cart.cartNumber,
-        //            cartQTY=x.ProductPost.Cart.QTY,
-        //    }).ToList();
-        //    return Json(list, JsonRequestBehavior.AllowGet));
-        //}
 
         public ActionResult report()
         {
@@ -281,27 +267,117 @@ namespace MaiMai.Controllers
 
         public ActionResult saveReport(string reportTXT, int reportTAG)
         {
-            
-            Report r = new Report  //存值不成功??
+
+            Report r = new Report
             {
                 reportorID = 13,//Convert.ToInt32(Request.Cookies["LoginID"].Value),
                 repotedUserID = 5,
                 reportStatus = 0,
                 createdTime = DateTime.Now,
-                ReportDetailID = reportTAG,  
+                ReportDetailID = reportTAG,
                 reportDescription = reportTXT, //[Product(0)OrRequire(1)] 
                 ProductOrRequire = 1,
-                ProductOrRequireID=4
+                ProductOrRequireID = 4
             };
-
-            db.Report.Add(r);
-            db.SaveChanges();
-            //rtdb.Create(r);
+            rtdb.Create(r);
 
             return Content("新增成功");
         }
 
 
+        public ActionResult commentForm()
+        {
+            return View();
+        }
+
+        public ActionResult getComment(int OrderDetailID)
+            //userID買家-評論者  commentorUserID賣家-被評論者
+        {
+            var UserID = db.OrderDetail.Find(OrderDetailID).SellerID; //PK才可以用find
+            var img = db.Member.Find(UserID).profileImg;
+
+            var commentDetail = db.Comment.Where(t => t.UserID == UserID).Select(s => new
+            {
+                starRate = s.starRate,  
+                img=img, //nvarchar
+            }).ToList();
+
+            
+            return Json(commentDetail, JsonRequestBehavior.AllowGet);
+        }
+
+        maimaiRepository<Comment> cmdb = new maimaiRepository<Comment>();
+        public ActionResult saveComment(int starRate,string description)
+        {
+            var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var OrderID = db.OrderDetail.Where(x=>x.SellerID==UserID).Select(x=>new { OrderID=x.OrderID});
+            var CommentorUserID=db.Order.Find(OrderID).buyerUserID;
+
+            Comment cmt = new Comment() {
+                OrderID= OrderID,
+                starRate= starRate,
+                commentDescription=description,
+                UserID=UserID,
+                CommentorUserID= CommentorUserID,
+            };
+            cmdb.Create(cmt);
+            return Content("成功");
+        }
+
+
+
+        //public ActionResult checkOut()
+        //{
+        //    List<string> enErrors = null;
+
+        //    try
+        //    {
+        //        using (AllInEscrow oPayment = new AllInEscrow())
+        //        {
+        /* 服務參數 */
+        //            oPayment.ServiceMethod = HttpMethod.HttpPOST;
+        //            oPayment.ServiceURL = "<<AllPay Service URL>>";
+        //            oPayment.HashKey = "<<5294y06JbISpM5x9>>";
+        //            oPayment.HashIV = "<<v77hoKGq4kWxNNIS>>";
+        //            oPayment.MerchantID = "<<2000132>>";
+        //            /* 基本參數 */
+        //            oPayment.Send.ReturnURL = "<<https://localhost:44340/>>";
+        //            oPayment.Send.ClientBackURL = "<<Client Back URL>>";
+
+        //            oPayment.Send.MerchantTradeNo = "<<12345678901234567890>>";
+        //            oPayment.Send.MerchantTradeDate = DateTime.Parse("<<20210105>>");
+        //            oPayment.Send.TotalAmount = Decimal.Parse("<<40>>");
+        //            oPayment.Send.TradeDesc = "<<SONY遊戲機台>>";
+        //            oPayment.Send.Currency = "<<TW>>";
+        //            oPayment.Send.EncodeChartset = "<<Encode Chartset>>";
+        //            oPayment.Send.UseAllpayAddress = "<<Use Allpay Address>>";
+        //            oPayment.Send.CreditInstallment = Int32.Parse("<<Credit Installment>>");
+        //            oPayment.Send.InstallmentAmount = Decimal.Parse("<<Installment Amount>>");
+        //            oPayment.Send.Redeem = "<<Redeem>>";
+        //            oPayment.Send.ShippingDate = "<<<20210514>>>";
+        //            oPayment.Send.ConsiderHour = Int32.Parse("<<48>>");
+        //            oPayment.Send.Remark = "<<易碎品，請輕放>>";
+        //            // 加入選購商品資料。
+        //            oPayment.Send.Items.Add(new Item() { Name = "<<馬力歐賽車>>", Price = Decimal.Parse("<<500>>"), Currency = "<<Currency>>", Quantity = Int32.Parse("<<20>>"), URL = "<<Product Detail URL>>" });
+        //            oPayment.Send.Items.Add(new Item() { Name = "<<薩爾達傳說>>", Price = Decimal.Parse("<<900>>"), Currency = "<<Currency>>", Quantity = Int32.Parse("<<20>>"), URL = "<<Product Detail URL>>" });
+        //            oPayment.Send.Items.Add(new Item() { Name = "<<Product Name>>", Price = Decimal.Parse("<<Unit Price>>"), Currency = "<<Currency>>", Quantity = Int32.Parse("<<Quantity>>"), URL = "<<Product Detail URL>>" });
+
+        //            enErrors.AddRange(oPayment.CheckOut());
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // 例外錯誤處理。
+        //        enErrors.Add(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        // 顯示錯誤訊息。
+        //        if (enErrors.Count() > 0)
+        //            ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
+        //    }
+
+        //}
 
 
     }
