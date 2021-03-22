@@ -26,7 +26,7 @@
 
 <body class="container">
     <nav class="nav1 ">
-        <div class=" d-flex">
+        <div class=" row">
             @*layout左邊*@
             <div class=" d-flex mt-3 ml-2">
                 <div class="logo">
@@ -41,48 +41,17 @@
                 </div>
             </div>
             @*layout左邊*@
-            @*Search*@
-            <div class=" dropdown col-6 my-3">
-                <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
-                    <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
-                </div>
-
-                <div class="Ajax-search-dropdown dropdown-menu " aria-labelledby="dropdownMenuButton" @*style="left:30%"*@>
-                    <div class="dropdown-item  ">
-                        <div class=" row" style="width:100%;height:100%;" id="tag-search-dropdown">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @*Search*@
-
+            <div class="" style="width:800px"></div>
             @*layout右邊*@
-            <div id="mainListDiv" class="main_list" style="position: absolute; right:20% ;">
+            <div id="mainListDiv" class="main_list" style="">
                 <div class="navlinks d-flex mt-3">
-                    <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
-                    <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@  
-                    <img src="~/Maimai/layout/images/059-cart.svg" />  </a></div>
-                    <div class="svglink dropdown" >
-                    <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >@*Services*@
-                        <img src="~/Maimai/images/svg/082-bell.svg"></a>
-                                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto"  >
-                                                      @*<a class="dropdown-item" href="#">Action</a>
-                                                      <a class="dropdown-item" href="#">Another action</a>
-                                                      <a class="dropdown-item" href="#">Something else here</a>*@
-                                                  </div></div>
-                    @*<li><a href="#">Contact</a></li>*@
+                    
+                    
                 <div class="dropdown mt-1">
-                    @*登入*@
-                    @*@if (Request.Cookies["LoginName"] != null)
-        {
-            <img  src="~/Maimai/images/svg/073-location2.svg" />
-        }*@
                     <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
                         <svg width="28" height="28" viewBox="0 0 24 24" >
                             <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
-                                <path id="Path_140" data-name="Path 140"
-                                      d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
+                                <path id="Path_140" data-name="Path 140"d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
                                       fill="#7B7B7B"></path>
                             </g>
                         </svg>
@@ -134,76 +103,7 @@
     </nav>
 
     @RenderBody()
-    <div class="chatbox d-flex justify-content-center align-content-center btn" >聊天室</div>
-
-    <div class="chatmsg" style="border-radius:0 0 10% 10%">
-        <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
-        background-color: #5CADAD;
-        border-radius:10% 10% 0 0 ;
-">X</div>
-        <div class="row">
-            <div class="col-4 chatContent" id="chatNameList">
-                @*<a class="btn-block" style="border: 1px solid black">1</a>*@
-
-            </div>
-            <div id="chatroom" class="col-8">
-                @*<div>
-            會員編號
-        </div>
-        <div id="chatbody">
-            <div class="d-flex justify-content-start">
-                <span style="background-color:white; border-radius:10px;">
-                    123
-                </span>
-            </div>
-            <div class="d-flex justify-content-end">
-                456
-            </div>
-        </div>
-        <input id="chattext" type="text" style="position:fixed; bottom:5px" />
-        <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText()">送出</a>*@
-            </div>
-        </div>
-    </div>
-    <footer>
-        <hr>
-        <div class=" d-flex mt-1 mb-2" id="footer">
-            <div class="col-1">
-                <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
-            </div>
-            <div class="col-3" style="position: absolute; left: 20%;">
-                <h5>關於我們</h5>
-                <select class="langSelect">
-                    <option selected>Team 4</option>
-                    <option value="組長">黃士豪</option>
-                    <option value="技術長">蕭祥耀</option>
-                    <option value="組員">徐家雯</option>
-                    <option value="組員">黃建寧</option>
-                    <option value="組員">黃立恆</option>
-                </select><br>
-            </div>
-                <div class="col-6"style="position: absolute; left: 40%;">
-                    <h5>歡迎企業合作</h5>
-                    <a href="#">經銷商合作</a><br>
-                    <a href="#">全球保固</a><br>
-                    <a href="#">招募新夥伴</a><br>
-            </div>
-                <div class="col-2" style="position: absolute; left: 80%;">
-                    <h5>語言</h5>
-                    <select class="langSelect">
-                        <option selected>繁體中文</option>
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="fr">Français</option>
-                        <option value="de">Deutsch</option>
-                        <option value="cn">简体中文</option>
-                        <option value="jp">日本語</option>
-                        <option value="ru">Русский</option>
-                    </select><br>
-                    <a href="#">客戶服務中心</a>
-            </div>
-        </div>
-    </footer>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.js"
             integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -309,7 +209,16 @@
         $(function () {
             getConent();
             //比對資料表Notification有無符合自己id or 群組的通知
-            getNotiRecord()
+            $.ajax({
+                url: "@Url.Action("getNotification_P", "backstage")",
+                type: "GET",
+                success: function (noti) {
+                    $(noti).each(function (index, noti) {
+                        $("#notify").append(`<div class="noti py-2 noti_border" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
+                    })
+                }
+
+            })
 
             $("body").on('click', '[data-stopPropagation]', function (e) {
                 e.stopPropagation();
@@ -317,15 +226,10 @@
 
             //var chat = $.connection.chatHub;
 
-            chat.client.addMessage = function (message, nowNotificationID) {
+            chat.client.addMessage = function (message) {
                 // 向頁面新增訊息
-                if (nowNotificationID != null) {
-                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID})"><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
-                }else {
-                    $('#notify').prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
-                }
+                $('#notify').append(`<div class="noti py-2 noti_border" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
             };
-
 
             $.connection.hub.start() .done(function () {
                 $.ajax({
@@ -348,51 +252,7 @@
                 $('.chatmsg').css('transform', 'translateY(500px)');
             })
 
-            //判斷通知欄裡是否有未讀訊息          
-            
         })
-        //$(window).on("load",function () {
-        //    console.log($("#notify div").length)
-        //    });
-
-
-
-
-        //判斷通知欄是否有未讀訊息
-        function isReadActive() {
-            //debugger;
-            console.log($("#notify div").length);
-        }
-
-        //抓通知歷史訊息
-        function getNotiRecord() {
-            //debugger;
-            $.ajax({
-                url: "@Url.Action("getNotification_P", "backstage")",
-                type: "GET",
-                success: function (noti) {
-                    $(noti).each(function (index, noti) {
-                        if (noti.Status == false) {
-                            $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID})"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-                        }
-                        else {
-                            $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-
-                        }
-                    })
-                    isReadActive();
-                }                
-            })
-        }
-
-        //點擊後將通知狀態改為已讀
-        function checkRead(NotificationID) {
-            $(event.target).removeClass("noti");
-            $.ajax({
-                url: "@Url.Action("changeNotiStatus", "backstage")",
-                data: { NotificationID: NotificationID},
-            })
-        }
 
         chat.client.reciverMessage = function (message, user) {
             debugger;
@@ -558,7 +418,7 @@
                 }
             })
         });
-
+            
 
 
     </script>

@@ -284,5 +284,9 @@ div.tag > a.btn {
     overflow-x:hidden;    
 }
 
+.notiHover:hover {
+    background-color: #BEBEBE;
+}
+
 
 /*====================================================================*/
