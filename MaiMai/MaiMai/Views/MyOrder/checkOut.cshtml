@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "checkOut";
+}
+
+<h2>checkOut</h2>
+
+
+<button onclick="checkout()"></button>
+
+
+<script>
+    function checkout() {
+        $.ajax({
+            url: "@Url.Action("checkout", "MyOrder")",
+            data: { },
+            type: "GET",
+            success: function (result) {
+            },
+        })
+    }
+
+
+
+
+</script>
