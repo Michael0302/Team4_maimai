@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace MaiMai.Controllers
 {
@@ -359,10 +360,10 @@ namespace MaiMai.Controllers
                     oPayment.Send.TradeDesc = "SONY遊戲機台";
                     oPayment.Send.Currency = "TW";
                     oPayment.Send.EncodeChartset = "Encode Chartset";
-                    oPayment.Send.UseAllpayAddress = "Use Allpay Address";
+                    oPayment.Send.UseAllpayAddress = true;
                     oPayment.Send.CreditInstallment = Int32.Parse("Credit Installment");
                     oPayment.Send.InstallmentAmount = Decimal.Parse("Installment Amount");
-                    oPayment.Send.Redeem = "Redeem";
+                    oPayment.Send.Redeem = false;
                     oPayment.Send.ShippingDate = "<20210514>";
                     oPayment.Send.ConsiderHour = Int32.Parse("48");
                     oPayment.Send.Remark = "易碎品，請輕放";
@@ -382,10 +383,10 @@ namespace MaiMai.Controllers
             finally
             {
                 // 顯示錯誤訊息。
-                if (enErrors.Count() > 0)
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
+                //if (enErrors.Count() > 0)
+                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
             }
-            return 
+            return Content("1") ;
         }
 
 
