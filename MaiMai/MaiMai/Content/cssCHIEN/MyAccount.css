@@ -696,3 +696,46 @@ input {
 textarea:focus {
     outline: none
 }
+.D_PZ {
+    padding: 32px 40px;
+}
+
+.D_Qa {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 44px;
+}
+
+.D_Qe {
+    margin-bottom: 32px;
+}
+
+.D_Qb {
+    margin: 32px 0 24px;
+    border-top: 1px solid #f0f1f1;
+}
+
+.D_Qc {
+    margin-left: auto;
+}
+
+.D_ea {
+    color: #fff;
+    background-color: #008f79;
+}
+
+.D_et:disabled {
+    cursor: not-allowed;
+}
+
+.D_ea:disabled, .D_eb:disabled, .D_ec:disabled {
+    color: #fff;
+    background-color: #c5c5c6;
+}
+.D_PR {
+    margin-left: auto;
+}
