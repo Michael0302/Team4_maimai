@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductPostID" Type="Int32" />
+    <Property Name="QTY" Type="Int32" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="ProductPost" Relationship="Self.FK_Cart_ProductPost" FromRole="Cart" ToRole="ProductPost" />
+  </EntityType>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="ChatID" />
+    </Key>
+    <Property Name="ChatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SenderID" Type="Int32" />
+    <Property Name="ReciverID" Type="Int32" />
+    <Property Name="ChatText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ChatTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Chat_Member" FromRole="Chat" ToRole="Member" />
+    <NavigationProperty Name="Member1" Relationship="maimaiModel.FK_Chat_Member1" FromRole="Chat" ToRole="Member" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" />
+    <Property Name="starRate" Type="Double" />
+    <Property Name="commentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="CommentorUserID" Type="Int32" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Comment_Order" FromRole="Comment" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userAccount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="userPassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phoneNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="firstName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="lastName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="birthday" Type="DateTime" Precision="0" />
+    <Property Name="identityNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="profileImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userLevel" Type="Int32" />
+    <Property Name="totalStarRate" Type="Double" />
+    <Property Name="selfDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="connectionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_Order_Member" FromRole="Member" ToRole="Order" />
+    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Member" FromRole="Member" ToRole="OrderDetail" />
+    <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Member" FromRole="Member" ToRole="ProductPost" />
+    <NavigationProperty Name="Report" Relationship="Self.FK_Report_Member" FromRole="Member" ToRole="Report" />
+    <NavigationProperty Name="Report1" Relationship="Self.FK_Report_Member1" FromRole="Member" ToRole="Report" />
+    <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Member" FromRole="Member" ToRole="RequiredPost" />
+    <NavigationProperty Name="Chat" Relationship="maimaiModel.FK_Chat_Member" FromRole="Member" ToRole="Chat" />
+    <NavigationProperty Name="Chat1" Relationship="maimaiModel.FK_Chat_Member1" FromRole="Member" ToRole="Chat" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SenderID" Type="Int32" />
+    <Property Name="ReciverLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="buyerUserID" Type="Int32" />
+    <Property Name="orderStatus" Type="Int32" />
+    <Property Name="createdTime" Type="DateTime" Precision="3" />
+    <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Order" FromRole="Order" ToRole="Comment" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Order_Member" FromRole="Order" ToRole="Member" />
+    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" />
+    <Property Name="ProductPostID" Type="Int32" />
+    <Property Name="QTY" Type="Int32" />
+    <Property Name="oneProductTotalPrice" Type="Int32" />
+    <Property Name="SellerID" Type="Int32" />
+    <Property Name="buyerStatus" Type="Int32" />
+    <Property Name="sellerStatus" Type="Int32" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_OrderDetail_Member" FromRole="OrderDetail" ToRole="Member" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
+  </EntityType>
+  <EntityType Name="ProductPost">
+    <Key>
+      <PropertyRef Name="ProductPostID" />
+    </Key>
+    <Property Name="ProductPostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="productDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="productImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="inStoreQTY" Type="Int32" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="TagID" Type="Int32" />
+    <Property Name="createdTime" Type="DateTime" Precision="3" />
+    <Property Name="RequiredPostID" Type="Int32" />
+    <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
+    <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
+    <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="Report">
+    <Key>
+      <PropertyRef Name="ReportID" />
+    </Key>
+    <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reportorID" Type="Int32" Nullable="false" />
+    <Property Name="repotedUserID" Type="Int32" Nullable="false" />
+    <Property Name="reportStatus" Type="Int32" />
+    <Property Name="createdTime" Type="DateTime" Precision="3" />
+    <Property Name="ReportDetailID" Type="Int32" />
+    <Property Name="reportDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductOrRequire" Type="Int32" Nullable="false" />
+    <Property Name="ProductOrRequireID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_Report_Member" FromRole="Report" ToRole="Member" />
+    <NavigationProperty Name="Member1" Relationship="Self.FK_Report_Member1" FromRole="Report" ToRole="Member" />
+    <NavigationProperty Name="ReportDetail" Relationship="Self.FK_Report_reportDetail" FromRole="Report" ToRole="ReportDetail" />
+  </EntityType>
+  <EntityType Name="ReportDetail">
+    <Key>
+      <PropertyRef Name="ReportDetailID" />
+    </Key>
+    <Property Name="ReportDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Report" Relationship="Self.FK_Report_reportDetail" FromRole="ReportDetail" ToRole="Report" />
+  </EntityType>
+  <EntityType Name="RequiredPost">
+    <Key>
+      <PropertyRef Name="RequiredPostID" />
+    </Key>
+    <Property Name="RequiredPostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="postTime" Type="DateTime" Precision="3" />
+    <Property Name="postDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="postName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="postImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="requiredQTY" Type="Int32" />
+    <Property Name="estimatePrice" Type="Int32" />
+    <Property Name="TagID" Type="Int32" />
+    <Property Name="OrderID" Type="Int32" />
+    <Property Name="isPast" Type="Boolean" />
+    <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Member" Relationship="Self.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
+    <NavigationProperty Name="Tag" Relationship="Self.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagID" />
+    </Key>
+    <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tagName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Tag" FromRole="Tag" ToRole="ProductPost" />
+    <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Tag" FromRole="Tag" ToRole="RequiredPost" />
+    <Property Name="TagImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Cart_ProductPost">
+    <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductPost">
+        <PropertyRef Name="ProductPostID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="ProductPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comment_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="buyerUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="SellerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductPost_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ProductPost">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Report_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Report" Type="Self.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="reportorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Report_Member1">
+    <End Role="Member" Type="Self.Member" Multiplicity="1" />
+    <End Role="Report" Type="Self.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="repotedUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RequiredPost_Member">
+    <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+    <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="RequiredPost">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderDetail_ProductPost">
+    <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductPost">
+        <PropertyRef Name="ProductPostID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductPostID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductPost_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+    <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagID" />
+      </Principal>
+      <Dependent Role="ProductPost">
+        <PropertyRef Name="TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Report_reportDetail">
+    <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="0..1" />
+    <End Role="Report" Type="Self.Report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReportDetail">
+        <PropertyRef Name="ReportDetailID" />
+      </Principal>
+      <Dependent Role="Report">
+        <PropertyRef Name="ReportDetailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RequiredPost_Tag">
+    <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+    <End Role="RequiredPost" Type="Self.RequiredPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagID" />
+      </Principal>
+      <Dependent Role="RequiredPost">
+        <PropertyRef Name="TagID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="maimaiEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cart" EntityType="Self.Cart" />
+    <EntitySet Name="Chat" EntityType="Self.Chat" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" />
+    <EntitySet Name="Member" EntityType="Self.Member" />
+    <EntitySet Name="Notification" EntityType="Self.Notification" />
+    <EntitySet Name="Order" EntityType="Self.Order" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
+    <EntitySet Name="ProductPost" EntityType="Self.ProductPost" />
+    <EntitySet Name="Report" EntityType="Self.Report" />
+    <EntitySet Name="ReportDetail" EntityType="Self.ReportDetail" />
+    <EntitySet Name="RequiredPost" EntityType="Self.RequiredPost" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Tag" EntityType="Self.Tag" />
+    <AssociationSet Name="FK_Cart_ProductPost" Association="Self.FK_Cart_ProductPost">
+      <End Role="ProductPost" EntitySet="ProductPost" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Member" Association="Self.FK_Comment_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comment_Order" Association="Self.FK_Comment_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Member" Association="Self.FK_Order_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Member" Association="Self.FK_OrderDetail_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductPost_Member" Association="Self.FK_ProductPost_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="ProductPost" EntitySet="ProductPost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Report_Member" Association="Self.FK_Report_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Report_Member1" Association="Self.FK_Report_Member1">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequiredPost_Member" Association="Self.FK_RequiredPost_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="RequiredPost" EntitySet="RequiredPost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_Order" Association="Self.FK_OrderDetail_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderDetail_ProductPost" Association="Self.FK_OrderDetail_ProductPost">
+      <End Role="ProductPost" EntitySet="ProductPost" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductPost_Tag" Association="Self.FK_ProductPost_Tag">
+      <End Role="Tag" EntitySet="Tag" />
+      <End Role="ProductPost" EntitySet="ProductPost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Report_reportDetail" Association="Self.FK_Report_reportDetail">
+      <End Role="ReportDetail" EntitySet="ReportDetail" />
+      <End Role="Report" EntitySet="Report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequiredPost_Tag" Association="Self.FK_RequiredPost_Tag">
+      <End Role="Tag" EntitySet="Tag" />
+      <End Role="RequiredPost" EntitySet="RequiredPost" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chat_Member" Association="maimaiModel.FK_Chat_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Chat" EntitySet="Chat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Chat_Member1" Association="maimaiModel.FK_Chat_Member1">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Chat" EntitySet="Chat" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Chat_Member">
+    <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
+    <End Type="maimaiModel.Chat" Role="Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="SenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Chat_Member1">
+    <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
+    <End Type="maimaiModel.Chat" Role="Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="ReciverID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
