@@ -162,7 +162,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="sysInfoTitle">系統通知</h5>
+                <h5 class="modal-title" id="sysInfoTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -332,9 +332,7 @@
             chat.client.addMessage = function (message, nowNotificationID) {
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
-                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID})"><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
-                }else {
-                    $('#notify').prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
+                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm"><strong>   [系統]</strong>:   ${message} </a></div>`);               
                 }
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
             };
@@ -360,11 +358,7 @@
             $('#chatmsgClose').on('click', function () {
                 $('.chatmsg').css('transform', 'translateY(500px)');
             })
-
-
         })
-
-
 
 
         //判斷通知欄是否有未讀訊息
@@ -385,12 +379,21 @@
                 type: "GET",
                 success: function (noti) {
                     $(noti).each(function (index, noti) {
-                        if (noti.Status == false) {
-                            $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID})"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-                        }
-                        else {
-                            $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-
+                        if (noti.Category == "系統") {
+                            if (noti.Status == false) {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}'), 1"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#sysInfoTitle").text(`${noti.Category}`);
+                            } else {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}')"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#sysInfoTitle").text(`${noti.Category}`);
+                            }
+                        } else{                 //訂單狀態改變，發通知
+                            if (noti.Status == false) {
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
+                            else {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
                         }
                     })
                     //判斷通知欄裡是否有未讀訊息
@@ -400,7 +403,12 @@
         }
 
         //點擊後將通知狀態改為已讀
-        function checkRead(NotificationID) {
+    function checkRead(NotificationID, NotifyText, check) {
+        console.log(check);
+        if (NotifyText != null)
+            $("#sysInfobody").html(`<div style="text-align:center">${NotifyText}</div>`);
+
+        if (check == 1) {
             $(event.target).removeClass("noti");
             $.ajax({
                 url: "@Url.Action("changeNotiStatus", "backstage")",
@@ -410,6 +418,7 @@
                     isReadActive();
                 }
             })
+        }
         }
 
         chat.client.reciverMessage = function (message, user) {
@@ -556,13 +565,11 @@
                 })
             }
         };
-            //Michael singalR add end<<<<<
+         //Michael singalR add end<<<<<
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
-
-
 
         $(function () {
             $.ajax({
