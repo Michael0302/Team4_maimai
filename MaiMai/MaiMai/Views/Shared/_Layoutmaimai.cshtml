@@ -327,8 +327,6 @@
             //    e.stopPropagation();
             //});
 
-            //var chat = $.connection.chatHub;
-
             chat.client.addMessage = function (message, nowNotificationID) {
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
@@ -381,16 +379,13 @@
                     $(noti).each(function (index, noti) {
                         if (noti.Category == "系統") {
                             if (noti.Status == false) {
-                                debugger;
-                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}',1) "><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="py-2 noti noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}',1) "><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                                 $("#sysInfoTitle").text(`${noti.Category}`);
                             } else {
-                                debugger;
                                 $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}')"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                                 $("#sysInfoTitle").text(`${noti.Category}`);
                             }
-                        } else {
-                            debugger;//訂單狀態改變，發通知
+                        } else {//訂單狀態改變，發通知
                             if (noti.Status == false) {
                                 $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
@@ -412,7 +407,6 @@
             $("#sysInfobody").html(`<div style="text-align:center">${NotifyText}</div>`);
 
         if (check == 1) {
-            debugger;
             $(event.target).removeClass("noti");
             $.ajax({
                 url: "@Url.Action("changeNotiStatus", "backstage")",
