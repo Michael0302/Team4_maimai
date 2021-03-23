@@ -86,28 +86,6 @@
                         </svg>
                     </button> @*會員圖示 end*@
 
-                    @*登入end*@
-                    @if (Request.Cookies["LoginName"] == null)
-                    {
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLogin">
-                            <li> @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "dropdown-item" })</li>
-                            <li>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "dropdown-item" })</li>
-                        </ul>
-                    }
-                    else
-                    {
-                        <img  src="~/Maimai/images/svg/073-location2.svg" />
-                    }*@
-                <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
-                    <svg width="28" height="28" viewBox="0 0 24 24">
-                        <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
-                            <path id="Path_140" data-name="Path 140"
-                                  d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
-                                  fill="#7B7B7B"></path>
-                        </g>
-                    </svg>
-                </button> @*會員圖示 end*@
-
                 @*登入end*@
                 @if (Request.Cookies["LoginName"] == null)
                 {
