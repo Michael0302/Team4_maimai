@@ -307,7 +307,7 @@ svg:not(:root) {
 }
 .D_cw {
     font-weight: 600;
-    color: #008f79;
+    color: black;
 }
 .D_alV {
     margin-bottom: 12px;
@@ -422,10 +422,10 @@ button, input, select {
     justify-content: space-between;
     padding: 24px 32px 8px;
 }
-.D_bh {
+/*.D_bh {
     font-size: 24px;
     line-height: 32px;
-}
+}*/
 .D_bz {
     font-weight: 600;
 }
@@ -893,9 +893,7 @@ input {
     line-height: 24px;
 }
 
-.D_bh {
-    font-weight: 400;
-}
+ 
 
 .D_bf {
     text-align: left;
@@ -937,9 +935,7 @@ svg:not(:root) {
     line-height: 24px;
 }
 
-.D_bh {
-    font-weight: 400;
-}
+ 
 
 .D_bf {
     text-align: left;

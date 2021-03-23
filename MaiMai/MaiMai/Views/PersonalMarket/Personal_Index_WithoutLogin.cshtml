@@ -20,6 +20,14 @@
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <style>
+        .wei-grid-special0 {
+            overflow: hidden;
+            transition: box-shadow 500ms;
+        }
+
+            .wei-grid-special0:hover {
+                box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
+            }
         .D_agE {
             width: 100%;
             height: 128px;
@@ -209,13 +217,6 @@
         .D_bh {
             font-weight: 600;
         }
-        .wei-grid-special0 {
-            overflow: hidden;
-            transition: box-shadow 500ms;
-        }
-        .wei-grid-special0:hover {
-            box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
-        }
     </style>
 </head>
 
@@ -235,25 +236,25 @@
                                 <a class="D_sa D_rW D_sc D_sf D_ih" >
                                     <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU g123" >商品</p>
                                 </a>
-                                <a class="D_sa D_rW D_ih" href="../Comment/Comment">
+                                <a class="D_sa D_rW D_ih" onclick="goback()">
                                     <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline">評價</p>
                                 </a>
                             </div>
-                            <div class="D_agK w-25">
+                            @*<div class="D_agK w-25">
                                 <a class="D_ih" data-toggle='modal' data-target='#bulid'>
                                     <div class="D_aG D_ay D_aS D_aO D_aB " type="button">上架商品</div>
                                 </a>
-                            </div>
-                            <div class="D_agK w-25">
+                            </div>*@
+                            @*<div class="D_agK w-25">
                                 <a class="D_ih" href="/OrderManager/salesOrderIndex">
                                     <div class="D_aG D_ay D_aS D_aO D_aB " type="button">賣家訂單管理</div>
                                 </a>
-                            </div>
-                            <div class="D_agK">
+                            </div>*@
+                            @*<div class="D_agK">
                                 <a class="D_ih" href="/settings/profile/">
                                     <div class="D_aG D_ay D_aS D_aO D_aB" type="button">編輯檔案</div>
                                 </a>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="D_agN">
@@ -301,7 +302,7 @@
 
                                 <a class="D_ahh D_bF D_ih">@*<p class="D_bY D_ci D_cl D_co D_cq D_ct D_cv D_bJ D_bN D_bV">0 追蹤中 </p>*@</a>
                             </div>
-                            <div class="D_alQ D_ba D_bc">
+                            @*<div class="D_alQ D_ba D_bc">
                                 <div class="D_alR">
                                     <div class="D_alU">
                                         <img alt="" class="D_bE D_bA D_alW" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/promote-inactive-07a36f3334a1662962ac691b7f69fd47.svg" title="">
@@ -313,7 +314,7 @@
                                     </div>
                                 </div>
                                 <button class="D_aG D_ay D_aS D_aI D_az D_alT" type="button">查看點閱率</button>
-                            </div>
+                            </div>*@
                             <div class="D_vO D_ahj">
                                 <div id="AdWideMPUDesktop-container" class="D_hi D_vP">
                                     <div class="D_hj" id="AdWideMPUDesktop-label">
@@ -346,7 +347,7 @@
                                         </div>
                                     </div>
                                     <div class="D_is">
-                                        <div class="D_io D_ahw " id="allPost">
+                                        <div class="D_io D_ahw" id="allPost">
                                             @*頭*@
                                             @*<div class="D_kZ D_kW D_il">
                                                     <div class="D_lc">
@@ -367,8 +368,8 @@
                                                     <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button">宣傳</button>
                                                 </div>*@
                                             @*委*@
-                                            <div class="D_kZ D_kW D_il wei-grid-special0">
-                                                <div class="D_lc ">
+                                            @*<div class="D_kZ D_kW D_il">
+                                                <div class="D_lc">
                                                     <a class="D_ih" href="/p/歡迎加入旋轉拍賣！-1071117678/?t-id=29214924_1614311140082&amp;t-referrer_request_id=vVlLujK09qPAFQfS">
                                                         <div class="D_lm">
                                                             <span class="D_bA D_ln D_bB"><img alt="" class="D_bE" src="~/Content/ImageCHIEN/maimaiLOGO.svg" title=""></span>
@@ -385,7 +386,7 @@
                                                     <button class="D_aG D_ay D_aS D_aY D_lA D_kY" type="button"><img alt="" class="D_bE D_bA D_lB" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/listing-insight-f5374f8a0bd79934d0aa3cbe73d07584.svg" title=""></button>
                                                 </div>
                                                 <button class="D_aG D_ay D_aS D_aN D_aF D_lG" disabled="" type="button">宣傳</button>
-                                            </div>
+                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
@@ -501,10 +502,14 @@
      
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script>
+        function goback() {
+            window.location.href = `/Comment/Comment_WithoutLogin?UserID=${getProductPostID}`;
+        }
         function CarouselClick(PostID) {
             window.location.href = `/NewMaimaiIndex/ProdutPost?PostID=${PostID}`;
             console.log(ProductPostID);
         }
+
         //.D_sf {
         //    border - bottom: 2px solid #008f79;
         //}
@@ -515,14 +520,6 @@
             } ,function () {
              $(".greenline").css("color", "black");
             });
-           
-
-            //$(".Shadow").hover(function () {
-            //    $(".Shadow").css("box-shadow", "10px 5px 5px black")
-            //}, function () {
-            //        $(".Shadow").css("box-shadow", "10px 5px 5px green");
-            //});
-
 
         });
 
@@ -540,13 +537,16 @@
                 return "";
 
             }
-
+            var getUrlString = location.href;
+            var url = new URL(getUrlString);
+            getProductPostID = url.searchParams.get("UserID");
+          
             $.ajax({
 
                 type: "POST",
                 url: "/Comment/TotalStarRate",
                 data: {
-                    UserID: test
+                    UserID: getProductPostID
                 },
 
                 success: function (data) {
@@ -777,11 +777,11 @@
             //console.log(test)
             $.ajax({
 
-                type: "POST",
+                type: "GET",
                 url: "/PersonalMarket/GetMember",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
 
 
 
@@ -819,7 +819,8 @@
                 url: "/PersonalMarket/checkAllComment",
                 data: {
 
-                    UserID: test
+                    UserID: getProductPostID
+
 
 
 
@@ -831,8 +832,8 @@
 
 
                         $("#allPost").append(`
-                            <div class="D_kZ D_kW D_il wei-grid-special0 ">
-                                <div class="D_lc " onclick="CarouselClick(${item.ProductPostID})">
+                            <div class="D_kZ D_kW D_il wei-grid-special0">
+                                <div class="D_lc" onclick="CarouselClick(${item.ProductPostID})">
                                     <a class="D_ih"  >
                                         <div class="D_lm">
                                             <span class="D_bA D_ln D_bB"><img alt="" class="D_bE" id="productImg" img src=../Content/ProductPostImg/${item.productImg} title=""></span>
@@ -847,9 +848,9 @@
                                         <button class="D_aG D_ay D_aT D_aY D_lA  D_kY" type="button"><svg class="D_lB " height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1c3.852 0 7 3.148 7 7 0 3.858-2.067 7.513-5.44 10.724C16.158 21.01 13.04 23 12 23s-4.158-1.99-6.56-4.276C2.067 15.514 0 11.858 0 8c0-3.852 3.148-7 7-7 1.917 0 3.688.79 5 2.13C13.312 1.79 15.083 1 17 1zm0 2c-1.677 0-3.205.854-4.176 2.267a1 1 0 0 1-1.648 0C10.205 3.854 8.676 3 7 3 4.252 3 2 5.252 2 8c0 3.215 1.804 6.406 4.82 9.276C8.86 19.218 11.652 21 12 21c.347 0 3.14-1.782 5.18-3.724C20.197 14.406 22 11.215 22 8c0-2.748-2.252-5-5-5z" fill="#57585a"></path></svg><span class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_bV">&nbsp;</span></button>
                                         <button class="D_aG D_ay D_aS D_aY D_lA D_kY" type="button"><img alt="" class="D_bE D_bA D_lB" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/listing-insight-f5374f8a0bd79934d0aa3cbe73d07584.svg" title=""></button>
                                                     </div>
-                                        <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button" onclick="deletepost (${item.ProductPostID})">下架</button>
+                                        <button class="D_aG D_ay D_aS D_aN D_aF D_lG" type="button"   >加入購物車</button>
                                     </div>`)
-                        console.log(item.ProductPostID)
+                        console.log(test)
 
                         //$("#productName").html(item.productName)
                         //$("#productDescription").html(item.productDescription)
