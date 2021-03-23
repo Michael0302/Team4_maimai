@@ -583,6 +583,8 @@
     <Content Include="Views\Comment\Comment.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\MyOrder\checkOut.cshtml" />
+    <Content Include="Views\PersonalMarket\Personal_Index_WithoutLogin.cshtml" />
+    <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

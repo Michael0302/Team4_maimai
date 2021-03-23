@@ -451,6 +451,7 @@ button, input, select {
 
 .D_hi {
     padding: 12px 0;
+    margin:20px;
 }
 
 .D_hj {
@@ -504,10 +505,10 @@ button, input, select {
     padding: 24px 32px 8px;
 }
 
-.D_bh {
+/*.D_bh {
     font-size: 24px;
     line-height: 32px;
-}
+}*/
 
 .D_bz {
     font-weight: 600;
@@ -1956,10 +1957,7 @@ button {
     font-size: 16px;
     line-height: 24px;
 }
-
-.D_bh {
-    font-weight: 400;
-}
+ 
 
 .D_bf {
     text-align: left;
@@ -2001,9 +1999,7 @@ svg:not(:root) {
     line-height: 24px;
 }
 
-.D_bh {
-    font-weight: 400;
-}
+ 
 
 .D_bf {
     text-align: left;
