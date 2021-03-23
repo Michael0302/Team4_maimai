@@ -24,6 +24,7 @@ namespace MaiMai.Controllers
         maimaiRepository<ProductPost> prod = new maimaiRepository<ProductPost>();
         maimaiEntities db = new maimaiEntities();
         maimaiRepository<Tag> tagdb = new maimaiRepository<Tag>();
+        maimaiRepository<Notification> notify = new maimaiRepository<Notification>();
         public ActionResult backstageIndex()
         {
             return View();
@@ -463,10 +464,12 @@ namespace MaiMai.Controllers
             {
                 var noti = db.Notification.Where(m => m.ReciverLevel.ToUpper() == "ALL" || m.ReciverLevel == loginID).Select(s => new
                 {
+                    NotificationID = s.NotificationID,
                     SenderID = s.SenderID,
                     ReciverLevel = s.ReciverLevel,
                     NotifyText = s.NotifyText,
                     CreateTime = s.CreateTime,
+                    Status = s.Status,
                 });
 
                 return Json(noti, JsonRequestBehavior.AllowGet);
@@ -475,10 +478,12 @@ namespace MaiMai.Controllers
             {
                 var noti = db.Notification.Where(m => m.ReciverLevel.ToUpper() == "ALL" || m.ReciverLevel.ToUpper() == "VIP" || m.ReciverLevel == loginID).Select(s => new
                 {
+                    NotificationID = s.NotificationID,
                     SenderID = s.SenderID,
                     ReciverLevel = s.ReciverLevel,
                     NotifyText = s.NotifyText,
                     CreateTime = s.CreateTime,
+                    Status = s.Status,
                 });
 
                 return Json(noti, JsonRequestBehavior.AllowGet);
@@ -509,10 +514,10 @@ namespace MaiMai.Controllers
         {
             if (Request.Cookies["LoginID"] == null) return Content("尚未登入");
             var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var record = db.Chat.Where(m => m.ReciverID == loginID || m.SenderID == loginID).OrderByDescending(o => o.ChatTime).Select(s => new
+            var record = db.Chat.Where(m => m.ReciverID == loginID || m.SenderID == loginID).OrderByDescending(o=>o.ChatID).Select(s => new
             {
                 TargetID = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.ReciverID : s.SenderID,
-                TargetName = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.Member1.userAccount : s.Member.userAccount,
+                TargetName = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.Member1.userAccount : s.Member.userAccount,                
             }).Distinct();
 
             return Json(record, JsonRequestBehavior.AllowGet);
@@ -533,6 +538,13 @@ namespace MaiMai.Controllers
                                         });
 
             return Json(record, JsonRequestBehavior.AllowGet);
+        }
+
+        //通知狀態改為已讀
+        public void changeNotiStatus(int NotificationID)
+        {
+            db.Notification.Find(NotificationID).Status = true;
+            db.SaveChanges();
         }
     }
 
