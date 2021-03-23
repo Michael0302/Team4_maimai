@@ -262,6 +262,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Cart_css\Cart.css" />
     <Content Include="Content\cssCHIEN\Comment.css" />
+    <Content Include="Content\cssCHIEN\MyAccount.css" />
     <Content Include="Content\cssCHIEN\personalMarket.css" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\30種方式提升內容創作力.jpg" />
@@ -661,6 +662,7 @@
     <Content Include="Views\MyOrder\checkOut.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index_WithoutLogin.cshtml" />
     <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
+    <Content Include="Views\MyAccount\MyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

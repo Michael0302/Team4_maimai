@@ -59,6 +59,9 @@ namespace MaiMai.Controllers
             return Content("修改成功");
         }
 
-
+        public ActionResult MyAccount()
+        {
+            return View();
+        }
     }
 }
