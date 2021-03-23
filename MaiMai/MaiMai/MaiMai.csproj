@@ -268,6 +268,9 @@
     <Content Include="Content\cssCHIEN\personalMarket.css" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\iphone11.png" />
+    <Content Include="Content\ProductPostImg\member\chngstar.jfif" />
+    <Content Include="Content\ProductPostImg\member\nike shoes.jfif" />
+    <Content Include="Content\ProductPostImg\member\star.jfif" />
     <Content Include="Content\ProductPostImg\member\嘉慶.jfif" />
     <Content Include="Content\ProductPostImg\member\嘉文.jfif" />
     <Content Include="Content\ProductPostImg\member\大衛.jfif" />
@@ -346,9 +349,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\chngstar.gif" />
-    <Content Include="images\nike shoes.jpg" />
-    <Content Include="images\star.gif" />
     <Content Include="Maimai\images\image jpeg\490db2640e04a996eea2652b0dc0b144.jpg" />
     <Content Include="Maimai\images\image jpeg\55da87e84d72586b3cfb9249408c45f0.jpg" />
     <Content Include="Maimai\images\image jpeg\82977e50d6548e1ea6e0972d11ea563e.jpg" />
@@ -406,6 +406,7 @@
       <DependentUpon>maimai.edmx</DependentUpon>
       <LastGenOutput>maimai.cs</LastGenOutput>
     </Content>
+    <Content Include="Payment_Net-master\AioSDK\AllPay.Payment.Integration.XML" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -442,6 +443,7 @@
     <Content Include="Models\maimai.edmx.diagram">
       <DependentUpon>maimai.edmx</DependentUpon>
     </Content>
+    <Content Include="Payment_Net-master\README.md" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -582,6 +584,7 @@
     <Content Include="Views\NewMaimaiIndex\ProdutPost.cshtml" />
     <Content Include="Views\Comment\Comment.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
+    <Content Include="Views\MyOrder\checkOut.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index_WithoutLogin.cshtml" />
     <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
   </ItemGroup>

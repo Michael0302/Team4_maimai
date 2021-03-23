@@ -67,6 +67,7 @@
           <Property Name="ReciverLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="NotifyText" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -518,6 +519,7 @@
           <Property Name="ReciverLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -977,6 +979,7 @@
                 <ScalarProperty Name="ReciverLevel" ColumnName="ReciverLevel" />
                 <ScalarProperty Name="NotifyText" ColumnName="NotifyText" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

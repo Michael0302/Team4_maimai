@@ -1,4 +1,5 @@
-﻿
+﻿                          
+using AllPay.Payment.Integration;
 using MaiMai.Models;
 using MaiMai.Models.ViewModel;
 using System;
@@ -7,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace MaiMai.Controllers
 {
@@ -293,31 +295,31 @@ namespace MaiMai.Controllers
         public ActionResult getComment(int OrderDetailID)
             //userID買家-評論者  commentorUserID賣家-被評論者
         {
-            var UserID = db.OrderDetail.Find(OrderDetailID).SellerID; //PK才可以用find
-            var img = db.Member.Find(UserID).profileImg;
+            var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;      
+            var img = db.Member.Find(SellerID).profileImg;
+            //PK才可以用find,  OrderDetailID=23, OrderID=3, SellerID=7
 
-            var commentDetail = db.Comment.Where(t => t.UserID == UserID).Select(s => new
+            var commentDetail = db.Comment.Where(t => t.CommentorUserID == SellerID).Select(s => new
             {
                 starRate = s.starRate,  
-                img=img, //nvarchar
+                img=img, 
             }).ToList();
-
-            
             return Json(commentDetail, JsonRequestBehavior.AllowGet);
         }
 
         maimaiRepository<Comment> cmdb = new maimaiRepository<Comment>();
-        public ActionResult saveComment(int starRate,string description)
+        public ActionResult saveComment(int OrderID, int starRate, string description)
         {
-            var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var OrderID = db.OrderDetail.Where(x=>x.SellerID==UserID).Select(x=>new { OrderID=x.OrderID});
-            var CommentorUserID=db.Order.Find(OrderID).buyerUserID;
+            
+            var UserID = 1;   // Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var  OrderDetailID=db.OrderDetail.FirstOrDefault(t => t.OrderID == OrderID).OrderDetailID;
+            var CommentorUserID=db.OrderDetail.Find(OrderDetailID).SellerID;
 
             Comment cmt = new Comment() {
-                //OrderID= OrderID,
                 starRate= starRate,
                 commentDescription=description,
                 UserID=UserID,
+                OrderID= OrderID,
                 CommentorUserID= CommentorUserID,
             };
             cmdb.Create(cmt);
@@ -326,58 +328,66 @@ namespace MaiMai.Controllers
 
 
 
-        //public ActionResult checkOut()
-        //{
-        //    List<string> enErrors = null;
 
-        //    try
-        //    {
-        //        using (AllInEscrow oPayment = new AllInEscrow())
-        //        {
-        /* 服務參數 */
-        //            oPayment.ServiceMethod = HttpMethod.HttpPOST;
-        //            oPayment.ServiceURL = "<<AllPay Service URL>>";
-        //            oPayment.HashKey = "<<5294y06JbISpM5x9>>";
-        //            oPayment.HashIV = "<<v77hoKGq4kWxNNIS>>";
-        //            oPayment.MerchantID = "<<2000132>>";
-        //            /* 基本參數 */
-        //            oPayment.Send.ReturnURL = "<<https://localhost:44340/>>";
-        //            oPayment.Send.ClientBackURL = "<<Client Back URL>>";
 
-        //            oPayment.Send.MerchantTradeNo = "<<12345678901234567890>>";
-        //            oPayment.Send.MerchantTradeDate = DateTime.Parse("<<20210105>>");
-        //            oPayment.Send.TotalAmount = Decimal.Parse("<<40>>");
-        //            oPayment.Send.TradeDesc = "<<SONY遊戲機台>>";
-        //            oPayment.Send.Currency = "<<TW>>";
-        //            oPayment.Send.EncodeChartset = "<<Encode Chartset>>";
-        //            oPayment.Send.UseAllpayAddress = "<<Use Allpay Address>>";
-        //            oPayment.Send.CreditInstallment = Int32.Parse("<<Credit Installment>>");
-        //            oPayment.Send.InstallmentAmount = Decimal.Parse("<<Installment Amount>>");
-        //            oPayment.Send.Redeem = "<<Redeem>>";
-        //            oPayment.Send.ShippingDate = "<<<20210514>>>";
-        //            oPayment.Send.ConsiderHour = Int32.Parse("<<48>>");
-        //            oPayment.Send.Remark = "<<易碎品，請輕放>>";
-        //            // 加入選購商品資料。
-        //            oPayment.Send.Items.Add(new Item() { Name = "<<馬力歐賽車>>", Price = Decimal.Parse("<<500>>"), Currency = "<<Currency>>", Quantity = Int32.Parse("<<20>>"), URL = "<<Product Detail URL>>" });
-        //            oPayment.Send.Items.Add(new Item() { Name = "<<薩爾達傳說>>", Price = Decimal.Parse("<<900>>"), Currency = "<<Currency>>", Quantity = Int32.Parse("<<20>>"), URL = "<<Product Detail URL>>" });
-        //            oPayment.Send.Items.Add(new Item() { Name = "<<Product Name>>", Price = Decimal.Parse("<<Unit Price>>"), Currency = "<<Currency>>", Quantity = Int32.Parse("<<Quantity>>"), URL = "<<Product Detail URL>>" });
+        public ActionResult checkOut()
+        {
 
-        //            enErrors.AddRange(oPayment.CheckOut());
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // 例外錯誤處理。
-        //        enErrors.Add(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        // 顯示錯誤訊息。
-        //        if (enErrors.Count() > 0)
-        //            ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
-        //    }
+            return View();
+        }
 
-        //}
+        public ActionResult creditCardcheckOut()
+        {
+            List<string> enErrors = null;
+
+            try
+            {
+                using (AllInEscrow oPayment = new AllInEscrow())
+                {
+                    /* 服務參數 */
+                    oPayment.ServiceMethod = HttpMethod.HttpPOST;
+                    oPayment.ServiceURL = "AllPay Service URL";
+                    oPayment.HashKey = "5294y06JbISpM5x9";
+                    oPayment.HashIV = "v77hoKGq4kWxNNIS";
+                    oPayment.MerchantID = "2000132";
+                    /* 基本參數 */
+                    oPayment.Send.ReturnURL = "https://localhost:44340/";
+                    oPayment.Send.ClientBackURL = "https://localhost:44340/";
+
+                    oPayment.Send.MerchantTradeNo = "12345678901234567890";
+                    oPayment.Send.MerchantTradeDate = DateTime.Parse("20210105");
+                    oPayment.Send.TotalAmount = Decimal.Parse("40");
+                    oPayment.Send.TradeDesc = "SONY遊戲機台";
+                    oPayment.Send.Currency = "TW";
+                    oPayment.Send.EncodeChartset = "Encode Chartset";
+                    oPayment.Send.UseAllpayAddress = true;
+                    oPayment.Send.CreditInstallment = Int32.Parse("Credit Installment");
+                    oPayment.Send.InstallmentAmount = Decimal.Parse("Installment Amount");
+                    oPayment.Send.Redeem = false;
+                    oPayment.Send.ShippingDate = "<20210514>";
+                    oPayment.Send.ConsiderHour = Int32.Parse("48");
+                    oPayment.Send.Remark = "易碎品，請輕放";
+                    // 加入選購商品資料。
+                    oPayment.Send.Items.Add(new Item() { Name = "馬力歐賽車", Price = Decimal.Parse("500"), Currency = "Currency", Quantity = Int32.Parse("20"), URL = "Product Detail URL" });
+                    oPayment.Send.Items.Add(new Item() { Name = "薩爾達傳說", Price = Decimal.Parse("900"), Currency = "Currency", Quantity = Int32.Parse("20"), URL = "Product Detail URL" });
+                    oPayment.Send.Items.Add(new Item() { Name = "Product Name", Price = Decimal.Parse("Unit Price"), Currency = "Currency", Quantity = Int32.Parse("Quantity"), URL = "Product Detail URL" });
+
+                    enErrors.AddRange(oPayment.CheckOut());
+                }
+            }
+            catch (Exception ex)
+            {
+                // 例外錯誤處理。
+                enErrors.Add(ex.Message);
+            }
+            finally
+            {
+                // 顯示錯誤訊息。
+                //if (enErrors.Count() > 0)
+                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
+            }
+            return Content("1") ;
+        }
 
 
     }
