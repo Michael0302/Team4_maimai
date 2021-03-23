@@ -42,7 +42,7 @@
             </div>
             @*layout左邊*@
             @*Search*@
-            <div class=" dropdown col-6 my-3">
+            <div class=" dropdown col-8  my-3">
                 <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
@@ -58,19 +58,17 @@
             @*Search*@
 
             @*layout右邊*@
-            <div id="mainListDiv" class="main_list" style="position: absolute; right:20% ;">
+            <div id="mainListDiv" class="main_list" @*style="position: absolute; right:20% ;"*@>
                 <div class="navlinks d-flex mt-3">
-                    <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
-                    <div class="svglink"><a href="../../Cart/cartIndex">@*Portfolio*@  
-                    <img src="~/Maimai/layout/images/059-cart.svg" />  </a></div>
-                    <div class="svglink dropdown" >
-                    <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >@*Services*@
-                        <img src="~/Maimai/images/svg/082-bell.svg"></a>
-                                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto"  >
-                                                      @*<a class="dropdown-item" href="#">Action</a>
-                                                      <a class="dropdown-item" href="#">Another action</a>
-                                                      <a class="dropdown-item" href="#">Something else here</a>*@
-                                                  </div></div>
+                    <div class="svglink"><a href="#"  style="text-decoration:none;">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"><p style="font-size:10px;">地圖</p></a></div>
+                    <div class="svglink"><a href="../../Cart/cartIndex" style="text-decoration:none;"> @*Portfolio*@<img src="~/Maimai/layout/images/059-cart.svg" /><p style="font-size:10px;">購物</p> </a></div>
+                    <div class="svglink dropdown"><a href="#" style="text-decoration:none;" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> @*Services*@<img src="~/Maimai/images/svg/082-bell.svg"><p style="font-size:10px;">通知</p></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto">
+                        @*<a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>*@
+                    </div>
+                    </div>
                     @*<li><a href="#">Contact</a></li>*@
                 <div class="dropdown mt-1">
                     @*登入*@

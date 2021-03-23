@@ -57,6 +57,7 @@
           <Property Name="selfDescription" Type="text" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="connectionID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProImg" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -67,6 +68,8 @@
           <Property Name="ReciverLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="NotifyText" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -507,6 +510,7 @@
           <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Member" FromRole="Member" ToRole="RequiredPost" />
           <NavigationProperty Name="Chat" Relationship="maimaiModel.FK_Chat_Member" FromRole="Member" ToRole="Chat" />
           <NavigationProperty Name="Chat1" Relationship="maimaiModel.FK_Chat_Member1" FromRole="Member" ToRole="Chat" />
+          <Property Name="ProImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -517,6 +521,8 @@
           <Property Name="ReciverLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -949,6 +955,7 @@
           <EntitySetMapping Name="Member">
             <EntityTypeMapping TypeName="maimaiModel.Member">
               <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="ProImg" ColumnName="ProImg" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="userAccount" ColumnName="userAccount" />
                 <ScalarProperty Name="userPassWord" ColumnName="userPassWord" />
@@ -971,6 +978,8 @@
           <EntitySetMapping Name="Notification">
             <EntityTypeMapping TypeName="maimaiModel.Notification">
               <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
                 <ScalarProperty Name="SenderID" ColumnName="SenderID" />
                 <ScalarProperty Name="ReciverLevel" ColumnName="ReciverLevel" />
