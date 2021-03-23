@@ -20,5 +20,7 @@ namespace MaiMai.Models
         public string NotifyText { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<bool> Status { get; set; }
+        public string Category { get; set; }
+
     }
 }
