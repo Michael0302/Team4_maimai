@@ -68,33 +68,33 @@
 
     <script>
         var starRate;
-    $(function () {
-        // 星星評等
-        $("#div0").find("img").on({
-            mouseenter: function () {
-                $(this).prop("src", "../Content/ProductPostImg/member/chngstar.jfif");
-                $(this).prevAll().attr("src", "../Content/ProductPostImg/member/chngstar.jfif");
-                $("#div0 p").text("評分為......." + ($(this).index() + 1) + "分，雙擊滑鼠送出");
+                        $(function () {
+                            // 星星評等
+                            $("#div0").find("img").on({
+                                mouseenter: function () {
+                                    $(this).prop("src", "../Content/ProductPostImg/member/chngstar.jfif");
+                                    $(this).prevAll().attr("src", "../Content/ProductPostImg/member/chngstar.jfif");
+                                    $("#div0 p").text("評分為......." + ($(this).index() + 1) + "分，雙擊滑鼠送出");
                
-            },
-            mouseout: function () {
-                $(this).prop("src", "../Content/ProductPostImg/member/star.jfif");
-                $(this).nextAll().attr("src", "../Content/ProductPostImg/member/star.jfif")
-            }
-            ,
-            dblclick: function () {
-                $("#div0").find("img").off("mouseenter");
-                $("#div0").find("img").off("mouseout");
-                $("#div0").off("mouseout");
-                $("#div0 p").text("評分完成......" + ($(this).index() + 1) + "分");
-                starRate = $(this).index() + 1;
-            },
-        });
-        $("#div0").mouseout(function () {
-            $(this).children("img").prop("src", "../Content/ProductPostImg/member/star.jfif");
-            $("#div0 p").text("評分中.......");
-        })
-    });
+                                },
+                                mouseout: function () {
+                                    $(this).prop("src", "../Content/ProductPostImg/member/star.jfif");
+                                    $(this).nextAll().attr("src", "../Content/ProductPostImg/member/star.jfif")
+                                }
+                                ,
+                                dblclick: function () {
+                                    $("#div0").find("img").off("mouseenter");
+                                    $("#div0").find("img").off("mouseout");
+                                    $("#div0").off("mouseout");
+                                    $("#div0 p").text("評分完成......" + ($(this).index() + 1) + "分");
+                                    starRate = $(this).index() + 1;
+                                },
+                            });
+                                $("#div0").mouseout(function () {
+                                    $(this).children("img").prop("src", "../Content/ProductPostImg/member/star.jfif");
+                                    $("#div0 p").text("評分中.......");
+                                })
+                         });
 
     //OrderID:3 獲得目前評價
         function getComment() {
