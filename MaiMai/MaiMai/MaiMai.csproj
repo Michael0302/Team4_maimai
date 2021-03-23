@@ -47,6 +47,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AllPay.Payment.Integration, Version=1.0.0.11, Culture=neutral, PublicKeyToken=afb33c1e6a3b1bbd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Payment_Net-master\AioSDK\AllPay.Payment.Integration.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.12.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.12.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
@@ -357,6 +361,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\chngstar.gif" />
+    <Content Include="images\nike shoes.jpg" />
+    <Content Include="images\star.gif" />
     <Content Include="Maimai\images\image jpeg\490db2640e04a996eea2652b0dc0b144.jpg" />
     <Content Include="Maimai\images\image jpeg\55da87e84d72586b3cfb9249408c45f0.jpg" />
     <Content Include="Maimai\images\image jpeg\82977e50d6548e1ea6e0972d11ea563e.jpg" />
@@ -582,6 +589,7 @@
     <Content Include="Views\MyOrder\report.cshtml" />
     <Content Include="Views\MyOrder\shoppingCart.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\MyOrder\commentForm.cshtml" />
     <Content Include="Views\OrderManager\OrderIndex.cshtml" />
     <Content Include="Views\OrderManager\salesOrderIndex.cshtml" />
     <Content Include="Views\Cart\cartIndex.cshtml" />
@@ -590,6 +598,8 @@
     <Content Include="Views\Comment\Comment.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index.cshtml" />
     <Content Include="Views\NewMaimaiIndex\ProuductpostAll.cshtml" />
+    <Content Include="Views\PersonalMarket\Personal_Index_WithoutLogin.cshtml" />
+    <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
