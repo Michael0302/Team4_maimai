@@ -3,43 +3,136 @@
     ViewBag.Title = "MaimaiIndexNew";
 }
 
-@*style="background-color:#F7E7DE;"*@
+
 <body>
-    <div style="height:100px;"></div>
+    
     <div class="container">
         @*首頁圖片 css內*@
-        <div class="d-flex">
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告1.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告2.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告3.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告4.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告5.jpg" /></div>
-        </div>
-        @*<section class="home">
-        </section>*@
+
+        <section class="home">
+        </section>
         @*首頁圖片*@
         @*TAG*@
         <div style="height:50px;" id="tag" class="d-flex"></div>
         @*TAG*@
         @*五星*@
         <div class="container-fluid paddding mb-5">
-            <div class="col-md-10" style="padding-left:185px;">
-                <div class="mb-5 StarFiveStyle"> <p>好評商家作品推薦</p></div>
-                <div class="row" id="StarFive2">
-
+            <div class="d-flex mx-0" id="StarFive">
+                @*<div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
+                <div class="fh5co_suceefh5co_height">
+                    <img src="images/nick-karvounis-78711.jpg" alt="img" />
+                    <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                文字
+                <div class="fh5co_suceefh5co_height_position_absolute_font">
+                    <div class="">
+                        <a href="#" class="color_fff">
+                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Dec
+                            31,2017
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="single.html" class="fh5co_good_font">
+                            After all is said and done, more is
+                            said than done
+                        </a>
+                    </div>
+                </div>
+                文字
+                </div>
+                </div>*@
+                <div class="col-md-6">
+                    <div class="row" id="StarFive2">
+                        @*<div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                            <div class="fh5co_suceefh5co_height_2">
+                                <img src="images/science-578x362.jpg" alt="img" />
+                                <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                                <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                                    <div class="">
+                                        <a href="#" class="color_fff">
+                                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Oct
+                                            28,2017
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <a href="single.html" class="fh5co_good_font_2">
+                                            After all is said and
+                                            done, <br>more is said than done
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                            <div class="fh5co_suceefh5co_height_2">
+                                <img src="images/joe-gardner-75333.jpg" alt="img" />
+                                <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                                <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                                    <div class="">
+                                        <a href="#" class="color_fff">
+                                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Oct 28,2017
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <a href="single.html" class="fh5co_good_font_2">
+                                            After all is said and
+                                            done...
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                            <div class="fh5co_suceefh5co_height_2">
+                                <img src="images/ryan-moreno-98837.jpg" alt="img" />
+                                <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                                <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                                    <div class="">
+                                        <a href="#" class="color_fff">
+                                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Oct
+                                            28,2017
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <a href="single.html" class="fh5co_good_font_2">
+                                            After all is said and
+                                            done, more is said than done
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                            <div class="fh5co_suceefh5co_height_2">
+                                <img src="images/10-1-1-875x500.jpg" alt="img" />
+                                <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                                <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                                    <div class="">
+                                        <a href="#" class="color_fff">
+                                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;Oct
+                                            28,2017
+                                        </a>
+                                    </div>
+                                    <div class="">
+                                        <a href="single.html" class="fh5co_good_font_2">
+                                            After all is said and
+                                            done, more is said...
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
                 </div>
             </div>
         </div>
         @*五星*@
-        <div></div>
         @*徵求台輪播*@
         <div class="row mb-lg-3">
             <div class="col-md-12 ">
-                <div class="d-flex" style="background: linear-gradient(#FFB4A2,#E5989B);border-radius:5px;">
-                    <p class="mb-2 col-3" style="font-weight: bold; font-size: 18px; font-family: fantasy;">徵求台</p>
+                <div class="d-flex">
+                    <p class="mb-2 col-3">徵求台</p>
                     <p class="col-6"></p>
-                    @*@Html.ActionLink("更多", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "" })*@
-                    <a class="mt-3 col-3" style="left:18%;" href="~/RequiredPost/requiredPostIndex">更多>></a>
+                    <p class="mb-2 col-3">更多</p>
                 </div>
                 <div class="carousel slide multi-item-carousel active " id="theCarousel2">
                     <div class="carousel-inner  d-md-flex theWidth2 mt-3" id="NewAddCarousel">
@@ -54,23 +147,13 @@
             </div>
         </div>
         @*徵求台輪播*@
-        <div class="d-flex" style=" width:900px;       margin-left: 90px;
-        box-shadow: -3px -3px 3px #7B7B7B;">
-            <div style="height:280px;width:450px;">
-                <img class="imgimg2" src="~/Content/ProductPostImg/咖啡1.jpg" />
-            </div>
-            <div>
-                <img class="imgimg2" src="~/Content/ProductPostImg/咖啡2.jpg" />
-            </div>
-        </div>
-        <div class="mt-5" style="height:100px;"></div>
         @*最新商品輪播*@
         <div class="row mt-lg-3">
             <div class="col-md-12 ">
-                <div class="d-flex" style="        background: linear-gradient(#FFB4A2,#E5989B);border-radius:5px;">
-                    <p class="mb-2 col-3" style="font-weight: bold; font-size: 18px; font-family: fantasy;">最新商品</p>
+                <div class="d-flex">
+                    <p class="mb-2 col-3">商品</p>
                     <p class="col-6"></p>
-                    <a class="mt-3 col-3" style="left:15%;" href="~/NewMaimaiIndex/ProuductpostAll">更多商品>></a>
+                    <p class="mb-2 col-3">更多</p>
                 </div>
                 <div class="carousel slide multi-item-carousel active " id="theCarousel">
                     <div class="carousel-inner  d-md-flex theWidth " id="addCarousel">
@@ -130,48 +213,66 @@
         }
         $(function () {
           //五星圖片刊版
-            //$.ajax({
-            //    url: "/NewMaimaiIndex/StarFive",
-            //    type: "GET",
-            //    success: function (StarFive) {
-            //        $(StarFive).each(function (i, item) {
-            //            if (i == 0) {
-            //                $("#StarFive").prepend(`
-            //                <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
-            //                    <div class="fh5co_suceefh5co_height">
-            //                        <img src="../Content/ProductPostImg/member/${item.img}" alt="img" />
-            //                            <div class="fh5co_suceefh5co_height_position_absolute"></div>-->
-            //        文字
-            //                            <!--<div class="fh5co_suceefh5co_height_position_absolute_font">
-            //                            <div class="">
-            //                             <a href="#" class="color_fff">
-            //                            <i class="fa fa-clock-o"></i>&nbsp;&nbsp;"${item.userAccount}"</a>
-            //                            </div>
-            //                            <div class="">
-            //                            <a href="single.html" class="fh5co_good_font">
-            //                                    After all is said and done, more is
-            //                                        said than done
-            //                            </a>
-            //                        </div>
-            //                    </div>-->
-            //        文字
-            //    <!--</div>
-            //</div>`)
-            //            }
-            //        })
-            //    }
-            //})
+            $.ajax({
+                url: "/NewMaimaiIndex/StarFive",
+                type: "GET",
+                success: function (StarFive) {
+                    $(StarFive).each(function (i, item) {
+                        if (i == 0) {
+                            $("#StarFive").prepend(`
+                            <div class="col-md-6 col-12 paddding animate-box" data-animate-effect="fadeIn">
+                                <div class="fh5co_suceefh5co_height">                               
+                                    <img src="../Content/ProductPostImg/member/${item.img}" alt="img" />
+                                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                    @*文字*@
+                                        <div class="fh5co_suceefh5co_height_position_absolute_font">
+                                        <div class="">
+                                         <a href="#" class="color_fff">
+                                        <i class="fa fa-clock-o"></i>&nbsp;&nbsp;"${item.userAccount}"</a>
+                                        </div>
+                                        <div class="">
+                                        <a href="single.html" class="fh5co_good_font">
+                                                After all is said and done, more is
+                                                    said than done
+                                        </a>
+                                    </div>
+                                </div>
+                    @*文字*@
+                </div>
+            </div>`)
+                        }
+                    })
+                }
+            })
 
             $.ajax({
                 url: "/NewMaimaiIndex/StarFive",
                 type: "GET",
                 success: function (StarFive2) {
                     $(StarFive2).each(function (i, item) {
-                        if (i >=1 && i<=6 ) {
+                        if (i >=1 && i<=4 ) {
                             $("#StarFive2").append(`
-                        <div class="start6" >
-                                        <img style="height:100%;width:100%;"  src="../Content/ProductPostImg/${item.img}"  />
+                            <div class="col-md-6 col-6 paddding animate-box" data-animate-effect="fadeIn">
+                                <div class="fh5co_suceefh5co_height_2">
+
+                                    <img src="../Content/ProductPostImg/member/${item.img}" alt="img" />
+
+                                        <div class="fh5co_suceefh5co_height_position_absolute"></div>
+                                            <div class="fh5co_suceefh5co_height_position_absolute_font_2">
+                                                <div class="">
+                                                    <a href="#" class="color_fff">
+                                                        <i class="fa fa-clock-o"></i>&nbsp;&nbsp;"${item.userAccount}"
+                                                     </a>
+                                                </div>
+                                                <div class="">
+                                        <a href="single.html" class="fh5co_good_font_2">
+                                        After all is said and
+                                        done, <br>more is said than done
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+                    </div>
                             `)
                         }
                     })
@@ -179,6 +280,7 @@
             })
 
           //五星圖片刊版
+        
             //徵求台輪播增加圖片
             $.ajax({
                 url: "/NewMaimaiIndex/NewaddCarousel",
@@ -186,13 +288,13 @@
                 success: function (NewAddCarousel) {
                     $(NewAddCarousel).each(function (i, item) {
                         $("#NewAddCarousel").append(`
-                        <div class="item mx-md-2 NewCarouseladvertising"onclick="CarouselClick(${item.RequiredPostID})">
+                        <div class="item mx-md-2 NewCarouseladvertising"onclick="CarouselClick(${item.ProductPostID})">
                                 <div class="col-xs-4">
                                     <a href="#1" >
-                                             <div class="img-responsive "  style="background-image:url(../Content/resource_nico/images/徵求台POST/${item.postImg})
+                                             <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})
                                                             ;height: 200px; width: 200px;background-size:cover;"></div>
-                                            <div>名稱 : ${item.postName}</div>
-                                            <div>金額 : ${item.estimatePrice}</div>
+                                            <div>名稱 : ${item.productDescription}</div>
+                                            <div>金額 : ${item.price}</div>
                                        </a>
                                 </div>
                         </div>
@@ -233,7 +335,7 @@
                                     <a href="#1">
                                              <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})
                                                             ;height: 200px; width: 200px;background-size:cover;"></div>
-                                            <div style="text-overflow: ellipsis;">${item.productDescription}</div>
+                                            <div>${item.productDescription}</div>
                                             <div>${item.price}</div>
                                        </a>
                                 </div>
@@ -245,6 +347,7 @@
             })
             //輪播增加圖片
             //tagID
+           
 
             function getCookie(cookieName) {
                 var name = cookieName + "=";
