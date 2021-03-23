@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -437,7 +437,8 @@
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -462,8 +463,8 @@
           <Property Name="ReciverID" Type="Int32" />
           <Property Name="ChatText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChatTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Member" Relationship="maimaiModel.FK_Chat_Member" FromRole="Chat" ToRole="Member" />
-          <NavigationProperty Name="Member1" Relationship="maimaiModel.FK_Chat_Member1" FromRole="Chat" ToRole="Member" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Chat_Member" FromRole="Chat" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="Self.FK_Chat_Member1" FromRole="Chat" ToRole="Member" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -498,6 +499,8 @@
           <Property Name="selfDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="connectionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Chat" Relationship="Self.FK_Chat_Member" FromRole="Member" ToRole="Chat" />
+          <NavigationProperty Name="Chat1" Relationship="Self.FK_Chat_Member1" FromRole="Member" ToRole="Chat" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_Member" FromRole="Member" ToRole="Order" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Member" FromRole="Member" ToRole="OrderDetail" />
@@ -505,8 +508,6 @@
           <NavigationProperty Name="Report" Relationship="Self.FK_Report_Member" FromRole="Member" ToRole="Report" />
           <NavigationProperty Name="Report1" Relationship="Self.FK_Report_Member1" FromRole="Member" ToRole="Report" />
           <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Member" FromRole="Member" ToRole="RequiredPost" />
-          <NavigationProperty Name="Chat" Relationship="maimaiModel.FK_Chat_Member" FromRole="Member" ToRole="Chat" />
-          <NavigationProperty Name="Chat1" Relationship="maimaiModel.FK_Chat_Member1" FromRole="Member" ToRole="Chat" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -630,9 +631,9 @@
           </Key>
           <Property Name="TagID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tagName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TagImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_ProductPost_Tag" FromRole="Tag" ToRole="ProductPost" />
           <NavigationProperty Name="RequiredPost" Relationship="Self.FK_RequiredPost_Tag" FromRole="Tag" ToRole="RequiredPost" />
-          <Property Name="TagImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Cart_ProductPost">
           <End Role="ProductPost" Type="Self.ProductPost" Multiplicity="0..1" />
@@ -643,6 +644,30 @@
             </Principal>
             <Dependent Role="Cart">
               <PropertyRef Name="ProductPostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="SenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Member1">
+          <End Role="Member" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="ReciverID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -820,6 +845,14 @@
             <End Role="ProductPost" EntitySet="ProductPost" />
             <End Role="Cart" EntitySet="Cart" />
           </AssociationSet>
+          <AssociationSet Name="FK_Chat_Member" Association="Self.FK_Chat_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Member1" Association="Self.FK_Chat_Member1">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
           <AssociationSet Name="FK_Comment_Member" Association="Self.FK_Comment_Member">
             <End Role="Member" EntitySet="Member" />
             <End Role="Comment" EntitySet="Comment" />
@@ -872,39 +905,7 @@
             <End Role="Tag" EntitySet="Tag" />
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
-          <AssociationSet Name="FK_Chat_Member" Association="maimaiModel.FK_Chat_Member">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Chat" EntitySet="Chat" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Chat_Member1" Association="maimaiModel.FK_Chat_Member1">
-            <End Role="Member" EntitySet="Member" />
-            <End Role="Chat" EntitySet="Chat" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Chat_Member">
-          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="maimaiModel.Chat" Role="Chat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Chat">
-              <PropertyRef Name="SenderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Chat_Member1">
-          <End Type="maimaiModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="maimaiModel.Chat" Role="Chat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Chat">
-              <PropertyRef Name="ReciverID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1079,9 +1080,9 @@
           <EntitySetMapping Name="Tag">
             <EntityTypeMapping TypeName="maimaiModel.Tag">
               <MappingFragment StoreEntitySet="Tag">
-                <ScalarProperty Name="TagImg" ColumnName="TagImg" />
                 <ScalarProperty Name="TagID" ColumnName="TagID" />
                 <ScalarProperty Name="tagName" ColumnName="tagName" />
+                <ScalarProperty Name="TagImg" ColumnName="TagImg" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

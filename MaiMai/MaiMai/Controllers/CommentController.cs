@@ -54,5 +54,9 @@ namespace MaiMai.Controllers
 
             //return Json(table, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Comment_WithoutLogin()
+        {
+            return View();
+        }
     }
 }
