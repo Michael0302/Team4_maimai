@@ -141,11 +141,11 @@
 </nav>
 
 @RenderBody()
-<div class="chatbox d-flex justify-content-center align-content-center btn">聊天室</div>
+<div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
 
 <div class="chatmsg" style="">
-    <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
-        background-color: #5CADAD;">X</div>
+    <div id="chatmsgClose" class="d-flex justify-content-end" style="        height: 20px;
+        background-color: #8E9AAF;">X</div>
     <div class="row">
         <div class="col-4 chatContent" id="chatNameList">
             @*<a class="btn-block" style="border: 1px solid black">1</a>*@
@@ -350,11 +350,11 @@
 
             //聊天室
             $('.chatbox').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(0)')
+                $('.chatmsg').css('transform', 'translate(0, 0)')
             })
 
             $('#chatmsgClose').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(500px)');
+                $('.chatmsg').css('transform', 'translate(500px, 500px)');
             })
         })
 
@@ -371,7 +371,6 @@
 
         //抓通知歷史訊息
         function getNotiRecord() {
-            debugger;
             $.ajax({
                 url: "@Url.Action("getNotification_P", "backstage")",
                 type: "GET",
