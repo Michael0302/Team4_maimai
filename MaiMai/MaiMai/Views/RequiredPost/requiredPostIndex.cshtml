@@ -19,8 +19,7 @@
 
                 </li>
                 <li >
-                     <a class="btn btn-post" style="color: #B5838D; font-weight:bolder;
-" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                     <a class="btn btn-post" style="color: #B5838D; font-weight:bolder;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                     
                 </li>
 
@@ -426,7 +425,7 @@
                                  <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
                                   
                                  </div>
-                                <h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6>
+                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
                                 <div>
                                 <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
                                  </div>
@@ -448,7 +447,7 @@
                                  <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
                                     <h6>${item.county}<span class="font-weight-bolder">${item.district}</span></h6>
                                      </div>
-                                <h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6>
+                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
                                 <div>
                                 <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
                             </div>
@@ -467,6 +466,21 @@
         })
     } // end check comment function
 
+    $('a>btn-post').click(() => {
+        var test = getCookie('LoginAccount');
+
+
+        if (test == null) {
+
+            alertTest1()
+            setTimeout("home()", 2000)
+            //swal("必須要登入才能發文喔");
+            return window.location.href = `/Members/Login`;
+        }
+
+
+    });
+
     function alertTest1() {
         Swal.fire(
             "必須要登入才能發文喔", //標題
@@ -481,14 +495,14 @@
     function sendRequiredPost() {
 
         var test = getCookie('LoginAccount');
-        console.log(test);
+       
 
         if (test == null) {
 
             alertTest1()
             setTimeout("home()", 2000)
             //swal("必須要登入才能發文喔");
-            //return window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
 
         var form = document.querySelector("#form1")

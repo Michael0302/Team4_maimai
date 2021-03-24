@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "requiredSingalPage";
+}
+
+<div class="container" style="padding: 100px 10px 10px 10px ; background-color: #FBEFF4; border-radius:20px ">
+    <div class="card shadow-lg d-flex" style="height:800px" >
+
+        <div class="col-4 h-100" style="border:1px solid black;">
+            <img class="photo mr-3" />
+
+            <h6 class="my-1">貼文名稱:</h6><input class="ml-2 form-control" type="text" required name="postName" id="postName">
+            <div>
+
+             <img style="border-radius:50%; width:30px;height:30px"/>
+            <h6 class="my-1"> 買家 : <span class="font-weight-bolder"></span></h6>
+            </div>
+            <h6 class="my-1">貼文描述:</h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" required onclick="tag()"></textarea>
+            <h6 class="my-1"> 大概徵求價位：<span class="font-weight-bolder"></span>  元</h6>
+
+
+        </div>
+        <div class="col-8 h-100" style="border:1px solid black">
+
+            
+
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+@*containerEnd*@
+

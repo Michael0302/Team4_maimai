@@ -201,7 +201,7 @@ namespace MaiMai.Controllers
         {
 
             var RequiredPostID = Convert.ToInt32(data);
-            var table = db.ProductPost.Where(m => m.RequiredPostID == RequiredPostID).Select(m => new ProductCommentListViewModel()
+            var table = db.ProductPost.Where(m => m.RequiredPostID == RequiredPostID).Select(m => new 
             {
                 ProductPostID = m.ProductPostID,
                 productName = m.productName,
@@ -214,6 +214,7 @@ namespace MaiMai.Controllers
                 createdTime = m.createdTime,
                 RequiredPostID = m.RequiredPostID,
                 userAccount = m.Member.userAccount,
+                useraccountID=m.Member.UserID,
                 county = m.county,
                 district = m.district
 
@@ -352,5 +353,17 @@ namespace MaiMai.Controllers
             }
         
         }
+
+        // required singal page
+
+
+        public ActionResult requiredSingalPage() {
+
+
+
+            return View();
+        }
+
+
     }//class end
 }//namespace end
