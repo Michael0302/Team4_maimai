@@ -135,8 +135,8 @@
 <div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
 
 <div class="chatmsg" style="">
-    <div id="chatmsgClose" class="d-flex justify-content-end" style="        height: 20px;
-        background-color: #8E9AAF;">X</div>
+    <div id="chatmsgClose" class="d-flex justify-content-start align-content-center" style="height: 35px;
+        background-color: #8E9AAF;"><div class="ml-1 mt-1" style="font-weight:bolder; color:gainsboro">MaiMai聊天室</div></div>
     <div class="row">
         <div class="col-4 chatContent" id="chatNameList">
             @*<a class="btn-block" style="border: 1px solid black">1</a>*@
@@ -491,9 +491,9 @@
                 success: function (record) {
                     $("#chatroom").html(`
                             <div>${UserName}</div>
-                            <div id="chatbody" style="height:320px;overflow-y:auto"></div>
+                            <div id="chatbody" style="height:300px;overflow-y:scroll"></div>
                             <div>
-                            <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
+                            <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px;right:70px;width:230px" />
                             <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${UserID})">送出</a>
                             </div>
                             `)
@@ -545,7 +545,7 @@
 
                             </div>
                         </div>
-                        <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
+                        <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px;right:70px;width:230px;" />
                         <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${data.UserID})">送出</a>
                         `);
                         })

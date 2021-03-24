@@ -284,7 +284,7 @@ div.tag > a.btn {
 .chatbox {
     width: 80px;
     height: 50px;
-    background-color: #CBC0D3;
+    background-color: #E1DBE6; 
     position: fixed;
     right: 10px;
     bottom: 0px;
@@ -294,9 +294,9 @@ div.tag > a.btn {
 }
 
 .chatmsg {
-    width: 450px;
+    width: 500px;
     height: 400px;
-    background-color: #CBC0D3;
+    background-color: #FFFFFF;
     position: fixed;
     right: 10px;
     bottom: 0px;
