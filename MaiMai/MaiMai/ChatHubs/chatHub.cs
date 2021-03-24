@@ -67,6 +67,7 @@ namespace SignalRMvc.chatHubs
                 NotifyText = message,
                 CreateTime = DateTime.Now,
                 Status = true,
+                Category = "系統"
             };
 
             db.Notification.Add(noti);
@@ -88,6 +89,7 @@ namespace SignalRMvc.chatHubs
                     NotifyText = message,
                     CreateTime = DateTime.Now,
                     Status = false,
+                    Category = "系統"
                 };
 
                 db.Notification.Add(noti);
@@ -130,6 +132,7 @@ namespace SignalRMvc.chatHubs
                 NotifyText = message,
                 CreateTime = DateTime.Now,
                 Status = true,
+                Category = "系統"
             };
 
             db.Notification.Add(noti);

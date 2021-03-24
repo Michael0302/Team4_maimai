@@ -133,11 +133,11 @@
 </nav>
 
 @RenderBody()
-<div class="chatbox d-flex justify-content-center align-content-center btn">聊天室</div>
+<div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
 
 <div class="chatmsg" style="">
-    <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
-        background-color: #5CADAD;">X</div>
+    <div id="chatmsgClose" class="d-flex justify-content-start align-content-center" style="height: 35px;
+        background-color: #8E9AAF;"><div class="ml-1 mt-1" style="font-weight:bolder; color:gainsboro">MaiMai聊天室</div></div>
     <div class="row">
         <div class="col-4 chatContent" id="chatNameList">
             @*<a class="btn-block" style="border: 1px solid black">1</a>*@
@@ -154,7 +154,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="sysInfoTitle">系統通知</h5>
+                <h5 class="modal-title" id="sysInfoTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -319,14 +319,10 @@
             //    e.stopPropagation();
             //});
 
-            //var chat = $.connection.chatHub;
-
             chat.client.addMessage = function (message, nowNotificationID) {
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
-                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID})"><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
-                }else {
-                    $('#notify').prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
+                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm"><strong>   [系統]</strong>:   ${message} </a></div>`);               
                 }
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
             };
@@ -346,17 +342,13 @@
 
             //聊天室
             $('.chatbox').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(0)')
+                $('.chatmsg').css('transform', 'translate(0, 0)')
             })
 
             $('#chatmsgClose').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(500px)');
+                $('.chatmsg').css('transform', 'translate(500px, 500px)');
             })
-
-
         })
-
-
 
 
         //判斷通知欄是否有未讀訊息
@@ -371,18 +363,26 @@
 
         //抓通知歷史訊息
         function getNotiRecord() {
-            //debugger;
             $.ajax({
                 url: "@Url.Action("getNotification_P", "backstage")",
                 type: "GET",
                 success: function (noti) {
                     $(noti).each(function (index, noti) {
-                        if (noti.Status == false) {
-                            $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID})"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-                        }
-                        else {
-                            $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-
+                        if (noti.Category == "系統") {
+                            if (noti.Status == false) {
+                                $("#notify").prepend(`<div class="py-2 noti noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}',1) "><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#sysInfoTitle").text(`${noti.Category}`);
+                            } else {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}')"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#sysInfoTitle").text(`${noti.Category}`);
+                            }
+                        } else {//訂單狀態改變，發通知
+                            if (noti.Status == false) {
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
+                            else {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
                         }
                     })
                     //判斷通知欄裡是否有未讀訊息
@@ -392,7 +392,12 @@
         }
 
         //點擊後將通知狀態改為已讀
-        function checkRead(NotificationID) {
+    function checkRead(NotificationID, NotifyText, check) {
+        console.log(check);
+        if (NotifyText != null)
+            $("#sysInfobody").html(`<div style="text-align:center">${NotifyText}</div>`);
+
+        if (check == 1) {
             $(event.target).removeClass("noti");
             $.ajax({
                 url: "@Url.Action("changeNotiStatus", "backstage")",
@@ -402,6 +407,7 @@
                     isReadActive();
                 }
             })
+        }
         }
 
         chat.client.reciverMessage = function (message, user) {
@@ -486,9 +492,9 @@
                 success: function (record) {
                     $("#chatroom").html(`
                             <div>${UserName}</div>
-                            <div id="chatbody" style="height:320px;overflow-y:auto"></div>
+                            <div id="chatbody" style="height:300px;overflow-y:scroll"></div>
                             <div>
-                            <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
+                            <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px;right:70px;width:230px" />
                             <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${UserID})">送出</a>
                             </div>
                             `)
@@ -540,7 +546,7 @@
 
                             </div>
                         </div>
-                        <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
+                        <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px;right:70px;width:230px;" />
                         <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${data.UserID})">送出</a>
                         `);
                         })
@@ -548,13 +554,11 @@
                 })
             }
         };
-            //Michael singalR add end<<<<<
+         //Michael singalR add end<<<<<
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
-
-
 
         $(function () {
             $.ajax({

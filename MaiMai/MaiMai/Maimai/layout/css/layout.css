@@ -284,9 +284,9 @@ div.tag > a.btn {
 }
 
 .chatbox {
-    width: 380px;
+    width: 80px;
     height: 50px;
-    background-color: #ccc;
+    background-color: #E1DBE6; 
     position: fixed;
     right: 10px;
     bottom: 0px;
@@ -296,13 +296,13 @@ div.tag > a.btn {
 }
 
 .chatmsg {
-    width: 380px;
+    width: 500px;
     height: 400px;
-    background-color: #ccc;
+    background-color: #FFFFFF;
     position: fixed;
     right: 10px;
     bottom: 0px;
-    transform: translateY(500px);
+    transform: translate(500px, 400px);
     transition: .5s;
     z-index: 999;
     box-shadow: 3px 3px 9px #BEBEBE;
