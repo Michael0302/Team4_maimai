@@ -176,5 +176,8 @@ namespace MaiMai.Controllers
             }
         }
         //送去購物車
+        public ActionResult opay() {
+            return View();
+        }
     }
 }

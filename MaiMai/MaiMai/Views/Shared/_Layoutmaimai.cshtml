@@ -81,9 +81,10 @@
                             <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
                                 <path id="Path_140" data-name="Path 140"
                                       d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
-                                      fill="#7B7B7B"></path>
+                                      fill="#F94144"></path>
                             </g>
                         </svg>
+                        <p style="font-size:10px;">會員</p>
                     </button> @*會員圖示 end*@
 
                 @*登入end*@
@@ -566,7 +567,7 @@
                 success: function (tagsearch) {
                     $(tagsearch).each(function (i, item) {
                         $("#tag-search-dropdown").append(`
-                                                    <a class="Ajax-search-dropdown-img mx-3 mb-3" onclick="tagonclick(${item.TagID})" >
+                                                    <a class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
                                                             <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/${item.TagImg})">
                                                                 <div style="color:#FCFCFC;font-weight:bold;">${item.tagName}</div>
                                                     </div>
