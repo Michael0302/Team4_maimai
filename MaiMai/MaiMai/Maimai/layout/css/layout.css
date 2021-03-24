@@ -12,7 +12,7 @@ padding:0;
     text-align: center;
     font-size: 1.5em;
     font-weight: 500;
-    color: #EA0000;
+    color: #B5838D;
     margin: 0;
     padding: 0;
 }
@@ -212,8 +212,10 @@ border:1px solid;
     height: 50px;
     border-radius: 35px;
     /*margin-top: 1%;*/
-    background-color: #7b7b7b7b;
+    background-color: #CBC0D3;
+    border:none;
 }
+   
 .Ajax-search-dropdown-img {
 }
 
@@ -282,9 +284,9 @@ div.tag > a.btn {
 }
 
 .chatbox {
-    width: 380px;
+    width: 80px;
     height: 50px;
-    background-color: #ccc;
+    background-color: #E1DBE6; 
     position: fixed;
     right: 10px;
     bottom: 0px;
@@ -294,13 +296,13 @@ div.tag > a.btn {
 }
 
 .chatmsg {
-    width: 380px;
+    width: 500px;
     height: 400px;
-    background-color: #ccc;
+    background-color: #FFFFFF;
     position: fixed;
     right: 10px;
     bottom: 0px;
-    transform: translateY(500px);
+    transform: translate(500px, 400px);
     transition: .5s;
     z-index: 999;
     box-shadow: 3px 3px 9px #BEBEBE;
