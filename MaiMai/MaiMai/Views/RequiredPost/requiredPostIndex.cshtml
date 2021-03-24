@@ -19,7 +19,8 @@
 
                 </li>
                 <li >
-                     <a class="btn btn-post" style="color: #B5838D; font-weight:bolder;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                     <a class="btn btn-post" style="color: #B5838D; font-weight:bolder;
+" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                     
                 </li>
 
@@ -278,10 +279,10 @@
         $(`#city${index}`).addClass("my-selector-c");
         $(`#city${index}`).html(`
             <div>
-                <select class="county"></select>
+                <select class="county" name="county"></select>
             </div>
             <div>
-                <select class="district"></select>
+                <select class="district" name="district"></select>
             </div>`);
 
     }
@@ -424,15 +425,16 @@
                                 <div class="d-flex justify-content-between">
                                  <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
                                   
-                                     </div>
+                                 </div>
                                 <h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6>
                                 <div>
                                 <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
-                            </div>
-                            <div class="post-button">
+                                 </div>
+                                <div class="post-button">
                                 <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
                                 <a class="btn" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
-                         </div>
+                                </div>
+                          </div>
                         </div>`
 
                     }
