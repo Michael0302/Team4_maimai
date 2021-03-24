@@ -86,12 +86,6 @@ border:1px solid;
         background-position: center top;
         background-size: cover;
     }
-input {
-    outline: none;
-    border: none;
-   /* font-size: 20px;
-    left:15px;*/
-}
 /*Carsousel*/
 .slide_btn {
     display: flex;

@@ -59,8 +59,9 @@ namespace MaiMai.Controllers
                 o.buyerUserID,
                 od.oneProductTotalPrice,
 
-            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID }).Select(s => new OrderViewModel()
+            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID }).Select(s => new 
             {
+                buyusrId = s.Key.buyerUserID,
                 OrderId = s.Key.OrderId,
                 orderStatus = s.Key.orderStatus,
                 orderStatusString = s.Key.orderStatus.ToString(),
@@ -90,6 +91,7 @@ namespace MaiMai.Controllers
                 ProductPostName =  od.ProductPost.productName,
                 ProductPostID= od.ProductPostID,
                 buyerName= od.Member.userAccount,
+                buyusrId=od.Member.UserID,
                 buyerStatus= od.buyerStatus,
                 sellerStatus=od.sellerStatus
 
@@ -310,7 +312,7 @@ namespace MaiMai.Controllers
             var id = Convert.ToInt32(userid);
 
             var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2 && m.buyerStatus == 2).Select(od => new {
-                orderDetailId = od.OrderDetailID,
+                orderDetailId = od.OrderDetailID,  
                 orderID = od.OrderID,
                 createdTime = od.Order.createdTime,
                 productName = od.ProductPost.productName,
@@ -318,9 +320,9 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = od.Order.buyerUserID
+                buyerUserAccount = od.Order.Member.userAccount
 
-            });
+            }).ToList();
 
 
             return Json(table, JsonRequestBehavior.AllowGet);
