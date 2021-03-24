@@ -3,6 +3,7 @@ using AllPay.Payment.Integration;
 using MaiMai.Models;
 using MaiMai.Models.ViewModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -298,13 +299,47 @@ namespace MaiMai.Controllers
             var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;      
             var img = db.Member.Find(SellerID).profileImg;
             //PK才可以用find,  OrderDetailID=23, OrderID=3, SellerID=7
+            //OrderDetailID=25, OrderID=, SellerID=21   no__comment
 
-            var commentDetail = db.Comment.Where(t => t.CommentorUserID == SellerID).Select(s => new
+            //var result = new ArrayList();  //
+            var commentDetail = db.Comment.Where(x => x.CommentorUserID == SellerID);
+            if (commentDetail.Count() == 0)
             {
-                starRate = s.starRate,  
-                img=img, 
-            }).ToList();
-            return Json(commentDetail, JsonRequestBehavior.AllowGet);
+                var CNT = 0;
+                var result =new
+                {
+                    starTotal = 0,
+                    img = img,
+                    CNT,
+                };
+                //result.Add("0");
+                //result.Add(img);
+                return Json(result, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+             var starTotal = 0;
+             var CNT = 0;
+
+            foreach(var item in commentDetail)
+            {
+                    starTotal += (int)item.starRate;
+                    CNT += 1;   
+            }
+                var result = new
+                {
+                    starTotal = starTotal,
+                    img = img,
+                    CNT,
+                };
+                return Json(result, JsonRequestBehavior.AllowGet);
+
+            }
+
+
+
+
         }
 
         maimaiRepository<Comment> cmdb = new maimaiRepository<Comment>();
@@ -327,11 +362,11 @@ namespace MaiMai.Controllers
         }
 
 
-        //public ActionResult checkOut()
-        //{
+        public ActionResult checkOut()
+        {
 
-        //    return View();
-        //}
+            return View();
+        }
 
         //public ActionResult creditCardcheckOut()
         //{

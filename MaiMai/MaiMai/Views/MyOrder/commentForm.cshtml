@@ -100,21 +100,29 @@
         function getComment() {
         $.ajax({
             url: "@Url.Action("getComment","MyOrder")",
-            data: { OrderDetailID:23},
+            data: { OrderDetailID:25},
             type: "GET",
             success: function (result) {
-                var CNT = result.length;
-                console.log(result);
-                console.log(`${result.img}`);
+                var CNT = result.CNT;
+                var starTotal = result.starTotal;
+                var starAVG = 0;
 
-                var totalStar = result.reduce((a, b) => a.starRate + b.starRate);
-                var starAVG = totalStar / CNT;
-                console.log("totalStar", totalStar);
-                console.log("starAVG", starAVG);
-                
-                $("#commentCNT").text(`已經有${CNT}人評分`);
-                $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result[0].img}`);
-                $("#progress-bar").css("width", `${starAVG*20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG}`);
+                if (CNT==0)
+                {
+                    starAVG = 0;
+                }
+                else
+                {
+                    starAVG = starTotal / CNT;
+                }
+                console.log('result ',result);
+                console.log("img",`${result.img}`);
+                console.log("starTotal", `${result.starTotal}`);
+                console.log("starAVG得分",`${starAVG}`);
+
+                $("#commentCNT").text(`已經有${result.CNT}人評分`);
+                $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.img}`);
+                $("#progress-bar").css("width", `${starAVG * 20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG }`);
             },
         })
     }
