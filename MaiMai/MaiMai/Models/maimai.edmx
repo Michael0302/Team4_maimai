@@ -57,6 +57,7 @@
           <Property Name="selfDescription" Type="text" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="connectionID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProImg" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -68,6 +69,7 @@
           <Property Name="NotifyText" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="Status" Type="bit" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -521,6 +523,7 @@
           <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
