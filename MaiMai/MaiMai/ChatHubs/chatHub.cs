@@ -34,8 +34,6 @@ namespace SignalRMvc.chatHubs
 
     public class chatHub : Hub
     {
-        //public static List<User> users = new List<User>();
-
         
         maimaiEntities db = new maimaiEntities();
 
@@ -55,13 +53,6 @@ namespace SignalRMvc.chatHubs
         }
         public override Task OnConnected()
         {
-            //var user = users.Where(u => u.ConnectionID == Context.ConnectionId).SingleOrDefault();
-            //判断用户是否存在，否则添加集合
-            //if (user == null)
-            //{
-            //    user = new User("",  Context.ConnectionId);
-            //    users.Add(user);
-            //}
             return base.OnConnected();
         }
 
@@ -74,7 +65,8 @@ namespace SignalRMvc.chatHubs
                 SenderID = sender,
                 ReciverLevel = "All",
                 NotifyText = message,
-                CreateTime = DateTime.Now
+                CreateTime = DateTime.Now,
+                Status = true,
             };
 
             db.Notification.Add(noti);
@@ -85,15 +77,17 @@ namespace SignalRMvc.chatHubs
         {
             var user = db.Member.Find(reciver);
             if(user != null)
-            {                
-                Clients.Client(user.connectionID).addMessage(message);
+            {
+                var nowNotificationID = db.Notification.Max(m => m.NotificationID)+1;
+                Clients.Client(user.connectionID).addMessage(message, nowNotificationID);
 
                 Notification noti = new Notification()
                 {
                     SenderID = sender,
                     ReciverLevel = reciver.ToString(),
                     NotifyText = message,
-                    CreateTime = DateTime.Now
+                    CreateTime = DateTime.Now,
+                    Status = false,
                 };
 
                 db.Notification.Add(noti);
@@ -134,7 +128,8 @@ namespace SignalRMvc.chatHubs
                 SenderID = sender,
                 ReciverLevel = "VIP",
                 NotifyText = message,
-                CreateTime = DateTime.Now
+                CreateTime = DateTime.Now,
+                Status = true,
             };
 
             db.Notification.Add(noti);

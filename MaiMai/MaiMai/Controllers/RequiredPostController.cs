@@ -34,7 +34,7 @@ namespace MaiMai.Controllers
         public JsonResult allrequiredPostWithLogin(int loginID)
         {
 
-            var table = db.RequiredPost.Where(m => m.UserID == loginID && m.isPast == false).Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.UserID == loginID && m.isPast == false).OrderByDescending(e => e.postTime).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,
@@ -58,7 +58,7 @@ namespace MaiMai.Controllers
         public JsonResult allrequiredPost()
         {
 
-            var table = db.RequiredPost.Where(m => m.isPast == false).Select(m => new RequiredPostViewModel_C()
+            var table = db.RequiredPost.Where(m => m.isPast == false).OrderByDescending(e => e.postTime).Select(m => new RequiredPostViewModel_C()
             {
                 RequiredPostID = m.RequiredPostID,
                 postTime = m.postTime,

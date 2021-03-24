@@ -1,5 +1,5 @@
-                          
-using AllPay.Payment.Integration;
+                     
+//using AllPay.Payment.Integration;
 using MaiMai.Models;
 using MaiMai.Models.ViewModel;
 using System;
@@ -296,7 +296,7 @@ namespace MaiMai.Controllers
         public ActionResult getComment(int OrderDetailID)
             //userID買家-評論者  commentorUserID賣家-被評論者
         {
-            var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;      
+            var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;
             var img = db.Member.Find(SellerID).profileImg;
             //PK才可以用find,  OrderDetailID=23, OrderID=3, SellerID=7
             //OrderDetailID=25, OrderID=, SellerID=21   no__comment
@@ -392,11 +392,11 @@ namespace MaiMai.Controllers
         //            oPayment.Send.TradeDesc = "SONY遊戲機台";
         //            oPayment.Send.Currency = "TW";
         //            oPayment.Send.EncodeChartset = "Encode Chartset";
-        //            oPayment.Send.UseAllpayAddress = "Use Allpay Address";
-        //            oPayment.Send.CreditInstallment = Int32.Parse("4311-9522-2222-2222");
+        //            oPayment.Send.UseAllpayAddress = true;
+        //            oPayment.Send.CreditInstallment = Int32.Parse("Credit Installment");
         //            oPayment.Send.InstallmentAmount = Decimal.Parse("Installment Amount");
-        //            oPayment.Send.Redeem = "Redeem";
-        //            oPayment.Send.ShippingDate = "20210514";
+        //            oPayment.Send.Redeem = false;
+        //            oPayment.Send.ShippingDate = "<20210514>";
         //            oPayment.Send.ConsiderHour = Int32.Parse("48");
         //            oPayment.Send.Remark = "易碎品，請輕放";
         //            // 加入選購商品資料。
@@ -415,10 +415,10 @@ namespace MaiMai.Controllers
         //    finally
         //    {
         //        // 顯示錯誤訊息。
-        //        if (enErrors.Count() > 0)
-        //            ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
+        //        //if (enErrors.Count() > 0)
+        //        //    ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
         //    }
-        //    return;
+        //    return Content("1") ;
         //}
 
 
