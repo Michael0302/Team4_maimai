@@ -295,7 +295,7 @@ namespace MaiMai.Controllers
         public ActionResult getComment(int OrderDetailID)
             //userID買家-評論者  commentorUserID賣家-被評論者
         {
-            var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;      
+            var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;
             var img = db.Member.Find(SellerID).profileImg;
             //PK才可以用find,  OrderDetailID=23, OrderID=3, SellerID=7
 
