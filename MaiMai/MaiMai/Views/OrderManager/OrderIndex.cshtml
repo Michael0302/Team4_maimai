@@ -459,24 +459,25 @@
 
     function checkout() {
 
-        let id = $('#showOrderTitle').attr("name");
+        //let id = $('#showOrderTitle').attr("name");
 
-        $.ajax({
-            url: "/OrderManager/checkout",
-            type: "GET",
-            data: { 'orderid': id },
-            success: function (response) {
-                swal('成功', response, 'success');
+        //$.ajax({
+        //    url: "/OrderManager/checkout",
+        //    type: "GET",
+        //    data: { 'orderid': id },
+        //    success: function (response) {
+        //        swal('成功', response, 'success');
 
-                window.location.reload("/OrderManager/OrderIndex");
+        //        window.location.reload("/OrderManager/OrderIndex");
 
-            },
-            error: function (response) {
+        //    },
+        //    error: function (response) {
 
-                window.alert(response);
-                window.location.reload("/OrderManager/OrderIndex");
-            }
-        });
+        //        window.alert(response);
+        //        window.location.reload("/OrderManager/OrderIndex");
+        //    }
+        //});
+
     };
 
     function endOrder(id) {
