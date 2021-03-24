@@ -53,35 +53,34 @@
                         <form id="form1" class="formFrame mx-auto" enctype="multipart/form-data">
                             <div class="displayImg">
                                 <div class="photo"><img id="Productimg"></div>
-                                <input type="file" required name="upphoto" id="postImg" style="display: block;" onchange="previewFile()">
+                                <input class="ml-2 form-control" type="file" required name="upphoto" id="productImg" style="display: block" ; onchange="previewFile()">
                             </div>
                             <div class="displayInput">
-                                <h6>貼文名稱:</h6><input type="text" required name="postName" id="postName">
+                                <h6>貼文名稱:</h6><input class="ml-2 form-control" type="text" required name="postName" id="postName">
                                 <h6>
                                     貼文描述:
-                                </h6><textarea id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
-
-
+                                </h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
+                                <h6>交貨方式 : </h6>
                                 <div>
-                                    <h6>交貨方式</h6>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express" checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                    <div class="form-check  input-group ml-2">
+                                        <input class="form-check-input" type="radio" name="transationType" value="express" id="express">
+                                        <label class="form-check-label " for="express">
                                             物流交貨
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2" value="pTop">
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                    <div class="form-check  input-group ml-2">
+                                        <input class="form-check-input" type="radio" name="transationType" value="pTop" id="pTop" checked>
+                                        <label class="form-check-label" for="pTop">
                                             當面交貨/地點
                                         </label>
                                     </div>
-                                    <div class="my-selector-b" disabled></div>
+                                    <div class="my-selector-b"></div>
                                 </div>
 
 
-                                <h6>價格:</h6><input type="text" required name="estimatePrice" id="estimatePrice">
-                                <h6>數量:</h6><input type="text" required name="require0dQTY" id="requiredQTY">
+
+                                <h6>價格:</h6><input class="ml-2 form-control" type="text" required name="estimatePrice" id="estimatePrice">
+                                <h6>數量:</h6><input class="ml-2 form-control" type="text" required name="requiredQTY" id="requiredQTY">
                                 <h6>
                                     標籤:
                                     <select id="tagSelectioninPost" required class="form-control" name="TagID">
@@ -89,7 +88,7 @@
                                     </select>
                                 </h6>
                                 @*====userID======
-                                    ====posttime====*@
+                    ====posttime====*@
 
                             </div>
 
@@ -202,7 +201,7 @@
             success: function (response) {
                 $(response).each(function (i, item) {
                     $("#allPost").append(`
-                         <div class="row mx-auto shadow-sm" style="border-bottom: 3px dashed gray;" id="start">
+                         <div class="row mx-auto shadow-sm" id="start">
                             <div class="photo">
                                     <img  src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -212,15 +211,15 @@
                                     <h3 id="postName${i}">${item.postName}</h3>
                                     <h6>${item.county} <span>${item.district}</span></h6>
                                 </div>
-                                    <h6 id="userName${i}">買家:${item.userAccount}</h6>
+                                    <h6 id="userName${i}"> 買家 : <span class="font-weight-bolder">${item.userAccount}</span></h6>
                             <div>
-                                    <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                                    <h6 id="text${i}"> 產品敘述 : <span class="font-weight-bolder">${item.postDescription}</sapn></h6>
                             </div>
 
 
 
                             <div class="post-button">
-                                    <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                                    <h6 id="price${i}">大概徵求價位：<span class="font-weight-bolder">${item.estimatePrice}</span> 元</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false" aria-controls="collapseExample" name="${item.RequiredPostID}" onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
 
 
@@ -235,60 +234,6 @@
                                 </div>
                         </div>
 
-                         <div class="collapse w-100" id="collapseExample${i}">
-                              <div class="card card-body w-100">
-                                      <form id="Commentform${i}" class="formFrame mx-auto" enctype="multipart/form-data">
-                                                <div class="displayImg">
-                                                      <img id="Productimg${i}">
-                                                      <input type="file" onChange="doUpload(this,'${i}')" name="productImg" id="productImg${i}" style="display: block;">
-                                                 </div>
-                                                <div class="displayInput">
-                                                        <h6>產品名稱:<input type="text" name="productName" id="productName${i}"></h6>
-
-                                                        <h6>
-                                                              產品描述:<textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新" class="w-75" onclick="tag()"></textarea>
-                                                        </h6>
-
-                                    <div>
-                                    <h6>交貨方式</h6>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault1" value="express"checked>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            物流交貨
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" id="flexRadioDefault2"   value="pTop" >
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                          當面交貨/地點
-                                        </label>
-                                    </div>
-                                    <div class="my-selector-b" disabled ></div>
-                                </div>
-
-
-                                                        <h6>價格:<input type="text" name="price" id="price${i}"></h6>
-                                                        <h6>數量:<input type="text" name="inStoreQTY" id="inStoreQTY${i}"></h6>
-                                                        <h6>標籤:
-                                                                <select id="tagselection${i}" class="form-control"  name="TagID" >
-                                                                              <option >Choose...</option>
-                                                                </select>
-                                                        </h6>
-
-                                    <!-- createtime
-                                    <input type="hidden" name="createdTime">
-                                     userID
-                                    <input type="hidden" name="RequiredPostID" value="${item.RequiredPostID}">
-                                     requiredPostID
-                                    <div style="display: flex; justify-content:flex-end;">
-
-                                    </div>
-                                </div>
-
-                            </form>
-                                        <button type="submit" class="btn btn-secondary" onclick="submitProdouct(this,${i})">建立商品留言</button>
-                                </div>
-                          </div>-->    end of 訂單
                     </div)
                     `)
                     checkSpan(item.RequiredPostID, i);
@@ -365,12 +310,12 @@
                                                 <h3 id="postName${i}">${item.postName}</h3>
                                                 <h6>${item.county}  <span>${item.district}</span></h6>
                                                  </div>
-                                        <h6 id="userName${i}">名稱:${item.userAccount}</h6>
+                                        <h6 id="userName${i}">名稱 : <span class="font-weight-bolder">${item.userAccount}</sapn></h6>
                                         <div>
-                                        <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                                        <h6 id="text${i}"> 產品敘述 : <span class="font-weight-bolder">${item.postDescription}</sapn></h6>
                                         </div>
                                         <div class="post-button">
-                                        <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                                        <h6 id="price${i}"> 大概徵求價位：<span class="font-weight-bolder">${item.estimatePrice}</span>  元</h6>
                                         <a data-toggle="collapse" href="#collapseComment${i}"
                                            role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
 
@@ -416,12 +361,12 @@
                                     <h3 id="postName${i}">${item.postName}</h3>
                                     <h6>${item.county} <span>${item.district}</span></h6>
                                 </div>
-                            <h6 id="userName${i}">買家:${item.userAccount}</h6>
+                            <h6 id="userName${i}"> 買家 : <span class="font-weight-bolder">${item.userAccount} </span></h6>
                             <div>
-                            <h6 id="text${i}">產品敘述:${item.postDescription}</h6>
+                            <h6 id="text${i}"> >產品敘述 : <span class="font-weight-bolder"${item.postDescription}</sapn></h6>
                             </div>
                             <div class="post-button">
-                            <h6 id="price${i}">大概徵求價位：${item.estimatePrice}</h6>
+                            <h6 id="price${i}"> 大概徵求價位：<span class="font-weight-bolder">${item.estimatePrice} </sapn>  元</h6>
                             <a data-toggle="collapse" href="#collapseComment${i}"
                                role="button" aria-expanded="false" aria-controls="collapseExample">查看留言(<span id="cmCount${i}">0</span>)</a>
 
@@ -446,29 +391,8 @@
 
     })// finish tab end
 
-    function submitProdouct(eler, index) {
+  
 
-        var test = getCookie('LoginAccount');
-        if (test == null) {
-            alert("必須要登入才能查看留言喔");
-            window.location.href = `/Members/Login`;
-        }
-        var form = $(`#Commentform${i}`)
-        var data = new FormData(form);
-
-        $.ajax({
-            url: "/RequiredPost/commemtProductPost",
-            type: "Post",
-            data: data,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                window.alert(response)
-                window.location.reload("/RequiredPost/requiredPostIndex")
-
-            }
-        })
-    }//end  of submit product
 
     function tag() {
         var txt = ""
@@ -523,10 +447,11 @@
                                      </div>
                                 <h6 id="userName${i}">賣家:${item.userAccount}</h6>
                                 <div>
+                                <div>
                                 <h6 id="text${i}">產品敘述:${item.productDescription}</h6>
                             </div>
                             <div class="post-button">
-                                <h6 id="price${i}">價位：${item.price}</h6>
+                                <h6 id="price${i}"><span class="font-weight-bolder">價位：${item.price} </span>  元</h6>
 
                                 <a class="btn btn-secondary" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
 
@@ -620,7 +545,7 @@
                                 </div>
 
 
-                                <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${item.estimatePrice}"></h6>
+                                <h6>價格:<input type="text" required name="estimateprice" id="estimateprice" value="${item.estimatePrice}"> </h6>
                                 <h6>數量:<input type="text" required name="requiredQTY" id="requiredqty" value="${item.requiredQTY}"></h6>
                                 <h6>
                                     標籤:

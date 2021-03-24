@@ -9,17 +9,17 @@
 </head>
 
 
-<div class="container" style="padding-top:100px">
+<div class="container" style="padding-top: 100px;background-color: #FBEFF4; border-radius:20px">
     <div class="container" style=" padding-bottom: 40px; border-radius: 20px; ">
         <div class="row">
             <ul class="nav nav-pills mb-3 requriedTab w-100" style="justify-content:space-between" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#allPost" role="tab"
+                    <a class="nav-link active" style=" background-color: #B5838D ;color: #FBEFF4;" id="pills-home-tab" data-toggle="pill" href="#allPost" role="tab"
                        aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
 
                 </li>
                 <li>
-                    <a class="btn  btn-secondary" style="color:white;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                    <a class="btn" style=" background-color: #B5838D ;color: #FBEFF4;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
                 </li>
 
             </ul>
@@ -42,11 +42,11 @@
                                 <input class="ml-2 form-control" type="file" required name="upphoto" id="productImg" style="display: block" ; onchange="previewFile()">
                             </div>
                             <div class="displayInput">
-                                <h6>貼文名稱:</h6><input  class="ml-2 form-control" type="text" required name="postName" id="postName">
+                                <h6>貼文名稱:</h6><input class="ml-2 form-control" type="text" required name="postName" id="postName">
                                 <h6>
                                     貼文描述:
-                                </h6><textarea  class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
-                                    <h6>交貨方式 : </h6>
+                                </h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
+                                <h6>交貨方式 : </h6>
                                 <div>
                                     <div class="form-check  input-group ml-2">
                                         <input class="form-check-input" type="radio" name="transationType" value="express" id="express">
@@ -65,8 +65,8 @@
 
 
 
-                                <h6>價格:</h6><input  class="ml-2 form-control" type="text" required name="estimatePrice" id="estimatePrice">
-                                <h6>數量:</h6><input  class="ml-2 form-control" type="text" required name="requiredQTY" id="requiredQTY">
+                                <h6>價格:</h6><input class="ml-2 form-control" type="text" required name="estimatePrice" id="estimatePrice">
+                                <h6>數量:</h6><input class="ml-2 form-control" type="text" required name="requiredQTY" id="requiredQTY">
                                 <h6>
                                     標籤:
                                     <select id="tagSelectioninPost" required class="form-control" name="TagID">
@@ -151,7 +151,8 @@
 
 
                     $("#allPost").append(`
-                             <div class="row mx-auto shadow-sm" id="start">
+                            <div class="my-3" style="background-color:#FFFFFF">
+                           <div class="row mx-auto shadow-lg" id="start">
                             <div class="photo">
                                 <img src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -165,7 +166,7 @@
                                     <h6 id="text${i}">產品敘述 : <span class="font-weight-bolder">${item.postDescription}</span></h6>
                                 </div>
                                 <div class="post-button">
-                                    <h6 id="price${i}">大概徵求價位：<span class="font-weight-bolder">${item.estimatePrice}</span></h6>
+                                    <h6 id="price${i}">大概徵求價位：<span class="font-weight-bolder">${item.estimatePrice}</span>  元</h6>
                                     <a data-toggle="collapse" href="#collapseComment${i}" role="button" aria-expanded="false"
                                         aria-controls="collapseExample" name="${item.RequiredPostID}"
                                         onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
@@ -176,7 +177,7 @@
                                 </div>
 
                             </div>
-
+                            </div>
                             <div class="collapse w-100 comment" id="collapseComment${i}">
                                 <div class="card card-body w-100 comment">
 
@@ -237,7 +238,7 @@
                                         </div>
 
                                     </form>
-                                    <button type="submit" class="btn btn-secondary" onclick="submitProdouct(this,${i})">建立商品留言</button>
+                                    <button type="submit" class="btn"  style=" background-color: #B5838D ;color: #FBEFF4;" onclick="submitProdouct(this,${i})">建立商品留言</button>
                                 </div>
                             </div> @*end of 訂單*@
                             </div)
@@ -426,7 +427,7 @@
                                 <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
                             </div>
                             <div class="post-button">
-                                <h6 id="price${i}">價位：${item.price}</h6>
+                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
                                 <a class="btn btn-secondary" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
                          </div>
                         </div>
