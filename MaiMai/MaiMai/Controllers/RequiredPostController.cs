@@ -364,6 +364,44 @@ namespace MaiMai.Controllers
             return View();
         }
 
+        public ActionResult getsingalPost(string requiredPostID) {
+
+            try
+            {
+                var id = Convert.ToInt32(requiredPostID);
+                var rPost = requiredPostRepository.GetbyID(id);
+                RequiredPostViewModel_C rp = new RequiredPostViewModel_C()
+                {
+                    RequiredPostID=rPost.RequiredPostID,
+                    postDescription=rPost.postDescription,
+                    postTime = rPost.postTime,
+                    postName = rPost.postName,
+                    postImg = rPost.postImg,
+                    UserID = rPost.UserID,
+                    requiredQTY = rPost.requiredQTY,
+                    estimatePrice = rPost.estimatePrice,
+                    tagName = rPost.Tag.tagName,
+                    county = rPost.county,
+                    district = rPost.district,
+                    userAccount = rPost.Member.userAccount,
+                    userAvrta=rPost.Member.profileImg
+
+                };
+
+
+
+                return Json(rp, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e) {
+
+                Response.StatusCode = 404;
+                return Content(e.Message);
+                
+            }
+
+           
+        }
+
 
     }//class end
 }//namespace end
