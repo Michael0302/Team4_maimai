@@ -57,6 +57,7 @@
           <Property Name="selfDescription" Type="text" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="connectionID" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProImg" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -68,6 +69,7 @@
           <Property Name="NotifyText" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="Status" Type="bit" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -489,6 +491,7 @@
           <Property Name="selfDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="connectionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Chat" Relationship="Self.FK_Chat_Member" FromRole="Member" ToRole="Chat" />
           <NavigationProperty Name="Chat1" Relationship="Self.FK_Chat_Member1" FromRole="Member" ToRole="Chat" />
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Member" FromRole="Member" ToRole="Comment" />
@@ -509,6 +512,7 @@
           <Property Name="NotifyText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Boolean" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -946,6 +950,7 @@
                 <ScalarProperty Name="selfDescription" ColumnName="selfDescription" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="connectionID" ColumnName="connectionID" />
+                <ScalarProperty Name="ProImg" ColumnName="ProImg" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -958,6 +963,7 @@
                 <ScalarProperty Name="NotifyText" ColumnName="NotifyText" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

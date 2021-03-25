@@ -39,7 +39,7 @@ namespace MaiMai.Controllers
         public ActionResult StarFive()
         {
             var StarFiveList = db.Member.Where(m => m.totalStarRate == 5.0 ).Select(m => new {
-                img = m.profileImg,
+                img = m.ProImg,
                 userAccount = m.userAccount
             }).ToList();
             return Json(StarFiveList, JsonRequestBehavior.AllowGet);
@@ -48,7 +48,7 @@ namespace MaiMai.Controllers
         //增加輪播圖片
         public ActionResult addCarousel()
         {
-            var addCarouselList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
+            var addCarouselList = db.ProductPost.OrderByDescending(m=>m.ProductPostID).Select(m => new MaimaiIndexViewModel()
             {
                 ProductPostID = m.ProductPostID,
                 productImg = m.productImg,
@@ -58,19 +58,44 @@ namespace MaiMai.Controllers
             return Json(addCarouselList, JsonRequestBehavior.AllowGet);
         }
         //增加輪播圖片
-        //增加輪播新商品
+        //增加徵求台
         public ActionResult NewaddCarousel()
         {
-            var addCarouselList = db.ProductPost.Select(m => new MaimaiIndexViewModel()
+            var addCarouselList = db.RequiredPost.OrderByDescending(m=>m.RequiredPostID).Select(m => new RequiredPostViewModel_C()
             {
-                ProductPostID = m.ProductPostID,
-                productImg = m.productImg,
-                price = m.price,
-                productDescription = m.productDescription
+                RequiredPostID = m.RequiredPostID,
+                postTime = m.postTime,
+                postName = m.postName,
+                postImg = m.postImg,
+                UserID = m.UserID,
+                requiredQTY = m.requiredQTY,
+                estimatePrice = m.estimatePrice,
+                TagID = m.TagID,
+                OrderID = m.OrderID,
+                userAccount = m.Member.userAccount,
+                county = m.county,
+                district = m.district
             }).ToList();
             return Json(addCarouselList, JsonRequestBehavior.AllowGet);
         }
-        //增加輪播新商品
+        //增加徵求台
+        //商品頁面總覽
+        public ActionResult ProuductpostAll() {
+            return View();
+        }
+        public ActionResult ProuductpostAll123(int TagID)
+        {
+            var PostList = db.ProductPost.Where(m => m.TagID == TagID && m.inStoreQTY > 0).Select(m => new
+            {
+                PostID = m.ProductPostID,
+                price = m.price,
+                img = m.productImg,
+                name = m.productName,
+            }).ToList();
+            return Json(PostList, JsonRequestBehavior.AllowGet);
+        }
+
+
         //商品頁面
         public ActionResult ProdutPost() {
 
@@ -85,6 +110,8 @@ namespace MaiMai.Controllers
                 Description=m.productDescription,
                 QTY=m.inStoreQTY,
                 UserID=m.UserID,
+                userAccount = m.Member.userAccount,
+
                 ProductPostID=m.ProductPostID,
             }).ToList();
             return Json(ProdutPostDetailList, JsonRequestBehavior.AllowGet);
@@ -149,5 +176,8 @@ namespace MaiMai.Controllers
             }
         }
         //送去購物車
+        public ActionResult opay() {
+            return View();
+        }
     }
 }

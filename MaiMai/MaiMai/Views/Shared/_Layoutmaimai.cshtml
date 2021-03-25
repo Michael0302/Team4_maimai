@@ -42,7 +42,7 @@
             </div>
             @*layout左邊*@
             @*Search*@
-            <div class=" dropdown col-6 my-3">
+            <div class=" dropdown col-8  my-3">
                 <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
                     <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
@@ -58,42 +58,34 @@
             @*Search*@
 
             @*layout右邊*@
-            <div id="mainListDiv" class="main_list" style="position: absolute; right:20% ;">
+            <div id="mainListDiv" class="main_list" @*style="position: absolute; right:20% ;"*@>
                 <div class="navlinks d-flex mt-3">
-                    <div class="svglink"><a href="#">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"></a></div>
-                    <div class="svglink">
-                        <a href="../../Cart/cartIndex">
-                            @*Portfolio*@
-                        <img src="~/Maimai/layout/images/059-cart.svg" />
-                    </a>
-                </div>
-                <div class="svglink dropdown">
-                    <a href="#" class="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @*Services*@
-                    <img src="~/Maimai/images/svg/082-bell.svg"><span id="redPoint" class=""></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto">
-                    @*<a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>*@
-                </div>
-            </div>
-            @*<li><a href="#">Contact</a></li>*@
-            <div class="dropdown mt-1">
-                @*登入*@
-                @*@if (Request.Cookies["LoginName"] != null)
-                    {
-                        <img  src="~/Maimai/images/svg/073-location2.svg" />
-                    }*@
-                <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
-                    <svg width="28" height="28" viewBox="0 0 24 24">
-                        <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
-                            <path id="Path_140" data-name="Path 140"
-                                  d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
-                                  fill="#7B7B7B"></path>
-                        </g>
-                    </svg>
-                </button> @*會員圖示 end*@
+                    <div class="svglink"><a href="#"  style="text-decoration:none;">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"><p style="font-size:10px;">地圖</p></a></div>
+                    <div class="svglink"><a href="../../Cart/cartIndex" style="text-decoration:none;"> @*Portfolio*@<img src="~/Maimai/layout/images/059-cart.svg" /><p style="font-size:10px;">購物</p> </a></div>
+                    <div class="svglink dropdown"><a href="#" style="text-decoration:none;" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> @*Services*@<img src="~/Maimai/images/svg/082-bell.svg"><p style="font-size:10px;"><span id="redPoint"></span>通知</p></a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto">
+                        @*<a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>*@
+                    </div>
+                    </div>
+                    @*<li><a href="#">Contact</a></li>*@
+                <div class="dropdown mt-1">
+                    @*登入*@
+                    @*@if (Request.Cookies["LoginName"] != null)
+        {
+            <img  src="~/Maimai/images/svg/073-location2.svg" />
+        }*@
+                    <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
+                        <svg width="28" height="28" viewBox="0 0 24 24" >
+                            <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
+                                <path id="Path_140" data-name="Path 140"
+                                      d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
+                                      fill="#F94144"></path>
+                            </g>
+                        </svg>
+                        <p style="font-size:10px;">會員</p>
+                    </button> @*會員圖示 end*@
 
                 @*登入end*@
                 @if (Request.Cookies["LoginName"] == null)
@@ -141,11 +133,11 @@
 </nav>
 
 @RenderBody()
-<div class="chatbox d-flex justify-content-center align-content-center btn">聊天室</div>
+<div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
 
 <div class="chatmsg" style="">
-    <div id="chatmsgClose" class="d-flex justify-content-end" style="height: 20px;
-        background-color: #5CADAD;">X</div>
+    <div id="chatmsgClose" class="d-flex justify-content-start align-content-center" style="height: 35px;
+        background-color: #8E9AAF;"><div class="ml-1 mt-1" style="font-weight:bolder; color:gainsboro">MaiMai聊天室</div></div>
     <div class="row">
         <div class="col-4 chatContent" id="chatNameList">
             @*<a class="btn-block" style="border: 1px solid black">1</a>*@
@@ -162,7 +154,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="sysInfoTitle">系統通知</h5>
+                <h5 class="modal-title" id="sysInfoTitle"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -327,14 +319,10 @@
             //    e.stopPropagation();
             //});
 
-            //var chat = $.connection.chatHub;
-
             chat.client.addMessage = function (message, nowNotificationID) {
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
-                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID})"><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
-                }else {
-                    $('#notify').prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm"><strong>   [系統通知]</strong>:   ${message} </a></div>`);
+                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm"><strong>   [系統]</strong>:   ${message} </a></div>`);               
                 }
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
             };
@@ -354,17 +342,13 @@
 
             //聊天室
             $('.chatbox').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(0)')
+                $('.chatmsg').css('transform', 'translate(0, 0)')
             })
 
             $('#chatmsgClose').on('click', function () {
-                $('.chatmsg').css('transform', 'translateY(500px)');
+                $('.chatmsg').css('transform', 'translate(500px, 500px)');
             })
-
-
         })
-
-
 
 
         //判斷通知欄是否有未讀訊息
@@ -379,18 +363,26 @@
 
         //抓通知歷史訊息
         function getNotiRecord() {
-            //debugger;
             $.ajax({
                 url: "@Url.Action("getNotification_P", "backstage")",
                 type: "GET",
                 success: function (noti) {
                     $(noti).each(function (index, noti) {
-                        if (noti.Status == false) {
-                            $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID})"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-                        }
-                        else {
-                            $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo"><a class="btn-sm "><strong>   [系統通知]</strong>:   ${noti.NotifyText} </a></div>`);
-
+                        if (noti.Category == "系統") {
+                            if (noti.Status == false) {
+                                $("#notify").prepend(`<div class="py-2 noti noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}',1) "><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#sysInfoTitle").text(`${noti.Category}`);
+                            } else {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}')"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#sysInfoTitle").text(`${noti.Category}`);
+                            }
+                        } else {//訂單狀態改變，發通知
+                            if (noti.Status == false) {
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
+                            else {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
                         }
                     })
                     //判斷通知欄裡是否有未讀訊息
@@ -400,7 +392,12 @@
         }
 
         //點擊後將通知狀態改為已讀
-        function checkRead(NotificationID) {
+    function checkRead(NotificationID, NotifyText, check) {
+        console.log(check);
+        if (NotifyText != null)
+            $("#sysInfobody").html(`<div style="text-align:center">${NotifyText}</div>`);
+
+        if (check == 1) {
             $(event.target).removeClass("noti");
             $.ajax({
                 url: "@Url.Action("changeNotiStatus", "backstage")",
@@ -410,6 +407,7 @@
                     isReadActive();
                 }
             })
+        }
         }
 
         chat.client.reciverMessage = function (message, user) {
@@ -494,9 +492,9 @@
                 success: function (record) {
                     $("#chatroom").html(`
                             <div>${UserName}</div>
-                            <div id="chatbody" style="height:320px;overflow-y:auto"></div>
+                            <div id="chatbody" style="height:300px;overflow-y:scroll"></div>
                             <div>
-                            <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
+                            <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px;right:70px;width:230px" />
                             <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${UserID})">送出</a>
                             </div>
                             `)
@@ -548,7 +546,7 @@
 
                             </div>
                         </div>
-                        <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px" />
+                        <input id="chattext" class="chatInput" type="text" style="position:fixed; bottom:5px;right:70px;width:230px;" />
                         <a class="btn" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${data.UserID})">送出</a>
                         `);
                         })
@@ -556,13 +554,11 @@
                 })
             }
         };
-            //Michael singalR add end<<<<<
+         //Michael singalR add end<<<<<
         function htmlEncode(value) {
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
-
-
 
         $(function () {
             $.ajax({
@@ -571,7 +567,7 @@
                 success: function (tagsearch) {
                     $(tagsearch).each(function (i, item) {
                         $("#tag-search-dropdown").append(`
-                                                    <a class="Ajax-search-dropdown-img mx-3 mb-3" onclick="tagonclick(${item.TagID})" >
+                                                    <a class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
                                                             <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/${item.TagImg})">
                                                                 <div style="color:#FCFCFC;font-weight:bold;">${item.tagName}</div>
                                                     </div>

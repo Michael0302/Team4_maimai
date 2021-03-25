@@ -470,6 +470,7 @@ namespace MaiMai.Controllers
                     NotifyText = s.NotifyText,
                     CreateTime = s.CreateTime,
                     Status = s.Status,
+                    Category = s.Category,
                 });
 
                 return Json(noti, JsonRequestBehavior.AllowGet);
@@ -484,6 +485,7 @@ namespace MaiMai.Controllers
                     NotifyText = s.NotifyText,
                     CreateTime = s.CreateTime,
                     Status = s.Status,
+                    Category = s.Category,
                 });
 
                 return Json(noti, JsonRequestBehavior.AllowGet);
@@ -543,8 +545,11 @@ namespace MaiMai.Controllers
         //通知狀態改為已讀
         public void changeNotiStatus(int NotificationID)
         {
-            db.Notification.Find(NotificationID).Status = true;
-            db.SaveChanges();
+            if(db.Notification.Find(NotificationID) != null)
+            {
+                db.Notification.Find(NotificationID).Status = true;
+                db.SaveChanges();
+            };
         }
     }
 

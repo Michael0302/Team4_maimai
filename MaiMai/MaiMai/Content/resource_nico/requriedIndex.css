@@ -9,7 +9,7 @@ width:  100%;
 .requriedTab > li > a {
     text-decoration: none;
     margin: 20px 20px;
-    color: darkslategray;
+    color: #818C9F;
 }
 .requriedTab > li{
 
@@ -25,12 +25,12 @@ width:  100%;
 
 /* ===================== */
 .requriedTab .nav-link.active, .requriedTab .show > .nav-link {
-    color: #5B5B5B;
-    background-color: #D0D0D0;
+    color: #CBC0D3;
+    background-color: #818C9F;
 }
 .showPostArea .tab-content{
 
-    border: 3px dashed rgb(190, 136, 64);
+  
 }
 
 
@@ -96,5 +96,5 @@ img {
     
 }
 .comment {
-    background-color: #E0E0E0;
+    background-color: #EFD3D7;
 }
