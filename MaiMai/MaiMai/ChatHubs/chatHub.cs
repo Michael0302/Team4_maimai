@@ -99,14 +99,8 @@ namespace SignalRMvc.chatHubs
 
         public void OneToOneChat(int sender, int reciver, string message)
         {
+            var senderinfo = db.Member.Find(sender);
             var user = db.Member.Find(reciver);
-            if (user != null)
-            {
-                Clients.Client(user.connectionID).reciverMessage(message, new {
-                    user.UserID,
-                    user.userAccount
-                    });
-                Clients.Caller.senderMessage(message);
 
                 Chat chat = new Chat()
                 {
@@ -118,6 +112,20 @@ namespace SignalRMvc.chatHubs
 
                 db.Chat.Add(chat);
                 db.SaveChanges();
+
+            if (user != null)
+            {
+                Clients.Client(user.connectionID).reciverMessage(message, new
+                {
+                    senderinfo.UserID,
+                    senderinfo.userAccount
+                });
+                Clients.Caller.senderMessage(message, new
+                {
+                    user.UserID,
+                    user.userAccount
+                });
+
             }
         }
 

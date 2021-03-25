@@ -431,8 +431,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         }
 
         chat.client.reciverMessage = function (message, user) {
-            debugger;
-            var ChatName = $("#NameList" + user.userAccount);
+            var ChatName = $("#NameList" + user.UserID);
             if (ChatName.length == 0) {
                 $("#chatNameList").html("");
                 getConent();
@@ -444,9 +443,11 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             `)
             $("#chattext").val("");
             $("#chattext").focus();
+            lastChatText(user.UserID)
+
         }
 
-        chat.client.senderMessage = function (message) {
+        chat.client.senderMessage = function (message, user) {
             $("#chatbody").append(`
                 <div class="d-flex justify-content-end">
                     <span class="px-1 mr-3 mb-1 speech-bubble-right">${message}</span>
@@ -454,6 +455,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             `)
             $("#chattext").val("");
             $("#chattext").focus();
+            lastChatText(user.UserID);
         }
 
         //觸發server function
@@ -466,7 +468,6 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             $.connection.hub.start().done(function () {
                 chat.server.oneToOneChat(sender, reciverID, text).done(function () {
                     var ChatName = $("#NameList" + reciverID);
-                    console.log(ChatName.length);
                     if (ChatName.length == 0) {
                         $("#chatNameList").html("");
                         getConent();
@@ -485,7 +486,19 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             }
             return "";
 
-        }
+    }
+
+    //刷新最後聊天紀錄
+    function lastChatText(UserID) {
+        $.ajax({
+            url: "@Url.Action("lastChatText", "backstage")",
+            type: "GET",
+            data: { UserID: UserID },
+            success: function (chattext) {
+                $(`#lasttext${UserID}`).html(`${chattext}`);
+            }
+        })
+    }
 
         //一開始載入 先去資料庫抓歷史紀錄塞到左邊列表
         var loginID = getCookie("LoginID");
@@ -498,7 +511,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             $("#chatNameList").append(`
                                         <div id="NameList${record.TargetID}" class="btn NameList d-flex" onclick="getRecord(${record.TargetID}, '${record.TargetName}')">
                                             <div style="width:30px; height:30px"><img style="width:100%;height:100%;border-radius:50%" src="../Content/ProductPostImg/member/${record.TargetImg}"/></div>
-                                        <div>${record.TargetName}
+                                        <div><div>${record.TargetName}</div>
                                             <div id="lasttext${record.TargetID}" class="lasttext"></div>
                                         </div>
                                         </div>
@@ -529,7 +542,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 success: function (record) {
                     $("#chatroom").html(`
                             <div class="chatReciver">${UserName}</div>
-                            <div id="chatbody" style="height:300px;overflow-y:scroll"></div>
+                            <div id="chatbody" style="height:290px;overflow-y:scroll"></div>
                             <div>
                             <input id="chattext" class="chatInput" onkeyup="useEnter(${UserID})" type="text" style="position:fixed; bottom:8px;right:90px;width:230px" />
                             <a class="btn btnsubmit" style="position:fixed; bottom:8px;right:10px" onclick="submitText(${UserID})">送出</a>
@@ -571,17 +584,17 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                     data: { ProductPostID: ProductPostID},
                     success: function (data) {
                         $(data).each(function (index, data) {
-                            $("#chatNameList div").each(function (index, name) {
+                            $("#chatNameList div:first-child").each(function (index, name) {
                                 if (data.UserName == name.textContent) {
                                     getRecord(data.UserID, data.UserName);
                                     return false;
                                 }
                             });
                         $("#chatroom").html(`
-                            <div>
+                            <div class="chatReciver">
                                 ${data.UserName}
                             </div>
-                            <div id="chatbody">
+                            <div id="chatbody" style="height:290px;overflow-y:scroll">
                                 <div class="d-flex justify-content-start">
                                     <span style="background-color:white; border-radius:10px;">
 
@@ -591,8 +604,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
                             </div>
                         </div>
-                        <input id="chattext" class="chatInput" onkeyup="useEnter(${data.UserID})" type="text" style="position:fixed; bottom:5px;right:70px;width:230px;" />
-                        <a class="btn btnsubmit" style="position:fixed; bottom:0px;right:10px" onclick="submitText(${data.UserID})">送出</a>
+                        <input id="chattext" class="chatInput" onkeyup="useEnter(${data.UserID})" type="text" style="position:fixed; bottom:8px;right:90px;width:230px" />
+                            <a class="btn btnsubmit" style="position:fixed; bottom:8px;right:10px" onclick="submitText(${data.UserID})">送出</a>
                         `);
                         })
                     }
