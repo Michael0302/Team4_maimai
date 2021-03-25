@@ -12,6 +12,7 @@ namespace MaiMai.Models.ViewModel
         public string userAccount { get; set; }
         [Required]
         public string userPassWord { get; set; }
+        public int UserID { get; set; }
         public string RememberMe { get; set; }
     }
 }
