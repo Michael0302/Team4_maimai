@@ -520,10 +520,20 @@ namespace MaiMai.Controllers
             {
                 TargetID = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.ReciverID : s.SenderID,
                 TargetName = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.Member1.userAccount : s.Member.userAccount,                
+                TargetImg = loginID.Equals(s.SenderID != null ? s.SenderID.Value : -1) ? s.Member1.profileImg : s.Member.profileImg,                
             }).Distinct();
 
             return Json(record, JsonRequestBehavior.AllowGet);
         }
+
+        //抓最後一筆聊天紀錄
+        public ActionResult lastChatText(int UserID)
+        {
+            var lasttext = db.Chat.OrderByDescending(o=>o.ChatID).FirstOrDefault(m => m.SenderID == UserID || m.ReciverID == UserID).ChatText;
+
+            return Json(lasttext, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult getAllChatRecord_P(int UserID)
         {
