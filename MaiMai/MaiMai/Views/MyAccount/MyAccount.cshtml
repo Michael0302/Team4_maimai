@@ -15,6 +15,7 @@
 
     <link href="~/Content/cssCHIEN/MyAccount.css" rel="stylesheet" />
     <style>
+       
     </style>
 </head>
 
@@ -26,22 +27,22 @@
         <div class="D_PE">
             <div class="D_PF">
                 <div class="D_ui M_kh D_uj M_ki  D_oz">
-                    <a class="D_ul M_kk D_tA D_un M_km D_up M_ko D_gN M_fQ"
+                    <a class=" D_up D_ul M_kk D_tA D_un M_km  M_ko D_gN M_fQ"
                        href="/MyAccount/MyAccount">
-                        <p class="D_bO M_bF D_bU M_bL D_ca M_bR D_ce M_bU D_cg M_bW D_ci M_bY D_cm M_cc D_tB D_bH">
+                        <p class="  D_bO M_bF D_bU M_bL D_ca M_bR D_ce M_bU D_cg M_bW D_ci M_bY D_cm M_cc D_tB D_bH">
                             編輯檔案
                         </p>
                     </a>
-                    <a class="D_ul M_kk D_tA D_gN M_fQ" href="/MyAccount/MyPassword">
-                        <p class="D_bO M_bF D_bY M_bP D_ca M_bR D_ce M_bU D_cg M_bW D_ci M_bY D_cl M_cb D_tB D_bH">
+                    <a class="D_ul M_kk D_tA D_gN M_fQ   " href="/MyAccount/MyPassword">
+                        <p class="greenline D_bO M_bF D_bY M_bP D_ca M_bR D_ce M_bU D_cg M_bW D_ci M_bY D_cl M_cb D_tB D_bH">
                             更改密碼
                         </p>
                     </a>
-                    <a class="D_ul M_kk D_tA D_gN M_fQ" href="/settings/data-and-privacy">
+                    @*<a class="D_ul M_kk D_tA D_gN M_fQ" href="/settings/data-and-privacy">
                         <p class="D_bO M_bF D_bY M_bP D_ca M_bR D_ce M_bU D_cg M_bW D_ci M_bY D_cl M_cb D_tB D_bH">
                             數據和隱私
                         </p>
-                    </a>
+                    </a>*@
                 </div>
             </div>
             <div class="D_PG" id="account"></div>
@@ -134,6 +135,14 @@
 
 
         $(function () {
+            $(".greenline").hover(function () {
+                $(".greenline").css("color", "green")
+            }, function () {
+                $(".greenline").css("color", "black");
+            });
+
+
+
         $.ajax({
             url: "@Url.Action("getAccount_P", "MyAccount")",
             type: "GET",
