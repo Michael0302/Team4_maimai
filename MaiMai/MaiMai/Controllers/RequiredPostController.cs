@@ -164,7 +164,7 @@ namespace MaiMai.Controllers
         {
             ProductPost product = new ProductPost()
             {
-                ProductPostID = ps.ProductPostID,
+                //ProductPostID = ps.ProductPostID,
                 productName = ps.productName,
                 productDescription = ps.productDescription,
                 status=ps.status,
@@ -174,6 +174,8 @@ namespace MaiMai.Controllers
                 RequiredPostID = ps.RequiredPostID,
                 productImg = ps.upphoto.FileName,
                 createdTime = DateTime.Now,
+                county=ps.county,
+                district=ps.district,
                 UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value)
 
             };

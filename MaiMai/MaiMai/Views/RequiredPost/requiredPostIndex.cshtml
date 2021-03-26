@@ -153,7 +153,7 @@
 
                     $("#allPost").append(`
                             <div class="my-3" style="background-color:#FFFFFF">
-                           <div class="row mx-auto shadow-lg" id="start" onclick="window.open('../../RequiredPost/requiredSingalPage?rqID=${item.RequiredPostID}','徵求台')">
+                           <div class="row mx-auto shadow-lg" id="start" onclick="toRequiredPostPage(${item.RequiredPostID})">
                             <div class="photo">
                                 <img src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -172,7 +172,7 @@
                                         aria-controls="collapseExample" name="${item.RequiredPostID}"
                                         onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
                                     <div>
-                                        <a class="btn btn-comment" style="color:#FFB4A2" data-toggle="collapse" href="#collapseExample${i}" role="button"
+                                        <a class="btn btn-comment" style="color:#FFB4A2" data-toggle="collapse" href="#collapseExample${i}"  role="button"
                                             aria-expanded="false" aria-controls="collapseExample">我要留言</a>
                                     </div>
                                 </div>
@@ -390,9 +390,19 @@
         })
 
     }// end tag function
-    function checkCommentList(eler,index) {
 
+    function toRequiredPostPage(id) {
 
+        window.open(`../../RequiredPost/requiredSingalPage?rqID=${id}`, '徵求台');
+
+    }
+    function checkCommentList(eler,index, event) {
+
+        //$("body").on("click", "[data-stopPropagation]", function (e) {
+        //    e.stopPropagation;
+        //})
+     
+        alert("1231321");
         var test = getCookie('LoginAccount');
         console.log(test)
         console.log(typeof test)
@@ -459,11 +469,15 @@
 
 
                     }
-                    })
+                })
+
                 $(`#collapseComment${index}>div`).html(inner);
                 $(`#cmCount${index}`).html(`${response.length}`)
+               
             }
+            
         })
+
     } // end check comment function
 
     $('a>btn-post').click(() => {
