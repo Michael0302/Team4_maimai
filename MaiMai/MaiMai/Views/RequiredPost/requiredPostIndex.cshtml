@@ -153,7 +153,7 @@
 
                     $("#allPost").append(`
                             <div class="my-3" style="background-color:#FFFFFF">
-                           <div class="row mx-auto shadow-lg" id="start">
+                           <div class="row mx-auto shadow-lg" id="start" onclick="window.open('../../RequiredPost/requiredSingalPage?rqID=${item.RequiredPostID}','徵求台')">
                             <div class="photo">
                                 <img src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -417,7 +417,7 @@
 
                     if (item.county == null) {
                         inner += `
-                         <div class="row mx-auto shadow-lg my-3"  id="start">
+                         <div class="row mx-auto shadow-lg my-3"  id="start" >
 
                           <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
                           <div class="post-text">
@@ -439,7 +439,7 @@
                     }
                     else {
                         inner += `
-                         <div class="row mx-auto shadow-sm my-2" style="background-color:#F7E7DE" id="start">
+                         <div class="row mx-auto shadow-sm my-2" style="background-color:#F7E7DE" id="start" >
 
                           <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
                           <div class="post-text">

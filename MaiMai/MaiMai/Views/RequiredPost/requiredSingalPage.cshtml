@@ -76,8 +76,8 @@
                         text += `
                 
                      
-                            <div class="photo">
-                            <img class="w-100" src="../Content/resource_nico/images/徵求台POST/${data.postImg}"> 
+                            <div class="photo" style="height:300px">
+                            <img class="w-100 h-100" src="../Content/resource_nico/images/徵求台POST/${data.postImg}"> 
                             </div>
 
 
@@ -85,7 +85,7 @@
                                <div class="d-flex">
                              <img style="border-radius:50%; width:50px;height:50px" src="../Content/ProductPostImg/member/${data.userAvrta}"/>
 
-                            <h6 class="my-3 mx-3"> 買家 :  <span class="font-weight-bolder">${data.userAccount}</span></h6>
+                            <a onclick="window.open('../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${data.UserID}','${data.userAccount}的賣場')" href="#"><h6 class="my-3 mx-3"> 買家 :  <span class="font-weight-bolder">${data.userAccount}</span></h6><a>
                             </div>
                             <h6 class="my-3">貼文描述 :  <span class="font-weight-bolder">${data.postDescription}</span></h6>
                             <h6 class="my-3"> 大概徵求價位：<span class="font-weight-bolder">${data.estimatePrice}</span>  元</h6>
