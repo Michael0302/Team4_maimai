@@ -455,6 +455,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             `)
             $("#chattext").val("");
             $("#chattext").focus();
+            scrollToButtom();
             lastChatText(user.UserID);
         }
 
@@ -533,7 +534,6 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
         //抓資料庫 塞到右邊內容
         function getRecord(UserID, UserName) {
-            //console.log(UserName);
             var LoginName = getCookie("LoginName")
             var LoginID = getCookie("LoginID")
             $.ajax({
@@ -563,10 +563,17 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                         `);
                         }
                     })
+                    scrollToButtom();
                     $("#chattext").focus();
                 }
             })
         }
+
+        //scroll置底
+    function scrollToButtom() {
+        var scr = document.getElementById("chatbody");
+        scr.scrollTop = scr.scrollHeight;
+    }
 
          //使用enter輸入
     function useEnter(UserID) {
