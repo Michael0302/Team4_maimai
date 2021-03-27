@@ -136,8 +136,7 @@
 <div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
 
 <div class="chatmsg" style="">
-    <div id="chatmsgClose" class="d-flex justify-content-start align-content-center" style="height: 35px;
-        background-color: #8E9AAF;"><div class="ml-1 mt-1" style="font-weight:bolder; color:gainsboro"><svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+    <div id="chatmsgClose" class="d-flex justify-content-start align-content-center chatmsgClose"><div class="ml-1 mt-1" style="font-weight:bolder; color:gainsboro"><svg version="1.0" xmlns="http://www.w3.org/2000/svg"
      width="30px" height="30px" viewBox="0 0 226.000000 196.000000"
      preserveAspectRatio="xMidYMid meet">
 
@@ -339,14 +338,19 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             //    e.stopPropagation();
             //});
 
-            chat.client.addMessage = function (message, nowNotificationID) {
+            chat.client.addMessage = function (message, nowNotificationID, category) {
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
-                    $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm"><strong>   [系統]</strong>:   ${message} </a></div>`);
+                    if (category == "系統") {
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                    } else if (category == "違規") {
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm" href="#"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                    } else if (category == "訂單") {
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm" href="#"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                    }
                 }
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
             };
-
 
             $.connection.hub.start() .done(function () {
                 $.ajax({
@@ -396,9 +400,16 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}')"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                                 $("#sysInfoTitle").text(`${noti.Category}`);
                             }
-                        } else {//訂單狀態改變，發通知
+                        } else if (noti.Category =="訂單") {//訂單狀態改變，發通知
                             if (noti.Status == false) {
-                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
+                            else {
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                            }
+                        } else if (noti.Category == "違規") {//下架貼文，發通知
+                            if (noti.Status == false) {
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
                             else {
                                 $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
@@ -413,7 +424,6 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
         //點擊後將通知狀態改為已讀
     function checkRead(NotificationID, NotifyText, check) {
-        console.log(check);
         if (NotifyText != null)
             $("#sysInfobody").html(`<div style="text-align:center">${NotifyText}</div>`);
 
@@ -436,28 +446,37 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 $("#chatNameList").html("");
                 getConent();
             }
-            $("#chatbody").append(`
+            $("#chatbody" + user.UserID).append(`
                 <div class="d-flex justify-content-start">
                     <span class="px-1 ml-3 mb-1 speech-bubble">${message}</span>
                 </div>
             `)
             $("#chattext").val("");
             $("#chattext").focus();
+            scrollToButtom(user.UserID)
             lastChatText(user.UserID)
 
         }
 
         chat.client.senderMessage = function (message, user) {
-            $("#chatbody").append(`
+            $("#chatbody"+user.UserID).append(`
                 <div class="d-flex justify-content-end">
                     <span class="px-1 mr-3 mb-1 speech-bubble-right">${message}</span>
                 </div>
             `)
             $("#chattext").val("");
             $("#chattext").focus();
-            scrollToButtom();
+            scrollToButtom(user.UserID);
             lastChatText(user.UserID);
+    }
+
+    chat.client.isConnected = function (isConnected, userID) {
+        if (isConnected) {
+            $(`#isConnect` + userID).attr("style","background: radial-gradient(#00EC00, #007500 );");
+        } else {
+            $(`#isConnect` + userID).attr("style", "background: radial-gradient(#BEBEBE, #3C3C3C );");
         }
+    }
 
         //觸發server function
         function submitText(reciverID) {
@@ -541,8 +560,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 data: { UserID: UserID },
                 success: function (record) {
                     $("#chatroom").html(`
-                            <div class="chatReciver">${UserName}</div>
-                            <div id="chatbody" style="height:290px;overflow-y:scroll"></div>
+                            <div class="chatReciver d-flex"><div id="isConnect${UserID}" class="isconnected mt-2 mr-1"></div>${UserName}</div>
+                            <div id="chatbody${UserID}" style="height:290px;overflow-y:scroll"></div>
                             <div>
                             <input id="chattext" class="chatInput" onkeyup="useEnter(${UserID})" type="text" style="position:fixed; bottom:8px;right:90px;width:230px" />
                             <a class="btn btnsubmit" style="position:fixed; bottom:8px;right:10px" onclick="submitText(${UserID})">送出</a>
@@ -550,29 +569,31 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             `)
                     $(record).each(function (index, record) {
                         if (record.SenderID == LoginID) {
-                            $("#chatbody").append(`
+                            $("#chatbody" + record.ReciverID).append(`
                                 <div class="d-flex justify-content-end">
                                     <span class="px-1 mr-3 mb-1 speech-bubble-right">${record.ChatText}</span>
                                 </div>
                             `);
                         } else {
-                            $("#chatbody").append(`
+                            $("#chatbody" + record.SenderID).append(`
                             <div class="d-flex justify-content-start">
                                 <span class="px-1 ml-3 mb-1 speech-bubble">${record.ChatText}</span>
                             </div>
                         `);
                         }
                     })
-                    scrollToButtom();
+                    scrollToButtom(UserID);
                     $("#chattext").focus();
+                    chat.server.checkConnectedMem(UserID);
                 }
             })
         }
 
         //scroll置底
-    function scrollToButtom() {
-        var scr = document.getElementById("chatbody");
-        scr.scrollTop = scr.scrollHeight;
+    function scrollToButtom(userID) {        
+        var scr = document.getElementById("chatbody" + userID);
+        if (scr != null)
+            scr.scrollTop = scr.scrollHeight;
     }
 
          //使用enter輸入
@@ -599,9 +620,10 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             });
                         $("#chatroom").html(`
                             <div class="chatReciver">
+                                <div id="isConnect${data.UserID}" class="isconnected mt-2 mr-1"></div>
                                 ${data.UserName}
                             </div>
-                            <div id="chatbody" style="height:290px;overflow-y:scroll">
+                            <div id="chatbody${data.UserID}" style="height:290px;overflow-y:scroll">
                                 <div class="d-flex justify-content-start">
                                     <span style="background-color:white; border-radius:10px;">
 
@@ -614,6 +636,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                         <input id="chattext" class="chatInput" onkeyup="useEnter(${data.UserID})" type="text" style="position:fixed; bottom:8px;right:90px;width:230px" />
                             <a class="btn btnsubmit" style="position:fixed; bottom:8px;right:10px" onclick="submitText(${data.UserID})">送出</a>
                         `);
+                            $("#chattext").focus();
+                            chat.server.checkConnectedMem(data.UserID);
                         })
                     }
                 })

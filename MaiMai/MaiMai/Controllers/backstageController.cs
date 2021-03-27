@@ -148,7 +148,7 @@ namespace MaiMai.Controllers
                         buyerName = s.Key.firstName,
                         //SellerID =s.Select(i => i.SellerID),
                         price = s.Select(i => i.oneProductTotalPrice).Sum()
-                    });
+                    }).OrderByDescending(o=>o.OrderId);
 
                     return Json(ordercmplist, JsonRequestBehavior.AllowGet);
                 }
@@ -173,7 +173,7 @@ namespace MaiMai.Controllers
                         buyerName = s.Key.firstName,
                         //SellerID =s.Select(i => i.SellerID),
                         price = s.Select(i => i.oneProductTotalPrice).Sum()
-                    });
+                    }).OrderByDescending(o=>o.OrderId);
 
                     return Json(ordercmplist, JsonRequestBehavior.AllowGet);
                 }
@@ -198,7 +198,7 @@ namespace MaiMai.Controllers
                 buyerName = s.Key.firstName,
                 //SellerID =s.Select(i => i.SellerID),
                 price = s.Select(i => i.oneProductTotalPrice).Sum()
-            });
+            }).OrderByDescending(o=>o.OrderId);
 
             return Json(orderlist, JsonRequestBehavior.AllowGet);
         }
@@ -327,7 +327,7 @@ namespace MaiMai.Controllers
                 createdTime = s.createdTime,
                 inStoreQTY = s.inStoreQTY,
                 RequiredPostID = s.RequiredPostID
-            });
+            }).OrderByDescending(o=>o.ProductPostID);
 
             return Json(prodlist, JsonRequestBehavior.AllowGet);
         }
@@ -362,7 +362,8 @@ namespace MaiMai.Controllers
             cancel.status = false;
             db.SaveChanges();
 
-            return Content("成功下架");
+
+            return Json(cancel.UserID,JsonRequestBehavior.AllowGet);
         }
 
         //取得刪除列表
@@ -382,7 +383,7 @@ namespace MaiMai.Controllers
                 createdTime = s.createdTime,
                 inStoreQTY = s.inStoreQTY,
                 RequiredPostID = s.RequiredPostID
-            });
+            }).OrderByDescending(o=>o.ProductPostID);
 
             return Json(prodlist, JsonRequestBehavior.AllowGet);
         }
