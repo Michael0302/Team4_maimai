@@ -218,6 +218,15 @@
             box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
 
         }
+        .D_aha:hover {
+            cursor: pointer;
+            background-color: #f0f1f1;
+            box-shadow: 0 0 0 4px #fff;
+        }
+       /* .qqq1{
+            width:227px;
+            height:53px;
+        }*/
     </style>
 </head>
 
@@ -234,14 +243,23 @@
                         <div class="D_agM"></div>
                         <div class="D_agH">
                             <div class="D_rY  D_ix">
-                                <a class="D_sa D_rW D_sc D_sf D_ih" >
-                                    <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU g123" >商品</p>
+                                <a class="D_sa D_rW D_sc D_sf D_ih">
+                                    <p class="D_bY D_cf D_cl D_co D_cq D_cs D_cw D_rX D_bU g123">商品</p>
                                 </a>
-                                <a class="D_sa D_rW D_ih" href="../Comment/Comment">
+                                <a class="D_sa D_rW D_ih" href="/Comment/Comment">
                                     <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline">評價</p>
                                 </a>
+                                <a class="D_sa D_rW D_ih" data-toggle='modal' data-target='#bulid'>
+                                    <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline1">上架商品</p>
+                                </a>
+                                <a class="D_sa D_rW D_ih" href="/OrderManager/salesOrderIndex">
+                                    <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline2">賣家訂單管理</p>
+                                </a>
+                                <a class="D_sa D_rW D_ih" href="/MyAccount/MyAccount">
+                                    <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline3">編輯檔案</p>
+                                </a>
                             </div>
-                            <div class="D_agK w-25">
+                            @*<div class="D_agK w-25">
                                 <a class="D_ih" data-toggle='modal' data-target='#bulid'>
                                     <div class="D_aG D_ay D_aS D_aO D_aB " type="button">上架商品</div>
                                 </a>
@@ -252,10 +270,10 @@
                                 </a>
                             </div>
                             <div class="D_agK">
-                                <a class="D_ih" href="/settings/profile/">
+                                <a class="D_ih" href="/MyAccount/MyAccount">
                                     <div class="D_aG D_ay D_aS D_aO D_aB" type="button">編輯檔案</div>
                                 </a>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="D_agN">
@@ -269,11 +287,15 @@
                             <h2 id="lastName" class="D_bi D_bq D_bw D_by D_bg">@*建寧 黃*@</h2>
 
                             <p class="D_bY D_cj D_cl D_co D_cr D_ct D_cv D_bU"> </p>
-                            <div class="D_aha" style=""id="ViewComment">
-                                @*<img alt="" class="D_bE D_bA D_ahb" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/star-empty-66230871b8b309452e1913302057b3b5.svg" title="">
-                                <p class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_ahc D_ahe D_bU">尚無評價</p>
-                                <svg class="" fill="#57585a" height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z" id="iconArrow"></path></svg>*@
-                            </div>
+
+                            <a href="/Comment/Comment" style="text-decoration:none">
+                                <div class="D_aha" style="" id="ViewComment">
+
+                                    @*<img alt="" class="D_bE D_bA D_ahb" crossorigin="anonymous" src="https://mweb-cdn.karousell.com/build/star-empty-66230871b8b309452e1913302057b3b5.svg" title="">
+            <p class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_ahc D_ahe D_bU">尚無評價</p>
+            <svg class="" fill="#57585a" height="24" role="img" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M9.29 15.88L13.17 12 9.29 8.12c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0l4.59 4.59c.39.39.39 1.02 0 1.41L10.7 17.3c-.39.39-1.02.39-1.41 0-.38-.39-.39-1.03 0-1.42z" id="iconArrow"></path></svg>*@
+                                </div>
+                            </a>
                             <p id="City" class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_bV">新北市 (New Taipei) &nbsp;&nbsp;∙&nbsp;&nbsp; 已加入 3d</p>
                             <div class="D_agV" style="">
                                 <p class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_agW D_bV">已驗證</p>
@@ -512,13 +534,27 @@
         //}
         //greenline
         $(function () {
+
             $(".greenline").hover(function () {
                 $(".greenline").css("color", "green")
             } ,function () {
              $(".greenline").css("color", "black");
             });
-           
-
+            $(".greenline1").hover(function () {
+                $(".greenline1").css("color", "green")
+            }, function () {
+                $(".greenline1").css("color", "black");
+            });
+            $(".greenline2").hover(function () {
+                $(".greenline2").css("color", "green")
+            }, function () {
+                $(".greenline2").css("color", "black");
+            });
+            $(".greenline3").hover(function () {
+                $(".greenline3").css("color", "green")
+            }, function () {
+                $(".greenline3").css("color", "black");
+            });
             //$(".Shadow").hover(function () {
             //    $(".Shadow").css("box-shadow", "10px 5px 5px black")
             //}, function () {

@@ -25,11 +25,13 @@ namespace MaiMai.Controllers
 
         public ActionResult getAccount_P()
         {
-            var userName =Request.Cookies["LoginName"].Value.ToString();
+            var userName = Request.Cookies["LoginName"].Value.ToString();
             if (userName == null)
                 return Content("尚未登入");
             var getAccount = db.Member.Where(m => m.userAccount == userName).Select(s => new MemberViewModel()
             {
+                ProImg = s.ProImg,
+                connectionID = s.connectionID,
                 UserID = s.UserID,
                 userAccount = s.userAccount,
                 userPassWord = s.userPassWord,
@@ -59,6 +61,26 @@ namespace MaiMai.Controllers
             return Content("修改成功");
         }
 
+        public ActionResult MyAccount()
+        {
+            return View();
+        }
+        public ActionResult MyPassword()
+        {
+            return View();
+        }
 
+        public String Editpassword(LoginViewModel password)
+        {
+            Member mb1 = db.Member.FirstOrDefault(m => m.userAccount == password.userAccount && m.userPassWord == password.userPassWord);
+            if (mb1 == null)
+            {
+                return "帳號不存在或密碼錯誤!";
+            }
+
+           
+
+            return "登入成功";
+        }
     }
 }

@@ -21,8 +21,6 @@ width:  100%;
     margin: 5px auto;
 }
 
-
-
 /* ===================== */
 .requriedTab .nav-link.active, .requriedTab .show > .nav-link {
     color: #CBC0D3;
@@ -33,6 +31,13 @@ width:  100%;
   
 }
 
+.btn-post:hover {
+
+    background-color:#FFB4A2;
+}
+.btn-comment:hover {
+    background-color: #B5838D;
+}
 
 
 @media (max-width: 575.98px) {
@@ -96,5 +101,8 @@ img {
     
 }
 .comment {
+    background-color: #EFD3D7;
+}
+#start:hover {
     background-color: #EFD3D7;
 }

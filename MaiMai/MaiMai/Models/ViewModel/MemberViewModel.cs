@@ -17,7 +17,7 @@ namespace MaiMai.Models.ViewModel
 
         public string ProImg { get; set; }
 
-
+        public string connectionID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string Name { get; set; }
