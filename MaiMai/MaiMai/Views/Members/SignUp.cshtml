@@ -15,22 +15,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="~/Content/cssCHIEN/SignUP.css" rel="stylesheet" />
-
+    <style>
+        .aa1 {
+            text-decoration: none;
+        }
+    </style>
 </head>
+
+
 
 <body class="w-100">
 
     <div class="cf flex-l bg-near-white">
         <div class="w-50-l pv6-l pv5-ns pv4 ph5-ns ph4 tr-l self-center tc tl-l">
-            <a class="nowrap" href="/">
+            <a class="  aa1  " href="/">
                 <h1 class="mv0 f5 dib mr4 br b--light-silver">
-                    <img src="~/Content/ImageCHIEN/maimaiLOGO.svg" />
-
+                    @*<img src="~/Content/ImageCHIEN/maimaiLOGO.svg" />*@
+                    @*<img src="~/Maimai/images/svg/maimaiLOGO.svg" />*@
+                    <img src="~/Maimai/images/svg/maimaiTOPLOGO.svg" style="left:50px" />
                 </h1>
-                <h2 class="mv0 f5 dib">一起幫助需要幫助的人</h2>
+                <h2 class="mv0 f5 dib  ">跟我們一起，快樂購買</h2>
             </a>
         </div>
-        <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l">
+        <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l h-50">
             <div class="nt3 mt0-ns mb4"></div>
             <h3 class="b f4"> </h3>
             <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" data-scope="public_profile,email" data-onlogin="checkLoginState();"></div>
@@ -88,7 +95,7 @@
                             <div class="mt3">
                                 <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button> 
                                  
-                                <button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>
+                                @*<button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>*@
 
 
 
@@ -97,10 +104,10 @@
                             </div>
                         </form>
                     </div>
-                    <label class="f6">
+                    @*<label class="f6">
                         <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="user[remember_me]" id="user_remember_me">
                         記得我的帳號，下次自動登入
-                    </label>
+                    </label>*@
                 </div>
                 <p class="f7 gray">
                     繼續進行代表你同意

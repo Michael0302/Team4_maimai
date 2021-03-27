@@ -233,8 +233,17 @@
                                 <a class="D_sa D_rW D_ih D_sf">
                                     <p class="  D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU g123">評價</p>
                                 </a>
+                                <a class="D_sa D_rW D_ih" data-toggle='modal' data-target='#bulid'>
+                                    <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline1">上架商品</p>
+                                </a>
+                                <a class="D_sa D_rW D_ih" href="/OrderManager/salesOrderIndex">
+                                    <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline2">賣家訂單管理</p>
+                                </a>
+                                <a class="D_sa D_rW D_ih" href="/MyAccount/MyAccount">
+                                    <p class="D_bY D_cj D_cl D_co D_cq D_cs D_cv D_rX D_bU greenline3">編輯檔案</p>
+                                </a>
                             </div>
-                            <div class="D_agK w-25">
+                            @*<div class="D_agK w-25">
                                 <a class="D_ih" data-toggle='modal' data-target='#bulid'>
                                     <div class="D_aG D_ay D_aS D_aO D_aB " type="button">上架商品</div>
                                 </a>
@@ -248,7 +257,7 @@
                                 <a class="D_ih" href="/settings/profile/">
                                     <div class="D_aG D_ay D_aS D_aO D_aB" type="button">編輯檔案</div>
                                 </a>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                     <div class="D_agN">
@@ -543,7 +552,21 @@
             }, function () {
                 $(".greenline").css("color", "black");
             });
-
+            $(".greenline1").hover(function () {
+                $(".greenline1").css("color", "green")
+            }, function () {
+                $(".greenline1").css("color", "black");
+            });
+            $(".greenline2").hover(function () {
+                $(".greenline2").css("color", "green")
+            }, function () {
+                $(".greenline2").css("color", "black");
+            });
+            $(".greenline3").hover(function () {
+                $(".greenline3").css("color", "green")
+            }, function () {
+                $(".greenline3").css("color", "black");
+            });
         });
 
 
