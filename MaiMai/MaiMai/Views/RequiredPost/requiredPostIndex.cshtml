@@ -153,7 +153,7 @@
 
                     $("#allPost").append(`
                             <div class="my-3" style="background-color:#FFFFFF">
-                           <div class="row mx-auto shadow-lg" id="start" onclick="toRequiredPostPage(${item.RequiredPostID})">
+                           <div class="row mx-auto shadow-lg" id="start${i}" name="${item.RequiredPostID})">
                             <div class="photo">
                                 <img src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -250,6 +250,13 @@
                 })
             }
         })
+
+        var parent = document.getElementById('start');
+        var value = event.currentTarget.getAttribute('name');
+        console.log(     );
+        console.log(value);
+        console.log(parent);
+        parent.addEventListener('click', toRequiredPostPage(value), true);
         // ajax end
     })//documentReady
 

@@ -91,6 +91,7 @@ img {
 .post-button{
     display: flex;
     justify-content: space-between;
+    flex-grow:inherit;
 
 }
 .post-text{
@@ -105,4 +106,9 @@ img {
 }
 #start:hover {
     background-color: #EFD3D7;
+}
+.upCollepaseBox {
+    height:30px; 
+    background-color:#DDCAD5;
+    position:fixed;
 }
