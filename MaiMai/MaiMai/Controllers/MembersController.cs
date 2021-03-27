@@ -28,7 +28,57 @@ namespace MaiMai.Controllers
             return  "註冊成功" ; /* RedirectToAction("Homepage", "HomePage_C");*/
         }
 
+        public string MemberGG(MemberViewModel mber)
+        {
+            if (mber.city == null)
+            {
+                return "輸入東西";
+            }
+            Member memmgg = new Member()
+            {
+                 
+                userAccount = mber.userAccount,
+                userPassWord = mber.userPassWord,
+                city = mber.city,
+                address = mber.address,
+                phoneNumber = mber.phoneNumber,
+                profileImg = mber.upphoto.FileName,
+                firstName = mber.firstName,
+                lastName = mber.lastName,
+                birthday = mber.birthday,
+                identityNumber = mber.identityNumber,
+                selfDescription = mber.selfDescription,
+                userLevel = mber.userLevel,
+                totalStarRate = mber.totalStarRate,
+                email = mber.email
+            };
+            if (mber.upphoto == null)
+            {
+                memmgg.profileImg = "無圖示.jpg";
+            }
+            else
+            {
+                memmgg.userLevel = 3;
+                memmgg.totalStarRate =0;
 
+                memmgg.profileImg = mber.upphoto.FileName;
+                string filename = mber.upphoto.FileName;
+                mber.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/member/") + filename);
+                string filePath = $"../Content/ProductPostImg/member/{filename}";
+
+            }
+            //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
+            
+           
+        
+           
+  memrepp.Create(memmgg);
+            return "註冊成功";
+
+
+
+        }
+        maimaiRepository<Member> memrepp = new maimaiRepository<Member>();
 
 
 

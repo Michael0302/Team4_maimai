@@ -678,6 +678,7 @@
     <Content Include="Views\PersonalMarket\Personal_Index_WithoutLogin.cshtml" />
     <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
     <Content Include="Views\RequiredPost\requiredSingalPage.cshtml" />
+    <Content Include="Views\MyAccount\MyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
