@@ -15,22 +15,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link href="~/Content/cssCHIEN/SignUP.css" rel="stylesheet" />
-
+    <style>
+        .aa1 {
+            text-decoration: none;
+        }
+    </style>
 </head>
+
+
 
 <body class="w-100">
 
     <div class="cf flex-l bg-near-white">
         <div class="w-50-l pv6-l pv5-ns pv4 ph5-ns ph4 tr-l self-center tc tl-l">
-            <a class="nowrap" href="/">
+            <a class="  aa1  " href="/">
                 <h1 class="mv0 f5 dib mr4 br b--light-silver">
-                    <img src="~/Content/ImageCHIEN/maimaiLOGO.svg" />
-
+                    @*<img src="~/Content/ImageCHIEN/maimaiLOGO.svg" />*@
+                    @*<img src="~/Maimai/images/svg/maimaiLOGO.svg" />*@
+                    <img src="~/Maimai/images/svg/maimaiTOPLOGO.svg" style="left:50px" />
                 </h1>
-                <h2 class="mv0 f5 dib">一起幫助需要幫助的人</h2>
+                <h2 class="mv0 f5 dib  ">跟我們一起，快樂購買</h2>
             </a>
         </div>
-        <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l">
+        <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l h-50">
             <div class="nt3 mt0-ns mb4"></div>
             <h3 class="b f4"> </h3>
             <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" data-scope="public_profile,email" data-onlogin="checkLoginState();"></div>
@@ -38,7 +45,7 @@
             <div class="js-details reset-details mb3 f6">
                 <div class="mt3">
                     <div>
-                        <form>
+                        <form class="formFrame" enctype="multipart/form-data">
                             <div>
                                 <label class="b" for="userAccount">用戶帳號</label>
                                 <input onkeyup="value=value.replace(/[\W]/g,'') "
@@ -79,16 +86,20 @@
                                 <label class="b" for="identityNumber">身分證字號</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="text" name="identityNumber" id="identityNumber">
                                 <label class="b" for="profileImg">個人頭像</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">
+                                @*<input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">*@
+                                <div class="displayImg">
+                                    <div class="photo"><img id="Productimg" style="width:150px;height:150px"></div>
+                                    <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;">
+                                </div>
                                 <label class="b" for="selfDescription">個人簡介</label>
                                 <textarea class="w-100" required="required" autofocus="autofocus" type="text" name="selfDescription" id="selfDescription"> </textarea>
                                 <label class="b" for="email">信箱</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
                             </div>
                             <div class="mt3">
-                                <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button> 
-                                 
-                                <button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>
+                                <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button>
+                                <button type="button" id="p1" class="button b green" onclick="gogosignup()">註冊11</button>
+                                @*<button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>*@
 
 
 
@@ -97,10 +108,10 @@
                             </div>
                         </form>
                     </div>
-                    <label class="f6">
+                    @*<label class="f6">
                         <input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" checked="checked" name="user[remember_me]" id="user_remember_me">
                         記得我的帳號，下次自動登入
-                    </label>
+                    </label>*@
                 </div>
                 <p class="f7 gray">
                     繼續進行代表你同意
@@ -137,7 +148,52 @@
 
 
 
-    <script>
+    <script>        
+        function previewFile() {
+            //var photo = $(eler).val();
+            const preview = document.querySelector('#Productimg');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                // convert image file to base64 string
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        } //  doUpload end
+
+        function gogosignup() {
+
+
+            var form = document.querySelector(".formFrame")
+            console.log(form)
+            var data = new FormData(form);
+            $.ajax({
+                url: "/Members/MemberGG",
+                type: "Post",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    var good = data.indexOf("註冊成功")
+                    console.log(good)
+                    if (good == 0) {
+                        alertTest1()
+                        setTimeout("home()", 2000)
+
+                    }
+                    else {
+                        //alert("註冊失敗,請檢查輸入欄位")
+                        alertTest()
+                    }
+
+                }
+            })
+        }//end  of submit product
+
 
 
         document.getElementById("firstName").onblur = checkName1;
