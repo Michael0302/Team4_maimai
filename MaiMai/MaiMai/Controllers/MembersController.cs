@@ -182,7 +182,8 @@ namespace MaiMai.Controllers
             Response.Cookies["LoginAccount"].Expires = DateTime.Now.AddDays(-1);
             Response.Cookies["LoginName"].Expires = DateTime.Now.AddDays(-1);
             Response.Cookies["MemberLevel"].Expires = DateTime.Now.AddDays(-1);
-            
+            Response.Cookies["LoginID"].Expires = DateTime.Now.AddDays(-1);
+
             return RedirectToAction("MaimaiIndexNew", "NewMaimaiIndex");
         }
 
