@@ -569,7 +569,6 @@
              var reciver = $("#searchID").val().toUpperCase();
              var loginID = getCookie("LoginID");
              var date = new Date();
-             console.log(date);
              var year = date.getFullYear();
              var mon = date.getMonth();
              var dat = date.getDate();
@@ -753,7 +752,7 @@
             url: "@Url.Action("cancelProduct", "backstage")",
             data: { ProductPostID: ProductPostID },
             type: "GET",
-            success: function (oneProduct) {
+            success: function (userID) {
                 Swal.fire(
                     "此訂單已下架",
                     "",
@@ -761,6 +760,15 @@
                 );
                 //alert("此訂單已下架!");
                 getAllPorducts();
+                //發通知給賣家
+                $.connection.hub.start().done(function () {
+                    var sender = getCookie("LoginID");
+                    if (sender == "") {
+                        alert("請先登入")
+                        return false;
+                    }
+                    chat.server.sendToOne_OffSale(sender, userID);
+                })
             }
         })
         event.stopPropagation();

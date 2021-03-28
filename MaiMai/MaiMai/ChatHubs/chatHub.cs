@@ -90,7 +90,7 @@ namespace SignalRMvc.chatHubs
             if(user != null)
             {
                 var nowNotificationID = db.Notification.Max(m => m.NotificationID)+1;
-                Clients.Client(user.connectionID).addMessage(message, nowNotificationID);
+                Clients.Client(user.connectionID).addMessage(message, nowNotificationID,"系統");
 
                 Notification noti = new Notification()
                 {
@@ -123,6 +123,31 @@ namespace SignalRMvc.chatHubs
 
             db.Notification.Add(noti);
             db.SaveChanges();
+        }
+
+        //下架通知
+        public void SendToOne_OffSale(int sender, int reciver)
+        {
+            var user = db.Member.Find(reciver);
+            var message = "貼文違規，已下架";
+            if (user != null)
+            {
+                var nowNotificationID = db.Notification.Max(m => m.NotificationID) + 1;
+                Clients.Client(user.connectionID).addMessage(message, nowNotificationID, "違規");
+
+                Notification noti = new Notification()
+                {
+                    SenderID = sender,
+                    ReciverLevel = reciver.ToString(),
+                    NotifyText = message,
+                    CreateTime = DateTime.Now,
+                    Status = false,
+                    Category = "違規"
+                };
+
+                db.Notification.Add(noti);
+                db.SaveChanges();
+            }
         }
 
         //聊天室用

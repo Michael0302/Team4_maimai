@@ -342,11 +342,11 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
                     if (category == "系統") {
-                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "違規") {
-                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm" href="#"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../PersonalMarket/Personal_Index"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "訂單") {
-                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}')"><a class="btn-sm" href="#"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     }
                 }
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
@@ -409,10 +409,10 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             }
                         } else if (noti.Category == "違規") {//下架貼文，發通知
                             if (noti.Status == false) {
-                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="../PersonalMarket/Personal_Index"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
                             else {
-                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../PersonalMarket/Personal_Index"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
                         }
                     })
@@ -619,7 +619,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 }
                             });
                         $("#chatroom").html(`
-                            <div class="chatReciver">
+                            <div class="chatReciver d-flex">
                                 <div id="isConnect${data.UserID}" class="isconnected mt-2 mr-1"></div>
                                 ${data.UserName}
                             </div>
