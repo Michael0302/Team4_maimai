@@ -15,8 +15,37 @@ padding:0;
     color: #EA0000;
     margin: 0;
     padding: 0;
-    
 }
+.StarFiveStyle {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: fantasy;
+    padding-left: 250px;
+}
+    .StarFiveStyle > p {
+        width:150px;
+        color: #FFFFFF;
+        background: linear-gradient(#FFB4A2,#E5989B);
+    }
+.imgimg2 {
+    height:280px;width:450px; box-shadow: -3px -3px 3px #7B7B7B;
+}
+    .imgimg2:hover {
+        transform: scale(1,1);
+        transition: all 1s ease-out;
+        transform: scale(1.2,1.2);
+    }
+
+
+.start6 {
+    height: 295px;
+    width: 235px;
+}
+    .start6:hover {
+        transform: scale(1,1);
+        transition: all 1s ease-out;
+        transform: scale(1.2,1.2);
+    }
     .MaiMai > a > p {
         margin: 0;
         padding: 0;
@@ -26,7 +55,7 @@ padding:0;
 }
 /*} NICO*/
 .nav1 {
-    width: 100%;
+    width:1100px;
     position: fixed;
     z-index: 50;
     background-color: #FCFCFC;
@@ -48,19 +77,21 @@ padding:0;
             margin-top: 8%;
             padding: 0;
         }*/
-.nav1 div.main_list div.navlinks div.svglink {
-                width: 100%;
-                height: 100%;
-                padding: 0;
-                padding-bottom:13px;
-                padding-top:13px;
-                padding-left:13px;
-                padding-right:13px;
-                /*padding-right: 3rem;*/
-            }
+    .nav1 div.main_list div.navlinks div.svglink {
+        width: 50px;
+        height: 50px;
+        /*padding: 0;*/
+        padding-bottom: 13px;
+        padding-top: 13px;
+        padding-left: 13px;
+        padding-right: 13px;
+        
+        /*padding-right: 3rem;*/
+    }
 .组_22 {
     display: none;
 }
+
 .组_23 {
 width:28px;
 height:28px;
@@ -86,12 +117,8 @@ border:1px solid;
         background-position: center top;
         background-size: cover;
     }
-input {
-    outline: none;
-    border: none;
-    font-size: 20px;
-    left:15px;
-}
+
+
 /*Carsousel*/
 .slide_btn {
     display: flex;
@@ -181,7 +208,7 @@ input {
 }
 
 .dropdown-search {
-    width:100%;
+    width:900px;
     height: 50px;
     border-radius: 35px;
     /*margin-top: 1%;*/
@@ -192,7 +219,7 @@ input {
 
 .Ajax-search-dropdown-img > img {
     height: 84px;
-    width: 192px;
+    width: 182px;
     border-radius: 15px;
     position: relative;
     top: 0;
@@ -207,12 +234,12 @@ input {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     width: 80px;
-    height: 38px;
+    height: 33px;
     /*background-color: #BEBEBE;*/
-    color: #272727;
+    /*color: #272727;*/
     font-weight: bold;
     /*font: 600;*/
-    font-size: 25px;
+    font-size: 20px;
     font-family: fantasy;
     text-align: center;
     cursor: pointer;
@@ -227,15 +254,16 @@ div.tag > a.btn {
     transition: transform 0.25s ease;
     background-color: #F0F0F0;
     cursor: pointer;
+    color: #EA0000;
 }
 
-    .tag:active {
-        transform: scale(1.25,1.25);
-        transition: transform 0.25s ease;
-        background-color: #000000;
-        color: #FFFFFF;
-        border:2px solid skyblue;
-    }
+.tag:active {
+    transform: scale(1.25,1.25);
+    transition: transform 0.25s ease;
+    background-color:#FF0000;
+    color: #FFFFFF;
+    /*border: 2px solid skyblue;*/
+}
 @media (min-width: 576px) and (max-width: 1000px) {
     #inputsearch {
     display:none;
@@ -261,7 +289,8 @@ div.tag > a.btn {
     right: 10px;
     bottom: 0px;
     font-size: 20px;
-    z-index:999;
+    z-index: 999;
+    box-shadow: 3px 3px 9px #BEBEBE;
 }
 
 .chatmsg {
@@ -274,6 +303,7 @@ div.tag > a.btn {
     transform: translateY(500px);
     transition: .5s;
     z-index: 999;
+    box-shadow: 3px 3px 9px #BEBEBE;
 }
 
 /*聊天室窗內容*/
@@ -283,6 +313,31 @@ div.tag > a.btn {
     overflow-y:scroll;
     overflow-x:hidden;    
 }
+
+.notiHover:hover {
+    background-color: #BEBEBE;
+}
+
+/*通知欄紅點*/
+.redPoint{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background-color:red;
+    position:absolute;
+    right:8px;
+    top:10px;
+    color:white;
+    font-size:10px;
+    font-weight:500;
+    text-align:center;   
+}
+
+.fade {
+    opacity: 1;
+}
+
+
 
 
 /*====================================================================*/

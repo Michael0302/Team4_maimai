@@ -49,15 +49,18 @@
     margin: 20px 20px;
 }
 
+
 .displayInput {
     margin: 20px;
+    width:50%;
 }
 
-    .displayInput > h6 > input {
+    .displayInput > input {
         margin-left: 20px;
+        border:1px solid gray;
     }
 
-    .displayInput > h6 > textarea {
+    .displayInput >  textarea {
         margin-left: 20px;
     }
 
@@ -67,6 +70,12 @@
         color: darkslategray;
         font-weight: 900;
     }
+
+.form-check-label {
+    margin: 30px 20px;
+    color: darkslategray;
+    font-weight: 900;
+}
 
 .submitBtn {
     width: 80px;
