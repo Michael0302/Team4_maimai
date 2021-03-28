@@ -113,7 +113,8 @@
     </div>
     <script>
         function CarouselClick(PostID) {
-            window.location.href = `/NewMaimaiIndex/ProdutPost?PostID=${PostID}`;
+            window.open(`/RequiredPost/requiredSingalPage?rqID=${PostID} `, 'MAIMAI徵求台');
+            //window.location.href = `/NewMaimaiIndex/ProdutPost?PostID=${PostID}`;
             console.log(ProductPostID);
         }
         function tagonclick(TagID) {
@@ -186,7 +187,7 @@
                 success: function (NewAddCarousel) {
                     $(NewAddCarousel).each(function (i, item) {
                         $("#NewAddCarousel").append(`
-                        <div class="item mx-md-2 NewCarouseladvertising"onclick="CarouselClick(${item.RequiredPostID})">
+                        <div class="item mx-md-2 NewCarouseladvertising" onclick="CarouselClick(${item.RequiredPostID})">
                                 <div class="col-xs-4">
                                     <a href="#1" >
                                              <div class="img-responsive "  style="background-image:url(../Content/resource_nico/images/徵求台POST/${item.postImg})
@@ -230,7 +231,7 @@
                         $("#addCarousel").append(`
                         <div class="item mx-md-2 Carouseladvertising"onclick="CarouselClick(${item.ProductPostID})">
                                 <div class="col-xs-4">
-                                    <a href="#1">
+                                    <a href="#">
                                              <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})
                                                             ;height: 200px; width: 200px;background-size:cover;"></div>
                                             <div style="text-overflow: ellipsis;">${item.productDescription}</div>
@@ -322,6 +323,7 @@
                 show();
             })
         }
+
     </script>
     @*新商品輪播*@
 </body>
