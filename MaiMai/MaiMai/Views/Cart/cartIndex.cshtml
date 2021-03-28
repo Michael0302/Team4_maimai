@@ -115,7 +115,7 @@
                     $("#cartList").append(`
                         <tr>
                         <td><input data-productID="${cart.CartID}" type="checkbox" class="mr-2 sel" onclick="changeValue()">${cart.productName}</td>
-                        <td "><img src="../Content/ProductPostImg/${cart.productImg}"/></td>
+                        <td "><div class="mx-auto" style="width:200px;height:200px;overflow: hidden"><img style="width:100%;" src="../Content/ProductPostImg/${cart.productImg}"/></div></td>
                         <td>${cart.price}</td>
                         <td>${cart.QTY}</td>
                         <td class="proTotal">${cart.price*cart.QTY}</td>
