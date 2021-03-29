@@ -25,6 +25,7 @@ namespace MaiMai.Models
         public Nullable<int> orderStatus { get; set; }
         public Nullable<System.DateTime> createdTime { get; set; }
         public string CartNumber { get; set; }
+        public Nullable<int> OrderTotalPrice { get; set; }
     
         public virtual Member Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

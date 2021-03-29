@@ -33,7 +33,7 @@ namespace MaiMai.Models
         public Nullable<int> RequiredPostID { get; set; }
         public string county { get; set; }
         public string district { get; set; }
-        public Nullable<bool> status { get; set; }
+        public Nullable<int> status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Cart { get; set; }
