@@ -349,7 +349,7 @@ namespace MaiMai.Controllers
                 starRate= star,
                 commentDescription=description,
                 UserID=UserID,
-                OrderdetalID = OrderID,
+                OrderdetalID = orderID,
                 CommentorUserID= CommentorUserID,
             };
             cmdb.Create(cmt);
