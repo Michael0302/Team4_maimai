@@ -263,6 +263,7 @@
     } // end of getCookie
 
     var test = getCookie('LoginID');
+    var starRate;
 
     $(function () {
 
@@ -405,7 +406,7 @@
             }
         })
 
-
+       
         // comment
         // 星星評等
         $("#div0").find("img").on({
@@ -485,46 +486,58 @@
 
 
 
-      //OrderID:3 獲得目前評價s
-        function getComment(id) {
-                $.ajax({
-                    url: "@Url.Action("getComment","MyOrder")",
-                    data: { OrderDetailID:id},
-                    type: "GET",
-                    success: function (result) {
-                        var CNT = result.length;
-                        console.log(result);
-                        console.log(`${result.img}`);
 
-                        var totalStar = result.reduce((a, b) => a.starRate + b.starRate);
-                        var starAVG = totalStar / CNT;
-                        console.log("totalStar", totalStar);
-                        console.log("starAVG", starAVG);
+     //OrderID:3 獲得目前評價s
+    function getComment(oderdeail) {
+        console.log(oderdeail);
+        $("#OrderID").attr("name",oderdeail);
+        $.ajax({
+            url: "@Url.Action("getComment","MyOrder")",
+            data: { OrderDetailID: oderdeail},
+            type: "GET",
+            success: function (result) {
+                var CNT = result.CNT;
+                var starTotal = result.starTotal;
+                var starAVG = 0;
+                if (CNT==0)
+                {
+                    starAVG = 0;
+                }
+                else
+                {
+                    starAVG = starTotal / CNT;
+                }
+                console.log('result ',result);
+                console.log("img",`${result.img}`);
+                console.log("starTotal", `${result.starTotal}`);
+                console.log("starAVG得分",`${starAVG}`);
 
-                        $("#commentCNT").text(`已經有${CNT}人評分`);
-                        $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result[0].img}`);
-                        $("#progress-bar").css("width", `${starAVG*20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG}`);
-                    },
-                })
-         }
+                $("#commentCNT").text(`已經有${result.CNT}人評分`);
+                $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.img}`);
+                $("#progress-bar").css("width", `${starAVG * 20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG }`);
+            },
+        })
+    }
 
-        function saveComment() {
-            console.log(starRate);
+    function saveComment() {
+        var oderdeail = $("#OrderID").attr("name");
+        console.log(oderdeail);
 
-                $.ajax({
-                    url: "@Url.Action("saveComment", "MyOrder")",
-                    data: {  OrderID:"40", starRate: starRate, description: $(`#commentTXT`).val()},
-                    type: "GET",
-                    success: function (result) {
-                    swal('成功', '感謝您寶貴的意見', 'success');
-                        setTimeout(function () { $(".close").click() }, 700);
-                    },
-                    error: function(){
-                    swal("失敗","星星滿意度為必要勾選!!",'error');
-                    }
-                 })
-         }
+        $.ajax({
+            url: "@Url.Action("saveComment", "MyOrder")",
+            data: { OrderID: oderdeail, starRate: starRate, description: $(`#commentTXT`).val()},
+            type: "GET",
+            success: function (result) {
+            swal('成功', '感謝您寶貴的意見', 'success');
+                setTimeout(function () { $(".close").click() }, 700);
+            },
+            error: function(){
+            swal("失敗","星星滿意度為必要勾選!!",'error');
+            }
+            })
+            }
 
     //comment
+
 
 </script>

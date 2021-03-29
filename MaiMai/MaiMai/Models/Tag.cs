@@ -17,8 +17,8 @@ namespace MaiMai.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tag()
         {
-            this.RequiredPost = new HashSet<RequiredPost>();
             this.ProductPost = new HashSet<ProductPost>();
+            this.RequiredPost = new HashSet<RequiredPost>();
         }
     
         public int TagID { get; set; }
@@ -26,8 +26,8 @@ namespace MaiMai.Models
         public string TagImg { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequiredPost> RequiredPost { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPost> ProductPost { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RequiredPost> RequiredPost { get; set; }
     }
 }
