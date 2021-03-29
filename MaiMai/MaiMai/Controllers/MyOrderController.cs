@@ -337,18 +337,19 @@ namespace MaiMai.Controllers
 
 
         maimaiRepository<Comment> cmdb = new maimaiRepository<Comment>();
-        public ActionResult saveComment(int OrderID, int starRate, string description)
+        public ActionResult saveComment(string OrderID, string starRate, string description)
         {
-            
-            var UserID = 1;   // Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var  OrderDetailID=db.OrderDetail.FirstOrDefault(t => t.OrderID == OrderID).OrderDetailID;
-            var CommentorUserID=db.OrderDetail.Find(OrderDetailID).SellerID;
+            var orderID = Convert.ToInt32(OrderID);
+            var star = Convert.ToInt32(starRate);
+            var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            //var  OrderDetailID=db.OrderDetail.FirstOrDefault(t => t.OrderID == orderID).OrderDetailID;
+            var CommentorUserID=db.OrderDetail.Find(orderID).SellerID;
 
             Comment cmt = new Comment() {
-                starRate= starRate,
+                starRate= star,
                 commentDescription=description,
                 UserID=UserID,
-                OrderID= OrderID,
+                OrderdetalID = orderID,
                 CommentorUserID= CommentorUserID,
             };
             cmdb.Create(cmt);
@@ -390,7 +391,7 @@ namespace MaiMai.Controllers
                 buyerUserID = s.Key.QTY,
                 ItemName= s.Key.productName,
                 TotalAmounot = s.Key.oneProductTotalPrice,
-                MerchantTradeDate,
+                //MerchantTradeDate,
             }).ToList();
 
             
