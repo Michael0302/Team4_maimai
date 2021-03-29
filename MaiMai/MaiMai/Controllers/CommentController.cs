@@ -26,7 +26,7 @@ namespace MaiMai.Controllers
             var table = db.Comment.Where(m => m.CommentorUserID == UserID).Select(m => new CommentViewModel()
             {
                 CommentID = m.CommentID,
-                OrderID = m.OrderID,
+                OrderID = m.OrderdetalID,
                 starRate = m.starRate,
                 commentDescription = m.commentDescription,
                 UserID = m.UserID,

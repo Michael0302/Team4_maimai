@@ -31,7 +31,7 @@
             <PropertyRef Name="CommentID" />
           </Key>
           <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderID" Type="int" />
+          <Property Name="OrderdetalID" Type="int" />
           <Property Name="starRate" Type="float" />
           <Property Name="commentDescription" Type="text" />
           <Property Name="UserID" Type="int" Nullable="false" />
@@ -80,6 +80,7 @@
           <Property Name="orderStatus" Type="int" />
           <Property Name="createdTime" Type="datetime" />
           <Property Name="CartNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderTotalPrice" Type="int" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -110,7 +111,7 @@
           <Property Name="RequiredPostID" Type="int" />
           <Property Name="county" Type="nchar" MaxLength="10" />
           <Property Name="district" Type="nchar" MaxLength="10" />
-          <Property Name="status" Type="bit" />
+          <Property Name="status" Type="int" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -207,15 +208,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+        <Association Name="FK_Comment_OrderDetail">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="OrderDetailID" />
             </Principal>
             <Dependent Role="Comment">
-              <PropertyRef Name="OrderID" />
+              <PropertyRef Name="OrderdetalID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -380,8 +381,8 @@
             <End Role="Member" EntitySet="Member" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_Order" Association="Self.FK_Comment_Order">
-            <End Role="Order" EntitySet="Order" />
+          <AssociationSet Name="FK_Comment_OrderDetail" Association="Self.FK_Comment_OrderDetail">
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Member" Association="Self.FK_Order_Member">
@@ -463,13 +464,13 @@
             <PropertyRef Name="CommentID" />
           </Key>
           <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderID" Type="Int32" />
+          <Property Name="OrderdetalID" Type="Int32" />
           <Property Name="starRate" Type="Double" />
           <Property Name="commentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <Property Name="CommentorUserID" Type="Int32" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Comment_Member" FromRole="Comment" ToRole="Member" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Comment_Order" FromRole="Comment" ToRole="Order" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_Comment_OrderDetail" FromRole="Comment" ToRole="OrderDetail" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -523,7 +524,7 @@
           <Property Name="orderStatus" Type="Int32" />
           <Property Name="createdTime" Type="DateTime" Precision="3" />
           <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_Order" FromRole="Order" ToRole="Comment" />
+          <Property Name="OrderTotalPrice" Type="Int32" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Order_Member" FromRole="Order" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
@@ -539,6 +540,7 @@
           <Property Name="SellerID" Type="Int32" />
           <Property Name="buyerStatus" Type="Int32" />
           <Property Name="sellerStatus" Type="Int32" />
+          <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_OrderDetail" FromRole="OrderDetail" ToRole="Comment" />
           <NavigationProperty Name="Member" Relationship="Self.FK_OrderDetail_Member" FromRole="OrderDetail" ToRole="Member" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
           <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
@@ -559,7 +561,7 @@
           <Property Name="RequiredPostID" Type="Int32" />
           <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="status" Type="Boolean" />
+          <Property Name="status" Type="Int32" />
           <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
           <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
@@ -668,15 +670,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_Order">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+        <Association Name="FK_Comment_OrderDetail">
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="0..1" />
           <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Order">
-              <PropertyRef Name="OrderId" />
+            <Principal Role="OrderDetail">
+              <PropertyRef Name="OrderDetailID" />
             </Principal>
             <Dependent Role="Comment">
-              <PropertyRef Name="OrderID" />
+              <PropertyRef Name="OrderdetalID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -841,8 +843,8 @@
             <End Role="Member" EntitySet="Member" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_Order" Association="Self.FK_Comment_Order">
-            <End Role="Order" EntitySet="Order" />
+          <AssociationSet Name="FK_Comment_OrderDetail" Association="Self.FK_Comment_OrderDetail">
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
             <End Role="Comment" EntitySet="Comment" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Member" Association="Self.FK_Order_Member">
@@ -923,7 +925,7 @@
             <EntityTypeMapping TypeName="maimaiModel.Comment">
               <MappingFragment StoreEntitySet="Comment">
                 <ScalarProperty Name="CommentID" ColumnName="CommentID" />
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderdetalID" ColumnName="OrderdetalID" />
                 <ScalarProperty Name="starRate" ColumnName="starRate" />
                 <ScalarProperty Name="commentDescription" ColumnName="commentDescription" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -975,6 +977,7 @@
                 <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
                 <ScalarProperty Name="createdTime" ColumnName="createdTime" />
                 <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
+                <ScalarProperty Name="OrderTotalPrice" ColumnName="OrderTotalPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
