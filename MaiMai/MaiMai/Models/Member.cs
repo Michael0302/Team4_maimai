@@ -22,10 +22,10 @@ namespace MaiMai.Models
             this.Comment = new HashSet<Comment>();
             this.Order = new HashSet<Order>();
             this.OrderDetail = new HashSet<OrderDetail>();
-            this.ProductPost = new HashSet<ProductPost>();
             this.Report = new HashSet<Report>();
             this.Report1 = new HashSet<Report>();
             this.RequiredPost = new HashSet<RequiredPost>();
+            this.ProductPost = new HashSet<ProductPost>();
         }
     
         public int UserID { get; set; }
@@ -57,12 +57,12 @@ namespace MaiMai.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductPost> ProductPost { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Report> Report { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Report> Report1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RequiredPost> RequiredPost { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductPost> ProductPost { get; set; }
     }
 }

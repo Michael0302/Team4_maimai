@@ -7,51 +7,13 @@
     <div class="shadow-lg d-flex" style="height:800px">
 
         <div class=" card col-5 w-100 h-100 py-5" style="border:1px solid black;" id="page-left">
-            @*<img class="photo mr-3" />
 
-                <h6 class="my-1">貼文名稱:</h6><input class="ml-2 form-control" type="text" required name="postName" id="postName">
-                <div>
-
-                    <img style="border-radius:50%; width:30px;height:30px" />
-                    <h6 class="my-1"> 買家 : <span class="font-weight-bolder"></span></h6>
-                </div>
-                <h6 class="my-1">貼文描述:</h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" required onclick="tag()"></textarea>
-                <h6 class="my-1"> 大概徵求價位：<span class="font-weight-bolder"></span>  元</h6>
-                <div>
-                    <span></span>
-                    <span></span>
-                </div>
-                <span>建立時間: </span>*@
 
         </div>
 
         <div class="card col-7 h-100" style="border:1px solid black">
             <div id="commentBox" class="h-100" style="overflow-y:scroll">
-                @*<div class="row mx-auto shadow-lg my-3">
-
-                <div class="w-25 h-25">
-                    <img class="w-100" src="../Content/ProductPostImg/}]">
-                </div>
-
-
-                <div class="post-text">
-                    <div class="d-flex justify-content-between">
-                        <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=3"><h3 class="ml-1" id="postNam"><span class="font-weight-bolder">23232323</span></h3></a>
-                        <h6 class="my-auto">countyitem.district</h6>
-                    </div>
-
-                    <div class="post-text">
-                        <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID= item.useraccountID}"><h6 id="userName">賣家 :  <span class="font-weight-bolder">item.userAccount</span></h6></a>
-
-                        <h6 id="text">產品敘述 :  <span class="font-weight-bolder"> item.productDescription}</span></h6>
-                    </div>
-
-                    <div class="post-button">
-                        <h6 id="price  "> <span class="font-weight-bolder">價位： item.price</span>  元</h6>
-                        <a class="btn" href="../../NewMaimaiIndex/ProdutPost?PostID= item.ProductPostID">查看商品</a>
-                    </div>
-                </div>
-            </div>`*@
+                
 
 
             </div>
@@ -61,66 +23,70 @@
 
             <button class="btn w-100" style=" background-color: #DDCAD5;" type="button" data-toggle="collapse" data-target="#collapsecommentBox" aria-expanded="false" aria-controls="collapsecommentBox">
                 我要留言
-            </button>
+            </button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 
-            <div class="collapse" id="collapsecommentBox">
-                <div class="card card-body">
-                    <div class="card card-body w-100 shadow">
-                        <span class="btn btn-outline-dark" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter" style="width:60px">檢舉</span>
+            <div class="collapse" id="collapsecommentBox"> @*不能用*@
 
-                        <form class="formFrame mx-auto Commentform " enctype="multipart/form-data">
-                            <div class="displayImg Productimg ">
-                                <div class="photo"><img id="Productimg "></div>
-                                <input type="file" onChange="previewFile()" name="upphoto" id="productImg "
-                                       style="display: block;">
+                <div class="card card-body w-100 shadow">
+                    <span class="btn btn-outline-dark" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter" style="width:60px">檢舉</span>
+
+                    <form class="formFrame mx-auto Commentform " enctype="multipart/form-data">
+                        <div class="displayImg Productimg ">
+                            <div class="w-50"><img class="w-100" id="Productimg"></div>
+                            <input type="file" onChange="previewFile()" name="upphoto" id="productImg "
+                                   style="display: block;">
+                            <div class="ml-5">
+                                <input class="form-check-input" id="showProduct" onchange="addStatus() " type="radio" name="status">
+                                <label>此商品是否加入個人賣場</label>
                             </div>
-                            <div class="displayInput w-50">
-                                <h6>產品名稱:</h6><input class="ml-2 form-control" type="text" name="productName" id="productName  ">
-                                <h6>產品描述:</h6>
-                                <textarea id="productDescription " name="productDescription" placeholder="使用程度、幾成新"
-                                          class="form-control ml-2" rows="3" onclick="tag()"></textarea>
-                                <h6>交貨方式:</h6>
-                                <div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="transationType" value="express "
-                                               id="express " checked>
-                                        <label class="form-check-label " for="express ">
-                                            物流交貨
-                                        </label>
-                                    </div>
-                                    <div class="form-check input-group">
-                                        <input class="form-check-input" type="radio" name="transationType"
-                                               onchange="changeDis()" id="pTop " value="pTop ">
-                                        <label class="form-check-label" for="pTop ">
-                                            當面交貨/地點
-                                        </label>
-                                    </div>
-                                    <div id="city "></div>
+                        </div>
+                        <div class="displayInput w-100">
+                            <h6>產品名稱:</h6><input class="ml-2 form-control" type="text" name="productName" id="productName  ">
+                            <h6>產品描述:</h6>
+                            <textarea id="productDescription " name="productDescription" placeholder="使用程度、幾成新"
+                                      class="form-control ml-2" rows="3" onclick="tag()"></textarea>
+                            <h6>交貨方式:</h6>
+                            <div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="transationType" value="express "
+                                           id="express " checked>
+                                    <label class="form-check-label " for="express ">
+                                        物流交貨
+                                    </label>
                                 </div>
-
-
-                                <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="price">
-                                <h6>數量:</h6><input class="ml-2 form-control" type="text" name="inStoreQTY" id="inStoreQTY">
-                                <h6>
-                                    標籤:
-                                    <select id="tagselection" class="form-control" name="TagID">
-                                        <option>Choose...</option>
-                                    </select>
-                                </h6>
-
-                                <!-- createtime -->
-                                <input type="hidden" name="createdTime">
-                                <!-- userID -->
-                                <input type="hidden" name="RequiredPostID">
-                                <!-- requiredPostID -->
-                              
+                                <div class="form-check input-group">
+                                    <input class="form-check-input" type="radio" name="transationType"
+                                           onchange="changeDis()" id="pTop " value="pTop ">
+                                    <label class="form-check-label" for="pTop ">
+                                        當面交貨/地點
+                                    </label>
+                                </div>
+                                <div id="city "></div>
                             </div>
 
-                        </form>
-                        <button type="submit" class="btn btn-comment" style="color:#FFB4A2" onclick="submitProdouct(this)">建立商品留言</button>
-                    </div>
-                </div> @*end of 商品留言*@
-            </div>
+
+                            <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="price">
+                            <h6>數量:</h6><input class="ml-2 form-control" type="text" name="inStoreQTY" id="inStoreQTY">
+                            <h6>
+                                標籤:
+                                <select id="tagselection" class="form-control" name="TagID">
+                                    <option>Choose...</option>
+                                </select>
+                            </h6>
+
+                            <!-- createtime -->
+                            <input type="hidden" name="createdTime">
+                            <!-- userID -->
+                            <input type="hidden" name="RequiredPostID">
+                            <!-- requiredPostID -->
+
+                        </div>
+
+                    </form>
+                    <button type="submit" class="btn btn-comment" style="color:#FFB4A2" onclick="submitProdouct(this)">建立商品留言</button>
+                </div>
+
+            </div>@*end of 商品留言*@
         </div>
 
     </div>
@@ -335,7 +301,7 @@
 
 
     function submitProdouct() {
-       
+
 
         var test = getCookie('LoginAccount');
         if (test == "") {
@@ -348,7 +314,7 @@
         var data = new FormData(form);
         data.append("RequiredPostID", getRquiredPostID)
         console.log(data);
-        
+
         $.ajax({
             url: "/RequiredPost/commemtProductPost",
             type: "Post",
@@ -409,7 +375,7 @@ ${item.reason}</label>
             }
         })
     }
-    
+
     function changeColor() {
         $(event.target).removeClass("btn-info").addClass("btn-success").siblings().removeClass("btn-success").addClass("btn-info");
     };
