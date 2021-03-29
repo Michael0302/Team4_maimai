@@ -77,7 +77,7 @@
                 </div>
 `);
 
-                $(result).each(function (index, item) {
+                $.each(result, function (index, item) {
                     $("#reportTags").append(`
 <input type="radio"class="btn btn-info " value="${index}"style="border-radius:50px"id="btnradio${index}" required>
   <label  for="btnradio${index}" class="btn btn-info " value="${index}"style="border-radius:50px" onclick="changeColor()" >
