@@ -19,6 +19,13 @@
         .aa1 {
             text-decoration: none;
         }
+        input:focus {
+            outline: none
+        }
+        textarea:focus {
+            outline: none
+        }
+       
     </style>
 </head>
 
@@ -45,7 +52,7 @@
             <div class="js-details reset-details mb3 f6">
                 <div class="mt3">
                     <div>
-                        <form>
+                        <form class="formFrame" enctype="multipart/form-data">
                             <div>
                                 <label class="b" for="userAccount">用戶帳號</label>
                                 <input onkeyup="value=value.replace(/[\W]/g,'') "
@@ -86,15 +93,19 @@
                                 <label class="b" for="identityNumber">身分證字號</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="text" name="identityNumber" id="identityNumber">
                                 <label class="b" for="profileImg">個人頭像</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">
+                                @*<input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">*@
+                                <div class="displayImg">
+                                    <div class="photo"><img id="Productimg" style="width:150px;height:150px"></div>
+                                    <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;">
+                                </div>
                                 <label class="b" for="selfDescription">個人簡介</label>
                                 <textarea class="w-100" required="required" autofocus="autofocus" type="text" name="selfDescription" id="selfDescription"> </textarea>
                                 <label class="b" for="email">信箱</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
                             </div>
                             <div class="mt3">
-                                <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button> 
-                                 
+                                @*<button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button>*@
+                                <button type="button" id="p1" class="button b green" onclick="gogosignup()">註冊</button>
                                 @*<button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>*@
 
 
@@ -118,9 +129,9 @@
             </div>
             <button id="demo1" onclick="demo1()">DEMO1</button>
             <div class="mv4-ns mv3 bt b--light-gray"></div>
-            <a class="link b f6 hover-blue black mr3" href="/Members/Login">登入</a>
+            <a class="link b f6 hover-blue black mr3"style="text-decoration: none"  href="/Members/Login">登入</a>
             @*@Html.ActionLink("登入", "Login", "Members")*@
-            <a class="link b f6 hover-blue black mr3" href="/users/password/new">忘記密碼或重設密碼</a>
+            <a class="link b f6 hover-blue black mr3" style="text-decoration: none" href="/users/password/new">忘記密碼或重設密碼</a>
             <div class="fb-like"
                  data-share="true"
                  data-width="450"
@@ -144,7 +155,52 @@
 
 
 
-    <script>
+    <script>        
+        function previewFile() {
+            //var photo = $(eler).val();
+            const preview = document.querySelector('#Productimg');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                // convert image file to base64 string
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        } //  doUpload end
+
+        function gogosignup() {
+
+
+            var form = document.querySelector(".formFrame")
+            console.log(form)
+            var data = new FormData(form);
+            $.ajax({
+                url: "/Members/MemberGG",
+                type: "Post",
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    var good = data.indexOf("註冊成功")
+                    console.log(good)
+                    if (good == 0) {
+                        alertTest1()
+                        setTimeout("home()", 2000)
+
+                    }
+                    else {
+                        //alert("註冊失敗,請檢查輸入欄位")
+                        alertTest()
+                    }
+
+                }
+            })
+        }//end  of submit product
+
 
 
         document.getElementById("firstName").onblur = checkName1;

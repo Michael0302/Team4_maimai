@@ -82,5 +82,65 @@ namespace MaiMai.Controllers
 
             return "登入成功";
         }
+        public string Doingmember(MemberViewModel mber)
+        {
+          
+            Member memmgg = new Member()
+            {
+                UserID = mber.UserID,
+
+                userAccount = mber.userAccount,
+
+                city = mber.city,
+                address = mber.address,
+                phoneNumber = mber.phoneNumber,
+                //profileImg = mber.upphoto.FileName,
+                
+                firstName = mber.firstName,
+                lastName = mber.lastName,
+                selfDescription = mber.selfDescription,
+                email = mber.email,
+
+                identityNumber = mber.identityNumber,
+                userLevel = mber.userLevel,
+                totalStarRate = mber.totalStarRate,
+                ProImg = mber.ProImg,
+                connectionID = mber.connectionID,
+                userPassWord = mber.userPassWord,
+                birthday = mber.birthday,
+
+
+                 
+                
+            };
+            if (mber.upphoto == null)
+            {
+                var mbb = db.Member.FirstOrDefault(a => a.UserID == mber.UserID);
+                memmgg.profileImg = mbb.profileImg;
+            }
+            else
+            {
+                
+
+                memmgg.profileImg = mber.upphoto.FileName;
+                string filename = mber.upphoto.FileName;
+                mber.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/member/") + filename);
+                string filePath = $"../Content/ProductPostImg/member/{filename}";
+
+            }
+            //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
+
+
+
+
+            mb.Update(memmgg);
+            return "註冊成功";
+
+
+
+        }
+
+
+
     }
 }

@@ -80,6 +80,7 @@
           <Property Name="orderStatus" Type="int" />
           <Property Name="createdTime" Type="datetime" />
           <Property Name="CartNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderTotalPrice" Type="int" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -533,6 +534,7 @@
           <Property Name="orderStatus" Type="Int32" />
           <Property Name="createdTime" Type="DateTime" Precision="3" />
           <Property Name="CartNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderTotalPrice" Type="Int32" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Order_Member" FromRole="Order" ToRole="Member" />
           <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_Order" FromRole="Order" ToRole="OrderDetail" />
         </EntityType>
@@ -551,7 +553,29 @@
           <NavigationProperty Name="Comment" Relationship="Self.FK_Comment_OrderDetail" FromRole="OrderDetail" ToRole="Comment" />
           <NavigationProperty Name="Member" Relationship="Self.FK_OrderDetail_Member" FromRole="OrderDetail" ToRole="Member" />
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
-          <NavigationProperty Name="ProductPost" Relationship="maimaiModel.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
+          <NavigationProperty Name="ProductPost" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="OrderDetail" ToRole="ProductPost" />
+        </EntityType>
+        <EntityType Name="ProductPost">
+          <Key>
+            <PropertyRef Name="ProductPostID" />
+          </Key>
+          <Property Name="ProductPostID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="productImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="inStoreQTY" Type="Int32" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="TagID" Type="Int32" />
+          <Property Name="createdTime" Type="DateTime" Precision="3" />
+          <Property Name="RequiredPostID" Type="Int32" />
+          <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cart_ProductPost" FromRole="ProductPost" ToRole="Cart" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_ProductPost_Member" FromRole="ProductPost" ToRole="Member" />
+          <NavigationProperty Name="OrderDetail" Relationship="Self.FK_OrderDetail_ProductPost" FromRole="ProductPost" ToRole="OrderDetail" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_ProductPost_Tag" FromRole="ProductPost" ToRole="Tag" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -996,6 +1020,7 @@
                 <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
                 <ScalarProperty Name="createdTime" ColumnName="createdTime" />
                 <ScalarProperty Name="CartNumber" ColumnName="CartNumber" />
+                <ScalarProperty Name="OrderTotalPrice" ColumnName="OrderTotalPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -269,8 +269,17 @@
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
     <Content Include="Content\ProductPostImg\30種方式提升內容創作力.jpg" />
     <Content Include="Content\ProductPostImg\3C.jpg" />
+    <Content Include="Content\ProductPostImg\a2.jfif" />
+    <Content Include="Content\ProductPostImg\a3.jfif" />
+    <Content Include="Content\ProductPostImg\a4.jfif" />
+    <Content Include="Content\ProductPostImg\a5.jpg" />
+    <Content Include="Content\ProductPostImg\a6.jpg" />
+    <Content Include="Content\ProductPostImg\a7.jpg" />
+    <Content Include="Content\ProductPostImg\a8.jpg" />
+    <Content Include="Content\ProductPostImg\a9.jpg" />
     <Content Include="Content\ProductPostImg\AudiR5.jpg" />
     <Content Include="Content\ProductPostImg\AutoLisp - 紮實入門與實例應用.jpg" />
+    <Content Include="Content\ProductPostImg\b1.jpg" />
     <Content Include="Content\ProductPostImg\fitfit.jfif" />
     <Content Include="Content\ProductPostImg\iconfinder_basket_1814090.png" />
     <Content Include="Content\ProductPostImg\iphone11.png" />
@@ -319,6 +328,9 @@
     <Content Include="Content\ProductPostImg\厚装紫羅蘭翡翠手鐲.jpg" />
     <Content Include="Content\ProductPostImg\原型師之路｜帶你手作公仔模型.jpg" />
     <Content Include="Content\ProductPostImg\原神歐皇老字號🙏單五星150起💘現貨出清議價請小窗💘下單火速發號.jpg" />
+    <Content Include="Content\ProductPostImg\咖啡1.jpg" />
+    <Content Include="Content\ProductPostImg\咖啡2.jpg" />
+    <Content Include="Content\ProductPostImg\咖啡3.jpg" />
     <Content Include="Content\ProductPostImg\品牌包裝設計學：從包裝建立最佳使用體驗.jpg" />
     <Content Include="Content\ProductPostImg\天堂M台服命運女神大地之神伺服器小量藍鑽1比2.jfif" />
     <Content Include="Content\ProductPostImg\天堂M金牛座第58妖精.png" />
@@ -329,6 +341,17 @@
     <Content Include="Content\ProductPostImg\小小灶神夏令營.jpg" />
     <Content Include="Content\ProductPostImg\山野.jpg" />
     <Content Include="Content\ProductPostImg\廢墟模型.jpg" />
+    <Content Include="Content\ProductPostImg\廣告1.jpg" />
+    <Content Include="Content\ProductPostImg\廣告10.jpg" />
+    <Content Include="Content\ProductPostImg\廣告11.jpg" />
+    <Content Include="Content\ProductPostImg\廣告2.jpg" />
+    <Content Include="Content\ProductPostImg\廣告3.jpg" />
+    <Content Include="Content\ProductPostImg\廣告4.jpg" />
+    <Content Include="Content\ProductPostImg\廣告5.jpg" />
+    <Content Include="Content\ProductPostImg\廣告6.jpg" />
+    <Content Include="Content\ProductPostImg\廣告7.jpg" />
+    <Content Include="Content\ProductPostImg\廣告8.jpg" />
+    <Content Include="Content\ProductPostImg\廣告9.jpg" />
     <Content Include="Content\ProductPostImg\意象插畫風刺青.jpg" />
     <Content Include="Content\ProductPostImg\懶人沙發.jpg" />
     <Content Include="Content\ProductPostImg\技術.jpg" />
@@ -340,11 +363,16 @@
     <Content Include="Content\ProductPostImg\正義聯盟-黑超人頭雕.jpg" />
     <Content Include="Content\ProductPostImg\殭屍六吋人偶.jpg" />
     <Content Include="Content\ProductPostImg\決定求生陪玩遊戲.png" />
+    <Content Include="Content\ProductPostImg\無圖示.jpg" />
     <Content Include="Content\ProductPostImg\王者榮耀職業選手陪打.jpg" />
     <Content Include="Content\ProductPostImg\玩具.jpg" />
     <Content Include="Content\ProductPostImg\生活.jpg" />
+    <Content Include="Content\ProductPostImg\票卷tag.png" />
     <Content Include="Content\ProductPostImg\福袋.jfif" />
     <Content Include="Content\ProductPostImg\科技健身.jpg" />
+    <Content Include="Content\ProductPostImg\童書1.jpg" />
+    <Content Include="Content\ProductPostImg\童書2.jpg" />
+    <Content Include="Content\ProductPostImg\童書4.jpg" />
     <Content Include="Content\ProductPostImg\籃球.jfif" />
     <Content Include="Content\ProductPostImg\米.jfif" />
     <Content Include="Content\ProductPostImg\網頁照片1.jpg" />
@@ -354,6 +382,8 @@
     <Content Include="Content\ProductPostImg\網頁照片13.jpg" />
     <Content Include="Content\ProductPostImg\網頁照片14.jpg" />
     <Content Include="Content\ProductPostImg\網頁照片15.jpg" />
+    <Content Include="Content\ProductPostImg\網頁照片16.jpg" />
+    <Content Include="Content\ProductPostImg\網頁照片17.jpg" />
     <Content Include="Content\ProductPostImg\網頁照片2.jpg" />
     <Content Include="Content\ProductPostImg\網頁照片3.jpg" />
     <Content Include="Content\ProductPostImg\網頁照片4.jpg" />
@@ -368,6 +398,7 @@
     <Content Include="Content\ProductPostImg\英雄聯盟菁英代打.jfif" />
     <Content Include="Content\ProductPostImg\蒼白騎士.jpg" />
     <Content Include="Content\ProductPostImg\蝙蝠俠含蝙蝠車.jpg" />
+    <Content Include="Content\ProductPostImg\衣服.jpeg" />
     <Content Include="Content\ProductPostImg\設計師馮宇拆解商LOGO.jpg" />
     <Content Include="Content\ProductPostImg\豬.jfif" />
     <Content Include="Content\ProductPostImg\賞金獵人-薇拉.jpg" />
@@ -682,6 +713,8 @@
     <Content Include="Views\PersonalMarket\Personal_Index_WithoutLogin.cshtml" />
     <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
     <Content Include="Views\RequiredPost\requiredSingalPage.cshtml" />
+    <Content Include="Views\MyAccount\MyAccount.cshtml" />
+    <Content Include="Views\MyAccount\MyPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

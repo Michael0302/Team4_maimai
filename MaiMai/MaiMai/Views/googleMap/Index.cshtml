@@ -32,7 +32,15 @@
             var latlng = { lat: 25.046891, lng: 121.516602 }; // 給一個初始位置
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 14, //放大的倍率
-                center: latlng //初始化的地圖中心位置
+                center: latlng, //初始化的地圖中心位置
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false,
+                styles: [{
+                    visibility: 'off',
+                }],
             });
             var marker = new google.maps.Marker({
                 position: latlng,
@@ -53,7 +61,9 @@
                         title: "現在位置",
                        
                         draggable: true,
-
+                        stylers: [{
+                            visibility: 'off'
+                        }],
                         position: CurrentPos,
                         map: map
                     });
