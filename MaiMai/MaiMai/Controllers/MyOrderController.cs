@@ -369,7 +369,11 @@ namespace MaiMai.Controllers
         public ActionResult creditCardcheckOut(int OrderId)
         {//orderID=30; USerID=18
 
-            var MerchantTradeDate = DateTime.Now;
+            //var 
+
+
+
+            //var MerchantTradeDate = DateTime.Now;
             var orderlist = db.Order.Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
             {
                 x.OrderId,
@@ -389,21 +393,8 @@ namespace MaiMai.Controllers
                 MerchantTradeDate,
             }).ToList();
 
-            //var amount = 0;
-            //foreach(var Item in orderlist)
-            //{
-            //    amount += (int)Item.TotalAmounot;
-            //}
-            //var formData = new
-            //{
-            //    OrderId = s.Key.OrderId,
-            //    orderStatus = orderlist[0].orderStatus,
-            //    MerchantTradeNo = s.Key.CartNumber,
-            //    buyerUserID = s.Key.QTY,
-            //    ItemName = s.Key.productName,
-            //    TotalAmounot = s.Key.oneProductTotalPrice,
-            //    MerchantTradeDate,
-            //};
+            
+
             return Json(orderlist, JsonRequestBehavior.AllowGet);
         }
 
