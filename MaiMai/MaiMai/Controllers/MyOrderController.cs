@@ -301,7 +301,6 @@ namespace MaiMai.Controllers
             //PK才可以用find,  OrderDetailID=23, OrderID=3, SellerID=7
             //OrderDetailID=25, OrderID=, SellerID=21   no__comment
 
-            //var result = new ArrayList();  //
             var commentDetail = db.Comment.Where(x => x.CommentorUserID == SellerID);
             if (commentDetail.Count() == 0)
             {
@@ -312,8 +311,6 @@ namespace MaiMai.Controllers
                     img = img,
                     CNT,
                 };
-                //result.Add("0");
-                //result.Add(img);
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             }
@@ -336,22 +333,20 @@ namespace MaiMai.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             }
-
-
-
-
         }
 
+
         maimaiRepository<Comment> cmdb = new maimaiRepository<Comment>();
-        public ActionResult saveComment(int OrderID, int starRate, string description)
+        public ActionResult saveComment(string OrderID, string starRate, string description)
         {
-            
-            var UserID = 1;   // Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var  OrderDetailID=db.OrderDetail.FirstOrDefault(t => t.OrderID == OrderID).OrderDetailID;
-            var CommentorUserID=db.OrderDetail.Find(OrderDetailID).SellerID;
+            var orderID = Convert.ToInt32(OrderID);
+            var star = Convert.ToInt32(starRate);
+            var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            //var  OrderDetailID=db.OrderDetail.FirstOrDefault(t => t.OrderID == orderID).OrderDetailID;
+            var CommentorUserID=db.OrderDetail.Find(orderID).SellerID;
 
             Comment cmt = new Comment() {
-                starRate= starRate,
+                starRate= star,
                 commentDescription=description,
                 UserID=UserID,
                 OrderdetalID = OrderID,
@@ -365,11 +360,45 @@ namespace MaiMai.Controllers
         public ActionResult checkOut()
         {
 
+            //DateTime dt = DateTime.Now.ToString("G", "");
+
+            Console.WriteLine(DateTime.Now.ToLocalTime());
+
             return View();
         }
 
-        //public ActionResult creditCardcheckOut()
-        //{
+        public ActionResult creditCardcheckOut(int OrderId)
+        {//orderID=30; USerID=18
+
+            //var 
+
+
+
+            //var MerchantTradeDate = DateTime.Now;
+            var orderlist = db.Order.Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+            {
+                x.OrderId,
+                x.orderStatus,
+                x.CartNumber,
+                y.QTY,
+                y.oneProductTotalPrice,
+                y.ProductPost.productName,
+            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.CartNumber, g.QTY, g.oneProductTotalPrice,g.productName }).Select(s => new
+            {
+                OrderId = s.Key.OrderId,
+                orderStatus = s.Key.orderStatus,
+                MerchantTradeNo = s.Key.CartNumber,
+                buyerUserID = s.Key.QTY,
+                ItemName= s.Key.productName,
+                TotalAmounot = s.Key.oneProductTotalPrice,
+                //MerchantTradeDate,
+            }).ToList();
+
+            
+
+            return Json(orderlist, JsonRequestBehavior.AllowGet);
+        }
+
         //    List<string> enErrors = null;
 
         //    try
@@ -378,13 +407,13 @@ namespace MaiMai.Controllers
         //        {
         //            /* 服務參數 */
         //            oPayment.ServiceMethod = HttpMethod.HttpPOST;
-        //            oPayment.ServiceURL = "AllPay Service URL";
+        //            oPayment.ServiceURL = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
         //            oPayment.HashKey = "5294y06JbISpM5x9";
         //            oPayment.HashIV = "v77hoKGq4kWxNNIS";
         //            oPayment.MerchantID = "2000132";
         //            /* 基本參數 */
-        //            oPayment.Send.ReturnURL = "https://localhost:44340/";
-        //            oPayment.Send.ClientBackURL = "https://localhost:44340/";
+        //            oPayment.Send.ReturnURL = "https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew";
+        //            oPayment.Send.ClientBackURL = "https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew";
 
         //            oPayment.Send.MerchantTradeNo = "12345678901234567890";
         //            oPayment.Send.MerchantTradeDate = DateTime.Parse("20210105");
@@ -392,8 +421,8 @@ namespace MaiMai.Controllers
         //            oPayment.Send.TradeDesc = "SONY遊戲機台";
         //            oPayment.Send.Currency = "TW";
         //            oPayment.Send.EncodeChartset = "Encode Chartset";
-        //            oPayment.Send.UseAllpayAddress = true;
-        //            oPayment.Send.CreditInstallment = Int32.Parse("Credit Installment");
+        //            oPayment.Send.UseAllpayAddress = "https://payment-stage.opay.tw/Cashier/AioCheckOut/V5";
+        //            oPayment.Send.CreditInstallment = Int32.Parse("4311-9522-2222-2222");
         //            oPayment.Send.InstallmentAmount = Decimal.Parse("Installment Amount");
         //            oPayment.Send.Redeem = false;
         //            oPayment.Send.ShippingDate = "<20210514>";
@@ -418,9 +447,7 @@ namespace MaiMai.Controllers
         //        //if (enErrors.Count() > 0)
         //        //    ScriptManager.RegisterStartupScript(this, typeof(Page), "_MESSAGE", String.Format("alert(\"{0}\");", String.Join("\\r\\n", enErrors)), true);
         //    }
-        //    return Content("1") ;
-        //}
 
 
     }
-}
+    }
