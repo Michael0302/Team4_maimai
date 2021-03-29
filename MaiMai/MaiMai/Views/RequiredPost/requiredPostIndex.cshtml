@@ -18,8 +18,9 @@
                        aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
 
                 </li>
-                <li>
-                    <a class="btn" style=" background-color: #B5838D ;color: #FBEFF4;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                <li >
+                     <a class="btn btn-post" style="color: #B5838D; font-weight:bolder;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+                    
                 </li>
 
             </ul>
@@ -152,7 +153,7 @@
 
                     $("#allPost").append(`
                             <div class="my-3" style="background-color:#FFFFFF">
-                           <div class="row mx-auto shadow-lg" id="start">
+                           <div class="row mx-auto shadow-lg" id="start" onclick="window.open('../../RequiredPost/requiredSingalPage?rqID=${item.RequiredPostID}','徵求台')">
                             <div class="photo">
                                 <img src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
@@ -171,7 +172,7 @@
                                         aria-controls="collapseExample" name="${item.RequiredPostID}"
                                         onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
                                     <div>
-                                        <a class="btn btn-outline-secondary" data-toggle="collapse" href="#collapseExample${i}" role="button"
+                                        <a class="btn btn-comment" style="color:#FFB4A2" data-toggle="collapse" href="#collapseExample${i}" role="button"
                                             aria-expanded="false" aria-controls="collapseExample">我要留言</a>
                                     </div>
                                 </div>
@@ -179,7 +180,7 @@
                             </div>
                             </div>
                             <div class="collapse w-100 comment" id="collapseComment${i}">
-                                <div class="card card-body w-100 comment">
+                                <div class="card card-body w-100 comment" style="background-color:#F7E7DE">
 
                                 </div>
                             </div>
@@ -238,7 +239,7 @@
                                         </div>
 
                                     </form>
-                                    <button type="submit" class="btn"  style=" background-color: #B5838D ;color: #FBEFF4;" onclick="submitProdouct(this,${i})">建立商品留言</button>
+                                    <button type="submit" class="btn btn-comment"  style="color:#FFB4A2" onclick="submitProdouct(this,${i})">建立商品留言</button>
                                 </div>
                             </div> @*end of 訂單*@
                             </div)
@@ -277,10 +278,10 @@
         $(`#city${index}`).addClass("my-selector-c");
         $(`#city${index}`).html(`
             <div>
-                <select class="county"></select>
+                <select class="county" name="county"></select>
             </div>
             <div>
-                <select class="district"></select>
+                <select class="district" name="district"></select>
             </div>`);
 
     }
@@ -413,8 +414,32 @@
             data: { 'data': data },
             success: function (response) {
                 $(response).each(function (i, item) {
-                    inner += `
-                         <div class="row mx-auto shadow-sm mt-2" style="border-top:1px solid #9D9D9D" id="start">
+
+                    if (item.county == null) {
+                        inner += `
+                         <div class="row mx-auto shadow-lg my-3"  id="start" >
+
+                          <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
+                          <div class="post-text">
+                                <div class="d-flex justify-content-between">
+                                 <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
+                                  
+                                 </div>
+                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
+                                <div>
+                                <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
+                                 </div>
+                                <div class="post-button">
+                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
+                                <a class="btn" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
+                                </div>
+                          </div>
+                        </div>`
+
+                    }
+                    else {
+                        inner += `
+                         <div class="row mx-auto shadow-sm my-2" style="background-color:#F7E7DE" id="start" >
 
                           <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
                           <div class="post-text">
@@ -422,7 +447,7 @@
                                  <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
                                     <h6>${item.county}<span class="font-weight-bolder">${item.district}</span></h6>
                                      </div>
-                                <h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6>
+                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
                                 <div>
                                 <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
                             </div>
@@ -430,14 +455,31 @@
                                 <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
                                 <a class="btn btn-secondary" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
                          </div>
-                        </div>
+                        </div>`
 
-                    `})
+
+                    }
+                    })
                 $(`#collapseComment${index}>div`).html(inner);
                 $(`#cmCount${index}`).html(`${response.length}`)
             }
         })
     } // end check comment function
+
+    $('a>btn-post').click(() => {
+        var test = getCookie('LoginAccount');
+
+
+        if (test == null) {
+
+            alertTest1()
+            setTimeout("home()", 2000)
+            //swal("必須要登入才能發文喔");
+            return window.location.href = `/Members/Login`;
+        }
+
+
+    });
 
     function alertTest1() {
         Swal.fire(
@@ -453,14 +495,14 @@
     function sendRequiredPost() {
 
         var test = getCookie('LoginAccount');
-        console.log(test);
+       
 
         if (test == null) {
 
             alertTest1()
             setTimeout("home()", 2000)
             //swal("必須要登入才能發文喔");
-            //return window.location.href = `/Members/Login`;
+            return window.location.href = `/Members/Login`;
         }
 
         var form = document.querySelector("#form1")

@@ -287,9 +287,9 @@ div.tag > a.btn {
 }
 
 .chatbox {
-    width: 380px;
+    width: 80px;
     height: 50px;
-    background-color: #ccc;
+    background-color: #E1DBE6; 
     position: fixed;
     right: 10px;
     bottom: 0px;
@@ -299,24 +299,33 @@ div.tag > a.btn {
 }
 
 .chatmsg {
-    width: 380px;
+    width: 500px;
     height: 400px;
-    background-color: #ccc;
+    background-color: #FFFFFF;
     position: fixed;
     right: 10px;
     bottom: 0px;
-    transform: translateY(500px);
+    transform: translate(500px, 400px);
     transition: .5s;
     z-index: 999;
     box-shadow: 3px 3px 9px #BEBEBE;
 }
 
+.chatmsgClose {
+    height: 35px;
+    background-color: #8E9AAF;
+}
+
+.chatmsgClose:hover {
+    background-color: #7C8AA2;
+}
+
 /*聊天室窗內容*/
-.chatContent{
-    width:100%;
-    height:375px;
-    overflow-y:scroll;
-    overflow-x:hidden;    
+.chatContent {
+    width: 100%;
+    height: 365px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .notiHover:hover {
@@ -338,11 +347,113 @@ div.tag > a.btn {
     text-align:center;   
 }
 
+/*聊天輸入框*/
+.chatInput{
+
+}
+
 .fade {
     opacity: 1;
 }
 
+.NameList:hover {
+    background-color: #E0E0E0;
+}
 
+.NameList {
+    width:100%;
+    text-align:left;
+    font-weight:bolder;
+    font-size:14px;
+}
 
+.speech-bubble {
+    position: relative;
+    background: #bed3d5;
+    border-radius: .4em;
+    margin-right: 60px;
+    color: #3C3C3C;
+}
+
+    .speech-bubble:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-right-color: #bed3d5;
+        border-left: 0;
+        border-bottom: 0;
+        margin-top: -5px;
+        margin-left: -10px;
+    }
+
+.speech-bubble-right {
+    position: relative;
+    background: #02DF82;
+    border-radius: .4em;
+    margin-left: 60px;
+    color: #3C3C3C;
+    font-size:14px;
+}
+
+    .speech-bubble-right:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 0;
+        height: 0;
+        border: 10px solid transparent;
+        border-left-color: #02DF82;
+        border-right: 0;
+        border-bottom: 0;
+        margin-top: -5px;
+        margin-right: -10px;
+    }
+
+ /*送出*/
+.btnsubmit {
+    width: 58px;
+    height:30px;
+    background-color: #E1DBE6;
+    font-weight:bolder;
+    line-height:15px;
+}
+
+.chatReciver {
+    height: 30px;
+    font-weight: bolder;
+    border-bottom: 0.5px solid #ADADAD;
+    margin-bottom: 5px;
+}
+
+.lasttext {
+    font-weight: 200;
+    font-size: 10px;
+    color: #ADADAD;
+    width: 70px;
+    overflow:hidden;
+    height:17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.Connected {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #00BB00;
+}
+
+.isconnected {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    /*background-color: #BEBEBE;*/
+    background: radial-gradient(#BEBEBE, #3C3C3C );
+}
 
 /*====================================================================*/
