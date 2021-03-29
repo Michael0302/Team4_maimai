@@ -354,7 +354,7 @@ namespace MaiMai.Controllers
                 starRate= starRate,
                 commentDescription=description,
                 UserID=UserID,
-                OrderID= OrderID,
+                OrderdetalID = OrderID,
                 CommentorUserID= CommentorUserID,
             };
             cmdb.Create(cmt);

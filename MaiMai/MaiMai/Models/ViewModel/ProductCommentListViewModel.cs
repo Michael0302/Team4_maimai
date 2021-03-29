@@ -20,8 +20,8 @@ namespace MaiMai.Models.ViewModel
 
         public string county { get; set; }
         public string district { get; set; }
-
-        public Nullable<bool> status { get; set; }
+        public Nullable<int> status { get; set; }
+       
         public HttpPostedFileBase upphoto { get; set; }
         public string userAccount { get; set; }
     }
