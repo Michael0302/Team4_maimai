@@ -150,6 +150,42 @@ namespace SignalRMvc.chatHubs
             }
         }
 
+        //訂單狀態變更通知
+        public void SendToOne_OrderStatus(int sender, int reciver, int status)
+        {
+            ///status 1 = 買家結帳 通知賣家
+            ///status 2 = 賣家確認訂單 通知買家
+            ///status 3 = 賣家出貨 通知買家
+            ///status 4 = 買家結單 通知賣家
+            var user = db.Member.Find(reciver);
+            var message = "";
+            switch (status)
+            {
+                case 1: message = "有人訂購你的商品囉!"; break;
+                case 2: message = "賣家已確認訂單!"; break;
+                case 3: message = "賣家已出貨!"; break;
+                case 4: message = "買家已結單!"; break;
+            }
+            if (user != null)
+            {
+                var nowNotificationID = db.Notification.Max(m => m.NotificationID) + 1;
+                Clients.Client(user.connectionID).addMessage(message, nowNotificationID, "訂單");
+
+                Notification noti = new Notification()
+                {
+                    SenderID = sender,
+                    ReciverLevel = reciver.ToString(),
+                    NotifyText = message,
+                    CreateTime = DateTime.Now,
+                    Status = false,
+                    Category = "訂單"
+                };
+
+                db.Notification.Add(noti);
+                db.SaveChanges();
+            }
+        }
+
         //聊天室用
         public void OneToOneChat(int sender, int reciver, string message)
         {
