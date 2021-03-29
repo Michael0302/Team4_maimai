@@ -46,7 +46,7 @@
                                 <h6>貼文名稱:</h6><input class="ml-2 form-control" type="text" required name="postName" id="postName">
                                 <h6>
                                     貼文描述:
-                                </h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
+                                </h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新"  required onclick="tag()"></textarea>
                                 <h6>交貨方式 : </h6>
                                 <div>
                                     <div class="form-check  input-group ml-2">
@@ -159,7 +159,7 @@
                             </div>
                             <div class="post-text">
                                 <div class="d-flex justify-content-between">
-                                    <h3 id="postName${i}">${item.postName}</h3>
+                                    <h3 id="postName${i}" class="butt"  onclick="toRequiredPostSingal(${item.RequiredPostID})">${item.postName}</h3>
                                     <h6>${item.county} <span>${item.district}</span></h6>
                                 </div>
                                 <h6 id="userName${i}">買家 : <span class="font-weight-bolder">${item.userAccount}</span></h6>
@@ -180,7 +180,7 @@
                             </div>
                             </div>
                             <div class="collapse w-100 comment" id="collapseComment${i}">
-                                <div class="card card-body w-100 comment" style="background-color:#F7E7DE">
+                                <div class="card card-body w-100 ">
 
                                 </div>
                             </div>
@@ -251,12 +251,7 @@
             }
         })
 
-        var parent = document.getElementById('start');
-        var value = event.currentTarget.getAttribute('name');
-        console.log(     );
-        console.log(value);
-        console.log(parent);
-        parent.addEventListener('click', toRequiredPostPage(value), true);
+     
         // ajax end
     })//documentReady
 
@@ -398,26 +393,18 @@
 
     }// end tag function
 
-    function toRequiredPostPage(id) {
+    function toRequiredPostSingal(id) {
 
         window.open(`../../RequiredPost/requiredSingalPage?rqID=${id}`, '徵求台');
 
     }
     function checkCommentList(eler,index, event) {
 
-        //$("body").on("click", "[data-stopPropagation]", function (e) {
-        //    e.stopPropagation;
-        //})
      
-        alert("1231321");
         var test = getCookie('LoginAccount');
-        console.log(test)
-        console.log(typeof test)
-
+     
         if (test == "") {
             var test = getCookie('LoginAccount');
-            console.log(test)
-            console.log(typeof test)
             alertTest1()
             setTimeout("home()", 2000)
         }
@@ -434,44 +421,45 @@
 
                     if (item.county == null) {
                         inner += `
-                         <div class="row mx-auto shadow-lg my-3"  id="start" >
+                         <div class="row mx-auto shadow-lg my-3"  style="background-color:#F9F0F2">
 
-                          <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
-                          <div class="post-text">
-                                <div class="d-flex justify-content-between">
-                                 <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
+                                    <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
+                                    <div class="post-text">
+                                        <div class="d-flex justify-content-between">
+                                            <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
                                   
-                                 </div>
-                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
-                                <div>
-                                <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
-                                 </div>
-                                <div class="post-button">
-                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
-                                <a class="btn" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
-                                </div>
-                          </div>
+                                        </div>
+                                        <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
+                                         <div>
+                                                <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
+                                          </div>
+                                          <div class="post-button">
+                                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
+                                                <a class="btn nico_but" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
+                                        </div>
+                                    </div>
                         </div>`
 
                     }
                     else {
                         inner += `
-                         <div class="row mx-auto shadow-sm my-2" style="background-color:#F7E7DE" id="start" >
+                         <div class="row mx-auto shadow-lg my-2"   style="background-color:#F9F0F2">
 
-                          <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
-                          <div class="post-text">
-                                <div class="d-flex justify-content-between">
-                                 <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
-                                    <h6>${item.county}<span class="font-weight-bolder">${item.district}</span></h6>
-                                     </div>
-                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
-                                <div>
-                                <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
-                            </div>
-                            <div class="post-button">
-                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
-                                <a class="btn btn-secondary" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
-                         </div>
+                                    <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
+                                     <div class="post-text">
+                                            <div class="d-flex justify-content-between">
+                                                     <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
+                                                    <h6>${item.county}<span class="font-weight-bolder">${item.district}</span></h6>
+                                             </div>
+                                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
+                                                <div>
+                                                        <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
+                                                 </div>
+                                                <div class="post-button">
+                                                     <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
+                                                     <a class="btn nico_but" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
+                                                </div>
+                                            </div>
                         </div>`
 
 
@@ -520,10 +508,13 @@
 
         if (test == null) {
 
-            alertTest1()
+            Swal.fire(
+                "必須要登入才能看留言喔喔", //標題
+                " 2秒後自動跳轉...", //訊息內容(可省略)
+                "warning" //圖示(可省略) success/info/warning/error/question
+            );
             setTimeout("home()", 2000)
-            //swal("必須要登入才能發文喔");
-            return window.location.href = `/Members/Login`;
+          
         }
 
         var form = document.querySelector("#form1")

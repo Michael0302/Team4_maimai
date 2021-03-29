@@ -31,14 +31,14 @@ width:  100%;
   
 }
 
-.btn-post:hover {
+/*.btn-post:hover {
 
     background-color:#FFB4A2;
-}
-.btn-comment:hover {
+}*/
+/*.btn-comment:hover {
     background-color: #B5838D;
 }
-
+*/
 
 @media (max-width: 575.98px) {
     .photo {
@@ -101,14 +101,11 @@ img {
     display: block;
     
 }
-.comment {
-    background-color: #EFD3D7;
+.butt:hover {
+    cursor: pointer;
 }
-#start:hover {
-    background-color: #EFD3D7;
+.nico_but {
+    font-weight:bolder;
+    color:#B5838D;
 }
-.upCollepaseBox {
-    height:30px; 
-    background-color:#DDCAD5;
-    position:fixed;
-}
+/*F7E7DE*/

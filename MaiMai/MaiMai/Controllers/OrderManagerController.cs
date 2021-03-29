@@ -213,7 +213,7 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = od.Order.buyerUserID
+                buyerUserAccount = od.Member.userAccount
 
             }); 
 
@@ -253,7 +253,8 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = od.Order.buyerUserID
+                buyerUserAccount = od.Member.userAccount
+
 
             });
 
@@ -297,7 +298,7 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = od.Order.buyerUserID
+                buyerUserAccount = od.Order.Member.userAccount
 
             });
 
@@ -320,7 +321,7 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = od.Order.Member.userAccount
+                buyerUserAccount = od.Member.userAccount
 
             }).ToList();
 

@@ -162,41 +162,48 @@ namespace MaiMai.Controllers
         maimaiRepository<ProductPost> productPostRepository = new maimaiRepository<ProductPost>();
         public string commemtProductPost(ProductCommentListViewModel ps)
         {
-            ProductPost product = new ProductPost()
+            try
             {
-                //ProductPostID = ps.ProductPostID,
-                productName = ps.productName,
-                productDescription = ps.productDescription,
-                status=ps.status,
-                inStoreQTY = ps.inStoreQTY,
-                price = ps.price,
-                TagID = ps.TagID,
-                RequiredPostID = ps.RequiredPostID,
-                productImg = ps.upphoto.FileName,
-                createdTime = DateTime.Now,
-                county=ps.county,
-                district=ps.district,
-                UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value)
+                ProductPost product = new ProductPost()
+                {
+                    //ProductPostID = ps.ProductPostID,
+                    productName = ps.productName,
+                    productDescription = ps.productDescription,
+                    status = ps.status,
+                    inStoreQTY = ps.inStoreQTY,
+                    price = ps.price,
+                    TagID = ps.TagID,
+                    RequiredPostID = ps.RequiredPostID,
+                    productImg = ps.upphoto.FileName,
+                    createdTime = DateTime.Now,
+                    county = ps.county,
+                    district = ps.district,
+                    UserID = Convert.ToInt32(Request.Cookies["LoginAccount"].Value)
 
-            };
-            if (ps.upphoto == null)
-            {
-                product.productImg = "無圖示.jpg";
+                };
+                if (ps.upphoto == null)
+                {
+                    product.productImg = "無圖示.jpg";
+                }
+                else
+                {
+                    product.status = true;
+
+                    product.productImg = ps.upphoto.FileName;
+                    string filename = ps.upphoto.FileName;
+                    ps.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
+                    string filePath = $"../Content/ProductPostImg/{filename}";
+
+                }
+                //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
+
+                productPostRepository.Create(product);
+
+                return "留言成功";
             }
-            else {
-                product.status = true;
-            
-            product.productImg = ps.upphoto.FileName;
-            string filename = ps.upphoto.FileName;
-            ps.upphoto.SaveAs(Server.MapPath("../Content/ProductPostImg/") + filename);
-            string filePath = $"../Content/ProductPostImg/{filename}";
-
+            catch (Exception e) {
+                return e.Message;
             }
-            //HttpPostedFileBase photo = new HttpPostedFileBase(upphoto);
-
-            productPostRepository.Create(product);
-
-            return "留言成功";
         }
 
         public ActionResult checkAllComment(string data)
