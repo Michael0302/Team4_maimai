@@ -49,7 +49,7 @@
   <ItemGroup>
     <Reference Include="AllPay.Payment.Integration, Version=1.0.0.11, Culture=neutral, PublicKeyToken=afb33c1e6a3b1bbd, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Payment_Net-master\AioSDK\AllPay.Payment.Integration.dll</HintPath>
+      <HintPath>..\..\..\..\..\Desktop\AllPay.Payment.Integration.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.12.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.12.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
@@ -412,6 +412,7 @@
     <Content Include="Content\ProductPostImg\體育.jpg" />
     <Content Include="Content\ProductPostImg\髮型設計教學.jpg" />
     <Content Include="Content\ProductPostImg\💝書僮代練🔹波利🔹Lv1-185代練、坐吸、時空戰死附魔【200開練了!】.PNG" />
+    <Content Include="Content\resource_nico\carousel.css" />
     <Content Include="Content\resource_nico\createProductPost.css" />
     <Content Include="Content\resource_nico\images\徵求台POST\iphone12.jpg" />
     <Content Include="Content\resource_nico\images\徵求台POST\一日女友.jpg" />
@@ -708,9 +709,11 @@
     <Content Include="Views\MyOrder\checkOut.cshtml" />
     <Content Include="Views\PersonalMarket\Personal_Index_WithoutLogin.cshtml" />
     <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
+    <Content Include="Views\NewMaimaiIndex\opay.cshtml" />
     <Content Include="Views\RequiredPost\requiredSingalPage.cshtml" />
     <Content Include="Views\MyAccount\MyAccount.cshtml" />
     <Content Include="Views\MyAccount\MyPassword.cshtml" />
+    <Content Include="Views\OrderManager\OrderIndex2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

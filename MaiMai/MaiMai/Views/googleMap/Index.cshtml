@@ -94,7 +94,10 @@
                             url: '/Content/resource_nico/logoTOPwithoutBG.png',
                                  scaledSize: new google.maps.Size(100, 100)
                         },
-                        draggable: true,                        
+                        draggable: true,
+                        stylers: [{
+                            visibility: 'off'
+                        }],
                         position: CurrentPos,
                         map: map
                     });
@@ -104,6 +107,7 @@
                     map.setZoom(17);
                     map.setCenter(CurrentPos);
 
+                    
 
                     let cityCircle = new google.maps.Circle({
                         strokeColor: '#f1c40f', // 線條顏色

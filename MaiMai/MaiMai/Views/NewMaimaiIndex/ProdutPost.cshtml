@@ -13,13 +13,13 @@
     <div id="carousel" class="container">
         <figure id="spinner">
             @*<a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
-            <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
-            <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
-            <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
-            <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
-            <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
-            <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
-            <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>*@
+                <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
+                <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
+                <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
+                <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
+                <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
+                <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
+                <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>*@
         </figure>
         <div class="d-flex justify-content-between">
             <a class="btn btn-light" onclick="galleryspin('-')">&lt;</a>
@@ -27,11 +27,11 @@
         </div>
     </div>
 </div>
-    @*下方輪播牆*@
+@*下方輪播牆*@
 
-    @section scripts {
-
-        <script>
+@section scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
         var getUrlString = location.href;
         var url = new URL(getUrlString);
         getProductPostID = url.searchParams.get("PostID");
@@ -58,12 +58,12 @@
                                             <div ><span class="priceColor2">${item.price}</span> <span calss="priceColor3">TWD</span></div>
                                     </div>
                                                     </div>
-                                                                <span class="errorColor" id="overcount"></span>
+                                                              
                                                                             <div class="priceH">
                                                                                 <label class="d-block">描述</label>
                                                                                 <textarea cols="70" rows="6" readonly class="description">${item.Description}</textarea>
                                                                             </div>
-                                                <div><a onclick="displayChat(${item.ProductPostID})">聯絡賣家</a><a href="/RequiredPost/requiredPostIndex">${item.userAccount}</a></div>
+                                                <div class="mr-3"><a onclick="displayChat(${item.ProductPostID})">聯絡賣家</a><a href="/PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.UserID}">${item.userAccount}</a></div>
 
                                                      <div   style="margin-left:85%;" class="btn redbtn" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter">檢舉</div>
                                                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -85,7 +85,7 @@
                                                             </div>
                                                     <div style="border:1px solid;color:	#BEBEBE;weight:150px;"></div>
                                                     <div class="mt-3">
-                                                    <div class="d-flex " >   
+                                                    <div class="d-flex " >
                                                                         <div style="border-top:1px solid  #5B5B5B"></div>
                                                                         <div class="mr-5 mt-2">訂購數量</div>
                                                                         <div class="">
@@ -122,7 +122,7 @@
                                                                                     <div>剩餘數量 : </div>
                                                                                     <div class=" ml-5"><span id="inStoreQTY">${item.QTY}</span></div>
                                                                              </div>
-                                               
+      <span class="errorColor" id="overcount"></span>
 
                                     <div class=" justify-content-center mt-3" onclick="addcar(${item.ProductPostID})">
                                         <a class="btn addcart" >
@@ -214,6 +214,27 @@
                 console.log(ProductPostID);
             }
         //=========================================================
+        function alertTest() {
+            Swal.fire(
+                "請先登入", //標題
+                " 請先登入", //訊息內容(可省略)
+                "error" //圖示(可省略) success/info/warning/error/question
+
+            );
+        }
+        function alertTestok() {
+            Swal.fire(
+                "新增成功", //標題
+                " 新增成功", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
+
+            );
+        }
+
+        function home() {
+            window.location.href = "/Members/Login";
+        }
+
         function addcar(getProductPostIDNew) {
             console.log(getProductPostIDNew);
             $.ajax({
@@ -228,15 +249,20 @@
                 },
                 success: function (data) {
                     if (data == "請先登入") {
-                        window.location.href = "/Members/Login";
+                        alertTest()
+                     
+                        setTimeout("home()", 2000)
                     }
-                    alert(data)
-                    window.location.href = "/Cart/cartIndex";
+                    if (data == "新增成功" || data == "商品更新成功" || data == "增加一筆新商品") { 
+                        alertTestok()
+                        setTimeout(`window.location.href = "/Cart/cartIndex"`,2000)
+                    
+                    }
                 }
-            });            
+            });
             }
             //$(function () {
-       
+
             //})
         //=========================================================
         var angle = 0;
@@ -252,6 +278,7 @@
             var instoreQty = $("#inStoreQTY").html();
             if (count <= 0) {
                 $("#count").val("0");
+
             }
             else {
                 $("#count").val(`${(count * 1) - 1}`);
@@ -262,55 +289,57 @@
         function countUpClick() {
             var count = $("#count").val();
             var instoreQty = $("#inStoreQTY").html();
+            var instoreQty1 = $("#inStoreQTY").html();
+            if ( instoreQty==0) {
+                $("#count").val(`${count}`);
+                $("#overcount").html(`數量已達上限`)
+                //$("#countup").off("click");
+            }
+            else {
+                $("#count").val(`${count * 1 + 1}`);
+                $("#inStoreQTY").html(`${(instoreQty1-1)}`)
+            }
+        }
+         //數量計算
+    </script>
+
+    @*選轉輪播*@
+    <script>
+        $("#countdown").on("click", function () {
+            const count = $("#count").val();
+            if (count <= 1) {
+                $("#count").val("1");
+            }
+            else {
+                $("#count").val(`${count - 1}`);
+                $("#overcount").html("")
+            }
+        })
+        $("#countup").on("click", function () {
+            const instoreQty = $("#inStoreQTY").text();
+            const count = $("#count").val();
             if (count >= (instoreQty * 1)) {
                 $("#count").val(`${instoreQty}`);
                 $("#overcount").html(`數量已達上限`)
             }
             else {
                 $("#count").val(`${count * 1 + 1}`);
-                $("#inStoreQTY").html(`${(instoreQty - 1)}`)
             }
+        })
+        $("#count").on("change", function () {
+            const instoreQty = $("#inStoreQTY").text();
+            const count = $("#count").val();
+            if (count >= (instoreQty * 1)) {
+                $("#count").val(`${instoreQty}`);
+                $("#overcount").html(`數量已達上限`)
+            }
+        })
+        var angle = 0;
+        function galleryspin(sign) {
+            spinner = document.querySelector("#spinner");
+            if (!sign) { angle = angle + 45; } else { angle = angle - 45; }
+            spinner.setAttribute("style", "-webkit-transform: rotateY(" + angle + "deg); -moz-transform: rotateY(" + angle + "deg); transform: rotateY(" + angle + "deg);");
         }
-         //數量計算
-        </script>
-
-        @*選轉輪播*@
-        <script>
-                $("#countdown").on("click", function () {
-                    const count = $("#count").val();
-                    if (count <= 1) {
-                        $("#count").val("1");
-                    }
-                    else {
-                        $("#count").val(`${count - 1}`);
-                        $("#overcount").html("")
-                    }
-                })
-                $("#countup").on("click", function () {
-                    const instoreQty = $("#inStoreQTY").text();
-                    const count = $("#count").val();
-                    if (count >= (instoreQty * 1)) {
-                        $("#count").val(`${instoreQty}`);
-                        $("#overcount").html(`數量已達上限`)
-                    }
-                    else {
-                        $("#count").val(`${count * 1 + 1}`);
-                    }
-                })
-                $("#count").on("change", function () {
-                    const instoreQty = $("#inStoreQTY").text();
-                    const count = $("#count").val();
-                    if (count >= (instoreQty * 1)) {
-                        $("#count").val(`${instoreQty}`);
-                        $("#overcount").html(`數量已達上限`)
-                    }
-                })
-                var angle = 0;
-                function galleryspin(sign) {
-                    spinner = document.querySelector("#spinner");
-                    if (!sign) { angle = angle + 45; } else { angle = angle - 45; }
-                    spinner.setAttribute("style", "-webkit-transform: rotateY(" + angle + "deg); -moz-transform: rotateY(" + angle + "deg); transform: rotateY(" + angle + "deg);");
-                }
-            </script>
-        @*選轉輪播*@
-    }
+    </script>
+    @*選轉輪播*@
+}

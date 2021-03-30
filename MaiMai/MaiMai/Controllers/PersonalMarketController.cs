@@ -45,7 +45,7 @@ namespace MaiMai.Controllers
         {
 
              
-            var table = db.ProductPost.Where(m => m.UserID == UserID&&m.status==1).Select(m => new ProductCommentListViewModel()
+            var table = db.ProductPost.Where(m => m.UserID == UserID&&m.status==1&&m.inStoreQTY>0).Select(m => new ProductCommentListViewModel()
             {
                 ProductPostID = m.ProductPostID,
                 productName = m.productName,
