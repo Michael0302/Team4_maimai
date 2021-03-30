@@ -9,11 +9,11 @@
     <div class="container">
         @*首頁圖片 css內*@
         <div class="d-flex">
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告1.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告2.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告3.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告4.jpg" /></div>
-            <div style="height:130px;width:260px;" id=""><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告5.jpg" /></div>
+            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告1.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告2.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告3.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告4.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告5.jpg" /></a></div>
         </div>
         @*<section class="home">
         </section>*@
@@ -23,8 +23,8 @@
         @*TAG*@
         @*五星*@
         <div class="container-fluid paddding mb-5">
-            <div class="col-md-10" style="padding-left:185px;">
-                <div class="mb-5 StarFiveStyle"> <p>好評商家作品推薦</p></div>
+            <div class="col-md-12">
+                <div class=" StarFiveStyle"> <p>好評商家作品推薦</p></div>
                 <div class="row" id="StarFive2">
 
                 </div>
@@ -112,6 +112,7 @@
         @*最新商品輪播*@
     </div>
     <script>
+        
         function CarouselClick(PostID) {
             window.open(`/RequiredPost/requiredSingalPage?rqID=${PostID} `, 'MAIMAI徵求台');
             //window.location.href = `/NewMaimaiIndex/ProdutPost?PostID=${PostID}`;
@@ -168,9 +169,9 @@
                 type: "GET",
                 success: function (StarFive2) {
                     $(StarFive2).each(function (i, item) {
-                        if (i >=1 && i<=6 ) {
+                        if (i >=1 && i<=8 ) {
                             $("#StarFive2").append(`
-                        <div class="start6" >
+                        <div class="start6 mx-3 my-2" >
                                         <img style="height:100%;width:100%;"  src="../Content/ProductPostImg/${item.img}"  />
                         </div>
                             `)
@@ -234,7 +235,7 @@
                                     <a href="#">
                                              <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})
                                                             ;height: 200px; width: 200px;background-size:cover;"></div>
-                                            <div style="text-overflow: ellipsis;">${item.productDescription}</div>
+                                            <div style="text-overflow: ellipsis;">${item.productName}</div>
                                             <div>${item.price}</div>
                                        </a>
                                 </div>
