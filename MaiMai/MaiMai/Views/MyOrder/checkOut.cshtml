@@ -5,24 +5,18 @@
 
 <h2>checkOut</h2>
 
-@*harsh key*--5294y06JbISpM5x9
-    Hash IV--v77hoKGq4kWxNNIS*@
-@*<button class="btn btn-danger pt-5 mt-5" onclick="getFormData()">送出交易資料</button>*@
 
 <div id="form" class="mt-5">
-
 </div>
 
 <script>
 
     $(function () {
-
-                $.ajax({
+            $.ajax({
             url: "@Url.Action("creditCardcheckOut", "MyOrder")",
             data: { OrderId:33},
             type: "GET",
                     success: function (result) {
-                
                         var totalDollar = 0;
                         var MerchantTradeNo = 0;
                         var prodName ;
@@ -48,8 +42,25 @@
                             console.log("tradeDescription", tradeDescription);
                             console.log("MerchantTradeNo", MerchantTradeNo);
 
-                $("#form" ).append(`
-                    <form id="formCreditCard" method="post" accept-charset="UTF-8"
+                        @* harsh key  --5294y06JbISpM5x9                      Hash IV--v77hoKGq4kWxNNIS *@
+                        //CheckMacValue 檢查碼
+                        @*{
+                        var is4 = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew& CreditInstallment=& EncryptType=1 & InstallmentAmount=& ItemName=`${prodName}`& MerchantID=2000132 & MerchantTradeDate=" + DateTime.Now + " & MerchantTradeNo=DX202103261609371970 & PaymentType=aio & Redeem=& ReturnURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew&StoreID=&TotalAmount=`${totalDollar}`&TradeDesc=`${tradeDescription}`&HashIV=v77hoKGq4kWxNNIS";
+
+                    is4 = Server.UrlEncode(is4).ToLower();//正確
+                    var bytes = System.Text.Encoding.Default.GetBytes(is4);
+                    byte[] hash = System.Security.Cryptography.SHA256Managed.Create().ComputeHash(bytes);
+                        System.Text.StringBuilder builder = new System.Text.StringBuilder();
+
+                    for (int i = 0; i < hash.Length; i++)
+                    {
+                     builder.Append(hash[i].ToString("X2"));
+                    }
+}*@
+                    console.log("checkMAC",builder);
+
+    $("#form" ).append(`
+    <form id="formCreditCard" method="post" accept-charset="UTF-8"
                         action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5">
 
                         MerchantID 商店代號:
@@ -72,17 +83,17 @@
     <input type="text" name="ChoosePayment" value="Credit" /><br />
     ClientBackURL Client端返回廠商網址:
     <input type="text" name="ClientBackURL" value="https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew" /><br />
-CreditInstallment 刷卡分期期數: 
+CreditInstallment 刷卡分期期數:
 <input type="text" name="CreditInstallment" value="" /><br />
 
-InstallmentAmount 使用刷卡分期的付款金額: 
+InstallmentAmount 使用刷卡分期的付款金額:
 <input type="text" name="InstallmentAmount" value="" /><br />
 
-Redeem 信用卡是否使用紅利折抵: 
+Redeem 信用卡是否使用紅利折抵:
 <input type="text" name="Redeem" value="" /><br />
 
-CheckMacValue 簽章類型: 
-<input type="text" name="EncryptType" value="1" /><br />    
+CheckMacValue 簽章類型:
+<input type="text" name="EncryptType" value="1" /><br />
 CheckMacValue 檢查碼:
     <input type="text" name="CheckMacValue" value="A54BB85B3EEC88913D672A9F03AC5FA5A8A4AAA9EFFEC9E00419FAEE61EA9CE1" /><br />
                         <input type="submit" value="送出訂單" />

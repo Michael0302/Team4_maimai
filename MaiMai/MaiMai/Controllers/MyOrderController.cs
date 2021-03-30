@@ -360,21 +360,13 @@ namespace MaiMai.Controllers
         public ActionResult checkOut()
         {
 
-            //DateTime dt = DateTime.Now.ToString("G", "");
-
-            Console.WriteLine(DateTime.Now.ToLocalTime());
-
             return View();
         }
 
         public ActionResult creditCardcheckOut(int OrderId)
         {//orderID=30; USerID=18
 
-            //var 
-
-
-
-            //var MerchantTradeDate = DateTime.Now;
+            var MerchantTradeDate = DateTime.Now;
             var orderlist = db.Order.Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
             {
                 x.OrderId,
@@ -391,10 +383,22 @@ namespace MaiMai.Controllers
                 buyerUserID = s.Key.QTY,
                 ItemName= s.Key.productName,
                 TotalAmounot = s.Key.oneProductTotalPrice,
-                //MerchantTradeDate,
+                MerchantTradeDate,
             }).ToList();
 
-            
+            var is4 = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew& CreditInstallment=& EncryptType=1 & InstallmentAmount=& ItemName=`${orderlist.ItemName}`& MerchantID=2000132 & MerchantTradeDate=" + DateTime.Now + " & MerchantTradeNo=`${orderlist.CartNumber}` & PaymentType=aio & Redeem=& ReturnURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew&StoreID=&TotalAmount=`${totalDollar}`&TradeDesc=`${tradeDescription}`&HashIV=v77hoKGq4kWxNNIS";
+
+            is4 = Server.UrlEncode(is4).ToLower();//正確
+            var bytes = System.Text.Encoding.Default.GetBytes(is4);
+            byte[] hash = System.Security.Cryptography.SHA256Managed.Create().ComputeHash(bytes);
+            System.Text.StringBuilder builder = new System.Text.StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+            {
+                builder.Append(hash[i].ToString("X2"));
+            }
+            Console.WriteLine(builder);
+
 
             return Json(orderlist, JsonRequestBehavior.AllowGet);
         }
