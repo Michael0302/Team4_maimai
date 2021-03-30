@@ -366,27 +366,31 @@ namespace MaiMai.Controllers
         public ActionResult creditCardcheckOut(int OrderId)
         {//orderID=30; USerID=18
 
-            var MerchantTradeDate = DateTime.Now;
-            var orderlist = db.Order.Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
-            {
-                x.OrderId,
-                x.orderStatus,
-                x.CartNumber,
-                y.QTY,
-                y.oneProductTotalPrice,
-                y.ProductPost.productName,
-            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.CartNumber, g.QTY, g.oneProductTotalPrice,g.productName }).Select(s => new
-            {
-                OrderId = s.Key.OrderId,
-                orderStatus = s.Key.orderStatus,
-                MerchantTradeNo = s.Key.CartNumber,
-                buyerUserID = s.Key.QTY,
-                ItemName= s.Key.productName,
-                TotalAmounot = s.Key.oneProductTotalPrice,
-                MerchantTradeDate,
-            }).ToList();
+            var tradeDescription="";
 
-            var is4 = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew& CreditInstallment=& EncryptType=1 & InstallmentAmount=& ItemName=`${orderlist.ItemName}`& MerchantID=2000132 & MerchantTradeDate=" + DateTime.Now + " & MerchantTradeNo=`${orderlist.CartNumber}` & PaymentType=aio & Redeem=& ReturnURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew&StoreID=&TotalAmount=`${totalDollar}`&TradeDesc=`${tradeDescription}`&HashIV=v77hoKGq4kWxNNIS";
+            var obj = db.OrderDetail.Where(x => x.OrderID == OrderId && x.Order.orderStatus == 0).Select(s => new
+            {
+                ItemName = s.ProductPost.productName,
+                TotalAmounot = s.oneProductTotalPrice,
+            });
+            foreach (var item in obj)
+            {
+                tradeDescription += item.ItemName + "," + item.TotalAmounot + ";  ";
+            }
+
+
+
+
+            var Item = db.OrderDetail.FirstOrDefault(x => x.OrderID == OrderId && x.Order.orderStatus == 0);
+            if(Item == null)
+            {
+                return Content("此商品不存在");
+            }
+            var ItemName = Item.ProductPost.productName;
+            var MerchantTradeNo = db.OrderDetail.FirstOrDefault(x => x.OrderID == OrderId && x.Order.orderStatus == 0).OrderID;
+
+            //harsh key--5294y06JbISpM5x9 Hash IV--v77hoKGq4kWxNNIS 
+            var is4 = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew& CreditInstallment=& EncryptType=1 & InstallmentAmount=& ItemName="+ ItemName + "& MerchantID=2000132 & MerchantTradeDate=" + DateTime.Now + " & MerchantTradeNo="+ MerchantTradeNo + "& PaymentType=aio & Redeem=& ReturnURL=https://localhost:44340/NewMaimaiIndex/MaimaiIndexNew&StoreID=&TotalAmount=`${totalDollar}`&TradeDesc="+tradeDescription+"&HashIV=v77hoKGq4kWxNNIS";
 
             is4 = Server.UrlEncode(is4).ToLower();//正確
             var bytes = System.Text.Encoding.Default.GetBytes(is4);
@@ -397,8 +401,18 @@ namespace MaiMai.Controllers
             {
                 builder.Append(hash[i].ToString("X2"));
             }
-            Console.WriteLine(builder);
 
+            var CheckMacValue=builder.ToString();  
+            var MerchantTradeDate = DateTime.Now;
+            var orderlist = db.OrderDetail.Where(x => x.OrderID==OrderId&&x.Order.orderStatus==0).Select(s => new
+            {
+                MerchantTradeNo= MerchantTradeNo,
+                ItemName= ItemName,
+                TotalAmounot =s.oneProductTotalPrice,
+                tradeDescription= tradeDescription,
+                MerchantTradeDate,
+                CheckMacValue ,
+            }).ToList();
 
             return Json(orderlist, JsonRequestBehavior.AllowGet);
         }
