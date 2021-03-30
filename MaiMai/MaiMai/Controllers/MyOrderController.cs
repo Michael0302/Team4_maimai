@@ -354,7 +354,7 @@ namespace MaiMai.Controllers
                 OrderdetalID = orderID,
                 CommentorUserID= CommentorUserID,
             };
-            if (od.SellerID == CommentorUserID)
+            if (od.SellerID == UserID)
             {
                 od.sellerStatus = 3;
                 
@@ -365,8 +365,8 @@ namespace MaiMai.Controllers
 
             if (od.sellerStatus == 3 && od.buyerStatus == 3) {
 
-                Order o = odRepository.GetbyID(od.OrderDetailID);
-                o.orderStatus = 3;
+                Order o = odRepository.GetbyID((int)od.OrderID);
+                o.orderStatus = 2;
 
                 odRepository.Update(o);
             }

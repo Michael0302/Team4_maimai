@@ -240,13 +240,14 @@ namespace MaiMai.Controllers
 
                 postDescription = rp.postDescription,
                 postName = rp.postName,
-                postImg = rp.upphoto.FileName,
+                postImg = rp.upphoto.FileName, 
                 requiredQTY = rp.requiredQTY,
                 TagID = rp.TagID,
                 estimatePrice = rp.estimatePrice,
                 OrderID = rp.OrderID,
                 county = rp.county,
                 district = rp.district,
+                address=rp.address,
                 isPast = false
 
             };
@@ -320,6 +321,7 @@ namespace MaiMai.Controllers
                     post.OrderID = rp.OrderID;
                     post.county = rp.county;
                     post.district = rp.district;
+                    post.address = rp.address;
                     post.isPast = false;
                    
 
