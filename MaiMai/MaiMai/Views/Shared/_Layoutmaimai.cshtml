@@ -22,6 +22,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
+    <style>
+        input:focus {
+            outline: none
+        }
+        .wei-grid-special0{
+            overflow: hidden;
+            transition: box-shadow 500ms;
+            border-radius: 10px;
+        }
+
+            .wei-grid-special0:hover {
+                box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
+            }
+    </style>
 </head>
 
 
@@ -304,6 +318,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         })
         $("#imgInputCilick").event.target({
 
+                });
+        }
         });
     };
         //function inputsearch() {
@@ -354,7 +370,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
                     if (category == "系統") {
-                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                        $('#notify').prepend(`<div class="wei-grid-special0 noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "違規") {
                         $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../PersonalMarket/Personal_Index"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "訂單") {
