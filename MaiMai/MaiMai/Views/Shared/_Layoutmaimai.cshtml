@@ -25,7 +25,7 @@
 </head>
 
 
-<body class="container">
+<body class="container ">
     <nav class="nav1 ">
         <div class=" d-flex">
             @*layout左邊*@
@@ -180,7 +180,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 </button>
             </div>
             <div class="modal-body" id="sysInfobody">
-
+                
             </div>
             
         </div>
@@ -295,16 +295,16 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             }
         })
 
-    function imgInputCilick() {
-        $.ajax({
-            url: "/NewMaimaiIndex/searchall",
-            type: "GET",
-            success:
-        })
-        $("#imgInputCilick").event.target({
+    //function imgInputCilick() {
+    //    $.ajax({
+    //        url: "/NewMaimaiIndex/searchall",
+    //        type: "GET",
+    //        success:
+    //    })
+    //    $("#imgInputCilick").event.target({
 
-        });
-    };
+    //    });
+    //};
         //function inputsearch() {
         //        ajax({
         //            url: "/NewMaimaiIndex/searchall",
@@ -674,7 +674,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 success: function (tagsearch) {
                     $(tagsearch).each(function (i, item) {
                         $("#tag-search-dropdown").append(`
-                                                    <a class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
+                                                    <a style="text-decoration: none;"  class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
                                                             <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/${item.TagImg})">
                                                                 <div style="color:#FCFCFC;font-weight:bold;">${item.tagName}</div>
                                                     </div>
