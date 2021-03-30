@@ -83,6 +83,11 @@ label {
     text-align: center;
     
 }
+.PersonalText {
+    border-radius: 5px;
+    color: #B5838D;
+    background-color:#FFCDB2;
+}
 
 .svgHover:hover {
     fill: #46A3FF;
