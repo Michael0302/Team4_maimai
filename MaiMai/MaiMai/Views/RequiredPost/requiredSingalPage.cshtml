@@ -3,6 +3,11 @@
     ViewBag.Title = "requiredSingalPage";
 }
 
+<style>
+    .moving {
+        transform: translate(0px, 800px);
+    }
+</style>
 <div class="container" style="padding: 100px 10px 10px 10px ; background-color: #FBEFF4; border-radius:20px ">
     <div class="shadow-lg d-flex" style="height:800px">
 
@@ -11,21 +16,23 @@
 
         </div>
 
-        <div class="card col-7 h-100" style="border:1px solid black">
+        <div class="card col-7 h-100" style="border:1px solid black ; overflow:hidden;"  >
             <div id="commentBox" class="h-100" style="overflow-y:scroll">
-                
+
 
 
             </div>
-
-
-
-
             <button class="btn w-100" style=" background-color: #DDCAD5;" type="button" data-toggle="collapse" data-target="#collapsecommentBox" aria-expanded="false" aria-controls="collapsecommentBox">
                 我要留言
-            </button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+            </button>
 
-            <div class="collapse" id="collapsecommentBox"> @*不能用*@
+
+
+            @*<button class="btn w-100" style=" background-color: #DDCAD5;" type="button" >
+                我要留言
+            </button>*@
+            <div class="collapse" id="collapsecommentBox">
+                @*不能用*@
 
                 <div class="card card-body w-100 shadow">
                     <span class="btn btn-outline-dark" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter" style="width:60px">檢舉</span>
