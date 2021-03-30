@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MaiMai買買</title>
-   
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -347,14 +346,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                     } else if (category == "違規") {
                         $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../PersonalMarket/Personal_Index"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "訂單") {
-                        var ordhref = "";
-                        switch (message) {
-                            case "有人訂購你的商品囉!": ordhref = "../PersonalMarket/Personal_Index"; break;
-                            case "賣家已確認訂單!": ordhref = "../OrderManager/OrderIndex"; break;
-                            case "賣家已出貨!": ordhref = "../OrderManager/OrderIndex"; break;
-                            case "買家已結單!": ordhref = "../PersonalMarket/Personal_Index"; break;
-                        }
-                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="${ordhref}"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     }
                 }
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);

@@ -16,41 +16,26 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <link href="~/Content/cssCHIEN/Login.css" rel="stylesheet" />
-    <style>
-        .abc1 {
-            padding: 260px;
-        }
-        .abb2 {
-            padding-left: 16px;
-            padding-top: 21px;
-        }
-        .abb2:focus{
-                  outline:none;
-        }
-        input:focus {
-            outline: none
-        }
-    </style>
 </head>
 
 <body class="w-100">
 
-    <div class="cf flex-l bg-near-white abc1">
+    <div class="cf flex-l bg-near-white">
         <div class="w-50-l pv6-l pv5-ns pv4 ph5-ns ph4 tr-l self-center tc tl-l">
             <a class="nowrap" href="/">
                 <h1 class="mv0 f5 dib mr4 br b--light-silver">
 
-                    <img src="~/Maimai/images/svg/maimaiTOPLOGO.svg" style="left:50px" />
+                    <img src="~/Content/ImageCHIEN/maimaiLOGO.svg" />
                 </h1>
                 <h2 class="mv0 f5 dib">一起幫助需要幫助的人</h2>
             </a>
         </div>
-        <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l" style="border-radius: 50px;">
+        <div class="w-50-l ph5-ns ph4 pv6-l pt3-ns pv4 bg-white-l">
             <div class="nt3 mt0-ns mb4"></div>
 
             <a class="button b bg-fb white db pa3 ba b--blue mb3" href="/users/auth/facebook">Facebook 登入或註冊</a>
             <div class="js-details reset-details mb3 f6 ba br2 b--light-gray">
-                <button class="pa3 tl js-summary button-text b black w-100 abb2 " type="button">
+                <button class="pa3 tl js-summary button-text b black w-100" type="button">
                     會員登入
                     <span class="f4 ml1">▾</span>
                 </button>
@@ -102,9 +87,9 @@
             <div class="mv4-ns mv3 bt b--light-gray"></div>
             @*@Html.ActionLink("註冊", "SignUp", "Members")*@
 
-            <a class="b f6 hover-blue black mr3" style="text-decoration: none" href="SignUp">註冊</a>
+            <a class="b f6 hover-blue black mr3" href="SignUp">註冊</a>
 
-            <a class="link b f6 hover-blue black mr3"  style="text-decoration: none"href="/users/password/new">忘記密碼或重設密碼</a>
+            <a class="link b f6 hover-blue black mr3" href="/users/password/new">忘記密碼或重設密碼</a>
 
 
         </div>

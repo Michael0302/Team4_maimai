@@ -313,7 +313,7 @@ namespace MaiMai.Controllers
         //商品列表
         public ActionResult getAllPorducts()
         {
-            var prodlist = db.ProductPost.Where(p => p.status == 1).Select(s => new
+            var prodlist = db.ProductPost.Where(p => p.status == true).Select(s => new
             {
                 ProductPostID = s.ProductPostID,
                 productName = s.productName,
@@ -359,7 +359,7 @@ namespace MaiMai.Controllers
         {
             var cancel = db.ProductPost.Find(ProductPostID);
 
-            cancel.status = 0;
+            cancel.status = false;
             db.SaveChanges();
 
 
@@ -369,7 +369,7 @@ namespace MaiMai.Controllers
         //取得刪除列表
         public ActionResult getDelPorducts()
         {
-            var prodlist = db.ProductPost.Where(p => p.status == 0).Select(s => new
+            var prodlist = db.ProductPost.Where(p => p.status == false).Select(s => new
             {
                 ProductPostID = s.ProductPostID,
                 productName = s.productName,
