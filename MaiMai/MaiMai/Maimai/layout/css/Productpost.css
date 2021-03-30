@@ -23,8 +23,8 @@ label {
 }
 .prdImg > img {
     border-radius: 25px;
-    max-height: 500px;
-    max-width: 100%;
+    height: 500px;
+    width: 100%;
     border-radius: 25px;
     /*margin-left: 10%;*/
     margin-top: 5%;

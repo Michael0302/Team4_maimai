@@ -45,7 +45,7 @@
             @*Search*@
             <div class=" dropdown col-8  my-3">
                 <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" />
+                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick"/>
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
 
@@ -283,18 +283,28 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 $("#inputsearch").autocomplete({
                     source: test
                 });
+              
                 $(text).each(function (index, text) {
                     test.push(text.name);
                 })
                 //console.log(text)
                 ////availabletags = list.split(",");
                 //console.log(availabletags)s
-                console.log(test)
-
+                //console.log(test)
+                    //< a url = "/NewMaimaiIndex/ProdutPost?PostID=85" ></a >
             }
         })
 
+    function imgInputCilick() {
+        $.ajax({
+            url: "/NewMaimaiIndex/searchall",
+            type: "GET",
+            success:
+        })
+        $("#imgInputCilick").event.target({
 
+        });
+    };
         //function inputsearch() {
         //        ajax({
         //            url: "/NewMaimaiIndex/searchall",

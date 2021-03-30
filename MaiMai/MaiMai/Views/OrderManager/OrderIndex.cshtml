@@ -267,7 +267,6 @@
 
                 })
                 $('#tbody').html(text)
-
             }
         })
 
@@ -284,13 +283,10 @@
                     var year = new Date(Milliseconds).getFullYear();
                     var month = new Date(Milliseconds).getMonth() + 1;
                     var date = new Date(Milliseconds).getDate();
-
-
                     var sellerStatus = item.sellerStatus;
                     var buyerStatus = item.buyerStatus;
 
                     if (buyerStatus == 2) {
-
                         text += `
                         <tr >
                         <td id="oderdeail" name="${item.oderdeail}"> ${item.OrderId}</td>
@@ -301,9 +297,6 @@
                         <td> 已到貨</td>
                         <td><a class= "btn btn-outline-dark" data-toggle="modal" onclick="getComment(${item.oderdeail})" data-target="#exampleModalCenter"> 評論</td>
                         </tr>`
-
-
-
                     }
                     else if (buyerStatus == 1 && sellerStatus == 0) {
 
@@ -320,7 +313,6 @@
                         < td > <a class="btn btn-secondary" onclick="endOrder(${item.oderdeail})" > 結單</td>`
                     }
                     else if (buyerStatus == 1 && sellerStatus == 1) {
-
                         text += `
                         <tr >
                         <td> ${item.OrderId}</td>
@@ -347,11 +339,8 @@
                         <td><a class= "btn btn-outline-dark" onclick="endOrder(${item.oderdeail})"> 結單</td>
                         </tr>`
 
-                    }// 這邊要秀prodcut detail
-
-
+                    }// 這邊要秀prodcut detai
                     $('#tProcessbody').html(text)
-
                 })
             }
         })
@@ -470,24 +459,24 @@
 
     function checkout() {
 
-        //let id = $('#showOrderTitle').attr("name");
+        let id = $('#showOrderTitle').attr("name");
 
-        //$.ajax({
-        //    url: "/OrderManager/checkout",
-        //    type: "GET",
-        //    data: { 'orderid': id },
-        //    success: function (response) {
-        //        swal('成功', response, 'success');
+        $.ajax({
+            url: "/OrderManager/checkout",
+            type: "GET",
+            data: { 'orderid': id },
+            success: function (response) {
+                swal('成功', response, 'success');
 
-        //        window.location.reload("/OrderManager/OrderIndex");
+                window.location.reload("/OrderManager/OrderIndex");
 
-        //    },
-        //    error: function (response) {
+            },
+            error: function (response) {
 
-        //        window.alert(response);
-        //        window.location.reload("/OrderManager/OrderIndex");
-        //    }
-        //});
+                window.alert(response);
+                window.location.reload("/OrderManager/OrderIndex");
+            }
+        });
 
     };
 
