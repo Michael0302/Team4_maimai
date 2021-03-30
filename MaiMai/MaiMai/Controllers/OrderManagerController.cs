@@ -204,10 +204,7 @@ namespace MaiMai.Controllers
             
             var id = Convert.ToInt32(userid);
 
-           
-
-            var table = db.OrderDetail.Where(m => m.SellerID == id && m.buyerStatus == 1 && m.sellerStatus ==0 ).Join(db.Order,od=>od.OrderID,o => o.OrderId, (od,o) => new {
-
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.buyerStatus == 1 && m.sellerStatus ==0 ).Select(od => new {
                 orderDetailId= od.OrderDetailID,
                 orderID= od.OrderID,
                 createdTime = od.Order.createdTime,
@@ -216,10 +213,9 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerId= o.buyerUserID,
-                buyerUserAccount = o.Member.userAccount
+                buyerUserAccount = od.Member.userAccount
 
-            });; 
+            }); 
 
 
             return Json(table, JsonRequestBehavior.AllowGet);
@@ -248,7 +244,7 @@ namespace MaiMai.Controllers
         public ActionResult getSalesProcessOrderList(string userid) {
             var id = Convert.ToInt32(userid);
 
-            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 1 && m.buyerStatus == 1).Join(db.Order, od => od.OrderID, o => o.OrderId, (od, o) => new {
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 1 && m.buyerStatus == 1).Select(od => new {
                 orderDetailId = od.OrderDetailID,
                 orderID = od.OrderID,
                 createdTime = od.Order.createdTime,
@@ -257,7 +253,7 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = o.Member.userAccount
+                buyerUserAccount = od.Member.userAccount
 
 
             });
@@ -293,7 +289,7 @@ namespace MaiMai.Controllers
         {
             var id = Convert.ToInt32(userid);
 
-            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus >= 2 && m.buyerStatus==1).Join(db.Order, od => od.OrderID, o => o.OrderId, (od, o) => new {
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2 && m.buyerStatus==1).Select(od => new {
                 orderDetailId = od.OrderDetailID,
                 orderID = od.OrderID,
                 createdTime = od.Order.createdTime,
@@ -302,7 +298,7 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = o.Member.userAccount
+                buyerUserAccount = od.Order.Member.userAccount
 
             });
 
@@ -316,7 +312,7 @@ namespace MaiMai.Controllers
         {
             var id = Convert.ToInt32(userid);
 
-            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus >= 2 && m.buyerStatus >= 2).Join(db.Order, od => od.OrderID, o => o.OrderId, (od, o) => new {
+            var table = db.OrderDetail.Where(m => m.SellerID == id && m.sellerStatus == 2 && m.buyerStatus == 2).Select(od => new {
                 orderDetailId = od.OrderDetailID,  
                 orderID = od.OrderID,
                 createdTime = od.Order.createdTime,
@@ -325,9 +321,7 @@ namespace MaiMai.Controllers
                 QTY = od.QTY,
                 OrderDetailID = od.OrderDetailID,
                 oneProductTotalPrice = od.oneProductTotalPrice,
-                buyerUserAccount = o.Member.userAccount,
-                buyerStatus=od.buyerStatus,
-                sellerStatus=od.sellerStatus
+                buyerUserAccount = od.Member.userAccount
 
             }).ToList();
 
