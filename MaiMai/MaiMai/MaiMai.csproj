@@ -189,61 +189,61 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Chat.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Comment.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GenericRepository\IRepository.cs" />
     <Compile Include="Models\GenericRepository\maimaiRepository.cs" />
+    <Compile Include="Models\maimai.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>maimai.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\maimai.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>maimai.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\maimai.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>maimai.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\MaimaiIndexViewModel\MaimaiIndexViewModel.cs" />
-    <Compile Include="Models\maimaiModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>maimaiModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\maimaiModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>maimaiModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\maimaiModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>maimaiModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Member.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Notification.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Order.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductPost.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Report.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReportDetail.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RequiredPost.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tag.cs">
-      <DependentUpon>maimaiModel.tt</DependentUpon>
+      <DependentUpon>maimai.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\CommentViewModel.cs" />
     <Compile Include="Models\ViewModel\LoginViewModel.cs" />
@@ -518,15 +518,15 @@
     <Content Include="Maimai\layout\images\vil-son-35490.jpg" />
     <Content Include="Maimai\layout\images\white_logo.png" />
     <Content Include="Maimai\layout\images\zack-minor-15104.jpg" />
-    <Content Include="Models\maimaiModel.Context.tt">
+    <Content Include="Models\maimai.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>maimaiModel.edmx</DependentUpon>
-      <LastGenOutput>maimaiModel.Context.cs</LastGenOutput>
+      <DependentUpon>maimai.edmx</DependentUpon>
+      <LastGenOutput>maimai.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\maimaiModel.tt">
+    <Content Include="Models\maimai.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>maimaiModel.edmx</DependentUpon>
-      <LastGenOutput>maimaiModel.cs</LastGenOutput>
+      <DependentUpon>maimai.edmx</DependentUpon>
+      <LastGenOutput>maimai.cs</LastGenOutput>
     </Content>
     <Content Include="Payment_Net-master\AioSDK\AllPay.Payment.Integration.XML" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -559,12 +559,12 @@
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
     <Content Include="Payment_Net-master\README.md" />
-    <EntityDeploy Include="Models\maimaiModel.edmx">
+    <EntityDeploy Include="Models\maimai.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>maimaiModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>maimai.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\maimaiModel.edmx.diagram">
-      <DependentUpon>maimaiModel.edmx</DependentUpon>
+    <Content Include="Models\maimai.edmx.diagram">
+      <DependentUpon>maimai.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
@@ -713,6 +713,7 @@
     <Content Include="Views\Comment\Comment_WithoutLogin.cshtml" />
     <Content Include="Views\RequiredPost\requiredSingalPage.cshtml" />
     <Content Include="Views\MyAccount\MyAccount.cshtml" />
+    <Content Include="Views\MyAccount\MyPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
