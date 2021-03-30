@@ -33,18 +33,49 @@
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 14, //放大的倍率
                 center: latlng, //初始化的地圖中心位置
-                mapTypeControl: false,
+                mapTypeControl: false, //預設功能關閉 ex.放大、切換衛星地圖...等
                 scaleControl: false,
                 streetViewControl: false,
                 rotateControl: false,
                 fullscreenControl: false,
                 styles: [{
-                    visibility: 'off',
-                }],
+                    "featureType": "administrative",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                    {
+                        "featureType": "poi",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    }],
             });
             var marker = new google.maps.Marker({
-                position: latlng,
-                map: map
+                //position: latlng,
+                //map: map
             });
 
 
@@ -76,6 +107,7 @@
                     map.setZoom(17);
                     map.setCenter(CurrentPos);
 
+                    
 
                     let cityCircle = new google.maps.Circle({
                         strokeColor: '#f1c40f', // 線條顏色
