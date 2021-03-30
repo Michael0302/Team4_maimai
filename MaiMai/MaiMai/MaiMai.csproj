@@ -713,6 +713,7 @@
     <Content Include="Views\RequiredPost\requiredSingalPage.cshtml" />
     <Content Include="Views\MyAccount\MyAccount.cshtml" />
     <Content Include="Views\MyAccount\MyPassword.cshtml" />
+    <Content Include="Views\OrderManager\OrderIndex2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

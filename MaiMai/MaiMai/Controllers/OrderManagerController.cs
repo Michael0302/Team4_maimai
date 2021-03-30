@@ -17,6 +17,12 @@ namespace MaiMai.Controllers
             return View();
         }
 
+        public ActionResult OrderIndex2() {
+
+            return View();
+        }
+
+
         public ActionResult getNonPayOrderList(string userid)
         {
 
