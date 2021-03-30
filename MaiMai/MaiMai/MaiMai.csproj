@@ -714,6 +714,7 @@
     <Content Include="Views\NewMaimaiIndex\opay.cshtml" />
     <Content Include="Views\RequiredPost\requiredSingalPage.cshtml" />
     <Content Include="Views\MyAccount\MyAccount.cshtml" />
+    <Content Include="Views\MyAccount\MyPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
