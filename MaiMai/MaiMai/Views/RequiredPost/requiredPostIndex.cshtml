@@ -5,6 +5,17 @@
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
     <script src="~/Content/resource_nico/tw-city-selector.min.js"></script>
 
+    
+    <style>
+        /*=================================================*/
+        
+      
+
+
+        /**=================================================*/
+
+
+    </style>
 
 </head>
 
@@ -18,9 +29,11 @@
                        aria-controls="pills-home" aria-selected="true">所有徵求貼文</a>
 
                 </li>
-                <li >
-                     <a class="btn btn-post" style="color: #B5838D; font-weight:bolder;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
-                    
+              
+
+                <li>
+                    <a class="btn btn-post" style="color: #B5838D; font-weight:bolder;" data-toggle='modal' data-target='#bulid'> 我要徵求</a>
+
                 </li>
 
             </ul>
@@ -46,7 +59,7 @@
                                 <h6>貼文名稱:</h6><input class="ml-2 form-control" type="text" required name="postName" id="postName">
                                 <h6>
                                     貼文描述:
-                                </h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" class="w-75" required onclick="tag()"></textarea>
+                                </h6><textarea class="ml-2 form-control" id="postDescription" name="postDescription" placeholder="使用程度、幾成新" required onclick="tag()"></textarea>
                                 <h6>交貨方式 : </h6>
                                 <div>
                                     <div class="form-check  input-group ml-2">
@@ -62,6 +75,7 @@
                                         </label>
                                     </div>
                                     <div class="my-selector-b"></div>
+                                    <label for="address">預設面交地址(不會顯示貼文上)</label><input class="ml-2 form-control" type="text" required name="address" id="address">
                                 </div>
 
 
@@ -106,6 +120,16 @@
 
 </div>
 
+
+
+@*=================================================*@
+
+
+
+
+
+@*=================================================*@
+
 @*=================report 立恆=====================*@
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -135,6 +159,9 @@
 <script>
     $(function () {
 
+      
+
+
 
         new TwCitySelector({
             el: ".my-selector-b",
@@ -153,13 +180,13 @@
 
                     $("#allPost").append(`
                             <div class="my-3" style="background-color:#FFFFFF">
-                           <div class="row mx-auto shadow-lg" id="start" onclick="window.open('../../RequiredPost/requiredSingalPage?rqID=${item.RequiredPostID}','徵求台')">
+                           <div class="row mx-auto shadow-lg" id="start${i}" name="${item.RequiredPostID})">
                             <div class="photo">
                                 <img src="../Content/resource_nico/images/徵求台POST/${item.postImg}" />
                             </div>
                             <div class="post-text">
                                 <div class="d-flex justify-content-between">
-                                    <h3 id="postName${i}">${item.postName}</h3>
+                                    <h3 id="postName${i}" class="butt"  onclick="toRequiredPostSingal(${item.RequiredPostID})">${item.postName}</h3>
                                     <h6>${item.county} <span>${item.district}</span></h6>
                                 </div>
                                 <h6 id="userName${i}">買家 : <span class="font-weight-bolder">${item.userAccount}</span></h6>
@@ -172,7 +199,7 @@
                                         aria-controls="collapseExample" name="${item.RequiredPostID}"
                                         onclick="checkCommentList(this,'${i}')">查看留言(<span id="cmCount${i}">0</span>)</a>
                                     <div>
-                                        <a class="btn btn-comment" style="color:#FFB4A2" data-toggle="collapse" href="#collapseExample${i}" role="button"
+                                        <a class="btn btn-comment" style="color:#FFB4A2" data-toggle="collapse" href="#collapseExample${i}"  role="button"
                                             aria-expanded="false" aria-controls="collapseExample">我要留言</a>
                                     </div>
                                 </div>
@@ -180,7 +207,7 @@
                             </div>
                             </div>
                             <div class="collapse w-100 comment" id="collapseComment${i}">
-                                <div class="card card-body w-100 comment" style="background-color:#F7E7DE">
+                                <div class="card card-body w-100 ">
 
                                 </div>
                             </div>
@@ -189,59 +216,66 @@
                                 <div class="card card-body w-100 shadow" >
                                     <span class="btn btn-outline-dark" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter" style="width:60px">檢舉</span>
 
-                                    <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
-                                        <div class="displayImg Productimg${i}">
-                                            <div class="photo"><img id="Productimg${i}"></div>
-                                            <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
-                                                style="display: block;">
-                                        </div>
-                                        <div class="displayInput w-50">
-                                            <h6>產品名稱:</h6><input  class="ml-2 form-control" type="text" name="productName" id="productName${i} ">
-                                            <h6>產品描述:</h6>
-                                                    <textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新"
-                                                    class="form-control ml-2"  rows="3" onclick="tag()"></textarea>
-                                            <h6>交貨方式:</h6>
-                                            <div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="transationType" value="express${i}"
-                                                        id="express${i}" checked>
-                                                    <label class="form-check-label " for="express${i}">
-                                                        物流交貨
-                                                    </label>
+                           
+                                        <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
+                                            <div class="displayImg Productimg${i}">
+                                                <div class="photo"><img id="Productimg${i}"></div>
+                                                <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
+                                                       style="display: block;">
+                                                <div class="ml-5">
+                                                    <input class="form-check-input" id="showProduct${i}" onchange="addStatus(this,${i}) "type="radio" name="status" >
+                                                    <label>此商品不要加入個人賣場</label>
                                                 </div>
-                                                <div class="form-check input-group">
-                                                    <input class="form-check-input" type="radio" name="transationType"
-                                                        onchange="changeDis(${i})" id="pTop${i}" value="pTop${i}">
-                                                    <label class="form-check-label" for="pTop${i}">
-                                                        當面交貨/地點
-                                                    </label>
-                                                </div>
-                                                <div id="city${i}"></div>
-                                            </div>
-
-
-                                            <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="price${i}">
-                                            <h6>數量:</h6><input class="ml-2 form-control" type="text" name="inStoreQTY" id="inStoreQTY${i}">
-                                            <h6>標籤:
-                                                <select id="tagselection${i}" class="form-control" name="TagID">
-                                                    <option>Choose...</option>
-                                                </select>
-                                            </h6>
-
-                                            <!-- createtime -->
-                                            <input type="hidden" name="createdTime">
-                                            <!-- userID -->
-                                            <input type="hidden" name="RequiredPostID" value="${item.RequiredPostID}">
-                                            <!-- requiredPostID -->
-                                            <div style="display: flex; justify-content:flex-end;">
 
                                             </div>
-                                        </div>
+                                            <div class="displayInput w-50">
+                                                <h6>產品名稱:</h6><input class="ml-2 form-control" type="text" name="productName" id="productName${i} ">
+                                                <h6>產品描述:</h6>
+                                                <textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新"
+                                                          class="form-control ml-2" rows="3" onclick="tag()"></textarea>
+                                                <h6>交貨方式:</h6>
+                                                <div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="transationType" value="express${i}"
+                                                               id="express${i}" checked>
+                                                        <label class="form-check-label " for="express${i}">
+                                                            物流交貨
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check input-group">
+                                                        <input class="form-check-input" type="radio" name="transationType"
+                                                               onchange="changeDis(${i})" id="pTop${i}" value="pTop${i}">
+                                                        <label class="form-check-label" for="pTop${i}">
+                                                            當面交貨/地點
+                                                        </label>
+                                                    </div>
+                                                    <div id="city${i}"></div>
+                                                </div>
 
-                                    </form>
-                                    <button type="submit" class="btn btn-comment"  style="color:#FFB4A2" onclick="submitProdouct(this,${i})">建立商品留言</button>
-                                </div>
-                            </div> @*end of 訂單*@
+
+                                                <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="price${i}">
+                                                <h6>數量:</h6><input class="ml-2 form-control" type="text" name="inStoreQTY" id="inStoreQTY${i}">
+                                                <h6>
+                                                    標籤:
+                                                    <select id="tagselection${i}" class="form-control" name="TagID">
+                                                        <option>Choose...</option>
+                                                    </select>
+                                                </h6>
+
+                                                <!-- createtime -->
+                                                <input type="hidden" name="createdTime">
+                                                <!-- userID -->
+                                                <input type="hidden" name="RequiredPostID" value="${item.RequiredPostID}">
+                                                <!-- requiredPostID -->
+                                                <div style="display: flex; justify-content:flex-end;">
+
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                        <button type="submit" class="btn btn-comment" style="color:#FFB4A2" onclick="submitProdouct(this,${i})">建立商品留言</button>
+                                    </div>
+                                </div> @*end of 訂單*@
                             </div)
                     `)
 
@@ -250,6 +284,8 @@
                 })
             }
         })
+
+
         // ajax end
     })//documentReady
 
@@ -264,7 +300,10 @@
         }
     });
 
+    function addStatus(ele, index) {
+        $(`showProduct${i}`).attr('value',2)
 
+    }
 
     function changeDis( index) {
 
@@ -300,7 +339,7 @@
         })
     }
 
-        function getCookie(cookieName) {
+    function getCookie(cookieName) {
             var name = cookieName + "=";
             var ca = document.cookie.split(';');
             for (var i = 0; i < ca.length; i++) {
@@ -312,7 +351,7 @@
 
         }
 
-     function previewFile() {
+    function previewFile() {
             //var photo = $(eler).val();
          const preview = document.querySelector('#Productimg');
          const file = document.querySelector('input[type=file]').files[0];
@@ -353,7 +392,7 @@
         if (test == "") {
             Swal.fire("必須要登入才能留言喔")
 
-           
+
             return window.location.href = `/Members/Login`;
         }
 
@@ -390,17 +429,19 @@
         })
 
     }// end tag function
-    function checkCommentList(eler,index) {
+
+    function toRequiredPostSingal(id) {
+
+        window.open(`../../RequiredPost/requiredSingalPage?rqID=${id}`, '徵求台');
+
+    }
+    function checkCommentList(eler,index, event) {
 
 
         var test = getCookie('LoginAccount');
-        console.log(test)
-        console.log(typeof test)
 
         if (test == "") {
             var test = getCookie('LoginAccount');
-            console.log(test)
-            console.log(typeof test)
             alertTest1()
             setTimeout("home()", 2000)
         }
@@ -417,53 +458,58 @@
 
                     if (item.county == null) {
                         inner += `
-                         <div class="row mx-auto shadow-lg my-3"  id="start" >
+                         <div class="row mx-auto shadow-lg my-3"  style="background-color:#F9F0F2">
 
-                          <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
-                          <div class="post-text">
-                                <div class="d-flex justify-content-between">
-                                 <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
-                                  
-                                 </div>
-                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
-                                <div>
-                                <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
-                                 </div>
-                                <div class="post-button">
-                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
-                                <a class="btn" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
-                                </div>
-                          </div>
+                                    <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
+                                    <div class="post-text">
+                                        <div class="d-flex justify-content-between">
+                                            <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
+
+                                        </div>
+                                        <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
+                                         <div>
+                                                <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
+                                          </div>
+                                          <div class="post-button">
+                                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
+                                                <a class="btn nico_but" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
+                                        </div>
+                                    </div>
                         </div>`
 
                     }
                     else {
                         inner += `
-                         <div class="row mx-auto shadow-sm my-2" style="background-color:#F7E7DE" id="start" >
+                         <div class="row mx-auto shadow-lg my-2"   style="background-color:#F9F0F2">
 
-                          <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
-                          <div class="post-text">
-                                <div class="d-flex justify-content-between">
-                                 <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
-                                    <h6>${item.county}<span class="font-weight-bolder">${item.district}</span></h6>
-                                     </div>
-                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
-                                <div>
-                                <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
-                            </div>
-                            <div class="post-button">
-                                <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
-                                <a class="btn btn-secondary" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
-                         </div>
+                                    <div class="photo">  <img src=../Content/ProductPostImg/${item.productImg}> </div>
+                                     <div class="post-text">
+                                            <div class="d-flex justify-content-between">
+                                                     <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}"><h3 class="ml-1" id="postName${i}">${item.productName}</h3></a>
+                                                    <h6>${item.county}<span class="font-weight-bolder">${item.district}</span></h6>
+                                             </div>
+                                                <a class="btn" role="button" href="../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.useraccountID}"><h6 id="userName${i}">賣家 :  <span class="font-weight-bolder">${item.userAccount}</span></h6></a>
+                                                <div>
+                                                        <h6 id="text${i}">產品敘述 :  <span class="font-weight-bolder">${item.productDescription}</span></h6>
+                                                 </div>
+                                                <div class="post-button">
+                                                     <h6 id="price${i}"> <span class="font-weight-bolder">價位：${item.price}<span>  元</h6>
+                                                     <a class="btn nico_but" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">查看商品</a>
+                                                </div>
+                                            </div>
                         </div>`
 
 
                     }
-                    })
+                })
+
                 $(`#collapseComment${index}>div`).html(inner);
                 $(`#cmCount${index}`).html(`${response.length}`)
+
             }
+
         })
+
     } // end check comment function
 
     $('a>btn-post').click(() => {
@@ -495,14 +541,17 @@
     function sendRequiredPost() {
 
         var test = getCookie('LoginAccount');
-       
+
 
         if (test == null) {
 
-            alertTest1()
+            Swal.fire(
+                "必須要登入才能看留言喔喔", //標題
+                " 2秒後自動跳轉...", //訊息內容(可省略)
+                "warning" //圖示(可省略) success/info/warning/error/question
+            );
             setTimeout("home()", 2000)
-            //swal("必須要登入才能發文喔");
-            return window.location.href = `/Members/Login`;
+
         }
 
         var form = document.querySelector("#form1")
@@ -520,7 +569,7 @@
             contentType: false,
             success: function (response) {
                 swal('成功', '送出成功', 'success');
-             
+
                 window.location.reload("/RequiredPost/requiredPostIndex")
 
             }

@@ -59,10 +59,7 @@
 
                     var marker = new google.maps.Marker({
                         title: "現在位置",
-                        icon: {
-                            url: '/Content/resource_nico/logoTOPwithoutBG.png',
-                                 scaledSize: new google.maps.Size(100, 100)
-                        },
+                       
                         draggable: true,
                         stylers: [{
                             visibility: 'off'
@@ -76,6 +73,7 @@
                     map.setZoom(17);
                     map.setCenter(CurrentPos);
 
+                    
 
                     let cityCircle = new google.maps.Circle({
                         strokeColor: '#f1c40f', // 線條顏色

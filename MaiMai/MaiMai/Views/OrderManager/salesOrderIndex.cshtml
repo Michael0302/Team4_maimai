@@ -6,6 +6,13 @@
 
 <head>
     <link href="~/Content/resource_nico/OrderManager.css" rel="stylesheet" />
+    <style>
+        img[src*="star"] {
+            width: 30px;
+            margin: 0 10px;
+        }
+    </style>
+
 </head>
 
 <div class="container" style="padding-top:100px">
@@ -31,14 +38,14 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">訂單編號</th>
-                        <th scope="col">建立時間</th>
+                        <th scope="col" width="100px">訂單編號</th>
+                        <th scope="col"  width="150px">建立時間</th>
                         <th scope="col">商品</th>
                         <th scope="col">商品名稱</th>
                         <th scope="col">商品數量</th>
                         <th scope="col">買家名稱</th>
                         <th scope="col">總價</th>
-                        <th scope="col"></th>
+                        <th scope="col"   width="150px"></th>
                     </tr>
                 </thead>
                 <tbody id="tbody">
@@ -60,14 +67,14 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">訂單編號</th>
-                        <th scope="col">建立時間</th>
+                        <th scope="col" width="100px">訂單編號</th>
+                        <th scope="col" width="150px">建立時間</th>
                         <th scope="col">商品</th>
                         <th scope="col">商品名稱</th>
                         <th scope="col">商品數量</th>
                         <th scope="col">買家名稱</th>
                         <th scope="col">總價</th>
-                        <th scope="col"></th>
+                        <th scope="col"   width="150px"></th>
                     </tr>
                 </thead>
                 <tbody id="tProcessbody">
@@ -94,14 +101,14 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">訂單編號</th>
-                        <th scope="col">建立時間</th>
+                        <th scope="col" width="100px">訂單編號</th>
+                        <th scope="col" width="150px">建立時間</th>
                         <th scope="col">商品</th>
                         <th scope="col">商品名稱</th>
                         <th scope="col">商品數量</th>
                         <th scope="col">買家名稱</th>
                         <th scope="col">總價</th>
-                        <th scope="col">賣家狀態</th>
+                        <th scope="col"   width="150px">賣家狀態</th>
                     </tr>
                 </thead>
                 <tbody id="tProcessedbody">
@@ -130,14 +137,14 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">訂單編號</th>
-                        <th scope="col">建立時間</th>
+                        <th scope="col" width="100px">訂單編號</th>
+                        <th scope="col" width="150px">建立時間</th>
                         <th scope="col">商品</th>
                         <th scope="col">商品名稱</th>
                         <th scope="col">商品數量</th>
                         <th scope="col">買家名稱</th>
                         <th scope="col">總價</th>
-                        <th scope="col">賣家狀態</th>
+                        <th scope="col"   width="150px">賣家狀態</th>
                     </tr>
                 </thead>
                 <tbody id="tPastbody">
@@ -192,7 +199,7 @@
         </div>
     </div>
 </div>
-@*=====================================詳細訂單彈跳視窗end==========================================*@
+
 <!--評論彈跳視窗 -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -234,7 +241,7 @@
                     <textarea id="commentTXT" rows="15" cols="60"></textarea>
                 </div>
 
-
+                <div id="OrderID" type="hidden"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
@@ -243,9 +250,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 
 <script>
@@ -263,6 +267,7 @@
     } // end of getCookie
 
     var test = getCookie('LoginID');
+    var starRate;
 
     $(function () {
 
@@ -353,7 +358,6 @@
                     var month = new Date(Milliseconds).getMonth() + 1;
                     var date = new Date(Milliseconds).getDate();
 
-
                     text += `
                     <tr>
                     <td>${item.orderID}</td>
@@ -365,6 +369,7 @@
                     <td ">${item.oneProductTotalPrice}</td>
                     <td><a class= "btn btn-outline-dark" onclick="sentOrder(${item.orderDetailId})"> 出貨</td>
                     </tr>`
+
 
                 })
 
@@ -388,26 +393,44 @@
                     var date = new Date(Milliseconds).getDate();
 
 
-                    text += `
-                    <tr name='${item.orderDetailId}'>
-                    <td>${item.orderID}</td>
-                    <td>${year} - ${month} - ${date}</td>
-                    <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
-                    <td>${item.productName}</td>
-                    <td>${item.QTY}</td>
-                    <td>${item.buyerUserAccount}</td>
-                    <td ">${item.oneProductTotalPrice}</td>
-                    <td><a class= "btn btn-outline-dark" data-toggle="modal" onclick="getComment(${item.orderDetailId})" data-target="#exampleModalCenter">評論</td>
-                    </tr>`
+                    var sellerStatus = item.sellerStatus;
+               
+
+                    if (sellerStatus == 3) {
+                        text += `
+                                <tr name='${item.orderDetailId}'>
+                                <td>${item.orderID}</td>
+                                <td>${year} - ${month} - ${date}</td>
+                                <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
+                                <td>${item.productName}</td>
+                                <td>${item.QTY}</td>
+                                <td>${item.buyerUserAccount}</td>
+                                <td ">${item.oneProductTotalPrice}</td>
+                                <td>已評論</td>
+                                </tr>`
+                    }
+                    else{
+                        text += `
+                                <tr name='${item.orderDetailId}'>
+                                <td>${item.orderID}</td>
+                                <td>${year} - ${month} - ${date}</td>
+                                <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
+                                <td>${item.productName}</td>
+                                <td>${item.QTY}</td>
+                                <td>${item.buyerUserAccount}</td>
+                                <td ">${item.oneProductTotalPrice}</td>
+                                <td><a class= "btn btn-outline-dark" data-toggle="modal" onclick="getComment(${item.orderDetailId})" data-target="#exampleModalCenter">評論</td>
+                                </tr>`
+                    }
 
                 })
                 $('#tPastbody').html(text)
             }
         })
 
-
         // comment
         // 星星評等
+
         $("#div0").find("img").on({
             mouseenter: function () {
                 $(this).prop("src", "../Content/ProductPostImg/member/chngstar.jfif");
@@ -485,46 +508,60 @@
 
 
 
-      //OrderID:3 獲得目前評價s
-        function getComment(id) {
-                $.ajax({
-                    url: "@Url.Action("getComment","MyOrder")",
-                    data: { OrderDetailID:id},
-                    type: "GET",
-                    success: function (result) {
-                        var CNT = result.length;
-                        console.log(result);
-                        console.log(`${result.img}`);
+ //comment
 
-                        var totalStar = result.reduce((a, b) => a.starRate + b.starRate);
-                        var starAVG = totalStar / CNT;
-                        console.log("totalStar", totalStar);
-                        console.log("starAVG", starAVG);
+     //OrderID:3 獲得目前評價s
+    function getComment(oderdeail) {
+        console.log(oderdeail);
+        $("#OrderID").attr("name",oderdeail);
+        $.ajax({
+            url: "@Url.Action("getComment","MyOrder")",
+            data: { OrderDetailID: oderdeail},
+            type: "GET",
+            success: function (result) {
+                var CNT = result.CNT;
+                var starTotal = result.starTotal;
+                var starAVG = 0;
+                if (CNT==0)
+                {
+                    starAVG = 0;
+                }
+                else
+                {
+                    starAVG = starTotal / CNT;
+                }
+                console.log('result ',result);
+                console.log("img",`${result.img}`);
+                console.log("starTotal", `${result.starTotal}`);
+                console.log("starAVG得分",`${starAVG}`);
 
-                        $("#commentCNT").text(`已經有${CNT}人評分`);
-                        $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result[0].img}`);
-                        $("#progress-bar").css("width", `${starAVG*20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG}`);
-                    },
-                })
-         }
+                $("#commentCNT").text(`已經有${result.CNT}人評分`);
+                $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.img}`);
+                $("#progress-bar").css("width", `${starAVG * 20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG }`);
+            },
+        })
+    }
 
-        function saveComment() {
-            console.log(starRate);
+    function saveComment() {
+        var oderdeail = $("#OrderID").attr("name");
+        console.log(oderdeail);
 
-                $.ajax({
-                    url: "@Url.Action("saveComment", "MyOrder")",
-                    data: {  OrderID:"40", starRate: starRate, description: $(`#commentTXT`).val()},
-                    type: "GET",
-                    success: function (result) {
-                    swal('成功', '感謝您寶貴的意見', 'success');
-                        setTimeout(function () { $(".close").click() }, 700);
-                    },
-                    error: function(){
-                    swal("失敗","星星滿意度為必要勾選!!",'error');
-                    }
-                 })
-         }
+        $.ajax({
+            url: "@Url.Action("saveComment", "MyOrder")",
+            data: { OrderID: oderdeail, starRate: starRate, description: $(`#commentTXT`).val()},
+            type: "GET",
+            success: function (result) {
+            swal('成功', '感謝您寶貴的意見', 'success');
+                setTimeout(function () { $(".close").click() }, 1000);
+                window.location.reload();
+            },
+            error: function(){
+            swal("失敗","星星滿意度為必要勾選!!",'error');
+            }
+        })
+     }
 
     //comment
+
 
 </script>
