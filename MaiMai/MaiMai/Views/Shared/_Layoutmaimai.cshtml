@@ -22,6 +22,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
+    <style>
+        input:focus {
+            outline: none
+        }
+    </style>
 </head>
 
 
@@ -299,10 +304,11 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         $.ajax({
             url: "/NewMaimaiIndex/searchall",
             type: "GET",
-            success:
-        })
-        $("#imgInputCilick").event.target({
+            success: function (data) {
+                $("#imgInputCilick").event.target({
 
+                });
+        }
         });
     };
         //function inputsearch() {
