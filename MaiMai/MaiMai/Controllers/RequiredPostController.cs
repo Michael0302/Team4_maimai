@@ -182,7 +182,7 @@ namespace MaiMai.Controllers
                 product.productImg = "無圖示.jpg";
             }
             else {
-                product.status = true;
+                product.status = 1;
             
             product.productImg = ps.upphoto.FileName;
             string filename = ps.upphoto.FileName;

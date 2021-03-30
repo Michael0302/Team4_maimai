@@ -45,7 +45,7 @@ namespace MaiMai.Controllers
         {
 
              
-            var table = db.ProductPost.Where(m => m.UserID == UserID&&m.status==true).Select(m => new ProductCommentListViewModel()
+            var table = db.ProductPost.Where(m => m.UserID == UserID&&m.status==1).Select(m => new ProductCommentListViewModel()
             {
                 ProductPostID = m.ProductPostID,
                 productName = m.productName,
@@ -72,7 +72,7 @@ namespace MaiMai.Controllers
             
            ProductPost abc=ProductPostRepository.GetbyID(UserID);
 
-            abc.status = false;
+            abc.status = 0;
 
             ProductPostRepository.Update(abc);
             return "成功";

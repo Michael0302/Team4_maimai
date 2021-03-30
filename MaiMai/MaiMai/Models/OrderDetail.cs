@@ -14,6 +14,12 @@ namespace MaiMai.Models
     
     public partial class OrderDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OrderDetail()
+        {
+            this.Comment = new HashSet<Comment>();
+        }
+    
         public int OrderDetailID { get; set; }
         public Nullable<int> OrderID { get; set; }
         public Nullable<int> ProductPostID { get; set; }
@@ -23,6 +29,8 @@ namespace MaiMai.Models
         public Nullable<int> buyerStatus { get; set; }
         public Nullable<int> sellerStatus { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comment { get; set; }
         public virtual Member Member { get; set; }
         public virtual Order Order { get; set; }
         public virtual ProductPost ProductPost { get; set; }

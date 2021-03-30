@@ -52,7 +52,7 @@ namespace MaiMai.Controllers
         //增加輪播圖片
         public ActionResult addCarousel()
         {
-            var addCarouselList = db.ProductPost.OrderByDescending(m => m.ProductPostID).Select(m => new MaimaiIndexViewModel()
+            var addCarouselList = db.ProductPost.Where(m=>m.status==1).OrderByDescending(m => m.ProductPostID).Select(m => new MaimaiIndexViewModel()
             {
                 ProductPostID = m.ProductPostID,
                 productImg = m.productImg,
