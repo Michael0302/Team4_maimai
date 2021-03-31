@@ -1,4 +1,30 @@
-﻿
+﻿input:focus {
+    outline: none
+}
+
+.wei-grid-special0 {
+    overflow: hidden;
+    transition: box-shadow 500ms;
+    border-radius: 10px;
+}
+
+    .wei-grid-special0:hover {
+        box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
+        background-color: white;
+    }
+
+.abc {
+    border-radius: 40px;
+    padding-top: 8px;
+    background-color: blanchedalmond !important;
+    padding-bottom: 1px;
+    margin-bottom: 10px;
+}
+
+.abc1 {
+    font-weight: 600;
+}
+/*========================================*/
 .HeardLogo {
 width:48px;height:48px;
 margin:0;
@@ -214,13 +240,20 @@ border:1px solid;
     padding: 0;
     margin: 0;
 }
-
+.dropdown-search-img {
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
+    background-color: #CBC0D3;
+    width:35px;
+}
 .dropdown-search {
     width: 900px;
     height: 50px;
-    border-radius: 35px;
+    border-bottom-right-radius: 35px;
+    border-top-right-radius: 35px;
+    /*border-radius: 35px;*/
     /*margin-top: 1%;*/
-    outline:none;
+    outline: none;
     background-color: #CBC0D3;
     border: none;
 }
