@@ -30,7 +30,6 @@
 @*下方輪播牆*@
 
 @section scripts {
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         var getUrlString = location.href;
         var url = new URL(getUrlString);
@@ -61,9 +60,9 @@
                                                               
                                                                             <div class="priceH">
                                                                                 <label class="d-block">描述</label>
-                                                                                <textarea cols="70" rows="6" readonly class="description">${item.Description}</textarea>
+                                                                                <textarea cols="65" rows="6" readonly class="description">${item.Description}</textarea>
                                                                             </div>
-                                                <div class="mr-3"><a onclick="displayChat(${item.ProductPostID})">聯絡賣家</a><a href="/PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.UserID}">${item.userAccount}</a></div>
+                                                <div ><a onclick="displayChat(${item.ProductPostID})">聯絡賣家</a><a class="ml-3 PersonalText" href="/PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.UserID}">${item.userAccount}</a></div>
 
                                                      <div   style="margin-left:85%;" class="btn redbtn" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter">檢舉</div>
                                                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -189,7 +188,7 @@
         $(event.target).removeClass("btn-info").addClass("btn-success").siblings().removeClass("btn-success").addClass("btn-info");
     };
      function saveReport() {
-        console.log(`reportTAG=$('input:checked').val()`);
+        
         var reportTAG = $('input:checked').val() * 1 + 1;
         if (reportTAG == "NaN") {
             return false;
@@ -222,7 +221,14 @@
 
             );
         }
-        
+        function alertTestok() {
+            Swal.fire(
+                "新增成功", //標題
+                " 新增成功", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
+
+            );
+        }
 
         function home() {
             window.location.href = "/Members/Login";
@@ -247,8 +253,9 @@
                         setTimeout("home()", 2000)
                     }
                     if (data == "新增成功" || data == "商品更新成功" || data == "增加一筆新商品") { 
-                    alert(data)
-                    window.location.href = "/Cart/cartIndex";
+                        alertTestok()
+                        setTimeout(`window.location.href = "/Cart/cartIndex"`,2000)
+                    
                     }
                 }
             });

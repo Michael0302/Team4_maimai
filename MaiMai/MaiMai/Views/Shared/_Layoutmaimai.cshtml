@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MaiMai買買</title>
 
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,10 +22,37 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
+    <style>
+        input:focus {
+            outline: none
+        }
+
+        .wei-grid-special0 {
+            overflow: hidden;
+            transition: box-shadow 500ms;
+            border-radius: 10px;
+        }
+
+            .wei-grid-special0:hover {
+                box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
+                background-color:white;
+            }
+
+        .abc {
+            border-radius: 40px;
+            padding-top: 8px;
+            background-color: blanchedalmond !important;
+            padding-bottom: 1px;
+            margin-bottom: 10px;
+        }
+        .abc1 {
+            font-weight: 600;
+        }
+    </style>
 </head>
 
 
-<body class="container">
+<body class="container ">
     <nav class="nav1 ">
         <div class=" d-flex">
             @*layout左邊*@
@@ -44,7 +72,7 @@
             @*Search*@
             <div class=" dropdown col-8  my-3">
                 <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick"/>
+                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
 
@@ -60,89 +88,112 @@
             @*layout右邊*@
             <div id="mainListDiv" class="main_list" @*style="position: absolute; right:20% ;"*@>
                 <div class="navlinks d-flex mt-3">
-                    <div class="svglink"><a href="#"  style="text-decoration:none;">@*About*@<img src="~/Maimai/images/svg/073-location2.svg"><p style="font-size:10px;">地圖</p></a></div>
-                    <div class="svglink"><a href="../../Cart/cartIndex" style="text-decoration:none;"> @*Portfolio*@<img src="~/Maimai/layout/images/059-cart.svg" /><p style="font-size:10px;">購物</p> </a></div>
-                    <div class="svglink dropdown"><a href="#" style="text-decoration:none;" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> @*Services*@<img src="~/Maimai/images/svg/082-bell.svg"><p style="font-size:10px;"><span id="redPoint"></span>通知</p></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto">
-                        @*<a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>*@
+                    <div class="svglink">
+                        <a href="#" style="text-decoration:none;">
+                            @*About*@<img src="~/Maimai/images/svg/073-location2.svg">
+                            <p style="font-size:10px;">地圖</p>
+                        </a>
                     </div>
+                    <div class="svglink">
+                        <a href="../../Cart/cartIndex" style="text-decoration:none;">
+                            @*Portfolio*@<img src="~/Maimai/layout/images/059-cart.svg" />
+                            <p style="font-size:10px;">購物</p>
+                        </a>
+                    </div>
+                    <div class="svglink dropdown">
+                        <a href="#" style="text-decoration:none;" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @*Services*@<img src="~/Maimai/images/svg/082-bell.svg">
+                            <p style="font-size:10px;">
+                                <span id="redPoint"></span>通知
+                            </p>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink" id="notify" data-stopPropagation="true" style="min-width:300px; height:400px; overflow-y:auto">
+                            @*<a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>*@
+                        </div>
                     </div>
                     @*<li><a href="#">Contact</a></li>*@
-                <div class="dropdown mt-1">
-                    @*登入*@
-                    @*@if (Request.Cookies["LoginName"] != null)
-        {
-            <img  src="~/Maimai/images/svg/073-location2.svg" />
-        }*@
-                    <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
-                        <svg width="28" height="28" viewBox="0 0 24 24" >
-                            <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
-                                <path id="Path_140" data-name="Path 140"
-                                      d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
-                                      fill="#F94144"></path>
-                            </g>
-                        </svg>
-                        <p style="font-size:10px;">會員</p>
-                    </button> @*會員圖示 end*@
+                    <div class="dropdown mt-1">
+                        @*登入*@
+                        @*@if (Request.Cookies["LoginName"] != null)
+                            {
+                                <img  src="~/Maimai/images/svg/073-location2.svg" />
+                            }*@
+                        <button class="dropdown-toggle btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuLogin">
+                            <svg width="28" height="28" viewBox="0 0 24 24">
+                                <g id="组_21" data-name="组 21" transform="translate(-503.347 98.687)">
+                                    <path id="Path_140" data-name="Path 140"
+                                          d="M507.347-75.687a8,8,0,0,1,8-8,8,8,0,0,1,8,8h-2a6,6,0,0,0-6-6,6,6,0,0,0-6,6Zm8-10a6,6,0,0,1-6-6,6,6,0,0,1,6-6,6,6,0,0,1,6,6A6,6,0,0,1,515.347-85.687Zm0-2a4,4,0,0,0,4-4,4,4,0,0,0-4-4,4,4,0,0,0-4,4A4,4,0,0,0,515.347-87.687Z"
+                                          fill="#F94144"></path>
+                                </g>
+                            </svg>
+                            <p style="font-size:10px;">會員</p>
+                        </button> @*會員圖示 end*@
 
-                @*登入end*@
-                @if (Request.Cookies["LoginName"] == null)
-                {
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLogin">
-                        <li> @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "dropdown-item" })</li>
-                        <li>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "dropdown-item" })</li>
-                    </ul>
-                }
-                else
-                {
-                    @*<span class=" mx-2">
-                        @Request.Cookies["LoginName"].Value
-                        </span>*@
-
-                    <div class="dropdown-menu" style="padding-top:unset;">
-                        <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人帳戶管理</h5></div>
-                        @Html.ActionLink("個人資料", "MyAccount", "MyAccount", null, new { @class = "dropdown-item" })
-                        @Html.ActionLink("我的訂單", "OrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
-
-
-
-                        <div class="dropdown-divider" style="margin-bottom:unset;"></div>
-                        <div style="background-color: #E0E0E0"><h5 class="text-center" style="font-weight:bolder;color:	#5B5B5B">個人賣場管理</h5></div>
-                        @Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "dropdown-item" })
-                        @Html.ActionLink("賣場交易訂單", "salesOrderIndex", "OrderManager", null, new { @class = "dropdown-item" })
-                        @Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "dropdown-item" })
-
-
-                        <div class="dropdown-divider"></div>
-                        @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
+                        @*登入end*@
+                        @if (Request.Cookies["LoginName"] == null)
                         {
-                            @Html.ActionLink("後台管理員", "backstageIndex", "backstage", null, new { @class = "dropdown-item" })
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLogin">
+                                <li> @Html.ActionLink("註冊", "SignUp", "Members", null, new { @class = "dropdown-item" })</li>
+                                <li>@Html.ActionLink("登入", "Login", "Members", null, new { @class = "dropdown-item" })</li>
+                            </ul>
                         }
-                        @Html.ActionLink("登出", "Logout", "Members", null, new { @class = "dropdown-item", style = "font-weight:bolder;color:#FFB5B5" })
+                        else
+                        {
+                            @*<span class=" mx-2">
+                                @Request.Cookies["LoginName"].Value
+                                </span>*@
+
+                            <div class="dropdown-menu" style="padding-top:unset;">
+                                <div class="abc" style="background-color: #E0E0E0">
+                                    <h5 class="text-center" style="font-weight:bolder;color:	black">個人帳戶管理</h5>
+                                </div>
+                                @Html.ActionLink("個人資料", "MyAccount", "MyAccount", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
+                                @Html.ActionLink("我的訂單", "OrderIndex2", "OrderManager", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
+
+
+
+
+                                <div class="dropdown-divider" style="margin-bottom:unset;"></div>
+                                <div  class="abc"  style="background-color: #E0E0E0">
+                                    <h5 class="text-center" style="font-weight:bolder;color:	black">個人賣場管理</h5>
+                                </div>
+                                @Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
+                                @Html.ActionLink("賣場交易訂單", "salesOrderIndex", "OrderManager", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
+                                @Html.ActionLink("徵求台", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
+
+
+                                <div class="dropdown-divider"></div>
+                                @if (Convert.ToInt32(Request.Cookies["MemberLevel"].Value) == 1)
+                                {
+                                    @Html.ActionLink("後台管理員", "backstageIndex", "backstage", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
+                                }
+                                @Html.ActionLink("登出", "Logout", "Members", null, new { @class = "wei-grid-special0 dropdown-item abc1", style = "font-weight:bolder;color:red" })
+                            </div>
+
+
+
+                        }
                     </div>
-
-
-
-                }
+                </div>
             </div>
         </div>
-    </div>
-</div>
-</nav>
+    </nav>
 
-@RenderBody()
-<div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
+    @RenderBody()
+    <div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
 
-<div class="chatmsg" style="">
-    <div id="chatmsgClose" class="d-flex justify-content-start align-content-center chatmsgClose"><div class="ml-1 mt-1" style="font-weight:bolder; color:gainsboro"><svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-     width="30px" height="30px" viewBox="0 0 226.000000 196.000000"
-     preserveAspectRatio="xMidYMid meet">
+    <div class="chatmsg" style="">
+        <div id="chatmsgClose" class="d-flex justify-content-start align-content-center chatmsgClose">
+            <div class="ml-1 mt-1" style="font-weight:bolder; color:gainsboro">
+                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                     width="30px" height="30px" viewBox="0 0 226.000000 196.000000"
+                     preserveAspectRatio="xMidYMid meet">
 
-    <g transform="translate(0.000000,196.000000) scale(0.100000,-0.100000)"
-       fill="#ffff" stroke="none">
-        <path d="M1041 1730 c-317 -44 -582 -279 -673 -596 -18 -64 -22 -104 -22 -209
+                    <g transform="translate(0.000000,196.000000) scale(0.100000,-0.100000)"
+                       fill="#ffff" stroke="none">
+                        <path d="M1041 1730 c-317 -44 -582 -279 -673 -596 -18 -64 -22 -104 -22 -209
 0 -146 14 -213 70 -333 232 -504 884 -633 1286 -254 82 78 127 137 172 228
 142 287 106 616 -94 869 -107 135 -291 249 -455 283 -76 16 -213 22 -284 12z
 m-177 -567 c2 -10 15 -85 27 -166 22 -145 31 -162 42 -82 3 22 13 91 22 153
@@ -153,102 +204,109 @@ l17 112 64 0 64 0 0 -270 0 -270 -45 0 -44 0 -3 148 -3 147 -18 -125 c-26
 0 57 -9 67 -61 67 -44 0 -49 -2 -49 -22 0 -56 -10 -68 -54 -68 l-42 0 37 238
 c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 0 -45 0 0 270 0 270 45 0 45 0 0 -270z" />
-        <path d="M1267 1010 c-8 -31 -27 -163 -27 -184 0 -12 10 -16 35 -16 32 0 34 2
+                        <path d="M1267 1010 c-8 -31 -27 -163 -27 -184 0 -12 10 -16 35 -16 32 0 34 2
 29 28 -3 15 -11 65 -18 112 -9 61 -15 78 -19 60z" />
-    </g>
-</svg>MaiMai聊天室</div></div>
-    <div class="row">
-        <div class="col-4 chatContent" id="chatNameList">
-            @*<a class="btn-block" style="border: 1px solid black">1</a>*@
-
-        </div>
-        <div id="chatroom" class="col-8">
-        </div>
-    </div>
-</div>
-
-@*系統通知modal>>>>>>>>>>>>>*@
-<div class="modal fade" id="sysInfo" tabindex="-1" role="dialog" aria-labelledby="sysInfoTitle"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="sysInfoTitle"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    </g>
+                </svg>MaiMai聊天室
             </div>
-            <div class="modal-body" id="sysInfobody">
+        </div>
+        <div class="row">
+            <div class="col-4 chatContent" id="chatNameList">
+                @*<a class="btn-block" style="border: 1px solid black">1</a>*@
 
             </div>
-            
+            <div id="chatroom" class="col-8">
+            </div>
         </div>
     </div>
-</div>
+
+    @*系統通知modal>>>>>>>>>>>>>*@
+    <div class="modal fade" id="sysInfo" tabindex="-1" role="dialog" aria-labelledby="sysInfoTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sysInfoTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="sysInfobody">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
     @*<<<<<<<<<<<<<<<<系統通知modal*@
-<footer>
-    <hr>
-    <div class=" d-flex mt-1 mb-2" id="footer">
-        <div class="col-1">
-            <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
+    <footer>
+        <hr>
+        <div class=" d-flex mt-1 mb-2" id="footer">
+            <div class="col-1">
+                <img class="footerLogo" src="~/Maimai/images/svg/maimaiTOPLOGO.svg">
+            </div>
+            <div class="col-3" style="position: absolute; left: 20%;">
+                <h5>關於我們</h5>
+                <select class="langSelect">
+                    <option selected>Team 4</option>
+                    <option value="組長">黃士豪</option>
+                    <option value="技術長">蕭祥耀</option>
+                    <option value="組員">徐家雯</option>
+                    <option value="組員">黃建寧</option>
+                    <option value="組員">黃立恆</option>
+                </select>
+                <br>
+            </div>
+            <div class="col-6" style="position: absolute; left: 40%;">
+                <h5>歡迎企業合作</h5>
+                <a href="#">經銷商合作</a>
+                <br>
+                <a href="#">全球保固</a>
+                <br>
+                <a href="#">招募新夥伴</a>
+                <br>
+            </div>
+            <div class="col-2" style="position: absolute; left: 80%;">
+                <h5>語言</h5>
+                <select class="langSelect">
+                    <option selected>繁體中文</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="cn">简体中文</option>
+                    <option value="jp">日本語</option>
+                    <option value="ru">Русский</option>
+                </select>
+                <br>
+                <a href="#">客戶服務中心</a>
+            </div>
         </div>
-        <div class="col-3" style="position: absolute; left: 20%;">
-            <h5>關於我們</h5>
-            <select class="langSelect">
-                <option selected>Team 4</option>
-                <option value="組長">黃士豪</option>
-                <option value="技術長">蕭祥耀</option>
-                <option value="組員">徐家雯</option>
-                <option value="組員">黃建寧</option>
-                <option value="組員">黃立恆</option>
-            </select><br>
-        </div>
-        <div class="col-6" style="position: absolute; left: 40%;">
-            <h5>歡迎企業合作</h5>
-            <a href="#">經銷商合作</a><br>
-            <a href="#">全球保固</a><br>
-            <a href="#">招募新夥伴</a><br>
-        </div>
-        <div class="col-2" style="position: absolute; left: 80%;">
-            <h5>語言</h5>
-            <select class="langSelect">
-                <option selected>繁體中文</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="cn">简体中文</option>
-                <option value="jp">日本語</option>
-                <option value="ru">Русский</option>
-            </select><br>
-            <a href="#">客戶服務中心</a>
-        </div>
-    </div>
-</footer>
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+            integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.min.js" integrity="sha512-1zzZ0ynR2KXnFskJ1C2s+7TIEewmkB2y+5o/+ahF7mwNj9n3PnzARpqalvtjSbUETwx6yuxP5AJXZCpnjEJkQw==" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
 
-<script src="~/signalr/hubs"></script>
+    <script src="~/signalr/hubs"></script>
 
-<script>
+    <script>
 
         //$("#inputsearch").change(function () {
         //    //var availabletags="";
@@ -282,7 +340,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 $("#inputsearch").autocomplete({
                     source: test
                 });
-              
+
                 $(text).each(function (index, text) {
                     test.push(text.name);
                 })
@@ -294,6 +352,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             }
         })
 
+
     function imgInputCilick() {
         $.ajax({
             url: "/NewMaimaiIndex/searchall",
@@ -303,8 +362,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         })
         $("#imgInputCilick").event.target({
 
-        });
-    };
+                });
+        }
+    
         //function inputsearch() {
         //        ajax({
         //            url: "/NewMaimaiIndex/searchall",
@@ -353,11 +413,21 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 // 向頁面新增訊息
                 if (nowNotificationID != null) {
                     if (category == "系統") {
-                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                        $('#notify').prepend(`<div class=" noti py-2 noti_border notiHover  " data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}',1)">
+<a class="btn-sm">
+<strong>[${category}]</strong>:   ${message} </a>
+</div>`);
                     } else if (category == "違規") {
                         $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../PersonalMarket/Personal_Index"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "訂單") {
-                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>[${category}]</strong>:   ${message} </a></div>`);
+                        var ordhref = "";
+                        switch (message) {
+                            case "有人訂購你的商品囉!": ordhref = "../OrderManager/salesOrderIndex"; break;
+                            case "賣家已確認訂單!": ordhref = "../OrderManager/OrderIndex2"; break;
+                            case "賣家已出貨!": ordhref = "../OrderManager/OrderIndex2"; break;
+                            case "買家已結單!": ordhref = "../PersonalMarket/Personal_Index"; break;
+                        }
+                        $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="${ordhref}"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     }
                 }
                 $("#redPoint").addClass("redPoint").html(`${$("#notify div.noti").length}`);
@@ -411,12 +481,19 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}')"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                                 $("#sysInfoTitle").text(`${noti.Category}`);
                             }
-                        } else if (noti.Category =="訂單") {//訂單狀態改變，發通知
+                        } else if (noti.Category == "訂單") {//訂單狀態改變，發通知
+                            var ordhref = "";
+                            switch (noti.NotifyText) {
+                                case "有人訂購你的商品囉!": ordhref = "../OrderManager/salesOrderIndex"; break;
+                                case "賣家已確認訂單!": ordhref = "../OrderManager/OrderIndex2"; break;
+                                case "賣家已出貨!": ordhref = "../OrderManager/OrderIndex2"; break;
+                                case "買家已結單!": ordhref = "../PersonalMarket/Personal_Index"; break;
+                            }
                             if (noti.Status == false) {
-                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="${ordhref}"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
                             else {
-                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="${ordhref}"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
                         } else if (noti.Category == "違規") {//下架貼文，發通知
                             if (noti.Status == false) {
@@ -459,7 +536,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             }
             $("#chatbody" + user.UserID).append(`
                 <div class="d-flex justify-content-start">
-                    <span class="px-1 ml-3 mb-1 speech-bubble">${message}</span>
+                    <span class="px-1 ml-3 mb-1 speech-bubble">${htmlEncode(message)}</span>
                 </div>
             `)
             $("#chattext").val("");
@@ -472,7 +549,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         chat.client.senderMessage = function (message, user) {
             $("#chatbody"+user.UserID).append(`
                 <div class="d-flex justify-content-end">
-                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${message}</span>
+                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${htmlEncode(message)}</span>
                 </div>
             `)
             $("#chattext").val("");
@@ -480,6 +557,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             scrollToButtom(user.UserID);
             lastChatText(user.UserID);
     }
+
 
     chat.client.isConnected = function (isConnected, userID) {
         if (isConnected) {
@@ -526,7 +604,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             type: "GET",
             data: { UserID: UserID },
             success: function (chattext) {
-                $(`#lasttext${UserID}`).html(`${chattext}`);
+                $(`#lasttext${UserID}`).html(`${htmlEncode(chattext)}`);
             }
         })
     }
@@ -552,7 +630,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 type: "GET",
                                 data: { UserID: record.TargetID },
                                 success: function (chattext) {
-                                    $(`#lasttext${record.TargetID}`).html(`${chattext}`);
+                                    $(`#lasttext${record.TargetID}`).html(`${htmlEncode(chattext)}`);
                                 }
                             })
                         })
@@ -582,13 +660,13 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                         if (record.SenderID == LoginID) {
                             $("#chatbody" + record.ReciverID).append(`
                                 <div class="d-flex justify-content-end">
-                                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${record.ChatText}</span>
+                                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${htmlEncode(record.ChatText)}</span>
                                 </div>
                             `);
                         } else {
                             $("#chatbody" + record.SenderID).append(`
                             <div class="d-flex justify-content-start">
-                                <span class="px-1 ml-3 mb-1 speech-bubble">${record.ChatText}</span>
+                                <span class="px-1 ml-3 mb-1 speech-bubble">${htmlEncode(record.ChatText)}</span>
                             </div>
                         `);
                         }
@@ -601,7 +679,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         }
 
         //scroll置底
-    function scrollToButtom(userID) {        
+    function scrollToButtom(userID) {
         var scr = document.getElementById("chatbody" + userID);
         if (scr != null)
             scr.scrollTop = scr.scrollHeight;
@@ -667,7 +745,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 success: function (tagsearch) {
                     $(tagsearch).each(function (i, item) {
                         $("#tag-search-dropdown").append(`
-                                                    <a class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
+                                                    <a style="text-decoration: none;"  class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
                                                             <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/${item.TagImg})">
                                                                 <div style="color:#FCFCFC;font-weight:bold;">${item.tagName}</div>
                                                     </div>
@@ -680,7 +758,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
 
 
-</script>
-@RenderSection("scripts", required: false)
+    </script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

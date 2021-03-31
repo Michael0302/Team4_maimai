@@ -412,6 +412,7 @@
     <Content Include="Content\ProductPostImg\體育.jpg" />
     <Content Include="Content\ProductPostImg\髮型設計教學.jpg" />
     <Content Include="Content\ProductPostImg\💝書僮代練🔹波利🔹Lv1-185代練、坐吸、時空戰死附魔【200開練了!】.PNG" />
+    <Content Include="Content\resource_nico\carousel.css" />
     <Content Include="Content\resource_nico\createProductPost.css" />
     <Content Include="Content\resource_nico\images\徵求台POST\iphone12.jpg" />
     <Content Include="Content\resource_nico\images\徵求台POST\一日女友.jpg" />
@@ -711,6 +712,8 @@
     <Content Include="Views\NewMaimaiIndex\opay.cshtml" />
     <Content Include="Views\RequiredPost\requiredSingalPage.cshtml" />
     <Content Include="Views\MyAccount\MyAccount.cshtml" />
+    <Content Include="Views\MyAccount\MyPassword.cshtml" />
+    <Content Include="Views\OrderManager\OrderIndex2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,8 +29,14 @@ padding:0;
         color: #FFFFFF;
         background: linear-gradient(#FFB4A2,#E5989B);
     }
+div.imgimg2imgimg2 {
+     width:900px;       margin-left: 90px; box-shadow: -3px -3px 3px #7B7B7B;
+    
+}
 .imgimg2 {
-    height:280px;width:450px; box-shadow: -3px -3px 3px #7B7B7B;
+    height: 280px;
+    width: 450px;
+    box-shadow: -3px -3px 3px #7B7B7B;
 }
     .imgimg2:hover {
         transform: scale(1,1);
@@ -270,9 +276,33 @@ div.tag > a.btn {
     /*border: 2px solid skyblue;*/
 }
 @media (min-width: 576px) and (max-width: 1000px) {
-    #inputsearch {
-    display:none;
+    #dropdownMenuButton {
+        width:100%;
+        /*display:none;*/
     }
+    body.container > nav.nav1 > div.d-flex {
+        width: 60%;
+    }
+    .StarFiveStyle {
+        padding-left:45%;
+    }
+    .StarFive2 > div.start6 {
+    width:220px;
+    }
+    body.container > div.container > div.d-flex {
+        width: 100%;
+    }
+    body.container > div.container > .container-fluid {
+        width: 140%;
+    }
+    img.imgimg2 {
+        width: 300px;
+    }
+    div.imgimg2imgimg2 {
+        width: 600px;
+        box-shadow:  none;
+    }
+
 }
 
 

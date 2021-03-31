@@ -21,9 +21,9 @@ namespace MaiMai.Controllers
         {
             return View();
         }
-
+        maimaiRepository<OrderDetail> odtail = new maimaiRepository<OrderDetail>();
         maimaiRepository<Member> mb = new maimaiRepository<Member>();
-        maimaiRepository<Order> od = new maimaiRepository<Order>();
+        maimaiRepository<Order> odRepository = new maimaiRepository<Order>();
         maimaiEntities db = new maimaiEntities();
         public ActionResult myOrder()
         {
@@ -206,7 +206,7 @@ namespace MaiMai.Controllers
 
         public ActionResult delOrder_P(int OrderId)
         {
-            od.Delete(OrderId);
+            odRepository.Delete(OrderId);
             return Content("刪除成功");
         }
 
@@ -284,6 +284,8 @@ namespace MaiMai.Controllers
             };
             rtdb.Create(r);
 
+        
+
             return Content("新增成功");
         }
 
@@ -340,7 +342,7 @@ namespace MaiMai.Controllers
             var orderID = Convert.ToInt32(OrderID);
             var star = Convert.ToInt32(starRate);
             var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            //var  OrderDetailID=db.OrderDetail.FirstOrDefault(t => t.OrderID == orderID).OrderDetailID;
+            var od = odtail.GetbyID(orderID);
             var CommentorUserID=db.OrderDetail.Find(orderID).SellerID;
 
             Comment cmt = new Comment() {
@@ -350,6 +352,25 @@ namespace MaiMai.Controllers
                 OrderdetalID = orderID,
                 CommentorUserID= CommentorUserID,
             };
+            if (od.SellerID == UserID)
+            {
+                od.sellerStatus = 3;
+                
+            }
+            else {
+                od.buyerStatus = 3;
+            }
+
+            if (od.sellerStatus == 3 && od.buyerStatus == 3) {
+
+                Order o = odRepository.GetbyID((int)od.OrderID);
+                o.orderStatus = 2;
+
+                odRepository.Update(o);
+            }
+
+
+            odtail.Update(od);
             cmdb.Create(cmt);
             return Content("成功");
         }

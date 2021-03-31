@@ -44,7 +44,8 @@ namespace MaiMai.Controllers
             var StarFiveList = db.Member.Where(m => m.totalStarRate == 5.0).Select(m => new
             {
                 img = m.ProImg,
-                userAccount = m.userAccount
+                userAccount = m.userAccount,
+                UserID=m.UserID,
             }).ToList();
             return Json(StarFiveList, JsonRequestBehavior.AllowGet);
         }
@@ -191,6 +192,8 @@ namespace MaiMai.Controllers
 
         public ActionResult opay1(int orderID)
         {
+            
+
             var is4 = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=https://developers.opay.tw/AioMock/MerchantClientBackUrl&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName=MacBook 30元X2#iPhone6s 40元X1&MerchantID=2000132&MerchantTradeDate=2021/03/26 16:09:37&MerchantTradeNo=DX202103261609371970&PaymentType=aio&Redeem=&ReturnURL=https://developers.opay.tw/AioMock/MerchantReturnUrl&StoreID=&TotalAmount=5&TradeDesc=建立信用卡測試訂單&HashIV=v77hoKGq4kWxNNIS";
             is4 = Server.UrlEncode(is4).ToLower();//正確
             var bytes = System.Text.Encoding.Default.GetBytes(is4);

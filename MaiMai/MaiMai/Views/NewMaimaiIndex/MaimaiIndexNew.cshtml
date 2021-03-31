@@ -10,10 +10,10 @@
         @*首頁圖片 css內*@
         <div class="d-flex">
             <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告1.jpg" /></a></div>
-            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告2.jpg" /></a></div>
-            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告3.jpg" /></a></div>
-            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告4.jpg" /></a></div>
-            <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告5.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="https://www.misterdonut.com.tw/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告2.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="https://mochislife.com/smithwollensky-taipei/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告3.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="https://www.muji.com/tw/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告4.jpg" /></a></div>
+            <div style="height:130px;width:260px;" id=""><a href="https://hululu.tw/pablo/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告5.jpg" /></a></div>
         </div>
         @*<section class="home">
         </section>*@
@@ -54,9 +54,8 @@
             </div>
         </div>
         @*徵求台輪播*@
-        <div class="d-flex" style=" width:900px;       margin-left: 90px;
-        box-shadow: -3px -3px 3px #7B7B7B;">
-            <div style="height:280px;width:450px;">
+        <div class="d-flex imgimg2imgimg2 " >
+            <div >
                 <img class="imgimg2" src="~/Content/ProductPostImg/咖啡1.jpg" />
             </div>
             <div>
@@ -98,7 +97,7 @@
                             class="img-responsive"></a></div>
                         </div>*@
                         <!--  Example item end -->
-
+                        <a href="/PersonalMarket/Personal_Index_WithoutLogin?UserID="></a>
                     </div>
                     <div id="prevSlide" class="slide_btn">
                         <i class="fa fa-caret-left"></i>
@@ -112,11 +111,15 @@
         @*最新商品輪播*@
     </div>
     <script>
-        
+        function ProdutPostClick(PostID) {
+            //window.open(`/RequiredPost/requiredSingalPage?rqID=${PostID} `, 'MAIMAI徵求台');
+            window.location.href = `/NewMaimaiIndex/ProdutPost?PostID=${PostID}`;
+            //console.log(ProductPostID);
+        }
         function CarouselClick(PostID) {
             window.open(`/RequiredPost/requiredSingalPage?rqID=${PostID} `, 'MAIMAI徵求台');
             //window.location.href = `/NewMaimaiIndex/ProdutPost?PostID=${PostID}`;
-            console.log(ProductPostID);
+            //console.log(ProductPostID);
         }
         function tagonclick(TagID) {
             window.location.href = `/MaimaiIndex/tagsearch?TagID=${TagID}`;
@@ -124,7 +127,7 @@
 
         function toRequiredPostView() {
             var test = getCookie('LoginAccount');
-            console.log(test)
+            //console.log(test)
             if (test == "") {
                 window.location.href = `/RequiredPost/requiredPostIndexWithLogin`;
             }
@@ -172,7 +175,7 @@
                         if (i >=1 && i<=8 ) {
                             $("#StarFive2").append(`
                         <div class="start6 mx-3 my-2" >
-                                        <img style="height:100%;width:100%;"  src="../Content/ProductPostImg/${item.img}"  />
+                                        <a href="/PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.UserID}"><img style="height:100%;width:100%;"  src="../Content/ProductPostImg/${item.img}"  /></a>
                         </div>
                             `)
                         }
@@ -230,7 +233,7 @@
                 success: function (addCarousel) {
                     $(addCarousel).each(function (i, item) {
                         $("#addCarousel").append(`
-                        <div class="item mx-md-2 Carouseladvertising"onclick="CarouselClick(${item.ProductPostID})">
+                        <div class="item mx-md-2 Carouseladvertising"onclick="ProdutPostClick(${item.ProductPostID})">
                                 <div class="col-xs-4">
                                     <a href="#">
                                              <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})
