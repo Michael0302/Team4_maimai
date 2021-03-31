@@ -150,7 +150,7 @@
                                     <h5 class="text-center" style="font-weight:bolder;color:	black">個人帳戶管理</h5>
                                 </div>
                                 @Html.ActionLink("個人資料", "MyAccount", "MyAccount", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
-                                @Html.ActionLink("我的訂單", "OrderIndex", "OrderManager", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
+                                @Html.ActionLink("我的訂單", "OrderIndex2", "OrderManager", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
 
 
 
@@ -422,9 +422,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                     } else if (category == "訂單") {
                         var ordhref = "";
                         switch (message) {
-                            case "有人訂購你的商品囉!": ordhref = "../PersonalMarket/Personal_Index"; break;
-                            case "賣家已確認訂單!": ordhref = "../OrderManager/OrderIndex"; break;
-                            case "賣家已出貨!": ordhref = "../OrderManager/OrderIndex"; break;
+                            case "有人訂購你的商品囉!": ordhref = "../OrderManager/salesOrderIndex"; break;
+                            case "賣家已確認訂單!": ordhref = "../OrderManager/OrderIndex2"; break;
+                            case "賣家已出貨!": ordhref = "../OrderManager/OrderIndex2"; break;
                             case "買家已結單!": ordhref = "../PersonalMarket/Personal_Index"; break;
                         }
                         $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="${ordhref}"><strong>[${category}]</strong>:   ${message} </a></div>`);
@@ -481,12 +481,19 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 $("#notify").prepend(`<div class="py-2 noti_border notiHover" data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${noti.NotificationID}, '${noti.NotifyText}')"><a class="btn-sm "><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                                 $("#sysInfoTitle").text(`${noti.Category}`);
                             }
-                        } else if (noti.Category =="訂單") {//訂單狀態改變，發通知
+                        } else if (noti.Category == "訂單") {//訂單狀態改變，發通知
+                            var ordhref = "";
+                            switch (noti.NotifyText) {
+                                case "有人訂購你的商品囉!": ordhref = "../OrderManager/salesOrderIndex"; break;
+                                case "賣家已確認訂單!": ordhref = "../OrderManager/OrderIndex2"; break;
+                                case "賣家已出貨!": ordhref = "../OrderManager/OrderIndex2"; break;
+                                case "買家已結單!": ordhref = "../PersonalMarket/Personal_Index"; break;
+                            }
                             if (noti.Status == false) {
-                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${noti.NotificationID}, null, 1)"><a class="btn-sm " href="${ordhref}"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
                             else {
-                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="../OrderManager/OrderIndex"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
+                                $("#notify").prepend(`<div class="py-2 noti_border notiHover" ><a class="btn-sm" href="${ordhref}"><strong>   [${noti.Category}]</strong>:   ${noti.NotifyText} </a></div>`);
                             }
                         } else if (noti.Category == "違規") {//下架貼文，發通知
                             if (noti.Status == false) {

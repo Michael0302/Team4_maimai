@@ -133,7 +133,7 @@ namespace MaiMai.Controllers
 
         maimaiRepository<RequiredPost> requiredPostRepository = new maimaiRepository<RequiredPost>();
 
-        public string checkout(string orderid)
+        public ActionResult checkout(string orderid)
         {
 
             var oid = Convert.ToInt32(orderid);
@@ -149,14 +149,19 @@ namespace MaiMai.Controllers
             {
                 Response.StatusCode = 404;
 
-                return "錯誤";
+                return Content("錯誤");
             }
                 
                 orderReciept.orderStatus = 1;
                  changeStatus(oid);
                 order.Update(orderReciept);
 
-                return "繳費成功";
+            //Michael add>>>>>>>>
+            var reciverList = db.OrderDetail.Where(o => o.OrderID == oid).Select(s=>new {   
+                SellerID = s.SellerID                
+            }).ToList();
+
+                return Json(reciverList, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -176,7 +181,7 @@ namespace MaiMai.Controllers
 
         }
 
-        public string endOrder(string oderdeail)
+        public ActionResult endOrder(string oderdeail)
         {
            
             var oid = Convert.ToInt32(oderdeail);
@@ -186,14 +191,14 @@ namespace MaiMai.Controllers
             {
                 Response.StatusCode = 404;
 
-                return "結單失敗";
+                return Content("結單失敗");
             }
 
             orderDetail.buyerStatus = 2;
 
             OrderDetailRepository.Update(orderDetail);
-
-            return "結單成功 ! 別忘了下評論喔";
+            var sellerID = db.OrderDetail.Find(oid).SellerID;
+            return Json(sellerID, JsonRequestBehavior.AllowGet);
         }
 
 
@@ -231,20 +236,22 @@ namespace MaiMai.Controllers
             return Json(table, JsonRequestBehavior.AllowGet);
         }
 
-        public string  confirmOrder(string oderdeail) {
+        public ActionResult  confirmOrder(string oderdeail) {
 
             var oid = Convert.ToInt32(oderdeail);
             var orderDetail = OrderDetailRepository.GetbyID(oid);
+
+            var buyerID = db.OrderDetail.Find(oid).Order.buyerUserID;
 
             orderDetail.sellerStatus = 1;
             try
             {
                 OrderDetailRepository.Update(orderDetail);
-                return "確認訂單成功";
+                return Json(buyerID, JsonRequestBehavior.AllowGet);
             }
             catch( Exception e) {
                 Response.StatusCode = 404;
-                return "確認失敗";
+                return Content("確認失敗");
 
             }
             
@@ -273,7 +280,7 @@ namespace MaiMai.Controllers
 
 
         }
-        public string sentOrder(string oderdeail)
+        public ActionResult sentOrder(string oderdeail)
         {
 
             var oid = Convert.ToInt32(oderdeail);
@@ -283,12 +290,13 @@ namespace MaiMai.Controllers
             try
             {
                 OrderDetailRepository.Update(orderDetail);
-                return "出貨成功";
+                var buyerID = db.OrderDetail.Find(oid).Order.buyerUserID;
+                return Json(buyerID, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 Response.StatusCode = 404;
-                return "出貨失敗";
+                return Content("出貨失敗");
 
             }
 
