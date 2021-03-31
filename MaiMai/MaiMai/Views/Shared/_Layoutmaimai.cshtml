@@ -52,7 +52,7 @@
 </head>
 
 
-<body class="container">
+<body class="container ">
     <nav class="nav1 ">
         <div class=" d-flex">
             @*layout左邊*@
@@ -352,6 +352,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             }
         })
 
+
     function imgInputCilick() {
         $.ajax({
             url: "/NewMaimaiIndex/searchall",
@@ -363,7 +364,6 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
                 });
         }
-        
     
         //function inputsearch() {
         //        ajax({
@@ -529,7 +529,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             }
             $("#chatbody" + user.UserID).append(`
                 <div class="d-flex justify-content-start">
-                    <span class="px-1 ml-3 mb-1 speech-bubble">${message}</span>
+                    <span class="px-1 ml-3 mb-1 speech-bubble">${htmlEncode(message)}</span>
                 </div>
             `)
             $("#chattext").val("");
@@ -542,7 +542,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         chat.client.senderMessage = function (message, user) {
             $("#chatbody"+user.UserID).append(`
                 <div class="d-flex justify-content-end">
-                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${message}</span>
+                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${htmlEncode(message)}</span>
                 </div>
             `)
             $("#chattext").val("");
@@ -550,6 +550,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             scrollToButtom(user.UserID);
             lastChatText(user.UserID);
     }
+
 
     chat.client.isConnected = function (isConnected, userID) {
         if (isConnected) {
@@ -596,7 +597,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             type: "GET",
             data: { UserID: UserID },
             success: function (chattext) {
-                $(`#lasttext${UserID}`).html(`${chattext}`);
+                $(`#lasttext${UserID}`).html(`${htmlEncode(chattext)}`);
             }
         })
     }
@@ -622,7 +623,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 type: "GET",
                                 data: { UserID: record.TargetID },
                                 success: function (chattext) {
-                                    $(`#lasttext${record.TargetID}`).html(`${chattext}`);
+                                    $(`#lasttext${record.TargetID}`).html(`${htmlEncode(chattext)}`);
                                 }
                             })
                         })
@@ -652,13 +653,13 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                         if (record.SenderID == LoginID) {
                             $("#chatbody" + record.ReciverID).append(`
                                 <div class="d-flex justify-content-end">
-                                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${record.ChatText}</span>
+                                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${htmlEncode(record.ChatText)}</span>
                                 </div>
                             `);
                         } else {
                             $("#chatbody" + record.SenderID).append(`
                             <div class="d-flex justify-content-start">
-                                <span class="px-1 ml-3 mb-1 speech-bubble">${record.ChatText}</span>
+                                <span class="px-1 ml-3 mb-1 speech-bubble">${htmlEncode(record.ChatText)}</span>
                             </div>
                         `);
                         }
@@ -737,7 +738,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 success: function (tagsearch) {
                     $(tagsearch).each(function (i, item) {
                         $("#tag-search-dropdown").append(`
-                                                    <a class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
+                                                    <a style="text-decoration: none;"  class="Ajax-search-dropdown-img mx-2 mb-3" onclick="tagonclick(${item.TagID})" >
                                                             <div style="width: 150px;height: 100px;background-size: cover;text-align:center;border-radius:20px; background-image: url(../../Content/ProductPostImg/${item.TagImg})">
                                                                 <div style="color:#FCFCFC;font-weight:bold;">${item.tagName}</div>
                                                     </div>
