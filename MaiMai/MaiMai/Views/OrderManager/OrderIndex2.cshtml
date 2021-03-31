@@ -458,7 +458,7 @@
     }//end of showproductList
 
     function checkout() {
-
+        var LoginId = getCookie("LoginID")*1;
         let id = $('#showOrderTitle').attr("name");
 
         $.ajax({
@@ -466,36 +466,42 @@
             type: "GET",
             data: { 'orderid': id },
             success: function (response) {
-                swal('成功', response, 'success');
+                console.log(response);                
+                $(response).each(function(index,res) {
+                    chat.server.sendToOne_OrderStatus(LoginId, res.SellerID, 1);
+                })
+                swal('成功', "繳費成功", 'success');
 
-                window.location.reload("/OrderManager/OrderIndex");
+                window.location.reload("/OrderManager/OrderIndex2");
 
             },
             error: function (response) {
 
-                window.alert(response);
-                window.location.reload("/OrderManager/OrderIndex");
+                swal("錯誤","","error");
+                window.location.reload("/OrderManager/OrderIndex2");
             }
         });
 
     };
 
     function endOrder(id) {
-
+        var LoginId = getCookie("LoginID") * 1;
 
         $.ajax({
             url: "/OrderManager/endOrder",
             type: "GET",
             data: { 'oderdeail': id },
             success: function (response) {
-                swal('成功', response, 'success');
+                swal('成功', "結單成功 ! 別忘了下評論喔", 'success');
+                chat.server.sendToOne_OrderStatus(LoginId, response, 4)
+
 
                 window.location.reload();
 
             },
             error: function (response) {
 
-                swal('GG', response, 'error');
+                swal('GG', "結單失敗", 'error');
 
                 window.location.reload();
             }

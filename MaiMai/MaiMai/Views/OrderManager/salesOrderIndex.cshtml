@@ -462,21 +462,22 @@
 
 
     function comfirmOrder(orderid) {
-
+        var LoginId = getCookie("LoginID")*1;
 
         $.ajax({
             url: "/OrderManager/confirmOrder",
             type: "GET",
             data: { 'oderdeail': orderid },
             success: function (response) {
-                swal('成功', response, 'success');
+                swal('成功', "確認訂單成功", 'success');
+                chat.server.sendToOne_OrderStatus(LoginId, response, 2);
 
                 window.location.reload();
 
             },
             error: function (response) {
 
-                window.alert(response);
+                swal("失敗","確認失敗","error");
                 window.location.reload();
             }
         });
@@ -485,19 +486,22 @@
 
 
     function sentOrder(orderid) {
+        var LoginID = getCookie("LoginID")*1;
         $.ajax({
             url: "/OrderManager/sentOrder",
             type: "GET",
             data: { 'oderdeail': orderid },
             success: function (response) {
-                swal('成功', response, 'success');
+                console.log(response);
+                swal('成功', "出貨成功", 'success');
+                chat.server.sendToOne_OrderStatus(LoginID, response, 3)
 
                 window.location.reload();
 
             },
             error: function (response) {
 
-                swal('GG', response, 'error');
+                swal('GG', "出貨失敗", 'error');
 
                 window.location.reload();
             }
