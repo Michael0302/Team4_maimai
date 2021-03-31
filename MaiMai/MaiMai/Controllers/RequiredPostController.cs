@@ -365,6 +365,37 @@ namespace MaiMai.Controllers
         
         }
 
+        //tag page
+
+        public ActionResult allrequiredwithTag(string tag) {
+
+            var id = Convert.ToInt32(tag);
+
+            var table = db.RequiredPost.Where(m => m.isPast == false &&  m.TagID==id).OrderByDescending(e => e.postTime).Select(m => new RequiredPostViewModel_C()
+            {
+                RequiredPostID = m.RequiredPostID,
+                postTime = m.postTime,
+                postDescription = m.postDescription,
+                postName = m.postName,
+                postImg = m.postImg,
+                UserID = m.UserID,
+                requiredQTY = m.requiredQTY,
+                estimatePrice = m.estimatePrice,
+                TagID = m.TagID,
+                OrderID = m.OrderID,
+                userAccount = m.Member.userAccount,
+                county = m.county,
+                district = m.district
+            }).ToList();
+
+
+            return Json(table, JsonRequestBehavior.AllowGet);
+
+
+        }
+
+
+
         // required singal page
 
 
