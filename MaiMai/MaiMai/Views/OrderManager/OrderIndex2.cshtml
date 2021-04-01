@@ -563,10 +563,10 @@
     //comment
     //歐富保
 
-    function opay(odid) {
+    function opay(OrderId) {
                     $.ajax({
             url: "@Url.Action("creditCardcheckOut", "MyOrder")",
-                        data: { OrderId: odid},
+                        data: { OrderId: OrderId},
             type: "GET",
                     success: function (result) {
                         var MerchantTradeNo = 0;

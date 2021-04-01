@@ -405,8 +405,8 @@ namespace MaiMai.Controllers
                 return Content("此商品不存在");
             }
             var ItemName = Item.ProductPost.productName;
-            var MerchantTradeNo = "maimai"+Item.OrderID+ DateTime.Now.ToString("yyyyMMddHHmmss"); 
-            var totalAmount = Item.oneProductTotalPrice;
+            var MerchantTradeNo = Item.OrderID+DateTime.Now.ToString("mmss");
+            var totalAmount = Item.Order.OrderTotalPrice;
             var MerchantTradeDate=DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
             //harsh key--5294y06JbISpM5x9 Hash IV--v77hoKGq4kWxNNIS
