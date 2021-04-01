@@ -10,7 +10,6 @@
 </div>
 
 
-
 <script>
 
     $(function () {
@@ -52,18 +51,15 @@
                                 dd: (date.getDate() < 10 ? '0' : '') + date.getDate(),
                                 yyyy: date.getFullYear()
                             }
-                            return format.replace(/ss|MM|HH|mm|dd|yyyy/gi, matched => map[matched])//取代輸入格式變數為自訂格式
+                            return format.replace(/ss|MM|HH|mm|dd|yyyy/gi, matched => map[matched])
+                            //取代輸入格式變數為自訂格式
                         }
                         totalDollar = parseInt(totalDollar);
                         console.log("後端DateNow", format_time);
                         console.log("前端DateNow", formatDate(date,'yyyy/mm/dd HH:MM:ss'));
                         console.log("type totalamount", typeof(totalDollar));
-
-
                         //信用卡4311-9522-2222-2222
                         //安全碼222    後台測試帳密StageTest / test1234
-
-
 
     $("#form" ).append(`
 <form id="formCreditCard" method="post" accept-charset="UTF-8"
@@ -121,10 +117,14 @@ CheckMacValue 檢查碼:
 
 </form>
                 `)
+                        form.submit();
+
         },
         //error:
         })
     });
+                        //setTimeout(function () { $(".close").click() }, 700);
 
 
 </script>
+
