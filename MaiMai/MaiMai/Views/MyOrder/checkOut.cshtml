@@ -6,7 +6,7 @@
 <h2>checkOut</h2>
 
 
-<div id="form" class="mt-5">
+<div id="form" class="mt-5" >
 </div>
 
 
@@ -63,7 +63,7 @@
 
     $("#form" ).append(`
 <form id="formCreditCard" method="post" accept-charset="UTF-8"
- action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5">
+ action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5" style="display:none">
 
 MerchantID 商店代號:
 <input type="text" name="MerchantID" value="2000132" /><br />
@@ -117,7 +117,7 @@ CheckMacValue 檢查碼:
 
 </form>
                 `)
-                        form.submit();
+                        $("#formCreditCard").submit();
 
         },
         //error:

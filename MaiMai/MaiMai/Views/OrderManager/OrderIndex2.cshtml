@@ -463,7 +463,6 @@
 
         opay(id);
 
-
         $.ajax({
             url: "/OrderManager/checkout",
             type: "GET",
@@ -471,11 +470,11 @@
             success: function (response) {
                 console.log("===========================");
                 console.log(response);
-                //$(response).each(function(index,res) {
-                //    chat.server.sendToOne_OrderStatus(LoginId, res.SellerID, 1);
-                //})
-               
-                
+                $(response).each(function(index,res) {
+                    chat.server.sendToOne_OrderStatus(LoginId, res.SellerID, 1);
+                })
+
+
             },
             error: function (response) {
 
@@ -613,12 +612,9 @@
 
                         //信用卡4311-9522-2222-2222
                         //安全碼222    後台測試帳密StageTest / test1234
-
-
-
                         $("#opayform" ).append(`
 <form id="formCreditCard" method="post" accept-charset="UTF-8"
- action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5">
+ action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5" style="display:none">
 
 MerchantID 商店代號:
 <input type="text" name="MerchantID" value="2000132" /><br />
@@ -672,6 +668,8 @@ CheckMacValue 檢查碼:
 
 </form>
                 `)
+
+                        $("#formCreditCard").submit();
         },
         //error:
         })
