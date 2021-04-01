@@ -348,7 +348,8 @@ namespace MaiMai.Controllers
                 Tag = s.Tag.tagName,
                 createdTime = s.createdTime,
                 inStoreQTY = s.inStoreQTY,
-                RequiredPostID = s.RequiredPostID
+                RequiredPostID = s.RequiredPostID,
+                status = s.status,
             });
 
             return Json(prodlist, JsonRequestBehavior.AllowGet);
@@ -561,6 +562,48 @@ namespace MaiMai.Controllers
                 db.Notification.Find(NotificationID).Status = true;
                 db.SaveChanges();
             };
+        }
+
+        //徵求台列表
+        public ActionResult getRequirePostList_P()
+        {
+            var RequirePostList = db.RequiredPost.Select(s => new
+            {
+                RequiredPostID = s.RequiredPostID,
+                postDescription = s.postDescription,
+                postName = s.postName,
+                UserID = s.UserID,
+                UserName = s.Member.firstName,
+                TagID = s.TagID,
+                TagName = s.Tag.tagName,
+                estimatePrice = s.estimatePrice,
+            }).OrderByDescending(o=>o.RequiredPostID).ToList();
+
+            return Json(RequirePostList, JsonRequestBehavior.AllowGet);
+        }
+
+        //徵求台modal
+        public ActionResult getRequirePost_P(int RequiredPostID)
+        {
+            var RequirePost = db.RequiredPost.Where(m => m.RequiredPostID == RequiredPostID).Select(s => new
+            {
+                RequiredPostID = s.RequiredPostID,
+                postDescription = s.postDescription,
+                postName = s.postName,
+                postTime = s.postTime,
+                postImg = s.postImg,
+                requiredQTY = s.requiredQTY,
+                UserID = s.UserID,
+                UserName = s.Member.firstName,
+                TagID = s.TagID,
+                TagName = s.Tag.tagName,
+                estimatePrice = s.estimatePrice,
+                county = s.county,
+                district = s.district,
+                address = s.address,
+            }).ToList();
+
+            return Json(RequirePost, JsonRequestBehavior.AllowGet);
         }
     }
 

@@ -209,12 +209,12 @@ namespace SignalRMvc.chatHubs
                 {
                     senderinfo.UserID,
                     senderinfo.userAccount
-                });
+                }, chat.ChatTime?.ToString("yyyy-MM-dd HH:mm:ss"));
                 Clients.Caller.senderMessage(message, new
                 {
                     user.UserID,
                     user.userAccount
-                });
+                }, chat.ChatTime?.ToString("u"));
 
             }
         }

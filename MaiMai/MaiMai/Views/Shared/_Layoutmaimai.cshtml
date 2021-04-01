@@ -620,7 +620,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             $("#chatNameList").append(`
                                         <div id="NameList${record.TargetID}" class="btn NameList d-flex" onclick="getRecord(${record.TargetID}, '${record.TargetName}')">
                                             <div style="width:30px; height:30px"><img style="width:100%;height:100%;border-radius:50%" src="../Content/ProductPostImg/member/${record.TargetImg}"/></div>
-                                        <div><div>${record.TargetName}</div>
+                                        <div><div class="nameWeight">${record.TargetName}</div>
                                             <div id="lasttext${record.TargetID}" class="lasttext"></div>
                                         </div>
                                         </div>
