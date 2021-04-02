@@ -265,7 +265,15 @@
                 window.location.href = "../../Members/Login";
             }
         })
-    })
+        })
+
+        function okok() {
+            Swal.fire(
+                "個人資料修改成功", //標題
+                "盡情使用MaiMai買買吧!", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
+            );
+        }
         function editMember() {
 
             //if ($("#userPassWord").val() == "" && $("#userPassWordcheck").val() == "") {
@@ -289,7 +297,7 @@
                 contentType: false,
                 success: function (account) {
                     //$("#userPassWord").val("")
-                        alert("修改成功")
+                    okok()
                 }
                 })
 

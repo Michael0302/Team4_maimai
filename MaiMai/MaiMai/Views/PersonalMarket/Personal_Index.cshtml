@@ -201,7 +201,7 @@
         }
         .D_cw {
             font-weight: 600;
-            
+
         }
         .g123 {
             color: #008f79;
@@ -223,6 +223,26 @@
             background-color: #f0f1f1;
             box-shadow: 0 0 0 4px #fff;
         }
+        .exImg2 {
+            width: 400px!important;
+            height: 232px!important;
+            background: #f4f4f4;
+            object-fit: contain;
+        }
+        .exImg {
+            width: 200px;
+            height: 200px;
+            background: lightgray;
+            object-fit: cover;
+        }
+        @@media (min-width: 992px){
+            .photo {
+                width: 284px;
+                height: 230px;
+                margin: 20px;
+                overflow: hidden;
+            }}
+
        /* .qqq1{
             width:227px;
             height:53px;
@@ -457,7 +477,7 @@
                 <div class="modal-body" id="editMemberbody">
                     <form class="formFrame mx-auto " enctype="multipart/form-data">
                         <div class="displayImg">
-                            <div class="photo"><img id="Productimg"></div>
+                            <div class="photo"><img id="Productimg" class="exImg2"></div>
                             <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;">
                         </div>
                         <div class="displayInput">
@@ -467,7 +487,7 @@
                             </h6>
                             <h6>
                                 產品描述:
-<textarea id="productDescription" name="productDescription" placeholder="使用程度、幾成新" rows="4"
+<textarea style="width: 341px;" id="productDescription" name="productDescription" placeholder="使用程度、幾成新" rows="4"
           cols="50" onclick="tag()"></textarea>
                             </h6>
                             <h6>
