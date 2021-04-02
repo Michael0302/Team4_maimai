@@ -401,10 +401,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         $(function () {
             getConent();
             //比對資料表Notification有無符合自己id or 群組的通知
-            getNotiRecord()
-
-            //計算有幾筆未讀
-            checkChatroom();
+            getNotiRecord()           
 
             //取消bubble事件(點通知 通知欄不會縮小)
             //$("body").on('click', '[data-stopPropagation]', function (e) {
@@ -444,6 +441,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             chat.server.group(userID);
                     }
                 })
+                //計算有幾筆未讀
+                checkChatroom();
 
             })
 
@@ -455,6 +454,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             $('#chatmsgClose').on('click', function () {
                 $('.chatmsg').css('transform', 'translate(500px, 500px)');
             })
+
+            
         })
 
 
@@ -514,7 +515,13 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
         //判斷聊天室未讀訊息
         function checkChatroom() {
-            console.log($(`#chatNameList`).html());
+            var count = $(`#chatNameList div.chatCount`).length;
+            console.log(count);
+            if (count > 0)
+                $("#chatroomCount").addClass("redPoint").html(`${count}`);
+            else {
+                $("#chatroomCount").removeClass("redPoint").html(``);
+            }
         }
 
         //點擊後將通知狀態改為已讀
@@ -549,8 +556,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             `)
             $("#chattext").val("");
             $("#chattext").focus();
-            scrollToButtom(user.UserID)
-            lastChatText(user.UserID)
+            scrollToButtom(user.UserID);
+            lastChatText(user.UserID);
+            checkChatroom();
 
         }
 
@@ -704,6 +712,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                     scrollToButtom(UserID);
                     $("#chattext").focus();
                     chat.server.checkConnectedMem(UserID);
+                    checkChatroom();
                 }
             })
         }
