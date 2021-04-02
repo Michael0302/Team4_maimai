@@ -948,12 +948,21 @@
 
 
 
+        function home() {
+            window.location.href = "/PersonalMarket/Personal_Index";
+        }
 
 
 
 
+        function gogook() {
+            Swal.fire(
+                "上架成功", //標題
+                "盡情使用MaiMai買買吧!", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
 
-
+            );
+        }
         function submitProdouct() {
 
 
@@ -967,8 +976,8 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    window.alert(response)
-                    window.location.href = "/PersonalMarket/Personal_Index"
+                    gogook()
+                    setTimeout("home()",1000)
 
                 }
             })

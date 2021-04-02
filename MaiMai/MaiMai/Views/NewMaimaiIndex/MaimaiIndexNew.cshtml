@@ -4,6 +4,25 @@
 }
 
 @*style="background-color:#F7E7DE;"*@
+<style>
+    .hidetext {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 196px;
+        font-weight: 600;
+    }
+    .price {
+        font-weight: bolder;
+        color: crimson;
+    }
+    .exImg2 {
+        width: 200px;
+        height: 200px;
+        background: #f4f4f4;
+        object-fit: contain;
+    }  
+</style>
 <body>
     <div style="height:100px;"></div>
     <div class="container">
@@ -195,9 +214,9 @@
                                 <div class="col-xs-4">
                                     <a href="#1" >
                                              <div class="img-responsive "  style="background-image:url(../Content/resource_nico/images/徵求台POST/${item.postImg})
-                                                            ;height: 200px; width: 200px;background-size:cover;"></div>
-                                            <div>名稱 : ${item.postName}</div>
-                                            <div>金額 : ${item.estimatePrice}</div>
+                                                            ;height: 200px; width: 200px;background-size:cover;" ></div>
+                                            <div class="hidetext">名稱 : ${item.postName}</div>
+                                            <div class="price">金額 : ${item.estimatePrice}$</div>
                                        </a>
                                 </div>
                         </div>
@@ -238,8 +257,8 @@
                                     <a href="#">
                                              <div class="img-responsive "  style="background-image:url(../Content/ProductPostImg/${item.productImg})
                                                             ;height: 200px; width: 200px;background-size:cover;"></div>
-                                            <div style="text-overflow: ellipsis;">${item.productName}</div>
-                                            <div>${item.price}</div>
+                                            <div class="hidetext">${item.productName}</div>
+                                            <div class="price">金額: ${item.price}$</div>
                                        </a>
                                 </div>
                         </div>
