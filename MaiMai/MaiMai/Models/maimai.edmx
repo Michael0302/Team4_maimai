@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="maimaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="CartID" />
@@ -431,8 +431,7 @@
             <End Role="RequiredPost" EntitySet="RequiredPost" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="maimaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -610,9 +609,9 @@
           <Property Name="isPast" Type="Boolean" />
           <Property Name="county" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="district" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Member" Relationship="Self.FK_RequiredPost_Member" FromRole="RequiredPost" ToRole="Member" />
           <NavigationProperty Name="Tag" Relationship="Self.FK_RequiredPost_Tag" FromRole="RequiredPost" ToRole="Tag" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -1042,6 +1041,7 @@
           <EntitySetMapping Name="RequiredPost">
             <EntityTypeMapping TypeName="maimaiModel.RequiredPost">
               <MappingFragment StoreEntitySet="RequiredPost">
+                <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="RequiredPostID" ColumnName="RequiredPostID" />
                 <ScalarProperty Name="postTime" ColumnName="postTime" />
                 <ScalarProperty Name="postDescription" ColumnName="postDescription" />
@@ -1055,7 +1055,6 @@
                 <ScalarProperty Name="isPast" ColumnName="isPast" />
                 <ScalarProperty Name="county" ColumnName="county" />
                 <ScalarProperty Name="district" ColumnName="district" />
-                <ScalarProperty Name="address" ColumnName="address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
