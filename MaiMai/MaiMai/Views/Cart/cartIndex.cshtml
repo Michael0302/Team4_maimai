@@ -159,7 +159,7 @@
     function CartToOrder() {
         var checkedToOrder = [];
         if ($("td input:checked").length == 0) {
-            alert("請選擇商品");
+            swal("下單失敗","請選擇商品", "error");
             return false;
         }
         $("td input:checked").each(function () {
@@ -173,7 +173,7 @@
             //traditional: true,
             contentType: "application/json",
             success: function (status) {
-                alert("下單成功!");
+                swal("下單成功!","請前往付款","success");
                 window.location.href = "/OrderManager/OrderIndex2"
                 //location.reload();
             }

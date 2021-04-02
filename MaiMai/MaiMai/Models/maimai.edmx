@@ -25,6 +25,7 @@
           <Property Name="ReciverID" Type="int" />
           <Property Name="ChatText" Type="nvarchar" MaxLength="50" />
           <Property Name="ChatTime" Type="datetime" />
+          <Property Name="ChatStatus" Type="bit" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -458,6 +459,7 @@
           <Property Name="ChatTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Member" Relationship="Self.FK_Chat_Member" FromRole="Chat" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="Self.FK_Chat_Member1" FromRole="Chat" ToRole="Member" />
+          <Property Name="ChatStatus" Type="Boolean" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -914,6 +916,7 @@
           <EntitySetMapping Name="Chat">
             <EntityTypeMapping TypeName="maimaiModel.Chat">
               <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="ChatStatus" ColumnName="ChatStatus" />
                 <ScalarProperty Name="ChatID" ColumnName="ChatID" />
                 <ScalarProperty Name="SenderID" ColumnName="SenderID" />
                 <ScalarProperty Name="ReciverID" ColumnName="ReciverID" />

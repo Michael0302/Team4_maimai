@@ -485,6 +485,7 @@
     <Content Include="Maimai\images\svg\082-bell.svg" />
     <Content Include="Maimai\images\svg\135-search.svg" />
     <Content Include="Maimai\images\svg\149-cog.svg" />
+    <Content Include="Maimai\images\svg\chat.svg" />
     <Content Include="Maimai\images\svg\maimaiLOGO.svg" />
     <Content Include="Maimai\images\svg\maimaiTOPLOGO.svg" />
     <Content Include="Maimai\layout\css\layout.css" />
