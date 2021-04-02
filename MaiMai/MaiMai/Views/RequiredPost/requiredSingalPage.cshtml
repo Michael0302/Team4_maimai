@@ -7,6 +7,12 @@
     .moving {
         transform: translate(0px, 800px);
     }
+    .exImg2 {
+        width: 400px;
+        height: 400px;
+        background: #f4f4f4;
+        object-fit: contain;
+    }
 </style>
 <div class="container" style="padding: 100px 10px 10px 10px ; background-color: #FBEFF4; border-radius:20px ">
     <div class="shadow-lg d-flex" style="height:800px">
@@ -139,8 +145,8 @@
                 text += `
 
 
-                            <div class="photo" style="height:300px">
-                            <img class="w-100 h-100" src="../Content/resource_nico/images/徵求台POST/${data.postImg}">
+                            <div class="photo"  ">
+                            <img class="exImg2" src="../Content/resource_nico/images/徵求台POST/${data.postImg}">
                             </div>
 
 

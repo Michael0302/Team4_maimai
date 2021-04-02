@@ -19,6 +19,26 @@
         .aa1 {
             text-decoration: none;
         }
+        .exImg {
+            width: 200px;
+            height: 200px;
+            background: lightgray;
+            object-fit: cover;
+        }
+
+        .exImg2 {
+            width: 200px;
+            height: 200px;
+            background: #f4f4f4;
+            object-fit: contain;
+        }
+        input:focus {
+            outline: none
+        }
+        textarea:focus {
+            outline: none
+        }
+       
     </style>
 </head>
 
@@ -88,7 +108,7 @@
                                 <label class="b" for="profileImg">個人頭像</label>
                                 @*<input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">*@
                                 <div class="displayImg">
-                                    <div class="photo"><img id="Productimg" style="width:150px;height:150px"></div>
+                                    <div class="photo"><img id="Productimg"class="exImg2"  ></div>
                                     <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;">
                                 </div>
                                 <label class="b" for="selfDescription">個人簡介</label>
@@ -97,8 +117,8 @@
                                 <input class="w-100" required="required" autofocus="autofocus" type="email" name="email" id="email">
                             </div>
                             <div class="mt3">
-                                <button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button>
-                                <button type="button" id="p1" class="button b green" onclick="gogosignup()">註冊11</button>
+                                @*<button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button>*@
+                                <button type="button" id="p1" class="button b green" onclick="gogosignup()">註冊</button>
                                 @*<button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>*@
 
 
@@ -122,9 +142,9 @@
             </div>
             <button id="demo1" onclick="demo1()">DEMO1</button>
             <div class="mv4-ns mv3 bt b--light-gray"></div>
-            <a class="link b f6 hover-blue black mr3" href="/Members/Login">登入</a>
+            <a class="link b f6 hover-blue black mr3"style="text-decoration: none"  href="/Members/Login">登入</a>
             @*@Html.ActionLink("登入", "Login", "Members")*@
-            <a class="link b f6 hover-blue black mr3" href="/users/password/new">忘記密碼或重設密碼</a>
+            <a class="link b f6 hover-blue black mr3" style="text-decoration: none" href="/users/password/new">忘記密碼或重設密碼</a>
             <div class="fb-like"
                  data-share="true"
                  data-width="450"
@@ -182,7 +202,7 @@
                     console.log(good)
                     if (good == 0) {
                         alertTest1()
-                        setTimeout("home()", 2000)
+                        setTimeout("home()", 1000)
 
                     }
                     else {
@@ -214,7 +234,7 @@
                         sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
 
                     }
-                    else sp.innerHTML = " 正確</span>";
+                    else sp.innerHTML = " <span style='color:green'>正確</span>";
                 }
             }
             else sp.innerHTML = "<span style='color:red'>至少輸入兩個字</span>";
@@ -243,7 +263,7 @@
                         sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
 
                     }
-                    else sp.innerHTML = " 正確</span>";
+                    else sp.innerHTML = "<span style='color:green'> 正確</span>";
                 }
             }
             else sp.innerHTML = "<span style='color:red'>至少輸入一個字</span>";
@@ -329,7 +349,7 @@
                     if (flag1 && flag2) break;
 
                 }
-                if (flag1 && flag2) sp.innerHTML = "正確</span>";
+                if (flag1 && flag2) sp.innerHTML = "<span style='color:green'>正確</span>";
                 else sp.innerHTML = " <span style='color:red'>要包含字母數字 </span>";
             }
             else
@@ -383,7 +403,7 @@
                     if (flag1 && flag2 && flag3) break;
 
                 }
-                if (flag1 && flag2 && flag3) sp.innerHTML = "正確</span>";
+                if (flag1 && flag2 && flag3) sp.innerHTML = "<span style='color:green'>正確</span>";
                 else sp.innerHTML = " <span style='color:red'>要包含字母數字特殊符號</span>";
             }
             else
@@ -404,7 +424,7 @@
         function alertTest1() {
             Swal.fire(
                 "註冊成功", //標題
-                " 歡迎光臨MaiMai</br>2秒後自動跳轉回首頁...", //訊息內容(可省略)
+                " 歡迎光臨MaiMai</br>1秒後自動跳轉回首頁...", //訊息內容(可省略)
                "success" //圖示(可省略) success/info/warning/error/question
             );
         }
@@ -603,18 +623,18 @@
         //</fb: login - button >
 
         function demo1() {
-            $("#userAccount").val("Kobe")
-            $("#userPassWord").val("apple0108")
-            $("#userPassWordCheck").val("apple0108")
+            $("#userAccount").val("Jeenifer0108")
+            $("#userPassWord").val("aA#123")
+            $("#userPassWordCheck").val("aA#123")
             $("#city").val("台中市")
             $("#address").val("台中市大雅區中港路一段88號")
             $("#phoneNumber").val("0988554474")
-            $("#firstName").val("國瑜")
-            $("#lastName").val("韓")
+            $("#firstName").val("妮佛")
+            $("#lastName").val("珍")
             $("#birthday").val("1945-01-08")
             $("#identityNumber").val("F447878547")
             //$("#profileImg").val("")
-            $("#selfDescription").val("台灣土豪,韓國瑜,販售各種國瑜寶寶")
+            $("#selfDescription").val("雪莉?!~你攻擊了我的村莊?")
             $("#email").val("quees778w2s@gmail.com")
         }
 
