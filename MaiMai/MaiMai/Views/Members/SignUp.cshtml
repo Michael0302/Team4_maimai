@@ -32,6 +32,13 @@
             background: #f4f4f4;
             object-fit: contain;
         }
+        input:focus {
+            outline: none
+        }
+        textarea:focus {
+            outline: none
+        }
+       
     </style>
 </head>
 
@@ -135,9 +142,9 @@
             </div>
             <button id="demo1" onclick="demo1()">DEMO1</button>
             <div class="mv4-ns mv3 bt b--light-gray"></div>
-            <a class="link b f6 hover-blue black mr3" href="/Members/Login">登入</a>
+            <a class="link b f6 hover-blue black mr3"style="text-decoration: none"  href="/Members/Login">登入</a>
             @*@Html.ActionLink("登入", "Login", "Members")*@
-            <a class="link b f6 hover-blue black mr3" href="/users/password/new">忘記密碼或重設密碼</a>
+            <a class="link b f6 hover-blue black mr3" style="text-decoration: none" href="/users/password/new">忘記密碼或重設密碼</a>
             <div class="fb-like"
                  data-share="true"
                  data-width="450"

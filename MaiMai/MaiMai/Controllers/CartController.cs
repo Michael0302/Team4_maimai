@@ -85,25 +85,24 @@ namespace MaiMai.Controllers
             List<Cart> cart = new List<Cart>();
 
             IQueryable<Cart> oneProduct = db.Cart;
-            IQueryable<Order> orded = db.Order;
+            IQueryable<Order>orded = db.Order;
             IQueryable<ProductPost> product = db.ProductPost;
-            Order ord = new Order();
+                Order ord = new Order();
 
             foreach (string i in CartID.ToArray())
             {
-                var oneProduct1 = oneProduct.ToList().FirstOrDefault(m => m.CartID == Convert.ToInt32(i) && m.Status == false);
+                var oneProduct1 = oneProduct.ToList().FirstOrDefault(m=>m.CartID==Convert.ToInt32(i) && m.Status == false);   
                 /////取出CartID存入Order
-                if (db.Order.FirstOrDefault(m => m.CartNumber == oneProduct1.CartNumber) == null)
-                {
-                    ord.buyerUserID = UserID;
-                    ord.CartNumber = oneProduct1.CartNumber;
-                    ord.orderStatus = 0;
-                    ord.createdTime = DateTime.Now;
-                    db.Order.Add(ord);
-                    db.SaveChanges();
+                if(db.Order.FirstOrDefault(m=>m.CartNumber == oneProduct1.CartNumber) == null) { 
+                ord.buyerUserID = UserID;
+                ord.CartNumber = oneProduct1.CartNumber;
+                ord.orderStatus = 0;
+                ord.createdTime = DateTime.Now;
+                db.Order.Add(ord);
+                db.SaveChanges();
                 }
                 ///抓取存入的OrderID存入OrderDetail
-                var orded1 = orded.FirstOrDefault(o => o.CartNumber == oneProduct1.CartNumber);
+                var orded1 = orded.FirstOrDefault(o => o.CartNumber == oneProduct1.CartNumber);                
                 //var product1 = product.FirstOrDefault(p=>p.ProductPostID == oneProduct1.ProductPostID);
                 OrderDetail ordt = new OrderDetail();
                 ordt.OrderID = orded1.OrderId;
@@ -119,12 +118,11 @@ namespace MaiMai.Controllers
                 oneProduct1.Status = true;
                 db.SaveChanges();
             }
-            var ordTotalPrice = db.OrderDetail.Where(o => o.OrderID == ord.OrderId).Select(s => s.oneProductTotalPrice).Sum();
-            ord.OrderTotalPrice = ordTotalPrice;
-            db.SaveChanges();
+                var ordTotalPrice = db.OrderDetail.Where(o => o.OrderID == ord.OrderId).Select(s=>s.oneProductTotalPrice).Sum();
+                ord.OrderTotalPrice = ordTotalPrice;
+                db.SaveChanges();
 
             return Content("success");
         }
     }
-
 }
