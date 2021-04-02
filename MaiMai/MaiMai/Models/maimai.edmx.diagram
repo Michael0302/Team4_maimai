@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="067643bc48a3405aabec01e20b4ea535" Name="Diagram1">
-        <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Chat" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Comment" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+      <Diagram DiagramId="d7b1182ae87a4e139a292713503c41ef" Name="Diagram1">
+        <EntityTypeShape EntityType="maimaiModel.Cart" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Chat" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Comment" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Member" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.Notification" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Order" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Order" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.OrderDetail" Width="1.5" PointX="5.25" PointY="16.375" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.ProductPost" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Report" Width="1.5" PointX="8" PointY="15.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.ReportDetail" Width="1.5" PointX="5.75" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Report" Width="1.5" PointX="8" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.ReportDetail" Width="1.5" PointX="5.75" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="maimaiModel.RequiredPost" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="maimaiModel.Tag" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="maimaiModel.Tag" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
         <AssociationConnector Association="maimaiModel.FK_Cart_ProductPost" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Chat_Member" ManuallyRouted="false" />
         <AssociationConnector Association="maimaiModel.FK_Chat_Member1" ManuallyRouted="false" />
