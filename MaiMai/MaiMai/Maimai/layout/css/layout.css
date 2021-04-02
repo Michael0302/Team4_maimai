@@ -499,10 +499,11 @@ div.tag > a.btn {
 }
 
 .chatCount {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background-color: #FF9797;
     border-radius: 50%;
+    /*background: radial-gradient(#FF9797, #FF0000 )*/
 }
 
 /*====================================================================*/
