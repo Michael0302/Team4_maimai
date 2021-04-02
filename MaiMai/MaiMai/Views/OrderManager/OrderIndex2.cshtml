@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "OrderIndex2";
+//ViewBag.Title = "OrderIndex2";
 }
 
 <head>
@@ -174,8 +174,9 @@
                 </button>
             </div>
             <div id="modal-body" class="modal-body" style="margin-bottom:30px">
-                <div style="text-align:center" class="mb-5">
-                    <img src="" />
+                <div id="sellerID"></div>
+                <div style="height:290px ;text-align:center;"  class="mb-5 mt-5">
+                    <img src=""  style="width:100%; height:auto"/>
 
                 </div>
                 <h4>請問您對這次交易的滿意度為 :</h4>
@@ -521,22 +522,26 @@
                 var CNT = result.CNT;
                 var starTotal = result.starTotal;
                 var starAVG = 0;
+                var SellerID = result.SellerID;
+
                 if (CNT==0)
                 {
                     starAVG = 0;
                 }
                 else
                 {
-                    starAVG = starTotal / CNT;
+                    //var x = ;
+                    starAVG = Math.round(starTotal / CNT);
                 }
                 console.log('result ',result);
                 console.log("img",`${result.img}`);
                 console.log("starTotal", `${result.starTotal}`);
                 console.log("starAVG得分",`${starAVG}`);
 
+                $("#sellerID").html(`賣家編號: ${SellerID}`);
                 $("#commentCNT").text(`已經有${result.CNT}人評分`);
                 $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.img}`);
-                $("#progress-bar").css("width", `${starAVG * 20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG }`);
+                $("#progress-bar").css("width", `${starAVG * 20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG }分`);
             },
         })
     }
