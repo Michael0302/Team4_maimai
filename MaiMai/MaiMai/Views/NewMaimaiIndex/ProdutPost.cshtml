@@ -3,13 +3,20 @@
     ViewBag.Title = "ProdutPost";
 }
 <link href="~/Maimai/layout/css/Productpost.css" rel="stylesheet" />
-
+<style>
+    .exImg2 {
+        width: 200px;
+        height: 200px;
+        background: #f4f4f4;
+        object-fit: contain;
+    }
+</style>
 <div style="height:100px"></div>
 
-<div class="container">
+<div class="container"style=" padding-top: 40px;">
     <div class="row " id="postdetail">
     </div>
-    <h3>逛逛其他商品</h3>
+    <h3 style="padding-top: 60px;">逛逛其他商品</h3>
     <div id="carousel" class="container">
         <figure id="spinner">
             @*<a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>
@@ -22,8 +29,12 @@
                 <a class="btn" href="#"><img src="~/Maimai/images/image jpeg/490db2640e04a996eea2652b0dc0b144.jpg"></a>*@
         </figure>
         <div class="d-flex justify-content-between">
-            <a class="btn btn-light" onclick="galleryspin('-')">&lt;</a>
-            <a class="btn btn-light" onclick="galleryspin('')">&gt;</a>
+            <a class="btn  "  onclick="galleryspin('-')"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">  <image id="image0" width="32" height="32" x="0" y="0" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAgMAAAAOFJJnAAAABGdBTUEAALGPC/xhBQAAACBjSFJN AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAADFBMVEX///9YseNXseP////h Slq/AAAAAnRSTlMAgJsrThgAAAABYktHRACIBR1IAAAACXBIWXMAAADdAAAA3QFwU6IHAAAAB3RJ TUUH5QQCCgY4phvUFAAAAC9JREFUGNNjYGBgYFy1atVKIM3ABmQsATGkgIwJIEYWkOFATyUIBlwK rhiunY6KALrBVQGNupb8AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTA0LTAyVDEwOjA2OjU2KzAw OjAwzl2A3AAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0wNC0wMlQxMDowNjo1NiswMDowML8AOGAA AAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwaAAAAAElFTkSuQmCC" />
+
+</svg> </a>
+            <a class="btn" onclick="galleryspin('')"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">  <image id="image0" width="32" height="32" x="0" y="0" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgEAYAAAAj6qa3AAAABGdBTUEAALGPC/xhBQAAACBjSFJN AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAA CXBIWXMAAABgAAAAYADwa0LPAAAAB3RJTUUH5QQCCgshd94CmQAAAjFJREFUaN7l2T9IG1EcB/Df 78VBECyIAYe7VOiSCBYsFFyawck4JAHNnzopUmJQySA0Q3DSICl29M+J4tjkYiXaISJExaEtOFha GhzTphbBbqVtltxz8TkUJGrynnnnd3rHHffu+zlu+HEIF/F/2rIWmycncZauwNe5OeCVbUhge6kE H/EfDEUiKYf7SFldXua2X4UQtqBx460RzWbhMSRAPzvjtmMvRGmhsRGOaRcdWVrylzMvfyRDoTsH SKe9zoexfJ60kpLl2OmEp7CGodNTbjsnwQMqIm7hL2pbXAzGN5uKrrEx0QB41Ynn2rsnP1/Y7cZv w2ac7O3BIQxTra2N25MEYROKlGIeUjA9MZGMef6o2fn5OwO4LxAVAcwOcW0As0LcGMBsELcGMAtE 1QCyQ9QMQFaImgPIBsENQBYI7gD1DiEMoF4hhAOw+AYyg8XXnZ2kCwsAuRx8hij4rVbeEPAG3KgG Aind41XUdJpUf2e5gk20BTYoZcfCAQLhjS+F9w4H6ca/mNvZEfXmaQ8OwLPx8eSa16lE1tcvQUQX h0eWqYaZ3V1R3z4rrj9w96nlhYX/L+MOUK/FuQPUe3FuALIUrzmAbMVrBiBr8aoBZC9+awCzFL8x gNmKXxvArMUrApi9+JUA96U4SwNb+HyZg2/xjg5QMEQ+7O/DIUSpJmBIcdNW/B4O6xZPn1LWNFHF WS6nQYyRfpJwubhPZ+z3uB2PcHV0VLd4XylB8cVZzgFIuZQyg5NqQgAAACV0RVh0ZGF0ZTpjcmVh dGUAMjAyMS0wNC0wMlQxMDoxMTozMyswMDowMHlYYkUAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEt MDQtMDJUMTA6MTE6MzMrMDA6MDAIBdr5AAAAAElFTkSuQmCC" />
+
+</svg> </a>
         </div>
     </div>
 </div>
@@ -45,12 +56,12 @@
                         console.log(item.ProductPostID);
                         $("#postdetail").prepend(`
                          <div class="col-6 col-md-6 prdMT ">
-                                    <h4 >${item.ProductName}</h4>
+                                    <h4 style="margin: 6px;">${item.ProductName}</h4>
                                 <div class="prdImg">
-                                        <img src="../Content/ProductPostImg/${item.img}" alt="">
+                                        <img class="exImg2"src="../Content/ProductPostImg/${item.img}" alt="">
                                 </div>
                          </div>
-                        <div class="col-6 col-md-6 prdMT-text">
+                        <div class="col-6 col-md-6 prdMT-text" style="margin: 0px;padding-top: 59px;">
                                 <div class="priceH d-flex justify-content-between">
                                     <div class="d-flex">
                                             <div class="priceColor">商品價格</div>
@@ -60,7 +71,7 @@
                                                               
                                                                             <div class="priceH">
                                                                                 <label class="d-block">描述</label>
-                                                                                <textarea cols="65" rows="6" readonly class="description">${item.Description}</textarea>
+                                                                                <textarea cols="60" rows="6" readonly class="description">${item.Description}</textarea>
                                                                             </div>
                                                 <div ><a onclick="displayChat(${item.ProductPostID})">聯絡賣家</a><a class="ml-3 PersonalText" href="/PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.UserID}">${item.userAccount}</a></div>
 
@@ -146,7 +157,7 @@
                 success: function (postDetail2) {
                     $(postDetail2).each(function (i, item) {
                         $("#spinner").prepend(`
-                            <a class="btn" onclick="CarouselClick(${item.ProductPostID})"><img style="width:350px;height:280px;" src="../Content/ProductPostImg/${item.productImg}"></a>
+                            <a class="btn" onclick="CarouselClick(${item.ProductPostID})"><img class="exImg2" style="width:350px;height:280px;" src="../Content/ProductPostImg/${item.productImg}"></a>
                         `)
                     })
                 }

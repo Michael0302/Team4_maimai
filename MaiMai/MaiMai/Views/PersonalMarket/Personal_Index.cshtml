@@ -201,7 +201,7 @@
         }
         .D_cw {
             font-weight: 600;
-            
+
         }
         .g123 {
             color: #008f79;
@@ -223,6 +223,26 @@
             background-color: #f0f1f1;
             box-shadow: 0 0 0 4px #fff;
         }
+        .exImg2 {
+            width: 400px!important;
+            height: 232px!important;
+            background: #f4f4f4;
+            object-fit: contain;
+        }
+        .exImg {
+            width: 200px;
+            height: 200px;
+            background: lightgray;
+            object-fit: cover;
+        }
+        @@media (min-width: 992px){
+            .photo {
+                width: 284px;
+                height: 230px;
+                margin: 20px;
+                overflow: hidden;
+            }}
+
        /* .qqq1{
             width:227px;
             height:53px;
@@ -235,7 +255,7 @@
 
     <div id="root">
         <div @*class="D_cE D_cI D_agB"*@ style="padding-bottom: 0px; padding-top: 104px;">
-            <div class="D_aho">
+            <div class="D_aho"style=" padding-top: 22px;">
                 <div class="D_ahm">
                     <div class="D_agC D_agE">
                     </div>
@@ -457,22 +477,22 @@
                 <div class="modal-body" id="editMemberbody">
                     <form class="formFrame mx-auto " enctype="multipart/form-data">
                         <div class="displayImg">
-                            <div class="photo"><img id="Productimg"></div>
+                            <div class="photo"><img id="Productimg" class="exImg2"></div>
                             <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;">
                         </div>
                         <div class="displayInput">
                             <h6>
                                 產品名稱:
-                                <input type="text" name="productName" id="productName">
+                                <input type="text" name="productName" id="productName1">
                             </h6>
                             <h6>
                                 產品描述:
-<textarea id="productDescription" name="productDescription" placeholder="使用程度、幾成新" rows="4"
+<textarea style="width: 341px;" id="productDescription1" name="productDescription" placeholder="使用程度、幾成新" rows="4"
           cols="50" onclick="tag()"></textarea>
                             </h6>
                             <h6>
                                 價格:
-                                <input type="text" name="price" id="price">
+                                <input type="text" name="price" id="price1">
                             </h6>
                             <h6>
                                 數量:
@@ -501,6 +521,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="submitProdouct()">新增貼文</button>
+                    <button type="button" onclick="demo1()"> demo1</button>
                 </div>
             </div>
         </div>
@@ -908,7 +929,13 @@
 
         });
 
-
+        function demo1() {
+            $("#productName1").val("CoinMaster等級全滿帳號")
+            $("#productDescription1").val("超級滿等帳號、軍團全滿、要搶要快")
+            $("#price1").val("999")
+            $("#inStoreQTY").val("50")
+           
+        }
 
         function deletepost(id) {
             $.ajax({
@@ -928,12 +955,21 @@
 
 
 
+        function home() {
+            window.location.href = "/PersonalMarket/Personal_Index";
+        }
 
 
 
 
+        function gogook() {
+            Swal.fire(
+                "上架成功", //標題
+                "盡情使用MaiMai買買吧!", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
 
-
+            );
+        }
         function submitProdouct() {
 
 
@@ -947,8 +983,8 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
-                    window.alert(response)
-                    window.location.href = "/PersonalMarket/Personal_Index"
+                    gogook()
+                    setTimeout("home()",1000)
 
                 }
             })

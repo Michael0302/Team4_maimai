@@ -362,4 +362,8 @@ MigrationBackup/
 FodyWeavers.xsd
 *.dll
 
-
+# Michael_add SQL file
+*.Context.cs
+*.Designer.cs
+*.edmx
+*.edmx.diagram
