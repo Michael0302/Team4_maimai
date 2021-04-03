@@ -24,7 +24,10 @@
         <h2>顯示附近的訂單</h2>
         <div class="w-100 d-flex">
             <div id="map" class="map"></div>
-            <div style="width:400px;border:1px solid red ;padding:10px;" id="postbox">
+            <div style="        width: 400px;
+        height: 750px;
+        border: 1px solid gray;
+        padding: 10px;" id="postbox">
                 
             </div>
         </div>
@@ -111,7 +114,7 @@
                                              <span class="font-weight-bolder"> ${item.posterName}</span>
 
                               
-                                        <button class-"btn" id="btn${item.requiredPostID}" name="${item.requiredPostID}" onclick="formRequiredSingalPage(${item.requiredPostID})" > 查看訂單</button>`;
+                                        <button class-"btn" id="btn${item.requiredPostID}" name="${item.requiredPostID}" onclick="formRequiredSingalPage(${item.requiredPostID})" > 查看貼文</button>`;
                                     const infowindow = new google.maps.InfoWindow({
                                         content: contentString,
                                     });
@@ -128,7 +131,7 @@
                                     });
                                     
                                    
-                                    marker.addListener("click", () => {
+                                    marker.addListener("mouseover", () => {
                                         infowindow.open(map, marker);
                                        
                                     });
