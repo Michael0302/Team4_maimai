@@ -22,33 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
-    <style>
-        input:focus {
-            outline: none
-        }
-
-        .wei-grid-special0 {
-            overflow: hidden;
-            transition: box-shadow 500ms;
-            border-radius: 10px;
-        }
-
-            .wei-grid-special0:hover {
-                box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
-                background-color:white;
-            }
-
-        .abc {
-            border-radius: 40px;
-            padding-top: 8px;
-            background-color: blanchedalmond !important;
-            padding-bottom: 1px;
-            margin-bottom: 10px;
-        }
-        .abc1 {
-            font-weight: 600;
-        }
-    </style>
+    
 </head>
 
 
@@ -72,7 +46,7 @@
             @*Search*@
             <div class=" dropdown col-8  my-3">
                 <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick" />
+                    <img class="ml-1 dropdown-search-img" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
 
@@ -340,15 +314,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 $("#inputsearch").autocomplete({
                     source: test
                 });
-
                 $(text).each(function (index, text) {
                     test.push(text.name);
                 })
-                //console.log(text)
-                ////availabletags = list.split(",");
-                //console.log(availabletags)s
-                //console.log(test)
-                    //< a url = "/NewMaimaiIndex/ProdutPost?PostID=85" ></a >
             }
         })
 
