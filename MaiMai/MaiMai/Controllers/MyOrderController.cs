@@ -300,6 +300,8 @@ namespace MaiMai.Controllers
         {
             var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;
             var img = db.Member.Find(SellerID).profileImg;
+
+            //var sellerID = db.Comment.Find(OrderDetailID).CommentorUserID;
             //PK才可以用find,  OrderDetailID=23, OrderID=3, SellerID=7
             //OrderDetailID=25, OrderID=, SellerID=21   no__comment
 
@@ -312,6 +314,7 @@ namespace MaiMai.Controllers
                     starTotal = 0,
                     img = img,
                     CNT,
+                    SellerID,
                 };
                 return Json(result, JsonRequestBehavior.AllowGet);
 
@@ -331,6 +334,7 @@ namespace MaiMai.Controllers
                     starTotal = starTotal,
                     img = img,
                     CNT,
+                    SellerID,
                 };
                 return Json(result, JsonRequestBehavior.AllowGet);
 
