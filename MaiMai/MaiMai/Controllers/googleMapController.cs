@@ -23,6 +23,12 @@ namespace MaiMai.Controllers
                 county=m.county,
                 district=m.district,
                 address= m.address,
+                requiredPostName=m.postName,
+                requiredPostID=m.RequiredPostID,
+                postImg=m.postImg,
+                estimatePrice=m.estimatePrice,
+                posterName= m.Member.userAccount,
+                userAvrta=m.Member.profileImg
             }).ToList();
             return Json(mapList, JsonRequestBehavior.AllowGet);
         }

@@ -13,15 +13,25 @@
             height: 750px;
             border: 1px solid gray;
         }
-        img {
-            
+        mapPostimg {
+            width:300px;
+            height:300px;
         }
     </style>
 </head>
 <body>
     <div class="container" style="padding-top:100px">
         <h2>顯示附近的訂單</h2>
-        <div id="map" class="map"></div>
+        <div class="w-100 d-flex">
+            <div id="map" class="map"></div>
+            <div style="        width: 400px;
+        height: 750px;
+        border: 1px solid gray;
+        padding: 10px;" id="postbox">
+                
+            </div>
+        </div>
+        
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
@@ -98,6 +108,17 @@
                             geocoder.geocode({ 'address': address }, function (results, status) {
                                 if (status == 'OK') {
                                     map.setCenter(results[0].geometry.location);
+                                    const contentString = `<h5>${item.requiredPostName}</h5>
+                                                                   
+                                            <img style="border-radius:50%; width:50px;height:50px" src="../Content/ProductPostImg/member/${item.userAvrta}" />
+                                             <span class="font-weight-bolder"> ${item.posterName}</span>
+
+                              
+                                        <button class-"btn" id="btn${item.requiredPostID}" name="${item.requiredPostID}" onclick="formRequiredSingalPage(${item.requiredPostID})" > 查看貼文</button>`;
+                                    const infowindow = new google.maps.InfoWindow({
+                                        content: contentString,
+                                    });
+
                                     var marker = new google.maps.Marker({
                                         map: map,
                                         label: 'MaiMai',
@@ -108,6 +129,22 @@
                                         //    scaledSize: new google.maps.Size(10, 10)
                                         //},
                                     });
+                                    
+                                   
+                                    marker.addListener("mouseover", () => {
+                                        infowindow.open(map, marker);
+                                       
+                                    });
+                                    //var btn = document.getElementsByTagName('button');
+                                    //btn.addEventListener('click', () => {
+                                    //    console.log(event.target);
+                                    //    var id = $(event.taget).attr(name);
+                                    //    console.log(id);
+                                    //    formRequiredSingalPage(id);
+
+                                    //});
+
+
                                 } else {
                                     console.log(status);
                                 }
@@ -196,10 +233,78 @@
 
 
 
+                              
 
         })//end of document ready
+ 
+
+        function formRequiredSingalPage(index) {
+
+           
 
 
+            var text = "";
+
+
+            $.ajax({
+                type: "POST",
+                url: "/RequiredPost/getsingalPost",
+                data: {
+                    requiredPostID: index
+                },
+                success: function (data) {
+
+
+                    var Milliseconds = parseInt(data.postTime.replace(/\D/igm, ""));
+                    var year = new Date(Milliseconds).getFullYear();
+                    var month = new Date(Milliseconds).getMonth() + 1;
+                    var date = new Date(Milliseconds).getDate();
+
+
+                    text += `
+
+
+                            <div class="mapPostimg" >
+                            <img class="w-100" src="../Content/resource_nico/images/徵求台POST/${data.postImg}">
+                            </div>
+
+
+                            <a onclick="toRequiredPostSingal(${data.RequiredPostID})" href="#"><h6 class="my-5">貼文名稱 : <span class="font-weight-bolder">${data.postName}</span></h6></a>
+                               <div class="d-flex">
+                             <img style="border-radius:50%; width:50px;height:50px" src="../Content/ProductPostImg/member/${data.userAvrta}"/>
+
+                            <a onclick="window.open('../../PersonalMarket/Personal_Index_WithoutLogin?UserID=${data.UserID}','${data.userAccount}的賣場')" href="#"><h6 class="my-3 mx-3"> 買家 :  <span class="font-weight-bolder">${data.userAccount}</span></h6><a>
+                            </div>
+                            <h6 class="my-3">貼文描述 :  <span class="font-weight-bolder">${data.postDescription}</span></h6>
+                            <h6 class="my-3"> 大概徵求價位：<span class="font-weight-bolder">${data.estimatePrice}</span>  元</h6>
+                             <div class="my-5">
+                            <span>${data.county}</span><span>${data.district}</span>
+                            </div>
+                            <span>建立時間 : ${year} - ${month} - ${date}</span>
+
+
+
+                            `
+                    $("#postbox").html(text);
+
+                },
+                error: function (data) {
+
+                    Swal.fire("失敗", data, 'error');
+                }
+            });
+
+          
+
+        }
+
+
+
+            function toRequiredPostSingal(id) {
+
+                window.open(`../../RequiredPost/requiredSingalPage?rqID=${id}`, '徵求台');
+
+            }
     </script>
 
 </body>

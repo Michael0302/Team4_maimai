@@ -22,33 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
-    <style>
-        input:focus {
-            outline: none
-        }
-
-        .wei-grid-special0 {
-            overflow: hidden;
-            transition: box-shadow 500ms;
-            border-radius: 10px;
-        }
-
-            .wei-grid-special0:hover {
-                box-shadow: 0 5px 30px rgba(225, 202, 202, 1);
-                background-color:white;
-            }
-
-        .abc {
-            border-radius: 40px;
-            padding-top: 8px;
-            background-color: blanchedalmond !important;
-            padding-bottom: 1px;
-            margin-bottom: 10px;
-        }
-        .abc1 {
-            font-weight: 600;
-        }
-    </style>
+    
 </head>
 
 
@@ -72,7 +46,7 @@
             @*Search*@
             <div class=" dropdown col-8  my-3">
                 <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick" />
+                    <img class="ml-1 dropdown-search-img" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
 
@@ -89,7 +63,7 @@
             <div id="mainListDiv" class="main_list" @*style="position: absolute; right:20% ;"*@>
                 <div class="navlinks d-flex mt-3">
                     <div class="svglink">
-                        <a href="#" style="text-decoration:none;">
+                        <a href="../../googleMap/Index" style="text-decoration:none;">
                             @*About*@<img src="~/Maimai/images/svg/073-location2.svg">
                             <p style="font-size:10px;">地圖</p>
                         </a>
@@ -156,7 +130,7 @@
 
 
                                 <div class="dropdown-divider" style="margin-bottom:unset;"></div>
-                                <div  class="abc"  style="background-color: #E0E0E0">
+                                <div class="abc" style="background-color: #E0E0E0">
                                     <h5 class="text-center" style="font-weight:bolder;color:	black">個人賣場管理</h5>
                                 </div>
                                 @Html.ActionLink("個人賣場", "Personal_Index", "PersonalMarket", null, new { @class = "wei-grid-special0 dropdown-item abc1" })
@@ -182,7 +156,7 @@
     </nav>
 
     @RenderBody()
-    <div class="chatbox d-flex justify-content-center align-content-center btn">聊天</div>
+    <div class="chatbox d-flex justify-content-center align-content-center btn"><img src="~/Maimai/images/svg/chat.svg"/><div id="chatroomCount" class=""></div></div>
 
     <div class="chatmsg" style="">
         <div id="chatmsgClose" class="d-flex justify-content-start align-content-center chatmsgClose">
@@ -340,15 +314,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 $("#inputsearch").autocomplete({
                     source: test
                 });
-
                 $(text).each(function (index, text) {
                     test.push(text.name);
                 })
-                //console.log(text)
-                ////availabletags = list.split(",");
-                //console.log(availabletags)s
-                //console.log(test)
-                    //< a url = "/NewMaimaiIndex/ProdutPost?PostID=85" ></a >
             }
         })
 
@@ -364,7 +332,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
                 });
         }
-    
+
         //function inputsearch() {
         //        ajax({
         //            url: "/NewMaimaiIndex/searchall",
@@ -401,8 +369,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         $(function () {
             getConent();
             //比對資料表Notification有無符合自己id or 群組的通知
-            getNotiRecord()
-
+            getNotiRecord()           
 
             //取消bubble事件(點通知 通知欄不會縮小)
             //$("body").on('click', '[data-stopPropagation]', function (e) {
@@ -414,9 +381,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 if (nowNotificationID != null) {
                     if (category == "系統") {
                         $('#notify').prepend(`<div class=" noti py-2 noti_border notiHover  " data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}',1)">
-<a class="btn-sm">
-<strong>[${category}]</strong>:   ${message} </a>
-</div>`);
+                            <a class="btn-sm">
+                            <strong>[${category}]</strong>:   ${message} </a>
+                            </div>`);
                     } else if (category == "違規") {
                         $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../PersonalMarket/Personal_Index"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "訂單") {
@@ -442,6 +409,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             chat.server.group(userID);
                     }
                 })
+                //計算有幾筆未讀
+                checkChatroom();
 
             })
 
@@ -453,6 +422,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             $('#chatmsgClose').on('click', function () {
                 $('.chatmsg').css('transform', 'translate(500px, 500px)');
             })
+
+            
         })
 
 
@@ -510,6 +481,17 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             })
         }
 
+        //判斷聊天室未讀訊息
+        function checkChatroom() {
+            var count = $(`#chatNameList div.chatCount`).length;
+            console.log(count);
+            if (count > 0)
+                $("#chatroomCount").addClass("redPoint").html(`${count}`);
+            else {
+                $("#chatroomCount").removeClass("redPoint").html(``);
+            }
+        }
+
         //點擊後將通知狀態改為已讀
     function checkRead(NotificationID, NotifyText, check) {
         if (NotifyText != null)
@@ -528,7 +510,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         }
         }
 
-        chat.client.reciverMessage = function (message, user) {
+        chat.client.reciverMessage = function (message, user, ChatTime) {
             var ChatName = $("#NameList" + user.UserID);
             if (ChatName.length == 0) {
                 $("#chatNameList").html("");
@@ -536,26 +518,29 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             }
             $("#chatbody" + user.UserID).append(`
                 <div class="d-flex justify-content-start">
-                    <span class="px-1 ml-3 mb-1 speech-bubble">${htmlEncode(message)}</span>
+                    <span class="px-1 ml-3  speech-bubble">${htmlEncode(message)}</span>
                 </div>
-            `)
-            $("#chattext").val("");
-            $("#chattext").focus();
-            scrollToButtom(user.UserID)
-            lastChatText(user.UserID)
-
-        }
-
-        chat.client.senderMessage = function (message, user) {
-            $("#chatbody"+user.UserID).append(`
-                <div class="d-flex justify-content-end">
-                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${htmlEncode(message)}</span>
-                </div>
+                <div class="chatTime mb-1">${ChatTime}</div>
             `)
             $("#chattext").val("");
             $("#chattext").focus();
             scrollToButtom(user.UserID);
             lastChatText(user.UserID);
+            checkChatroom();
+
+        }
+
+        chat.client.senderMessage = function (message, user, ChatTime) {
+            $("#chatbody"+user.UserID).append(`
+                <div class="d-flex justify-content-end">
+                    <span class="px-1 mr-3  speech-bubble-right">${htmlEncode(message)}</span>
+                </div>
+                <div class="chatTime mb-1" style="text-align:right;">${ChatTime}</div>
+            `)
+            $("#chattext").val("");
+            $("#chattext").focus();
+            scrollToButtom(user.UserID);
+            lastChatText(user.UserID,1);  //第二個參數單純拿來判斷是否是發送人
     }
 
 
@@ -598,13 +583,16 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
     }
 
     //刷新最後聊天紀錄
-    function lastChatText(UserID) {
+        function lastChatText(UserID, check) {
+            console.log(check);
+            if (check != 1)   //如果是從senderMessage進來，則不新增未讀紅點
+                $(`#chCount${UserID}`).addClass("chatCount");
         $.ajax({
             url: "@Url.Action("lastChatText", "backstage")",
             type: "GET",
             data: { UserID: UserID },
             success: function (chattext) {
-                $(`#lasttext${UserID}`).html(`${htmlEncode(chattext)}`);
+                $(`#lasttext${UserID}`).html(`${htmlEncode(chattext.ChatText)}`);
             }
         })
     }
@@ -620,9 +608,10 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                             $("#chatNameList").append(`
                                         <div id="NameList${record.TargetID}" class="btn NameList d-flex" onclick="getRecord(${record.TargetID}, '${record.TargetName}')">
                                             <div style="width:30px; height:30px"><img style="width:100%;height:100%;border-radius:50%" src="../Content/ProductPostImg/member/${record.TargetImg}"/></div>
-                                        <div><div>${record.TargetName}</div>
-                                            <div id="lasttext${record.TargetID}" class="lasttext"></div>
-                                        </div>
+                                            <div><div class="nameWeight">${record.TargetName}</div>
+                                                <div id="lasttext${record.TargetID}" class="lasttext d-flex"></div>
+                                            </div>
+                                            <div id="chCount${record.TargetID}"></div>
                                         </div>
                                     `)
                             $.ajax({
@@ -630,7 +619,20 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 type: "GET",
                                 data: { UserID: record.TargetID },
                                 success: function (chattext) {
-                                    $(`#lasttext${record.TargetID}`).html(`${htmlEncode(chattext)}`);
+                                    $(`#lasttext${record.TargetID}`).html(`${htmlEncode(chattext.ChatText)}`);
+                                }
+                            })
+
+                            $.ajax({
+                                url: "@Url.Action("lastChatText_Reciver", "backstage")",
+                                type: "GET",
+                                data: { UserID: record.TargetID },
+                                success: function (chattext) {
+                                    if (chattext.ChatStatus == false) {
+                                        $(`#chCount${record.TargetID}`).addClass("chatCount");
+                                    } else {
+                                        $(`#chCount${record.TargetID}`).removeClass("chatCount");
+                                    }
                                 }
                             })
                         })
@@ -644,6 +646,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         function getRecord(UserID, UserName) {
             var LoginName = getCookie("LoginName")
             var LoginID = getCookie("LoginID")
+            $(`#chCount${UserID}`).removeClass("chatCount");
             $.ajax({
                 url: "@Url.Action("getAllChatRecord_P", "backstage")",
                 data: { UserID: UserID },
@@ -660,20 +663,23 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                         if (record.SenderID == LoginID) {
                             $("#chatbody" + record.ReciverID).append(`
                                 <div class="d-flex justify-content-end">
-                                    <span class="px-1 mr-3 mb-1 speech-bubble-right">${htmlEncode(record.ChatText)}</span>
+                                    <span class="px-1 mr-3  speech-bubble-right">${htmlEncode(record.ChatText)}</span>
                                 </div>
+                                <div class="chatTime mb-1" style="text-align:right">${record.ChatTime}</div>
                             `);
                         } else {
                             $("#chatbody" + record.SenderID).append(`
                             <div class="d-flex justify-content-start">
-                                <span class="px-1 ml-3 mb-1 speech-bubble">${htmlEncode(record.ChatText)}</span>
+                                <span class="px-1 ml-3  speech-bubble">${htmlEncode(record.ChatText)}</span>
                             </div>
+                            <div class="chatTime mb-1">${record.ChatTime}</div>
                         `);
                         }
                     })
                     scrollToButtom(UserID);
                     $("#chattext").focus();
                     chat.server.checkConnectedMem(UserID);
+                    checkChatroom();
                 }
             })
         }
