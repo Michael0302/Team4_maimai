@@ -273,6 +273,7 @@
             }
         })
         })
+<<<<<<< HEAD
 
         function okok() {
             Swal.fire(
@@ -281,6 +282,33 @@
                 "success" //圖示(可省略) success/info/warning/error/question
             );
         }
+=======
+        function previewFile() {
+            //var photo = $(eler).val();
+            const preview = document.querySelector('#Productimg');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                // convert image file to base64 string
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        } //  doUpload end
+
+
+        function alertTest1() {
+            Swal.fire(
+                "修改成功", //標題
+                "盡情使用買買吧!", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
+            );
+        }
+
+>>>>>>> parent of 24a74fe (Merge pull request #83 from Michael0302/mark_ver3)
         function editMember() {
             //if ($("#ptr2").val() == "" ) {
             //    var oldPtr = $("#ptr").val();
@@ -308,7 +336,11 @@
                 contentType: false,
                 success: function (account) {
                     //$("#userPassWord").val("")
+<<<<<<< HEAD
                     okok()
+=======
+                    alertTest1()
+>>>>>>> parent of 24a74fe (Merge pull request #83 from Michael0302/mark_ver3)
                 }
                 })
 
