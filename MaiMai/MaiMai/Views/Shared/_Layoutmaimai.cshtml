@@ -382,9 +382,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 if (nowNotificationID != null) {
                     if (category == "系統") {
                         $('#notify').prepend(`<div class=" noti py-2 noti_border notiHover  " data-toggle="modal" data-target="#sysInfo" onclick="checkRead(${nowNotificationID}, '${message}',1)">
-                        <a class="btn-sm">
-                        <strong>[${category}]</strong>:   ${message} </a>
-                        </div>`);
+                            <a class="btn-sm">
+                            <strong>[${category}]</strong>:   ${message} </a>
+                            </div>`);
                     } else if (category == "違規") {
                         $('#notify').prepend(`<div class="noti py-2 noti_border notiHover" onclick="checkRead(${nowNotificationID}, '${message}',1)"><a class="btn-sm" href="../PersonalMarket/Personal_Index"><strong>[${category}]</strong>:   ${message} </a></div>`);
                     } else if (category == "訂單") {
