@@ -117,7 +117,7 @@ namespace MaiMai.Controllers
 
 
 
-            SqlConnection conn = new SqlConnection("data source=maimai.database.windows.net;initial catalog=maimai2;persist security info=True;user id=team4;password=MaiMai123;");
+            SqlConnection conn = new SqlConnection("data source=maimai2.database.windows.net;initial catalog=maimai;persist security info=True;user id=team4;password=MaiMai123;");
             conn.Open();
 
             SqlCommand bb = new SqlCommand("Select * From Member Where userAccount='" + account + "'", conn);

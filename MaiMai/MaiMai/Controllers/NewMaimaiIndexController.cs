@@ -22,6 +22,7 @@ namespace MaiMai.Controllers
             var SearchAll =
                 db.ProductPost.Where(m => m.productName.Contains(text) || m.productDescription.Contains(text)).Select(m => new
                 {
+                    
                     name = m.productName,
                     prd = m.productDescription
                 }).ToList();
