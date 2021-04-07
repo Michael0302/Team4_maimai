@@ -49,6 +49,12 @@ label {
     margin-top: 130px;
 }
 /*=================================================*/
+.contantsell {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    background-color:#E1DBE6;
+}
 .priceColor {
     color: #5B5B5B;
     margin-right:50px;
