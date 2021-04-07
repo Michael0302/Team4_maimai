@@ -99,6 +99,7 @@
 
                     </div>
                     <div class="modal-footer">
+                        <span class="btn"onclick="demo()">demo</span>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequiredPost()">新增貼文</button>
                     </div>
@@ -311,7 +312,14 @@
     }
 
 
+    function demo() {
 
+        $("#postName").val("徵求國三英文家教");
+        $("#postDescription").val("國三英文家教，一周兩堂課會考模考演習");
+        $("#address").val("中和路499號");
+        $("#requiredQTY").val("1");
+        $("#estimatePrice").val("550");
+    }
 
 
     function tagonclickpage(TagID) {
