@@ -298,33 +298,40 @@ namespace MaiMai.Controllers
         public ActionResult getComment(int OrderDetailID)
             //userID買家-評論者  commentorUserID賣家-被評論者
         {
+            var loginID= Convert.ToInt32(Request.Cookies["LoginID"].Value);
             var SellerID = db.OrderDetail.Find(OrderDetailID).SellerID;
-            var img = db.Member.Find(SellerID).profileImg;
+            var buyerID = db.OrderDetail.Find(OrderDetailID).Order.buyerUserID;
+            var sellerImg= db.Member.Find(SellerID).profileImg;
+            var buyerImg=db.Member.Find(buyerID).profileImg;
 
-            //var sellerID = db.Comment.Find(OrderDetailID).CommentorUserID;
-            //PK才可以用find,  OrderDetailID=23, OrderID=3, SellerID=7
-            //OrderDetailID=25, OrderID=, SellerID=21   no__comment
+            var commentedPSNid=(loginID == buyerID) ? SellerID : buyerID;
+            var commentDetail = db.Comment.Where(x =>x.CommentorUserID== commentedPSNid).Select(x=>new { starRate=x.starRate}); 
+            //選擇多筆訂單紀錄
 
-            var commentDetail = db.Comment.Where(x => x.CommentorUserID == SellerID);
+
+
             if (commentDetail.Count() == 0)
             {
-                var CNT = 0;
+            var starTotal = 0;
+            var CNT = 0;
+
                 var result =new
                 {
-                    starTotal = 0,
-                    img = img,
-                    CNT,
+                    starTotal ,
+                    sellerImg ,
+                    buyerImg,
                     SellerID,
+                    buyerID,
+                    CNT,
                 };
                 return Json(result, JsonRequestBehavior.AllowGet);
 
             }
             else
             {
-             var starTotal = 0;
-             var CNT = 0;
-
-            foreach(var item in commentDetail)
+                var starTotal = 0;  //不可移到外面
+                var CNT = 0;
+                foreach (var item in commentDetail)
             {
                     starTotal += (int)item.starRate;
                     CNT += 1;   
@@ -332,9 +339,11 @@ namespace MaiMai.Controllers
                 var result = new
                 {
                     starTotal = starTotal,
-                    img = img,
-                    CNT,
+                    sellerImg,
+                    buyerImg,
                     SellerID,
+                    buyerID,
+                    CNT,
                 };
                 return Json(result, JsonRequestBehavior.AllowGet);
 
@@ -349,15 +358,21 @@ namespace MaiMai.Controllers
             var star = Convert.ToInt32(starRate);
             var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
             var od = odtail.GetbyID(orderID);
-            var CommentorUserID=db.OrderDetail.Find(orderID).SellerID;
+
+            //var orderDetailID=
+            var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
+            var SellerID = db.OrderDetail.Find(od).SellerID;
+            var buyerID = db.Order.Find(OrderID).buyerUserID;
+            var commentedPSNid = (loginID == SellerID) ? SellerID : buyerID;
 
             Comment cmt = new Comment() {
                 starRate= star,
                 commentDescription=description,
                 UserID=UserID,
                 OrderdetalID = orderID,
-                CommentorUserID= CommentorUserID,
+                CommentorUserID= commentedPSNid,
             };
+
             if (od.SellerID == UserID)
             {
                 od.sellerStatus = 3;
