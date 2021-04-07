@@ -437,6 +437,7 @@ div.tag > a.btn {
     border-radius: .4em;
     margin-right: 60px;
     color: #3C3C3C;
+    font-size: 14px;
 }
 
     .speech-bubble:after {
