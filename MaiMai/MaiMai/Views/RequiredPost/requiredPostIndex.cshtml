@@ -1,6 +1,6 @@
 ﻿
 @{ ViewBag.Title = "requiredPostIndex"; }
-<head>
+000000<head>
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
     <script src="~/Content/resource_nico/tw-city-selector.min.js"></script>
@@ -239,7 +239,7 @@
                             <div class="collapse w-100" id="collapseExample${i}">
                                 <div class="card card-body w-100 shadow" >
                                     <span class="btn btn-outline-dark" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter" style="width:60px">檢舉</span>
-
+                                    <span class="btn" onclick="demoS(${i})">demo-S</sapn><span class="btn" onclick="demoT(${i})">demo-T</span>
                            
                                         <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
                                             <div class="displayImg Productimg${i}">
@@ -319,6 +319,26 @@
         $("#address").val("中和路499號");
         $("#requiredQTY").val("1");
         $("#estimatePrice").val("550");
+    }
+
+    function demoS(index) {
+        console.log(index);
+        $(`#productName${index}`).val("薩諾斯全新無拆封");
+     
+        $(`#productDescription${index}`).val("全新 未拆，HOTTOYS 預購版");
+        $(`#price${index}`).val("11000");
+        $(`#inStoreQTY${index}`).val("1");
+
+
+    }
+    function demoT(index) {
+        console.log(index);
+        $(`#productName${index}`).val("清大大研究所在讀中找打工");
+        $(`#productDescription${index}`).val("多益成績955，加拿大交換一年經驗，目前就讀清大財金系，歡迎跟我聯絡");
+        $(`#price${index}`).val("600");
+        $(`#inStoreQTY${index}`).val("1");
+
+
     }
 
 
