@@ -532,17 +532,16 @@
                 }
                 else
                 {
-                    //var x = ;
                     starAVG = Math.round(starTotal / CNT);
                 }
                 console.log('result ',result);
-                console.log("img",`${result.img}`);
+                console.log("img",`${result.sellerImg}`);
                 console.log("starTotal", `${result.starTotal}`);
                 console.log("starAVG得分",`${starAVG}`);
 
                 $("#sellerID").html(`賣家編號: ${SellerID}`);
                 $("#commentCNT").text(`已經有${result.CNT}人評分`);
-                $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.img}`);
+                $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.sellerImg}`);
                 $("#progress-bar").css("width", `${starAVG * 20}%`).prop("aria-valuenow", `${starAVG}`).text(`${starAVG }分`);
             },
         })
