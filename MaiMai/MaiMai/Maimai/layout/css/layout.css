@@ -24,11 +24,12 @@
 .abc1 {
     font-weight: 600;
 }
-/*========================================*/
+
 .HeardLogo {
-width:48px;height:48px;
-margin:0;
-padding:0;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+    padding: 0;
 }
     .HeardLogo:hover {
         background-color: #D0D0D0;
