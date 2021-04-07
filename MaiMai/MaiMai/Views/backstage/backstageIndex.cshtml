@@ -36,14 +36,19 @@
                     <a class="d-block btn" onclick="getDelProducts()">下架商品</a>
                 </div>
 
-                <a class="btn btncss mb-3 btn-block " data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
-                <div class="collapse" id="info_P" data-parent="#backstage"></div>
+                <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#report_P" role="button" onclick="RequirePost()">徵求文列表</a>
+                <div class="collapse" id="report_P" data-parent="#backstage"></div>
+
+                <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#report_P" role="button" onclick="reportList()">檢舉列表</a>
+                <div class="collapse" id="report_P" data-parent="#backstage"></div>
 
                 <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
                 <div class="collapse" id="tag_P" data-parent="#backstage"></div>
 
-                <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#report_P" role="button" onclick="reportList()">檢舉列表</a>
-                <div class="collapse" id="report_P" data-parent="#backstage"></div>
+                <a class="btn btncss mb-3 btn-block " data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
+                <div class="collapse" id="info_P" data-parent="#backstage"></div>
+
+
 
 
             </div>
@@ -109,6 +114,7 @@
 
                         </div>
                         <div class="modal-footer">
+                            <a id="cancelProd"></a>
                             <button type="button" class="btn btn_close" data-dismiss="modal">關閉</button>
                         </div>
 
@@ -132,7 +138,28 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn_close" data-dismiss="modal">關閉</button>
                             <a id="report-footer"></a>
+                            <a id="reportToProductPost"></a>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="requirePost" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="requirePosttitle">徵求文明細</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div id="requirePostbody">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn_close" data-dismiss="modal">關閉</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -741,6 +768,9 @@
                                                     <label>建立時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/></div></label>
                                                 </div>
                                                 `)
+                    if (oneProduct.status == 1) {
+                        $("#cancelProd").html(`<button type='button' class='btn btn_del' onclick="cancelProduct(${oneProduct.ProductPostID})">下架此商品</button>`);
+                    }
                 })
             }
         })
@@ -905,7 +935,7 @@
                                                     <label>被檢舉人<input class='form-control' type='text' value="[${reportdetail.repotedUserID}]${reportdetail.repotedUserName}" readonly/>
                                                     <label>檢舉類別<input class='form-control' type='text' value="${reportdetail.ReportDetailTag}" readonly/>
                                                     <label>檢舉內容<input class='form-control' type='text' value="${reportdetail.reportDescription}" readonly/>
-                                                    <label>來源<input class='form-control' type='text' value="${source}" readonly/>
+                                                    <label>來源<input id="source" class='form-control' type='text' value="${source}" readonly/>
                                                     <label>來源編號<input class='form-control' type='text' value="${reportdetail.ProductOrRequireID}" readonly/>
                                                     <label>檢舉時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/>
                                                     <label>處理狀態<input class='form-control reportStatus' type='text' value="${reportStatus}" readonly/>
@@ -913,12 +943,16 @@
                                                 `)
                     $(".reportStatus").each(function () {
                         if ($(this).val() == "未處理") {
-                            $("#report-footer").html(`<button type="button" class="btn btn_save" data-dismiss="modal" onclick="processReport(${reportdetail.ReportID})">已處理</button>`)
+                            $("#report-footer").html(`<button type="button" class="btn btn_save" data-dismiss="modal" onclick="getProductPostFromAll(${reportdetail.ReportID})">已處理</button>`)
                         }
                         else {
                             $("#report-footer").html("");
                         }
                     })
+
+                    if (reportdetail.reportStatus == 0 && reportdetail.ProductOrRequire == 1) {
+                        $("#reportToProductPost").html(`<button type="button" class="btn btncss_inside" data-toggle='modal'  data-target='#editProduct' data-dismiss="modal" onclick="getProductPostFromAll(${reportdetail.ProductOrRequireID})">查看貼文</button>`)
+                    }
 
                 });
             }
@@ -953,6 +987,89 @@
             }
             return "";
 
+        }
+
+    //徵求台列表
+        function RequirePost() {
+            $.ajax({
+                url: "@Url.Action("getRequirePostList_P", "backstage")",
+                type: "GET",
+                success: function (report) {
+                    $("#show").html(`
+                                    <div class= 'd-flex justify-content-center' id = 'search' ></div >
+                                        <table class='table table-hover'>
+                                            <thead class='table-dark'>
+                                                <tr id='showTh'>
+                                                    <th>徵求文編號</th>
+                                                    <th>徵求人</th>
+                                                    <th>標題</th>
+                                                    <th>類別</th>
+                                                    <th>預算</th>
+                                                </tr>
+                                            </thead>
+                                        <tbody id='showList'></tbody>
+                                    </table>`);
+
+                    $(report).each(function (index, item) {
+
+                        $("#showList").append(`
+                                                                <tr data-toggle='modal'  data-target='#requirePost' onclick="getRequirePost(${item.RequiredPostID})">
+                                                                    <td>${item.RequiredPostID}</td>
+                                                                    <td>[${item.UserID}]${item.UserName}</td>
+                                                                    <td>[${item.postName}]${item.postName}</td>
+                                                                    <td>${item.TagName}</td>
+                                                                    <td>${item.estimatePrice}</td>
+                                                                </tr>`);
+
+                    });
+                }
+            })
+        }
+
+    //徵求台modal
+        function getRequirePost(RequiredPostID) {
+            $.ajax({
+                url: "@Url.Action("getRequirePost_P", "backstage")",
+                type: "GET",
+                data: { RequiredPostID: RequiredPostID},
+                success: function (product) {
+                    $(product).each(function (index, product) {
+                        var Milliseconds = parseInt(product.postTime.replace(/\D/igm, ""));
+                        var year = new Date(Milliseconds).getFullYear();
+                        var month = new Date(Milliseconds).getMonth() + 1;
+                        var date = new Date(Milliseconds).getDate();
+                        var hour = new Date(Milliseconds).getHours();
+                        var min = new Date(Milliseconds).getMinutes();
+                        var sec = new Date(Milliseconds).getSeconds();
+                        $("#requirePostbody").html(`
+                                                <div class='d-flex justify-content-center'>
+                                                    <label>徵求商品照片
+                                                        <div style="width:200px; height:200px; background-image:url(../Content/ProductPostImg/${product.postImg}); background-size:cover"></div>
+                                                    </label>
+                                                </div>
+                                                <div class='d-flex justify-content-between mx-5'>
+                                                    <label>徵求文編號<input class='form-control' type='text' value="${product.RequiredPostID}" readonly /></label>
+                                                    <label>徵求標題<input class='form-control' type='text' value="${product.postName}" readonly/></label>
+                                                    <label>描述<input class='form-control' type='text' value="${product.postDescription}" readonly/></label>
+                                                </div>
+                                                <div class='d-flex justify-content-between mx-5'>
+                                                    <label>徵求人<input class='form-control' type='text' value="${product.UserName}" readonly/></label>
+                                                    <label>數量<input class='form-control' type='text' value="${product.requiredQTY}" readonly/></label>
+                                                    <label>預算<input class='form-control' type='text' value="${product.estimatePrice}" readonly/></label>
+                                                </div>
+                                                <div class='d-flex justify-content-between mx-5'>
+                                                    <label>縣市<input class='form-control' type='text' value="${product.county}" readonly/></label>
+                                                    <label>區域<input class='form-control' type='text' value="${product.district}" readonly/></label>
+                                                    <label>地址<input class='form-control' type='text' value="${product.address}" readonly/></label>
+                                                </div>
+                                                <div class='d-flex justify-content-between mx-5'>
+                                                    <label>類別<input class='form-control' type='text' value="${product.TagName}" readonly/></label>
+                                                    <label>建立時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/></div></label>
+                                                </div>
+                                                            `)
+                    })
+                    }
+            })
         }
 
     </script>
