@@ -68,8 +68,9 @@ namespace SignalRMvc.chatHubs
 
         public void Send(int sender,  string message)
         {
+            var nowNotificationID = db.Notification.Max(m => m.NotificationID) + 1;
             // 呼叫所有客戶端的sendMessage方法
-            Clients.All.addMessage(message);
+            Clients.All.addMessage(message, nowNotificationID,"系統");
 
             Notification noti = new Notification() {
                 SenderID = sender,
