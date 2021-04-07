@@ -143,6 +143,7 @@
                     <tbody id="receiptbody">
                     </tbody>
                 </table>
+                    <div id="opayform"></div>
 
             </div>
 
@@ -175,8 +176,8 @@
             </div>
             <div id="modal-body" class="modal-body" style="margin-bottom:30px">
                 <div id="sellerID"></div>
-                <div style="height:290px ;text-align:center;"  class="mb-5 mt-5">
-                    <img src=""  style="width:100%; height:auto"/>
+                <div style="text-align:center;"  class="mb-5 mt-5">
+                    <img src=""  style="width:300px; height:auto"/>
 
                 </div>
                 <h4>請問您對這次交易的滿意度為 :</h4>
@@ -461,19 +462,20 @@
     function checkout() {
         var LoginId = getCookie("LoginID")*1;
         let id = $('#showOrderTitle').attr("name");
+        opay(id);
 
         $.ajax({
             url: "/OrderManager/checkout",
             type: "GET",
             data: { 'orderid': id },
             success: function (response) {
-                console.log(response);                
-                $(response).each(function(index,res) {
+                console.log(response);
+
+                $(response).each(function (index, res) {
                     chat.server.sendToOne_OrderStatus(LoginId, res.SellerID, 1);
                 })
-                swal('成功', "繳費成功", 'success');
-
-                window.location.reload("/OrderManager/OrderIndex2");
+                //swal('成功', "繳費成功", 'success');
+                //window.location.reload("/OrderManager/OrderIndex2");
 
             },
             error: function (response) {
@@ -564,6 +566,121 @@
             }
 
     //comment
+
+    function opay(OrderId) {
+                    $.ajax({
+            url: "@Url.Action("creditCardcheckOut", "MyOrder")",
+                        data: { OrderId: OrderId},
+            type: "GET",
+                    success: function (result) {
+                        var MerchantTradeNo = 0;
+                        var prodName ;
+                        var tradeDescription;
+                        var Milliseconds, year, month, day, hour, min, sec;
+                        let totalDollar;
+                        var CheckMacValue;
+                        var is4;
+                        var format_time;
+
+                        $.each(result, function (index, item) {
+                            prodName = item.ItemName;
+                            tradeDescription =item.tradeDescription;
+                            MerchantTradeNo = item.MerchantTradeNo;
+                            totalDollar = item.totalAmount;
+                            CheckMacValue = item.CheckMacValue;
+                            is4 = item.is4;
+                            format_time = item.MerchantTradeDate;
+                        }),
+                            console.log("prodName", prodName);
+                            console.log("tradeDescription", tradeDescription);
+                            console.log("MerchantTradeNo", MerchantTradeNo);
+                            console.log("CheckMacValue", CheckMacValue);
+
+                        const date = new Date();
+                        function formatDate(date, format) {
+                            const map = {
+                                ss: (date.getSeconds()< 10 ? '0' : '') + date.getSeconds(),
+                                MM: (date.getMinutes() + 1 < 10 ? '0' : '') + date.getMinutes(),
+                                HH: (date.getHours() < 10 ? '0' : '') + date.getHours(),
+                                mm: (date.getMonth()< 10 ? '0' : '') + (date.getMonth() + 1),
+                                dd: (date.getDate() < 10 ? '0' : '') + date.getDate(),
+                                yyyy: date.getFullYear()
+                            }
+                            return format.replace(/ss|MM|HH|mm|dd|yyyy/gi, matched => map[matched])//取代輸入格式變數為自訂格式
+                        }
+                        totalDollar = parseInt(totalDollar);
+                        console.log("後端DateNow", format_time);
+                        console.log("前端DateNow", formatDate(date,'yyyy/mm/dd HH:MM:ss'));
+                        console.log("type totalamount", typeof(totalDollar));
+
+
+                        //信用卡4311-9522-2222-2222
+                        //安全碼222    後台測試帳密StageTest / test1234
+
+
+
+                        $("#opayform" ).append(`
+<form id="formCreditCard" method="post" accept-charset="UTF-8"
+ action="https://payment-stage.opay.tw/Cashier/AioCheckOut/V5" style="display:none">
+
+MerchantID 商店代號:
+<input type="text" name="MerchantID" value="2000132" /><br />
+
+MerchantTradeNo 商店交易編號:
+<input type="text" name="MerchantTradeNo" value="${MerchantTradeNo}" /><br />
+
+MerchantTradeDate 商店交易時間:
+<input type="text" name="MerchantTradeDate" value="${format_time}" /><br />
+
+PaymentType 交易類型:
+<input type="text" name="PaymentType" value="aio" /><br />
+
+TotalAmount 交易金額:
+<input type="text" name="TotalAmount" value="${totalDollar}" /><br />
+
+TradeDesc 交易描述:
+<input type="text" name="TradeDesc" value="${tradeDescription}" /><br />
+
+ItemName 商品名稱:
+<input type="text" name="ItemName" value="${prodName}" /><br />
+
+ReturnURL 付款完成通知回傳網址:
+<input type="text" name="ReturnURL" value="https://localhost:44340/" /><br />
+
+ChoosePayment 預設付款方式:
+<input type="text" name="ChoosePayment" value="Credit" /><br />
+
+會員商店代碼:
+<input type="text" name="StoreID" value="" /><br />
+
+ClientBackURL Client端返回廠商網址:
+<input type="text" name="ClientBackURL" value="https://localhost:44340/" /><br />
+
+CreditInstallment 刷卡分期期數:
+<input type="text" name="CreditInstallment" value="" /><br />
+
+InstallmentAmount 使用刷卡分期的付款金額:
+<input type="text" name="InstallmentAmount" value="" /><br />
+
+Redeem 信用卡是否使用紅利折抵:
+<input type="text" name="Redeem" value="" /><br />
+
+CheckMacValue 簽章類型:
+<input type="text" name="EncryptType" value="1" /><br />
+
+CheckMacValue 檢查碼:
+<input type="text" name="CheckMacValue" value="${CheckMacValue}" /><br />
+
+<input type="submit" value="送出訂單" />
+
+</form>
+                `)
+$("#formCreditCard").submit();
+        },
+        //error:
+        })
+
+    }
 
 
 
