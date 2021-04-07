@@ -920,6 +920,10 @@
                         }
                     })
 
+                    if (reportdetail.reportStatus == 0 && reportdetail.ProductOrRequire == 0) {    //商品貼文才能下架
+                        $("#reportToProductPost").html(`<button type="button" class="btn btncss_inside" data-toggle='modal'  data-target='#editProduct' data-dismiss="modal" onclick="getProductPostFromAll(${reportdetail.ProductOrRequireID})">查看貼文</button>`)
+                    }
+
                 });
             }
         })

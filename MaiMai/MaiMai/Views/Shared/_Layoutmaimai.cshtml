@@ -13,13 +13,14 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <link href="~/Maimai/layout/css/layout.css" rel="stylesheet" />
-    <link href="~/Maimai/layout/css/style_1.css" rel="stylesheet" />
-    <link href="~/Content/Cart_css/Cart.css" rel="stylesheet" />
-    <link href="~/Content/Backstage_css/backstage.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @*<link href="~/Maimai/layout/css/layout.css" rel="stylesheet" />
+        <link href="~/Maimai/layout/css/style_1.css" rel="stylesheet" />
+        <link href="~/Content/Cart_css/Cart.css" rel="stylesheet" />
+        <link href="~/Content/Backstage_css/backstage.css" rel="stylesheet" />*@
 
     @*Pagination*@
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />*@
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
     <style>
@@ -72,7 +73,7 @@
             @*Search*@
             <div class=" dropdown col-8  my-3">
                 <div class="d-flex " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                    <img class="ml-1" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick" />
+                    <img class="pl-2 dropdown-search-img" src="~/Maimai/images/svg/135-search.svg" id="imgInputCilick" onclick="imgInputCilick" />
                     <input Placeholder="Search " class="dropdown-search" id="inputsearch" />
                 </div>
 
@@ -87,7 +88,7 @@
 
             @*layout右邊*@
             <div id="mainListDiv" class="main_list" @*style="position: absolute; right:20% ;"*@>
-                <div class="navlinks d-flex mt-3">
+                <div class="navlinks d-flex mt-2">
                     <div class="svglink">
                         <a href="../../googleMap/Index" style="text-decoration:none;">
                             @*About*@<img src="~/Maimai/images/svg/073-location2.svg">
@@ -283,8 +284,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             </div>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    @*<script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>*@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
