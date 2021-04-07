@@ -99,6 +99,7 @@
 
                     </div>
                     <div class="modal-footer">
+                        <span class="btn" onclick="demo()">demo</span>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="sendRequiredPost()">新增貼文</button>
                     </div>
@@ -238,7 +239,7 @@
                             <div class="collapse w-100" id="collapseExample${i}">
                                 <div class="card card-body w-100 shadow" >
                                     <span class="btn btn-outline-dark" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter" style="width:60px">檢舉</span>
-
+                                    <span class="btn" onclick="demoS(${i})">demo-S</span><span class="btn" onclick="demoT(${i})">demo-T</span>
                            
                                         <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
                                             <div class="displayImg Productimg${i}">
@@ -252,7 +253,7 @@
 
                                             </div>
                                             <div class="displayInput w-50">
-                                                <h6>產品名稱:</h6><input class="ml-2 form-control" type="text" name="productName" id="productName${i} ">
+                                                <h6>產品名稱:</h6><input class="ml-2 form-control" type="text" name="productName" id="productName${i}">
                                                 <h6>產品描述:</h6>
                                                 <textarea id="productDescription${i}" name="productDescription" placeholder="使用程度、幾成新"
                                                           class="form-control ml-2" rows="3" onclick="tag()"></textarea>
@@ -412,7 +413,7 @@
                                                 </div>
 
 
-                                                <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="price${i}">
+                                                <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="price_comment${i}">
                                                 <h6>數量:</h6><input class="ml-2 form-control" type="text" name="inStoreQTY" id="inStoreQTY${i}">
                                                 <h6>
                                                     標籤:
@@ -809,6 +810,35 @@ ${item.reason}</label>
 
 
     //========== report script=====================
+
+    function demo() {
+
+        $("#postName").val("徵求國三英文家教");
+        $("#postDescription").val("國三英文家教，一周兩堂課會考模考演習");
+        $("#address").val("中和路499號");
+        $("#requiredQTY").val("1");
+        $("#estimatePrice").val("550");
+    }
+
+    function demoS(index) {
+        console.log(index);
+        $(`#productName${index}`).val("薩諾斯全新無拆封");
+
+        $(`#productDescription${index}`).val("全新 未拆，HOTTOYS 預購版");
+        $(`#price_comment${index}`).val("11000");
+        $(`#inStoreQTY${index}`).val("1");
+
+
+    }
+    function demoT(index) {
+        console.log(index);
+        $(`#productName${index}`).val("清大大研究所在讀中找打工");
+        $(`#productDescription${index}`).val("多益成績955，加拿大交換一年經驗，目前就讀清大財金系，歡迎跟我聯絡");
+        $(`#price_comment${index}`).val("600");
+        $(`#inStoreQTY${index}`).val("1");
+
+
+    }
 
 
 </script>
