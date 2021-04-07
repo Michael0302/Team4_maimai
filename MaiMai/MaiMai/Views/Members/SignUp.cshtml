@@ -38,10 +38,6 @@
         textarea:focus {
             outline: none
         }
-        button:disabled {
-            
-            cursor: not-allowed;
-        }
        
     </style>
 </head>
@@ -73,12 +69,12 @@
                             <div>
                                 <label class="b" for="userAccount">用戶帳號</label>
                                 <input onkeyup="value=value.replace(/[\W]/g,'') "
-                                       onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount" onblur="checkName()" placeholder="請輸入7位以上英數混和字元">
+                                       onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" class="w-100" required="required" autofocus="autofocus" type="text" name="userAccount" id="userAccount" onblur="checkName()">
 
                                 <span id="idsp"> </span>
                                 <span id="ccc"></span>
                                 <label class="b" for="userPassWord">密碼</label>
-                                <input placeholder="請輸入6位以上英數混和且包含特殊符號字元" class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord" onblur="chkPassword()" @*onblur="checkpas1()"*@>
+                                <input class="w-100" required="required" autofocus="autofocus" type="password" name="userPassWord" id="userPassWord" @*onblur="chkPassword()"*@ onblur="checkpas1()">
 
                                 <span id="idsp2"> </span>
                                 <label class="b" for="userPassWordCheck">確認密碼</label>
@@ -94,15 +90,15 @@
                                 <label class="b" for="phoneNumber">手機號碼</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="tel" name="phoneNumber" id="phoneNumber">
 
-                                <label class="b" for="lastName">姓氏</label>
-                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="lastName" id="lastName">
-                                <span id="idsplastName"> </span>
 
 
                                 <label class="b" for="firstName">名字</label>
                                 <input class="w-100" required="required" autofocus="autofocus" type="text" name="firstName" id="firstName">
                                 <span id="idspname"> </span>
 
+                                <label class="b" for="lastName">姓氏</label>
+                                <input class="w-100" required="required" autofocus="autofocus" type="text" name="lastName" id="lastName">
+                                <span id="idsplastName"> </span>
 
 
                                 <label class="b" for="birthday">生日</label>
@@ -112,9 +108,8 @@
                                 <label class="b" for="profileImg">個人頭像</label>
                                 @*<input class="w-100" required="required" autofocus="autofocus" type="file" name="profileImg" id="profileImg">*@
                                 <div class="displayImg">
-                                    <div class="photo"><img id="Productimg" class="exImg2"></div>
-                                    <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;"  >
-                                    <span id="picc"></span>
+                                    <div class="photo"><img id="Productimg"class="exImg2"  ></div>
+                                    <input type="file" onchange="previewFile()" name="upphoto" id="productImg" style="display: block;">
                                 </div>
                                 <label class="b" for="selfDescription">個人簡介</label>
                                 <textarea class="w-100" required="required" autofocus="autofocus" type="text" name="selfDescription" id="selfDescription"> </textarea>
@@ -123,7 +118,7 @@
                             </div>
                             <div class="mt3">
                                 @*<button type="submit" id="p1" class="button b green" onclick="myFunction()">註冊</button>*@
-                                <button type="button" id="p1" class="button b green" onclick="gogosignup()" >註冊</button>
+                                <button type="button" id="p1" class="button b green" onclick="gogosignup()">註冊</button>
                                 @*<button type="button" id="p2" onclick="checkAccount ()" class="button b green">註冊1</button>*@
 
 
@@ -173,10 +168,7 @@
 
 
 
-    <script>    
-      
-         
-        //預覽圖片方法
+    <script>        
         function previewFile() {
             //var photo = $(eler).val();
             const preview = document.querySelector('#Productimg');
@@ -190,27 +182,12 @@
 
             if (file) {
                 reader.readAsDataURL(file);
-                $('#picc').html("");
             }
         } //  doUpload end
-        //會員註冊方法(包含圖片上傳)
-        function gogosignup() {
-            if (checkName1() == false || checkName2() == false || checkName() == false || checkpas() == false || chkPassword() == false || $('#productImg').val()=="") {
-                alertTest()
-                console.log($('#productImg').val())
-                $('#picc').css("color", "red");
-                $('#picc').html("請上傳一張照片");
-                return false;
-            }
-          
-            console.log(checkName1())
-            console.log(checkName2())
-            console.log(checkName())
-            console.log(checkpas())
-            console.log(chkPassword())
-            console.log($('#productImg').val())
 
-        
+        function gogosignup() {
+
+
             var form = document.querySelector(".formFrame")
             console.log(form)
             var data = new FormData(form);
@@ -235,9 +212,10 @@
 
                 }
             })
-        } 
+        }//end  of submit product
 
-        //名字驗證方法
+
+
         document.getElementById("firstName").onblur = checkName1;
         function checkName1() {
 
@@ -245,10 +223,8 @@
             let theNameLen = theName.length;
             let sp = document.getElementById("idspname");
 
-            if (theName == "") {
+            if (theName == "")
                 sp.innerHTML = "<span style='color:red'>不可空白</span>";
-                return false;
-            }
 
             else if (theNameLen > 1) {
 
@@ -256,21 +232,19 @@
                     let NameChr = theName.charAt(i);
                     if (NameChr < "\u4E00" || NameChr > "\u9FFF") {
                         sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
-                        return false;
+
                     }
-                    else {
-                        sp.innerHTML = " <span style='color:green'>正確</span>";
-                        return true;
-                    }
+                    else sp.innerHTML = " <span style='color:green'>正確</span>";
                 }
             }
-            else {
-                sp.innerHTML = "<span style='color:red'>至少輸入兩個字</span>";
-                return false;
-            }
+            else sp.innerHTML = "<span style='color:red'>至少輸入兩個字</span>";
         }
 
-        //姓氏驗證方法
+
+
+
+
+
         document.getElementById("lastName").onblur = checkName2;
         function checkName2() {
 
@@ -278,11 +252,8 @@
             let theNameLen = theName.length;
             let sp = document.getElementById("idsplastName");
 
-            if (theName == "") {
+            if (theName == "")
                 sp.innerHTML = "<span style='color:red'>不可空白</span>";
-                return false;
-            }
-
 
             else if (theNameLen > 0) {
 
@@ -290,73 +261,78 @@
                     let NameChr = theName.charAt(i);
                     if (NameChr < "\u4E00" || NameChr > "\u9FFF") {
                         sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
-                        return false;
+
                     }
-                    else {
-                        sp.innerHTML = "<span style='color:green'> 正確</span>";
-                        return true;
-                    }
+                    else sp.innerHTML = "<span style='color:green'> 正確</span>";
                 }
             }
-            else {
-                sp.innerHTML = "<span style='color:red'>至少輸入一個字</span>";
-                return false;
-            }
+            else sp.innerHTML = "<span style='color:red'>至少輸入一個字</span>";
         }
 
-        //二次密碼驗證方法
+
+
+
+
+
+
+
         $(".tip").hide();
         function checkpas1() {//當第一個密碼框失去焦點時，觸發checkpas1事件
-            //chkPassword()
             var pas1 = document.getElementById("userPassWord").value;
             var pas2 = document.getElementById("userPassWordCheck").value;//獲取兩個密碼框的值
-            if (pas1 != pas2 && pas2 != "") {
-                //此事件當兩個密碼不相等且第二個密碼是空的時候會顯示錯誤資訊
+            if (pas1 != pas2 && pas2 != "")//此事件當兩個密碼不相等且第二個密碼是空的時候會顯示錯誤資訊
                 $(".tip").show();
-                return false;
-            }
-            else {
+            else
                 $(".tip").hide();//若兩次輸入的密碼相等且都不為空時，不顯示錯誤資訊
-                return true;
-            }
-                
 
-            
+            chkPassword()
 
         }
 
-           //二次密碼驗證方法
+
         function checkpas() {//當第一個密碼框失去焦點時，觸發checkpas2件
             var pas1 = document.getElementById("userPassWord").value;
             var pas2 = document.getElementById("userPassWordCheck").value;//獲取兩個密碼框的值
-            if (pas1 != pas2)
-            {
+            if (pas1 != pas2) {
                 $(".tip").show();//當兩個密碼不相等時則顯示錯誤資訊
-                return false;
-            }
-            else
-            {
+            } else {
                 $(".tip").hide();
-                return true;
             }
         }
 
-        
-        
-        //帳號驗證
+
+        function checkpas2() {//點選提交按鈕時，觸發checkpas2事件，會進行彈框提醒以防無視錯誤資訊提交
+            var pas3 = document.getElementById("userPassWord").value;
+            var pas4 = document.getElementById("userPassWordCheck").value;
+            if (pas3 != pas4) {
+                alert("兩次輸入的密碼不一致！");
+                return false;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
         function checkName() {
- 
+            checkAccount()
+
+
+
+
             let theName = document.getElementById("userAccount").value;
             let theNameLen = theName.length;
             let sp = document.getElementById("idsp");
             let flag1 = false, flag2 = false;  
-            if (theName == "") {
+            if (theName == "")
                 sp.innerHTML = " <span style='color:red'>不可空白</span>";
-                $("#ccc").html("")
-              
-                return false;
-            }
+
             else if (theNameLen > 6) {
 
                 for (let i = 0; i < theNameLen; i++) {
@@ -373,29 +349,30 @@
                     if (flag1 && flag2) break;
 
                 }
-                if (flag1 && flag2) {
-                  
-                    sp.innerHTML = "<span style='color:green'></span>";
-                    checkAccount()
-               
-                    return true;
-                }
-                else {
-                    sp.innerHTML = " <span style='color:red'>要包含字母數字 </span>";
-                   
-                    return false;
-                }
+                if (flag1 && flag2) sp.innerHTML = "<span style='color:green'>正確</span>";
+                else sp.innerHTML = " <span style='color:red'>要包含字母數字 </span>";
+            }
+            else
+                sp.innerHTML = " <span style='color:red'>至少輸入6個字</span>";
 
-            }
-            else {
-                sp.innerHTML = " <span style='color:red'>至少輸入7個字</span>";
-            $("#ccc").html("")
-                 
-                return false;
-            }
 
         }
-        //密碼組合驗證
+
+
+                    //if (NameChr < "\u4E00" || NameChr > "\u9FFF") {
+                    //    sp.innerHTML = "<span style='color:red'>只能輸入中文</span>";
+
+        //            }
+        //            else sp.innerHTML = "正確</span>";
+        //        }
+        //    }
+        //    else sp.innerHTML ="<span style='color:red'>至少輸入兩個字</span>";
+        //}
+
+
+
+
+
         function chkPassword() {
             //取得元素值
             let thePwd = document.getElementById("userPassWord").value;
@@ -404,13 +381,10 @@
             let sp = document.getElementById("idsp2");
 
             //判斷元素值是否為空白，密碼長度是否大於6
-            if (thePwd == "") {
+            if (thePwd == "")
+                //alert("you must enter");
                 sp.innerHTML =
                     "<span style='color:red'>不可空白</span>";
-                return false;
-            }
-
-
             //document.getElementById("idPwd").insertAdjacentHTML("afterend", "you must enter");
             //如果長度是否大於6，判斷是否包含字母、數字、特殊符號a1 
             else if (thePwdLen >= 6) {
@@ -429,34 +403,24 @@
                     if (flag1 && flag2 && flag3) break;
 
                 }
-                if (flag1 && flag2 && flag3) {
-                    sp.innerHTML = "<span style='color:green'>正確</span>";
-                    return true;
-                }
-
-                else {
-                    sp.innerHTML = " <span style='color:red'>要包含字母數字特殊符號</span>";
-                    return false;
-                }
+                if (flag1 && flag2 && flag3) sp.innerHTML = "<span style='color:green'>正確</span>";
+                else sp.innerHTML = " <span style='color:red'>要包含字母數字特殊符號</span>";
             }
-            else {
+            else
                 sp.innerHTML = " <span style='color:red'>至少輸入6個字</span>";
-                return false;
-            }
-      
   }
 
 
-        //失敗提視窗
+
         function alertTest() {
             Swal.fire(
                 "註冊失敗", //標題
-                " 請檢查失敗訊息", //訊息內容(可省略)
+                " 請檢查您所輸入的欄位是否有誤!", //訊息內容(可省略)
                 "error" //圖示(可省略) success/info/warning/error/question
             );
         }
 
-         // 成功提視窗
+
         function alertTest1() {
             Swal.fire(
                 "註冊成功", //標題
@@ -464,11 +428,49 @@
                "success" //圖示(可省略) success/info/warning/error/question
             );
         }
-        //回到首頁
+
         function home() {
             window.location.href = "/NewMaimaiIndex/MaimaiIndexNew";
         }
-        //舊版會員註冊方法
+
+
+
+        //function checkinput() {
+        //    // 檢查登入帳號是否有特殊字元
+        //    var re = /[^a-zA-Z0-9.-_]/;
+        //    var okname = re.exec(document.getElementById("userAccount").value);
+        //    if (okname) {
+        //        window.alert("指允許英文、數字、底線、小數點與減號");
+        //        document.getElementById("userAccount").focus();
+        //        return false;
+        //    }
+
+        //    // 開始檢查密碼長度是否正確？
+        //    var pw1 = document.getElementById("userPassWord");
+        //    if (pw1.value.length < 5) {
+        //        window.alert("密碼長度必須要大於 5 個字元以上");
+        //        document.getElementById("userPassWord").focus();
+        //        return false;
+        //    }
+
+        //    // 看看兩次密碼是否相同？
+        //    var pw2 = document.getElementById("userPassWordCheck");
+        //    if (pw1.value != pw2.value) {
+        //        window.alert("兩次密碼並不相同！");
+        //        document.getElementById("userPassWordCheck").focus();
+        //        return false;
+        //    }
+
+        //    // 檢查生日的格式正確與否
+        //    re = /^[0-9]{4}[./-][0-9]{2}[./-][0-9]{2}$/;
+        //    var okday = re.exec(document.getElementById("birthday").value);
+        //    if (!okday) {
+        //        window.alert("日期格式為 2011-11-11");
+        //        document.getElementById("birthday").focus();
+        //        return false;
+        //    }
+        //}
+
         function myFunction() {
 
             $(document).ready(function () {
@@ -521,72 +523,28 @@
             });
         }
 
-        //demo設定
-        function demo1() {
-            $("#userAccount").val("Jeenifer0108")
-            $("#userPassWord").val("aA#123")
-            $("#userPassWordCheck").val("aA#123")
-            $("#city").val("台中市")
-            $("#address").val("台中市大雅區中港路一段88號")
-            $("#phoneNumber").val("0988554474")
-            $("#firstName").val("妮佛")
-            $("#lastName").val("珍")
-            $("#birthday").val("1945-01-08")
-            $("#identityNumber").val("F447878547")
-            //$("#profileImg").val("")
-            $("#selfDescription").val("雪莉?!~你攻擊了我的村莊?")
-            $("#email").val("quees778w2s@gmail.com")
-        }
-        //重複帳號驗證方法
-        function checkAccount() {
 
-            $.ajax({
-                url: "/Members/CheckAccount",
-                type: 'POST',
+        //function doUpload(eler) {
+        //    var photo = $(eler).val();
+        //    console.log(photo);
+        //    $.ajax({
+        //        url: "/RequiredPost/uploadPhoto",
+        //        type: "Post",
+        //        data: { upphoto: photo },
+        //        processData: false,
+        //        contentType: false,
+        //        success: function (response) {
+        //            $(".displayImg>img").attr("src", response)
+        //        }
+        //    })
+        //} //  doUpload end
 
-                data: {
-                    account: $('#userAccount').val()
-                },
-                success: function (data) {
-                    if (data == "2") {
-                        $("#ccc").css("color", "red")
-                        $("#ccc").html("請輸入帳號!")
-             
-
-                    }
-
-                    else if (data == '1') {
-                        //alert('申請帳號重複，請輸入其他帳號');
-                        $("#ccc").css("color", "red")
-
-                        $("#ccc").html("帳號重複!請換一個!否則無法按下註冊按鈕!")
-                        $("#p1").attr("disabled","disabled")
-          
-                    }
-                    else if (data == "0" && $('#userAccount').val().length >= 7) {
-                        //alert('帳號可以使用');  
-                        $("#ccc").css("color", "green")
-                        $("#ccc").html("帳號可以使用!")
-                        $("#p1").removeAttr("disabled")
-                    
-                        //$('#p1 ').click();
-                    }
-                    else {
-                        $("#ccc").html("")
-                      
-                    }
-
-
-                }
-            });
-        };
 
 
 
     </script>
 
     <script>
-                //FB登入
         window.fbAsyncInit = function () {
             FB.init({
                 appId: '760951437892454',
@@ -598,11 +556,10 @@
             FB.AppEvents.logPageView();
 
         };
-                //FB登入
         FB.getLoginStatus(function (response) {
             statusChangeCallback(response);
         });
-                //FB登入
+
         function statusChangeCallback(response) {
             console.log(response);
             var target = document.getElementById("FB_STATUS_1"),
@@ -630,13 +587,13 @@
                 target.innerHTML = "未登入 FB";
             }
         }
-                //FB登入
+
         function checkLoginState() {
             FB.getLoginStatus(function (response) {
                 statusChangeCallback(response);
             });
         }
-                //FB登入
+
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) { return; }
@@ -645,8 +602,96 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-    
+
+
+
+
+        //{
+        //    status: 'connected',
+        //        authResponse: {
+        //        accessToken: '...',
+        //            expiresIn: '...',
+        //                signedRequest: '...',
+        //                    userID: '...'
+        //    }
+        //}
+
+
+        //<fb: login-button
+        //    scope="public_profile,email" autologoutlink="true"
+        //    onlogin="checkLoginState();">
+        //</fb: login - button >
+
+        function demo1() {
+            $("#userAccount").val("Jeenifer0108")
+            $("#userPassWord").val("aA#123")
+            $("#userPassWordCheck").val("aA#123")
+            $("#city").val("台中市")
+            $("#address").val("台中市大雅區中港路一段88號")
+            $("#phoneNumber").val("0988554474")
+            $("#firstName").val("妮佛")
+            $("#lastName").val("珍")
+            $("#birthday").val("1945-01-08")
+            $("#identityNumber").val("F447878547")
+            //$("#profileImg").val("")
+            $("#selfDescription").val("雪莉?!~你攻擊了我的村莊?")
+            $("#email").val("quees778w2s@gmail.com")
+        }
+
+        function checkAccount () {
+           
+                $.ajax({
+                    url: "/Members/CheckAccount",
+                    type: 'POST',
+                    
+                    data: {
+                        account: $('#userAccount').val()
+                    },
+                    success: function (data) {
+                        if (data == "2") {
+                            $("#ccc").css("color", "red")
+                            $("#ccc").html("請輸入帳號!")
+               
+                
+                        }
+
+                        else if (data == '1') {
+                            //alert('申請帳號重複，請輸入其他帳號');
+                            $("#ccc").css("color","red")
+
+                            $("#ccc").html("帳號重複!")
+                        
+                        }
+                        else {
+                            //alert('帳號可以使用');  
+                            $("#ccc").css("color", "green")
+                            $("#ccc").html("帳號可以使用!")
  
+                            //$('#p1 ').click();
+                        }
+                          
+
+                    
+                    }
+                });
+            };
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
 
