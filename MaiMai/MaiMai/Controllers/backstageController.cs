@@ -270,7 +270,7 @@ namespace MaiMai.Controllers
 
         public ActionResult getinfoRecord_P()
         {
-            var infoRecord = db.Notification.Select(s => new
+            var infoRecord = db.Notification.Where(m=>m.Category =="系統").Select(s => new
                                             {
                                                 SenderID = s.SenderID,
                                                 ReciverLevel = s.ReciverLevel,
