@@ -361,14 +361,28 @@
                     var month = new Date(Milliseconds).getMonth() + 1;
                     var date = new Date(Milliseconds).getDate();
 
-                    text += `
+                    var bs = item.buyerStautus
+
+                    if (item.orderStatusString == 2) {
+                        text += `
                     <tr onclick="showDetail(this,${item.OrderId},1)" data-toggle='modal' data-target='#showOrder')>
                     <td>${item.OrderId}</td>
                     <td>${year} - ${month} - ${date}</td>
                     <td >${item.price}</td>
-                    <td>${item.orderStatusString}</td>
+                    <td>訂單已完成</td>
 
-                    </tr>`
+                    </tr>`}
+                    else if (bs == 3) {
+                        text += `
+                        <tr onclick="showDetail(this,${item.OrderId},1)" data-toggle='modal' data-target='#showOrder') >
+                    <td>${item.OrderId}</td>
+                    <td>${year} - ${month} - ${date}</td>
+                    <td >${item.price}</td>
+                    <td>等待賣家評論中</td>
+
+
+
+                     </tr>`}
 
                 })
                 $('#tPastbody').html(text)

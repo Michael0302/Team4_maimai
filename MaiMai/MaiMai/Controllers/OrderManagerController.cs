@@ -56,7 +56,7 @@ namespace MaiMai.Controllers
 
             var id = Convert.ToInt32(userid);
 
-            var table = db.Order.Where(m => m.buyerUserID == id && m.orderStatus == 2).Join(db.OrderDetail, o => o.OrderId, od => od.OrderID
+            var table = db.Order.Where(m => m.buyerUserID == id && m.orderStatus >= 1).Join(db.OrderDetail, o => o.OrderId, od => od.OrderID
             , (o, od) => new
             {
                 o.OrderId,
@@ -64,13 +64,15 @@ namespace MaiMai.Controllers
                 o.createdTime,
                 o.buyerUserID,
                 od.oneProductTotalPrice,
+                od.buyerStatus
 
-            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID }).Select(s => new 
+            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID, g.buyerStatus }).Select(s => new 
             {
                 buyusrId = s.Key.buyerUserID,
                 OrderId = s.Key.OrderId,
                 orderStatus = s.Key.orderStatus,
                 orderStatusString = s.Key.orderStatus.ToString(),
+                buyerStautus= s.Key.buyerStatus,
                 createdTime = s.Key.createdTime,
                 price = (int)s.Select(i => i.oneProductTotalPrice).Sum()
             }).ToList(); ;
