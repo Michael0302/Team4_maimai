@@ -701,18 +701,23 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
         //聯絡賣家
         function displayChat(ProductPostID) {
-            $('.chatmsg').css('transform', 'translateY(0)')
+            $('.chatmsg').css('transform', 'translate(0, 0)')
+            var login = getCookie("LoginID");
             if (ProductPostID != null || ProductPostID != "") {
                 $.ajax({
                     url: "@Url.Action("getChat_P", "backstage")",
                     data: { ProductPostID: ProductPostID},
                     success: function (data) {
                         $(data).each(function (index, data) {
+                            if (data.UserID == login) {
+                                swal("無法與自己聊天", "", "error");
+                                return false;
+                            }
                             $("#chatNameList div:first-child").each(function (index, name) {
                                 if (data.UserName == name.textContent) {
                                     getRecord(data.UserID, data.UserName);
                                     return false;
-                                }
+                                }                                
                             });
                         $("#chatroom").html(`
                             <div class="chatReciver d-flex">
