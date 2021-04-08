@@ -52,7 +52,7 @@
 }
     .StarFiveStyle > p {
        
-        width: 250px;
+        width: 150px;
         color: #FFFFFF;
         background: linear-gradient(#FFB4A2,#E5989B);
     }
@@ -241,20 +241,13 @@ border:1px solid;
     padding: 0;
     margin: 0;
 }
-.dropdown-search-img {
-    border-bottom-left-radius: 50px;
-    border-top-left-radius: 50px;
-    background-color: #CBC0D3;
-    width:35px;
-}
+
 .dropdown-search {
     width: 900px;
     height: 50px;
-    border-bottom-right-radius: 35px;
-    border-top-right-radius: 35px;
-    /*border-radius: 35px;*/
+    border-radius: 35px;
     /*margin-top: 1%;*/
-    outline: none;
+    outline:none;
     background-color: #CBC0D3;
     border: none;
 }
@@ -351,15 +344,15 @@ div.tag > a.btn {
 }
 
 .chatbox {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 50px;
     background-color: #E1DBE6; 
     position: fixed;
     right: 10px;
-    bottom: 3px;
+    bottom: 0px;
+    font-size: 20px;
     z-index: 999;
-    box-shadow: 3px 3px 3px #BEBEBE;
-    border-radius:50%;
+    box-shadow: 3px 3px 9px #BEBEBE;
 }
 
 .chatmsg {
@@ -519,26 +512,6 @@ div.tag > a.btn {
     border-radius: 50%;
     /*background-color: #BEBEBE;*/
     background: radial-gradient(#BEBEBE, #3C3C3C );
-}
-
-.nameWeight {
-    width: 70px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.chatTime {
-    font-size: 6px;
-    color: #9D9D9D;
-}
-
-.chatCount {
-    width: 10px;
-    height: 10px;
-    background-color: #FF9797;
-    border-radius: 50%;
-    /*background: radial-gradient(#FF9797, #FF0000 )*/
 }
 
 /*====================================================================*/
