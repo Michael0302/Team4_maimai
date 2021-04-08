@@ -247,7 +247,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onchange="addStatus(this,${i}) "type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i}) "type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -322,7 +322,7 @@
     }
 
     function demoS(index) {
-        console.log(index);
+
         $(`#productName${index}`).val("薩諾斯全新無拆封");
      
         $(`#productDescription${index}`).val("全新 未拆，HOTTOYS 預購版");
@@ -332,7 +332,7 @@
 
     }
     function demoT(index) {
-        console.log(index);
+   
         $(`#productName${index}`).val("清大大研究所在讀中找打工");
         $(`#productDescription${index}`).val("多益成績955，加拿大交換一年經驗，目前就讀清大財金系，歡迎跟我聯絡");
         $(`#price${index}`).val("600");
@@ -410,7 +410,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onchange="addStatus(this,${i}) "type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i})" type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -486,8 +486,21 @@
         }
     });
 
-    function addStatus(ele, index) {
-        $(`showProduct${i}`).attr('value',2)
+    function addStatus(index) {
+
+        console.log($(`#showProduct${index}`).prop("checked"));
+        if ($(`#showProduct${index}`).prop("checked") == true) {
+
+
+            $(`#showProduct${index}`).val(2);
+
+        }
+       else {
+
+            $(`#showProduct${index}`).val(1);
+        } 
+
+
 
     }
 
