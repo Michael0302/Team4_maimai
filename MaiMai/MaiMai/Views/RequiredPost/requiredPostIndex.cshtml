@@ -1,6 +1,6 @@
 ﻿
 @{ ViewBag.Title = "requiredPostIndex"; }
-000000<head>
+<head>
     <link href="~/Content/resource_nico/requriedIndex.css" rel="stylesheet" />
     <link href="~/Content/resource_nico/createProductPost.css" rel="stylesheet" />
     <script src="~/Content/resource_nico/tw-city-selector.min.js"></script>
@@ -247,7 +247,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i}) "type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProduct${i}" onchange="addStatus(this,${i}) "type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -312,34 +312,7 @@
     }
 
 
-    function demo() {
 
-        $("#postName").val("徵求國三英文家教");
-        $("#postDescription").val("國三英文家教，一周兩堂課會考模考演習");
-        $("#address").val("中和路499號");
-        $("#requiredQTY").val("1");
-        $("#estimatePrice").val("550");
-    }
-
-    function demoS(index) {
-
-        $(`#productName${index}`).val("薩諾斯全新無拆封");
-     
-        $(`#productDescription${index}`).val("全新 未拆，HOTTOYS 預購版");
-        $(`#price${index}`).val("11000");
-        $(`#inStoreQTY${index}`).val("1");
-
-
-    }
-    function demoT(index) {
-   
-        $(`#productName${index}`).val("清大大研究所在讀中找打工");
-        $(`#productDescription${index}`).val("多益成績955，加拿大交換一年經驗，目前就讀清大財金系，歡迎跟我聯絡");
-        $(`#price${index}`).val("600");
-        $(`#inStoreQTY${index}`).val("1");
-
-
-    }
 
 
     function tagonclickpage(TagID) {
@@ -410,7 +383,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i})" type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProduct${i}" onchange="addStatus(this,${i}) "type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -486,21 +459,8 @@
         }
     });
 
-    function addStatus(index) {
-
-        console.log($(`#showProduct${index}`).prop("checked"));
-        if ($(`#showProduct${index}`).prop("checked") == true) {
-
-
-            $(`#showProduct${index}`).val(2);
-
-        }
-       else {
-
-            $(`#showProduct${index}`).val(1);
-        } 
-
-
+    function addStatus(ele, index) {
+        $(`showProduct${i}`).attr('value',2)
 
     }
 

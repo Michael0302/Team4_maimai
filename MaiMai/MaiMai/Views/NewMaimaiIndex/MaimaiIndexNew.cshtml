@@ -43,14 +43,32 @@
         @*五星*@
         <div class="container-fluid paddding mb-5">
             <div class="col-md-12">
-                <div class=" StarFiveStyle"> <p>好評商家作品推薦</p></div>
+                <div class=" StarFiveStyle"> <p style="font-size:30px;">好評商家作品推薦</p></div>
                 <div class="row" id="StarFive2">
 
                 </div>
             </div>
         </div>
         @*五星*@
-        <div></div>
+        
+
+        <div  style="margin:80px 0px;" class="d-flex">
+            <div style="height:130px;width:260px; padding-left:10px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告6.jpg" /></a></div>
+            <div style="height:130px;width:260px; padding-left:10px;" id=""><a href="https://www.misterdonut.com.tw/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告7.jpg" /></a></div>
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="https://mochislife.com/smithwollensky-taipei/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告8.jpg" /></a></div>
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="https://www.muji.com/tw/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告9.jpg" /></a></div>
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="https://hululu.tw/pablo/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告10.jpg" /></a></div>
+        </div>
+        <div style="height:10px;"></div>
         @*徵求台輪播*@
         <div class="row mb-lg-3">
             <div class="col-md-12 ">
@@ -98,15 +116,29 @@
             </div>
         </div>
         @*徵求台輪播*@
-        <div class="d-flex imgimg2imgimg2 " >
-            <div >
-                <img class="imgimg2" src="~/Content/ProductPostImg/咖啡1.jpg" />
-            </div>
-            <div>
-                <img class="imgimg2" src="~/Content/ProductPostImg/咖啡2.jpg" />
-            </div>
+        <div style="margin:80px 0px;" class="d-flex">
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告11.jpg" /></a></div>
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="https://www.misterdonut.com.tw/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告12.jpg" /></a></div>
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="https://mochislife.com/smithwollensky-taipei/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告13.jpg" /></a></div>
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="https://www.muji.com/tw/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告14.jpg" /></a></div>
+            <div style="        height: 130px;
+        width: 260px;
+        padding-left: 10px;
+" id=""><a href="https://hululu.tw/pablo/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告15.jpg" /></a></div>
         </div>
-        <div class="mt-5" style="height:100px;"></div>
+
         @*最新商品輪播*@
         <div class="row mt-lg-3">
             <div class="col-md-12 ">
@@ -191,7 +223,7 @@
             window.location.href = `/RequiredPost/requiredPostIndex`;
         }
         $(function () {
-          //五星圖片刊版
+            //五星圖片刊版
             //$.ajax({
             //    url: "/NewMaimaiIndex/StarFive",
             //    type: "GET",
@@ -229,18 +261,18 @@
                 type: "GET",
                 success: function (StarFive2) {
                     $(StarFive2).each(function (i, item) {
-                        if (i >=1 && i<=8 ) {
+                        if (i >= 1 && i <= 8) {
                             $("#StarFive2").append(`
-                        <div class="start6 mx-3 my-2" >
-                                        <a href="/PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.UserID}"><img style="height:100%;width:100%;"  src="../Content/ProductPostImg/${item.img}"  /></a>
-                        </div>
-                            `)
+                            <div class="start6 mx-3 my-2" >
+                                            <a href="/PersonalMarket/Personal_Index_WithoutLogin?UserID=${item.UserID}"><img style="height:100%;width:100%;"  src="../Content/ProductPostImg/${item.img}"  /></a>
+                            </div>
+                                `)
                         }
                     })
                 }
             })
 
-          //五星圖片刊版
+            //五星圖片刊版
             //徵求台輪播增加圖片
             $.ajax({
                 url: "/NewMaimaiIndex/NewaddCarousel",
@@ -283,7 +315,7 @@
             //    }
             //    return "";
             //}
-          //輪播增加圖片
+            //輪播增加圖片
             $.ajax({
                 url: "/NewMaimaiIndex/addCarousel",
                 type: "GET",
@@ -327,8 +359,8 @@
                         $(response).each(function (i, item) {
                             $("#tag").append(
                                 `<div class="tag ml-3 my-2 "onclick="tagonclick(${item.TagID})">
-                                        <a><p>${item.tagName}</p></a>
-                                    </div>`
+                                            <a><p>${item.tagName}</p></a>
+                                        </div>`
                             )
                         })
                     }
