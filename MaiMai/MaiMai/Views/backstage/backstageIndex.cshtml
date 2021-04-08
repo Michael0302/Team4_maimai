@@ -943,7 +943,7 @@
                                                 `)
                     $(".reportStatus").each(function () {
                         if ($(this).val() == "未處理") {
-                            $("#report-footer").html(`<button type="button" class="btn btn_save" data-dismiss="modal" onclick="getProductPostFromAll(${reportdetail.ReportID})">已處理</button>`)
+                            $("#report-footer").html(`<button type="button" class="btn btn_save" data-dismiss="modal" onclick="processReport(${reportdetail.ReportID})">已處理</button>`)
                         }
                         else {
                             $("#report-footer").html("");
