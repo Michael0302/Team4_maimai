@@ -36,8 +36,15 @@
                     <a class="d-block btn" onclick="getDelProducts()">下架商品</a>
                 </div>
 
-                <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#report_P" role="button" onclick="RequirePost()">徵求文列表</a>
-                <div class="collapse" id="report_P" data-parent="#backstage"></div>
+                @*<a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#report_P" role="button" onclick="RequirePost()">徵求文列表</a>
+                <div class="collapse" id="report_P" data-parent="#backstage"></div>*@
+
+                <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#requirePostList"  role="button"
+                   aria-expanded="false" aria-controls="product_P">徵求文列表</a>
+                <div class="collapse mb-3" id="requirePostList" data-parent="#backstage">
+                    <a class="d-block btn" onclick="RequirePost()">上架徵求文</a>
+                    <a class="d-block btn" onclick="RequirePost_OffSale()">下架徵求文</a>
+                </div>
 
                 <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#report_P" role="button" onclick="reportList()">檢舉列表</a>
                 <div class="collapse" id="report_P" data-parent="#backstage"></div>
@@ -158,6 +165,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn_close" data-dismiss="modal">關閉</button>
+                            <a id="requestPost-footer"></a>
                         </div>
 
                     </div>
@@ -947,11 +955,14 @@
                         }
                         else {
                             $("#report-footer").html("");
+                            $("#reportToProductPost").html("");
                         }
                     })
 
-                    if (reportdetail.reportStatus == 0 && reportdetail.ProductOrRequire == 0) {    //商品貼文才能下架
+                    if (reportdetail.reportStatus == 0 && reportdetail.ProductOrRequire == 0) {    //商品貼文
                         $("#reportToProductPost").html(`<button type="button" class="btn btncss_inside" data-toggle='modal'  data-target='#editProduct' data-dismiss="modal" onclick="getProductPostFromAll(${reportdetail.ProductOrRequireID})">查看貼文</button>`)
+                    } else if (reportdetail.reportStatus == 0 && reportdetail.ProductOrRequire == 1) {
+                        $("#reportToProductPost").html(`<button type="button" class="btn btncss_inside" data-toggle='modal'  data-target='#requirePost' data-dismiss="modal" onclick="getRequirePost(${reportdetail.ProductOrRequireID})">查看貼文</button>`)
                     }
 
                 });
@@ -989,7 +1000,7 @@
 
         }
 
-    //徵求台列表
+    //徵求台上架列表
         function RequirePost() {
             $.ajax({
                 url: "@Url.Action("getRequirePostList_P", "backstage")",
@@ -1026,13 +1037,54 @@
             })
         }
 
+        //徵求台下架列表
+        function RequirePost_OffSale() {
+            $.ajax({
+                url: "@Url.Action("getOff_SaleRequirePostList_P", "backstage")",
+                type: "GET",
+                success: function (report) {
+                    $("#show").html(`
+                                    <div class= 'd-flex justify-content-center' id = 'search' ></div >
+                                        <table class='table table-hover'>
+                                            <thead class='table-dark'>
+                                                <tr id='showTh'>
+                                                    <th>徵求文編號</th>
+                                                    <th>徵求人</th>
+                                                    <th>標題</th>
+                                                    <th>類別</th>
+                                                    <th>預算</th>
+                                                </tr>
+                                            </thead>
+                                        <tbody id='showList'></tbody>
+                                    </table>`);
+
+                    $(report).each(function (index, item) {
+
+                        $("#showList").append(`
+                                                                <tr data-toggle='modal'  data-target='#requirePost' onclick="getRequirePost(${item.RequiredPostID},1)">
+                                                                    <td>${item.RequiredPostID}</td>
+                                                                    <td>[${item.UserID}]${item.UserName}</td>
+                                                                    <td>[${item.postName}]${item.postName}</td>
+                                                                    <td>${item.TagName}</td>
+                                                                    <td>${item.estimatePrice}</td>
+                                                                </tr>`);
+
+                    });
+                }
+            })
+        }
+
     //徵求台modal
-        function getRequirePost(RequiredPostID) {
+        function getRequirePost(RequiredPostID, check) {
             $.ajax({
                 url: "@Url.Action("getRequirePost_P", "backstage")",
                 type: "GET",
                 data: { RequiredPostID: RequiredPostID},
                 success: function (product) {
+                    $("#requestPost-footer").html("");
+                    if (check != 1) {
+                        $("#requestPost-footer").html(`<button class='btn btn_del' data-dismiss="modal" onclick="delRequirePost(${RequiredPostID})">下架貼文</button>`);
+                    }
                     $(product).each(function (index, product) {
                         var Milliseconds = parseInt(product.postTime.replace(/\D/igm, ""));
                         var year = new Date(Milliseconds).getFullYear();
@@ -1069,6 +1121,20 @@
                                                             `)
                     })
                     }
+            })
+        }
+
+        //下架徵求文
+        function delRequirePost(RequiredPostID) {
+            console.log(RequiredPostID);
+            $.ajax({
+                url: "@Url.Action("delRequirePost", "backstage")",
+                type: "GET",
+                data: { RequiredPostID: RequiredPostID },
+                success: function (product) {
+                    swal("已下架", "", "success");
+                    RequirePost();
+                }
             })
         }
 
