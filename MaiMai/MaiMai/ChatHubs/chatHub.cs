@@ -198,8 +198,7 @@ namespace SignalRMvc.chatHubs
                 SenderID = sender,
                 ReciverID = reciver,
                 ChatText = message,
-                ChatTime = DateTime.Now,
-                ChatStatus = false,
+                ChatTime = DateTime.Now
             };
 
             db.Chat.Add(chat);
@@ -211,12 +210,12 @@ namespace SignalRMvc.chatHubs
                 {
                     senderinfo.UserID,
                     senderinfo.userAccount
-                }, chat.ChatTime?.ToString());
+                });
                 Clients.Caller.senderMessage(message, new
                 {
                     user.UserID,
                     user.userAccount
-                }, chat.ChatTime?.ToString());
+                });
 
             }
         }

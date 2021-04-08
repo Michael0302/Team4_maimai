@@ -211,6 +211,7 @@
                 </button>
             </div>
             <div id="modal-body" class="modal-body" style="margin-bottom:30px">
+                <div id="orderID"></div>
                 <div id="buyerID"></div>
                 <div style="text-align:center;" class="mb-5 mt-5">
                     <img src="" style="width:300px; height:auto" />
@@ -242,7 +243,7 @@
                     <textarea id="commentTXT" rows="15" cols="60"></textarea>
                 </div>
 
-                <div id="OrderID" type="hidden"></div>
+                <div id="OrderDetailID" type="hidden"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
@@ -420,7 +421,7 @@
                                 <td>${item.QTY}</td>
                                 <td>${item.buyerUserAccount}</td>
                                 <td ">${item.oneProductTotalPrice}</td>
-                                <td><a class= "btn btn-outline-dark" data-toggle="modal" onclick="getComment(${item.orderDetailId})" data-target="#exampleModalCenter">評論</td>
+                                <td><a class= "btn btn-outline-dark" data-toggle="modal" onclick="getComment(${item.orderDetailId},${item.orderID})" data-target="#exampleModalCenter">評論</td>
                                 </tr>`
                     }
 
@@ -431,6 +432,11 @@
 
         // comment
         // 星星評等
+
+        //comment
+
+    }) // end of doucument ready
+        function resetComment() {
 
         $("#div0").find("img").on({
             mouseenter: function () {
@@ -456,10 +462,9 @@
             $(this).children("img").prop("src", "../Content/ProductPostImg/member/star.jfif");
             $("#div0 p").text("評分中.......");
         })
+            $("#commentTXT").text("");
 
-        //comment
-
-    }) // end of doucument ready
+        };
 
 
     function comfirmOrder(orderid) {
@@ -516,9 +521,12 @@
  //comment
 
      //OrderID:3 獲得目前評價s
-    function getComment(oderdeail) {
+    function getComment(oderdeail, orderID) {
         console.log(oderdeail);
-        $("#OrderID").attr("name",oderdeail);
+        $("#OrderDetailID").attr("name", oderdeail);
+        $("#OrderDetailID").attr("name2", orderID);
+        resetComment();
+
         $.ajax({
             url: "@Url.Action("getComment","MyOrder")",
             data: { OrderDetailID: oderdeail },
@@ -547,6 +555,7 @@
                 console.log("starTotal", `${result.starTotal}`);
                 console.log("starAVG得分",`${starAVG}`);
 
+                $("#orderID").html(`訂單編號: ${orderID}`);
                 $("#buyerID").html(`買家編號: ${buyerID}`);
                 $("#commentCNT").text(`已經有${result.CNT}人評分`);
                 $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.buyerImg}`);
@@ -556,18 +565,17 @@
     }
 
     function saveComment() {
-        var oderdeail = $("#OrderID").attr("name");
-        console.log(oderdeail);
+        var orderDetailID = $("#OrderDetailID").attr("name");
 
         $.ajax({
             url: "@Url.Action("saveComment", "MyOrder")",
-            data: { OrderID: oderdeail, starRate: starRate, description: $(`#commentTXT`).val()},
+            data: { orderDetailID: orderDetailID, starRate: starRate, description: $(`#commentTXT`).val()},
             type: "GET",
             success: function (result) {
             swal('成功', '感謝您寶貴的意見', 'success');
-                setTimeout(function () { $(".close").click() }, 1000);
+                setTimeout(function () { $(".close").click() }, 1300);
                 window.location.reload();
-            },
+            }
             error: function(){
             swal("失敗","星星滿意度為必要勾選!!",'error');
             }

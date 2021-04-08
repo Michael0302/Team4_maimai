@@ -1,6 +1,6 @@
 ﻿
 @{
-//ViewBag.Title = "OrderIndex2";
+    //ViewBag.Title = "OrderIndex2";
 }
 
 <head>
@@ -143,7 +143,7 @@
                     <tbody id="receiptbody">
                     </tbody>
                 </table>
-                    <div id="opayform"></div>
+                <div id="opayform"></div>
 
             </div>
 
@@ -175,9 +175,10 @@
                 </button>
             </div>
             <div id="modal-body" class="modal-body" style="margin-bottom:30px">
+                <div id="orderid"></div>
                 <div id="sellerID"></div>
-                <div style="text-align:center;"  class="mb-5 mt-5">
-                    <img src=""  style="width:300px; height:auto"/>
+                <div style="text-align:center;" class="mb-5 mt-5">
+                    <img src="" style="width:300px; height:auto" />
 
                 </div>
                 <h4>請問您對這次交易的滿意度為 :</h4>
@@ -206,7 +207,7 @@
                     <textarea id="commentTXT" rows="15" cols="60"></textarea>
                 </div>
 
-                <div id="OrderID" type="hidden"></div>
+                <div id="OrderDetailID" type="hidden"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
@@ -297,7 +298,7 @@
                         <td> <a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">   <h3 id="postName${i}">${item.ProductPostName}</h3></a></td>
                         <td>${item.buyerName}</td>
                         <td> 已到貨</td>
-                        <td><a class= "btn btn-outline-dark" data-toggle="modal" onclick="getComment(${item.oderdeail})" data-target="#exampleModalCenter"> 評論</td>
+                        <td><a class= "btn btn-outline-dark" data-toggle="modal" onclick="getComment(${item.oderdeail},${item.OrderId})" data-target="#exampleModalCenter"> 評論</td>
                         </tr>`
                     }
                     else if (buyerStatus == 1 && sellerStatus == 0) {
@@ -377,6 +378,16 @@
         // comment
         // 星星評等
 
+
+        //comment
+
+
+
+    }) // end of doucument ready
+
+
+    function resetComment() {
+
         $("#div0").find("img").on({
             mouseenter: function () {
                 $(this).prop("src", "../Content/ProductPostImg/member/chngstar.jfif");
@@ -402,11 +413,9 @@
             $("#div0 p").text("評分中.......");
         })
 
-        //comment
+        $("#commentTXT").text("");
+    };
 
-
-
-    }) // end of doucument ready
 
     function showDetail(elem, id, index) {
 
@@ -513,9 +522,14 @@
     }
     //comment
      //OrderID:3 獲得目前評價s
-    function getComment(oderdeail) {
-        console.log(oderdeail);
-        $("#OrderID").attr("name",oderdeail);
+    function getComment(oderdeail,orderID) {
+        console.log("oderdeail",oderdeail);
+        console.log("orderdID", orderID);
+
+        $("#OrderDetailID").attr("name", oderdeail);
+        $("#OrderDetailID").attr("name2", orderID);
+        resetComment();
+
         $.ajax({
             url: "@Url.Action("getComment","MyOrder")",
             data: { OrderDetailID: oderdeail},
@@ -539,6 +553,7 @@
                 console.log("starTotal", `${result.starTotal}`);
                 console.log("starAVG得分",`${starAVG}`);
 
+                $("#orderid").html(`訂單編號: ${orderID}`);
                 $("#sellerID").html(`賣家編號: ${SellerID}`);
                 $("#commentCNT").text(`已經有${result.CNT}人評分`);
                 $("#modal-body img").eq(0).attr("src", `../Content/ProductPostImg/member/${result.sellerImg}`);
@@ -548,16 +563,19 @@
     }
 
     function saveComment() {
-        var oderdeail = $("#OrderID").attr("name");
-        console.log(oderdeail);
+        var orderDetailID = $("#OrderDetailID").attr("name");
+        console.log("starRate", starRate);
 
         $.ajax({
             url: "@Url.Action("saveComment", "MyOrder")",
-            data: { OrderID: oderdeail, starRate: starRate, description: $(`#commentTXT`).val()},
+            data: { orderDetailID: orderDetailID, starRate: starRate, description: $(`#commentTXT`).val()},
             type: "GET",
             success: function (result) {
-            swal('成功', '感謝您寶貴的意見', 'success');
-                setTimeout(function () { $(".close").click() }, 700);
+                swal('成功', '感謝您寶貴的意見', 'success');
+
+                setTimeout(function () { $(".close").click() }, 1300);
+                window.location.reload();
+
             },
             error: function(){
             swal("失敗","星星滿意度為必要勾選!!",'error');
@@ -642,7 +660,7 @@ TradeDesc 交易描述:
 <input type="text" name="TradeDesc" value="${tradeDescription}" /><br />
 
 ItemName 商品名稱:
-<input type="text" name="ItemName" value="${prodName}" /><br />
+<input type="text" name="ItemName" value="${tradeDescription}" /><br />
 
 ReturnURL 付款完成通知回傳網址:
 <input type="text" name="ReturnURL" value="https://localhost:44340/" /><br />

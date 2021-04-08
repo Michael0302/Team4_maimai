@@ -55,7 +55,11 @@
                 <a class="btn btncss mb-3 btn-block " data-toggle="collapse" href="#info_P" role="button" onclick="information()">發送通知</a>
                 <div class="collapse" id="info_P" data-parent="#backstage"></div>
 
+                <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#tag_P" role="button" onclick="getTag()">新增標籤</a>
+                <div class="collapse" id="tag_P" data-parent="#backstage"></div>
 
+                <a class="btn btncss mb-3 btn-block" data-toggle="collapse" href="#report_P" role="button" onclick="reportList()">檢舉列表</a>
+                <div class="collapse" id="report_P" data-parent="#backstage"></div>
 
 
             </div>
@@ -121,7 +125,6 @@
 
                         </div>
                         <div class="modal-footer">
-                            <a id="cancelProd"></a>
                             <button type="button" class="btn btn_close" data-dismiss="modal">關閉</button>
                         </div>
 
@@ -145,7 +148,6 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn_close" data-dismiss="modal">關閉</button>
                             <a id="report-footer"></a>
-                            <a id="reportToProductPost"></a>
                         </div>
                     </div>
                 </div>
@@ -776,9 +778,6 @@
                                                     <label>建立時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/></div></label>
                                                 </div>
                                                 `)
-                    if (oneProduct.status == 1) {
-                        $("#cancelProd").html(`<button type='button' class='btn btn_del' onclick="cancelProduct(${oneProduct.ProductPostID})">下架此商品</button>`);
-                    }
                 })
             }
         })
@@ -943,7 +942,7 @@
                                                     <label>被檢舉人<input class='form-control' type='text' value="[${reportdetail.repotedUserID}]${reportdetail.repotedUserName}" readonly/>
                                                     <label>檢舉類別<input class='form-control' type='text' value="${reportdetail.ReportDetailTag}" readonly/>
                                                     <label>檢舉內容<input class='form-control' type='text' value="${reportdetail.reportDescription}" readonly/>
-                                                    <label>來源<input id="source" class='form-control' type='text' value="${source}" readonly/>
+                                                    <label>來源<input class='form-control' type='text' value="${source}" readonly/>
                                                     <label>來源編號<input class='form-control' type='text' value="${reportdetail.ProductOrRequireID}" readonly/>
                                                     <label>檢舉時間<input class='form-control' type='text' value="${year}-${month}-${date} ${hour}:${min}:${sec}" readonly/>
                                                     <label>處理狀態<input class='form-control reportStatus' type='text' value="${reportStatus}" readonly/>

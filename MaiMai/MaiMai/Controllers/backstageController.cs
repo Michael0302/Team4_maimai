@@ -348,8 +348,7 @@ namespace MaiMai.Controllers
                 Tag = s.Tag.tagName,
                 createdTime = s.createdTime,
                 inStoreQTY = s.inStoreQTY,
-                RequiredPostID = s.RequiredPostID,
-                status = s.status,
+                RequiredPostID = s.RequiredPostID
             });
 
             return Json(prodlist, JsonRequestBehavior.AllowGet);
@@ -531,51 +530,25 @@ namespace MaiMai.Controllers
         //抓最後一筆聊天紀錄
         public ActionResult lastChatText(int UserID)
         {
-            if (Request.Cookies["LoginID"] == null) return Content("尚未登入");
-            var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var lasttext = db.Chat.OrderByDescending(o=>o.ChatID).Select(s=>new { 
-                s.SenderID,
-                s.ReciverID,
-                s.ChatText,
-                s.ChatStatus,
-            }).FirstOrDefault(m => (m.SenderID == UserID && m.ReciverID == loginID ) || (m.ReciverID == UserID && m.SenderID == loginID));
+            var lasttext = db.Chat.OrderByDescending(o=>o.ChatID).FirstOrDefault(m => m.SenderID == UserID || m.ReciverID == UserID).ChatText;
 
             return Json(lasttext, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult lastChatText_Reciver(int UserID)
-        {
-            if (Request.Cookies["LoginID"] == null) return Content("尚未登入");
-            var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var lasttext = db.Chat.OrderByDescending(o => o.ChatID).Select(s => new {
-                s.SenderID,
-                s.ReciverID,
-                s.ChatText,
-                s.ChatStatus,
-            }).FirstOrDefault(m => (m.SenderID == UserID && m.ReciverID == loginID));
-
-            return Json(lasttext, JsonRequestBehavior.AllowGet);
-        }
 
         public ActionResult getAllChatRecord_P(int UserID)
         {
             var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var record = db.Chat.Where(m => (m.ReciverID == loginID && m.SenderID == UserID) || (m.ReciverID == UserID && m.SenderID == loginID)).ToList().Select(s => new
+            var record = db.Chat.Where(m => (m.ReciverID == loginID && m.SenderID == UserID) || (m.ReciverID == UserID && m.SenderID == loginID))
+                                        .Select(s => new
                                         {
                                             SenderID = s.SenderID,
                                             SenderName = s.Member.userAccount,
                                             ReciverID = s.ReciverID,
                                             ReciverName = s.Member1.userAccount,
                                             ChatText = s.ChatText,
-                                            ChatTime = Convert.ToDateTime(s.ChatTime).ToString(),
-                                        }).ToList();
-            //取消未讀小紅點
-            var lasttext = db.Chat.OrderByDescending(o => o.ChatID).FirstOrDefault(m => (m.ReciverID == loginID && m.SenderID == UserID));
-            if(lasttext != null)
-            {
-                lasttext.ChatStatus = true;
-                db.SaveChanges();
-            }
+                                            ChatTime = s.ChatTime,
+                                        });
 
             return Json(record, JsonRequestBehavior.AllowGet);
         }
