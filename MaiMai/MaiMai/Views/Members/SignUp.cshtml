@@ -142,7 +142,7 @@
                     繼續進行代表你同意
                     <a href="/docs/terms_of_service">服務條款</a>。
                 </p>
-                目前狀態：
+               
                 <span id="FB_STATUS_1"></span>
             </div>
             <button id="demo1" onclick="demo1()">DEMO1</button>
@@ -588,55 +588,17 @@
     <script>
                 //FB登入
         window.fbAsyncInit = function () {
-            FB.init({
+                 window.FB.init({
                 appId: '760951437892454',
                 cookie: true,
                 xfbml: true,
                 version: ' v10.0'
             });
 
-            FB.AppEvents.logPageView();
+           window.FB.AppEvents.logPageView();
 
         };
-                //FB登入
-        FB.getLoginStatus(function (response) {
-            statusChangeCallback(response);
-        });
-                //FB登入
-        function statusChangeCallback(response) {
-            console.log(response);
-            var target = document.getElementById("FB_STATUS_1"),
-                html = "";
-
-            // 登入 FB 且已加入會員
-            if (response.status === 'connected') {
-                html = "已登入 FB，並加入 MaiMai  <br/>";
-
-                FB.api('/me?fields=id,name,email', function (response) {
-                    console.log(response);
-                    html += "會員暱稱：" + response.name + "<br/>";
-                    html += "會員 email：" + response.email;
-                    target.innerHTML = html;
-                });
-            }
-
-            // 登入 FB, 未偵測到加入會員
-            else if (response.status === "not_authorized") {
-                target.innerHTML = "已登入 FB，但未加入MaiMai  ";
-            }
-
-            // 未登入 FB
-            else {
-                target.innerHTML = "未登入 FB";
-            }
-        }
-                //FB登入
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
-        }
-                //FB登入
+        //FB登入
         (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) { return; }
@@ -644,6 +606,70 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+
+
+                 //FB登入
+       
+                //FB登入
+        $(function () {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+
+            function statusChangeCallback(response) {
+                console.log(response);
+                var target = document.getElementById("FB_STATUS_1")
+                    //html = "";
+
+                // 登入 FB 且已加入會員
+                if (response.status === 'connected') {
+                    //html = "已登入 FB，並加入 MaiMai  <br/>";
+
+                    window.FB.api('/me?fields=id,name,email', function (response) {
+                        console.log(response);
+                        //html += "會員暱稱：" + response.name + "<br/>";
+                        //html += "會員 email：" + response.email;
+                        //target.innerHTML = html;
+
+                        $("#userAccount").val(response.email)
+                        $("#userPassWord").val("fbuser123*")
+                        $("#userPassWordCheck").val("fbuser123*")
+                        $("#city").val("臉書用戶")
+                        $("#address").val("臉書登入用戶")
+                        $("#phoneNumber").val("0912345678")
+                        $("#firstName").val(response.name)
+                        $("#lastName").val("臉書")
+                        $("#birthday").val("1945-01-08")
+                        $("#identityNumber").val("F447878547")
+                        //$("#profileImg").val("")
+                        $("#selfDescription").val("臉書登入用戶")
+                        $("#email").val(response.email)
+                  
+    
+                    });
+                }
+
+                // 登入 FB, 未偵測到加入會員
+                else if (response.status === "not_authorized") {
+                    target.innerHTML = "已登入 FB，但未加入MaiMai  ";
+                }
+
+                // 未登入 FB
+                else {
+                    target.innerHTML = "未登入 FB";
+                }
+            }
+
+        });
+
+                //FB登入
+        //function checkLoginState() {
+        //      FB.getLoginStatus(function (response) {
+        //        statusChangeCallback(response);
+        //    });
+        //}
+             
 
     
  
