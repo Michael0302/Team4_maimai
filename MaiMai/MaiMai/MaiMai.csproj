@@ -264,6 +264,8 @@
     <Content Include="Content\cssCHIEN\Comment.css" />
     <Content Include="Content\cssCHIEN\personalMarket.css" />
     <Content Include="Content\ImageCHIEN\maimaiLOGO.svg" />
+    <Content Include="Content\ImageCHIEN\廣告.PNG" />
+    <Content Include="Content\ImageCHIEN\廣告2.PNG" />
     <Content Include="Content\ProductPostImg\30種方式提升內容創作力.jpg" />
     <Content Include="Content\ProductPostImg\3C.jpg" />
     <Content Include="Content\ProductPostImg\a2.jfif" />
