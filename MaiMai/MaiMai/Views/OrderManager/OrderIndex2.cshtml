@@ -154,8 +154,8 @@
 
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="checkout()">結帳</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消訂單</button>
+                <button id="checkBTN" type="button" class="btn btn-warning" data-dismiss="modal" onclick="checkout()">結帳</button>
+                <button id="cancelBTN" type="button" class="btn btn-secondary" data-dismiss="modal">取消訂單</button>
             </div>
         </div>
     </div>
@@ -321,7 +321,7 @@
                         <td> ${item.OrderId}</td>
                         <td>${year} - ${month} - ${date}</td>
                           <td><div class="photo"><img   src="../Content/ProductPostImg/${item.productImg}"><div></td>
-                        <td>${item.ProductPostName}</td>
+                        <td><a class="btn" role="button" href="../../NewMaimaiIndex/ProdutPost?PostID=${item.ProductPostID}">   <h3 id="postName${i}">${item.ProductPostName}</h3></a></td>
                         <td>${item.buyerName}</td>
                         <td> 賣家出貨中</td>
                        <td></td>
@@ -362,7 +362,7 @@
                     var date = new Date(Milliseconds).getDate();
 
                     text += `
-                    <tr onclick="showDetail(this,${item.OrderId},1)" data-toggle='modal' data-target='#showOrder')>
+                    <tr onclick="showDetail(this,${item.OrderId},1,1)" data-toggle='modal' data-target='#showOrder')>
                     <td>${item.OrderId}</td>
                     <td>${year} - ${month} - ${date}</td>
                     <td >${item.price}</td>
@@ -417,10 +417,15 @@
     };
 
 
-    function showDetail(elem, id, index) {
-
-        console.log(elem)
-        console.log(id)
+    function showDetail(elem, id, index, check) {
+        if (check == 1) {
+            $("#checkBTN").attr("hidden", "true");
+            $("#cancelBTN").html(`關閉`);
+        } else {
+            $("#checkBTN").removeAttr("hidden");
+            $("#cancelBTN").html(`取消訂單`);
+        }
+        
 
         $.ajax({
             url: "/OrderManager/showOrderRecipt",
