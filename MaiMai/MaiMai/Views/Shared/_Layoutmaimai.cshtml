@@ -157,7 +157,9 @@
     </nav>
 
     @RenderBody()
-    <div class="chatbox d-flex justify-content-center align-content-center btn"><img src="~/Maimai/images/svg/chat.svg"/><div id="chatroomCount" class=""></div></div>
+    @if (Request.Cookies["LoginID"] != null)
+    {
+        <div class="chatbox d-flex justify-content-center align-content-center btn"><img src="~/Maimai/images/svg/chat.svg" /><div id="chatroomCount" class=""></div></div>
 
     <div class="chatmsg" style="">
         <div id="chatmsgClose" class="d-flex justify-content-start align-content-center chatmsgClose">
@@ -194,6 +196,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             </div>
         </div>
     </div>
+    }
 
     @*系統通知modal>>>>>>>>>>>>>*@
     <div class="modal fade" id="sysInfo" tabindex="-1" role="dialog" aria-labelledby="sysInfoTitle"
@@ -259,7 +262,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         </div>
     </footer>
     @*<script src="https://code.jquery.com/jquery-3.5.1.js"
-            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>*@
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>*@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -313,12 +316,21 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             success: function (text) {
                 var test = []
                 $("#inputsearch").autocomplete({
-                    source: test
+                    source: test,
+                    select: function (event, ui) {
+                        $.ajax({
+                            url: "/NewMaimaiIndex/getAutocompleteID",
+                            data: { ProductPostName: ui.item.value },
+                            success: function (result) {
+                                window.open(`NewMaimaiIndex/ProdutPost?PostID=${result}`);
+                            }
+                        })
+                    }
                 });
                 $(text).each(function (index, text) {
                     test.push(text.name);
                 })
-            }
+            }           
         })
 
 
@@ -370,7 +382,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         $(function () {
             getConent();
             //比對資料表Notification有無符合自己id or 群組的通知
-            getNotiRecord()           
+            getNotiRecord()
 
             //取消bubble事件(點通知 通知欄不會縮小)
             //$("body").on('click', '[data-stopPropagation]', function (e) {
@@ -424,7 +436,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 $('.chatmsg').css('transform', 'translate(500px, 500px)');
             })
 
-            
+
         })
 
 
@@ -717,7 +729,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                                 if (data.UserName == name.textContent) {
                                     getRecord(data.UserID, data.UserName);
                                     return false;
-                                }                                
+                                }
                             });
                         $("#chatroom").html(`
                             <div class="chatReciver d-flex">
