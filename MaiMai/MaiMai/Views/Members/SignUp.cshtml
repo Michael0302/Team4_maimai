@@ -626,7 +626,7 @@
                 if (response.status === 'connected') {
                     //html = "已登入 FB，並加入 MaiMai  <br/>";
 
-                    window.FB.api('/me?fields=id,name,email', function (response) {
+                    window.FB.api('/me?fields=id,name,email,picture', function (response) {
                         console.log(response);
                         //html += "會員暱稱：" + response.name + "<br/>";
                         //html += "會員 email：" + response.email;
@@ -657,7 +657,7 @@
 
                 // 未登入 FB
                 else {
-                    target.innerHTML = "未登入 FB";
+                    //target.innerHTML = "未登入 FB";
                 }
             }
 
