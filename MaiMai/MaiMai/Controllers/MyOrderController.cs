@@ -352,24 +352,24 @@ namespace MaiMai.Controllers
 
 
         maimaiRepository<Comment> cmdb = new maimaiRepository<Comment>();
-        public ActionResult saveComment(string OrderID, string starRate, string description)
+        public ActionResult saveComment(int orderDetailID, string starRate, string description)
         {
-            var orderID = Convert.ToInt32(OrderID);
+            var orderID = db.OrderDetail.Find(orderDetailID).OrderID;
             var star = Convert.ToInt32(starRate);
             var UserID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var od = odtail.GetbyID(orderID);
+            var od = odtail.GetbyID(orderDetailID);
 
             //var orderDetailID=
             var loginID = Convert.ToInt32(Request.Cookies["LoginID"].Value);
-            var SellerID = db.OrderDetail.Find(od).SellerID;
-            var buyerID = db.Order.Find(OrderID).buyerUserID;
-            var commentedPSNid = (loginID == SellerID) ? SellerID : buyerID;
+            var SellerID = db.OrderDetail.FirstOrDefault(s=>s.OrderID==orderID).SellerID;
+            var buyerID = db.Order.Find(orderID).buyerUserID;
+            var commentedPSNid = (loginID == buyerID) ? SellerID : buyerID;
 
             Comment cmt = new Comment() {
                 starRate= star,
                 commentDescription=description,
                 UserID=UserID,
-                OrderdetalID = orderID,
+                OrderdetalID = orderDetailID,
                 CommentorUserID= commentedPSNid,
             };
 
@@ -389,7 +389,6 @@ namespace MaiMai.Controllers
 
                 odRepository.Update(o);
             }
-
 
             odtail.Update(od);
             cmdb.Create(cmt);
@@ -430,7 +429,7 @@ namespace MaiMai.Controllers
             var MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
             //harsh key--5294y06JbISpM5x9 Hash IV--v77hoKGq4kWxNNIS
-            var is4 = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=https://localhost:44340/&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName=" + ItemName + "&MerchantID=2000132&MerchantTradeDate=" + MerchantTradeDate + "&MerchantTradeNo=" + MerchantTradeNo + "&PaymentType=aio&Redeem=&ReturnURL=https://localhost:44340/&StoreID=&TotalAmount=" + totalAmount + "&TradeDesc=" + tradeDescription + "&HashIV=v77hoKGq4kWxNNIS";
+            var is4 = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=https://localhost:44340/&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName=" + tradeDescription + "&MerchantID=2000132&MerchantTradeDate=" + MerchantTradeDate + "&MerchantTradeNo=" + MerchantTradeNo + "&PaymentType=aio&Redeem=&ReturnURL=https://localhost:44340/&StoreID=&TotalAmount=" + totalAmount + "&TradeDesc=" + tradeDescription + "&HashIV=v77hoKGq4kWxNNIS";
 
             is4 = Server.UrlEncode(is4).ToLower();//正確
             var bytes = System.Text.Encoding.Default.GetBytes(is4);

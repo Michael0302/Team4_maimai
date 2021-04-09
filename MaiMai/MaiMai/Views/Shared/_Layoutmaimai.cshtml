@@ -653,7 +653,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 data: { UserID: UserID },
                 success: function (record) {
                     $("#chatroom").html(`
-                            <div class="chatReciver d-flex"><div id="isConnect${UserID}" class="isconnected mt-2 mr-1"></div>${UserName}</div>
+                            <div class="chatReciver d-flex"><div id="isConnect${UserID}" class="isconnected mt-2 mr-1"></div><a href="../PersonalMarket/Personal_Index_WithoutLogin?UserID=${UserID}">${UserName}</a></div>
                             <div id="chatbody${UserID}" style="height:290px;overflow-y:scroll"></div>
                             <div>
                             <input id="chattext" class="chatInput" onkeyup="useEnter(${UserID})" type="text" style="position:fixed; bottom:8px;right:90px;width:230px" />
@@ -701,23 +701,28 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
         //聯絡賣家
         function displayChat(ProductPostID) {
-            $('.chatmsg').css('transform', 'translateY(0)')
+            $('.chatmsg').css('transform', 'translate(0, 0)')
+            var login = getCookie("LoginID");
             if (ProductPostID != null || ProductPostID != "") {
                 $.ajax({
                     url: "@Url.Action("getChat_P", "backstage")",
                     data: { ProductPostID: ProductPostID},
                     success: function (data) {
                         $(data).each(function (index, data) {
+                            if (data.UserID == login) {
+                                swal("無法與自己聊天", "", "error");
+                                return false;
+                            }
                             $("#chatNameList div:first-child").each(function (index, name) {
                                 if (data.UserName == name.textContent) {
                                     getRecord(data.UserID, data.UserName);
                                     return false;
-                                }
+                                }                                
                             });
                         $("#chatroom").html(`
                             <div class="chatReciver d-flex">
                                 <div id="isConnect${data.UserID}" class="isconnected mt-2 mr-1"></div>
-                                ${data.UserName}
+                                <a href="../PersonalMarket/Personal_Index_WithoutLogin?UserID=${data.UserID}">${data.UserName}</a>
                             </div>
                             <div id="chatbody${data.UserID}" style="height:290px;overflow-y:scroll">
                                 <div class="d-flex justify-content-start">

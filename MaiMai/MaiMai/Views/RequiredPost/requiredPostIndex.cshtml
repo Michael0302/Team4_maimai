@@ -247,7 +247,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onchange="addStatus(this,${i}) "type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i}) "type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -383,7 +383,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onchange="addStatus(this,${i}) "type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i}) "type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -459,8 +459,17 @@
         }
     });
 
-    function addStatus(ele, index) {
-        $(`showProduct${index}`).attr('value',2)
+    function addStatus(index) {
+        if ($(`#showProduct${index}`).prop("checked") == true) {
+
+
+            $(`#showProduct${index}`).val(2);
+
+        }
+        else {
+
+            $(`#showProduct${index}`).val(1);
+        } 
 
     }
 

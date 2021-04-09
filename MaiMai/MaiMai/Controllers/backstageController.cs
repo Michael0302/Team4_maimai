@@ -270,7 +270,7 @@ namespace MaiMai.Controllers
 
         public ActionResult getinfoRecord_P()
         {
-            var infoRecord = db.Notification.Select(s => new
+            var infoRecord = db.Notification.Where(m=>m.Category =="系統").Select(s => new
                                             {
                                                 SenderID = s.SenderID,
                                                 ReciverLevel = s.ReciverLevel,
@@ -590,10 +590,10 @@ namespace MaiMai.Controllers
             };
         }
 
-        //徵求台列表
+        //徵求台上架列表
         public ActionResult getRequirePostList_P()
         {
-            var RequirePostList = db.RequiredPost.Select(s => new
+            var RequirePostList = db.RequiredPost.Where(m=>m.isPast == false).Select(s => new
             {
                 RequiredPostID = s.RequiredPostID,
                 postDescription = s.postDescription,
@@ -603,7 +603,27 @@ namespace MaiMai.Controllers
                 TagID = s.TagID,
                 TagName = s.Tag.tagName,
                 estimatePrice = s.estimatePrice,
+                isPast = s.isPast,
             }).OrderByDescending(o=>o.RequiredPostID).ToList();
+
+            return Json(RequirePostList, JsonRequestBehavior.AllowGet);
+        }
+
+        //徵求台下架列表
+        public ActionResult getOff_SaleRequirePostList_P()
+        {
+            var RequirePostList = db.RequiredPost.Where(m => m.isPast == true).Select(s => new
+            {
+                RequiredPostID = s.RequiredPostID,
+                postDescription = s.postDescription,
+                postName = s.postName,
+                UserID = s.UserID,
+                UserName = s.Member.firstName,
+                TagID = s.TagID,
+                TagName = s.Tag.tagName,
+                estimatePrice = s.estimatePrice,
+                isPast = s.isPast,
+            }).OrderByDescending(o => o.RequiredPostID).ToList();
 
             return Json(RequirePostList, JsonRequestBehavior.AllowGet);
         }
@@ -631,6 +651,15 @@ namespace MaiMai.Controllers
 
             return Json(RequirePost, JsonRequestBehavior.AllowGet);
         }
+
+        //下架徵求文
+        public void delRequirePost(int RequiredPostID)
+        {
+            var requirePostStatus = db.RequiredPost.Find(RequiredPostID);
+            requirePostStatus.isPast = true;
+            db.SaveChanges();
+        }
+
     }
 
 
