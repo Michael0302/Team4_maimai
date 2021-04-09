@@ -546,6 +546,8 @@
                                                 <div class="col-md-12 col-lg-6">
                                                 <textarea id="infotext" style="resize:none" cols="50" rows="10" placeholder="請輸入通知內容"></textarea>
                                                 <input class="btn btn_info" value="發送" onclick="pushInfo()"/>
+                                                <input class="btn btn-block " value="All_Demo" onclick="AllDemo()"/>
+                                                <input class="btn btn-block" value="One_Demo" onclick="OneDemo()"/>
                                                 </div>
                                                 <div id="pushrecord" class="col-md-12 col-lg-6">
                                                     <span style="color:#6C6C6C">發送紀錄</span>
@@ -592,7 +594,19 @@
                 })
             }
         })
-    }
+        }
+
+     //AllDemo
+        function AllDemo() {
+            $("#searchID").val(`ALL`);
+            $("#infotext").html(`系統將於今日4/14，晚間11:59，進行維護，預計時間兩個小時`);
+        }
+
+        //OneDemo
+        function OneDemo() {
+            $("#searchID").val(`14`);
+            $("#infotext").html(`請注意，違規次數過多`);
+        }
 
     //發通知
     function pushInfo() {
