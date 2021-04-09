@@ -64,12 +64,12 @@
 
                 <thead>
                     <tr>
-                        <th scope="col">訂單編號</th>
-                        <th scope="col">建立時間</th>
+                        <th scope="col" width="100px">訂單編號</th>
+                        <th scope="col"width="100px">建立時間</th>
                         <th scope="col">商品細項</th>
                         <th scope="col"></th>
-                        <th scope="col">賣家商城</th>
-                        <th scope="col">訂單狀態</th>
+                        <th scope="col" width="100px">賣家商城</th>
+                        <th scope="col" width="100px">訂單狀態</th>
                         <th scope="col"></th>
 
                     </tr>
@@ -366,7 +366,7 @@
                     <td>${item.OrderId}</td>
                     <td>${year} - ${month} - ${date}</td>
                     <td >${item.price}</td>
-                    <td>${item.orderStatusString}</td>
+                    <td name="${item.orderStatusString}">已完成</td>
 
                     </tr>`
 
