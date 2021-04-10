@@ -61,7 +61,7 @@
         <div class="col-12 col-lg-10">
 
             @*更新部分頁面*@
-            <div id="show">
+            <div id="show" class="showCss">
             </div>
 
             <div class="modal fade" id="editMember" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
@@ -186,10 +186,16 @@
                 url: "@Url.Action("getMemberList_P", "backstage")",
                 type: "GET",
                 success: function (memberList) {
-                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>編號</th><th>帳號</th><th>姓名</th><th>會員等級</th><th>信箱</th><th></th></tr></thead> <tbody id='showList'></tbody></table>");
-                    $(memberList).each(function(index, item){
-                        $("#showList").append(`<tr><td>${item.UserID}</td><td>${item.userAccount}</td><td>${item.Name}</td><td>${item.userLevelString}</td><td>${item.email}</td><td><button type='button' class='btn btncss_inside' data-toggle='modal' onclick='getMember(${item.UserID})' data-target='#editMember'>查看</button></td></tr>`);
-                    });
+                    $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>編號</th><th>帳號</th><th>姓名</th><th>會員等級</th><th>信箱</th><th></th></tr></thead> <tbody id='showList'></tbody></table>").pagination({
+                        dataSource: memberList,
+                        pageSize: 8,
+                        callback: function (data) {
+                            $("#showList").html("");
+                            $(data).each(function (index, item) {
+                                $("#showList").append(`<tr><td>${item.UserID}</td><td>${item.userAccount}</td><td>${item.Name}</td><td>${item.userLevelString}</td><td>${item.email}</td><td><button type='button' class='btn btncss_inside' data-toggle='modal' onclick='getMember(${item.UserID})' data-target='#editMember'>查看</button></td></tr>`);
+                            });
+                        }
+                    });                    
                 }
             })
         }
@@ -265,10 +271,16 @@
             type: "GET",
             data: {userLevel:"1"},
             success: function (memberList) {
-                $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>帳號</th><th>姓名</th><th>會員等級</th><th>信箱</th><th>城市</th><th></th></tr></thead> <tbody id='showList'></tbody></table>");
-                $(memberList).each(function (index, item) {
-                    $("#showList").append(`<tr><td>${item.userAccount}</td><td>${item.Name}</td><td>${item.userLevelString}</td><td>${item.email}</td><td>${item.city}</td><td><button type='button' class='btn btncss_inside' data-toggle='modal' onclick='getMember(${item.UserID})' data-target='#editMember'>查看</button></td></tr>`);
-                });
+                $("#show").html("<div class='d-flex justify-content-center' id='search'></div> <table class='table table-hover'><thead class='table-dark'><tr id='showTh'> <th>帳號</th><th>姓名</th><th>會員等級</th><th>信箱</th><th>城市</th><th></th></tr></thead> <tbody id='showList'></tbody></table>").pagination({
+                    dataSource: memberList,
+                    pageSize: 8,
+                    callback: function (data) {
+                        $("showList").html("");
+                        $(data).each(function (index, item) {
+                            $("#showList").append(`<tr><td>${item.userAccount}</td><td>${item.Name}</td><td>${item.userLevelString}</td><td>${item.email}</td><td>${item.city}</td><td><button type='button' class='btn btncss_inside' data-toggle='modal' onclick='getMember(${item.UserID})' data-target='#editMember'>查看</button></td></tr>`);
+                        });
+                    }
+                });                
             }
         })
     }
@@ -314,21 +326,25 @@
                                                 </tr>
                                             </thead>
                                             <tbody id='showList'></tbody>
-                                        </table>`)
-                    $(orderList).each(function (index, orderList) {
-                        var orderStatus = "";
-                        switch (orderList.orderStatus) {
-                            case 0: orderStatus = "已下單"; break;
-                            case 1: orderStatus = "已結帳"; break;
-                            case 2: orderStatus = "已評論"; break;
-                            case 3: orderStatus = "已完成"; break;
-                            case 4: orderStatus = "已取消"; break;
-                        }
-                        var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
-                        var year = new Date(Milliseconds).getFullYear();
-                        var month = new Date(Milliseconds).getMonth() + 1;
-                        var date = new Date(Milliseconds).getDate();
-                        $("#showList").append(`
+                                        </table>`).pagination({
+                                            dataSource: orderList,
+                                            pageSize: 8,
+                                            callback: function (data) {
+                                                $("#showList").html("");
+                                                $(data).each(function (index, orderList) {
+                                                    var orderStatus = "";
+                                                    switch (orderList.orderStatus) {
+                                                        case 0: orderStatus = "已下單"; break;
+                                                        case 1: orderStatus = "已結帳"; break;
+                                                        case 2: orderStatus = "已評論"; break;
+                                                        case 3: orderStatus = "已完成"; break;
+                                                        case 4: orderStatus = "已取消"; break;
+                                                    }
+                                                    var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
+                                                    var year = new Date(Milliseconds).getFullYear();
+                                                    var month = new Date(Milliseconds).getMonth() + 1;
+                                                    var date = new Date(Milliseconds).getDate();
+                                                    $("#showList").append(`
                                                                 <tr>
                                                                 <td>${orderList.OrderId}</td>
                                                                 <td>${year}-${month}-${date}</td>
@@ -338,7 +354,9 @@
                                                                 <td>${orderStatus}</td>
                                                                 <td><button type='button' class='btn btncss_inside' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td>
                                                                 </tr>`)
-                    })
+                                                })
+                                            }
+                                        })                    
                 }
             })
     }
@@ -356,21 +374,25 @@
                                     <tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr>
                                     </thead>
                                     <tbody id='showList'></tbody>
-                                    </table>`)
-                $(orderList).each(function (index, orderList) {
-                        var orderStatus = "";
-                        switch (orderList.orderStatus) {
-                            case 0: orderStatus = "已下單"; break;
-                            case 1: orderStatus = "已結帳"; break;
-                            case 2: orderStatus = "已評論"; break;
-                            case 3: orderStatus = "已完成"; break;
-                            case 4: orderStatus = "已取消"; break;
-                        }
-                    var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
-                    var year = new Date(Milliseconds).getFullYear();
-                    var month = new Date(Milliseconds).getMonth() + 1;
-                    var date = new Date(Milliseconds).getDate();
-                    $("#showList").append(`
+                                    </table>`).pagination({
+                                        dataSource: orderList,
+                                        pageSize: 8,
+                                        callback: function (data) {
+                                            $("#showList").html("");
+                                            $(data).each(function (index, orderList) {
+                                                var orderStatus = "";
+                                                switch (orderList.orderStatus) {
+                                                    case 0: orderStatus = "已下單"; break;
+                                                    case 1: orderStatus = "已結帳"; break;
+                                                    case 2: orderStatus = "已評論"; break;
+                                                    case 3: orderStatus = "已完成"; break;
+                                                    case 4: orderStatus = "已取消"; break;
+                                                }
+                                                var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
+                                                var year = new Date(Milliseconds).getFullYear();
+                                                var month = new Date(Milliseconds).getMonth() + 1;
+                                                var date = new Date(Milliseconds).getDate();
+                                                $("#showList").append(`
                                                     <tr>
                                                     <td>${orderList.OrderId}</td>
                                                     <td>${year}-${month}-${date}</td>
@@ -380,7 +402,9 @@
                                                     <td>${orderStatus}</td>
                                                     <td><button type='button' class='btn btncss_inside' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td>
                                                     </tr>`)
-                })
+                                            })
+                                        }
+                                    })                
             }
         })
     }
@@ -398,21 +422,25 @@
                                                             <tr id='showTh'> <th>訂單編號</th><th>建立時間</th><th>買方</th><th>買方姓名</th><th>價錢</th><th>訂單狀態</th><th></th></tr>
                                                         </thead>
                                                     <tbody id='showList'></tbody>
-                                                </table>`)
-                $(orderList).each(function (index, orderList) {
-                    var orderStatus = "";
-                    switch (orderList.orderStatus) {
-                        case 0: orderStatus = "已下單"; break;
-                        case 1: orderStatus = "已結帳"; break;
-                        case 2: orderStatus = "已評論"; break;
-                        case 3: orderStatus = "已完成"; break;
-                        case 4: orderStatus = "已取消"; break;
-                    }
-                    var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
-                    var year = new Date(Milliseconds).getFullYear();
-                    var month = new Date(Milliseconds).getMonth() + 1;
-                    var date = new Date(Milliseconds).getDate();
-                    $("#showList").append(`
+                                                </table>`).pagination({
+                                                    dataSource: orderList,
+                                                    pageSize: 8,
+                                                    callback: function (data) {
+                                                        $("#showList").html("");
+                                                        $(data).each(function (index, orderList) {
+                                                            var orderStatus = "";
+                                                            switch (orderList.orderStatus) {
+                                                                case 0: orderStatus = "已下單"; break;
+                                                                case 1: orderStatus = "已結帳"; break;
+                                                                case 2: orderStatus = "已評論"; break;
+                                                                case 3: orderStatus = "已完成"; break;
+                                                                case 4: orderStatus = "已取消"; break;
+                                                            }
+                                                            var Milliseconds = parseInt(orderList.createdTime.replace(/\D/igm, ""));
+                                                            var year = new Date(Milliseconds).getFullYear();
+                                                            var month = new Date(Milliseconds).getMonth() + 1;
+                                                            var date = new Date(Milliseconds).getDate();
+                                                            $("#showList").append(`
                                                         <tr>
                                                         <td>${orderList.OrderId}</td>
                                                         <td>${year}-${month}-${date}</td>
@@ -422,7 +450,9 @@
                                                         <td>${orderStatus}</td>
                                                         <td><button type='button' class='btn btncss_inside' onclick='getOrderDetail(${orderList.OrderId},${orderList.orderStatus})'>查看</button></td>
                                                         </tr>`)
-                })
+                                                        })
+                                                    }
+                                                })                
             }
         })
     }
@@ -716,18 +746,21 @@
                                                         </tbody>
                                                     </table>
                                                 <div class='d-flex justify-content-center'></div>
-                                    `)
+                                    `).pagination({
+                                        dataSource: allProduct,
+                                        pageSize: 8,
+                                        callback: function (data) {
+                                            $("#showList").html("");
+                                            $(data).each(function (index, allproduct) {
+                                                var Milliseconds = parseInt(allproduct.createdTime.replace(/\D/igm, ""));
+                                                var year = new Date(Milliseconds).getFullYear();
+                                                var month = new Date(Milliseconds).getMonth() + 1;
+                                                var date = new Date(Milliseconds).getDate();
+                                                var hour = new Date(Milliseconds).getHours();
+                                                var min = new Date(Milliseconds).getMinutes();
+                                                var sec = new Date(Milliseconds).getSeconds();
 
-                $(allProduct).each(function (index, allproduct) {
-                    var Milliseconds = parseInt(allproduct.createdTime.replace(/\D/igm, ""));
-                    var year = new Date(Milliseconds).getFullYear();
-                    var month = new Date(Milliseconds).getMonth() + 1;
-                    var date = new Date(Milliseconds).getDate();
-                    var hour = new Date(Milliseconds).getHours();
-                    var min = new Date(Milliseconds).getMinutes();
-                    var sec = new Date(Milliseconds).getSeconds();
-
-                    $("#showList").append(`
+                                                $("#showList").append(`
                                             <tr data-toggle='modal'  data-target='#editProduct' onclick="getProductPostFromAll(${allproduct.ProductPostID})">
                                                     <td>${allproduct.ProductPostID}</td>
                                                     <td>${allproduct.productName}</td>
@@ -739,7 +772,9 @@
                                                     </td>
                                                     </tr>
                                                 `)
-                })
+                                            })
+                                        }
+                                    })
             }
         })
     }
@@ -838,18 +873,21 @@
                                                         </tbody>
                                                     </table>
                                                 <div class='d-flex justify-content-center'></div>
-                                    `)
+                                    `).pagination({
+                                        dataSource: allProduct,
+                                        pageSize: 8,
+                                        callback: function (data) {
+                                            $("#showList").html("");
+                                            $(data).each(function (index, allproduct) {
+                                                var Milliseconds = parseInt(allproduct.createdTime.replace(/\D/igm, ""));
+                                                var year = new Date(Milliseconds).getFullYear();
+                                                var month = new Date(Milliseconds).getMonth() + 1;
+                                                var date = new Date(Milliseconds).getDate();
+                                                var hour = new Date(Milliseconds).getHours();
+                                                var min = new Date(Milliseconds).getMinutes();
+                                                var sec = new Date(Milliseconds).getSeconds();
 
-                $(allProduct).each(function (index, allproduct) {
-                    var Milliseconds = parseInt(allproduct.createdTime.replace(/\D/igm, ""));
-                    var year = new Date(Milliseconds).getFullYear();
-                    var month = new Date(Milliseconds).getMonth() + 1;
-                    var date = new Date(Milliseconds).getDate();
-                    var hour = new Date(Milliseconds).getHours();
-                    var min = new Date(Milliseconds).getMinutes();
-                    var sec = new Date(Milliseconds).getSeconds();
-
-                    $("#showList").append(`
+                                                $("#showList").append(`
                                             <tr data-toggle='modal'  data-target='#editProduct' onclick="getProductPostFromAll (${allproduct.ProductPostID})">
                                                     <td>${allproduct.ProductPostID}</td>
                                                     <td>${allproduct.productName}</td>
@@ -861,7 +899,9 @@
                                                     </td>
                                                     </tr>
                                                 `)
-                })
+                                            })
+                                        }
+                                    })
             }
         })
     }
@@ -887,35 +927,42 @@
                                             </thead>
                                         <tbody id='showList'></tbody>
                                     </table>`);
-                    $(report).each(function (index, item) {
-                        var reportStatus = "";
-                        if (item.reportStatus == 0)
-                            reportStatus = "未處理";
-                        else
-                            reportStatus = "已處理";
-                        var Milliseconds = parseInt(item.createdTime.replace(/\D/igm, ""));
-                        var year = new Date(Milliseconds).getFullYear();
-                        var month = new Date(Milliseconds).getMonth() + 1;
-                        var date = new Date(Milliseconds).getDate();
-                        var hour = new Date(Milliseconds).getHours();
-                        var min = new Date(Milliseconds).getMinutes();
-                        var sec = new Date(Milliseconds).getSeconds();
+                    $("#show").pagination({
+                        dataSource: report,
+                        pageSize: 8,
+                        callback: function (data) {
+                            $("#showList").html("");
+                            $(data).each(function (index, item) {
+                            var reportStatus = "";
+                            if (item.reportStatus == 0)
+                                reportStatus = "未處理";
+                            else
+                                reportStatus = "已處理";
+                            var Milliseconds = parseInt(item.createdTime.replace(/\D/igm, ""));
+                            var year = new Date(Milliseconds).getFullYear();
+                            var month = new Date(Milliseconds).getMonth() + 1;
+                            var date = new Date(Milliseconds).getDate();
+                            var hour = new Date(Milliseconds).getHours();
+                            var min = new Date(Milliseconds).getMinutes();
+                            var sec = new Date(Milliseconds).getSeconds();
 
-                        $("#showList").append(`
-                                                                <tr data-toggle='modal'  data-target='#report' onclick="getReportDetail(${item.ReportID})">
-                                                                    <td>${item.ReportID}</td>
-                                                                    <td>[${item.reportorID}]${item.reportorName}</td>
-                                                                    <td>[${item.repotedUserID}]${item.repotedUserName}</td>
-                                                                    <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>
-                                                                    <td><a  id="reportStauts${item.ReportID}">${reportStatus}</a></td>
-                                                                    <td>${item.ReportDetailTag}</td>
-                                                                </tr>`);
-                        $("a").each(function () {
-                            if ($(this).text() == "未處理") {
-                                $(this).attr("style", "color:red;");
-                            }
-                        })
+                            $("#showList").append(`
+                                                                    <tr data-toggle='modal'  data-target='#report' onclick="getReportDetail(${item.ReportID})">
+                                                                        <td>${item.ReportID}</td>
+                                                                        <td>[${item.reportorID}]${item.reportorName}</td>
+                                                                        <td>[${item.repotedUserID}]${item.repotedUserName}</td>
+                                                                        <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>
+                                                                        <td><a  id="reportStauts${item.ReportID}">${reportStatus}</a></td>
+                                                                        <td>${item.ReportDetailTag}</td>
+                                                                    </tr>`);
+                            $("a").each(function () {
+                                if ($(this).text() == "未處理") {
+                                    $(this).attr("style", "color:red;");
+                                }
+                            })
                     });
+                        }
+                    })
                 }
             })
     }
@@ -1029,11 +1076,13 @@
                                                 </tr>
                                             </thead>
                                         <tbody id='showList'></tbody>
-                                    </table>`);
-
-                    $(report).each(function (index, item) {
-
-                        $("#showList").append(`
+                                    </table>`).pagination({
+                                        dataSource: report,
+                                        pageSize: 8,
+                                        callback: function (data) {
+                                            $("#showList").html("");
+                                            $(data).each(function (index, item) {
+                                                $("#showList").append(`
                                                                 <tr data-toggle='modal'  data-target='#requirePost' onclick="getRequirePost(${item.RequiredPostID})">
                                                                     <td>${item.RequiredPostID}</td>
                                                                     <td>[${item.UserID}]${item.UserName}</td>
@@ -1042,7 +1091,9 @@
                                                                     <td>${item.estimatePrice}</td>
                                                                 </tr>`);
 
-                    });
+                                            });
+                                        }
+                                    });
                 }
             })
         }
@@ -1066,11 +1117,13 @@
                                                 </tr>
                                             </thead>
                                         <tbody id='showList'></tbody>
-                                    </table>`);
-
-                    $(report).each(function (index, item) {
-
-                        $("#showList").append(`
+                                    </table>`).pagination({
+                                        dataSource: report,
+                                        pageSize: 8,
+                                        callback: function (data) {
+                                            $("#showList").html("");
+                                            $(data).each(function (index, item) {
+                                                $("#showList").append(`
                                                                 <tr data-toggle='modal'  data-target='#requirePost' onclick="getRequirePost(${item.RequiredPostID},1)">
                                                                     <td>${item.RequiredPostID}</td>
                                                                     <td>[${item.UserID}]${item.UserName}</td>
@@ -1078,8 +1131,9 @@
                                                                     <td>${item.TagName}</td>
                                                                     <td>${item.estimatePrice}</td>
                                                                 </tr>`);
-
-                    });
+                                            });
+                                        }
+                                    });
                 }
             })
         }
