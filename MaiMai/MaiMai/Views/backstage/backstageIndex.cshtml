@@ -964,6 +964,8 @@
                                                 `)
                     if (oneProduct.status == 1) {
                         $("#cancelProd").html(`<button type='button' class='btn btn_del' onclick="cancelProduct(${oneProduct.ProductPostID})">下架此商品</button>`);
+                    } else {
+                        $("#cancelProd").html("");
                     }
                 })
             }
@@ -1008,7 +1010,7 @@
                                             <div class='d-flex justify-content-center mb-3'><input placeholder="請輸入關鍵字" type='text'  id='search_generic'/><button class="btn search_generic" onclick="getSearchDelProducts_P()">搜尋</button></div>
                                                     <table class='table table-hover'>
                                                         <thead class='table-dark'>
-                                                            <tr id='showTh'><th>商品編號</th><th>商品名稱</th><th>價錢</th><th>庫存</th><th>建立時間</th><th></th></tr>
+                                                            <tr id='showTh'><th>商品編號</th><th>商品名稱</th><th>價錢</th><th>庫存</th><th>建立時間</th></tr>
                                                         </thead>
                                                         <tbody id='showList'>
                                                         </tbody>
@@ -1034,10 +1036,7 @@
                                                     <td>${allproduct.productName}</td>
                                                     <td>${allproduct.price}</td>
                                                     <td>${allproduct.inStoreQTY}</td>
-                                                    <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>
-                                                    <td>
-                                                    <button type='button' class='btn btncss_inside' onclick="getProductPostFromAll(${allproduct.ProductPostID})">查看</button>
-                                                    </td>
+                                                    <td>${year}-${month}-${date} ${hour}:${min}:${sec}</td>                                                    
                                                     </tr>
                                                 `)
                                             })
