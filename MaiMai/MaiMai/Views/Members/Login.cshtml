@@ -71,25 +71,29 @@
 
 
                         @*<div>
-                        @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
-                        @Html.TextBoxFor(m => m.email, new { @class = "w-100" })
-                    </div>
-                    <div>
-                        @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
-                        @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100" })
-                    </div>*@
+            @Html.LabelFor(m => m.email, "E-mail", new { @class = "b" })
+            @Html.TextBoxFor(m => m.email, new { @class = "w-100" })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.userPassWord, "密碼", new { @class = "b" })
+            @Html.PasswordFor(m => m.userPassWord, new { @class = "w-100" })
+        </div>*@
                         <div>
                             <label><input type="checkbox" name="RememberMe" />保持登入 </label>
                         </div>
+
                         <input type="submit" value="登入" class="button b green mr3" onclick="myFunction()" />
+                        <input type="button" value="祥耀" class="button  " onclick="demo1()" />
+                        <input type="button" value="嘉文" class="button  " onclick="demo2()" />
+
 
 
 
                         @*<label class="b" for="user_email">電子信箱</label>
-                    <input class="w-100" required="required" autofocus="autofocus" type="email" name="user[email]" id="user_email">
-                    <label class="b" for="user_password">密碼</label>
-                    <input class="w-100" required="required" type="password" name="user[password]" id="user_password">
-                    <input checked="checked" type="hidden" name="user[remember_me]" id="user_remember_me">*@
+        <input class="w-100" required="required" autofocus="autofocus" type="email" name="user[email]" id="user_email">
+        <label class="b" for="user_password">密碼</label>
+        <input class="w-100" required="required" type="password" name="user[password]" id="user_password">
+        <input checked="checked" type="hidden" name="user[remember_me]" id="user_remember_me">*@
                         <div class="mt3">
                             @*<input type="submit" name="commit" value="登入" class="button b green mr3">*@
                             <span class="f7 gray">繼續進行代表你同意<a href="/docs/terms_of_service">服務條款</a>。</span>
@@ -123,8 +127,14 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v10.0&appId=760951437892454&autoLogAppEvents=1" nonce="uw6hH87Q"></script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <script>
-
-
+        function demo1() {
+            $("#userAccount").val("MichaelXiao");
+            $("#userPassWord").val("aa123123");
+        }
+        function demo2() {
+            $("#userAccount").val("winny5028");
+            $("#userPassWord").val("abc49949");
+        }
         function myFunction() {
 
             var userAccount2 = $("#userAccount").val();
