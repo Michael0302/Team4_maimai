@@ -206,6 +206,16 @@ namespace MaiMai.Controllers
             }
             return Json(builder.ToString(), JsonRequestBehavior.AllowGet);
         }
+
+        //Michael add>>>>
+
+        public ActionResult getAutocompleteID(string ProductPostName)
+        {
+            var productName = db.ProductPost.FirstOrDefault(m => m.productName == ProductPostName).ProductPostID;
+
+            return Json(productName, JsonRequestBehavior.AllowGet);
+        }
+        //<<<<<
     }
 
 }
