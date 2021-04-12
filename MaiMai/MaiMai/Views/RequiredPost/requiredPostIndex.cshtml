@@ -238,7 +238,10 @@
 
                             <div class="collapse w-100" id="collapseExample${i}">
                                 <div class="card card-body w-100 shadow" >
+
                                     <span class="btn btn-outline-dark" data-toggle="modal" onclick="report()" data-target="#exampleModalCenter" style="width:60px">檢舉</span>
+
+
                                     <span class="btn" onclick="demoS(${i})">demo-S</span><span class="btn" onclick="demoT(${i})">demo-T</span>
                            
                                         <form class="formFrame mx-auto Commentform${i}" enctype="multipart/form-data">
@@ -247,7 +250,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i}) "type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i})" type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -277,7 +280,7 @@
                                                 </div>
 
 
-                                                <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="price${i}">
+                                                <h6>價格:</h6><input class="ml-2 form-control" type="text" name="price" id="priceC${i}">
                                                 <h6>數量:</h6><input class="ml-2 form-control" type="text" name="inStoreQTY" id="inStoreQTY${i}">
                                                 <h6>
                                                     標籤:
@@ -383,7 +386,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProduct${i}" onclick="addStatus(${i}) "type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProductT${i}"  type="checkbox" name="status" >
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -460,15 +463,20 @@
     });
 
     function addStatus(index) {
+
+        console.log($(`#showProduct${index}`).prop("checked"));
+
         if ($(`#showProduct${index}`).prop("checked") == true) {
 
 
             $(`#showProduct${index}`).val(2);
+            console.log($(`#showProduct${index}`).val());
 
         }
         else {
 
             $(`#showProduct${index}`).val(1);
+            console.log($(`#showProduct${index}`).val());
         } 
 
     }
@@ -834,7 +842,7 @@ ${item.reason}</label>
         $(`#productName${index}`).val("薩諾斯全新無拆封");
 
         $(`#productDescription${index}`).val("全新 未拆，HOTTOYS 預購版");
-        $(`#price_comment${index}`).val("11000");
+        $(`#priceC${index}`).val("11000");
         $(`#inStoreQTY${index}`).val("1");
 
 
@@ -843,7 +851,7 @@ ${item.reason}</label>
         console.log(index);
         $(`#productName${index}`).val("清大大研究所在讀中找打工");
         $(`#productDescription${index}`).val("多益成績955，加拿大交換一年經驗，目前就讀清大財金系，歡迎跟我聯絡");
-        $(`#price_comment${index}`).val("600");
+        $(`#priceC${index}`).val("600");
         $(`#inStoreQTY${index}`).val("1");
 
 

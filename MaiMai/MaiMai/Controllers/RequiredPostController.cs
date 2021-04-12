@@ -174,7 +174,7 @@ namespace MaiMai.Controllers
                     price = ps.price,
                     TagID = ps.TagID,
                     RequiredPostID = ps.RequiredPostID,
-                 
+                   
                     createdTime = DateTime.Now,
                     county = ps.county,
                     district = ps.district,
@@ -187,7 +187,7 @@ namespace MaiMai.Controllers
                 }
                 else
                 {
-                    product.status = 1;
+                   
 
                     product.productImg = ps.upphoto.FileName;
                     string filename = ps.upphoto.FileName;
