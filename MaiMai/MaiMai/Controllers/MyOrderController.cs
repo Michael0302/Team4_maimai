@@ -409,7 +409,7 @@ namespace MaiMai.Controllers
             var obj = db.OrderDetail.Where(x => x.OrderID == OrderId && x.Order.orderStatus == 0).Select(s => new
             {
                 ItemName = s.ProductPost.productName,
-                totalAmount = s.Order.OrderTotalPrice,
+                totalAmount = s.oneProductTotalPrice,
             });
             foreach (var item in obj)
             {
