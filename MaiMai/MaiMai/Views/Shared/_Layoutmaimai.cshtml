@@ -20,7 +20,7 @@
         <link href="~/Content/Backstage_css/backstage.css" rel="stylesheet" />*@
 
     @*Pagination*@
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.css" integrity="sha512-QmxybGIvkSI8+CGxkt5JAcGOKIzHDqBMs/hdemwisj4EeGLMXxCm9h8YgoCwIvndnuN1NdZxT4pdsesLXSaKaA==" crossorigin="anonymous" />
     <title>@Page.Title</title>
     @RenderSection("head", required: false)
     
@@ -157,7 +157,9 @@
     </nav>
 
     @RenderBody()
-    <div class="chatbox d-flex justify-content-center align-content-center btn"><img src="~/Maimai/images/svg/chat.svg"/><div id="chatroomCount" class=""></div></div>
+    @if (Request.Cookies["LoginID"] != null)
+    {
+        <div class="chatbox d-flex justify-content-center align-content-center btn"><img src="~/Maimai/images/svg/chat.svg" /><div id="chatroomCount" class=""></div></div>
 
     <div class="chatmsg" style="">
         <div id="chatmsgClose" class="d-flex justify-content-start align-content-center chatmsgClose">
@@ -194,6 +196,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             </div>
         </div>
     </div>
+    }
 
     @*系統通知modal>>>>>>>>>>>>>*@
     <div class="modal fade" id="sysInfo" tabindex="-1" role="dialog" aria-labelledby="sysInfoTitle"
@@ -258,8 +261,8 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             </div>
         </div>
     </footer>
-    @*<script src="https://code.jquery.com/jquery-3.5.1.js"
-            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>*@
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -313,12 +316,21 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
             success: function (text) {
                 var test = []
                 $("#inputsearch").autocomplete({
-                    source: test
+                    source: test,
+                    select: function (event, ui) {
+                        $.ajax({
+                            url: "/NewMaimaiIndex/getAutocompleteID",
+                            data: { ProductPostName: ui.item.value },
+                            success: function (result) {
+                                window.open(`NewMaimaiIndex/ProdutPost?PostID=${result}`);
+                            }
+                        })
+                    }
                 });
                 $(text).each(function (index, text) {
                     test.push(text.name);
                 })
-            }
+            }           
         })
 
 
@@ -370,7 +382,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
         $(function () {
             getConent();
             //比對資料表Notification有無符合自己id or 群組的通知
-            getNotiRecord()           
+            getNotiRecord()
 
             //取消bubble事件(點通知 通知欄不會縮小)
             //$("body").on('click', '[data-stopPropagation]', function (e) {
@@ -424,7 +436,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 $('.chatmsg').css('transform', 'translate(500px, 500px)');
             })
 
-            
+
         })
 
 
@@ -608,9 +620,9 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                         $(record).each(function (index, record) {
                             $("#chatNameList").append(`
                                         <div id="NameList${record.TargetID}" class="btn NameList d-flex" onclick="getRecord(${record.TargetID}, '${record.TargetName}')">
-                                            <div style="width:30px; height:30px"><img style="width:100%;height:100%;border-radius:50%" src="../Content/ProductPostImg/member/${record.TargetImg}"/></div>
+                                            <div style="width:30px; height:30px"><img style="width:100%;height:100%;border-radius:50%;object-fit:cover" src="../Content/ProductPostImg/member/${record.TargetImg}"/></div>
                                             <div><div class="nameWeight">${record.TargetName}</div>
-                                                <div id="lasttext${record.TargetID}" class="lasttext d-flex"></div>
+                                                <div id="lasttext${record.TargetID}" class="lasttext"></div>
                                             </div>
                                             <div id="chCount${record.TargetID}"></div>
                                         </div>
@@ -653,7 +665,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                 data: { UserID: UserID },
                 success: function (record) {
                     $("#chatroom").html(`
-                            <div class="chatReciver d-flex"><div id="isConnect${UserID}" class="isconnected mt-2 mr-1"></div>${UserName}</div>
+                            <div class="chatReciver d-flex"><div id="isConnect${UserID}" class="isconnected mt-2 mr-1"></div><a href="../PersonalMarket/Personal_Index_WithoutLogin?UserID=${UserID}">${UserName}</a></div>
                             <div id="chatbody${UserID}" style="height:290px;overflow-y:scroll"></div>
                             <div>
                             <input id="chattext" class="chatInput" onkeyup="useEnter(${UserID})" type="text" style="position:fixed; bottom:8px;right:90px;width:230px" />
@@ -701,13 +713,18 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
 
         //聯絡賣家
         function displayChat(ProductPostID) {
-            $('.chatmsg').css('transform', 'translateY(0)')
+            $('.chatmsg').css('transform', 'translate(0, 0)')
+            var login = getCookie("LoginID");
             if (ProductPostID != null || ProductPostID != "") {
                 $.ajax({
                     url: "@Url.Action("getChat_P", "backstage")",
                     data: { ProductPostID: ProductPostID},
                     success: function (data) {
                         $(data).each(function (index, data) {
+                            if (data.UserID == login) {
+                                swal("無法與自己聊天", "", "error");
+                                return false;
+                            }
                             $("#chatNameList div:first-child").each(function (index, name) {
                                 if (data.UserName == name.textContent) {
                                     getRecord(data.UserID, data.UserName);
@@ -717,7 +734,7 @@ c21 130 41 252 44 270 l6 32 64 0 c59 0 65 -2 70 -22z m215 -248 l0 -270 -45
                         $("#chatroom").html(`
                             <div class="chatReciver d-flex">
                                 <div id="isConnect${data.UserID}" class="isconnected mt-2 mr-1"></div>
-                                ${data.UserName}
+                                <a href="../PersonalMarket/Personal_Index_WithoutLogin?UserID=${data.UserID}">${data.UserName}</a>
                             </div>
                             <div id="chatbody${data.UserID}" style="height:290px;overflow-y:scroll">
                                 <div class="d-flex justify-content-start">

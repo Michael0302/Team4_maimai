@@ -58,6 +58,32 @@ namespace MaiMai.Controllers
 
         }
 
+        public ActionResult getSearchMemberList_P(string search)
+        {
+            var result = db.Member.Where(m => m.userAccount.Contains(search) || m.UserID.ToString().Contains(search) || m.firstName.Contains(search) || m.email.Contains(search)).Select(m => new MemberViewModel()
+            {
+                UserID = m.UserID,
+                userAccount = m.userAccount,
+                userPassWord = m.userPassWord,
+                city = m.city,
+                address = m.address,
+                phoneNumber = m.phoneNumber,
+                firstName = m.firstName,
+                lastName = m.lastName,
+                Name = m.lastName + m.firstName,
+                birthday = m.birthday,
+                identityNumber = m.identityNumber,
+                profileImg = m.profileImg,
+                userLevel = m.userLevel,
+                totalStarRate = m.totalStarRate,
+                selfDescription = m.selfDescription,
+                email = m.email,
+                userLevelString = m.userLevel.ToString()
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult getAdminList_P(int userLevel)
         {
 
@@ -203,6 +229,32 @@ namespace MaiMai.Controllers
             return Json(orderlist, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult getSearchOrderList_P(string search)
+        {
+            var result = db.Order.Where(m => m.OrderId.ToString().Contains(search) || m.buyerUserID.ToString().Contains(search) || m.Member.firstName.Contains(search)).Join(db.OrderDetail, x => x.OrderId, y => y.OrderID, (x, y) => new
+            {
+                x.OrderId,
+                x.orderStatus,
+                x.createdTime,
+                x.buyerUserID,
+                x.Member.firstName,
+                //y.SellerID,
+                y.oneProductTotalPrice,
+
+            }).GroupBy(g => new { g.OrderId, g.orderStatus, g.createdTime, g.buyerUserID, g.firstName }).Select(s => new
+            {
+                OrderId = s.Key.OrderId,
+                orderStatus = s.Key.orderStatus,
+                createdTime = s.Key.createdTime,
+                buyerUserID = s.Key.buyerUserID,
+                buyerName = s.Key.firstName,
+                //SellerID =s.Select(i => i.SellerID),
+                price = s.Select(i => i.oneProductTotalPrice).Sum()
+            }).OrderByDescending(o => o.OrderId);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult delOrder_P(int OrderId)
         {
             db.Order.Find(OrderId).orderStatus = 4;
@@ -270,7 +322,7 @@ namespace MaiMai.Controllers
 
         public ActionResult getinfoRecord_P()
         {
-            var infoRecord = db.Notification.Select(s => new
+            var infoRecord = db.Notification.Where(m=>m.Category =="系統").Select(s => new
                                             {
                                                 SenderID = s.SenderID,
                                                 ReciverLevel = s.ReciverLevel,
@@ -332,6 +384,27 @@ namespace MaiMai.Controllers
             return Json(prodlist, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult getSearchAllPorducts_P(string search)
+        {
+            var result = db.ProductPost.Where(m=>(m.ProductPostID.ToString().Contains(search) || m.productName.Contains(search)) && m.status ==1).Select(s => new
+            {
+                ProductPostID = s.ProductPostID,
+                productName = s.productName,
+                productDescription = s.productDescription,
+                productImg = s.productImg,
+                UserName = s.Member.firstName,
+                UserID = s.UserID,
+                price = s.price,
+                TagID = s.TagID,
+                Tag = s.Tag.tagName,
+                createdTime = s.createdTime,
+                inStoreQTY = s.inStoreQTY,
+                RequiredPostID = s.RequiredPostID
+            }).OrderByDescending(o => o.ProductPostID);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         //單一商品貼文
         public ActionResult getProductPostFromAll(int ProductPostID)
         {
@@ -389,6 +462,27 @@ namespace MaiMai.Controllers
             return Json(prodlist, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult getSearchDelProducts_P(string search)
+        {
+            var result = db.ProductPost.Where(m => (m.ProductPostID.ToString().Contains(search) || m.productName.Contains(search)) && m.status == 0).Select(s => new
+            {
+                ProductPostID = s.ProductPostID,
+                productName = s.productName,
+                productDescription = s.productDescription,
+                productImg = s.productImg,
+                UserName = s.Member.firstName,
+                UserID = s.UserID,
+                price = s.price,
+                TagID = s.TagID,
+                Tag = s.Tag.tagName,
+                createdTime = s.createdTime,
+                inStoreQTY = s.inStoreQTY,
+                RequiredPostID = s.RequiredPostID
+            }).OrderByDescending(o => o.ProductPostID);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         //取得檢舉列表
         public ActionResult getReport_P()
         {
@@ -409,6 +503,27 @@ namespace MaiMai.Controllers
             }).OrderByDescending(o => o.ReportID);
 
             return Json(allreports, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getReportList_P(string search)
+        {
+            var result = db.Report.Where(m=>m.ReportID.ToString().Contains(search) || m.reportDescription.Contains(search)).Select(s => new
+            {
+                ReportID = s.ReportID,
+                reportorID = s.reportorID,
+                reportorName = s.Member.firstName,
+                repotedUserID = s.repotedUserID,
+                repotedUserName = s.Member1.firstName,
+                reportStatus = s.reportStatus,
+                createdTime = s.createdTime,
+                ReportDetailID = s.ReportDetailID,
+                ReportDetailTag = s.ReportDetail.reason,
+                reportDescription = s.reportDescription,
+                ProductOrRequire = s.ProductOrRequire,
+                ProductOrRequireID = s.ProductOrRequireID,
+            }).OrderByDescending(o => o.ReportID);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //檢舉modal
@@ -590,10 +705,10 @@ namespace MaiMai.Controllers
             };
         }
 
-        //徵求台列表
+        //徵求台上架列表
         public ActionResult getRequirePostList_P()
         {
-            var RequirePostList = db.RequiredPost.Select(s => new
+            var RequirePostList = db.RequiredPost.Where(m=>m.isPast == false).Select(s => new
             {
                 RequiredPostID = s.RequiredPostID,
                 postDescription = s.postDescription,
@@ -603,9 +718,65 @@ namespace MaiMai.Controllers
                 TagID = s.TagID,
                 TagName = s.Tag.tagName,
                 estimatePrice = s.estimatePrice,
+                isPast = s.isPast,
             }).OrderByDescending(o=>o.RequiredPostID).ToList();
 
             return Json(RequirePostList, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getSearchRequirePostList_P(string search)
+        {
+            var result = db.RequiredPost.Where(m=>(m.RequiredPostID.ToString().Contains(search) || m.postName.Contains(search)) && m.isPast == false).Select(s => new
+            {
+                RequiredPostID = s.RequiredPostID,
+                postDescription = s.postDescription,
+                postName = s.postName,
+                UserID = s.UserID,
+                UserName = s.Member.firstName,
+                TagID = s.TagID,
+                TagName = s.Tag.tagName,
+                estimatePrice = s.estimatePrice,
+                isPast = s.isPast,
+            }).OrderByDescending(o => o.RequiredPostID).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        //徵求台下架列表
+        public ActionResult getOff_SaleRequirePostList_P()
+        {
+            var RequirePostList = db.RequiredPost.Where(m => m.isPast == true).Select(s => new
+            {
+                RequiredPostID = s.RequiredPostID,
+                postDescription = s.postDescription,
+                postName = s.postName,
+                UserID = s.UserID,
+                UserName = s.Member.firstName,
+                TagID = s.TagID,
+                TagName = s.Tag.tagName,
+                estimatePrice = s.estimatePrice,
+                isPast = s.isPast,
+            }).OrderByDescending(o => o.RequiredPostID).ToList();
+
+            return Json(RequirePostList, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult getSearchOff_SaleRequirePostList_P(string search)
+        {
+            var result = db.RequiredPost.Where(m => (m.RequiredPostID.ToString().Contains(search) || m.postName.Contains(search)) && m.isPast == true).Select(s => new
+            {
+                RequiredPostID = s.RequiredPostID,
+                postDescription = s.postDescription,
+                postName = s.postName,
+                UserID = s.UserID,
+                UserName = s.Member.firstName,
+                TagID = s.TagID,
+                TagName = s.Tag.tagName,
+                estimatePrice = s.estimatePrice,
+                isPast = s.isPast,
+            }).OrderByDescending(o => o.RequiredPostID).ToList();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         //徵求台modal
@@ -631,6 +802,15 @@ namespace MaiMai.Controllers
 
             return Json(RequirePost, JsonRequestBehavior.AllowGet);
         }
+
+        //下架徵求文
+        public void delRequirePost(int RequiredPostID)
+        {
+            var requirePostStatus = db.RequiredPost.Find(RequiredPostID);
+            requirePostStatus.isPast = true;
+            db.SaveChanges();
+        }
+
     }
 
 

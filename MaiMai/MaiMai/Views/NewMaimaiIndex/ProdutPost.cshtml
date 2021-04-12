@@ -110,7 +110,7 @@
                                                                              </svg>
                                                                         </a>
 
-                                                                        <input id="count" class="Nborder" value="0" size="1" readonly ="readonly">
+                                                                        <input id="count" class="Nborder" value="1" size="1" readonly ="readonly">
 
                                                                         <a id="countup" class="btn"  onclick="countUpClick()">
                                                                             <svg width="24px" height="24px" class="svgHover" fill="#0072E3"
@@ -130,7 +130,7 @@
                                                          </div>
                                                                             <div class="d-flex mt-3">
                                                                                     <div>剩餘數量 : </div>
-                                                                                    <div class=" ml-5"><span id="inStoreQTY">${item.QTY}</span></div>
+                                                                                    <div class=" ml-5"><span id="inStoreQTY">${item.QTY-1}</span></div>
                                                                              </div>
       <span class="errorColor" id="overcount"></span>
 
@@ -286,8 +286,8 @@
         function countDownClick() {
             var count = $("#count").val();
             var instoreQty = $("#inStoreQTY").html();
-            if (count <= 0) {
-                $("#count").val("0");
+            if (count <= 1) {
+                $("#count").val("1");
 
             }
             else {

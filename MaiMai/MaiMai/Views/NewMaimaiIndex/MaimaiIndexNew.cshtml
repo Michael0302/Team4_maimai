@@ -21,11 +21,19 @@
         height: 200px;
         background: #f4f4f4;
         object-fit: contain;
-    }  
+    }
+    .good {
+        text-align: center;
+        font-size: 25px;
+        background-color: blanchedalmond;
+        border-radius: 45px;
+        margin-right: 30%;
+        margin-left: 30%;
+    }
 </style>
 <body>
     <div style="height:100px;"></div>
-    <div class="container"style=" padding-top: 22px;">
+    <div class="container"style="background-color: whitesmoke;padding-top: 22px;">
         @*首頁圖片 css內*@
         <div class="d-flex">
             <div style="height:130px;width:260px;" id=""><a href="/"><img style="height:100%;width:100%;" src="~/Content/ProductPostImg/廣告1.jpg" /></a></div>
@@ -41,9 +49,10 @@
         <div style="height:50px;" id="tag" class="d-flex"></div>
         @*TAG*@
         @*五星*@
+        <p  class="good">好評商家賣場推薦</p>
         <div class="container-fluid paddding mb-5">
             <div class="col-md-12">
-                <div class=" StarFiveStyle"> <p style="font-size:30px;">好評商家作品推薦</p></div>
+                <div class=" StarFiveStyle"> </div>
                 <div class="row" id="StarFive2">
 
                 </div>
@@ -72,7 +81,8 @@
         @*徵求台輪播*@
         <div class="row mb-lg-3">
             <div class="col-md-12 ">
-                <div class="d-flex" style="background: linear-gradient(#FFB4A2,#E5989B);border-radius:5px;">
+                <div class="d-flex" style="        background: linear-gradient(#ffdcc5,#f4bfbf);
+        border-radius: 5px;">
                     <p class="mb-2 col-3" style="font-weight: bold; font-size: 18px; font-family: fantasy;">徵求台</p>
                     <p class="col-6"></p>
                     @*@Html.ActionLink("更多", "requiredPostIndexWithLogin", "RequiredPost", null, new { @class = "" })*@
@@ -142,7 +152,8 @@
         @*最新商品輪播*@
         <div class="row mt-lg-3">
             <div class="col-md-12 ">
-                <div class="d-flex" style="        background: linear-gradient(#FFB4A2,#E5989B);border-radius:5px;">
+                <div class="d-flex" style="        background: linear-gradient(#ffdcc5,#f4bfbf);
+        border-radius: 5px;">
                     <p class="mb-2 col-3" style="font-weight: bold; font-size: 18px; font-family: fantasy;">最新商品</p>
                     <p class="col-6"></p>
                     <a class="mt-3 col-3" style="left:15%;" href="~/NewMaimaiIndex/ProuductpostAll">更多商品>></a>
