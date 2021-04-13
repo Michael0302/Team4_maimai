@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
     @Styles.Render("~/Content/css")
     @*<link href="~/Maimai/layout/css/layout.css" rel="stylesheet" />
         <link href="~/Maimai/layout/css/style_1.css" rel="stylesheet" />
@@ -66,14 +67,14 @@
                     <div class="svglink">
                         <a href="../../googleMap/Index" style="text-decoration:none;">
                             @*About*@<img src="~/Maimai/images/svg/073-location2.svg">
-                            <p style="font-size:10px;">地圖</p>
+                            <p style="font-size:10px;inline-size: max-content;">地圖</p>
                         </a>
                     </div>
                     <div class="svglink">
                         <span id="CartredPoint"></span>
                         <a href="../../Cart/cartIndex" style="text-decoration:none;">
                             @*Portfolio*@<img src="~/Maimai/layout/images/059-cart.svg" />
-                            <p style="font-size:10px;">
+                            <p style="font-size:10px; inline-size: max-content;">
                                 購物
                             </p>
                         </a>
@@ -81,7 +82,7 @@
                     <div class="svglink dropdown">
                         <a href="#" style="text-decoration:none;" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @*Services*@<img src="~/Maimai/images/svg/082-bell.svg">
-                            <p style="font-size:10px;">
+                            <p style="font-size:10px;inline-size: max-content;">
                                 <span id="redPoint"></span>通知
                             </p>
                         </a>
