@@ -477,8 +477,8 @@
             success: function (response) {
                 swal('成功', "確認訂單成功", 'success');
                 chat.server.sendToOne_OrderStatus(LoginId, response, 2);
-
-                window.location.reload();
+                setTimeout("window.location.reload()", 1000);
+          
 
             },
             error: function (response) {
@@ -501,8 +501,8 @@
                 console.log(response);
                 swal('成功', "出貨成功", 'success');
                 chat.server.sendToOne_OrderStatus(LoginID, response, 3)
-
-                window.location.reload();
+                setTimeout("window.location.reload()",1000)
+        
 
             },
             error: function (response) {

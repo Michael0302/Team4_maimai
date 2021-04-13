@@ -173,11 +173,15 @@
             //traditional: true,
             contentType: "application/json",
             success: function (status) {
-                swal("下單成功!","請前往付款","success");
-                window.location.href = "/OrderManager/OrderIndex2"
+                swal("下單成功!", "請前往付款", "success");
+                setTimeout("happy()",1000);
+              
                 //location.reload();
             }
         })
+    }
+    function happy() {
+        window.location.href = "/OrderManager/OrderIndex2";
     }
     //}
 </script>

@@ -444,7 +444,7 @@
                                 <div class="D_hj" id="adTallTopMPU-label">
                                     <p class="D_bY D_ci D_cl D_co D_cr D_ct D_cv D_hj D_bV">廣告</p>
                                 </div>
-                                <div class="D_hh" id="adTallTopMPU" data-google-query-id="CL_fx_HRhu8CFcxFYAodt5UGJw"style=" background-image:url(../../Content/ImageCHIEN/廣告.PNG); background-size: cover;">
+                                <div class="D_hh" id="adTallTopMPU" data-google-query-id="CL_fx_HRhu8CFcxFYAodt5UGJw" style=" background-image:url(../../Content/ImageCHIEN/廣告.PNG); background-size: cover;">
                                     <div id="google_ads_iframe_/325540922/Desktop_Profile_RSB_2__container__" style="border: 0pt none; display: inline-block; width: 160px; height: 600px;">
                                         <iframe frameborder="0" src="https://af9a746fb16e9e470bc73c4363da472a.safeframe.googlesyndication.com/safeframe/1-0-37/html/container.html" id="google_ads_iframe_/325540922/Desktop_Profile_RSB_2" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="160" height="600" data-is-safeframe="true" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" data-google-container-id="c" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe>
                                     </div>
@@ -947,8 +947,10 @@
                     UserID: id
                 },
                 success: function (data) {
-                    alert(data)
-                    location.reload()
+                    //alert(data)
+                    drop()
+                 
+                    setTimeout("location.reload()", 1000)
                 }
             });
         }
@@ -970,6 +972,15 @@
 
             );
         }
+        function drop() {
+            Swal.fire(
+                "下架成功", //標題
+                "盡情使用MaiMai買買吧!", //訊息內容(可省略)
+                "success" //圖示(可省略) success/info/warning/error/question
+
+            );
+        }
+
         function submitProdouct() {
 
 
@@ -977,7 +988,7 @@
             console.log(form)
             var data = new FormData(form);
             $.ajax({
-                url: "/RequiredPost/commemtProductPost",
+                url: "/PersonalMarket/commemtProductPost",
                 type: "Post",
                 data: data,
                 processData: false,
