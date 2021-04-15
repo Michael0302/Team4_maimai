@@ -169,7 +169,7 @@ namespace MaiMai.Controllers
                     //ProductPostID = ps.ProductPostID,
                     productName = ps.productName,
                     productDescription = ps.productDescription,
-                    status = ps.status,
+                    status = ps.status==null?1:ps.status,
                     inStoreQTY = ps.inStoreQTY,
                     price = ps.price,
                     TagID = ps.TagID,

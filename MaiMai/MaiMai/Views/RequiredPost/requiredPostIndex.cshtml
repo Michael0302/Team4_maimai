@@ -386,7 +386,7 @@
                                                 <input type="file" onChange="doUpload(this,'${i}')" name="upphoto" id="productImg${i}"
                                                        style="display: block;">
                                                 <div class="ml-5">
-                                                    <input class="form-check-input" id="showProductT${i}"  type="checkbox" name="status" >
+                                                    <input class="form-check-input" id="showProductT${i}"  type="checkbox">
                                                     <label>此商品不要加入個人賣場</label>
                                                 </div>
 
@@ -466,6 +466,8 @@
 
         console.log($(`#showProduct${index}`).prop("checked"));
 
+        $(`#showProduct${index}`).val("1");
+
         if ($(`#showProduct${index}`).prop("checked") == true) {
 
 
@@ -473,11 +475,8 @@
             console.log($(`#showProduct${index}`).val());
 
         }
-        else {
 
-            $(`#showProduct${index}`).val(1);
-            console.log($(`#showProduct${index}`).val());
-        } 
+      
 
     }
 

@@ -513,7 +513,7 @@
                 chat.server.sendToOne_OrderStatus(LoginId, response, 4)
 
 
-                window.location.reload();
+                setTimeout("window.location.reload()", 1000);
 
             },
             error: function (response) {
@@ -579,7 +579,8 @@
                 swal('成功', '感謝您寶貴的意見', 'success');
 
                 setTimeout(function () { $(".close").click() }, 1300);
-                window.location.reload();
+                setTimeout("window.location.reload()", 1000);
+             
 
             },
             error: function(){

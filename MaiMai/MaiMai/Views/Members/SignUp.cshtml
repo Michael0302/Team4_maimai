@@ -612,10 +612,10 @@
                  //FB登入
        
                 //FB登入
-        $(function () {
-            FB.getLoginStatus(function (response) {
-                statusChangeCallback(response);
-            });
+        //$(function () {
+        //    FB.getLoginStatus(function (response) {
+        //        statusChangeCallback(response);
+        //    });
 
             function statusChangeCallback(response) {
                 console.log(response);
@@ -627,7 +627,7 @@
                     //html = "已登入 FB，並加入 MaiMai  <br/>";
 
                     window.FB.api('/me?fields=id,name,email', function (response) {
-                        console.log(response);
+                        //console.log(response);
                         //html += "會員暱稱：" + response.name + "<br/>";
                         //html += "會員 email：" + response.email;
                         //target.innerHTML = html;
@@ -658,17 +658,24 @@
                 // 未登入 FB
                 else {
                     //target.innerHTML = "未登入 FB";
+                 
                 }
             }
 
+        //});
+
+        $(function () {
+            checkLoginState();
         });
 
+
+
                 //FB登入
-        //function checkLoginState() {
-        //      FB.getLoginStatus(function (response) {
-        //        statusChangeCallback(response);
-        //    });
-        //}
+        function checkLoginState() {
+              FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
              
 
     
