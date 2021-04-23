@@ -267,6 +267,9 @@
     <Content Include="Content\ImageCHIEN\廣告.PNG" />
     <Content Include="Content\ImageCHIEN\廣告2.PNG" />
     <Content Include="Content\ProductPostImg\1.jpg" />
+    <Content Include="Content\ProductPostImg\244.jpg" />
+    <Content Include="Content\ProductPostImg\cat.jpg" />
+    <Content Include="Content\ProductPostImg\Emoji_LIne_Doodle_C-22-512.png" />
     <Content Include="Content\ProductPostImg\iphone12.jpg" />
     <Content Include="Content\ProductPostImg\11.jpg" />
     <Content Include="Content\ProductPostImg\12.jpg" />
@@ -355,6 +358,7 @@
     <Content Include="Content\ProductPostImg\天堂M金牛座第58妖精.png" />
     <Content Include="Content\ProductPostImg\太超骷髏王一組合.jpg" />
     <Content Include="Content\ProductPostImg\孩子游泳.jfif" />
+    <Content Include="Content\ProductPostImg\家教.png" />
     <Content Include="Content\ProductPostImg\射擊遊戲.jpg" />
     <Content Include="Content\ProductPostImg\小丑女015EX.jpg" />
     <Content Include="Content\ProductPostImg\小小灶神夏令營.jpg" />
@@ -378,6 +382,7 @@
     <Content Include="Content\ProductPostImg\意象插畫風刺青.jpg" />
     <Content Include="Content\ProductPostImg\懶人沙發.jpg" />
     <Content Include="Content\ProductPostImg\技術.jpg" />
+    <Content Include="Content\ProductPostImg\排隊.jpg" />
     <Content Include="Content\ProductPostImg\收藏.jpg" />
     <Content Include="Content\ProductPostImg\星爵頭雕.jpg" />
     <Content Include="Content\ProductPostImg\模型.jfif" />
@@ -416,6 +421,7 @@
     <Content Include="Content\ProductPostImg\網頁照片8.jpg" />
     <Content Include="Content\ProductPostImg\網頁照片9.jpg" />
     <Content Include="Content\ProductPostImg\紙板模型.jfif" />
+    <Content Include="Content\ProductPostImg\羅培茲.jpg" />
     <Content Include="Content\ProductPostImg\美式居家裝潢估價.jpg" />
     <Content Include="Content\ProductPostImg\肌肉訓練.jpg" />
     <Content Include="Content\ProductPostImg\英雄聯盟菁英代打.jfif" />
